@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+spec:
+  template:
+    spec:
+      containers:
+        - name: jellyfin
+          volumeMounts:
+            - name: dev-video10
+              mountPath: /dev/video10
+            - name: dev-video11
+              mountPath: /dev/video11
+            - name: dev-video12
+              mountPath: /dev/video12
+      volumes:
+        - name: dev-video10
+          hostPath:
+            path: /dev/video10
+        - name: dev-video11
+          hostPath:
+            path: /dev/video11
+        - name: dev-video12
+          hostPath:
+            path: /dev/video12
+      securityContext:
+        privileged: true

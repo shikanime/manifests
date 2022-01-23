@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+spec:
+  template:
+    spec:
+      containers:
+        - name: transmission
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: watch
+              mountPath: /watch
+            - name: downloads
+              mountPath: /downloads
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: transmission-config
+        - name: watch
+          persistentVolumeClaim:
+            claimName: torrent-data
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: media-data

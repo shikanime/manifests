@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/instance: jellyfin
+resources:
+  - ../../../bases/jellyfin
+  - pvc.yaml
+patchesStrategicMerge:
+  - deployment.yaml
+images:
+  - name: docker.io/linuxserver/jellyfin
+    newTag: arm32v7-10.7.7
+secretGenerator:
+  - name: jellyfin
+    envs:
+      - .env

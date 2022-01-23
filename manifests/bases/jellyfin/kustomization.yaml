@@ -4,6 +4,5 @@ commonLabels:
   app.kubernetes.io/instance: jellyfin
 resources:
   - svc.yaml
-  - pvc.yaml
   - sa.yaml
-  - sts.yaml
+  - deployment.yaml

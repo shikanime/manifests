@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: jellyfin
   labels:
@@ -7,8 +7,6 @@ metadata:
     app.kubernetes.io/version: "10.7.7"
 spec:
   replicas: 1
-  podManagementPolicy: Parallel
-  serviceName: jellyfin
   selector:
     matchLabels:
       app.kubernetes.io/name: jellyfin
@@ -50,32 +48,16 @@ spec:
             - name: service-discovery
               containerPort: 1900
               protocol: UDP
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
           volumeMounts:
             - name: cache
               mountPath: /cache
-            - name: config
-              mountPath: /config
-            - name: data
-              mountPath: /data
       volumes:
         - name: cache
-          persistentVolumeClaim:
-            claimName: jellyfin-cache
-        - name: config
-          persistentVolumeClaim:
-            claimName: jellyfin-config
-        - name: data
-          persistentVolumeClaim:
-            claimName: jellyfin-data
-  volumeClaimTemplates:
-    - metadata:
-        name: jellyfin-cache
-      labels:
-        app.kubernetes.io/name: jellyfin
-        app.kubernetes.io/version: "10.7.7"
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 20Gi
+          emptyDir: {}

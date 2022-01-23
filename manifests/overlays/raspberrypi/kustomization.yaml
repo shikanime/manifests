@@ -1,32 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../../bases/jellyfin
-  - ../../bases/transmission
-images:
-  - name: docker.io/linuxserver/jellyfin
-    newTag: arm32v7-10.7.7
-  - name: docker.io/linuxserver/transmission
-    newTag: arm32v7-version-3.00-r2
-secretGenerator:
-  - name: jellyfin
-    envs:
-      - jellyfin.env
-  - name: transmission
-    envs:
-      - transmission.env
-patches:
-  - path: add-openmax.patch.yaml
-    target:
-      group: apps
-      version: v1
-      kind: StatefulSet
-      labelSelector: "app.kubernetes.io/name=jellyfin"
-  - path: add-v4l2.patch.yaml
-    target:
-      group: apps
-      version: v1
-      kind: StatefulSet
-      labelSelector: "app.kubernetes.io/name=jellyfin"
+  - jellyfin
+  - transmission
+  - pvc.yaml
+  - pv.yaml
+components:
+  - ../components/openmax
+  - ../components/v4l
 generatorOptions:
   immutable: true
