@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+  labels:
+    app.kubernetes.io/name: transmission
+    app.kubernetes.io/instance: transmission
+    app.kubernetes.io/version: 3.00-r2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: transmission
+      app.kubernetes.io/instance: transmission
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: transmission
+        app.kubernetes.io/instance: transmission
+    spec:
+      serviceAccountName: transmission
+      containers:
+        - name: transmission
+        - image: docker.io/linuxserver/transmission:arm32v7-version-3.00-r2
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Europe/Paris
+            - name: USER
+              value: username
+            - name: PASS
+              value: password
+          ports:
+            - name: http
+              containerPort: 9091
+              protocol: TCP
+            - name: bittorrent
+              containerPort: 51413
+              protocol: TCP
+            - name: utp
+              containerPort: 51413
+              protocol: UDP
+          readinessProbe:
+            httpGet:
+              port: 9091
+            timeoutSeconds: 30
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+            - name: watch
+              mountPath: /watch
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: transmission-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: transmission-downloads
+        - name: watch
+          persistentVolumeClaim:
+            claimName: transmission-watch
