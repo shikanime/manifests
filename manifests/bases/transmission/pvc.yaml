@@ -4,7 +4,6 @@ metadata:
   name: transmission-downloads
   labels:
     app.kubernetes.io/name: transmission
-    app.kubernetes.io/instance: transmission
     app.kubernetes.io/version: 3.00-r2
 spec:
   accessModes:
@@ -19,7 +18,6 @@ metadata:
   name: transmission-watch
   labels:
     app.kubernetes.io/name: transmission
-    app.kubernetes.io/instance: transmission
     app.kubernetes.io/version: 3.00-r2
 spec:
   accessModes:
@@ -34,7 +32,6 @@ metadata:
   name: transmission-config
   labels:
     app.kubernetes.io/name: transmission
-    app.kubernetes.io/instance: transmission
     app.kubernetes.io/version: 3.00-r2
 spec:
   accessModes:
