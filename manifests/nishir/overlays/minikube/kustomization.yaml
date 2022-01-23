@@ -4,7 +4,3 @@ resources:
   - ../../base
   - ../../../jellyfin/overlays/nishir
   - ../../../transmission/overlays/nishir
-  - pv.yaml
-components:
-  - ../../../jellyfin/components/openmax
-  - ../../../jellyfin/components/v4l

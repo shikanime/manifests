@@ -8,9 +8,6 @@ resources:
   - pvc.yaml
 patchesStrategicMerge:
   - deployment.yaml
-images:
-  - name: docker.io/linuxserver/transmission
-    newTag: arm32v7-version-3.00-r2
 secretGenerator:
   - name: transmission
     envs:

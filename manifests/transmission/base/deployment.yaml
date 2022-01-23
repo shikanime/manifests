@@ -20,7 +20,7 @@ spec:
       serviceAccountName: transmission
       containers:
         - name: transmission
-          image: docker.io/linuxserver/transmission:3.00-r2
+          image: docker.io/linuxserver/transmission:version-3.00-r2
           env:
             - name: PUID
               value: "1000"

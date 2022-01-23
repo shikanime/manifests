@@ -8,5 +8,8 @@ profiles:
       kustomize:
         paths:
           - manifests/nishir/overlays/raspberrypi
-          - manifests/jellyfin/overlays/nishir
-          - manifests/transmission/overlays/nishir
+  - name: minikube
+    deploy:
+      kustomize:
+        paths:
+          - manifests/nishir/overlays/minikube

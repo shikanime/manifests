@@ -42,10 +42,10 @@ spec:
             - name: http
               containerPort: 8096
               protocol: TCP
-            - name: client-discovery
+            - name: client
               containerPort: 7359
               protocol: UDP
-            - name: service-discovery
+            - name: service
               containerPort: 1900
               protocol: UDP
           resources:

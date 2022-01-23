@@ -8,18 +8,18 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 8096
-    targetPort: http
-    protocol: TCP
-    name: http
-  - port: 7359
-    targetPort: client-discovery
-    protocol: UDP
-    name: client-discovery
-  - port: 1900
-    targetPort: service-discovery
-    protocol: UDP
-    name: service-discovery
+    - port: 8096
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: 7359
+      targetPort: client
+      protocol: UDP
+      name: client
+    - port: 1900
+      targetPort: service
+      protocol: UDP
+      name: service
   selector:
     app.kubernetes.io/name: jellyfin
     app.kubernetes.io/version: "10.7.7"
