@@ -13,3 +13,10 @@ profiles:
       kustomize:
         paths:
           - manifests/nishir/overlays/minikube
+portForward:
+  - resourceType: Service
+    resourceName: jellyfin
+    port: 8096
+  - resourceType: Service
+    resourceName: transmission
+    port: 9091
