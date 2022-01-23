@@ -3,8 +3,11 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/instance: jellyfin
 resources:
-  - ../../../bases/jellyfin
+  - ../../base
   - pvc.yaml
+components:
+  - ../../components/openmax
+  - ../../components/v4l
 patchesStrategicMerge:
   - deployment.yaml
 images:
@@ -14,3 +17,5 @@ secretGenerator:
   - name: jellyfin
     envs:
       - .env
+generatorOptions:
+  immutable: true

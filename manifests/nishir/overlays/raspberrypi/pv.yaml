@@ -2,10 +2,12 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: media-data
+  labels:
+    app.kubernetes.io/name: nishir
 spec:
   storageClassName: manual
   capacity:
-    storage: 50Gi
+    storage: 500Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -15,6 +17,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: torrent-data
+  labels:
+    app.kubernetes.io/name: nishir
 spec:
   storageClassName: manual
   capacity:
