@@ -48,10 +48,6 @@ spec:
             - name: utp
               containerPort: 51413
               protocol: UDP
-          readinessProbe:
-            httpGet:
-              port: 9091
-            timeoutSeconds: 30
           resources:
             requests:
               cpu: "100m"
