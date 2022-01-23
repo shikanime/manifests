@@ -7,9 +7,5 @@ resources:
   - pvc.yaml
 patchesStrategicMerge:
   - deployment.yaml
-secretGenerator:
-  - name: jellyfin
-    envs:
-      - .env
 generatorOptions:
   immutable: true
