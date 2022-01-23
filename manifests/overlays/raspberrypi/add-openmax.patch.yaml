@@ -1,0 +1,26 @@
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts
+  value:
+    - name: libvideocore
+      mountPath: /opt/vc/lib
+    - name: dev-vchiq
+      mountPath: /dev/vchiq
+    - name: dev-vcsm
+      mountPath: /dev/vcsm
+- op: add
+  path: /spec/template/spec/volumes
+  value:
+    - name: libvideocore
+      hostPath:
+        path: /opt/vc/lib
+    - name: dev-vchiq
+      hostPath:
+        path: /dev/vchiq
+    - name: dev-vcsm
+      hostPath:
+        path: /dev/vcsm
+- op: add
+  path: /spec/template/spec
+  value:
+    securityContext:
+      privileged: true

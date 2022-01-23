@@ -6,4 +6,4 @@ resources:
   - svc.yaml
   - pvc.yaml
   - sa.yaml
-  - deployment.yaml
+  - sts.yaml

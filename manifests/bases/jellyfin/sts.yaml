@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSets
+kind: StatefulSet
 metadata:
   name: jellyfin
   labels:
@@ -8,6 +8,7 @@ metadata:
 spec:
   replicas: 1
   podManagementPolicy: Parallel
+  serviceName: jellyfin
   selector:
     matchLabels:
       app.kubernetes.io/name: jellyfin

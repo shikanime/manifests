@@ -15,5 +15,18 @@ secretGenerator:
   - name: transmission
     envs:
       - transmission.env
+patches:
+  - path: add-openmax.patch.yaml
+    target:
+      group: apps
+      version: v1
+      kind: StatefulSet
+      labelSelector: "app.kubernetes.io/name=jellyfin"
+  - path: add-v4l2.patch.yaml
+    target:
+      group: apps
+      version: v1
+      kind: StatefulSet
+      labelSelector: "app.kubernetes.io/name=jellyfin"
 generatorOptions:
   immutable: true
