@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta25
+kind: Config
+metadata:
+  name: nishir
+profiles:
+  - name: raspberrypi
+    deploy:
+      kustomize:
+        paths:
+          - manifests/nishir/overlays/raspberrypi
+          - manifests/jellyfin/overlays/nishir
+          - manifests/transmission/overlays/nishir
