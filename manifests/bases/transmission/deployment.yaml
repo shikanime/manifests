@@ -29,9 +29,15 @@ spec:
             - name: TZ
               value: Europe/Paris
             - name: USER
-              value: username
+              valueFrom:
+                secretKeyRef:
+                  name: jellyfin
+                  key: username
             - name: PASS
-              value: password
+              valueFrom:
+                secretKeyRef:
+                  name: jellyfin
+                  key: password
           ports:
             - name: http
               containerPort: 9091

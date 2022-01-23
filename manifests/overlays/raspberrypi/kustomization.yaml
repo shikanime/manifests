@@ -4,7 +4,16 @@ resources:
   - ../../bases/jellyfin
   - ../../bases/transmission
 images:
-  - name: docker.io/linuxserver/transmission
-    newTag: arm32v7-version-3.00-r2
   - name: docker.io/linuxserver/jellyfin
     newTag: arm32v7-10.7.7
+  - name: docker.io/linuxserver/transmission
+    newTag: arm32v7-version-3.00-r2
+secretGenerator:
+  - name: jellyfin
+    envs:
+      - jellyfin.env
+  - name: transmission
+    envs:
+      - transmission.env
+generatorOptions:
+  immutable: true

@@ -1,20 +1,6 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: jellyfin-cache
-  labels:
-    app.kubernetes.io/name: jellyfin
-    app.kubernetes.io/version: "10.7.7"
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 50Gi
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
   name: jellyfin-config
   labels:
     app.kubernetes.io/name: jellyfin

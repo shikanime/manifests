@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSets
 metadata:
   name: jellyfin
   labels:
@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/version: "10.7.7"
 spec:
   replicas: 1
+  podManagementPolicy: Parallel
   selector:
     matchLabels:
       app.kubernetes.io/name: jellyfin
@@ -29,9 +30,15 @@ spec:
             - name: TZ
               value: Europe/Paris
             - name: USER
-              value: username
+              valueFrom:
+                secretKeyRef:
+                  name: jellyfin
+                  key: username
             - name: PASS
-              value: password
+              valueFrom:
+                secretKeyRef:
+                  name: jellyfin
+                  key: password
           ports:
             - name: http
               containerPort: 8096
@@ -59,3 +66,15 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: jellyfin-data
+  volumeClaimTemplates:
+    - metadata:
+        name: jellyfin-cache
+      labels:
+        app.kubernetes.io/name: jellyfin
+        app.kubernetes.io/version: "10.7.7"
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
