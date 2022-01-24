@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: transmission-config
+  name: nfs-provisioner-export
   labels:
-    app.kubernetes.io/name: transmission
-    app.kubernetes.io/version: 3.00-r2
+    app.kubernetes.io/name: nishir
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 10Gi

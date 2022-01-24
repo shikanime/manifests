@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: deva-nfs
+provisioner: storage.deva.io/nfs
+mountOptions:
+  - vers=4.1

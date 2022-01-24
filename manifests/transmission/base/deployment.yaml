@@ -42,10 +42,10 @@ spec:
             - name: http
               containerPort: 9091
               protocol: TCP
-            - name: bittorrent
+            - name: utp
               containerPort: 51413
               protocol: TCP
-            - name: utp
+            - name: utp-udp
               containerPort: 51413
               protocol: UDP
           resources:

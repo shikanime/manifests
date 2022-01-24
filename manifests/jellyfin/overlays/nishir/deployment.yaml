@@ -10,12 +10,17 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: data
-              mountPath: /data
+            - name: movies
+              mountPath: /data/movies
+            - name: downloads
+              mountPath: /data/downloads
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
-        - name: data
+        - name: movies
           persistentVolumeClaim:
-            claimName: nishir-videos
+            claimName: nishir-movies
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: nishir-downloads

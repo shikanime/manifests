@@ -45,7 +45,7 @@ persistence:
   cache:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 50Gi
+    size: 200Gi
     mountPath: /cache
 
   media:

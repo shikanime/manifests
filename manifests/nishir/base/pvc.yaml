@@ -1,15 +1,16 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nishir-videos
+  name: nishir-movies
   labels:
     app.kubernetes.io/name: nishir
 spec:
+  storageClassName: deva-nfs
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 5Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -18,11 +19,12 @@ metadata:
   labels:
     app.kubernetes.io/name: nishir
 spec:
+  storageClassName: deva-nfs
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: 5Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -31,8 +33,9 @@ metadata:
   labels:
     app.kubernetes.io/name: nishir
 spec:
+  storageClassName: deva-nfs
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: 5Mi
