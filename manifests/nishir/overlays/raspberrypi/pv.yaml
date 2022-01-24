@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: media-data
+  name: nishir-videos
   labels:
     app.kubernetes.io/name: nishir
 spec:
@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: torrent-data
+  name: nishir-torrents
   labels:
     app.kubernetes.io/name: nishir
 spec:

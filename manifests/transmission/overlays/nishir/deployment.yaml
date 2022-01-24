@@ -20,7 +20,7 @@ spec:
             claimName: transmission-config
         - name: watch
           persistentVolumeClaim:
-            claimName: torrent-data
+            claimName: nishir-torrents
         - name: downloads
           persistentVolumeClaim:
-            claimName: media-data
+            claimName: nishir-downloads
