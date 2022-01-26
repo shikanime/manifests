@@ -9,3 +9,5 @@ resources:
 components:
   - ../../../jellyfin/components/openmax
   - ../../../jellyfin/components/v4l
+  - ../../../jellyfin/components/external
+  - ../../../transmission/components/external

@@ -31,7 +31,6 @@ spec:
           ports:
             - name: http
               containerPort: 8096
-              protocol: TCP
             - name: client
               containerPort: 7359
               protocol: UDP

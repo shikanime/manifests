@@ -6,16 +6,26 @@ metadata:
     app.kubernetes.io/name: transmission
     app.kubernetes.io/version: 3.00-r2
 spec:
-  type: ClusterIP
   ports:
     - port: 9091
       targetPort: http
-      protocol: TCP
       name: http
     - port: 51413
       targetPort: utp
-      protocol: TCP
       name: utp
+  selector:
+    app.kubernetes.io/name: transmission
+    app.kubernetes.io/version: 3.00-r2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: transmission-udp
+  labels:
+    app.kubernetes.io/name: transmission
+    app.kubernetes.io/version: 3.00-r2
+spec:
+  ports:
     - port: 51413
       targetPort: utp-udp
       protocol: UDP

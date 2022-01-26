@@ -41,10 +41,8 @@ spec:
           ports:
             - name: http
               containerPort: 9091
-              protocol: TCP
             - name: utp
               containerPort: 51413
-              protocol: TCP
             - name: utp-udp
               containerPort: 51413
               protocol: UDP
