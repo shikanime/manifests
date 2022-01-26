@@ -22,7 +22,7 @@ spec:
       serviceAccount: nfs-provisioner
       containers:
         - name: nfs-provisioner
-          image: k8s.gcr.io/sig-storage/nfs-provisioner:v3.0.0
+          image: ghcr.io/kubernetes-sigs/nfs-ganesha:v3.5@sha256:b3990acf8516964c3931bf84eb3caa402fc775b139eebeb4e7ae3bf76a7c809e
           ports:
             - name: nfs
               containerPort: 2049

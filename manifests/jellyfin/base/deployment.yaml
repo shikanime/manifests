@@ -20,7 +20,7 @@ spec:
       serviceAccountName: jellyfin
       containers:
         - name: jellyfin
-          image: docker.io/linuxserver/jellyfin:10.7.7
+          image: docker.io/linuxserver/jellyfin:10.7.7@sha256:9ef53374076d584e5c4b26f3f5ec79688bb76d2af3da7de80be6b1819ff3957f
           env:
             - name: PUID
               value: "1000"
