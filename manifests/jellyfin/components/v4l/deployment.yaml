@@ -14,6 +14,8 @@ spec:
               mountPath: /dev/video11
             - name: dev-video12
               mountPath: /dev/video12
+          securityContext:
+            privileged: true
       volumes:
         - name: dev-video10
           hostPath:
@@ -24,5 +26,3 @@ spec:
         - name: dev-video12
           hostPath:
             path: /dev/video12
-      securityContext:
-        privileged: true

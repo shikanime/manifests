@@ -14,6 +14,8 @@ spec:
               mountPath: /dev/vchiq
             - name: dev-vcsm
               mountPath: /dev/vcsm
+          securityContext:
+            privileged: true
       volumes:
         - name: libvideocore
           hostPath:
@@ -24,5 +26,3 @@ spec:
         - name: dev-vcsm
           hostPath:
             path: /dev/vcsm
-      securityContext:
-        privileged: true
