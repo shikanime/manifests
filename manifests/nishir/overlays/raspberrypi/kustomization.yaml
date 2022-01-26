@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ../../base
   - ../../../jellyfin/overlays/nishir
-  - ../../../nfs-provisioner/overlays/nishir
+  - ../../../nfs-ganesha/overlays/nishir
   - ../../../transmission/overlays/nishir
   - pv.yaml
 components:
