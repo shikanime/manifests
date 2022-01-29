@@ -13,6 +13,8 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /mnt/data/medias
+  claimRef:
+    name: nishir-movies
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -29,6 +31,8 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /mnt/data/torrents
+  claimRef:
+    name: nishir-torrents
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -45,3 +49,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /mnt/data/downloads
+  claimRef:
+    name: nishir-downloads
