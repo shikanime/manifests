@@ -12,5 +12,5 @@ secretGenerator:
   - name: transmission
     envs:
       - .env
-generatorOptions:
-  immutable: true
+    options:
+      immutable: true

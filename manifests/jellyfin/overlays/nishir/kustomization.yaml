@@ -7,5 +7,3 @@ resources:
   - pvc.yaml
 patchesStrategicMerge:
   - deployment.yaml
-generatorOptions:
-  immutable: true
