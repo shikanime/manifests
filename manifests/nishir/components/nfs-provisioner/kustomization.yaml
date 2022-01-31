@@ -4,5 +4,7 @@ commonLabels:
   app.kubernetes.io/instance: nishir
 resources:
   - ../../../nfs-provisioner/base
-patchesStrategicMerge:
   - pvc.yaml
+patchesStrategicMerge:
+  - patch-deployment.yaml
+  - patch-pvc.yaml

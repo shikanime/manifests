@@ -1,26 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nishir-movies
+  name: nfs-provisioner-export
   labels:
     app: nishir
 spec:
-  storageClassName: nfs
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nishir-downloads
-  labels:
-    app: nishir
-spec:
-  storageClassName: nfs
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nishir-torrents
-  labels:
-    app: nishir
-spec:
-  storageClassName: nfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

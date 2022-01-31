@@ -5,4 +5,4 @@ commonLabels:
 resources:
   - ../../../transmission/base
 patchesStrategicMerge:
-  - deployment.yaml
+  - patch-deployment.yaml
