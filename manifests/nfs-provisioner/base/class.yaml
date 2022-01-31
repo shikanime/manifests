@@ -2,6 +2,6 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nfs
-provisioner: sigs.k8s.io/nfs
+provisioner: kubernetes.io/nfs
 mountOptions:
   - vers=4.1

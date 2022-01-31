@@ -56,7 +56,7 @@ spec:
                 - DAC_READ_SEARCH
                 - SYS_RESOURCE
           args:
-            - "-provisioner=sigs.k8s.io/nfs"
+            - "-provisioner=kubernetes.io/nfs"
           env:
             - name: POD_IP
               valueFrom:
