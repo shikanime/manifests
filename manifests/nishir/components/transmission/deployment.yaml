@@ -9,16 +9,11 @@ spec:
       containers:
         - name: transmission
           volumeMounts:
-            - name: config
-              mountPath: /config
             - name: watch
               mountPath: /watch
             - name: downloads
               mountPath: /downloads
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: transmission-config
         - name: watch
           persistentVolumeClaim:
             claimName: nishir-torrents

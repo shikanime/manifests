@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+spec:
+  template:
+    spec:
+      serviceAccountName: nishir
+      containers:
+        - name: transmission
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: transmission-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+spec:
+  template:
+    spec:
+      serviceAccountName: nishir
+      containers:
+        - name: jellyfin
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-provisioner
+spec:
+  template:
+    spec:
+      containers:
+        - name: nfs-provisioner
+          volumeMounts:
+            - name: export
+              mountPath: /export
+      volumes:
+        - name: export
+          persistentVolumeClaim:
+            claimName: nfs-provisioner-export

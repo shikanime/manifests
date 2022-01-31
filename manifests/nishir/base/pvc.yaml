@@ -5,9 +5,8 @@ metadata:
   labels:
     app: nishir
 spec:
-  storageClassName: nfs
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
@@ -19,9 +18,8 @@ metadata:
   labels:
     app: nishir
 spec:
-  storageClassName: nfs
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
@@ -33,7 +31,6 @@ metadata:
   labels:
     app: nishir
 spec:
-  storageClassName: nfs
   accessModes:
     - ReadWriteOnce
   resources:

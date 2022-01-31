@@ -6,3 +6,4 @@ commonLabels:
   app.kubernetes.io/instance: nishir
 resources:
   - pvc.yaml
+  - sa.yaml
