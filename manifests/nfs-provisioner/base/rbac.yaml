@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: nfs-ganesha-runner
+  name: nfs-provisioner-runner
 rules:
   - apiGroups: [""]
     resources: ["persistentvolumes"]
@@ -20,26 +20,26 @@ rules:
     verbs: ["get"]
   - apiGroups: ["extensions"]
     resources: ["podsecuritypolicies"]
-    resourceNames: ["nfs-ganesha"]
+    resourceNames: ["nfs-provisioner"]
     verbs: ["use"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: run-nfs-ganesha
+  name: run-nfs-provisioner
 subjects:
   - kind: ServiceAccount
-    name: nfs-ganesha
+    name: default
     namespace: default
 roleRef:
   kind: ClusterRole
-  name: nfs-ganesha-runner
+  name: nfs-provisioner-runner
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: leader-locking-nfs-ganesha
+  name: leader-locking-nfs-provisioner
 rules:
   - apiGroups: [""]
     resources: ["endpoints"]
@@ -48,12 +48,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: leader-locking-nfs-ganesha
+  name: leader-locking-nfs-provisioner
 subjects:
   - kind: ServiceAccount
-    name: nfs-ganesha
+    name: default
     namespace: default
 roleRef:
   kind: Role
-  name: leader-locking-nfs-ganesha
+  name: leader-locking-nfs-provisioner
   apiGroup: rbac.authorization.k8s.io

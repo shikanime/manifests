@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-ganesha-export
+  name: nfs-provisioner-export
   labels:
     app.kubernetes.io/name: nishir
 spec:

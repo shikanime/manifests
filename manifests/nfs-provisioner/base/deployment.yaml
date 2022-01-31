@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/name: nfs-ganesha
+    app.kubernetes.io/name: nfs-provisioner
     app.kubernetes.io/version: "v3.0.0"
-  name: nfs-ganesha
+  name: nfs-provisioner
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: nfs-ganesha
+      app.kubernetes.io/name: nfs-provisioner
       app.kubernetes.io/version: "v3.0.0"
   replicas: 1
   strategy:
@@ -16,13 +16,12 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: nfs-ganesha
+        app.kubernetes.io/name: nfs-provisioner
         app.kubernetes.io/version: "v3.0.0"
     spec:
-      serviceAccount: nfs-ganesha
       containers:
-        - name: nfs-ganesha
-          image: ghcr.io/kubernetes-sigs/nfs-ganesha:v3.5@sha256:b3990acf8516964c3931bf84eb3caa402fc775b139eebeb4e7ae3bf76a7c809e
+        - name: nfs-provisioner
+          image: k8s.gcr.io/sig-storage/nfs-provisioner:v3.0.0@sha256:2de1d15fc1f2a33618c61ff8d499ef22a7b2b8961952f059656a245b98498ba4
           ports:
             - name: nfs
               containerPort: 2049
@@ -67,7 +66,7 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
             - name: SERVICE_NAME
-              value: nfs-ganesha
+              value: nfs-provisioner
             - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:

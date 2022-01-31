@@ -2,9 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app.kubernetes.io/name: nfs-ganesha
+    app.kubernetes.io/name: nfs-provisioner
     app.kubernetes.io/version: "v3.0.0"
-  name: nfs-ganesha
+  name: nfs-provisioner
 spec:
   ports:
     - name: nfs
@@ -38,5 +38,5 @@ spec:
       port: 662
       protocol: UDP
   selector:
-    app.kubernetes.io/name: nfs-ganesha
+    app.kubernetes.io/name: nfs-provisioner
     app.kubernetes.io/version: "v3.0.0"

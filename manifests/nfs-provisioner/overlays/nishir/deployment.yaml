@@ -1,16 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nfs-ganesha
+  name: nfs-provisioner
 spec:
   template:
     spec:
+      serviceAccountName: nishir
       containers:
-        - name: nfs-ganesha
+        - name: nfs-provisioner
           volumeMounts:
             - name: export
               mountPath: /export
       volumes:
         - name: export
           persistentVolumeClaim:
-            claimName: nfs-ganesha-export
+            claimName: nfs-provisioner-export

@@ -4,5 +4,4 @@ commonLabels:
   app.kubernetes.io/instance: transmission
 resources:
   - svc.yaml
-  - sa.yaml
   - deployment.yaml
