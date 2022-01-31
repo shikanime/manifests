@@ -3,9 +3,9 @@ kind: PersistentVolume
 metadata:
   name: nishir-movies
   labels:
-    app.kubernetes.io/name: nishir
+    app: nishir
 spec:
-  storageClassName: deva-nfs
+  storageClassName: nfs
   capacity:
     storage: 5Gi
   accessModes:
@@ -21,9 +21,9 @@ kind: PersistentVolume
 metadata:
   name: nishir-torrents
   labels:
-    app.kubernetes.io/name: nishir
+    app: nishir
 spec:
-  storageClassName: deva-nfs
+  storageClassName: nfs
   capacity:
     storage: 5Mi
   accessModes:
@@ -39,9 +39,9 @@ kind: PersistentVolume
 metadata:
   name: nishir-downloads
   labels:
-    app.kubernetes.io/name: nishir
+    app: nishir
 spec:
-  storageClassName: deva-nfs
+  storageClassName: nfs
   capacity:
     storage: 5Gi
   accessModes:

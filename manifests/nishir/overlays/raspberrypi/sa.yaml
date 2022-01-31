@@ -3,4 +3,4 @@ kind: ServiceAccount
 metadata:
   name: nishir
   labels:
-    app.kubernetes.io/name: nishir
+    app: nishir

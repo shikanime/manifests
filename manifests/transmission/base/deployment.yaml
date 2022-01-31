@@ -3,19 +3,16 @@ kind: Deployment
 metadata:
   name: transmission
   labels:
-    app.kubernetes.io/name: transmission
-    app.kubernetes.io/version: 3.00-r2
+    app: transmission
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: transmission
-      app.kubernetes.io/version: 3.00-r2
+      app: transmission
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: transmission
-        app.kubernetes.io/version: 3.00-r2
+        app: transmission
     spec:
       containers:
         - name: transmission

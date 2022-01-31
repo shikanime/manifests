@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 commonLabels:
+  app.kubernetes.io/name: transmission
+  app.kubernetes.io/version: 3.00-r2
   app.kubernetes.io/instance: transmission
 resources:
   - svc.yaml

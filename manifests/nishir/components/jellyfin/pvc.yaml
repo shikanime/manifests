@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: transmission-config
+  name: jellyfin-config
   labels:
-    app.kubernetes.io/name: transmission
-    app.kubernetes.io/version: 3.00-r2
+    app: jellyfin
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
