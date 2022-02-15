@@ -25,7 +25,7 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - name: http
+            - name: web
               containerPort: 8096
             - name: client
               containerPort: 7359

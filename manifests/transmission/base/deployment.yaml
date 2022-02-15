@@ -35,7 +35,7 @@ spec:
                   name: transmission
                   key: password
           ports:
-            - name: http
+            - name: web
               containerPort: 9091
             - name: utp
               containerPort: 51413
