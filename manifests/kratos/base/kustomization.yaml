@@ -1,9 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-  app.kubernetes.io/name: kratos
-  app.kubernetes.io/version: "0.8.2"
-  app.kubernetes.io/instance: kratos
 resources:
   - svc.yaml
   - deployment.yaml
