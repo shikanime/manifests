@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kratos
+  labels:
+    app: kratos
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4433
+      targetPort: web
+      name: web
+  selector:
+    app: kratos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kratos-admin
+  labels:
+    app: kratos
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4434
+      targetPort: admin
+      name: admin
+  selector:
+    app: kratos

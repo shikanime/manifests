@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kratos
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: migrate
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-kratos
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-kratos
+                  key: password
+            - name: DSN
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres-kratos/kratos?sslmode=disable
+      containers:
+        - name: kratos
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-kratos
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-kratos
+                  key: password
+            - name: DSN
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres-kratos/kratos?sslmode=disable
