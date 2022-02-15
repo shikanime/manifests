@@ -11,6 +11,5 @@ components:
   - ../../components/transmission
 secretGenerator:
   - name: transmission
-    literals:
-      - username=nishir
-      - password=Kr!JZmu3Ce%Z@o
+    envs:
+      - transmission.env
