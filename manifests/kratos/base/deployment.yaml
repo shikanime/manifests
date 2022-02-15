@@ -42,11 +42,11 @@ spec:
               containerPort: 4434
           resources:
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: 100m
+              memory: 128Mi
             limits:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: 100m
+              memory: 128Mi
           volumeMounts:
             - mountPath: /etc/kratos
               name: kratos
