@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hasura
+  labels:
+    app: hasura
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hasura
+  template:
+    metadata:
+      labels:
+        app: hasura
+    spec:
+      containers:
+        - name: hasura
+          image: docker.io/hasura/graphql-engine
+          command:
+            - graphql-engine
+            - serve
+          env:
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: username
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: password
+            - name: HASURA_GRAPHQL_DATABASE_URL
+              value: postgresql://$(PGUSER)@postgres:5432/postgres
+            - name: HASURA_GRAPHQL_ENABLE_CONSOLE
+              value: "true"
+            - name: HASURA_GRAPHQL_SERVER_PORT
+              value: "3000"
+          ports:
+            - name: web
+              containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: web
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: web
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi

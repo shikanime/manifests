@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hasura
+  labels:
+    app: hasura
+spec:
+  ports:
+    - port: 3000
+      targetPort: web
+      name: web
+  selector:
+    app: hasura
