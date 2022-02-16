@@ -1,20 +1,20 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: postgres
+  name: postgresql
 spec:
   template:
     spec:
       containers:
-        - name: postgres
+        - name: postgresql
           env:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: kratos-postgres
+                  name: kratos-postgresql
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: kratos-postgres
+                  name: kratos-postgresql
                   key: password

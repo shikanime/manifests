@@ -1,40 +1,40 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: postgres
+  name: postgresql
   labels:
-    app: postgres
+    app: postgresql
 spec:
+  serviceName: postgresql-headless
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: postgresql
   template:
     metadata:
+      name: postgresql
       labels:
-        app: postgres
+        app: postgresql
+        role: master
     spec:
       containers:
-        - name: postgres
+        - name: postgresql
           image: docker.io/library/postgres:14.2-bullseye
           env:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres
+                  name: postgresql
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres
+                  name: postgresql
                   key: password
           ports:
-            - name: postgres
+            - name: postgresql
               containerPort: 5432
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 250m
+              memory: 256Mi

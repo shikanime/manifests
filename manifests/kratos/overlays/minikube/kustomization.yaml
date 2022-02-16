@@ -2,13 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../base
-  - ../../../postgres/overlays/kratos
+  - ../../../postgresql/overlays/kratos
 components:
-  - ../../components/postgres
+  - ../../components/postgresql
 secretGenerator:
-  - name: kratos-postgres
+  - name: kratos-postgresql
     envs:
-      - postgres.env
+      - postgresql.env
 configMapGenerator:
   - name: kratos
     files:

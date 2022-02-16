@@ -11,27 +11,27 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: kratos-postgres
+                  name: kratos-postgresql
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: kratos-postgres
+                  name: kratos-postgresql
                   key: password
             - name: DSN
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@kratos-postgres/kratos?sslmode=disable
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@kratos-postgresql/kratos?sslmode=disable
       containers:
         - name: kratos
           env:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: kratos-postgres
+                  name: kratos-postgresql
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: kratos-postgres
+                  name: kratos-postgresql
                   key: password
             - name: DSN
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@kratos-postgres/kratos?sslmode=disable
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@kratos-postgresql/kratos?sslmode=disable
