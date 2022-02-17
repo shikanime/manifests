@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oathkeeper
+  labels:
+    app: oathkeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oathkeeper
+  template:
+    metadata:
+      labels:
+        app: oathkeeper
+    spec:
+      containers:
+        - name: oathkeeper
+          image: docker.io/oryd/oathkeeper:v0.38
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
