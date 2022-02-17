@@ -7,12 +7,14 @@ profiles:
     deploy:
       kustomize:
         paths:
-          - manifests/nishir/overlays/raspberrypi
+          - overlays/raspberrypi
   - name: minikube
     deploy:
       kustomize:
         paths:
-          - manifests/nishir/overlays/minikube
+          - overlays/minikube
+    activation:
+      - kubeContext: minikube
 portForward:
   - resourceType: Service
     resourceName: jellyfin

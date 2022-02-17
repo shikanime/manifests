@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta25
+kind: Config
+metadata:
+  name: nishir
+profiles:
+  - name: minikube
+    deploy:
+      kustomize:
+        paths:
+          - overlays/minikube
+    activation:
+      - kubeContext: minikube
+portForward:
+  - resourceType: Service
+    resourceName: postgresql
+    port: 5432
