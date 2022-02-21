@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prefect-ui
+  labels:
+    app: prefect-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prefect-ui
+  template:
+    metadata:
+      labels:
+        app: prefect-ui
+    spec:
+      containers:
+        - name: ui
+          image: docker.io/prefecthq/ui:core-0.15.13
+          command:
+            - /intercept.sh
+          env:
+            - name: PREFECT_SERVER__APOLLO_URL
+              value: http://127.0.0.1:4200/graphql
+          ports:
+            - name: web
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: web
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: web
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
