@@ -13,4 +13,4 @@ components:
   - ../../../jellyfin/components/external
   - ../../../transmission/components/external
 patchesStrategicMerge:
-  - patch-deployment.yaml
+  - deployment-patch.yaml

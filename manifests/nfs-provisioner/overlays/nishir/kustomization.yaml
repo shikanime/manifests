@@ -3,5 +3,5 @@ kind: Component
 resources:
   - pvc.yaml
 patchesStrategicMerge:
-  - patch-deployment.yaml
-  - patch-pvc.yaml
+  - deployment-patch.yaml
+  - pvc-patch.yaml

@@ -4,4 +4,4 @@ namePrefix: kratos-
 resources:
   - ../../base
 patchesStrategicMerge:
-  - patch-sts.yaml
+  - sts-patch.yaml
