@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarqube
+spec:
+  selector:
+    matchLabels:
+      app: sonarqube
+  template:
+    spec:
+      containers:
+        - name: sonarqube
+          env:
+            - name: SONAR_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sonarqube-postgresql
+                  key: password
+            - name: SONAR_JDBC_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: sonarqube-postgresql
+                  key: username
+            - name: SONAR_JDBC_URL
+              value: jdbc:postgresql://sonarqube-postgresql:5432/sonarqube

@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarqube
+  labels:
+    app: sonarqube
+spec:
+  replicas: 1
+  serviceName: sonarqube
+  selector:
+    matchLabels:
+      app: sonarqube
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+    spec:
+      containers:
+        - name: sonarqube
+          image: docker.io/library/sonarqube:9.5.0-community
+          ports:
+            - name: web
+              containerPort: 9000
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 800m
+              memory: 4Gi
+            requests:
+              cpu: 400m
+              memory: 2Gi
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  # A Sonarqube container is considered ready if the status is UP, DB_MIGRATION_NEEDED or DB_MIGRATION_RUNNING
+                  # status about migration are added to prevent the node to be kill while sonarqube is upgrading the database.
+                  host="$(hostname -i || echo '127.0.0.1')"
+                  if wget --proxy off -qO- http://${host}:9000/api/system/status |
+                      grep -q \
+                          -e '"status":"UP"' \
+                          -e '"status":"DB_MIGRATION_NEEDED"' \
+                          -e '"status":"DB_MIGRATION_RUNNING"'; then
+                      exit 0
+                  fi
+                  exit 1
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            failureThreshold: 6
+          startupProbe:
+            httpGet:
+              path: /api/system/status
+              port: web
+            initialDelaySeconds: 30
+            failureThreshold: 24
+          volumeMounts:
+            - mountPath: /opt/sonarqube/data
+              name: sonarqube
+              subPath: data
+            - mountPath: /opt/sonarqube/temp
+              name: sonarqube
+              subPath: temp
+            - mountPath: /opt/sonarqube/logs
+              name: sonarqube
+              subPath: logs
+      volumes:
+        - name: sonarqube
+          emptyDir: {}

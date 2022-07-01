@@ -8,3 +8,8 @@ inflate-jellyfin:
 		--output-dir jellyfin/chart \
 		--values jellyfin/values.yaml
 
+
+inflate-sonarqube:
+	helm template sonarqube sonarqube/sonarqube \
+		--output-dir sonarqube/chart \
+		--values sonarqube/values.yaml
