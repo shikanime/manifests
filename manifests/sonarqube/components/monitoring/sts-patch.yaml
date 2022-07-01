@@ -16,3 +16,12 @@ spec:
                 secretKeyRef:
                   name: sonarqube
                   key: passcode
+          livenessProbe:
+            httpGet:
+              path: /api/system/liveness
+              port: web
+              httpHeaders:
+                - name: X-Sonar-Passcode
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            failureThreshold: 6

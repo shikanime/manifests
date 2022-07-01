@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarqube
+spec:
+  template:
+    spec:
+      containers:
+        - name: sonarqube
+          livenessProbe:
+            httpGet:
+              httpHeaders:
+                - name: X-Sonar-Passcode
+                  value: 8LqxBpyWFRMGzPAW
