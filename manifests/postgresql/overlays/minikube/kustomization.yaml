@@ -4,5 +4,6 @@ resources:
   - ../../base
 secretGenerator:
   - name: postgres
-    envs:
-      - postgresql.env
+    literals:
+      - username=postgres
+      - password=8LqxBpyWFRMGzPAW

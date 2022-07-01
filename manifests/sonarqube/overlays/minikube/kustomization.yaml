@@ -8,8 +8,9 @@ components:
   - ../../components/postgresql
 secretGenerator:
   - name: sonarqube-postgresql
-    envs:
-      - postgresql.env
+    literals:
+      - username=kratos
+      - password=8LqxBpyWFRMGzPAW
   - name: sonarqube
-    envs:
-      - sonarqube.env
+    literals:
+      - passcode=ZGVmaW5lX2l0

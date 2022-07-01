@@ -7,8 +7,9 @@ components:
   - ../../components/postgresql
 secretGenerator:
   - name: kratos-postgresql
-    envs:
-      - postgresql.env
+    literals:
+      - username=kratos
+      - password=8LqxBpyWFRMGzPAW
 configMapGenerator:
   - name: kratos
     files:

@@ -15,4 +15,4 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: sonarqube
-                  key: SONAR_WEB_SYSTEMPASSCODE
+                  key: passcode
