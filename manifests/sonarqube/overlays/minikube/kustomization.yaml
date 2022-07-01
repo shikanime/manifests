@@ -6,8 +6,6 @@ resources:
 components:
   - ../../components/monitoring
   - ../../components/postgresql
-patchesStrategicMerge:
-  - sts-patch.yaml
 secretGenerator:
   - name: sonarqube-postgresql
     envs:
