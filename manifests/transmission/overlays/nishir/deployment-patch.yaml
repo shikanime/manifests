@@ -5,14 +5,26 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: nishir
       containers:
         - name: transmission
+          env:
+            - name: USER
+              valueFrom:
+                secretKeyRef:
+                  name: nishir-transmission
+                  key: username
+            - name: PASS
+              valueFrom:
+                secretKeyRef:
+                  name: nishir-transmission
+                  key: password
           volumeMounts:
             - name: watch
               mountPath: /watch
             - name: downloads
               mountPath: /downloads
+            - name: config
+              mountPath: /config
       volumes:
         - name: watch
           persistentVolumeClaim:
@@ -20,3 +32,6 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: nishir-downloads
+        - name: config
+          persistentVolumeClaim:
+            claimName: transmission-config

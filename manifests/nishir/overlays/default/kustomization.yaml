@@ -5,7 +5,12 @@ resources:
   - ../../../jellyfin/overlays/nishir
   - ../../../nfs-provisioner/overlays/nishir
   - ../../../transmission/overlays/nishir
+components:
+  - ../../components/nfs
+  - ../../../jellyfin/components/expose
+  - ../../../transmission/components/expose
 secretGenerator:
-  - name: transmission
-    envs:
-      - transmission.env
+  - name: nishir-transmission
+    literals:
+      - username=nishir
+      - password=Kr!JZmu3Ce%Z@o

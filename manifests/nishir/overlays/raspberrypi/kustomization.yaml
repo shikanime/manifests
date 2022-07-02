@@ -8,9 +8,8 @@ resources:
   - pv.yaml
   - pvc.yaml
 components:
+  - ../../components/nfs
   - ../../../jellyfin/components/openmax
   - ../../../jellyfin/components/v4l
-  - ../../../jellyfin/components/external
-  - ../../../transmission/components/external
-patchesStrategicMerge:
-  - deployment-patch.yaml
+  - ../../../jellyfin/components/expose
+  - ../../../transmission/components/expose

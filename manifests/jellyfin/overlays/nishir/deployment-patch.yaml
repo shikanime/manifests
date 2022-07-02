@@ -5,7 +5,6 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: nishir
       containers:
         - name: jellyfin
           volumeMounts:
@@ -13,6 +12,8 @@ spec:
               mountPath: /data/movies
             - name: downloads
               mountPath: /data/downloads
+            - name: config
+              mountPath: /config
       volumes:
         - name: movies
           persistentVolumeClaim:
@@ -20,3 +21,6 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: nishir-downloads
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-config

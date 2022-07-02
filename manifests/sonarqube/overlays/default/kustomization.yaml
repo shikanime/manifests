@@ -11,7 +11,7 @@ patchesStrategicMerge:
 secretGenerator:
   - name: sonarqube-postgresql
     literals:
-      - username=kratos
+      - username=sonarqube
       - password=8LqxBpyWFRMGzPAW
   - name: sonarqube
     literals:

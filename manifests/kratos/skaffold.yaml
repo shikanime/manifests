@@ -1,7 +1,7 @@
-apiVersion: skaffold/v2beta25
+apiVersion: skaffold/v2beta28
 kind: Config
 metadata:
-  name: postgresql
+  name: kratos
 profiles:
   - name: default
     deploy:
@@ -12,5 +12,8 @@ profiles:
       - command: dev
 portForward:
   - resourceType: Service
-    resourceName: postgresql
-    port: 5432
+    resourceName: kratos
+    port: 4433
+  - resourceType: Service
+    resourceName: kratos-admin
+    port: 4434
