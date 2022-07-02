@@ -5,6 +5,7 @@ resources:
   - ../../../postgresql/overlays/kratos
 components:
   - ../../components/postgresql
+  - ../../components/expose
 secretGenerator:
   - name: kratos-postgresql
     literals:

@@ -10,13 +10,3 @@ profiles:
           - overlays/default
     activation:
       - command: dev
-portForward:
-  - resourceType: Service
-    resourceName: transmission
-    port: 9091
-  - resourceType: Service
-    resourceName: transmission
-    port: 51413
-  - resourceType: Service
-    resourceName: transmission-udp
-    port: 51413

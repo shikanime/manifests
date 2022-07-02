@@ -6,6 +6,7 @@ resources:
 components:
   - ../../components/monitoring
   - ../../components/postgresql
+  - ../../components/expose
 patchesStrategicMerge:
   - sts-patch.yaml
 secretGenerator:

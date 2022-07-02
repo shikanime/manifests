@@ -10,10 +10,3 @@ profiles:
           - overlays/default
     activation:
       - command: dev
-portForward:
-  - resourceType: Service
-    resourceName: kratos
-    port: 4433
-  - resourceType: Service
-    resourceName: kratos-admin
-    port: 4434

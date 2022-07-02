@@ -10,7 +10,3 @@ profiles:
           - overlays/default
     activation:
       - command: dev
-portForward:
-  - resourceType: Service
-    resourceName: postgresql
-    port: 5432

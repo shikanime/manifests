@@ -10,10 +10,3 @@ profiles:
           - overlays/default
     activation:
       - command: dev
-portForward:
-  - resourceType: Service
-    resourceName: transmission
-    port: 9091
-  - resourceType: Service
-    resourceName: jellyfin
-    port: 8096
