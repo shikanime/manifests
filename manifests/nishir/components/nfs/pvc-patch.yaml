@@ -3,18 +3,18 @@ kind: PersistentVolumeClaim
 metadata:
   name: nishir-movies
 spec:
-  storageClassName: nfs
+  storageClassName: nfs-standard
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nishir-downloads
 spec:
-  storageClassName: nfs
+  storageClassName: nfs-standard
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nishir-torrents
 spec:
-  storageClassName: nfs
+  storageClassName: nfs-standard
