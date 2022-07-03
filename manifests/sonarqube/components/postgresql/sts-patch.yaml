@@ -22,4 +22,4 @@ spec:
                   name: sonarqube-postgresql
                   key: username
             - name: SONAR_JDBC_URL
-              value: jdbc:postgresql://sonarqube-postgresql:5432/sonarqube
+              value: jdbc:postgresql://sonarqube-postgresql/sonarqube

@@ -21,6 +21,8 @@ spec:
         - name: postgresql
           image: docker.io/library/postgres:14.2-bullseye
           env:
+            - name: POSTGRES_DB
+              value: postgres
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
@@ -31,6 +33,28 @@ spec:
                 secretKeyRef:
                   name: postgresql
                   key: password
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  exec pg_isready \
+                    -U "${POSTGRES_USER}" \
+                    -d "dbname=${POSTGRES_DB}" \
+                    -h 127.0.0.1 \
+                    -p 5432
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  exec pg_isready \
+                    -U "${POSTGRES_USER}" \
+                    -d "dbname=${POSTGRES_DB}" \
+                    -h 127.0.0.1 \
+                    -p 5432
           ports:
             - name: postgresql
               containerPort: 5432

@@ -20,3 +20,10 @@ spec:
                   key: password
             - name: POSTGRES_DB
               value: hasura
+          volumeMounts:
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d/
+      volumes:
+        - name: initdb
+          configMap:
+            name: postgresql-initdb

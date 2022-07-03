@@ -9,15 +9,15 @@ spec:
       containers:
         - name: hasura
           env:
-            - name: POSTGRES_USER
+            - name: PGUSER
               valueFrom:
                 secretKeyRef:
                   name: hasura-postgresql
                   key: username
-            - name: POSTGRES_PASSWORD
+            - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: hasura-postgresql
                   key: password
             - name: HASURA_GRAPHQL_DATABASE_URL
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@hasura-postgresql:5432/hasura
+              value: postgresql://$(PGUSER)@hasura-postgresql/hasura

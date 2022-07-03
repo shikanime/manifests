@@ -5,3 +5,7 @@ resources:
   - ../../base
 patchesStrategicMerge:
   - sts-patch.yaml
+configMapGenerator:
+  - name: postgresql-initdb
+    files:
+      - init-hasura-db.sql

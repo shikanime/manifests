@@ -9,17 +9,17 @@ spec:
       containers:
         - name: hasura
           env:
-            - name: POSTGRES_USER
+            - name: PGUSER
               valueFrom:
                 secretKeyRef:
                   name: prefect-server-postgresql
                   key: username
-            - name: POSTGRES_PASSWORD
+            - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: prefect-server-postgresql
                   key: password
             - name: HASURA_GRAPHQL_DATABASE_URL
-              value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@prefect-server-postgresql/prefect_server
+              value: postgresql://$(PGUSER)@prefect-server-postgresql/prefect
             - name: HASURA_GRAPHQL_V1_BOOLEAN_NULL_COLLAPSE
               value: "true"
