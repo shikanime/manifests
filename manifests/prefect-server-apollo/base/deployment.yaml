@@ -60,7 +60,6 @@ spec:
           ports:
             - name: web
               containerPort: 4200
-              protocol: TCP
           livenessProbe:
             httpGet:
               path: /.well-known/apollo/server-health
@@ -70,9 +69,6 @@ spec:
               path: /.well-known/apollo/server-health
               port: web
           resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
             limits:
               cpu: 100m
               memory: 128Mi

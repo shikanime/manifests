@@ -21,14 +21,10 @@ spec:
           ports:
             - name: web
               containerPort: 9000
-              protocol: TCP
           resources:
             limits:
               cpu: 800m
               memory: 4Gi
-            requests:
-              cpu: 400m
-              memory: 2Gi
           readinessProbe:
             exec:
               command:

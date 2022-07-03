@@ -8,7 +8,6 @@ spec:
   ports:
     - port: 4201
       targetPort: web
-      protocol: TCP
       name: web
   selector:
     app: prefect-server

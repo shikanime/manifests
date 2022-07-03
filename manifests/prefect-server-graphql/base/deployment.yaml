@@ -94,7 +94,6 @@ spec:
           ports:
             - name: web
               containerPort: 4201
-              protocol: TCP
           livenessProbe:
             httpGet:
               path: /health
@@ -104,9 +103,6 @@ spec:
               path: /health
               port: web
           resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
             limits:
               cpu: 100m
               memory: 128Mi

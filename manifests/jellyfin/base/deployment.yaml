@@ -32,9 +32,6 @@ spec:
               containerPort: 1900
               protocol: UDP
           resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
             limits:
               cpu: 100m
               memory: 128Mi

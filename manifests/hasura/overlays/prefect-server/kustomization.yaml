@@ -4,7 +4,6 @@ namePrefix: prefect-server-
 resources:
   - ../../base
 components:
-  - ../../components/expose
   - ../../components/console
   - ../../components/postgresql
 patchesStrategicMerge:

@@ -41,9 +41,6 @@ spec:
             - name: admin
               containerPort: 4434
           resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
             limits:
               cpu: 100m
               memory: 128Mi
