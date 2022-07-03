@@ -11,3 +11,18 @@ spec:
       name: postgresql
   selector:
     app: postgresql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-headless
+  labels:
+    app: postgresql
+spec:
+  clusterIP: None
+  ports:
+    - port: 5432
+      targetPort: postgresql
+      name: postgresql
+  selector:
+    app: postgresql

@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - svc.yaml
   - sts.yaml
-  - svc-headless.yaml
