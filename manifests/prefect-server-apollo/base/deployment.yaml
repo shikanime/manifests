@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prefect-server-apollo
+  labels:
+    app: prefect-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prefect-server
+  template:
+    metadata:
+      labels:
+        app: prefect-server
+    spec:
+      containers:
+        - name: apollo
+          image: prefecthq/apollo:2022.04.14
+          imagePullPolicy: Always
+          command:
+            - sh
+            - -c
+            - /apollo/post-start.sh && npm run serve
+          env:
+            - name: HASURA_API_URL
+              value: http://prefect-server-hasura:8080/v1alpha1/graphql
+            - name: PREFECT_API_URL
+              value: http://prefect-server-graphql:4201/graphql/
+            - name: PREFECT_API_HEALTH_URL
+              value: http://prefect-server-graphql:4201/health
+            - name: GRAPHQL_SERVICE_HOST
+              value: "http://prefect-server-graphql"
+            - name: GRAPHQL_SERVICE_PORT
+              value: "4201"
+            - name: PREFECT_SERVER__API__URL
+              value: http://prefect-server-hasura:8080/v1alpha1/graphql
+            - name: PREFECT_SERVER__DATABASE__HOST
+              value: prefect-server-postgresql
+            - name: PREFECT_SERVER__DATABASE__PORT
+              value: "5432"
+            - name: PREFECT_SERVER__DATABASE__USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: prefect-server-postgresql
+                  key: username
+            - name: PREFECT_SERVER__DATABASE__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: prefect-server-postgresql
+                  key: password
+            - name: PREFECT_SERVER__HASURA__HOST
+              value: prefect-server-hasura
+            - name: PREFECT_SERVER__HASURA__PORT
+              value: "8080"
+            - name: PREFECT_SERVER__SERVICES__APOLLO__PORT
+              value: "4200"
+            - name: PREFECT_SERVER__SERVICES__GRAPHQL__PORT
+              value: "4201"
+          ports:
+            - name: web
+              containerPort: 4200
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /.well-known/apollo/server-health
+              port: web
+          readinessProbe:
+            httpGet:
+              path: /.well-known/apollo/server-health
+              port: web
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi

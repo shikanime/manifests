@@ -3,9 +3,9 @@ kind: Kustomization
 namePrefix: prefect-server-
 resources:
   - ../../base
-components:
-  - ../../components/expose
-  - ../../components/console
-  - ../../components/postgresql
 patchesStrategicMerge:
-  - deployment-patch.yaml
+  - sts-patch.yaml
+configMapGenerator:
+  - name: postgresql-initdb
+    files:
+      - init-hasura-db.sql
