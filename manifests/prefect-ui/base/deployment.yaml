@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ui
-          image: docker.io/prefecthq/ui:core-0.15.13
+          image: docker.io/prefecthq/ui:2022-02-17@sha256:8e6b797b94105ca50141d58944b1a264136d52f2a56cebd3c30f8096bdac2ec2
           command:
             - /intercept.sh
           env:
