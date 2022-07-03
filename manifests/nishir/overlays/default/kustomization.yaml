@@ -5,6 +5,7 @@ resources:
   - ../../../jellyfin/overlays/nishir
   - ../../../nfs-provisioner/overlays/nishir
   - ../../../transmission/overlays/nishir
+  - ../../../openldap/overlays/nishir
 components:
   - ../../components/nfs
   - ../../../jellyfin/components/expose
@@ -14,3 +15,7 @@ secretGenerator:
     literals:
       - username=nishir
       - password=Kr!JZmu3Ce%Z@o
+  - name: nishir-openldap
+    literals:
+      - admin-password=i%sH7T3fYKDmUD
+      - config-password=jS$fijZ4wmVN7F
