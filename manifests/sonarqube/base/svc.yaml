@@ -7,9 +7,9 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: web
-      port: 9000
+    - port: 9000
       targetPort: web
+      name: web
   selector:
     app: sonarqube
 ---
@@ -22,8 +22,8 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: web
-      port: 9000
+    - port: 9000
       targetPort: web
+      name: web
   selector:
     app: sonarqube

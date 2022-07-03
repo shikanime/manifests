@@ -6,35 +6,35 @@ metadata:
   name: nfs-provisioner
 spec:
   ports:
-    - name: nfs
-      port: 2049
-    - name: nfs-udp
-      port: 2049
+    - port: 2049
+      name: nfs
+    - port: 2049
+      name: nfs-udp
       protocol: UDP
-    - name: nlockmgr
-      port: 32803
-    - name: nlockmgr-udp
-      port: 32803
+    - port: 32803
+      name: nlockmgr
+    - port: 32803
+      name: nlockmgr-udp
       protocol: UDP
-    - name: mountd
-      port: 20048
-    - name: mountd-udp
-      port: 20048
+    - port: 20048
+      name: mountd
+    - port: 20048
+      name: mountd-udp
       protocol: UDP
-    - name: rquotad
-      port: 875
-    - name: rquotad-udp
-      port: 875
+    - port: 875
+      name: rquotad
+    - port: 875
+      name: rquotad-udp
       protocol: UDP
-    - name: rpcbind
-      port: 111
-    - name: rpcbind-udp
-      port: 111
+    - port: 111
+      name: rpcbind
+    - port: 111
+      name: rpcbind-udp
       protocol: UDP
-    - name: statd
-      port: 662
-    - name: statd-udp
-      port: 662
+    - port: 662
+      name: statd
+    - port: 662
+      name: statd-udp
       protocol: UDP
   selector:
     app: nfs-provisioner
