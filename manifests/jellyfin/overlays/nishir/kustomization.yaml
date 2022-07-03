@@ -3,5 +3,6 @@ kind: Kustomization
 namePrefix: nishir-
 resources:
   - ../../base
+  - pvc.yaml
 patchesStrategicMerge:
   - deployment-patch.yaml

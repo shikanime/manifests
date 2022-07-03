@@ -6,7 +6,6 @@ resources:
   - ../../../nfs-provisioner/overlays/nishir
   - ../../../transmission/overlays/nishir
   - pv.yaml
-  - pvc.yaml
 components:
   - ../../components/nfs
   - ../../../jellyfin/components/openmax
