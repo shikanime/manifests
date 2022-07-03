@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: postgresql
-          image: docker.io/library/postgres:14.2-bullseye
+          image: docker.io/library/postgres:14.4-bullseye@sha256:d3eecdd28512e721b10d6e270d4ede4cbd57706f0c5bf28ea1dc952eff325650
           env:
             - name: POSTGRES_DB
               value: postgres
