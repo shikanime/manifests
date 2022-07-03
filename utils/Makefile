@@ -8,8 +8,12 @@ inflate-jellyfin:
 		--output-dir jellyfin/chart \
 		--values jellyfin/values.yaml
 
-
 inflate-sonarqube:
 	helm template sonarqube sonarqube/sonarqube \
 		--output-dir sonarqube/chart \
 		--values sonarqube/values.yaml
+
+inflate-prefect-server:
+	helm template prefect-server prefecthq/prefect-server \
+		--output-dir prefect-server/chart \
+		--values prefect-server/values.yaml
