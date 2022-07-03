@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: prefect-server-towel
   labels:
-    app: prefect-server
+    app: prefect-server-towel
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prefect-server
+      app: prefect-server-towel
   template:
     metadata:
       labels:
-        app: prefect-server
+        app: prefect-server-towel
     spec:
       containers:
         - name: towel
@@ -21,8 +21,10 @@ spec:
             - python
             - src/prefect_server/services/towel/__main__.py
           env:
-            - name: PREFECT_SERVER__API__URL
-              value: http://prefect-server-hasura:8080/v1alpha1/graphql
+            - name: PREFECT_SERVER__HASURA__HOST
+              value: prefect-server-hasura
+            - name: PREFECT_SERVER__HASURA__PORT
+              value: "8080"
           resources:
             limits:
               cpu: 100m

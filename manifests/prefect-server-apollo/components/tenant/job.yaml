@@ -13,7 +13,6 @@ spec:
       containers:
         - name: create-tenant
           image: prefecthq/prefect:1.2.0
-          imagePullPolicy: Always
           command:
             - prefect
             - server

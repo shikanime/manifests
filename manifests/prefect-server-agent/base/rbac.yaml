@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: prefect-server-agent-role
   labels:
-    app: prefect-server
+    app: prefect-server-agent
   namespace: default
 rules:
   - apiGroups:
@@ -35,7 +35,7 @@ kind: RoleBinding
 metadata:
   name: prefect-server-agent-role-binding
   labels:
-    app: prefect-server
+    app: prefect-server-agent
   namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io

@@ -4,10 +4,14 @@ resources:
   - ../../../prefect-server-apollo/overlays/prefect-server
   - ../../../prefect-server-towel/overlays/prefect-server
   - ../../../prefect-server-graphql/overlays/prefect-server
+  - ../../../prefect-server-agent/overlays/prefect-server
+  - ../../../prefect-ui/overlays/prefect-server
   - ../../../postgresql/overlays/prefect-server
   - ../../../hasura/overlays/prefect-server
 components:
   - ../../../prefect-server-apollo/components/tenant
+  - ../../../prefect-server-apollo/components/expose
+  - ../../../prefect-ui/components/expose
 secretGenerator:
   - name: prefect-server-postgresql
     literals:

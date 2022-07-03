@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: prefect-server-apollo
   labels:
-    app: prefect-server
+    app: prefect-server-apollo
 spec:
   ports:
     - port: 4200
       targetPort: web
       name: web
   selector:
-    app: prefect-server
+    app: prefect-server-apollo

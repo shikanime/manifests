@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: prefect-server-graphql
   labels:
-    app: prefect-server
+    app: prefect-server-graphql
 spec:
   ports:
     - port: 4201
       targetPort: web
       name: web
   selector:
-    app: prefect-server
+    app: prefect-server-graphql
