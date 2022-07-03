@@ -10,3 +10,8 @@ profiles:
           - overlays/default
     activation:
       - command: dev
+  - name: raspberrypi
+    deploy:
+      kustomize:
+        paths:
+          - overlays/raspberrypi
