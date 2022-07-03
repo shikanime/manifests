@@ -5,7 +5,6 @@ metadata:
   labels:
     app: kratos
 spec:
-  type: ClusterIP
   ports:
     - port: 4433
       targetPort: web
@@ -20,7 +19,6 @@ metadata:
   labels:
     app: kratos
 spec:
-  type: ClusterIP
   ports:
     - port: 4434
       targetPort: admin
