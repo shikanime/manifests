@@ -12,6 +12,7 @@ spec:
     - port: 51413
       targetPort: utp
       name: utp
+  sessionAffinity: ClientIP
   selector:
     app: transmission
 ---
@@ -27,5 +28,6 @@ spec:
       targetPort: utp-udp
       protocol: UDP
       name: utp-udp
+  sessionAffinity: ClientIP
   selector:
     app: transmission

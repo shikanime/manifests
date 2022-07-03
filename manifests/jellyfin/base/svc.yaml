@@ -9,6 +9,7 @@ spec:
     - port: 8096
       targetPort: web
       name: web
+  sessionAffinity: ClientIP
   selector:
     app: jellyfin
 ---
@@ -28,5 +29,6 @@ spec:
       targetPort: service
       protocol: UDP
       name: service
+  sessionAffinity: ClientIP
   selector:
     app: jellyfin
