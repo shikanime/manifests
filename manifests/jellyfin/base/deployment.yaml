@@ -16,12 +16,7 @@ spec:
     spec:
       containers:
         - name: jellyfin
-          image: docker.io/linuxserver/jellyfin:10.7.7@sha256:9ef53374076d584e5c4b26f3f5ec79688bb76d2af3da7de80be6b1819ff3957f
-          env:
-            - name: PUID
-              value: "1000"
-            - name: PGID
-              value: "1000"
+          image: docker.io/jellyfin/jellyfin:10.8.1@sha256:dd15a0318e6565b7ceb06a11b6f7dfaefa0588601ce9bd26c4c6c41eb0061edd
           ports:
             - name: web
               containerPort: 8096
