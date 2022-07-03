@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prefect-server-agent
+  labels:
+    app: prefect-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prefect-server
+  template:
+    metadata:
+      labels:
+        app: prefect-server
+    spec:
+      containers:
+        - name: agent
+          image: prefecthq/prefect:1.2.0
+          imagePullPolicy: Always
+          command:
+            - prefect
+            - agent
+            - kubernetes
+            - start
+          env:
+            - name: PREFECT__CLOUD__API
+              value: http://prefect-server-apollo:4200/graphql
+            - name: NAMESPACE
+              value: default
+            - name: PREFECT__CLOUD__AGENT__LABELS
+              value: "[]"
+            - name: SERVICE_ACCOUNT_NAME
+              value: default
+            - name: PREFECT__BACKEND
+              value: server
+            - name: PREFECT__CLOUD__AGENT__AGENT_ADDRESS
+              value: http://0.0.0.0:8080
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 40
+            periodSeconds: 40
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi

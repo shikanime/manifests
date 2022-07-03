@@ -1,0 +1,46 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: prefect-server-agent-role
+  labels:
+    app: prefect-server
+  namespace: default
+rules:
+  - apiGroups:
+      - batch
+      - extensions
+    resources:
+      - jobs
+      - jobs/status
+    verbs:
+      - "*"
+  - apiGroups:
+      - ""
+    resources:
+      - events
+      - pods
+      - pods/log
+      - services
+    verbs:
+      - "*"
+  - apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prefect-server-agent-role-binding
+  labels:
+    app: prefect-server
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: prefect-server-agent-role
+subjects:
+  - kind: ServiceAccount
+    name: default
