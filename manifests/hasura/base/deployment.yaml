@@ -16,18 +16,11 @@ spec:
     spec:
       containers:
         - name: hasura
-          image: docker.io/hasura/graphql-engine
-          command:
-            - graphql-engine
-            - serve
+          image: docker.io/hasura/graphql-engine:v2.8.3@sha256:2ae7fe3ea4485e7f648ff7dd4d3f7a032192afe1bac8e83fa7d6e473927f3a4b
           ports:
             - name: web
               containerPort: 8080
           livenessProbe:
-            httpGet:
-              path: /healthz
-              port: web
-          readinessProbe:
             httpGet:
               path: /healthz
               port: web

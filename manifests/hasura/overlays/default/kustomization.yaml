@@ -1,12 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namePrefix: prefect-server-
 resources:
   - ../../base
-  - ../../../postgresql/overlays/default
+  - ../../../postgresql/overlays/hasura
 components:
   - ../../components/expose
   - ../../components/console
   - ../../components/postgresql
-patchesStrategicMerge:
-  - deployment-patch.yaml
+secretGenerator:
+  - name: hasura-postgresql
+    literals:
+      - username=hasura
+      - password=8LqxBpyWFRMGzPAW
