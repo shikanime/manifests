@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy
+  labels:
+    app: haproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: haproxy
+  template:
+    metadata:
+      labels:
+        app: haproxy
+    spec:
+      containers:
+        - name: haproxy
+          image: haproxytech/haproxy-alpine:2.6.1
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi

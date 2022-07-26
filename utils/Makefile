@@ -17,3 +17,8 @@ inflate-prefect-server:
 	helm template prefect-server prefecthq/prefect-server \
 		--output-dir prefect-server/chart \
 		--values prefect-server/values.yaml
+
+inflate-haproxy:
+	helm template haproxy haproxytech/haproxy \
+		--output-dir haproxy/chart \
+		--values haproxy/values.yaml
