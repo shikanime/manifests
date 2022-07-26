@@ -19,7 +19,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /api/system/liveness
-              port: web
+              name: http
               httpHeaders:
                 - name: X-Sonar-Passcode
             initialDelaySeconds: 60

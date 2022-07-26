@@ -18,7 +18,7 @@ spec:
         - name: jellyfin
           image: docker.io/jellyfin/jellyfin:10.8.1@sha256:dd15a0318e6565b7ceb06a11b6f7dfaefa0588601ce9bd26c4c6c41eb0061edd
           ports:
-            - name: web
+            - name: http
               containerPort: 8096
             - name: client
               containerPort: 7359

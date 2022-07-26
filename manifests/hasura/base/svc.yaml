@@ -7,7 +7,7 @@ metadata:
 spec:
   ports:
     - port: 8080
-      targetPort: web
-      name: web
+      targetPort: http
+      name: http
   selector:
     app: hasura

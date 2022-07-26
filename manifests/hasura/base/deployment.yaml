@@ -18,17 +18,17 @@ spec:
         - name: hasura
           image: docker.io/hasura/graphql-engine:v2.8.3@sha256:2ae7fe3ea4485e7f648ff7dd4d3f7a032192afe1bac8e83fa7d6e473927f3a4b
           ports:
-            - name: web
+            - name: http
               containerPort: 8080
           livenessProbe:
             httpGet:
               path: /healthz
-              port: web
+              name: http
             initialDelaySeconds: 5
           readinessProbe:
             httpGet:
               path: /healthz
-              port: web
+              name: http
             initialDelaySeconds: 5
           resources:
             limits:

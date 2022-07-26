@@ -33,16 +33,16 @@ spec:
             - name: GRAPHQL_SERVICE_PORT
               value: "4201"
           ports:
-            - name: web
+            - name: http
               containerPort: 4200
           livenessProbe:
             httpGet:
               path: /.well-known/apollo/server-health
-              port: web
+              name: http
           readinessProbe:
             httpGet:
               path: /.well-known/apollo/server-health
-              port: web
+              name: http
           resources:
             limits:
               cpu: 100m

@@ -36,7 +36,7 @@ spec:
             - -c
             - /etc/kratos/kratos.yaml
           ports:
-            - name: web
+            - name: http
               containerPort: 4433
             - name: admin
               containerPort: 4434

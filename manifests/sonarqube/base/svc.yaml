@@ -8,8 +8,8 @@ spec:
   clusterIP: None
   ports:
     - port: 9000
-      targetPort: web
-      name: web
+      targetPort: http
+      name: http
   selector:
     app: sonarqube
 ---
@@ -23,7 +23,7 @@ spec:
   clusterIP: None
   ports:
     - port: 9000
-      targetPort: web
-      name: web
+      targetPort: http
+      name: http
   selector:
     app: sonarqube

@@ -7,8 +7,8 @@ metadata:
 spec:
   ports:
     - port: 8096
-      targetPort: web
-      name: web
+      targetPort: http
+      name: http
   sessionAffinity: ClientIP
   selector:
     app: jellyfin

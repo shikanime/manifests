@@ -23,16 +23,16 @@ spec:
             - name: PREFECT_SERVER__APOLLO_URL
               value: http://127.0.0.1:4200/graphql
           ports:
-            - name: web
+            - name: http
               containerPort: 8080
           livenessProbe:
             httpGet:
               path: /healthz
-              port: web
+              name: http
           readinessProbe:
             httpGet:
               path: /healthz
-              port: web
+              name: http
           resources:
             limits:
               cpu: 100m

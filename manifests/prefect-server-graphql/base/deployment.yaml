@@ -53,16 +53,16 @@ spec:
             - name: PREFECT_SERVER__HASURA__PORT
               value: "8080"
           ports:
-            - name: web
+            - name: http
               containerPort: 4201
           livenessProbe:
             httpGet:
               path: /health
-              port: web
+              name: http
           readinessProbe:
             httpGet:
               path: /health
-              port: web
+              name: http
           resources:
             limits:
               cpu: 100m

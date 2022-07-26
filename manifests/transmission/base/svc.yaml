@@ -7,8 +7,8 @@ metadata:
 spec:
   ports:
     - port: 9091
-      targetPort: web
-      name: web
+      targetPort: http
+      name: http
     - port: 51413
       targetPort: utp
       name: utp
