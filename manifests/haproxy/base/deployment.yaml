@@ -19,5 +19,5 @@ spec:
           image: haproxytech/haproxy-alpine:2.6.1
           resources:
             limits:
-              cpu: 100m
-              memory: 64Mi
+              cpu: 1000m
+              memory: 2Gi
