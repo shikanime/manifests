@@ -1,9 +1,15 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ mkShell
+, minikube
+, skaffold
+, kubectl
+, kubernetes-helm
+}:
 
-pkgs.stdenv.mkDerivation {
-  name = "nishir-shell";
+mkShell {
   buildInputs = [
-    pkgs.kubectl
-    pkgs.kubernetes-helm
+    minikube
+    skaffold
+    kubectl
+    kubernetes-helm
   ];
 }
