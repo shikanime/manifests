@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+metadata:
+  name: nishir
+profiles:
+  - name: default
+    deploy:
+      kustomize:
+        paths:
+          - nfs-provisioner/overlays/default
+          - nishir/overlays/default
+  - name: raspberrypi
+    deploy:
+      kustomize:
+        paths:
+          - nfs-provisioner/overlays/default
+          - nishir/overlays/raspberrypi

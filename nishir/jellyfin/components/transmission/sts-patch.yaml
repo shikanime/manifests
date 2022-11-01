@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jellyfin
+  namespace: nishir
+spec:
+  template:
+    spec:
+      containers:
+        - name: jellyfin
+          volumeMounts:
+            - name: downloads
+              mountPath: /data/downloads
+      volumes:
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: transmission-downloads

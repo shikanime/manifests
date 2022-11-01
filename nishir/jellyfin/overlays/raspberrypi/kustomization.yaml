@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+  - pv.yaml
+components:
+  - ../../components/transmission
+  - ../../components/openmax
+  - ../../components/v4l

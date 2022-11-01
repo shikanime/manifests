@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jellyfin
+  namespace: nishir
+spec:
+  replicas: 1
+  serviceName: jellyfin-headless
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      containers:
+        - name: jellyfin
+          image: jellyfin/jellyfin:10.8.1
+          ports:
+            - name: http
+              containerPort: 8096
+            - name: client
+              containerPort: 7359
+              protocol: UDP
+            - name: service
+              containerPort: 1900
+              protocol: UDP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+          volumeMounts:
+            - name: cache
+              mountPath: /cache
+            - name: medias
+              mountPath: /data/medias
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: cache
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin
+        - name: medias
+          persistentVolumeClaim:
+            claimName: jellyfin-medias

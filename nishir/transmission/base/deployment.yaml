@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+  namespace: nishir
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      containers:
+        - name: transmission
+          image: linuxserver/transmission:version-3.00-r2
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: USER
+              valueFrom:
+                secretKeyRef:
+                  name: transmission
+                  key: username
+            - name: PASS
+              valueFrom:
+                secretKeyRef:
+                  name: transmission
+                  key: password
+          ports:
+            - name: http
+              containerPort: 9091
+            - name: utp
+              containerPort: 51413
+            - name: utp-udp
+              containerPort: 51413
+              protocol: UDP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - name: watch
+              mountPath: /watch
+            - name: downloads
+              mountPath: /downloads
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: transmission
+        - name: watch
+          persistentVolumeClaim:
+            claimName: transmission-torrents
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: transmission-downloads
