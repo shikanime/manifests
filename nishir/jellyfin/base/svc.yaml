@@ -32,17 +32,3 @@ spec:
   sessionAffinity: ClientIP
   selector:
     app: jellyfin
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jellyfin-headless
-  namespace: nishir
-spec:
-  clusterIP: None
-  ports:
-    - port: 8096
-      targetPort: http
-      name: http
-  selector:
-    app: jellyfin
