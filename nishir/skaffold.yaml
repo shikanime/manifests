@@ -9,9 +9,9 @@ profiles:
         paths:
           - nfs-provisioner/overlays/default
           - nishir/overlays/default
-  - name: raspberrypi
+  - name: raspberry-pi
     deploy:
       kustomize:
         paths:
           - nfs-provisioner/overlays/default
-          - nishir/overlays/raspberrypi
+          - nishir/overlays/raspberry-pi
