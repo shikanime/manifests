@@ -1,0 +1,4 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+metadata:
+  name: nishir

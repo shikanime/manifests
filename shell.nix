@@ -1,15 +1,7 @@
-{ mkShell
-, minikube
-, skaffold
-, kubectl
-, kubernetes-helm
-}:
+{ pkgs ? import <nixpkgs> { } }:
 
-mkShell {
+pkgs.mkShell {
   buildInputs = [
-    minikube
-    skaffold
-    kubectl
-    kubernetes-helm
+    pkgs.skaffold
   ];
 }
