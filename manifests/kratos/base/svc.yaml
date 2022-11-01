@@ -2,8 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kratos
-  labels:
-    app: kratos
 spec:
   ports:
     - port: 4433
@@ -16,8 +14,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kratos-admin
-  labels:
-    app: kratos
 spec:
   ports:
     - port: 4434

@@ -2,11 +2,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgresql
-  labels:
-    app: postgresql
 spec:
-  serviceName: postgresql-headless
   replicas: 1
+  serviceName: postgresql-headless
   selector:
     matchLabels:
       app: postgresql

@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prefect-server-graphql
-  labels:
-    app: prefect-server-graphql
 spec:
   replicas: 1
   selector:

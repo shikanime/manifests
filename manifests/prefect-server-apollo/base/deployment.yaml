@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prefect-server-apollo
-  labels:
-    app: prefect-server-apollo
 spec:
   replicas: 1
   selector:
