@@ -1,10 +1,10 @@
 apiVersion: skaffold/v2beta28
 kind: Config
 metadata:
-  name: prefect-server
+  name: prefect
 profiles:
   - name: default
     deploy:
       kustomize:
         paths:
-          - prefect-server/overlays/default
+          - prefect/overlays/default
