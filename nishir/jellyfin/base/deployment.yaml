@@ -33,8 +33,8 @@ spec:
           volumeMounts:
             - name: cache
               mountPath: /cache
-            - name: medias
-              mountPath: /data/medias
+            - name: libraries
+              mountPath: /data/libraries
             - name: config
               mountPath: /config
       volumes:
@@ -43,6 +43,6 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin
-        - name: medias
+        - name: libraries
           persistentVolumeClaim:
-            claimName: jellyfin-medias
+            claimName: jellyfin-libraries
