@@ -27,8 +27,8 @@ spec:
               protocol: UDP
           resources:
             limits:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 1000m
+              memory: 2Gi
           volumeMounts:
             - name: cache
               mountPath: /cache
