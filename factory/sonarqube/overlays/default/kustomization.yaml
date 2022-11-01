@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+  - ../../../postgresql/overlays/sonarqube
+components:
+  - ../../components/monitoring
+  - ../../components/postgresql
+  - ../../components/expose
+patchesStrategicMerge:
+  - sts-patch.yaml
+secretGenerator:
+  - name: sonarqube
+    literals:
+      - passcode=ZGVmaW5lX2l0
