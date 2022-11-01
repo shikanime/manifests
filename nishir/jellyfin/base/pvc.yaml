@@ -4,8 +4,9 @@ metadata:
   name: jellyfin
   namespace: nishir
 spec:
+  storageClassName: nfs-standard
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 128Mi

@@ -1,6 +1,23 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: transmission
+  namespace: nishir
+spec:
+  storageClassName: nfs-standard
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/nishir/transmission/config
+  claimRef:
+    name: transmission
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: transmission-torrents
   namespace: nishir
 spec:
@@ -11,7 +28,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /mnt/data/torrents
+    path: /mnt/nishir/transmission/torrents
   claimRef:
     name: transmission-torrents
 ---
@@ -28,6 +45,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /mnt/data/downloads
+    path: /mnt/nishir/transmission/downloads
   claimRef:
     name: transmission-downloads

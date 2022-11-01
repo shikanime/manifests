@@ -4,11 +4,14 @@ metadata:
   name: jellyfin
   namespace: nishir
 spec:
+  storageClassName: nfs-standard
   capacity:
-    storage: 5Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/nishir/jellyfin/config
   claimRef:
     name: jellyfin
 ---
@@ -25,6 +28,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /mnt/data/libraries
+    path: /mnt/nishir/jellyfin/libraries
   claimRef:
     name: jellyfin-libraries

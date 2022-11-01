@@ -4,8 +4,9 @@ metadata:
   name: transmission
   namespace: nishir
 spec:
+  storageClassName: nfs-standard
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
@@ -18,7 +19,7 @@ metadata:
 spec:
   storageClassName: nfs-standard
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Mi
