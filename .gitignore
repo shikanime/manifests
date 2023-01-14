@@ -25,3 +25,6 @@
 # Devenv
 .devenv
 .pre-commit-config.yaml
+
+# Helm
+manifests/factory/gitea/overlays/default/charts

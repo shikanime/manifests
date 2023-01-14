@@ -8,5 +8,6 @@ profiles:
       kustomize:
         paths:
           - factory/overlays/default
+          - gitea/overlays/default
         buildArgs:
           - --enable-helm
