@@ -5,7 +5,7 @@ metadata:
   namespace: factory
 spec:
   rules:
-    - host: sonarqube.shikanime.localhost
+    - host: sonarqube.localhost
       http:
         paths:
           - backend:
@@ -15,7 +15,7 @@ spec:
                   name: http
             path: /
             pathType: Prefix
-    - host: vaultwarden.shikanime.localhost
+    - host: vaultwarden.localhost
       http:
         paths:
           - backend:

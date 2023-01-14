@@ -13,7 +13,7 @@ helmCharts:
       ingress:
         enabled: true
         hosts:
-          - host: gitea.shikanime.localhost
+          - host: gitea.localhost
             paths:
               - path: /
                 pathType: Prefix
