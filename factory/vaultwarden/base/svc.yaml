@@ -4,7 +4,6 @@ metadata:
   name: vaultwarden
   namespace: factory
 spec:
-  clusterIP: None
   ports:
     - port: 80
       targetPort: http
