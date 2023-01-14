@@ -21,3 +21,7 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Devenv
+.devenv
+.pre-commit-config.yaml

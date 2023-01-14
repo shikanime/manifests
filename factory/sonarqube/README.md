@@ -29,7 +29,8 @@ ulimit -n
 ulimit -u
 ```
 
-You can set them dynamically for the current session by running the following commands as root:
+You can set them dynamically for the current session by running the following
+commands as root:
 
 ```shell
 sysctl -w vm.max_map_count=524288
