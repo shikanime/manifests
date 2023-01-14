@@ -4,3 +4,4 @@ resources:
   - ../../base
   - ../../../postgresql/overlays/default
   - ../../../sonarqube/overlays/default
+  - ../../../vaultwarden/overlays/default
