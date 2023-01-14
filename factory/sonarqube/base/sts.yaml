@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sonarqube
+  namespace: factory
 spec:
   replicas: 1
   serviceName: sonarqube
@@ -15,14 +16,26 @@ spec:
     spec:
       containers:
         - name: sonarqube
-          image: sonarqube:9.5.0-community
+          image: sonarqube:9.8.0-community
           ports:
             - name: http
               containerPort: 9000
-          resources:
-            limits:
-              cpu: 800m
-              memory: 4Gi
+          env:
+            - name: SONAR_WEB_SYSTEMPASSCODE
+              valueFrom:
+                secretKeyRef:
+                  name: sonarqube
+                  key: passcode
+          livenessProbe:
+            httpGet:
+              path: /api/system/liveness
+              port: http
+              httpHeaders:
+                - name: X-Sonar-Passcode
+                  value: $(SONAR_WEB_SYSTEMPASSCODE)
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            failureThreshold: 6
           readinessProbe:
             exec:
               command:
@@ -48,7 +61,7 @@ spec:
           startupProbe:
             httpGet:
               path: /api/system/status
-              name: http
+              port: http
             initialDelaySeconds: 30
             failureThreshold: 24
           volumeMounts:

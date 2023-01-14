@@ -21,7 +21,7 @@ spec:
           image: postgres:14.4-bullseye
           env:
             - name: POSTGRES_DB
-              value: factory
+              value: sonarqube
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
@@ -57,10 +57,6 @@ spec:
           ports:
             - name: postgresql
               containerPort: 5432
-          resources:
-            requests:
-              cpu: 250m
-              memory: 256Mi
           volumeMounts:
             - name: dshm
               mountPath: /dev/shm
