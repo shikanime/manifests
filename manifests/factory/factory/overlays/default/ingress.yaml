@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: factory
+  namespace: factory
+spec:
+  rules:
+    - host: sonarqube.shikanime.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: sonarqube
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+    - host: vaultwarden.shikanime.localhost
+      http:
+        paths:
+          - backend:
+              service:
+                name: vaultwarden
+                port:
+                  name: http
+            path: /
+            pathType: Prefix

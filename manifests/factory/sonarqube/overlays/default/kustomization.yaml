@@ -4,8 +4,6 @@ resources:
   - ../../base
 components:
   - ../../components/postgresql
-patchesStrategicMerge:
-  - patch-svc.yaml
 secretGenerator:
   - name: sonarqube
     namespace: factory
