@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - ingress.yaml
   - ../../base
-  - ../../../postgresql/overlays/default
+  - ../../../gitea/overlays/default
   - ../../../sonarqube/overlays/default
   - ../../../vaultwarden/overlays/default

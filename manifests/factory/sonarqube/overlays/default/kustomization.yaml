@@ -1,11 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: sonarqube
 resources:
   - ../../base
-components:
-  - ../../components/postgresql
-secretGenerator:
+helmCharts:
   - name: sonarqube
-    namespace: factory
-    literals:
-      - passcode=ZGVmaW5lX2l0
+    releaseName: sonarqube
+    repo: https://SonarSource.github.io/helm-chart-sonarqube
+    namespace: sonarqube
+    version: 7.0.0+449
+    valuesInline:
+      ingress:
+        enabled: true
+        hosts:
+          - name: sonaqube.localhost
