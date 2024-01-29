@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  namespace: shikanime
+spec:
+  ports:
+    - port: 7878
+      targetPort: http
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: radarr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr-headless
+  namespace: shikanime
+spec:
+  ports:
+    - port: 7878
+      targetPort: http
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: radarr
