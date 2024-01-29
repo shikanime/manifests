@@ -11,3 +11,4 @@ resources:
   - ../../../../apps/radarr/overlays/default
   - ../../../../apps/sonarr/overlays/default
   - ../../../../apps/vaultwarden/overlays/default
+  - ../../../../apps/ollama/overlays/default

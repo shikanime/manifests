@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama
+  namespace: shikanime
+spec:
+  ports:
+    - port: 11434
+      targetPort: http
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: ollama
