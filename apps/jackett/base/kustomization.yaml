@@ -4,5 +4,6 @@ images:
   - name: jackett
     newName: lscr.io/linuxserver/jackett
 resources:
-  - sts.yaml
+  - deployment.yaml
+  - pvc.yaml
   - svc.yaml

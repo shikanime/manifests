@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: jackett
   namespace: shikanime
 spec:
-  serviceName: jackett-headless
   replicas: 1
   selector:
     matchLabels:
@@ -34,12 +33,3 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: jackett-config
-  volumeClaimTemplates:
-    - metadata:
-        name: config
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 500Mi

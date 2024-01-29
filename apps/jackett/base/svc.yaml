@@ -10,16 +10,3 @@ spec:
   type: LoadBalancer
   selector:
     app.kubernetes.io/name: jackett
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jackett-headless
-  namespace: shikanime
-spec:
-  ports:
-    - port: 9117
-      targetPort: http
-  clusterIP: None
-  selector:
-    app.kubernetes.io/name: jackett

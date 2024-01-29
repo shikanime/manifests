@@ -4,5 +4,6 @@ images:
   - name: jellyfin
     newName: lscr.io/linuxserver/jellyfin
 resources:
-  - sts.yaml
+  - deployment.yaml
+  - pvc.yaml
   - svc.yaml
