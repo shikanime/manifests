@@ -4,10 +4,10 @@ resources:
   - pv.yaml
   - ../../base
   - ../../../../apps/deluge/overlays/default
-  - ../../../../apps/jackett/overlays/default
   - ../../../../apps/jellyfin/overlays/ishtar
   - ../../../../apps/metatube/overlays/default
   - ../../../../apps/postgres/overlays/default
   - ../../../../apps/radarr/overlays/default
   - ../../../../apps/sonarr/overlays/default
   - ../../../../apps/vaultwarden/overlays/default
+  - ../../../../apps/ollama/overlays/default
