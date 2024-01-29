@@ -11,3 +11,15 @@ spec:
           env:
             - name: JELLYFIN_PublishedServerUrl
               value: https://ishtar.tail9fed3.ts.net
+          volumeMounts:
+            - mountPath: /dev/dri
+              name: dev-dri
+          securityContext:
+            capabilities:
+              add:
+                - SYS_ADMIN
+      volumes:
+        - name: dev-dri
+          hostPath:
+            path: /dev/dri
+            type: Directory
