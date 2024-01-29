@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 8096
+      targetPort: http
+    - name: https
+      port: 8920
+      targetPort: https
+    - name: discovery
+      protocol: UDP
+      port: 7359
+      targetPort: discovery
+    - name: ssdp
+      protocol: UDP
+      port: 1900
+      targetPort: ssdp
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: jellyfin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin-headless
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 8096
+      targetPort: http
+    - name: https
+      port: 8920
+      targetPort: https
+    - name: discovery
+      protocol: UDP
+      port: 7359
+      targetPort: discovery
+    - name: ssdp
+      protocol: UDP
+      port: 1900
+      targetPort: ssdp
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: jellyfin

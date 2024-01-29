@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jellyfin
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: jellyfin
+          env:
+            - name: JELLYFIN_PublishedServerUrl
+              value: https://ishtar.tail9fed3.ts.net

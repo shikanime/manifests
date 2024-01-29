@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metatube
+  namespace: shikanime
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: metatube
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: metatube
+    spec:
+      containers:
+        - name: metatube
+          image: metatube:1.2.1
+          args:
+            - -dsn
+            - postgres://$(PGUSER):$(PGPASSWORD)@postgres/metatube
+            - -port
+            - "80"
+            - -db-auto-migrate
+            - -db-prepared-stmt
+          env:
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: metatube
+                  key: token
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-metatube
+                  key: username
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-metatube
+                  key: password
