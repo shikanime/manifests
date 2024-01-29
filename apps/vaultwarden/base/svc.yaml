@@ -14,20 +14,3 @@ spec:
   type: LoadBalancer
   selector:
     app.kubernetes.io/name: vaultwarden
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: vaultwarden-headless
-  namespace: shikanime
-spec:
-  ports:
-    - name: https
-      port: 80
-      targetPort: https
-    - name: websockets
-      port: 3012
-      targetPort: websockets
-  clusterIP: None
-  selector:
-    app.kubernetes.io/name: vaultwarden

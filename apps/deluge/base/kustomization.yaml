@@ -4,5 +4,6 @@ images:
   - name: deluge
     newName: lscr.io/linuxserver/deluge
 resources:
-  - sts.yaml
+  - deployment.yaml
+  - pvc.yaml
   - svc.yaml

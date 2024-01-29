@@ -281,7 +281,7 @@ spec:
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: config-deluge-0
+    name: deluge-config
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -300,7 +300,7 @@ spec:
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: config-jackett-0
+    name: jackett-config
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -319,7 +319,7 @@ spec:
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: config-jellyfin-0
+    name: jellyfin-config
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -357,7 +357,7 @@ spec:
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: config-radarr-0
+    name: radarr-config
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -376,7 +376,7 @@ spec:
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: config-sonarr-0
+    name: sonarr-config
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -395,4 +395,4 @@ spec:
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: data-vaultwarden-0
+    name: vaultwarden-data

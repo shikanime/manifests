@@ -10,6 +10,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -23,6 +24,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -36,6 +38,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -49,6 +52,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -62,6 +66,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -75,6 +80,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -88,6 +94,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -101,6 +108,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -114,6 +122,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -127,6 +136,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -140,6 +150,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -153,6 +164,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -166,6 +178,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -179,3 +192,4 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-path

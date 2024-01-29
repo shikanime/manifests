@@ -4,5 +4,6 @@ images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
 resources:
-  - sts.yaml
+  - deployment.yaml
+  - pvc.yaml
   - svc.yaml
