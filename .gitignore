@@ -27,5 +27,5 @@
 .pre-commit-config.yaml
 
 # Helm
-manifests/factory/gitea/overlays/default/charts
-manifests/factory/sonarqube/overlays/default/charts
+legacy/factory/gitea/overlays/default/charts
+legacy/factory/sonarqube/overlays/default/charts

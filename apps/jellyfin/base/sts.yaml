@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jellyfin
+  namespace: shikanime
+spec:
+  serviceName: jellyfin-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jellyfin
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jellyfin
+    spec:
+      containers:
+        - name: jellyfin
+          image: jellyfin:10.8.13
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Europe/Paris
+          ports:
+            - containerPort: 8096
+              name: http
+            - containerPort: 8920
+              name: https
+            - containerPort: 7359
+              name: discovery
+              protocol: UDP
+            - containerPort: 1900
+              name: ssdp
+              protocol: UDP
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: data-sukebe-jav
+              mountPath: /data/sukebe/jav
+            - name: data-sukebe-doujinshi
+              mountPath: /data/sukebe/doujinshi
+            - name: data-sukebe-series-anime
+              mountPath: /data/sukebe/series/anime
+            - name: data-sukebe-movies-anime
+              mountPath: /data/sukebe/movies/anime
+            - name: data-series-anime
+              mountPath: /data/series/anime
+            - name: data-movies-anime
+              mountPath: /data/movies/anime
+            - name: data-sync-sukebe-jav
+              mountPath: /data/sync/sukebe/jav
+            - name: data-sync-sukebe-doujinshi
+              mountPath: /data/sync/sukebe/doujinshi
+            - name: data-sync-sukebe-series-anime
+              mountPath: /data/sync/sukebe/series/anime
+            - name: data-sync-sukebe-movies-anime
+              mountPath: /data/sync/sukebe/movies/anime
+            - name: data-sync-series-anime
+              mountPath: /data/sync/series/anime
+            - name: data-sync-movies-anime
+              mountPath: /data/sync/movies/anime
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
+        - name: data-sukebe-jav
+          persistentVolumeClaim:
+            claimName: sukebe-jav
+        - name: data-sukebe-doujinshi
+          persistentVolumeClaim:
+            claimName: sukebe-doujinshi
+        - name: data-sukebe-series-anime
+          persistentVolumeClaim:
+            claimName: sukebe-series-anime
+        - name: data-sukebe-movies-anime
+          persistentVolumeClaim:
+            claimName: sukebe-movies-anime
+        - name: data-series-anime
+          persistentVolumeClaim:
+            claimName: series-anime
+        - name: data-movies-anime
+          persistentVolumeClaim:
+            claimName: movies-anime
+        - name: data-sync-sukebe-jav
+          persistentVolumeClaim:
+            claimName: sync-sukebe-jav
+        - name: data-sync-sukebe-doujinshi
+          persistentVolumeClaim:
+            claimName: sync-sukebe-doujinshi
+        - name: data-sync-sukebe-series-anime
+          persistentVolumeClaim:
+            claimName: sync-sukebe-series-anime
+        - name: data-sync-sukebe-movies-anime
+          persistentVolumeClaim:
+            claimName: sync-sukebe-movies-anime
+        - name: data-sync-series-anime
+          persistentVolumeClaim:
+            claimName: sync-series-anime
+        - name: data-sync-movies-anime
+          persistentVolumeClaim:
+            claimName: sync-movies-anime
+  volumeClaimTemplates:
+    - metadata:
+        name: config
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Mi

@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: shikanime
+spec:
+  serviceName: postgres-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: postgres
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15.4
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: password
+            - name: POSTGRES_METATUBE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-metatube
+                  key: username
+            - name: POSTGRES_METATUBE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-metatube
+                  key: password
+            - name: POSTGRES_VAULTWARDEN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-vaultwarden
+                  key: username
+            - name: POSTGRES_VAULTWARDEN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-vaultwarden
+                  key: password
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: docker-entrypoint-initdb
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+      volumes:
+        - name: docker-entrypoint-initdb
+          configMap:
+            name: postgres-docker-entrypoint-initdb
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Mi
