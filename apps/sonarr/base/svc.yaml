@@ -10,16 +10,3 @@ spec:
   type: LoadBalancer
   selector:
     app.kubernetes.io/name: sonarr
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sonarr-headless
-  namespace: shikanime
-spec:
-  ports:
-    - port: 8989
-      targetPort: http
-  clusterIP: None
-  selector:
-    app.kubernetes.io/name: sonarr

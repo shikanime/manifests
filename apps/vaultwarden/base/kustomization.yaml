@@ -4,5 +4,6 @@ images:
   - name: vaultwarden
     newName: vaultwarden/server
 resources:
-  - sts.yaml
+  - deployment.yaml
+  - pvc.yaml
   - svc.yaml

@@ -1,22 +1,21 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: sonarr
+  name: radarr
   namespace: shikanime
 spec:
-  serviceName: sonarr-headless
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: sonarr
+      app.kubernetes.io/name: radarr
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: sonarr
+        app.kubernetes.io/name: radarr
     spec:
       containers:
-        - name: sonarr
-          image: sonarr:4.0.1
+        - name: radarr
+          image: radarr:5.2.6
           env:
             - name: PUID
               value: "1000"
@@ -25,32 +24,22 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - containerPort: 8989
+            - containerPort: 7878
               name: http
           volumeMounts:
             - name: config
               mountPath: /config
             - name: torrents-downloads
               mountPath: /downloads
-            - name: data-series-anime
-              mountPath: /data/series/anime
+            - name: data-movies-anime
+              mountPath: /data/movies/anime
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: sonarr-config
+            claimName: radarr-config
         - name: torrents-downloads
           persistentVolumeClaim:
             claimName: torrents-downloads
-        - name: data-series-anime
+        - name: data-movies-anime
           persistentVolumeClaim:
-            claimName: series-anime
-
-  volumeClaimTemplates:
-    - metadata:
-        name: config
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 500Mi
+            claimName: movies-anime

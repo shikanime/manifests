@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: jellyfin
   namespace: shikanime
 spec:
-  serviceName: jellyfin-headless
   replicas: 1
   selector:
     matchLabels:
@@ -102,12 +101,3 @@ spec:
         - name: data-sync-movies-anime
           persistentVolumeClaim:
             claimName: sync-movies-anime
-  volumeClaimTemplates:
-    - metadata:
-        name: config
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 500Mi

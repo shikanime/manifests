@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: vaultwarden
   namespace: shikanime
 spec:
-  serviceName: vaultwarden-headless
   replicas: 1
   selector:
     matchLabels:
@@ -42,12 +41,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: vaultwarden-data
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 500Mi

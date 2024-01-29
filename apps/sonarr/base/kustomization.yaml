@@ -4,5 +4,6 @@ images:
   - name: sonarr
     newName: lscr.io/linuxserver/sonarr
 resources:
-  - sts.yaml
+  - deployment.yaml
+  - pvc.yaml
   - svc.yaml
