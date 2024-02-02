@@ -29,6 +29,11 @@ spec:
                   key: password
             - name: DATABASE_URL
               value: postgres://$(PGUSER):$(PGPASSWORD)@postgres/vaultwarden
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vaultwarden
+                  key: admin-token
           ports:
             - containerPort: 80
               name: https
