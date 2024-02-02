@@ -23,6 +23,9 @@ spec:
             - "80"
             - -db-auto-migrate
             - -db-prepared-stmt
+          ports:
+            - containerPort: 80
+              name: http
           env:
             - name: TOKEN
               valueFrom:
