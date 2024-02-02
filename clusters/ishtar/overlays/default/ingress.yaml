@@ -10,13 +10,6 @@ spec:
   rules:
     - http:
         paths:
-          - path: /deluge
-            pathType: Prefix
-            backend:
-              service:
-                name: deluge
-                port:
-                  number: 8112
           - path: /jackett
             pathType: Prefix
             backend:
