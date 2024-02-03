@@ -29,21 +29,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sukebe-series-anime
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sukebe-movies-anime
+  name: sukebe-anime
   namespace: shikanime
 spec:
   resources:
@@ -113,21 +99,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sync-sukebe-series-anime
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sync-sukebe-movies-anime
+  name: sync-sukebe-anime
   namespace: shikanime
 spec:
   resources:
