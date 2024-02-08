@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sukebe-series-anime
+  name: ishtar-sukebe-anime
   namespace: shikanime
 spec:
   capacity:
@@ -49,30 +49,11 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/g/Sukebe/Videos/Series/アニメ
+    path: /mnt/g/Sukebe/Videos/アニメ
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: sukebe-series-anime
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-sukebe-movies-anime
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/g/Sukebe/Videos/Movies/アニメ
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sukebe-movies-anime
+    name: sukebe-anime
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -153,7 +134,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sync-sukebe-series-anime
+  name: ishtar-sync-sukebe-anime
   namespace: shikanime
 spec:
   capacity:
@@ -163,30 +144,11 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Sync/Sukebe/Videos/Series/アニメ
+    path: /mnt/d/Sync/Sukebe/Videos/アニメ
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: sync-sukebe-series-anime
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-sync-sukebe-movies-anime
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/d/Sync/Sukebe/Videos/Movies/アニメ
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sync-sukebe-movies-anime
+    name: sync-sukebe-anime
 ---
 apiVersion: v1
 kind: PersistentVolume

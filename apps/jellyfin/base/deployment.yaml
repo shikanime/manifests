@@ -41,10 +41,8 @@ spec:
               mountPath: /data/sukebe/jav
             - name: data-sukebe-doujinshi
               mountPath: /data/sukebe/doujinshi
-            - name: data-sukebe-series-anime
-              mountPath: /data/sukebe/series/anime
-            - name: data-sukebe-movies-anime
-              mountPath: /data/sukebe/movies/anime
+            - name: data-sukebe-anime
+              mountPath: /data/sukebe/anime
             - name: data-series-anime
               mountPath: /data/series/anime
             - name: data-movies-anime
@@ -53,10 +51,8 @@ spec:
               mountPath: /data/sync/sukebe/jav
             - name: data-sync-sukebe-doujinshi
               mountPath: /data/sync/sukebe/doujinshi
-            - name: data-sync-sukebe-series-anime
-              mountPath: /data/sync/sukebe/series/anime
-            - name: data-sync-sukebe-movies-anime
-              mountPath: /data/sync/sukebe/movies/anime
+            - name: data-sync-sukebe-anime
+              mountPath: /data/sync/sukebe/anime
             - name: data-sync-series-anime
               mountPath: /data/sync/series/anime
             - name: data-sync-movies-anime
@@ -71,12 +67,9 @@ spec:
         - name: data-sukebe-doujinshi
           persistentVolumeClaim:
             claimName: sukebe-doujinshi
-        - name: data-sukebe-series-anime
+        - name: data-sukebe-anime
           persistentVolumeClaim:
-            claimName: sukebe-series-anime
-        - name: data-sukebe-movies-anime
-          persistentVolumeClaim:
-            claimName: sukebe-movies-anime
+            claimName: sukebe-anime
         - name: data-series-anime
           persistentVolumeClaim:
             claimName: series-anime
@@ -89,12 +82,9 @@ spec:
         - name: data-sync-sukebe-doujinshi
           persistentVolumeClaim:
             claimName: sync-sukebe-doujinshi
-        - name: data-sync-sukebe-series-anime
+        - name: data-sync-sukebe-anime
           persistentVolumeClaim:
-            claimName: sync-sukebe-series-anime
-        - name: data-sync-sukebe-movies-anime
-          persistentVolumeClaim:
-            claimName: sync-sukebe-movies-anime
+            claimName: sync-sukebe-anime
         - name: data-sync-series-anime
           persistentVolumeClaim:
             claimName: sync-series-anime
