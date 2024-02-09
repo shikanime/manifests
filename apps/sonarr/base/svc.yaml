@@ -8,5 +8,6 @@ spec:
     - port: 8989
       targetPort: http
   type: LoadBalancer
+  loadBalancerClass: tailscale
   selector:
     app.kubernetes.io/name: sonarr

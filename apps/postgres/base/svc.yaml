@@ -8,6 +8,7 @@ spec:
     - port: 5432
       targetPort: postgres
   type: LoadBalancer
+  loadBalancerClass: tailscale
   selector:
     app.kubernetes.io/name: postgres
 ---

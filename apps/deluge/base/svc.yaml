@@ -16,5 +16,6 @@ spec:
       port: 6881
       targetPort: bittorrent-udp
   type: LoadBalancer
+  loadBalancerClass: tailscale
   selector:
     app.kubernetes.io/name: deluge
