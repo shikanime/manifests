@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: jellyfin
   namespace: shikanime
+  annotations:
+    tailscale.com/hostname: jellyfin
+    tailscale.com/expose: "true"
+    tailscale.com/tags: "tag:jellyfin"
 spec:
   ports:
     - name: http
@@ -20,5 +24,6 @@ spec:
       port: 1900
       targetPort: ssdp
   type: LoadBalancer
+  loadBalancerClass: tailscale
   selector:
     app.kubernetes.io/name: jellyfin

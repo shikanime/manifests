@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: vaultwarden
   namespace: shikanime
+  annotations:
+    tailscale.com/hostname: vaultwarden
+    tailscale.com/expose: "true"
+    tailscale.com/tags: "tag:vaultwarden"
 spec:
   ports:
     - name: https
@@ -12,5 +16,6 @@ spec:
       port: 3012
       targetPort: websockets
   type: LoadBalancer
+  loadBalancerClass: tailscale
   selector:
     app.kubernetes.io/name: vaultwarden

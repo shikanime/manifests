@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: deluge
   namespace: shikanime
+  annotations:
+    tailscale.com/hostname: deluge
+    tailscale.com/expose: "true"
+    tailscale.com/tags: "tag:deluge"
 spec:
   ports:
     - name: http
@@ -16,5 +20,6 @@ spec:
       port: 6881
       targetPort: bittorrent-udp
   type: LoadBalancer
+  loadBalancerClass: tailscale
   selector:
     app.kubernetes.io/name: deluge
