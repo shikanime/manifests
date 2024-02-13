@@ -31,8 +31,8 @@ spec:
               mountPath: /config
             - name: torrents-downloads
               mountPath: /downloads
-            - name: data-series-anime
-              mountPath: /data/series/anime
+            - name: data-series
+              mountPath: /data/series
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -40,6 +40,6 @@ spec:
         - name: torrents-downloads
           persistentVolumeClaim:
             claimName: torrents-downloads
-        - name: data-series-anime
+        - name: data-series
           persistentVolumeClaim:
-            claimName: series-anime
+            claimName: series

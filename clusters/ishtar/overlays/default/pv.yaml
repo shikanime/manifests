@@ -58,7 +58,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-series-anime
+  name: ishtar-series
   namespace: shikanime
 spec:
   capacity:
@@ -68,16 +68,16 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Videos/Series/アニメ
+    path: /mnt/d/Videos/Series
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: series-anime
+    name: series
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-movies-anime
+  name: ishtar-movies
   namespace: shikanime
 spec:
   capacity:
@@ -87,11 +87,11 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Videos/Movies/アニメ
+    path: /mnt/d/Videos/Movies
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: movies-anime
+    name: movies
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -153,7 +153,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sync-series-anime
+  name: ishtar-sync-series
   namespace: shikanime
 spec:
   capacity:
@@ -163,16 +163,16 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Sync/Videos/Series/アニメ
+    path: /mnt/d/Sync/Videos/Series
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: sync-series-anime
+    name: sync-series
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sync-movies-anime
+  name: ishtar-sync-movies
   namespace: shikanime
 spec:
   capacity:
@@ -182,11 +182,11 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Sync/Videos/Movies/アニメ
+    path: /mnt/d/Sync/Videos/Movies
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: sync-movies-anime
+    name: sync-movies
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -377,3 +377,41 @@ spec:
   claimRef:
     namespace: shikanime
     name: ollama-cache
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: satellite-series
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/g/Videos/Series
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: satellite-series
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: satellite-movies
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/g/Videos/Movies
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: satellite-movies
