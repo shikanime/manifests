@@ -43,7 +43,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: series-anime
+  name: series
   namespace: shikanime
 spec:
   resources:
@@ -57,7 +57,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: movies-anime
+  name: movies
   namespace: shikanime
 spec:
   resources:
@@ -113,7 +113,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sync-series-anime
+  name: sync-series
   namespace: shikanime
 spec:
   resources:
@@ -127,7 +127,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sync-movies-anime
+  name: sync-movies
   namespace: shikanime
 spec:
   resources:
@@ -161,6 +161,34 @@ spec:
   resources:
     requests:
       storage: 100Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: satellite-movies
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: satellite-series
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 200Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
