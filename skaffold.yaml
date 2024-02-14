@@ -7,4 +7,4 @@ profiles:
     manifests:
       kustomize:
         paths:
-          - clusters/ishtar/overlays/default
+          - clusters/default/overlays/ishtar
