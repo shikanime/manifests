@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: sonarr
   namespace: shikanime
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/tags: "tag:sonarr"
 spec:
   ports:
     - port: 8989
