@@ -13,3 +13,5 @@ spec:
   valuesContent: |-
     apiServerProxyConfig:
       mode: "true"
+    operatorConfig:
+      hostname: ishtar-k8s-operator
