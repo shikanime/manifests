@@ -28,20 +28,6 @@ spec:
               mountPath: /data/series
             - name: data-movies
               mountPath: /data/movies
-            - name: data-sync-sukebe-jav
-              mountPath: /data/sync/sukebe/jav
-            - name: data-sync-sukebe-doujinshi
-              mountPath: /data/sync/sukebe/doujinshi
-            - name: data-sync-sukebe-anime
-              mountPath: /data/sync/sukebe/anime
-            - name: data-sync-series
-              mountPath: /data/sync/series
-            - name: data-sync-movies
-              mountPath: /data/sync/movies
-            - name: data-satellite-series
-              mountPath: /data/satellite/series
-            - name: data-satellite-movies
-              mountPath: /data/satellite/movies
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -61,24 +47,3 @@ spec:
         - name: data-movies
           persistentVolumeClaim:
             claimName: movies
-        - name: data-sync-sukebe-jav
-          persistentVolumeClaim:
-            claimName: sync-sukebe-jav
-        - name: data-sync-sukebe-doujinshi
-          persistentVolumeClaim:
-            claimName: sync-sukebe-doujinshi
-        - name: data-sync-sukebe-anime
-          persistentVolumeClaim:
-            claimName: sync-sukebe-anime
-        - name: data-sync-series
-          persistentVolumeClaim:
-            claimName: sync-series
-        - name: data-sync-movies
-          persistentVolumeClaim:
-            claimName: sync-movies
-        - name: data-satellite-series
-          persistentVolumeClaim:
-            claimName: satellite-series
-        - name: data-satellite-movies
-          persistentVolumeClaim:
-            claimName: satellite-movies
