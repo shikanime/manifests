@@ -1,0 +1,398 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sukebe-jav
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/g/Sukebe/Videos/JAV
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sukebe-jav
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sukebe-doujinshi
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/g/Sukebe/Videos/同人
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sukebe-doujinshi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sukebe-anime
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/g/Sukebe/Videos/アニメ
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sukebe-anime
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-series
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Videos/Series
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: series
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-movies
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Videos/Movies
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: movies
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sync-sukebe-jav
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Sync/Sukebe/Videos/JAV
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sync-sukebe-jav
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sync-sukebe-doujinshi
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Sync/Sukebe/Videos/同人
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sync-sukebe-doujinshi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sync-sukebe-anime
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Sync/Sukebe/Videos/アニメ
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sync-sukebe-anime
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sync-series
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Sync/Videos/Series
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sync-series
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sync-movies
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Sync/Videos/Movies
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sync-movies
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-torrents-downloads
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/d/Torrents/downloads
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: torrents-downloads
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-deluge-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/deluge/config
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: deluge-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-jackett-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/jackett/config
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: jackett-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-jellyfin-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/jellyfin/config
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: jellyfin-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-postgres-data
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/postgres/data
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: data-postgres-0
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-radarr-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/radarr/config
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: radarr-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-sonarr-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/sonarr/config
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sonarr-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-vaultwarden-data
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 500Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/vaultwarden/data
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: vaultwarden-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar-ollama-cache
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/ollama/cache
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: ollama-cache
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: satellite-series
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/g/Videos/Series
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: satellite-series
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: satellite-movies
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /mnt/g/Videos/Movies
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: satellite-movies

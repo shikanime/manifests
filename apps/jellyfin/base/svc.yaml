@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: jellyfin
   namespace: shikanime
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/tags: "tag:jellyfin"
 spec:
   ports:
     - name: http

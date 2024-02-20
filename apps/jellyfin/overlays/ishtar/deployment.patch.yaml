@@ -8,18 +8,70 @@ spec:
     spec:
       containers:
         - name: jellyfin
-          env:
-            - name: JELLYFIN_PublishedServerUrl
-              value: https://ishtar.tail9fed3.ts.net
           volumeMounts:
-            - mountPath: /dev/dri
-              name: dev-dri
-          securityContext:
-            capabilities:
-              add:
-                - SYS_ADMIN
+            - name: config
+              mountPath: /config
+            - name: data-sukebe-jav
+              mountPath: /data/sukebe/jav
+            - name: data-sukebe-doujinshi
+              mountPath: /data/sukebe/doujinshi
+            - name: data-sukebe-anime
+              mountPath: /data/sukebe/anime
+            - name: data-series
+              mountPath: /data/series
+            - name: data-movies
+              mountPath: /data/movies
+            - name: data-sync-sukebe-jav
+              mountPath: /data/sync/sukebe/jav
+            - name: data-sync-sukebe-doujinshi
+              mountPath: /data/sync/sukebe/doujinshi
+            - name: data-sync-sukebe-anime
+              mountPath: /data/sync/sukebe/anime
+            - name: data-sync-series
+              mountPath: /data/sync/series
+            - name: data-sync-movies
+              mountPath: /data/sync/movies
+            - name: data-satellite-series
+              mountPath: /data/satellite/series
+            - name: data-satellite-movies
+              mountPath: /data/satellite/movies
       volumes:
-        - name: dev-dri
-          hostPath:
-            path: /dev/dri
-            type: Directory
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
+        - name: data-sukebe-jav
+          persistentVolumeClaim:
+            claimName: sukebe-jav
+        - name: data-sukebe-doujinshi
+          persistentVolumeClaim:
+            claimName: sukebe-doujinshi
+        - name: data-sukebe-anime
+          persistentVolumeClaim:
+            claimName: sukebe-anime
+        - name: data-series
+          persistentVolumeClaim:
+            claimName: series
+        - name: data-movies
+          persistentVolumeClaim:
+            claimName: movies
+        - name: data-sync-sukebe-jav
+          persistentVolumeClaim:
+            claimName: sync-sukebe-jav
+        - name: data-sync-sukebe-doujinshi
+          persistentVolumeClaim:
+            claimName: sync-sukebe-doujinshi
+        - name: data-sync-sukebe-anime
+          persistentVolumeClaim:
+            claimName: sync-sukebe-anime
+        - name: data-sync-series
+          persistentVolumeClaim:
+            claimName: sync-series
+        - name: data-sync-movies
+          persistentVolumeClaim:
+            claimName: sync-movies
+        - name: data-satellite-series
+          persistentVolumeClaim:
+            claimName: satellite-series
+        - name: data-satellite-movies
+          persistentVolumeClaim:
+            claimName: satellite-movies
