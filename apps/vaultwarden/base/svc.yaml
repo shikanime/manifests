@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: vaultwarden
   namespace: shikanime
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/tags: "tag:vaultwarden"
 spec:
   ports:
     - name: https

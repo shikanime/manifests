@@ -6,10 +6,12 @@ metadata:
 spec:
   repo: https://pkgs.tailscale.com/helmcharts
   chart: tailscale-operator
-  targetNamespace: tailscale
+  targetNamespace: tailscale-system
   version: "1.58.2"
   helmVersion: v3
   bootstrap: false
   valuesContent: |-
     apiServerProxyConfig:
       mode: "true"
+    operatorConfig:
+      hostname: ishtar-k8s-operator

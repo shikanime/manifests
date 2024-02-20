@@ -34,70 +34,15 @@ spec:
             - containerPort: 1900
               name: ssdp
               protocol: UDP
+          securityContext:
+            capabilities:
+              add:
+                - SYS_ADMIN
           volumeMounts:
-            - name: config
-              mountPath: /config
-            - name: data-sukebe-jav
-              mountPath: /data/sukebe/jav
-            - name: data-sukebe-doujinshi
-              mountPath: /data/sukebe/doujinshi
-            - name: data-sukebe-anime
-              mountPath: /data/sukebe/anime
-            - name: data-series
-              mountPath: /data/series
-            - name: data-movies
-              mountPath: /data/movies
-            - name: data-sync-sukebe-jav
-              mountPath: /data/sync/sukebe/jav
-            - name: data-sync-sukebe-doujinshi
-              mountPath: /data/sync/sukebe/doujinshi
-            - name: data-sync-sukebe-anime
-              mountPath: /data/sync/sukebe/anime
-            - name: data-sync-series
-              mountPath: /data/sync/series
-            - name: data-sync-movies
-              mountPath: /data/sync/movies
-            - name: data-satellite-series
-              mountPath: /data/satellite/series
-            - name: data-satellite-movies
-              mountPath: /data/satellite/movies
+            - mountPath: /dev/dri
+              name: dev-dri
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: jellyfin-config
-        - name: data-sukebe-jav
-          persistentVolumeClaim:
-            claimName: sukebe-jav
-        - name: data-sukebe-doujinshi
-          persistentVolumeClaim:
-            claimName: sukebe-doujinshi
-        - name: data-sukebe-anime
-          persistentVolumeClaim:
-            claimName: sukebe-anime
-        - name: data-series
-          persistentVolumeClaim:
-            claimName: series
-        - name: data-movies
-          persistentVolumeClaim:
-            claimName: movies
-        - name: data-sync-sukebe-jav
-          persistentVolumeClaim:
-            claimName: sync-sukebe-jav
-        - name: data-sync-sukebe-doujinshi
-          persistentVolumeClaim:
-            claimName: sync-sukebe-doujinshi
-        - name: data-sync-sukebe-anime
-          persistentVolumeClaim:
-            claimName: sync-sukebe-anime
-        - name: data-sync-series
-          persistentVolumeClaim:
-            claimName: sync-series
-        - name: data-sync-movies
-          persistentVolumeClaim:
-            claimName: sync-movies
-        - name: data-satellite-series
-          persistentVolumeClaim:
-            claimName: satellite-series
-        - name: data-satellite-movies
-          persistentVolumeClaim:
-            claimName: satellite-movies
+        - name: dev-dri
+          hostPath:
+            path: /dev/dri
+            type: Directory
