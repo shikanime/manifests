@@ -36,8 +36,6 @@ spec:
               mountPath: /config
             - name: torrents-downloads
               mountPath: /downloads
-            - name: torrents-watch
-              mountPath: /watch
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -45,6 +43,3 @@ spec:
         - name: torrents-downloads
           persistentVolumeClaim:
             claimName: torrents-downloads
-        - name: torrents-watch
-          persistentVolumeClaim:
-            claimName: torrents-watch
