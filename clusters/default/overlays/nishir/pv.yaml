@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sukebe-jav
+  name: nishir-sukebe-jav
   namespace: shikanime
 spec:
   capacity:
@@ -11,7 +11,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/g/Sukebe/Videos/JAV
+    path: /media/shika/Satellite/Sukebe/Videos/JAV
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sukebe-doujinshi
+  name: nishir-sukebe-doujinshi
   namespace: shikanime
 spec:
   capacity:
@@ -30,7 +30,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/g/Sukebe/Videos/同人
+    path: /media/shika/Satellite/Sukebe/Videos/同人
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sukebe-anime
+  name: nishir-sukebe-anime
   namespace: shikanime
 spec:
   capacity:
@@ -49,7 +49,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/g/Sukebe/Videos/アニメ
+    path: /media/shika/Satellite/Sukebe/Videos/アニメ
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -58,7 +58,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-series
+  name: nishir-series
   namespace: shikanime
 spec:
   capacity:
@@ -68,7 +68,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Videos/Series
+    path: /media/shika/Satellite/Videos/Series
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -77,7 +77,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-movies
+  name: nishir-movies
   namespace: shikanime
 spec:
   capacity:
@@ -87,7 +87,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Videos/Movies
+    path: /media/shika/Satellite/Videos/Movies
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -96,7 +96,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sync-sukebe-jav
+  name: nishir-torrents-downloads
   namespace: shikanime
 spec:
   capacity:
@@ -106,102 +106,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /mnt/d/Sync/Sukebe/Videos/JAV
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sync-sukebe-jav
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-sync-sukebe-doujinshi
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/d/Sync/Sukebe/Videos/同人
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sync-sukebe-doujinshi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-sync-sukebe-anime
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/d/Sync/Sukebe/Videos/アニメ
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sync-sukebe-anime
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-sync-series
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/d/Sync/Videos/Series
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sync-series
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-sync-movies
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/d/Sync/Videos/Movies
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sync-movies
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-torrents-downloads
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/d/Torrents/downloads
+    path: /media/shika/Satellite/Torrents/downloads
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -210,26 +115,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-torrents-watch
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 100Mi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/d/Torrents/watch
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: torrents-watch
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ishtar-deluge-config
+  name: nishir-deluge-config
   namespace: shikanime
 spec:
   capacity:
@@ -248,7 +134,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-jackett-config
+  name: nishir-jackett-config
   namespace: shikanime
 spec:
   capacity:
@@ -267,7 +153,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-jellyfin-config
+  name: nishir-jellyfin-config
   namespace: shikanime
 spec:
   capacity:
@@ -286,7 +172,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-postgres-data
+  name: nishir-postgres-data
   namespace: shikanime
 spec:
   capacity:
@@ -305,7 +191,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-radarr-config
+  name: nishir-radarr-config
   namespace: shikanime
 spec:
   capacity:
@@ -324,7 +210,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-sonarr-config
+  name: nishir-sonarr-config
   namespace: shikanime
 spec:
   capacity:
@@ -343,7 +229,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-vaultwarden-data
+  name: nishir-vaultwarden-data
   namespace: shikanime
 spec:
   capacity:
@@ -362,7 +248,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ishtar-ollama-cache
+  name: nishir-ollama-cache
   namespace: shikanime
 spec:
   capacity:
@@ -377,41 +263,3 @@ spec:
   claimRef:
     namespace: shikanime
     name: ollama-cache
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: satellite-series
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/g/Videos/Series
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: satellite-series
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: satellite-movies
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /mnt/g/Videos/Movies
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: satellite-movies

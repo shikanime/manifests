@@ -6,4 +6,9 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: tailscale
+  name: tailscale-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
