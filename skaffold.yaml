@@ -7,4 +7,9 @@ profiles:
     manifests:
       kustomize:
         paths:
-          - clusters/ishtar/overlays/default
+          - clusters/default/overlays/ishtar
+  - name: nishir
+    manifests:
+      kustomize:
+        paths:
+          - clusters/default/overlays/nishir
