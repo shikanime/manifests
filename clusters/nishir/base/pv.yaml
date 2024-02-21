@@ -244,22 +244,3 @@ spec:
   claimRef:
     namespace: shikanime
     name: vaultwarden-data
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nishir-ollama-cache
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/ollama/cache
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: ollama-cache
