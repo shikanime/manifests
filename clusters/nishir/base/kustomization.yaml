@@ -6,11 +6,11 @@ resources:
   - ns.yaml
   - pv.yaml
   - pvc.yaml
-  - ../../../apps/deluge/overlays/default
-  - ../../../apps/jackett/overlays/default
+  - ../../../apps/deluge/base
+  - ../../../apps/jackett/base
   - ../../../apps/jellyfin/overlays/ishtar
-  - ../../../apps/metatube/overlays/default
-  - ../../../apps/postgres/overlays/default
-  - ../../../apps/radarr/overlays/default
-  - ../../../apps/sonarr/overlays/default
-  - ../../../apps/vaultwarden/overlays/default
+  - ../../../apps/metatube/base
+  - ../../../apps/postgres/base
+  - ../../../apps/radarr/base
+  - ../../../apps/sonarr/base
+  - ../../../apps/vaultwarden/base
