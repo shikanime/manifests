@@ -8,7 +8,7 @@ resources:
   - pvc.yaml
   - ../../../apps/deluge/base
   - ../../../apps/jackett/base
-  - ../../../apps/jellyfin/overlays/ishtar
+  - ../../../apps/jellyfin/overlays/nishir
   - ../../../apps/metatube/base
   - ../../../apps/postgres/base
   - ../../../apps/radarr/base
