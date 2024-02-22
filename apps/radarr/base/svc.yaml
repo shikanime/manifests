@@ -3,13 +3,9 @@ kind: Service
 metadata:
   name: radarr
   namespace: shikanime
-  annotations:
-    tailscale.com/expose: "true"
-    tailscale.com/tags: "tag:radarr"
 spec:
   ports:
     - port: 7878
       targetPort: http
-  type: LoadBalancer
   selector:
     app.kubernetes.io/name: radarr
