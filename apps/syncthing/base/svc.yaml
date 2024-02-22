@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 8384
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: syncthing
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-private
+  namespace: shikanime
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/tags: tag:syncthing
+spec:
+  ports:
+    - name: syncthing
+      port: 22000
+      targetPort: syncthing
+    - name: syncthing-udp
+      protocol: UDP
+      port: 22000
+      targetPort: syncthing-udp
+    - name: discovery
+      protocol: UDP
+      port: 21027
+      targetPort: discovery
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: syncthing
