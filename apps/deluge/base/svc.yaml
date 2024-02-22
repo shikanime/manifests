@@ -18,8 +18,8 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/expose: "true"
-    tailscale.com/hostname: "deluge-private"
-    tailscale.com/tags: "tag:deluge"
+    tailscale.com/hostname: deluge-private
+    tailscale.com/tags: tag:deluge
 spec:
   ports:
     - name: bittorrent

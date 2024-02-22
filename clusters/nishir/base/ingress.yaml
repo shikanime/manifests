@@ -4,7 +4,7 @@ metadata:
   name: deluge
   namespace: shikanime
   annotations:
-    tailscale.com/tags: "tag:web"
+    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
@@ -22,7 +22,7 @@ metadata:
   name: jackett
   namespace: shikanime
   annotations:
-    tailscale.com/tags: "tag:web"
+    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
@@ -40,7 +40,7 @@ metadata:
   name: jellyfin
   namespace: shikanime
   annotations:
-    tailscale.com/tags: "tag:web"
+    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
@@ -58,7 +58,7 @@ metadata:
   name: radarr
   namespace: shikanime
   annotations:
-    tailscale.com/tags: "tag:web"
+    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
@@ -73,7 +73,7 @@ metadata:
   name: sonarr
   namespace: shikanime
   annotations:
-    tailscale.com/tags: "tag:web"
+    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
@@ -91,7 +91,7 @@ metadata:
   name: vaultwarden
   namespace: shikanime
   annotations:
-    tailscale.com/tags: "tag:web"
+    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
