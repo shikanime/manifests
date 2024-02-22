@@ -3,13 +3,9 @@ kind: Service
 metadata:
   name: jackett
   namespace: shikanime
-  annotations:
-    tailscale.com/expose: "true"
-    tailscale.com/tags: "tag:jackett"
 spec:
   ports:
     - port: 9117
       targetPort: http
-  type: LoadBalancer
   selector:
     app.kubernetes.io/name: jackett

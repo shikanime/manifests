@@ -3,13 +3,9 @@ kind: Service
 metadata:
   name: ollama
   namespace: shikanime
-  annotations:
-    tailscale.com/expose: "true"
-    tailscale.com/tags: "tag:ollama"
 spec:
   ports:
     - port: 11434
       targetPort: http
-  type: LoadBalancer
   selector:
     app.kubernetes.io/name: ollama
