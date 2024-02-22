@@ -3,14 +3,25 @@ kind: Service
 metadata:
   name: deluge
   namespace: shikanime
-  annotations:
-    tailscale.com/expose: "true"
-    tailscale.com/tags: "tag:deluge"
 spec:
   ports:
     - name: http
       port: 8112
       targetPort: http
+  selector:
+    app.kubernetes.io/name: deluge
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deluge-p2p
+  namespace: shikanime
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: "deluge-p2p"
+    tailscale.com/tags: "tag:deluge"
+spec:
+  ports:
     - name: bittorrent
       port: 6881
       targetPort: bittorrent

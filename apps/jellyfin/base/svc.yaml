@@ -3,17 +3,25 @@ kind: Service
 metadata:
   name: jellyfin
   namespace: shikanime
-  annotations:
-    tailscale.com/expose: "true"
-    tailscale.com/tags: "tag:jellyfin"
 spec:
   ports:
     - name: http
       port: 8096
       targetPort: http
-    - name: https
-      port: 8920
-      targetPort: https
+  selector:
+    app.kubernetes.io/name: jellyfin
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin-p2p
+  namespace: shikanime
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: "jellyfin-p2p"
+    tailscale.com/tags: "tag:jellyfin"
+spec:
+  ports:
     - name: discovery
       protocol: UDP
       port: 7359
