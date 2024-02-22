@@ -18,8 +18,8 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/expose: "true"
-    tailscale.com/hostname: "jellyfin-private"
-    tailscale.com/tags: "tag:jellyfin"
+    tailscale.com/hostname: jellyfin-private
+    tailscale.com/tags: tag:jellyfin
 spec:
   ports:
     - name: discovery
