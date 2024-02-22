@@ -1,0 +1,10 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: ishtar
+  namespace: fleet-local
+spec:
+  repo: https://github.com/shikanime/manifests
+  branch: main
+  paths:
+    - clusters/ishtar/base
