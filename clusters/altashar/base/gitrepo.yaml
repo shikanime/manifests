@@ -1,0 +1,9 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: altashar
+  namespace: fleet-local
+spec:
+  repo: https://github.com/shikanime/manifests
+  paths:
+    - clusters/altashar/base

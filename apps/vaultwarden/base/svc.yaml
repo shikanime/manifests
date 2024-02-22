@@ -9,7 +9,7 @@ metadata:
 spec:
   ports:
     - name: https
-      port: 8080
+      port: 80
       targetPort: https
     - name: websockets
       port: 3012
