@@ -14,11 +14,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jellyfin-p2p
+  name: jellyfin-private
   namespace: shikanime
   annotations:
     tailscale.com/expose: "true"
-    tailscale.com/hostname: "jellyfin-p2p"
+    tailscale.com/hostname: "jellyfin-private"
     tailscale.com/tags: "tag:jellyfin"
 spec:
   ports:

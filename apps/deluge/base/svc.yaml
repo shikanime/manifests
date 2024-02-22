@@ -14,11 +14,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: deluge-p2p
+  name: deluge-private
   namespace: shikanime
   annotations:
     tailscale.com/expose: "true"
-    tailscale.com/hostname: "deluge-p2p"
+    tailscale.com/hostname: "deluge-private"
     tailscale.com/tags: "tag:deluge"
 spec:
   ports:
