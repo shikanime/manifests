@@ -9,11 +9,41 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
+            - name: data-documents
+              mountPath: /data/Documents
+            - name: data-infinity-horizons
+              mountPath: /data/Infinity Horizons
+            - name: data-music
+              mountPath: /data/Music
+            - name: data-pictures
+              mountPath: /data/Pictures
+            - name: data-source
+              mountPath: /data/Source
+            - name: data-studio
+              mountPath: /data/Studio
             - name: data-sukebe
               mountPath: /data/Sukebe
             - name: data-videos
               mountPath: /data/Videos
       volumes:
+        - name: data-documents
+          persistentVolumeClaim:
+            claimName: documents
+        - name: data-infinity-horizons
+          persistentVolumeClaim:
+            claimName: infinity-horizons
+        - name: data-music
+          persistentVolumeClaim:
+            claimName: music
+        - name: data-pictures
+          persistentVolumeClaim:
+            claimName: pictures
+        - name: data-source
+          persistentVolumeClaim:
+            claimName: source
+        - name: data-studio
+          persistentVolumeClaim:
+            claimName: studio
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe
