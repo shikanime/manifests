@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: metatube
-          image: metatube:1.2.1
+          image: metatube:1.2.2
           args:
             - -dsn
             - postgres://$(PGUSER):$(PGPASSWORD)@postgres/metatube

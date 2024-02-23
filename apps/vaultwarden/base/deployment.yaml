@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: vaultwarden
-          image: vaultwarden:1.30.0
+          image: vaultwarden:1.30.3
           env:
             - name: PGUSER
               valueFrom:
