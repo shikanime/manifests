@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: syncthing
+          volumeMounts:
+            - name: data-sukebe
+              mountPath: /data/Sukebe
+            - name: data-videos
+              mountPath: /data/Videos
+      volumes:
+        - name: data-sukebe
+          persistentVolumeClaim:
+            claimName: sukebe
+        - name: data-videos
+          persistentVolumeClaim:
+            claimName: videos
