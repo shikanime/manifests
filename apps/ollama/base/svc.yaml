@@ -5,7 +5,8 @@ metadata:
   namespace: shikanime
 spec:
   ports:
-    - port: 11434
+    - name: http
+      port: 11434
       targetPort: http
   selector:
     app.kubernetes.io/name: ollama
