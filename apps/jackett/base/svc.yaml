@@ -5,7 +5,8 @@ metadata:
   namespace: shikanime
 spec:
   ports:
-    - port: 9117
+    - name: http
+      port: 9117
       targetPort: http
   selector:
     app.kubernetes.io/name: jackett
