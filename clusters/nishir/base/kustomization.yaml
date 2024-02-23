@@ -6,6 +6,7 @@ resources:
   - ns.yaml
   - pv.yaml
   - pvc.yaml
+  - svc.yaml
   - ../../../apps/deluge/base
   - ../../../apps/jackett/base
   - ../../../apps/jellyfin/overlays/nishir
