@@ -244,3 +244,22 @@ spec:
   claimRef:
     namespace: shikanime
     name: vaultwarden-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nishir-sync
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Sync
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: sync
