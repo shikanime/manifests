@@ -10,7 +10,7 @@ spec:
     service:
       name: ollama
       port:
-        number: 11434
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:

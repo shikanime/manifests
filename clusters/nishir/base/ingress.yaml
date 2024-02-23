@@ -10,7 +10,7 @@ spec:
     service:
       name: deluge
       port:
-        number: 8112
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
@@ -28,7 +28,7 @@ spec:
     service:
       name: jackett
       port:
-        number: 9117
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
@@ -46,7 +46,7 @@ spec:
     service:
       name: jellyfin
       port:
-        number: 8096
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
@@ -64,7 +64,7 @@ spec:
     service:
       name: radarr
       port:
-        number: 7878
+        name: http
   ingressClassName: tailscale
 ---
 apiVersion: networking.k8s.io/v1
@@ -79,7 +79,7 @@ spec:
     service:
       name: sonarr
       port:
-        number: 8989
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
@@ -97,7 +97,7 @@ spec:
     service:
       name: vaultwarden
       port:
-        number: 80
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
@@ -115,7 +115,7 @@ spec:
     service:
       name: syncthing
       port:
-        number: 8384
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
