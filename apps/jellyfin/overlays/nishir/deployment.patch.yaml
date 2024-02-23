@@ -9,34 +9,25 @@ spec:
       containers:
         - name: jellyfin
           volumeMounts:
-            - name: config
-              mountPath: /config
-            - name: data-sukebe-jav
+            - name: data-sukebe
               mountPath: /data/sukebe/jav
-            - name: data-sukebe-doujinshi
+              subPath: Videos/JAV
+            - name: data-sukebe
               mountPath: /data/sukebe/doujinshi
-            - name: data-sukebe-anime
+              subPath: Videos/同人
+            - name: data-sukebe
               mountPath: /data/sukebe/anime
-            - name: data-series
+              subPath: Videos/アニメ
+            - name: data-videos
               mountPath: /data/series
-            - name: data-movies
+              subPath: Series
+            - name: data-videos
               mountPath: /data/movies
+              subPath: Movies
       volumes:
-        - name: config
+        - name: data-sukebe
           persistentVolumeClaim:
-            claimName: jellyfin-config
-        - name: data-sukebe-jav
+            claimName: sukebe
+        - name: data-videos
           persistentVolumeClaim:
-            claimName: sukebe-jav
-        - name: data-sukebe-doujinshi
-          persistentVolumeClaim:
-            claimName: sukebe-doujinshi
-        - name: data-sukebe-anime
-          persistentVolumeClaim:
-            claimName: sukebe-anime
-        - name: data-series
-          persistentVolumeClaim:
-            claimName: series
-        - name: data-movies
-          persistentVolumeClaim:
-            claimName: movies
+            claimName: videos
