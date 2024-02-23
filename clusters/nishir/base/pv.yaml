@@ -1,6 +1,120 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: nishir-documents
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Documents
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: documents
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nishir-infinity-horizons
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Infinify-Horizons
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: infinity-horizons
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nishir-music
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Music
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: music
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nishir-pictures
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Pictures
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: pictures
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nishir-source
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Source
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: source
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nishir-studio
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Studio
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: studio
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: nishir-sukebe
   namespace: shikanime
 spec:
