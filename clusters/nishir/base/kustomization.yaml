@@ -13,4 +13,5 @@ resources:
   - ../../../apps/postgres/base
   - ../../../apps/radarr/base
   - ../../../apps/sonarr/base
+  - ../../../apps/syncthing/overlays/nishir
   - ../../../apps/vaultwarden/base
