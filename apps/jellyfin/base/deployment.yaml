@@ -39,9 +39,14 @@ spec:
               add:
                 - SYS_ADMIN
           volumeMounts:
-            - mountPath: /dev/dri
-              name: dev-dri
+            - name: config
+              mountPath: /config
+            - name: dev-dri
+              mountPath: /dev/dri
       volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
         - name: dev-dri
           hostPath:
             path: /dev/dri
