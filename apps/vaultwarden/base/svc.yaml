@@ -5,8 +5,8 @@ metadata:
   namespace: shikanime
 spec:
   ports:
-    - name: https
+    - name: http
       port: 80
-      targetPort: https
+      targetPort: http
   selector:
     app.kubernetes.io/name: vaultwarden

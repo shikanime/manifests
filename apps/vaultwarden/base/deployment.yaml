@@ -36,9 +36,7 @@ spec:
                   key: admin-token
           ports:
             - containerPort: 80
-              name: https
-            - containerPort: 3012
-              name: websockets
+              name: http
           volumeMounts:
             - name: data
               mountPath: /data
