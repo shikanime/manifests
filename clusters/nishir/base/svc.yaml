@@ -8,7 +8,7 @@ metadata:
   name: nishir-syncthing-private
   namespace: shikanime
 spec:
-  externalName: nishir-syncthing-private.tail9fed3.ts.net
+  externalName: ""
   type: ExternalName
 ---
 apiVersion: v1
@@ -21,7 +21,7 @@ metadata:
   name: ishtar
   namespace: shikanime
 spec:
-  externalName: ishtar.tail9fed3.ts.net
+  externalName: ""
   type: ExternalName
 ---
 apiVersion: v1
@@ -34,5 +34,5 @@ metadata:
   name: altashar
   namespace: shikanime
 spec:
-  externalName: altashar.tail9fed3.ts.net
+  externalName: ""
   type: ExternalName
