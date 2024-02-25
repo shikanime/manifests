@@ -11,7 +11,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Satellite/Camera
+    path: /media/shika/Voyager/Camera
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -30,7 +30,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Satellite/Documents
+    path: /media/shika/Voyager/Documents
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -49,7 +49,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Satellite/Infinity Horizons
+    path: /media/shika/Voyager/Infinity Horizons
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -68,7 +68,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Satellite/Music
+    path: /media/shika/Voyager/Music
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -87,7 +87,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Satellite/Pictures
+    path: /media/shika/Voyager/Pictures
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -106,7 +106,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Satellite/Staging
+    path: /media/shika/Voyager/Staging
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -125,7 +125,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Satellite/Studio
+    path: /media/shika/Voyager/Studio
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
