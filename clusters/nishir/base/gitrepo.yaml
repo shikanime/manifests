@@ -1,0 +1,10 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: nishir
+  namespace: fleet-local
+spec:
+  repo: https://github.com/shikanime/manifests
+  branch: main
+  paths:
+    - clusters/nishir/base
