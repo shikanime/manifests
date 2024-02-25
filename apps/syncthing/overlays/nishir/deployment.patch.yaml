@@ -9,6 +9,8 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
+            - name: data-camera
+              mountPath: /data/Camera
             - name: data-documents
               mountPath: /data/Documents
             - name: data-infinity-horizons
@@ -17,8 +19,8 @@ spec:
               mountPath: /data/Music
             - name: data-pictures
               mountPath: /data/Pictures
-            - name: data-source
-              mountPath: /data/Source
+            - name: data-staging
+              mountPath: /data/Staging
             - name: data-studio
               mountPath: /data/Studio
             - name: data-sukebe
@@ -26,6 +28,9 @@ spec:
             - name: data-videos
               mountPath: /data/Videos
       volumes:
+        - name: data-camera
+          persistentVolumeClaim:
+            claimName: camera
         - name: data-documents
           persistentVolumeClaim:
             claimName: documents
@@ -38,9 +43,9 @@ spec:
         - name: data-pictures
           persistentVolumeClaim:
             claimName: pictures
-        - name: data-source
+        - name: data-staging
           persistentVolumeClaim:
-            claimName: source
+            claimName: staging
         - name: data-studio
           persistentVolumeClaim:
             claimName: studio
