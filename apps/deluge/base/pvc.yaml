@@ -8,5 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 500Mi
-  storageClassName: local-path
+      storage: 64Mi
+  storageClassName: longhorn
+  volumeMode: Filesystem
+  volumeName: deluge-config

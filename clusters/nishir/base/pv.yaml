@@ -191,18 +191,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-deluge-config
+  name: deluge-config
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 64Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/deluge/config
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: deluge-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: deluge-config
@@ -210,18 +214,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-jackett-config
+  name: jackett-config
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 64Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/jackett/config
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: jackett-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: jackett-config
@@ -229,18 +237,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-jellyfin-config
+  name: jellyfin-config
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 2Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/jellyfin/config
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: jellyfin-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: jellyfin-config
@@ -248,18 +260,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-postgres-data
+  name: postgres-data
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/postgres/data
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: postgres-data
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: data-postgres-0
@@ -267,18 +283,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-radarr-config
+  name: radarr-config
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 512Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/radarr/config
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: radarr-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: radarr-config
@@ -286,18 +306,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-sonarr-config
+  name: sonarr-config
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 512Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/sonarr/config
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: sonarr-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: sonarr-config
@@ -305,18 +329,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-vaultwarden-data
+  name: vaultwarden-data
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 64Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/vaultwarden/data
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: vaultwarden-data
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: vaultwarden-data
@@ -324,18 +352,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-syncthing-config
+  name: syncthing-config
   namespace: shikanime
 spec:
   capacity:
-    storage: 500Mi
+    storage: 2Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/syncthing/config
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: syncthing-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: syncthing-config
