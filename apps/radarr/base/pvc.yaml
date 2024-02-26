@@ -8,5 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 500Mi
-  storageClassName: local-path
+      storage: 512Mi
+  storageClassName: longhorn
+  volumeMode: Filesystem
+  volumeName: radarr-config
