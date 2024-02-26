@@ -15,3 +15,22 @@ spec:
       mode: "true"
     operatorConfig:
       hostname: nishir-k8s-operator
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: longhorn
+  namespace: kube-system
+spec:
+  repo: https://charts.longhorn.io
+  chart: longhorn
+  targetNamespace: longhorn-system
+  version: "1.6.0"
+  helmVersion: v3
+  bootstrap: false
+  valuesContent: |-
+    longhornUI:
+      replicas: 1
+    defaultSettings:
+      backupTarget: s3://shikanime-studio-backups@eu/
+      backupTargetCredentialSecret: longhorn-gcp-backups
