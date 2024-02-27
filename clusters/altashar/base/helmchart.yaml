@@ -7,7 +7,7 @@ spec:
   repo: https://pkgs.tailscale.com/helmcharts
   chart: tailscale-operator
   targetNamespace: tailscale
-  version: "1.58.2"
+  version: "1.60.0"
   helmVersion: v3
   bootstrap: false
   valuesContent: |-
