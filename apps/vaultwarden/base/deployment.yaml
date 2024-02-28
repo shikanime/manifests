@@ -28,7 +28,7 @@ spec:
                   name: postgres-vaultwarden
                   key: password
             - name: DATABASE_URL
-              value: postgres://$(PGUSER):$(PGPASSWORD)@postgres/vaultwarden
+              value: postgresql://$(PGUSER):$(PGPASSWORD)@postgres/vaultwarden
             - name: ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:
