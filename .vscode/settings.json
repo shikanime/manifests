@@ -8,5 +8,9 @@
     "radarr",
     "sonarr",
     "vaultwarden"
-  ]
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "shikanime",
+    "projectKey": "shikanime_shikanime"
+  }
 }
