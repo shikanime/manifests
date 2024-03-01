@@ -1,6 +1,27 @@
 apiVersion: skaffold/v4beta9
 kind: Config
 metadata:
+  name: shikanime-infrastructure
+profiles:
+  - name: altashar
+    manifests:
+      kustomize:
+        paths:
+          - infrastructures/altashar/base
+  - name: ishtar
+    manifests:
+      kustomize:
+        paths:
+          - infrastructures/ishtar/base
+  - name: nishir
+    manifests:
+      kustomize:
+        paths:
+          - infrastructures/nishir/base
+---
+apiVersion: skaffold/v4beta9
+kind: Config
+metadata:
   name: shikanime
 profiles:
   - name: altashar
@@ -10,18 +31,6 @@ profiles:
           - clusters/altashar/base
   - name: ishtar
     manifests:
-      helm:
-        releases:
-          - name: fleet-crd
-            remoteChart: fleet-crd
-            repo: https://rancher.github.io/fleet-helm-charts/
-            namespace: cattle-fleet-system
-            version: "0.9.0"
-          - name: fleet
-            remoteChart: fleet
-            repo: https://rancher.github.io/fleet-helm-charts/
-            namespace: cattle-fleet-system
-            version: "0.9.0"
       kustomize:
         paths:
           - clusters/ishtar/base
