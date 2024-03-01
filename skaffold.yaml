@@ -10,18 +10,6 @@ profiles:
           - clusters/altashar/base
   - name: ishtar
     manifests:
-      helm:
-        releases:
-          - name: fleet-crd
-            remoteChart: fleet-crd
-            repo: https://rancher.github.io/fleet-helm-charts/
-            namespace: cattle-fleet-system
-            version: "0.9.0"
-          - name: fleet
-            remoteChart: fleet
-            repo: https://rancher.github.io/fleet-helm-charts/
-            namespace: cattle-fleet-system
-            version: "0.9.0"
       kustomize:
         paths:
           - clusters/ishtar/base
