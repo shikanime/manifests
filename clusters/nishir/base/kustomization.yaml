@@ -11,7 +11,7 @@ resources:
   - ../../../apps/jackett/base
   - ../../../apps/jellyfin/overlays/nishir
   - ../../../apps/metatube/base
-  - ../../../apps/postgres/base
+  - ../../../apps/postgres/overlays/nishir
   - ../../../apps/radarr/base
   - ../../../apps/sonarr/base
   - ../../../apps/syncthing/overlays/nishir
