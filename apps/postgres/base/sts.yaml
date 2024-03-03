@@ -38,16 +38,6 @@ spec:
                 secretKeyRef:
                   name: postgres-metatube
                   key: password
-            - name: POSTGRES_VAULTWARDEN_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-vaultwarden
-                  key: username
-            - name: POSTGRES_VAULTWARDEN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-vaultwarden
-                  key: password
           ports:
             - containerPort: 5432
               name: postgres
@@ -55,7 +45,8 @@ spec:
             - name: data
               mountPath: /var/lib/postgresql/data
             - name: docker-entrypoint-initdb
-              mountPath: /docker-entrypoint-initdb.d
+              mountPath: /docker-entrypoint-initdb.d/metatube.sh
+              subPath: metatube.sh
               readOnly: true
       volumes:
         - name: docker-entrypoint-initdb

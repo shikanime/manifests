@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: jellyfin
+          env:
+            - name: JELLYFIN_PublishedServerUrl
+              value: ishtar.tail9fed3.ts.net
+          volumeMounts:
+            - name: data-sukebe
+              mountPath: /data/sukebe/jav
+              subPath: Videos/JAV
+            - name: data-sukebe
+              mountPath: /data/sukebe/doujinshi
+              subPath: Videos/同人
+            - name: data-sukebe
+              mountPath: /data/sukebe/anime
+              subPath: Videos/アニメ
+            - name: data-videos
+              mountPath: /data/series
+              subPath: Series
+            - name: data-videos
+              mountPath: /data/movies
+              subPath: Movies
+      volumes:
+        - name: data-sukebe
+          persistentVolumeClaim:
+            claimName: sukebe
+        - name: data-videos
+          persistentVolumeClaim:
+            claimName: videos
