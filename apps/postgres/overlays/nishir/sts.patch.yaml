@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: postgres
+          env:
+            - name: POSTGRES_VAULTWARDEN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-vaultwarden
+                  key: username
+            - name: POSTGRES_VAULTWARDEN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-vaultwarden
+                  key: password
+          volumeMounts:
+            - name: docker-entrypoint-initdb
+              mountPath: /docker-entrypoint-initdb.d/vaultwarden.sh
+              subPath: vaultwarden.sh
+              readOnly: true
