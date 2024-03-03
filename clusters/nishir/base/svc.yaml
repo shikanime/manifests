@@ -2,18 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    tailscale.com/tailnet-fqdn: nishir-syncthing-private.tail9fed3.ts.net
-    tailscale.com/hostname: nishir-syncthing-private-proxy
-  name: nishir-syncthing-private
-  namespace: shikanime
-spec:
-  externalName: nishir-syncthing-private.tail9fed3.ts.net
-  type: ExternalName
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
     tailscale.com/tailnet-fqdn: ishtar.tail9fed3.ts.net
     tailscale.com/hostname: nishir-ishtar-proxy
   name: ishtar
