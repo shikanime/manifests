@@ -2,6 +2,18 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
+    tailscale.com/tailnet-fqdn: yosh.tail9fed3.ts.net
+    tailscale.com/hostname: nishir-yosh-proxy
+  name: yosh
+  namespace: shikanime
+spec:
+  externalName: yosh.tail9fed3.ts.net
+  type: ExternalName
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
     tailscale.com/tailnet-fqdn: ishtar.tail9fed3.ts.net
     tailscale.com/hostname: nishir-ishtar-proxy
   name: ishtar
