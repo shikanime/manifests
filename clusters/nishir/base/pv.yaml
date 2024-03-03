@@ -191,6 +191,25 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: nishir
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 40Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /media/shika/Satellite/Yosh
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: nishir
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: deluge-config
   namespace: shikanime
 spec:

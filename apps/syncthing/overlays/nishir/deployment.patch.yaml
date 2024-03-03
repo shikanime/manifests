@@ -27,6 +27,8 @@ spec:
               mountPath: /data/Sukebe
             - name: data-videos
               mountPath: /data/Videos
+            - name: data-nishir
+              mountPath: /data/Nishir
       volumes:
         - name: data-camera
           persistentVolumeClaim:
@@ -55,3 +57,6 @@ spec:
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
+        - name: data-nishir
+          persistentVolumeClaim:
+            claimName: nishir
