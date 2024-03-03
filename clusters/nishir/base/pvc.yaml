@@ -137,3 +137,17 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nishir
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 40Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
