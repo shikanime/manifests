@@ -81,7 +81,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 1Gi
+    storage: 8Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce

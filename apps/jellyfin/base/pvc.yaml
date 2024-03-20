@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 8Gi
   storageClassName: longhorn
   volumeMode: Filesystem
   volumeName: jellyfin-config
