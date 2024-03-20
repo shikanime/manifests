@@ -136,7 +136,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
