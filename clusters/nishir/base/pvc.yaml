@@ -132,7 +132,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
