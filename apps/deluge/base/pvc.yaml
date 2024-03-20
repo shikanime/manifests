@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 64Mi
+      storage: 256Mi
   storageClassName: longhorn
   volumeMode: Filesystem
   volumeName: deluge-config
