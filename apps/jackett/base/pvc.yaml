@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 64Mi
+      storage: 258Mi
   storageClassName: longhorn
   volumeMode: Filesystem
   volumeName: jackett-config
