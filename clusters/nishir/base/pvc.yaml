@@ -132,11 +132,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

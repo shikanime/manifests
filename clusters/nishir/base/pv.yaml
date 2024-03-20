@@ -176,14 +176,18 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Satellite/Torrents/downloads
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: torrents-downloads
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: torrents-downloads
