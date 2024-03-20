@@ -260,7 +260,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 2Gi
+    storage: 8Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -306,7 +306,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 512Mi
+    storage: 4Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -329,7 +329,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 2Gi
+    storage: 4Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -352,7 +352,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 64Mi
+    storage: 258Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
