@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 258Mi
+      storage: 512Mi
   storageClassName: longhorn
   volumeMode: Filesystem
   volumeName: vaultwarden-data
