@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 512Mi
+      storage: 2Gi
   storageClassName: longhorn
   volumeMode: Filesystem
   volumeName: sonarr-config
