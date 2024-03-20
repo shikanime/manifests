@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-camera
+  name: camera
   namespace: shikanime
 spec:
   capacity:
@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-documents
+  name: documents
   namespace: shikanime
 spec:
   capacity:
@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-infinity-horizons
+  name: infinity-horizons
   namespace: shikanime
 spec:
   capacity:
@@ -58,7 +58,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-music
+  name: music
   namespace: shikanime
 spec:
   capacity:
@@ -77,7 +77,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-pictures
+  name: pictures
   namespace: shikanime
 spec:
   capacity:
@@ -96,7 +96,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-staging
+  name: staging
   namespace: shikanime
 spec:
   capacity:
@@ -115,7 +115,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-studio
+  name: studio
   namespace: shikanime
 spec:
   capacity:
@@ -134,7 +134,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-sukebe
+  name: sukebe
   namespace: shikanime
 spec:
   capacity:
@@ -153,7 +153,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-videos
+  name: videos
   namespace: shikanime
 spec:
   capacity:
@@ -172,7 +172,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir-torrents-downloads
+  name: torrents-downloads
   namespace: shikanime
 spec:
   capacity:
