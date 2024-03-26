@@ -1,25 +1,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ollama-cache
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/ollama/cache
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: ollama-cache
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: sukebe
   namespace: shikanime
 spec:
@@ -58,21 +39,48 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgres-data
+  name: deluge-config
   namespace: shikanime
 spec:
   capacity:
-    storage: 2Gi
+    storage: 64Mi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/postgres/data
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: deluge-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
-    name: data-postgres-0
+    name: deluge-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jackett-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 64Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: jackett-config
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: jackett-config
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -81,14 +89,179 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 8Gi
+    storage: 2Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /var/lib/shikanime/jellyfin/config
-    type: DirectoryOrCreate
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: jellyfin-config
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: jellyfin-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-data
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: postgres-data
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: data-postgres-0
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: radarr-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 512Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: radarr-config
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: radarr-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 512Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: sonarr-config
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: sonarr-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vaultwarden-data
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 64Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: vaultwarden-data
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: vaultwarden-data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: syncthing-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: syncthing-config
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: syncthing-config
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ollama-cache
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 60Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: ollama-cache
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: ollama-cache
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: torrents-downloads
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 60Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: torrents-downloads
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: torrents-downloads
