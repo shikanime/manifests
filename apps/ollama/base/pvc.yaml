@@ -8,5 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Gi
-  storageClassName: local-path
+      storage: 60Gi
+  storageClassName: longhorn
+  volumeMode: Filesystem
+  volumeName: ollama-cache
