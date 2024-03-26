@@ -6,7 +6,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 60Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -20,8 +20,22 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 60Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: torrents-downloads
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 60Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn

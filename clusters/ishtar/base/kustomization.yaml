@@ -6,7 +6,11 @@ resources:
   - ns.yaml
   - pv.yaml
   - pvc.yaml
+  - ../../../apps/deluge/base
+  - ../../../apps/jackett/base
   - ../../../apps/jellyfin/overlays/ishtar
   - ../../../apps/metatube/base
   - ../../../apps/postgres/overlays/ishtar
+  - ../../../apps/radarr/base
+  - ../../../apps/sonarr/base
   - ../../../apps/ollama/base
