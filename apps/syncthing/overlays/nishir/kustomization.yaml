@@ -5,3 +5,4 @@ patches:
   - path: svc.patch.yaml
 resources:
   - ../../base
+  - ingress.yaml
