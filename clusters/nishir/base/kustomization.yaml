@@ -2,17 +2,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - helmchart.yaml
-  - ingress.yaml
   - ns.yaml
   - pv.yaml
   - pvc.yaml
   - svc.yaml
-  - ../../../apps/deluge/base
-  - ../../../apps/jackett/base
+  - ../../../apps/deluge/overlays/nishir
+  - ../../../apps/jackett/overlays/nishir
   - ../../../apps/jellyfin/overlays/nishir
   - ../../../apps/metatube/base
   - ../../../apps/postgres/overlays/nishir
-  - ../../../apps/radarr/base
-  - ../../../apps/sonarr/base
+  - ../../../apps/radarr/overlays/nishir
+  - ../../../apps/sonarr/overlays/nishir
   - ../../../apps/syncthing/overlays/nishir
-  - ../../../apps/vaultwarden/base
+  - ../../../apps/vaultwarden/overlays/nishir
