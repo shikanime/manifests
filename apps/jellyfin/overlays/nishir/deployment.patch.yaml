@@ -10,7 +10,7 @@ spec:
         - name: jellyfin
           env:
             - name: JELLYFIN_PublishedServerUrl
-              value: jellyfin.tail9fed3.ts.net
+              value: "100.83.158.44"
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe/jav
