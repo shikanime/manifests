@@ -221,7 +221,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: deluge-config
@@ -244,7 +244,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: jackett-config
@@ -267,7 +267,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: jellyfin-config
@@ -290,7 +290,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: postgres-data
@@ -313,7 +313,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: radarr-config
@@ -336,7 +336,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: sonarr-config
@@ -359,7 +359,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: vaultwarden-data
@@ -382,7 +382,7 @@ spec:
   storageClassName: longhorn
   csi:
     driver: driver.longhorn.io
-    fsType: ext4
+    fsType: xfs
     volumeAttributes:
       numberOfReplicas: "1"
     volumeHandle: syncthing-config
