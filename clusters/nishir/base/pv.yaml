@@ -201,7 +201,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-path
   hostPath:
-    path: /media/shika/Iceberg/Yosh
+    path: /media/shika/Iceberg/Nishir
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
