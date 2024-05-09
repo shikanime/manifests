@@ -29,7 +29,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: torrents-downloads
+            - name: downloads
               mountPath: /downloads
             - name: data-videos
               mountPath: /data/movies
@@ -38,9 +38,9 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: radarr-config
-        - name: torrents-downloads
+        - name: downloads
           persistentVolumeClaim:
-            claimName: torrents-downloads
+            claimName: downloads
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
