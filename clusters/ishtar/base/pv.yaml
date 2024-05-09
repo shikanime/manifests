@@ -5,11 +5,11 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-path-static
   hostPath:
     path: /var/lib/shikanime/ollama/cache
     type: DirectoryOrCreate
@@ -24,11 +24,11 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-path-static
   hostPath:
     path: /mnt/d/Sukebe
     type: DirectoryOrCreate
@@ -43,11 +43,11 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-path-static
   hostPath:
     path: /mnt/d/Videos
     type: DirectoryOrCreate

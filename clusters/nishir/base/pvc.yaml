@@ -6,11 +6,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 64Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -20,11 +20,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -34,11 +34,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -48,11 +48,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 32Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -62,11 +62,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -76,11 +76,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -90,39 +90,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 32Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sukebe
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: videos
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -136,7 +108,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -146,8 +118,36 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 40Gi
+      storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: longhorn-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sukebe
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 1Ti
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: videos
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 512Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path-static
