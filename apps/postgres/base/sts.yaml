@@ -58,7 +58,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: longhorn
+        storageClassName: longhorn-static
         resources:
           requests:
             storage: 2Gi

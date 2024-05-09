@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  storageClassName: longhorn
+  storageClassName: longhorn-static
   volumeMode: Filesystem
   volumeName: syncthing-config
