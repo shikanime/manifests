@@ -6,11 +6,11 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-path-static
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -20,8 +20,8 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-path-static
