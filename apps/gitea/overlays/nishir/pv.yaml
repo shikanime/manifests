@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gitea-data
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 512Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: gitea-data
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: gitea-data
