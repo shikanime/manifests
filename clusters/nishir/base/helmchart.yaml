@@ -43,3 +43,4 @@ spec:
       backupTarget: s3://shikanime-studio-backups@eu/
       backupTargetCredentialSecret: longhorn-gcp-backups
       defaultReplicaCount: 1
+      allowCollectingLonghornUsageMetrics: false
