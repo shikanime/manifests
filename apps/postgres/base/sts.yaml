@@ -38,6 +38,16 @@ spec:
                 secretKeyRef:
                   name: postgres-metatube
                   key: password
+            - name: POSTGRES_GITEA_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-gitea
+                  key: username
+            - name: POSTGRES_GITEA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-gitea
+                  key: password
           ports:
             - containerPort: 5432
               name: postgres
