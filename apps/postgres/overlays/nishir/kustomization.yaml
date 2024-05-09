@@ -4,3 +4,4 @@ patches:
   - path: sts.patch.yaml
 resources:
   - ../../base
+  - pv.yaml

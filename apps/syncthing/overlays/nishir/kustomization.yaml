@@ -6,3 +6,4 @@ patches:
 resources:
   - ../../base
   - ingress.yaml
+  - pv.yaml

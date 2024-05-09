@@ -5,6 +5,7 @@ patches:
 resources:
   - ../../base
   - ingress.yaml
+  - pv.yaml
 components:
   - ../../components/openmax
   - ../../components/v4l

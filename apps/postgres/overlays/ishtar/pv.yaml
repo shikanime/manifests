@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-data
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  hostPath:
+    path: /var/lib/shikanime/postgres/data
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: data-postgres-0
