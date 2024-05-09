@@ -1,18 +1,45 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: datasets
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 128Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: datasets
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: datasets
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: camera
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 64Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Camera
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: camera
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: camera
@@ -24,14 +51,18 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Documents
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: documents
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: documents
@@ -43,14 +74,18 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Infinity Horizons
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: infinity-horizons
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: infinity-horizons
@@ -62,14 +97,18 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 32Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Music
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: music
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: music
@@ -81,14 +120,18 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Pictures
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: pictures
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: pictures
@@ -100,14 +143,18 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Staging
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: staging
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: staging
@@ -119,55 +166,21 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 32Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Studio
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: studio
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: studio
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: sukebe
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Satellite/Sukebe
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: sukebe
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: videos
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 200Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Satellite/Videos
-    type: DirectoryOrCreate
-  claimRef:
-    namespace: shikanime
-    name: videos
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -176,7 +189,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 128Gi
+    storage: 64Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -195,18 +208,37 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nishir
+  name: sukebe
   namespace: shikanime
 spec:
   capacity:
-    storage: 40Gi
+    storage: 1Ti
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: local-path-static
   hostPath:
-    path: /media/shika/Iceberg/Nishir
+    path: /media/shika/Satellite/Sukebe
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: nishir
+    name: sukebe
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: videos
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 512Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path-static
+  hostPath:
+    path: /media/shika/Satellite/Videos
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: shikanime
+    name: videos
