@@ -176,14 +176,18 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Torrents/downloads
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: torrents-downloads
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: torrents-downloads
