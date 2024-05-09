@@ -127,12 +127,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: torrents-downloads
+  name: downloads
   namespace: shikanime
 spec:
   resources:
     requests:
-      storage: 200Gi
+      storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce

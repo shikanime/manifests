@@ -34,12 +34,12 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: torrents-downloads
+            - name: downloads
               mountPath: /downloads
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: deluge-config
-        - name: torrents-downloads
+        - name: downloads
           persistentVolumeClaim:
-            claimName: torrents-downloads
+            claimName: downloads

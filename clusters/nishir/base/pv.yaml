@@ -172,21 +172,25 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: torrents-downloads
+  name: downloads
   namespace: shikanime
 spec:
   capacity:
-    storage: 200Gi
+    storage: 128Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
-  hostPath:
-    path: /media/shika/Iceberg/Torrents/downloads
-    type: DirectoryOrCreate
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeAttributes:
+      numberOfReplicas: "1"
+    volumeHandle: downloads
+  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
-    name: torrents-downloads
+    name: downloads
 ---
 apiVersion: v1
 kind: PersistentVolume
