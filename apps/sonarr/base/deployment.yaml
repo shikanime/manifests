@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sonarr
-          image: sonarr:4.0.1
+          image: sonarr:4.0.4
           env:
             - name: PUID
               value: "1000"

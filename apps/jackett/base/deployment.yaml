@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: jackett
-          image: jackett:0.21.1819
+          image: jackett:0.21.2565
           env:
             - name: PUID
               value: "1000"

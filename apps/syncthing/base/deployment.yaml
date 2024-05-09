@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: syncthing
-          image: syncthing:1.27.3
+          image: syncthing:1.27.7
           env:
             - name: PUID
               value: "1000"

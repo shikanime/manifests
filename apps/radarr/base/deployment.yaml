@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: radarr
-          image: radarr:5.3.6
+          image: radarr:5.4.6
           env:
             - name: PUID
               value: "1000"
