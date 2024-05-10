@@ -190,6 +190,111 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: cosplay-projects
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 512Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: cosplay-projects
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: cosplay-projects
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: graphic-design-projects
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: graphic-design-projects
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: graphic-design-projects
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: multimedia-projects
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 4Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: multimedia-projects
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: multimedia-projects
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: photography-projects
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 64Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: photography-projects
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: photography-projects
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sketch
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: sketch
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: sketch
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: sukebe
   namespace: shikanime
 spec:

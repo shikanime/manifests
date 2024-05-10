@@ -127,6 +127,76 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: cosplay-projects
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 512Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: graphic-design-projects
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: multimedia-projects
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 4Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: photography-projects
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 64Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sketch
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: sukebe
   namespace: shikanime
 spec:
