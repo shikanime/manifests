@@ -29,6 +29,18 @@ spec:
               mountPath: /data/Sukebe
             - name: data-videos
               mountPath: /data/Videos
+            - name: data-cosplay-projects
+              mountPath: /data/Cosplay Projects
+            - name: data-graphic-design-projects
+              mountPath: /data/Graphic Design Projects
+            - name: data-multimedia-projects
+              mountPath: /data/Multimedia Projects
+            - name: data-photography-projects
+              mountPath: /data/Photography Projects
+            - name: data-sketch
+              mountPath: /data/Sketch
+            - name: data-unreal-projects
+              mountPath: /data/Unreal Projects
       volumes:
         - name: data-datasets
           persistentVolumeClaim:
@@ -60,3 +72,21 @@ spec:
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
+        - name: data-cosplay-projects
+          persistentVolumeClaim:
+            claimName: cosplay-projects
+        - name: data-graphic-design-projects
+          persistentVolumeClaim:
+            claimName: graphic-design-projects
+        - name: data-multimedia-projects
+          persistentVolumeClaim:
+            claimName: multimedia-projects
+        - name: data-photography-projects
+          persistentVolumeClaim:
+            claimName: photography-projects
+        - name: data-sketch
+          persistentVolumeClaim:
+            claimName: sketch
+        - name: data-unreal-projects
+          persistentVolumeClaim:
+            claimName: unreal-projects

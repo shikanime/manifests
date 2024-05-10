@@ -5,6 +5,7 @@ resources:
   - ns.yaml
   - pv.yaml
   - pvc.yaml
+  - recurringjob.yaml
   - svc.yaml
   - ../../../apps/deluge/overlays/nishir
   - ../../../apps/gitea/overlays/nishir
