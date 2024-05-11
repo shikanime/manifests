@@ -8,12 +8,9 @@ resources:
   - recurringjob.yaml
   - svc.yaml
   - ../../../apps/deluge/overlays/nishir
-  - ../../../apps/gitea/overlays/nishir
   - ../../../apps/jackett/overlays/nishir
   - ../../../apps/jellyfin/overlays/nishir
-  - ../../../apps/metatube/base
-  - ../../../apps/postgres/overlays/nishir
+  - ../../../apps/metatube/overlays/nishir
   - ../../../apps/radarr/overlays/nishir
   - ../../../apps/sonarr/overlays/nishir
   - ../../../apps/syncthing/overlays/nishir
-  - ../../../apps/vaultwarden/overlays/nishir

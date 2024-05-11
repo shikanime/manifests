@@ -18,27 +18,22 @@ spec:
           image: metatube:1.2.3
           args:
             - -dsn
-            - postgres://$(PGUSER):$(PGPASSWORD)@postgres/metatube
-            - -port
-            - "80"
-            - -db-auto-migrate
-            - -db-prepared-stmt
+            - /data/metatube.db
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               name: http
           env:
+            - name: DB_AUTO_MIGRATE
+              value: "true"
             - name: TOKEN
               valueFrom:
                 secretKeyRef:
                   name: metatube
                   key: token
-            - name: PGUSER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-metatube
-                  key: username
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-metatube
-                  key: password
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: metatube-data
