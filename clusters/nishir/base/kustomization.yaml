@@ -8,7 +8,6 @@ resources:
   - recurringjob.yaml
   - svc.yaml
   - ../../../apps/deluge/overlays/nishir
-  - ../../../apps/gitea/overlays/nishir
   - ../../../apps/jackett/overlays/nishir
   - ../../../apps/jellyfin/overlays/nishir
   - ../../../apps/metatube/base
