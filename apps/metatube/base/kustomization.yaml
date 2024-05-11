@@ -6,4 +6,5 @@ images:
     newTag: 1.1.3
 resources:
   - deployment.yaml
+  - pvc.yaml
   - svc.yaml
