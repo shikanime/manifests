@@ -9,6 +9,8 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
+            - name: data-altashar
+              mountPath: /data/Altashar
             - name: data-camera
               mountPath: /data/Camera
             - name: data-cosplay-projects
@@ -21,6 +23,8 @@ spec:
               mountPath: /data/Graphic Design Projects
             - name: data-infinity-horizons
               mountPath: /data/Infinity Horizons
+            - name: data-ishtar
+              mountPath: /data/Ishtar
             - name: data-multimedia-projects
               mountPath: /data/Multimedia Projects
             - name: data-music
@@ -42,6 +46,9 @@ spec:
             - name: data-videos
               mountPath: /data/Videos
       volumes:
+        - name: data-altashar
+          persistentVolumeClaim:
+            claimName: altashar
         - name: data-camera
           persistentVolumeClaim:
             claimName: camera
@@ -60,6 +67,9 @@ spec:
         - name: data-infinity-horizons
           persistentVolumeClaim:
             claimName: infinity-horizons
+        - name: data-ishtar
+          persistentVolumeClaim:
+            claimName: ishtar
         - name: data-multimedia-projects
           persistentVolumeClaim:
             claimName: multimedia-projects
