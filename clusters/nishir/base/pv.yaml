@@ -1,6 +1,27 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: altashar
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 256Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: altashar
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: altashar
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: camera
   namespace: shikanime
 spec:
@@ -144,6 +165,27 @@ spec:
   claimRef:
     namespace: shikanime
     name: infinity-horizons
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ishtar
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 4Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: ishtar
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: ishtar
 ---
 apiVersion: v1
 kind: PersistentVolume
