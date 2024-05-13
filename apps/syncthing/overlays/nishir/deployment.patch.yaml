@@ -42,7 +42,7 @@ spec:
             - name: data-sukebe
               mountPath: /data/Sukebe
             - name: data-yosh
-              mountPath: /data/yosh
+              mountPath: /data/Yosh
             - name: data-unreal-projects
               mountPath: /data/Unreal Projects
             - name: data-videos
