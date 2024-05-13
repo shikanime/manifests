@@ -41,6 +41,8 @@ spec:
               mountPath: /data/Studio
             - name: data-sukebe
               mountPath: /data/Sukebe
+            - name: data-yosh
+              mountPath: /data/yosh
             - name: data-unreal-projects
               mountPath: /data/Unreal Projects
             - name: data-videos
@@ -97,6 +99,10 @@ spec:
         - name: data-unreal-projects
           persistentVolumeClaim:
             claimName: unreal-projects
+        - name: data-yosh
+          persistentVolumeClaim:
+            claimName: yosh
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
+

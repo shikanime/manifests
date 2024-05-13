@@ -377,6 +377,27 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: yosh
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 256Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: yosh
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: shikanime
+    name: yosh
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: videos
   namespace: shikanime
 spec:

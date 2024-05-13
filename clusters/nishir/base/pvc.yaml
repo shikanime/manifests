@@ -254,6 +254,20 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: yosh
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 256Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-static
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: videos
   namespace: shikanime
 spec:
