@@ -30,7 +30,7 @@ spec:
   bootstrap: false
   valuesContent: |-
     longhornUI:
-      replicas: 1
+      replicas: 0
     preUpgradeChecker:
       jobEnabled: false
     persistence:
