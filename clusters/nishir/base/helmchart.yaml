@@ -31,6 +31,8 @@ spec:
   valuesContent: |-
     longhornUI:
       replicas: 1
+    preUpgradeChecker:
+      jobEnabled: false
     persistence:
       defaultFsType: xfs
       defaultClassReplicaCount: 1
