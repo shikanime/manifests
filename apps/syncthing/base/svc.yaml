@@ -32,6 +32,5 @@ spec:
       protocol: UDP
       port: 21027
       targetPort: discovery
-  type: LoadBalancer
   selector:
     app.kubernetes.io/name: syncthing
