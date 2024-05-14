@@ -30,6 +30,5 @@ spec:
       protocol: UDP
       port: 1900
       targetPort: ssdp
-  type: LoadBalancer
   selector:
     app.kubernetes.io/name: jellyfin
