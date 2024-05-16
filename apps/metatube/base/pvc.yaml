@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 256Mi
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   volumeMode: Filesystem
   volumeName: metatube-data
