@@ -6,6 +6,7 @@ resources:
   - pv.yaml
   - pvc.yaml
   - recurringjob.yaml
+  - storageclass.yaml
   - svc.yaml
   - ../../../apps/deluge/overlays/nishir
   - ../../../apps/jackett/overlays/nishir
