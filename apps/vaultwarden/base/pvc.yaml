@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   volumeMode: Filesystem
   volumeName: vaultwarden-data

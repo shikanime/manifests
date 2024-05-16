@@ -9,7 +9,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -30,7 +30,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -51,7 +51,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -72,7 +72,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -93,7 +93,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -114,7 +114,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -135,7 +135,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -156,7 +156,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -177,7 +177,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -198,7 +198,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -219,7 +219,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -240,7 +240,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -261,7 +261,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -282,7 +282,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -303,7 +303,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -324,7 +324,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -364,7 +364,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
@@ -385,7 +385,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
