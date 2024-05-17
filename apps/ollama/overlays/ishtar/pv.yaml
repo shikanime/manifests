@@ -1,19 +1,18 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: deluge-config
+  name: ollama-cache
   namespace: shikanime
 spec:
   capacity:
-    storage: 512Mi
+    storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: deluge-config
+  storageClassName: local-path-static
+  hostPath:
+    path: /var/lib/shikanime/ollama/cache
+    type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
-    name: deluge-config
+    name: ollama-cache

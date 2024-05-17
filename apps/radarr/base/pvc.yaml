@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   volumeMode: Filesystem
   volumeName: radarr-config

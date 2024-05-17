@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   volumeMode: Filesystem
   volumeName: jellyfin-config
