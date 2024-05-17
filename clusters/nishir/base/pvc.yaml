@@ -10,7 +10,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -24,7 +24,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -38,7 +38,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -52,7 +52,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -66,7 +66,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 
 apiVersion: v1
@@ -81,7 +81,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -95,7 +95,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -109,7 +109,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -123,7 +123,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -137,7 +137,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -151,7 +151,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -165,7 +165,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -179,7 +179,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -193,7 +193,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -207,7 +207,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -221,7 +221,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -249,7 +249,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -263,7 +263,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

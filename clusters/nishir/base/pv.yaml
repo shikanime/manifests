@@ -9,12 +9,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: altashar
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: altashar
@@ -30,12 +29,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: camera
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: camera
@@ -51,12 +49,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: cosplay-projects
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: cosplay-projects
@@ -72,12 +69,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: datasets
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: datasets
@@ -93,12 +89,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: documents
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: documents
@@ -114,12 +109,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: downloads
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: downloads
@@ -135,12 +129,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: graphic-design-projects
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: graphic-design-projects
@@ -156,12 +149,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: infinity-horizons
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: infinity-horizons
@@ -177,12 +169,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: ishtar
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: ishtar
@@ -198,12 +189,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: multimedia-projects
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: multimedia-projects
@@ -219,12 +209,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: music
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: music
@@ -240,12 +229,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: photography-projects
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: photography-projects
@@ -261,12 +249,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: pictures
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: pictures
@@ -282,12 +269,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: sketch
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: sketch
@@ -303,12 +289,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: staging
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: staging
@@ -324,12 +309,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: studio
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: studio
@@ -364,12 +348,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: unreal-projects
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: unreal-projects
@@ -385,12 +368,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: ephemeral-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: yosh
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: yosh

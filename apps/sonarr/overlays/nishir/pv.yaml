@@ -9,12 +9,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-static
+  storageClassName: standard-rwo
   csi:
     driver: driver.longhorn.io
     fsType: xfs
     volumeHandle: sonarr-config
-  persistentVolumeReclaimPolicy: Retain
   claimRef:
     namespace: shikanime
     name: sonarr-config

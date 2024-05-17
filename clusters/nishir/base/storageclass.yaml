@@ -1,0 +1,27 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: standard-rwo
+parameters:
+  dataLocality: best-effort
+  fsType: xfs
+  numberOfReplicas: "1"
+  recurringJobSelector: '[{"name":"standard","isGroup":true}]'
+provisioner: driver.longhorn.io
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+---
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ephemeral-rwo
+parameters:
+  dataLocality: disabled
+  fsType: xfs
+  numberOfReplicas: "1"
+  recurringJobSelector: '[{"name":"ephemeral","isGroup":true}]'
+provisioner: driver.longhorn.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
