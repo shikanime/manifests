@@ -42,7 +42,7 @@ spec:
       resizerReplicaCount: 1
       snapshotterReplicaCount: 1
     defaultSettings:
-      backupTarget: s3://shikanime-studio-backups@eu/
+      backupTarget: s3://shikanime-studio-europe-west1-longhorn-backups@eu/
       backupTargetCredentialSecret: longhorn-gcp-backups
       defaultReplicaCount: 1
       allowCollectingLonghornUsageMetrics: false
