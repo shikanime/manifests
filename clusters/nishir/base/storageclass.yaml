@@ -23,7 +23,7 @@ parameters:
   numberOfReplicas: "1"
   recurringJobSelector: '[{"name":"ephemeral","isGroup":true}]'
 provisioner: driver.longhorn.io
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
 ---
 allowVolumeExpansion: true
@@ -32,6 +32,5 @@ kind: StorageClass
 metadata:
   name: local-rwo
 provisioner: rancher.io/local-path
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
-
