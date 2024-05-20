@@ -47,3 +47,4 @@ spec:
       backupstorePollInterval: 0
       defaultReplicaCount: 1
       allowCollectingLonghornUsageMetrics: false
+      deletingConfirmationFlag: true
