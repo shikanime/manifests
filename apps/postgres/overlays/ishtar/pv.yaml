@@ -9,7 +9,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path-static
+  storageClassName: local-rwo
   hostPath:
     path: /var/lib/shikanime/postgres/data
     type: DirectoryOrCreate

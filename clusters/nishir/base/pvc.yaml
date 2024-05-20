@@ -235,7 +235,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path-static
+  storageClassName: local-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -277,4 +277,4 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path-static
+  storageClassName: local-rwo

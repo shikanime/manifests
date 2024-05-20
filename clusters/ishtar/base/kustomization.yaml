@@ -5,6 +5,7 @@ resources:
   - ns.yaml
   - pv.yaml
   - pvc.yaml
+  - storageclass.yaml
   - ../../../apps/jellyfin/overlays/ishtar
   - ../../../apps/metatube/base
   - ../../../apps/postgres/overlays/ishtar

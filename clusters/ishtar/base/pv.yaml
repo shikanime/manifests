@@ -9,7 +9,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path-static
+  storageClassName: local-rwo
   hostPath:
     path: /mnt/d/Sukebe
     type: DirectoryOrCreate
@@ -28,7 +28,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path-static
+  storageClassName: local-rwo
   hostPath:
     path: /mnt/d/Videos
     type: DirectoryOrCreate

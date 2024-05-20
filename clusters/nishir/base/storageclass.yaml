@@ -10,7 +10,7 @@ parameters:
   recurringJobSelector: '[{"name":"standard","isGroup":true}]'
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
 ---
 allowVolumeExpansion: true
 apiVersion: storage.k8s.io/v1
@@ -24,4 +24,14 @@ parameters:
   recurringJobSelector: '[{"name":"ephemeral","isGroup":true}]'
 provisioner: driver.longhorn.io
 reclaimPolicy: Delete
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
+---
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-rwo
+provisioner: rancher.io/local-path
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+
