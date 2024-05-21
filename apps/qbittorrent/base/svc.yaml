@@ -1,25 +1,25 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: deluge
+  name: qbittorrent
   namespace: shikanime
 spec:
   ports:
     - name: http
-      port: 8112
+      port: 8080
       targetPort: http
   selector:
-    app.kubernetes.io/name: deluge
+    app.kubernetes.io/name: qbittorrent
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: deluge-private
+  name: qbittorrent-private
   namespace: shikanime
   annotations:
     tailscale.com/expose: "true"
-    tailscale.com/hostname: deluge-private
-    tailscale.com/tags: tag:deluge
+    tailscale.com/hostname: qbittorrent-private
+    tailscale.com/tags: tag:qbittorrent
 spec:
   ports:
     - name: bittorrent
@@ -30,4 +30,4 @@ spec:
       port: 6881
       targetPort: bittorrent-udp
   selector:
-    app.kubernetes.io/name: deluge
+    app.kubernetes.io/name: qbittorrent

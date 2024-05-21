@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: deluge-config
+  name: qbittorrent-config
   namespace: shikanime
 spec:
   capacity:
@@ -13,7 +13,7 @@ spec:
   csi:
     driver: driver.longhorn.io
     fsType: xfs
-    volumeHandle: deluge-config
+    volumeHandle: qbittorrent-config
   claimRef:
     namespace: shikanime
-    name: deluge-config
+    name: qbittorrent-config
