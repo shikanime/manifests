@@ -24,7 +24,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard-rwo
+  storageClassName: ephemeral-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
