@@ -49,3 +49,4 @@ spec:
       allowCollectingLonghornUsageMetrics: false
       deletingConfirmationFlag: true
       replicaSoftAntiAffinity: true
+      snapshotDataIntegrityCronjob: "0 4 */7 * *"

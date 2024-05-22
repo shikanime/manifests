@@ -10,3 +10,16 @@ spec:
     - standard
   retain: 3
   concurrency: 1
+---
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: weekly-filesystem-trim
+  namespace: longhorn-system
+spec:
+  cron: "0 4 */7 * *"
+  task: filesystem-trim
+  groups:
+    - standard
+  retain: 3
+  concurrency: 1
