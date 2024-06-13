@@ -9,8 +9,6 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
-            - name: data-altashar
-              mountPath: /data/Altashar
             - name: data-camera
               mountPath: /data/Camera
             - name: data-cosplay-projects
@@ -23,8 +21,6 @@ spec:
               mountPath: /data/Graphic Design Projects
             - name: data-infinity-horizons
               mountPath: /data/Infinity Horizons
-            - name: data-ishtar
-              mountPath: /data/Ishtar
             - name: data-multimedia-projects
               mountPath: /data/Multimedia Projects
             - name: data-music
@@ -35,22 +31,15 @@ spec:
               mountPath: /data/Pictures
             - name: data-sketch
               mountPath: /data/Sketch
-            - name: data-staging
-              mountPath: /data/Staging
             - name: data-studio
               mountPath: /data/Studio
             - name: data-sukebe
               mountPath: /data/Sukebe
-            - name: data-yosh
-              mountPath: /data/Yosh
             - name: data-unreal-projects
               mountPath: /data/Unreal Projects
             - name: data-videos
               mountPath: /data/Videos
       volumes:
-        - name: data-altashar
-          persistentVolumeClaim:
-            claimName: altashar
         - name: data-camera
           persistentVolumeClaim:
             claimName: camera
@@ -69,9 +58,6 @@ spec:
         - name: data-infinity-horizons
           persistentVolumeClaim:
             claimName: infinity-horizons
-        - name: data-ishtar
-          persistentVolumeClaim:
-            claimName: ishtar
         - name: data-multimedia-projects
           persistentVolumeClaim:
             claimName: multimedia-projects
@@ -87,9 +73,6 @@ spec:
         - name: data-sketch
           persistentVolumeClaim:
             claimName: sketch
-        - name: data-staging
-          persistentVolumeClaim:
-            claimName: staging
         - name: data-studio
           persistentVolumeClaim:
             claimName: studio
@@ -99,9 +82,6 @@ spec:
         - name: data-unreal-projects
           persistentVolumeClaim:
             claimName: unreal-projects
-        - name: data-yosh
-          persistentVolumeClaim:
-            claimName: yosh
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
