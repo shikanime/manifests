@@ -48,3 +48,6 @@ spec:
       defaultReplicaCount: 1
       allowCollectingLonghornUsageMetrics: false
       deletingConfirmationFlag: true
+      replicaSoftAntiAffinity: true
+      snapshotDataIntegrityCronjob: "0 4 */7 * *"
+      disableRevisionCounter: true
