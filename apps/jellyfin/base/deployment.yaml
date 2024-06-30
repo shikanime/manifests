@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: jellyfin
-          image: jellyfin:10.8.13
+          image: jellyfin:10.9.7
           env:
             - name: PUID
               value: "1000"
