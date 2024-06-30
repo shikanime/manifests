@@ -241,26 +241,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: staging
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: staging
-  claimRef:
-    namespace: shikanime
-    name: staging
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: studio
   namespace: shikanime
 spec:
