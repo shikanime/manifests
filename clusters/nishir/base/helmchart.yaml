@@ -35,7 +35,7 @@ spec:
       jobEnabled: false
     persistence:
       defaultFsType: xfs
-      defaultClassReplicaCount: 1
+      defaultClassReplicaCount: 2
     csi:
       attacherReplicaCount: 1
       provisionerReplicaCount: 1
