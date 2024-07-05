@@ -271,7 +271,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-rwo
   hostPath:
-    path: /media/shika/Satellite/Sukebe
+    path: /media/shika/satellite/Sukebe
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -310,7 +310,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-rwo
   hostPath:
-    path: /media/shika/Satellite/Videos
+    path: /media/shika/satellite/Videos
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
