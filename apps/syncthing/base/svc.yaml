@@ -17,10 +17,10 @@ metadata:
   name: syncthing-private
   namespace: shikanime
   annotations:
-    tailscale.com/expose: "true"
     tailscale.com/hostname: syncthing-private
     tailscale.com/tags: tag:syncthing
 spec:
+  loadBalancerClass: tailscale
   ports:
     - name: syncthing
       port: 22000
@@ -35,3 +35,4 @@ spec:
       targetPort: discovery
   selector:
     app.kubernetes.io/name: syncthing
+  type: LoadBalancer
