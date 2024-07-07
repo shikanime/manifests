@@ -18,6 +18,7 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/expose: "true"
+    tailscale.com/hostname: syncthing-private
     tailscale.com/tags: tag:syncthing
 spec:
   ports:
