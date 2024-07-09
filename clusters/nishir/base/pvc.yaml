@@ -20,7 +20,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 512Mi
+      storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -34,7 +34,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 128Gi
+      storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -48,7 +48,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 1Gi
+      storage: 4Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -133,7 +133,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 128Gi
+      storage: 512Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -147,7 +147,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 64Gi
+      storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
