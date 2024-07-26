@@ -7,7 +7,6 @@ resources:
   - pvc.yaml
   - recurringjob.yaml
   - storageclass.yaml
-  - svc.yaml
   - ../../../apps/qbittorrent/overlays/nishir
   - ../../../apps/jackett/overlays/nishir
   - ../../../apps/jellyfin/overlays/nishir
