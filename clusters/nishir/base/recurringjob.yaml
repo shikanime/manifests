@@ -20,6 +20,6 @@ spec:
   cron: "0 4 */7 * *"
   task: filesystem-trim
   groups:
-    - standard
-  retain: 3
+    - default
+  retain: 1
   concurrency: 1

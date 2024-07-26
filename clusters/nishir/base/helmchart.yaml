@@ -30,19 +30,19 @@ spec:
   bootstrap: false
   valuesContent: |-
     longhornUI:
-      replicas: 0
+      replicas: 1
     preUpgradeChecker:
       jobEnabled: false
     persistence:
       defaultFsType: xfs
-      defaultClassReplicaCount: 1
+      defaultClassReplicaCount: 2
     csi:
       attacherReplicaCount: 1
       provisionerReplicaCount: 1
       resizerReplicaCount: 1
       snapshotterReplicaCount: 1
     defaultSettings:
-      backupTarget: s3://shikanime-studio-europe-west1-longhorn-backups@eu/
+      backupTarget: s3://shikanime-studio-europe-west1-longhorn-backups@europe-west1/
       backupTargetCredentialSecret: longhorn-gcp-backups
       backupstorePollInterval: 0
       defaultReplicaCount: 1

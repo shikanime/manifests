@@ -17,10 +17,10 @@ metadata:
   name: jellyfin-private
   namespace: shikanime
   annotations:
-    tailscale.com/expose: "true"
     tailscale.com/hostname: jellyfin-private
     tailscale.com/tags: tag:jellyfin
 spec:
+  loadBalancerClass: tailscale
   ports:
     - name: discovery
       protocol: UDP
@@ -32,3 +32,4 @@ spec:
       targetPort: ssdp
   selector:
     app.kubernetes.io/name: jellyfin
+  type: LoadBalancer

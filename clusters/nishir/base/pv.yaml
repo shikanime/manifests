@@ -25,7 +25,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 512Mi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -45,7 +45,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 128Gi
+    storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -65,7 +65,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 1Gi
+    storage: 4Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -185,7 +185,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 64Gi
+    storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -205,7 +205,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 128Gi
+    storage: 512Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -271,7 +271,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-rwo
   hostPath:
-    path: /media/shika/Satellite/Sukebe
+    path: /media/shika/satellite/Sukebe
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime
@@ -310,7 +310,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-rwo
   hostPath:
-    path: /media/shika/Satellite/Videos
+    path: /media/shika/satellite/Videos
     type: DirectoryOrCreate
   claimRef:
     namespace: shikanime

@@ -17,10 +17,10 @@ metadata:
   name: qbittorrent-private
   namespace: shikanime
   annotations:
-    tailscale.com/expose: "true"
     tailscale.com/hostname: qbittorrent-private
     tailscale.com/tags: tag:qbittorrent
 spec:
+  loadBalancerClass: tailscale
   ports:
     - name: bittorrent
       port: 6881
@@ -31,3 +31,4 @@ spec:
       targetPort: bittorrent-udp
   selector:
     app.kubernetes.io/name: qbittorrent
+  type: LoadBalancer
