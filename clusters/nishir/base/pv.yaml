@@ -269,10 +269,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-rwo
-  hostPath:
-    path: /media/shika/satellite/Sukebe
-    type: DirectoryOrCreate
+  storageClassName: ephemeral-rwo
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: sukebe
   claimRef:
     namespace: shikanime
     name: sukebe
@@ -308,10 +309,11 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-rwo
-  hostPath:
-    path: /media/shika/satellite/Videos
-    type: DirectoryOrCreate
+  storageClassName: ephemeral-rwo
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: videos
   claimRef:
     namespace: shikanime
     name: videos
