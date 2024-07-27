@@ -193,7 +193,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-rwo
+  storageClassName: ephemeral-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -221,4 +221,4 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-rwo
+  storageClassName: ephemeral-rwo
