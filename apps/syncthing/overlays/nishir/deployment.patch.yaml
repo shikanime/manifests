@@ -9,6 +9,8 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
+            - name: data-sync
+              mountPath: /data/sync
             - name: data-camera
               mountPath: /data/Camera
             - name: data-cosplay-projects
@@ -40,6 +42,9 @@ spec:
             - name: data-videos
               mountPath: /data/Videos
       volumes:
+        - name: data-sync
+          persistentVolumeClaim:
+            claimName: sync
         - name: data-camera
           persistentVolumeClaim:
             claimName: camera
@@ -85,4 +90,3 @@ spec:
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
-
