@@ -9,84 +9,19 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
-            - name: data-sync
-              mountPath: /data/sync
-            - name: data-camera
-              mountPath: /data/Camera
-            - name: data-cosplay-projects
-              mountPath: /data/Cosplay Projects
-            - name: data-datasets
-              mountPath: /data/Datasets
-            - name: data-documents
-              mountPath: /data/Documents
-            - name: data-graphic-design-projects
-              mountPath: /data/Graphic Design Projects
-            - name: data-infinity-horizons
-              mountPath: /data/Infinity Horizons
-            - name: data-multimedia-projects
-              mountPath: /data/Multimedia Projects
-            - name: data-music
-              mountPath: /data/Music
-            - name: data-photography-projects
-              mountPath: /data/Photography Projects
-            - name: data-pictures
-              mountPath: /data/Pictures
-            - name: data-sketch
-              mountPath: /data/Sketch
-            - name: data-studio
-              mountPath: /data/Studio
             - name: data-sukebe
               mountPath: /data/Sukebe
-            - name: data-unreal-projects
-              mountPath: /data/Unreal Projects
+            - name: data-sync
+              mountPath: /data/sync
             - name: data-videos
               mountPath: /data/Videos
       volumes:
-        - name: data-sync
-          persistentVolumeClaim:
-            claimName: sync
-        - name: data-camera
-          persistentVolumeClaim:
-            claimName: camera
-        - name: data-cosplay-projects
-          persistentVolumeClaim:
-            claimName: cosplay-projects
-        - name: data-datasets
-          persistentVolumeClaim:
-            claimName: datasets
-        - name: data-documents
-          persistentVolumeClaim:
-            claimName: documents
-        - name: data-graphic-design-projects
-          persistentVolumeClaim:
-            claimName: graphic-design-projects
-        - name: data-infinity-horizons
-          persistentVolumeClaim:
-            claimName: infinity-horizons
-        - name: data-multimedia-projects
-          persistentVolumeClaim:
-            claimName: multimedia-projects
-        - name: data-music
-          persistentVolumeClaim:
-            claimName: music
-        - name: data-photography-projects
-          persistentVolumeClaim:
-            claimName: photography-projects
-        - name: data-pictures
-          persistentVolumeClaim:
-            claimName: pictures
-        - name: data-sketch
-          persistentVolumeClaim:
-            claimName: sketch
-        - name: data-studio
-          persistentVolumeClaim:
-            claimName: studio
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe
-        - name: data-unreal-projects
+        - name: data-sync
           persistentVolumeClaim:
-            claimName: unreal-projects
+            claimName: sync
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
