@@ -1,6 +1,26 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: sync
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 1Ti
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard-rwo
+  csi:
+    driver: driver.longhorn.io
+    fsType: xfs
+    volumeHandle: sync
+  claimRef:
+    namespace: shikanime
+    name: sync
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: camera
   namespace: shikanime
 spec:
