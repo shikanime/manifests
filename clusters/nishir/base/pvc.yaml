@@ -1,77 +1,6 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sync
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 1Ti
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: camera
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 64Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ephemeral-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: cosplay-projects
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: datasets
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 256Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: documents
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 4Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: downloads
   namespace: shikanime
 spec:
@@ -82,118 +11,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: ephemeral-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: graphic-design-projects
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 2Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: infinity-horizons
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: music
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 32Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: multimedia-projects
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 4Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pictures
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 512Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: photography-projects
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 256Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sketch
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 8Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: studio
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 32Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -212,12 +29,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: unreal-projects
+  name: sync
   namespace: shikanime
 spec:
   resources:
     requests:
-      storage: 32Gi
+      storage: 1Ti
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
