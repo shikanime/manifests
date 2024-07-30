@@ -1,106 +1,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sync
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 1Ti
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: sync
-  claimRef:
-    namespace: shikanime
-    name: sync
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: camera
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 64Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ephemeral-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: camera
-  claimRef:
-    namespace: shikanime
-    name: camera
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: cosplay-projects
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: cosplay-projects
-  claimRef:
-    namespace: shikanime
-    name: cosplay-projects
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: datasets
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 256Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: datasets
-  claimRef:
-    namespace: shikanime
-    name: datasets
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: documents
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 4Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: documents
-  claimRef:
-    namespace: shikanime
-    name: documents
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: downloads
   namespace: shikanime
 spec:
@@ -117,166 +17,6 @@ spec:
   claimRef:
     namespace: shikanime
     name: downloads
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: graphic-design-projects
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 2Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: graphic-design-projects
-  claimRef:
-    namespace: shikanime
-    name: graphic-design-projects
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: infinity-horizons
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: infinity-horizons
-  claimRef:
-    namespace: shikanime
-    name: infinity-horizons
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: multimedia-projects
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 4Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: multimedia-projects
-  claimRef:
-    namespace: shikanime
-    name: multimedia-projects
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: music
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 32Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: music
-  claimRef:
-    namespace: shikanime
-    name: music
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: photography-projects
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 256Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: photography-projects
-  claimRef:
-    namespace: shikanime
-    name: photography-projects
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pictures
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 512Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: pictures
-  claimRef:
-    namespace: shikanime
-    name: pictures
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: sketch
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 8Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: sketch
-  claimRef:
-    namespace: shikanime
-    name: sketch
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: studio
-  namespace: shikanime
-spec:
-  capacity:
-    storage: 32Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwo
-  csi:
-    driver: driver.longhorn.io
-    fsType: xfs
-    volumeHandle: studio
-  claimRef:
-    namespace: shikanime
-    name: studio
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -301,11 +41,11 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: unreal-projects
+  name: sync
   namespace: shikanime
 spec:
   capacity:
-    storage: 32Gi
+    storage: 1Ti
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -313,10 +53,10 @@ spec:
   csi:
     driver: driver.longhorn.io
     fsType: xfs
-    volumeHandle: unreal-projects
+    volumeHandle: sync
   claimRef:
     namespace: shikanime
-    name: unreal-projects
+    name: sync
 ---
 apiVersion: v1
 kind: PersistentVolume
