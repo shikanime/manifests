@@ -7,10 +7,10 @@ resources:
   - pvc.yaml
   - recurringjob.yaml
   - storageclass.yaml
-  # - ../../../apps/qbittorrent/overlays/nishir
-  # - ../../../apps/jackett/overlays/nishir
-  # - ../../../apps/jellyfin/overlays/nishir
-  # - ../../../apps/metatube/overlays/nishir
-  # - ../../../apps/radarr/overlays/nishir
-  # - ../../../apps/sonarr/overlays/nishir
+  - ../../../apps/qbittorrent/overlays/nishir
+  - ../../../apps/jackett/overlays/nishir
+  - ../../../apps/jellyfin/overlays/nishir
+  - ../../../apps/metatube/overlays/nishir
+  - ../../../apps/radarr/overlays/nishir
+  - ../../../apps/sonarr/overlays/nishir
   - ../../../apps/syncthing/overlays/nishir
