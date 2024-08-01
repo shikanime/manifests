@@ -10,6 +10,7 @@ parameters:
   recurringJobSelector: '[{"name":"standard","isGroup":true}]'
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
+allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 ---
 allowVolumeExpansion: true
@@ -24,6 +25,7 @@ parameters:
   recurringJobSelector: '[{"name":"ephemeral","isGroup":true}]'
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
+allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 ---
 allowVolumeExpansion: true
@@ -33,4 +35,5 @@ metadata:
   name: local-rwo
 provisioner: rancher.io/local-path
 reclaimPolicy: Retain
+allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
