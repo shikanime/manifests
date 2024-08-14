@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 8Gi
+      storage: 64Gi
   storageClassName: standard-rwo
   volumeMode: Filesystem
   volumeName: jellyfin-config
