@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - helmchart.yaml
   - ns.yaml
-  - pv.yaml
   - pvc.yaml
   - storageclass.yaml
   - ../../../apps/jellyfin/overlays/ishtar
