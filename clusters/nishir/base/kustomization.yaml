@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - helmchart.yaml
   - ns.yaml
-  - pv.yaml
   - pvc.yaml
   - recurringjob.yaml
   - storageclass.yaml
