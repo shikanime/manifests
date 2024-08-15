@@ -5,7 +5,7 @@ metadata:
   namespace: shikanime
 spec:
   capacity:
-    storage: 64Gi
+    storage: 256Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
