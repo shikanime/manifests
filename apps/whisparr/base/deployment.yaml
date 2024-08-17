@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whisparr
+  namespace: shikanime
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: whisparr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: whisparr
+    spec:
+      containers:
+        - name: whisparr
+          image: whisparr:v3-3.0.0.586
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Europe/Paris
+          ports:
+            - containerPort: 6969
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+            - name: data-sukebe
+              mountPath: /data/sukebe/scenes
+              subPath: Videos/Scenes
+            - name: data-sukebe
+              mountPath: /data/sukebe/movies
+              subPath: Videos/Movies
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: whisparr-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+        - name: data-sukebe
+          persistentVolumeClaim:
+            claimName: sukebe
