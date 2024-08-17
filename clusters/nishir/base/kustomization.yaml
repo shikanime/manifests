@@ -12,4 +12,5 @@ resources:
   - ../../../apps/metatube/overlays/nishir
   - ../../../apps/radarr/overlays/nishir
   - ../../../apps/sonarr/overlays/nishir
+  - ../../../apps/whisparr/overlays/nishir
   - ../../../apps/syncthing/overlays/nishir

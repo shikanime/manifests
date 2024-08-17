@@ -9,19 +9,9 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
-            - name: data-sukebe
-              mountPath: /data/Sukebe
             - name: data-sync
               mountPath: /data/sync
-            - name: data-videos
-              mountPath: /data/Videos
       volumes:
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe
         - name: data-sync
           persistentVolumeClaim:
             claimName: sync
-        - name: data-videos
-          persistentVolumeClaim:
-            claimName: videos
