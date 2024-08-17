@@ -13,14 +13,14 @@ spec:
               value: "100.83.158.44"
           volumeMounts:
             - name: data-sukebe
-              mountPath: /data/sukebe/jav
-              subPath: Videos/JAV
+              mountPath: /data/sukebe/movies
+              subPath: Videos/Movies
             - name: data-sukebe
-              mountPath: /data/sukebe/doujinshi
-              subPath: Videos/同人
+              mountPath: /data/sukebe/doujins
+              subPath: Videos/Doujins
             - name: data-sukebe
-              mountPath: /data/sukebe/anime
-              subPath: Videos/アニメ
+              mountPath: /data/sukebe/series
+              subPath: Videos/Series
             - name: data-videos
               mountPath: /data/series
               subPath: Series
