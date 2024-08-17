@@ -10,27 +10,4 @@ spec:
         - name: jellyfin
           env:
             - name: JELLYFIN_PublishedServerUrl
-              value: 100.64.0.0/10=jellyfin.tail9fed3.ts.net,10.0.0.0/8=jellyfin.tail9fed3.ts.net,192.168.0.0/16=jellyfin.tail9fed3.ts.net
-          volumeMounts:
-            - name: data-sukebe
-              mountPath: /data/sukebe/movies
-              subPath: Videos/Movies
-            - name: data-sukebe
-              mountPath: /data/sukebe/doujins
-              subPath: Videos/Doujins
-            - name: data-sukebe
-              mountPath: /data/sukebe/series
-              subPath: Videos/Series
-            - name: data-videos
-              mountPath: /data/series
-              subPath: Series
-            - name: data-videos
-              mountPath: /data/movies
-              subPath: Movies
-      volumes:
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe
-        - name: data-videos
-          persistentVolumeClaim:
-            claimName: videos
+              value: 100.64.0.0/10=ishtar.tail9fed3.ts.net,10.0.0.0/8=ishtar.tail9fed3.ts.net,192.168.0.0/16=ishtar.tail9fed3.ts.net

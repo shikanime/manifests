@@ -41,6 +41,21 @@ spec:
               mountPath: /config
             - name: dev-dri
               mountPath: /dev/dri
+            - name: data-sukebe
+              mountPath: /data/sukebe/movies
+              subPath: Videos/Movies
+            - name: data-sukebe
+              mountPath: /data/sukebe/doujins
+              subPath: Videos/Doujins
+            - name: data-sukebe
+              mountPath: /data/sukebe/series
+              subPath: Videos/Series
+            - name: data-videos
+              mountPath: /data/series
+              subPath: Series
+            - name: data-videos
+              mountPath: /data/movies
+              subPath: Movies
       volumes:
         - name: config
           persistentVolumeClaim:
@@ -49,3 +64,9 @@ spec:
           hostPath:
             path: /dev/dri
             type: Directory
+        - name: data-sukebe
+          persistentVolumeClaim:
+            claimName: sukebe
+        - name: data-videos
+          persistentVolumeClaim:
+            claimName: videos
