@@ -4,13 +4,14 @@ metadata:
   name: downloads
   namespace: shikanime
 spec:
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 256Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
   storageClassName: ephemeral-rwo
+  volumeMode: Filesystem
+  volumeName: downloads
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -18,13 +19,14 @@ metadata:
   name: sukebe
   namespace: shikanime
 spec:
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Ti
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
   storageClassName: ephemeral-rwo
+  volumeMode: Filesystem
+  volumeName: sukebe
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -32,13 +34,14 @@ metadata:
   name: sync
   namespace: shikanime
 spec:
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Ti
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
   storageClassName: standard-rwo
+  volumeMode: Filesystem
+  volumeName: sync
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -46,10 +49,11 @@ metadata:
   name: videos
   namespace: shikanime
 spec:
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 512Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
   storageClassName: ephemeral-rwo
+  volumeMode: Filesystem
+  volumeName: videos
