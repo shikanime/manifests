@@ -3,11 +3,11 @@ kind: Config
 metadata:
   name: shikanime
 profiles:
-  - name: altashar
+  - name: kaltashar
     manifests:
       kustomize:
         paths:
-          - clusters/altashar/base
+          - clusters/kaltashar/base
   - name: ishtar
     manifests:
       kustomize:
