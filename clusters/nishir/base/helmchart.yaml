@@ -45,10 +45,9 @@ spec:
       backupTarget: s3://shikanime-studio-fr-par-longhorn-backups@fr-par/
       backupTargetCredentialSecret: longhorn-scw-backups
       backupstorePollInterval: 0
-      defaultReplicaCount: 1
+      defaultReplicaCount: 2
       allowCollectingLonghornUsageMetrics: false
       deletingConfirmationFlag: true
-      replicaSoftAntiAffinity: true
       snapshotDataIntegrityCronjob: "0 4 */7 * *"
       disableRevisionCounter: true
 ---
