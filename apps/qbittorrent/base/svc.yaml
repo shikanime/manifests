@@ -14,10 +14,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent-private
+  name: qbittorrent-p2p
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: qbittorrent-private
+    tailscale.com/hostname: qbittorrent-p2p
     tailscale.com/tags: tag:qbittorrent
 spec:
   loadBalancerClass: tailscale
