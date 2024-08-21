@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: jellyfin-private
+  name: jellyfin-discovery
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: ishtar-jellyfin-private
+    tailscale.com/hostname: ishtar-jellyfin-discovery
