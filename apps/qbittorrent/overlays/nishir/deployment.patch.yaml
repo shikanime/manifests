@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - sonarr
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - radarr
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - whisparr
+                topologyKey: kubernetes.io/hostname
