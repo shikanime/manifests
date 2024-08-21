@@ -10,3 +10,21 @@ spec:
       targetPort: http
   selector:
     app.kubernetes.io/name: gitea
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea-git
+  namespace: shikanime
+  annotations:
+    tailscale.com/hostname: gitea-git
+    tailscale.com/tags: tag:gitea
+spec:
+  loadBalancerClass: tailscale
+  ports:
+    - name: ssh
+      port: 22
+      targetPort: ssh
+  selector:
+    app.kubernetes.io/name: gitea
+  type: LoadBalancer
