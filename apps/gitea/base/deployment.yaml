@@ -21,6 +21,8 @@ spec:
               value: "1000"
             - name: USER_GID
               value: "1000"
+            - name: TZ
+              value: Europe/Paris
           ports:
             - containerPort: 3000
               name: http
@@ -29,19 +31,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
-            - name: timezone
-              mountPath: /etc/timezone
-              readOnly: true
-            - name: localtime
-              mountPath: /etc/localtime
-              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: gitea-data
-        - name: timezone
-          hostPath:
-            path: /etc/timezone
-        - name: localtime
-          hostPath:
-            path: /etc/localtime
