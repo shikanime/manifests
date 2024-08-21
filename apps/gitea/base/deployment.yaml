@@ -21,22 +21,6 @@ spec:
               value: "1000"
             - name: USER_GID
               value: "1000"
-            - name: GITEA__database__DB_TYPE
-              value: postgres
-            - name: GITEA__database__HOST
-              value: postgres
-            - name: GITEA__database__NAME
-              value: gitea
-            - name: GITEA__database__USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-gitea
-                  key: username
-            - name: GITEA__database__PASSWD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-gitea
-                  key: password
           ports:
             - containerPort: 3000
               name: http
