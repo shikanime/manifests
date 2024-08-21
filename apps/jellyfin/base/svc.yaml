@@ -14,10 +14,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jellyfin-private
+  name: jellyfin-discovery
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: jellyfin-private
+    tailscale.com/hostname: jellyfin-discovery
     tailscale.com/tags: tag:jellyfin
 spec:
   loadBalancerClass: tailscale
