@@ -14,10 +14,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: syncthing-private
+  name: syncthing-replication
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: syncthing-private
+    tailscale.com/hostname: syncthing-replication
     tailscale.com/tags: tag:syncthing
 spec:
   loadBalancerClass: tailscale
