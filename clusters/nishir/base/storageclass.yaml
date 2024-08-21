@@ -5,7 +5,7 @@ metadata:
 parameters:
   dataLocality: best-effort
   fsType: xfs
-  numberOfReplicas: "1"
+  numberOfReplicas: "2"
   recurringJobSelector: '[{"name":"standard","isGroup":true}]'
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
@@ -17,9 +17,9 @@ kind: StorageClass
 metadata:
   name: ephemeral-rwo
 parameters:
-  dataLocality: disabled
+  dataLocality: best-effort
   fsType: xfs
-  numberOfReplicas: "1"
+  numberOfReplicas: "2"
   recurringJobSelector: '[{"name":"ephemeral","isGroup":true}]'
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
