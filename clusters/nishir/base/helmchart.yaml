@@ -44,12 +44,13 @@ spec:
     defaultSettings:
       backupTarget: s3://shikanime-studio-fr-par-longhorn-backups@fr-par/
       backupTargetCredentialSecret: longhorn-scw-backups
-      backupstorePollInterval: 0
+      defaultDataLocality: best-effort
+      engineReplicaTimeout: 30
+      replicaAutoBalance: best-effort
       defaultReplicaCount: 2
       allowCollectingLonghornUsageMetrics: false
       deletingConfirmationFlag: true
       snapshotDataIntegrityCronjob: "0 4 */7 * *"
-      disableRevisionCounter: true
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
