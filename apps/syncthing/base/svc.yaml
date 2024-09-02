@@ -25,7 +25,41 @@ spec:
     - name: syncthing
       port: 22000
       targetPort: syncthing
+  selector:
+    app.kubernetes.io/name: syncthing
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-internal
+  namespace: shikanime
+spec:
+  loadBalancerClass: tailscale
+  ports:
+    - name: syncthing
+      port: 22000
+      targetPort: syncthing
     - name: syncthing-udp
+      protocol: UDP
+      port: 22000
+      targetPort: syncthing-udp
+    - name: discovery
+      protocol: UDP
+      port: 21027
+      targetPort: discovery
+  selector:
+    app.kubernetes.io/name: syncthing
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-udp
+  namespace: shikanime
+spec:
+  ports:
+    - name: syncthing
       protocol: UDP
       port: 22000
       targetPort: syncthing-udp
