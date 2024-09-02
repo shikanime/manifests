@@ -24,7 +24,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: ephemeral-rwo
+  storageClassName: standard-rwo
   volumeMode: Filesystem
   volumeName: sukebe
 ---

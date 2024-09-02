@@ -3,22 +3,27 @@ kind: Service
 metadata:
   name: syncthing
   namespace: shikanime
+  annotations:
+    tailscale.com/hostname: syncthing-internal
+    tailscale.com/tags: tag:syncthing
 spec:
+  loadBalancerClass: tailscale
   ports:
     - name: http
       port: 8384
       targetPort: http
+    - name: sync
+      port: 22000
+      targetPort: sync
   selector:
     app.kubernetes.io/name: syncthing
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: syncthing-replication
+  name: syncthing-internal
   namespace: shikanime
-  annotations:
-    tailscale.com/hostname: syncthing-replication
-    tailscale.com/tags: tag:syncthing
 spec:
   loadBalancerClass: tailscale
   ports:
