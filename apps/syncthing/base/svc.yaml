@@ -14,13 +14,35 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: syncthing-replication
+  name: syncthing-sync
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: syncthing-replication
+    tailscale.com/hostname: syncthing-sync
     tailscale.com/tags: tag:syncthing
 spec:
   loadBalancerClass: tailscale
+  ports:
+    - name: syncthing
+      port: 22000
+      targetPort: syncthing
+    - name: syncthing-udp
+      protocol: UDP
+      port: 22000
+      targetPort: syncthing-udp
+    - name: discovery
+      protocol: UDP
+      port: 21027
+      targetPort: discovery
+  selector:
+    app.kubernetes.io/name: syncthing
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-internal
+  namespace: shikanime
+spec:
   ports:
     - name: syncthing
       port: 22000
