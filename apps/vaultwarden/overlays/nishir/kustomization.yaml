@@ -3,3 +3,8 @@ kind: Kustomization
 resources:
   - ../../base
   - ingress.yaml
+configMapGenerator:
+  - name: vaultwarden
+    namespace: shikanime
+    literals:
+      - admin-token=$argon2id$v=19$m=65540,t=3,p=4$lHHd4o5XuOmxx4nPNlrLBBhbZ13zFRjbUKkWUqHpiaQ$4R+ywYXk30CCfXKX1y1JsAqxetj+5XdZIZdJqXJ0w7M
