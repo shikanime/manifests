@@ -14,13 +14,27 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent-p2p
+  name: qbittorrent-tracker
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: qbittorrent-p2p
+    tailscale.com/hostname: qbittorrent-tracker
     tailscale.com/tags: tag:qbittorrent
 spec:
   loadBalancerClass: tailscale
+  ports:
+    - name: bittorrent
+      port: 6881
+      targetPort: bittorrent
+  selector:
+    app.kubernetes.io/name: qbittorrent
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent-internal
+  namespace: shikanime
+spec:
   ports:
     - name: bittorrent
       port: 6881
