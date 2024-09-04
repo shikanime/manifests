@@ -17,6 +17,7 @@ metadata:
   name: jellyfin-internal
   namespace: shikanime
 spec:
+  loadBalancerClass: traefik
   ports:
     - name: discovery
       protocol: UDP
