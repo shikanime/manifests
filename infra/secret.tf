@@ -1,0 +1,63 @@
+locals {
+  prometheus_credentails_data = jsondecode(
+    base64decode(data.scaleway_secret_version.prometheus_credentails.data)
+  )
+  loki_credentails_data = jsondecode(
+    base64decode(data.scaleway_secret_version.loki_credentails.data)
+  )
+  tempo_credentails_data = jsondecode(
+    base64decode(data.scaleway_secret_version.tempo_credentails.data)
+  )
+  metadata_token_data = base64decode(data.scaleway_secret_version.metatube_token.data)
+  tailscale_oauth_client_data = jsondecode(
+    base64decode(data.scaleway_secret_version.tailscale_oauth_client.data)
+  )
+}
+
+data "scaleway_secret_version" "prometheus_credentails" {
+  secret_id = var.secrets.prometheus_credentails
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "loki_credentails" {
+  secret_id = var.secrets.loki_credentails
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "tempo_credentails" {
+  secret_id = var.secrets.tempo_credentails
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "metatube_token" {
+  secret_id = var.secrets.metatube_token
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "tailscale_oauth_client" {
+  secret_id = var.secrets.tailscale_oauth_client
+  revision  = "latest"
+}
+
+resource "kubernetes_secret" "longhorn_scw_backups" {
+  metadata {
+    name      = "longhorn-scw-backups"
+    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+  }
+  data = {
+    AWS_ACCESS_KEY_ID     = scaleway_iam_api_key.longhorn.access_key
+    AWS_SECRET_ACCESS_KEY = scaleway_iam_api_key.longhorn.secret_key
+    AWS_ENDPOINT          = "https://s3.fr-par.scw.cloud"
+  }
+}
+
+resource "kubernetes_secret" "metatube" {
+  metadata {
+    name      = "metatube"
+    namespace = kubernetes_namespace.shikanime.metadata[0].name
+  }
+  data = {
+    token = local.metadata_token_data
+  }
+  depends_on = [kubernetes_namespace.shikanime]
+}

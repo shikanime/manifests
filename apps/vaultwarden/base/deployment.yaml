@@ -15,20 +15,8 @@ spec:
     spec:
       containers:
         - name: vaultwarden
-          image: vaultwarden:1.30.5
+          image: vaultwarden:1.32.0
           env:
-            - name: PGUSER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-vaultwarden
-                  key: username
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-vaultwarden
-                  key: password
-            - name: DATABASE_URL
-              value: postgresql://$(PGUSER):$(PGPASSWORD)@postgres/vaultwarden
             - name: ADMIN_TOKEN
               valueFrom:
                 secretKeyRef:

@@ -14,10 +14,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: syncthing-sync
+  name: syncthing-replication
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: syncthing-sync
+    tailscale.com/hostname: syncthing-replication
     tailscale.com/tags: tag:syncthing
 spec:
   loadBalancerClass: tailscale
@@ -43,6 +43,7 @@ metadata:
   name: syncthing-internal
   namespace: shikanime
 spec:
+  loadBalancerClass: traefik
   ports:
     - name: syncthing
       port: 22000
