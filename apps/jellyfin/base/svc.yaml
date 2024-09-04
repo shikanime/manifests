@@ -14,13 +14,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jellyfin-discovery
+  name: jellyfin-internal
   namespace: shikanime
-  annotations:
-    tailscale.com/hostname: jellyfin-discovery
-    tailscale.com/tags: tag:jellyfin
 spec:
-  loadBalancerClass: tailscale
   ports:
     - name: discovery
       protocol: UDP

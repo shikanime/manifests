@@ -27,9 +27,9 @@ spec:
             - containerPort: 8384
               name: http
             - containerPort: 22000
-              name: syncthing
+              name: sync
             - containerPort: 22000
-              name: syncthing-udp
+              name: sync-udp
               protocol: UDP
             - containerPort: 21027
               name: discovery
