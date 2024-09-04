@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8989
+      port: 6969
       targetPort: http
   selector:
     app.kubernetes.io/name: whisparr
