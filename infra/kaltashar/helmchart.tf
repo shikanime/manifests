@@ -13,7 +13,7 @@ resource "kubernetes_manifest" "tailscale_operator" {
       version         = "1.68.1"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = yamlencode({
+      valuesContent = jsonencode({
         apiServerProxyConfig = {
           mode = "true"
         }

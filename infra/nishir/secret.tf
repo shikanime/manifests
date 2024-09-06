@@ -1,31 +1,7 @@
 locals {
-  prometheus_basic_auth_data = jsondecode(
-    base64decode(data.scaleway_secret_version.prometheus_basic_auth.data)
-  )
-  loki_basic_auth_data = jsondecode(
-    base64decode(data.scaleway_secret_version.loki_basic_auth.data)
-  )
-  tempo_basic_auth_data = jsondecode(
-    base64decode(data.scaleway_secret_version.tempo_basic_auth.data)
-  )
   tailscale_oauth_client_data = jsondecode(
     base64decode(data.scaleway_secret_version.tailscale_oauth_client.data)
   )
-}
-
-data "scaleway_secret_version" "prometheus_basic_auth" {
-  secret_id = var.secrets.prometheus_basic_auth
-  revision  = "latest"
-}
-
-data "scaleway_secret_version" "loki_basic_auth" {
-  secret_id = var.secrets.loki_basic_auth
-  revision  = "latest"
-}
-
-data "scaleway_secret_version" "tempo_basic_auth" {
-  secret_id = var.secrets.tempo_basic_auth
-  revision  = "latest"
 }
 
 data "scaleway_secret_version" "tailscale_oauth_client" {

@@ -13,7 +13,7 @@ resource "kubernetes_manifest" "tailscale_operator" {
       version         = "1.68.1"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = yamlencode({
+      valuesContent = jsonencode({
         apiServerProxyConfig = {
           mode = "true"
         }
@@ -45,7 +45,7 @@ resource "kubernetes_manifest" "longhorn" {
       version         = "1.6.2"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = yamlencode({
+      valuesContent = jsonencode({
         preUpgradeChecker = {
           jobEnabled = false
         }
@@ -88,7 +88,7 @@ resource "kubernetes_manifest" "grafana_k8s_monitoring" {
       version         = "1.4.6"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = yamlencode({
+      valuesContent = jsonencode({
         externalServices = {
           prometheus = {
             host = "https://prometheus-prod-01-eu-west-0.grafana.net"
