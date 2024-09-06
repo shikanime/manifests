@@ -1,6 +1,27 @@
 # This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
+provider "registry.opentofu.org/hashicorp/grafana" {
+  version = "2.15.0"
+  hashes = [
+    "h1:6AUe5xUKZ03SQpwY+IcuzhK1U+LGcZ+W2bFmbBxe4jM=",
+    "zh:01c5c744409353c1fe0b095aedad21ccfb269e1b2b9fa31664d0e818bb41a818",
+    "zh:1499a68faf7ef6f7d10a49dc42ecbd675f5ab07d0fb760489333a1ff9724ac4e",
+    "zh:2de9436c6eb9456d7c084385568aa46da00839a0511a9a813df45fa38fb1ab9d",
+    "zh:3116b19239ff88be33f49c6aa8e905bd1c1046f557563d101d1fe67e2a3725d0",
+    "zh:6077cf620b0893d98e78b9578143257e0326540b4120ba1b46bc1f4a7e664cd4",
+    "zh:65c6aa1f3aead13ffc671696ef4824d63dacad05a187c38479ee62f120698c34",
+    "zh:673057b910805fcddb44883e1e52206f9fa05d4573c84bd353f67bf022416a82",
+    "zh:757b61c8050079d87cb880870567e63d914d4c3be090a57882b3551a8562b854",
+    "zh:84a78152f7a267bb2967b145b293e75a1cdd6a4372daaa6e62d4066749fdd6ac",
+    "zh:8b148f76300c6b6fc895ef239d014fe3a4c97ac8e2b9fb5eb11b6e769190482b",
+    "zh:a57362646231a966ff32295c52d74b42a56515b5b469881133b6a8a9c1ae61f4",
+    "zh:b14c8fd9a224944fd545779aba6720336b5b966f0c2393c889d8e169fb39379f",
+    "zh:d3c4a7dd5171e0bb9c1a87bb8eccac9543ce764710f21f13fe0883523e796b05",
+    "zh:f87989c7b83fdc4d4c40968efc6ad00811ca8323abcccc05025214beca0ab1c0",
+  ]
+}
+
 provider "registry.opentofu.org/hashicorp/kubernetes" {
   version = "2.32.0"
   hashes = [
