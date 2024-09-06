@@ -31,9 +31,6 @@ variable "buckets" {
 
 variable "secrets" {
   type = object({
-    prometheus_basic_auth  = string
-    loki_basic_auth        = string
-    tempo_basic_auth       = string
     tailscale_oauth_client = string
   })
   description = "The name of the secrets"
