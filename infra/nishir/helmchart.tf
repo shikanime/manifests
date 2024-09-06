@@ -93,22 +93,22 @@ resource "kubernetes_manifest" "grafana_k8s_monitoring" {
           prometheus = {
             host = "https://prometheus-prod-01-eu-west-0.grafana.net"
             basicAuth = {
-              username = local.prometheus_basic_auth_data.username
-              password = local.prometheus_basic_auth_data.password
+              username = data.grafana_data_source.prometheus.basic_auth_username
+              password = grafana_cloud_access_policy_token.nishir_kubernetes.token
             }
           }
           loki = {
             host = "http://logs-prod-eu-west-0.grafana.net"
             basicAuth = {
-              username = local.loki_basic_auth_data.username
-              password = local.loki_basic_auth_data.password
+              username = data.grafana_data_source.loki.basic_auth_username
+              password = grafana_cloud_access_policy_token.nishir_kubernetes.token
             }
           }
           tempo = {
             host = "https://empo-eu-west-0.grafana.net:443"
             basicAuth = {
-              username = local.tempo_basic_auth_data.username
-              password = local.tempo_basic_auth_data.password
+              username = data.grafana_data_source.tempo.basic_auth_username
+              password = grafana_cloud_access_policy_token.nishir_kubernetes.token
             }
           }
         }

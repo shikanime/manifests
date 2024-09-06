@@ -8,6 +8,22 @@ variable "app" {
   description = "The name of the application"
 }
 
+variable "stacks" {
+  type = object({
+    shikanime = string
+  })
+  description = "The Grafana Cloud stacks"
+}
+
+variable "data_sources" {
+  type = object({
+    prometheus = string
+    loki       = string
+    tempo      = string
+  })
+  description = "The Grafana data sources"
+}
+
 variable "buckets" {
   type        = object({ longhorn = string })
   description = "The name of the buckets"
