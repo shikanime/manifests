@@ -21,3 +21,9 @@ resource "kubernetes_namespace" "grafana" {
     name = "grafana"
   }
 }
+
+resource "kubernetes_namespace" "cattle_fleet_system" {
+  metadata {
+    name = "cattle-fleet-system"
+  }
+}
