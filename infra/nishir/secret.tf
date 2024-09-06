@@ -41,7 +41,7 @@ resource "kubernetes_secret" "longhorn_scw_backups" {
   data = {
     AWS_ACCESS_KEY_ID     = scaleway_iam_api_key.longhorn.access_key
     AWS_SECRET_ACCESS_KEY = scaleway_iam_api_key.longhorn.secret_key
-    AWS_ENDPOINT          = "https://s3.fr-par.scw.cloud"
+    AWS_ENDPOINTS         = "https://s3.fr-par.scw.cloud"
   }
 }
 
