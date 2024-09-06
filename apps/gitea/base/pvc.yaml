@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 512Mi
+      storage: 4Gi
   storageClassName: standard-rwo
   volumeMode: Filesystem
   volumeName: gitea-data

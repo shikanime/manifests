@@ -13,7 +13,7 @@ resource "kubernetes_manifest" "tailscale_operator" {
       version         = "1.68.1"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = yamlencode({
+      valuesContent = jsonencode({
         apiServerProxyConfig = {
           mode = "true"
         }
@@ -45,7 +45,7 @@ resource "kubernetes_manifest" "longhorn" {
       version         = "1.6.2"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = yamlencode({
+      valuesContent = jsonencode({
         preUpgradeChecker = {
           jobEnabled = false
         }
@@ -88,7 +88,7 @@ resource "kubernetes_manifest" "grafana_k8s_monitoring" {
       version         = "1.4.6"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = yamlencode({
+      valuesContent = jsonencode({
         externalServices = {
           prometheus = {
             host = "https://prometheus-prod-01-eu-west-0.grafana.net"
@@ -187,4 +187,62 @@ resource "kubernetes_manifest" "grafana_k8s_monitoring" {
     }
   }
   depends_on = [kubernetes_namespace.grafana]
+}
+
+resource "kubernetes_manifest" "fleet_crd" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "fleet-crd"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = "https://rancher.github.io/fleet-helm-charts"
+      chart           = "fleet-crd"
+      targetNamespace = kubernetes_namespace.cattle_fleet_system.metadata[0].name
+      version         = "0.10.1"
+      helmVersion     = "v3"
+      bootstrap       = false
+    }
+  }
+  depends_on = [kubernetes_namespace.cattle_fleet_system]
+}
+
+resource "kubernetes_manifest" "fleet" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "fleet"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = "https://rancher.github.io/fleet-helm-charts"
+      chart           = "fleet"
+      targetNamespace = kubernetes_namespace.cattle_fleet_system.metadata[0].name
+      version         = "0.10.1"
+      helmVersion     = "v3"
+      bootstrap       = false
+    }
+  }
+  depends_on = [
+    kubernetes_namespace.cattle_fleet_system,
+    kubernetes_manifest.fleet_crd,
+  ]
+}
+
+resource "kubernetes_manifest" "fleet_git_repo" {
+  manifest = {
+    apiVersion = "fleet.cattle.io/v1alpha1"
+    kind       = "GitRepo"
+    metadata = {
+      name      = "nishir"
+      namespace = "fleet-local"
+    }
+    spec = {
+      repo  = "https://github.com/rancher/fleet-examples"
+      paths = ["clusters/nishir"]
+    }
+  }
 }
