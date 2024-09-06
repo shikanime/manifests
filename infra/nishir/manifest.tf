@@ -188,3 +188,63 @@ resource "kubernetes_manifest" "grafana_k8s_monitoring" {
   }
   depends_on = [kubernetes_namespace.grafana]
 }
+
+resource "kubernetes_manifest" "fleet_crd" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "fleet-crd"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = "https://rancher.github.io/fleet-helm-charts"
+      chart           = "fleet-crd"
+      targetNamespace = kubernetes_namespace.cattle_fleet_system.metadata[0].name
+      version         = "0.10.1"
+      helmVersion     = "v3"
+      bootstrap       = false
+    }
+  }
+  depends_on = [kubernetes_namespace.cattle_fleet_system]
+}
+
+resource "kubernetes_manifest" "fleet" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "fleet"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = "https://rancher.github.io/fleet-helm-charts"
+      chart           = "fleet"
+      targetNamespace = kubernetes_namespace.cattle_fleet_system.metadata[0].name
+      version         = "0.10.1"
+      helmVersion     = "v3"
+      bootstrap       = false
+    }
+  }
+  depends_on = [
+    kubernetes_namespace.cattle_fleet_system,
+    kubernetes_manifest.fleet_crd,
+  ]
+}
+
+resource "kubernetes_manifest" "fleet_git_repo" {
+  manifest = {
+    apiVersion = "fleet.cattle.io/v1alpha1"
+    kind       = "GitRepo"
+    metadata = {
+      name      = "nishir"
+      namespace = "fleet-local"
+    }
+    spec = {
+      repo   = "https://github.com/shikanime/manifests.git"
+      branch = "main"
+      paths  = ["clusters/nishir"]
+    }
+  }
+  depends_on = [kubernetes_manifest.fleet_crd]
+}
