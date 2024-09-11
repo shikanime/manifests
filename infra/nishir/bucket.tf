@@ -1,3 +1,3 @@
-data "scaleway_object_bucket" "longhorn" {
-  name = var.buckets.longhorn
+data "scaleway_object_bucket" "longhorn_backups" {
+  name = var.buckets.longhorn_backups
 }

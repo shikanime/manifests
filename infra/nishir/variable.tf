@@ -25,7 +25,9 @@ variable "data_sources" {
 }
 
 variable "buckets" {
-  type        = object({ longhorn = string })
+  type = object({
+    longhorn_backups = string
+  })
   description = "The name of the buckets"
 }
 

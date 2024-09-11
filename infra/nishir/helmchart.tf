@@ -54,7 +54,7 @@ resource "kubernetes_manifest" "longhorn" {
           defaultClassReplicaCount = 2
         }
         defaultSettings = {
-          backupTarget                        = "s3://${data.scaleway_object_bucket.longhorn.name}@${data.scaleway_object_bucket.longhorn.region}/"
+          backupTarget                        = "s3://${data.scaleway_object_bucket.longhorn_backups.name}@${data.scaleway_object_bucket.longhorn_backups.region}/"
           backupTargetCredentialSecret        = kubernetes_secret.longhorn_scw_backups.metadata[0].name
           defaultDataLocality                 = "best-effort"
           engineReplicaTimeout                = 30
