@@ -54,6 +54,8 @@
             pkgs.gh
             pkgs.kubectl
             pkgs.skaffold
+            pkgs.scaleway-cli
+            pkgs.opentofu
           ];
         };
       };
