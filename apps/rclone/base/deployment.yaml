@@ -20,9 +20,6 @@ spec:
             - serve
             - webdav
             - /data
-          env:
-            - name: TZ
-              value: Europe/Paris
           ports:
             - containerPort: 8080
               name: webdav
