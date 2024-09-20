@@ -35,3 +35,14 @@ resource "kubernetes_secret" "metatube" {
   }
   depends_on = [kubernetes_namespace.shikanime]
 }
+
+resource "kubernetes_secret" "vaultwarden" {
+  metadata {
+    name      = "vaultwarden"
+    namespace = kubernetes_namespace.shikanime.metadata[0].name
+  }
+  data = {
+    admin-token = random_password.vaultwarden_admin_password.result
+  }
+  depends_on = [kubernetes_namespace.shikanime]
+}
