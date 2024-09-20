@@ -19,8 +19,6 @@ spec:
           args:
             - serve
             - webdav
-            - --htpasswd
-            - /config/rclone/.htpasswd
             - /data
           env:
             - name: TZ
