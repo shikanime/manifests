@@ -4,6 +4,7 @@ resources:
   - pvc.yaml
   - recurringjob.yaml
   - storageclass.yaml
+  - ../../../apps/rclone/base
   - ../../../apps/gitea/overlays/nishir
   - ../../../apps/qbittorrent/overlays/nishir
   - ../../../apps/jackett/overlays/nishir
