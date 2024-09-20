@@ -10,6 +10,7 @@ resources:
   - ../../../apps/jellyfin/overlays/nishir
   - ../../../apps/metatube/overlays/nishir
   - ../../../apps/radarr/overlays/nishir
+  - ../../../apps/rclone/overlays/nishir
   - ../../../apps/sonarr/overlays/nishir
   - ../../../apps/syncthing/overlays/nishir
   - ../../../apps/vaultwarden/overlays/nishir

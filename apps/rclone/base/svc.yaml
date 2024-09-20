@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rclone-webdav
+  namespace: shikanime
+  annotations:
+    tailscale.com/hostname: rclone-webdav
+    tailscale.com/tags: tag:rclone
+spec:
+  loadBalancerClass: tailscale
+  ports:
+    - name: webdav
+      port: 8080
+      targetPort: webdav
+  selector:
+    app.kubernetes.io/name: rclone
+  type: LoadBalancer
