@@ -41,7 +41,12 @@
             shfmt.enable = true;
             nixpkgs-fmt.enable = true;
             prettier.enable = true;
+            terraform.enable = true;
           };
+          settings.global.excludes = [
+            ".terraform.lock.hcl"
+            "LICENSE"
+          ];
         };
         devenv.shells.default = {
           containers = pkgs.lib.mkForce { };
