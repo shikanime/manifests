@@ -19,6 +19,8 @@ spec:
           args:
             - serve
             - webdav
+            - --addr
+            - :8080
             - /data
           ports:
             - containerPort: 8080
