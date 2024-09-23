@@ -103,6 +103,8 @@ spec:
               mountPath: /data/Sukebe
             - name: data-videos
               mountPath: /data/Videos
+            - name: data-svn
+              mountPath: /data/Subversion
       volumes:
         - name: data-sukebe
           persistentVolumeClaim:
@@ -110,3 +112,6 @@ spec:
         - name: data-videos
           persistentVolumeClaim:
             claimName: videos
+        - name: data-svn
+          persistentVolumeClaim:
+            claimName: svn-data
