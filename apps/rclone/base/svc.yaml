@@ -1,107 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rclone-ftp
+  name: rclone-webdav
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: rclone-ftp
+    tailscale.com/hostname: rclone-webdav
     tailscale.com/tags: tag:rclone
 spec:
   loadBalancerClass: tailscale
   ports:
-    - name: ftp
-      port: 21
-      targetPort: ftp
-    - name: ftp-data-1
-      port: 30000
-      targetPort: ftp-data-1
-    - name: ftp-data-2
-      port: 30001
-      targetPort: ftp-data-2
-    - name: ftp-data-3
-      port: 30002
-      targetPort: ftp-data-3
-    - name: ftp-data-4
-      port: 30003
-      targetPort: ftp-data-4
-    - name: ftp-data-5
-      port: 30004
-      targetPort: ftp-data-5
-    - name: ftp-data-6
-      port: 30005
-      targetPort: ftp-data-6
-    - name: ftp-data-7
-      port: 30006
-      targetPort: ftp-data-7
-    - name: ftp-data-8
-      port: 30007
-      targetPort: ftp-data-8
-    - name: ftp-data-9
-      port: 30008
-      targetPort: ftp-data-9
-    - name: ftp-data-10
-      port: 30009
-      targetPort: ftp-data-10
-    - name: ftp-data-11
-      port: 30010
-      targetPort: ftp-data-11
-    - name: ftp-data-12
-      port: 30011
-      targetPort: ftp-data-12
-    - name: ftp-data-13
-      port: 30012
-      targetPort: ftp-data-13
-    - name: ftp-data-14
-      port: 30013
-      targetPort: ftp-data-14
-    - name: ftp-data-15
-      port: 30014
-      targetPort: ftp-data-15
-    - name: ftp-data-16
-      port: 30015
-      targetPort: ftp-data-16
-    - name: ftp-data-17
-      port: 30016
-      targetPort: ftp-data-17
-    - name: ftp-data-18
-      port: 30017
-      targetPort: ftp-data-18
-    - name: ftp-data-19
-      port: 30018
-      targetPort: ftp-data-19
-    - name: ftp-data-20
-      port: 30019
-      targetPort: ftp-data-20
-    - name: ftp-data-21
-      port: 30020
-      targetPort: ftp-data-21
-    - name: ftp-data-22
-      port: 30021
-      targetPort: ftp-data-22
-    - name: ftp-data-23
-      port: 30022
-      targetPort: ftp-data-23
-    - name: ftp-data-24
-      port: 30023
-      targetPort: ftp-data-24
-    - name: ftp-data-25
-      port: 30024
-      targetPort: ftp-data-25
-    - name: ftp-data-26
-      port: 30025
-      targetPort: ftp-data-26
-    - name: ftp-data-27
-      port: 30026
-      targetPort: ftp-data-27
-    - name: ftp-data-28
-      port: 30027
-      targetPort: ftp-data-28
-    - name: ftp-data-29
-      port: 30028
-      targetPort: ftp-data-29
-    - name: ftp-data-30
-      port: 30029
-      targetPort: ftp-data-30
+    - name: webdav
+      port: 8080
+      targetPort: webdav
   selector:
     app.kubernetes.io/name: rclone
   type: LoadBalancer
