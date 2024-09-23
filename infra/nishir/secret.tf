@@ -36,6 +36,10 @@ resource "kubernetes_secret" "metatube" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
+resource "random_password" "vaultwarden_admin_password" {
+  length = 14
+}
+
 resource "kubernetes_secret" "vaultwarden" {
   metadata {
     name      = "vaultwarden"
@@ -44,5 +48,22 @@ resource "kubernetes_secret" "vaultwarden" {
   data = {
     admin-token = random_password.vaultwarden_admin_password.result
   }
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "rclone_password" {
+  length = 14
+}
+
+resource "kubernetes_secret" "rclone" {
+  metadata {
+    name      = "rclone"
+    namespace = kubernetes_namespace.shikanime.metadata[0].name
+  }
+  data = {
+    username = "rclone"
+    password = random_password.rclone_password.result
+  }
+  type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
 }

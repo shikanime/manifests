@@ -1,11 +1,23 @@
-output "rclone_password" {
-  value       = random_password.rclone_password.result
-  sensitive   = true
-  description = "Password for rclone"
+output "vaultwarden_secret_metadata" {
+  value = {
+    name      = kubernetes_secret.vaultwarden.metadata[0].name
+    namespace = kubernetes_secret.vaultwarden.metadata[0].namespace
+  }
+  description = "Vaultwarden secret metadata"
 }
 
-output "metatube_token" {
-  value       = random_password.metatube_token.result
-  sensitive   = true
-  description = "Token for metatube"
+output "metatube_secret_metadata" {
+  value = {
+    name      = kubernetes_secret.metatube.metadata[0].name
+    namespace = kubernetes_secret.metatube.metadata[0].namespace
+  }
+  description = "Metatube secret metadata"
+}
+
+output "rclone_secret_metadata" {
+  value = {
+    name      = kubernetes_secret.rclone.metadata[0].name
+    namespace = kubernetes_secret.rclone.metadata[0].namespace
+  }
+  description = "Rclone secret metadata"
 }
