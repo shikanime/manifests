@@ -37,7 +37,7 @@ spec:
                   key: password
           ports:
             - containerPort: 2121
-              name: ftp
+              name: ftp-control
             - containerPort: 30000
               name: ftp-data-1
             - containerPort: 30001

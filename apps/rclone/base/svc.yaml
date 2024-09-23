@@ -9,9 +9,9 @@ metadata:
 spec:
   loadBalancerClass: tailscale
   ports:
-    - name: ftp
+    - name: ftp-control
       port: 21
-      targetPort: ftp
+      targetPort: ftp-control
     - name: ftp-data-1
       port: 30000
       targetPort: ftp-data-1
