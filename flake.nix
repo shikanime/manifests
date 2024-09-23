@@ -42,9 +42,12 @@
             nixpkgs-fmt.enable = true;
             prettier.enable = true;
             terraform.enable = true;
+            dos2unix.enable = true;
           };
           settings.global.excludes = [
-            ".terraform.lock.hcl"
+            "*.excalidraw"
+            "*.terraform.lock.hcl"
+            ".gitattributes"
             "LICENSE"
           ];
         };
