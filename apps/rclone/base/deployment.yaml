@@ -15,98 +15,28 @@ spec:
     spec:
       containers:
         - name: rclone
-          image: rclone:1.67.0
+          image: rclone:1.68.0
           args:
             - serve
-            - ftp
+            - webdav
+            - --addr
+            - :8080
             - /data
-            - -vv
-          env:
-            - name: RCLONE_ADDR
-              value: 0.0.0.0:2121
-            - name: RCLONE_PUBLIC_IP
-              value: "100.70.193.54"
-            - name: RCLONE_PASSIVE_PORT
-              value: "30000-30029"
-            - name: RCLONE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: rclone
-                  key: username
-            - name: RCLONE_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: rclone
-                  key: password
           ports:
-            - containerPort: 2121
-              name: ftp
-            - containerPort: 30000
-              name: ftp-data-1
-            - containerPort: 30001
-              name: ftp-data-2
-            - containerPort: 30002
-              name: ftp-data-3
-            - containerPort: 30003
-              name: ftp-data-4
-            - containerPort: 30004
-              name: ftp-data-5
-            - containerPort: 30005
-              name: ftp-data-6
-            - containerPort: 30006
-              name: ftp-data-7
-            - containerPort: 30007
-              name: ftp-data-8
-            - containerPort: 30008
-              name: ftp-data-9
-            - containerPort: 30009
-              name: ftp-data-10
-            - containerPort: 30010
-              name: ftp-data-11
-            - containerPort: 30011
-              name: ftp-data-12
-            - containerPort: 30012
-              name: ftp-data-13
-            - containerPort: 30013
-              name: ftp-data-14
-            - containerPort: 30014
-              name: ftp-data-15
-            - containerPort: 30015
-              name: ftp-data-16
-            - containerPort: 30016
-              name: ftp-data-17
-            - containerPort: 30017
-              name: ftp-data-18
-            - containerPort: 30018
-              name: ftp-data-19
-            - containerPort: 30019
-              name: ftp-data-20
-            - containerPort: 30020
-              name: ftp-data-21
-            - containerPort: 30021
-              name: ftp-data-22
-            - containerPort: 30022
-              name: ftp-data-23
-            - containerPort: 30023
-              name: ftp-data-24
-            - containerPort: 30024
-              name: ftp-data-25
-            - containerPort: 30025
-              name: ftp-data-26
-            - containerPort: 30026
-              name: ftp-data-27
-            - containerPort: 30027
-              name: ftp-data-28
-            - containerPort: 30028
-              name: ftp-data-29
-            - containerPort: 30029
-              name: ftp-data-30
+            - containerPort: 8080
+              name: webdav
           volumeMounts:
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
             - name: data-sukebe
-              mountPath: /data/Sukebe
+              mountPath: /data/sukebe
             - name: data-videos
-              mountPath: /data/Videos
+              mountPath: /data/videos
       volumes:
+        - name: rclone-config
+          secret:
+            secretName: rclone
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe
