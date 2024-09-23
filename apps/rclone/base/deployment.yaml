@@ -23,8 +23,6 @@ spec:
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:2121
-            - name: RCLONE_PUBLIC_IP
-              value: "100.70.193.54"
             - name: RCLONE_PASSIVE_PORT
               value: "30000-30029"
             - name: RCLONE_USER
