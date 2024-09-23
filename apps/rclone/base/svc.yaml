@@ -12,96 +12,96 @@ spec:
     - name: ftp-control
       port: 21
       targetPort: ftp-control
-    - name: ftp-data-1
+    - name: ftp-data-30000
       port: 30000
-      targetPort: ftp-data-1
-    - name: ftp-data-2
+      targetPort: ftp-data-30000
+    - name: ftp-data-30001
       port: 30001
-      targetPort: ftp-data-2
-    - name: ftp-data-3
+      targetPort: ftp-data-30001
+    - name: ftp-data-30002
       port: 30002
-      targetPort: ftp-data-3
-    - name: ftp-data-4
+      targetPort: ftp-data-30002
+    - name: ftp-data-30003
       port: 30003
-      targetPort: ftp-data-4
-    - name: ftp-data-5
+      targetPort: ftp-data-30003
+    - name: ftp-data-30004
       port: 30004
-      targetPort: ftp-data-5
-    - name: ftp-data-6
+      targetPort: ftp-data-30004
+    - name: ftp-data-30005
       port: 30005
-      targetPort: ftp-data-6
-    - name: ftp-data-7
+      targetPort: ftp-data-30005
+    - name: ftp-data-30006
       port: 30006
-      targetPort: ftp-data-7
-    - name: ftp-data-8
+      targetPort: ftp-data-30006
+    - name: ftp-data-30007
       port: 30007
-      targetPort: ftp-data-8
-    - name: ftp-data-9
+      targetPort: ftp-data-30007
+    - name: ftp-data-30008
       port: 30008
-      targetPort: ftp-data-9
-    - name: ftp-data-10
+      targetPort: ftp-data-30008
+    - name: ftp-data-30009
       port: 30009
-      targetPort: ftp-data-10
-    - name: ftp-data-11
+      targetPort: ftp-data-30009
+    - name: ftp-data-30010
       port: 30010
-      targetPort: ftp-data-11
-    - name: ftp-data-12
+      targetPort: ftp-data-30010
+    - name: ftp-data-30011
       port: 30011
-      targetPort: ftp-data-12
-    - name: ftp-data-13
+      targetPort: ftp-data-30011
+    - name: ftp-data-30012
       port: 30012
-      targetPort: ftp-data-13
-    - name: ftp-data-14
+      targetPort: ftp-data-30012
+    - name: ftp-data-30013
       port: 30013
-      targetPort: ftp-data-14
-    - name: ftp-data-15
+      targetPort: ftp-data-30013
+    - name: ftp-data-30014
       port: 30014
-      targetPort: ftp-data-15
-    - name: ftp-data-16
+      targetPort: ftp-data-30014
+    - name: ftp-data-30015
       port: 30015
-      targetPort: ftp-data-16
-    - name: ftp-data-17
+      targetPort: ftp-data-30015
+    - name: ftp-data-30016
       port: 30016
-      targetPort: ftp-data-17
-    - name: ftp-data-18
+      targetPort: ftp-data-30016
+    - name: ftp-data-30017
       port: 30017
-      targetPort: ftp-data-18
-    - name: ftp-data-19
+      targetPort: ftp-data-30017
+    - name: ftp-data-30018
       port: 30018
-      targetPort: ftp-data-19
-    - name: ftp-data-20
+      targetPort: ftp-data-30018
+    - name: ftp-data-30019
       port: 30019
-      targetPort: ftp-data-20
-    - name: ftp-data-21
+      targetPort: ftp-data-30019
+    - name: ftp-data-30020
       port: 30020
-      targetPort: ftp-data-21
-    - name: ftp-data-22
+      targetPort: ftp-data-30020
+    - name: ftp-data-30021
       port: 30021
-      targetPort: ftp-data-22
-    - name: ftp-data-23
+      targetPort: ftp-data-30021
+    - name: ftp-data-30022
       port: 30022
-      targetPort: ftp-data-23
-    - name: ftp-data-24
+      targetPort: ftp-data-30022
+    - name: ftp-data-30023
       port: 30023
-      targetPort: ftp-data-24
-    - name: ftp-data-25
+      targetPort: ftp-data-30023
+    - name: ftp-data-30024
       port: 30024
-      targetPort: ftp-data-25
-    - name: ftp-data-26
+      targetPort: ftp-data-30024
+    - name: ftp-data-30025
       port: 30025
-      targetPort: ftp-data-26
-    - name: ftp-data-27
+      targetPort: ftp-data-30025
+    - name: ftp-data-30026
       port: 30026
-      targetPort: ftp-data-27
-    - name: ftp-data-28
+      targetPort: ftp-data-30026
+    - name: ftp-data-30027
       port: 30027
-      targetPort: ftp-data-28
-    - name: ftp-data-29
+      targetPort: ftp-data-30027
+    - name: ftp-data-30028
       port: 30028
-      targetPort: ftp-data-29
-    - name: ftp-data-30
+      targetPort: ftp-data-30028
+    - name: ftp-data-30029
       port: 30029
-      targetPort: ftp-data-30
+      targetPort: ftp-data-30029
   selector:
     app.kubernetes.io/name: rclone
   type: LoadBalancer
