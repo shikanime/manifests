@@ -45,13 +45,13 @@ metadata:
 spec:
   loadBalancerClass: traefik
   ports:
-    - name: sync
+    - name: syncthing
       port: 22000
-      targetPort: sync
-    - name: sync-udp
+      targetPort: syncthing
+    - name: syncthing-udp
       protocol: UDP
       port: 22000
-      targetPort: sync-udp
+      targetPort: syncthing-udp
     - name: discovery
       protocol: UDP
       port: 21027
