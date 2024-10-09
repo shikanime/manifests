@@ -14,7 +14,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jellyfin-internal
+  name: jellyfin-discovery
   namespace: shikanime
 spec:
   loadBalancerClass: traefik

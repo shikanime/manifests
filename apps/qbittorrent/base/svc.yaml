@@ -25,21 +25,6 @@ spec:
     - name: bittorrent
       port: 6881
       targetPort: bittorrent
-  selector:
-    app.kubernetes.io/name: qbittorrent
-  type: LoadBalancer
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: qbittorrent-internal
-  namespace: shikanime
-spec:
-  loadBalancerClass: traefik
-  ports:
-    - name: bittorrent
-      port: 6881
-      targetPort: bittorrent
     - name: bittorrent-udp
       protocol: UDP
       port: 6881
