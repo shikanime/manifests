@@ -10,23 +10,3 @@ spec:
       targetPort: http
   selector:
     app.kubernetes.io/name: jellyfin
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jellyfin-discovery
-  namespace: shikanime
-spec:
-  loadBalancerClass: traefik
-  ports:
-    - name: discovery
-      protocol: UDP
-      port: 7359
-      targetPort: discovery
-    - name: ssdp
-      protocol: UDP
-      port: 1900
-      targetPort: ssdp
-  selector:
-    app.kubernetes.io/name: jellyfin
-  type: LoadBalancer

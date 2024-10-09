@@ -32,19 +32,3 @@ spec:
   selector:
     app.kubernetes.io/name: syncthing
   type: LoadBalancer
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: syncthing-discovery
-  namespace: shikanime
-spec:
-  loadBalancerClass: traefik
-  ports:
-    - name: discovery
-      protocol: UDP
-      port: 21027
-      targetPort: discovery
-  selector:
-    app.kubernetes.io/name: syncthing
-  type: LoadBalancer
