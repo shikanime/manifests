@@ -42,7 +42,7 @@ resource "kubernetes_manifest" "longhorn" {
       repo            = "https://charts.longhorn.io"
       chart           = "longhorn"
       targetNamespace = kubernetes_namespace.longhorn_system.metadata[0].name
-      version         = "1.6.2"
+      version         = "1.7.1"
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
@@ -63,6 +63,7 @@ resource "kubernetes_manifest" "longhorn" {
           allowCollectingLonghornUsageMetrics = false
           deletingConfirmationFlag            = true
           snapshotDataIntegrityCronjob        = "0 4 */7 * *"
+          longGRPCTimeOut                     = 604800 # 1 week
         }
       })
     }
