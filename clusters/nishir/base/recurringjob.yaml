@@ -23,3 +23,16 @@ spec:
     - default
   retain: 1
   concurrency: 1
+---
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: weekly-snapshot-delete
+  namespace: longhorn-system
+spec:
+  cron: "0 4 */7 * *"
+  task: snapshot-delete
+  groups:
+    - default
+  retain: 50
+  concurrency: 1
