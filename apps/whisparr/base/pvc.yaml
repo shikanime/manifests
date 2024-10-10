@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: standard-rwo
+  storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: whisparr-config

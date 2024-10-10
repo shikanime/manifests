@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: standard-rwo
+  storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: vaultwarden-data

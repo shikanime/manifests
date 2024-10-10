@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 256Gi
-  storageClassName: local-rwo
+  storageClassName: nishir-local

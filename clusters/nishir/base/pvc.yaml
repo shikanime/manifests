@@ -9,7 +9,7 @@ spec:
   resources:
     requests:
       storage: 256Gi
-  storageClassName: ephemeral-rwo
+  storageClassName: nishir-ephemeral
   volumeMode: Filesystem
   volumeName: downloads
 ---
@@ -24,7 +24,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: standard-rwo
+  storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: sukebe
 ---
@@ -39,7 +39,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: standard-rwo
+  storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: sync
 ---
@@ -54,6 +54,6 @@ spec:
   resources:
     requests:
       storage: 512Gi
-  storageClassName: ephemeral-rwo
+  storageClassName: nishir-ephemeral
   volumeMode: Filesystem
   volumeName: videos
