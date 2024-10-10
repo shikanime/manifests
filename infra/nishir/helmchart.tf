@@ -1,4 +1,4 @@
-resource "kubernetes_manifest" "tailscale_operator" {
+resource "kubernetes_manifest" "tailscale" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
     kind       = "HelmChart"
@@ -48,7 +48,7 @@ resource "kubernetes_manifest" "longhorn" {
   }
 }
 
-resource "kubernetes_manifest" "grafana_k8s_monitoring" {
+resource "kubernetes_manifest" "grafana_monitoring" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
     kind       = "HelmChart"
