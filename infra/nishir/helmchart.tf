@@ -21,7 +21,6 @@ resource "kubernetes_manifest" "tailscale_operator" {
       })
     }
   }
-  depends_on = [kubernetes_namespace.tailscale]
 }
 
 resource "kubernetes_manifest" "longhorn" {
@@ -47,10 +46,6 @@ resource "kubernetes_manifest" "longhorn" {
       })
     }
   }
-  depends_on = [
-    kubernetes_namespace.longhorn_system,
-    kubernetes_secret.longhorn_scw_backups
-  ]
 }
 
 resource "kubernetes_manifest" "grafana_k8s_monitoring" {
@@ -95,5 +90,4 @@ resource "kubernetes_manifest" "grafana_k8s_monitoring" {
       })
     }
   }
-  depends_on = [kubernetes_namespace.grafana]
 }
