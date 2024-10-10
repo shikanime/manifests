@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: standard-rwo
+  name: nishir-standard
 parameters:
   dataLocality: best-effort
   fsType: xfs
@@ -15,7 +15,7 @@ volumeBindingMode: WaitForFirstConsumer
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: ephemeral-rwo
+  name: nishir-ephemeral
 parameters:
   dataLocality: best-effort
   fsType: xfs
@@ -29,7 +29,7 @@ volumeBindingMode: WaitForFirstConsumer
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: local-rwo
+  name: nishir-local
 provisioner: rancher.io/local-path
 reclaimPolicy: Retain
 allowVolumeExpansion: true
