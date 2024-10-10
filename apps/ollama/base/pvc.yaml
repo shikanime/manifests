@@ -5,7 +5,7 @@ metadata:
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOncePod
   resources:
     requests:
       storage: 256Gi
