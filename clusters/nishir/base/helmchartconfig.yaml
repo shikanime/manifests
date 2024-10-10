@@ -17,8 +17,6 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    preUpgradeChecker:
-      jobEnabled: false
     persistence:
       defaultFsType: xfs
       defaultClassReplicaCount: 2
