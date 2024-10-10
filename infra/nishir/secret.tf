@@ -35,7 +35,7 @@ resource "kubernetes_secret" "longhorn_scw_backups" {
 resource "kubernetes_secret" "grafana_monitoring_prometheus" {
   metadata {
     name      = "grafana-monitoring-prometheus"
-    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+    namespace = kubernetes_namespace.grafana.metadata[0].name
   }
   data = {
     host     = "https://prometheus-prod-01-eu-west-0.grafana.net"
@@ -48,7 +48,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
 resource "kubernetes_secret" "grafana_monitoring_loki" {
   metadata {
     name      = "grafana-monitoring-loki"
-    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+    namespace = kubernetes_namespace.grafana.metadata[0].name
   }
   data = {
     host     = "http://logs-prod-eu-west-0.grafana.net"
@@ -61,17 +61,15 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
 resource "kubernetes_secret" "grafana_monitoring_tempo" {
   metadata {
     name      = "grafana-monitoring-tempo"
-    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+    namespace = kubernetes_namespace.grafana.metadata[0].name
   }
   data = {
     host     = "https://empo-eu-west-0.grafana.net"
     username = data.grafana_data_source.tempo.basic_auth_username
     password = grafana_cloud_access_policy_token.nishir_kubernetes.token
-
   }
   type = "kubernetes.io/basic-auth"
 }
-
 
 resource "random_password" "metatube_token" {
   length = 14
