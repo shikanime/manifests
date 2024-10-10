@@ -5,7 +5,7 @@ metadata:
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 256Gi
@@ -20,7 +20,7 @@ metadata:
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Ti
@@ -35,7 +35,7 @@ metadata:
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Ti
@@ -50,7 +50,7 @@ metadata:
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 512Gi
