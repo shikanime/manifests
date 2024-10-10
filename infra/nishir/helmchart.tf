@@ -78,6 +78,13 @@ resource "kubernetes_manifest" "grafana_monitoring" {
             }
           }
         }
+        opencost = {
+          opencost = {
+            prometheus = {
+              existingSecretName = kubernetes_secret.grafana_monitoring_prometheus.metadata[0].name
+            }
+          }
+        }
       })
     }
   }
