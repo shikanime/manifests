@@ -1,0 +1,85 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: tailscale-operator
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    apiServerProxyConfig:
+      mode: "true"
+    operatorConfig:
+      hostname: nishir-k8s-operator
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: tailscale
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    preUpgradeChecker:
+      jobEnabled: false
+    persistence:
+      defaultFsType: xfs
+      defaultClassReplicaCount: 2
+    defaultSettings:
+      defaultDataLocality: best-effort
+      replicaAutoBalance: best-effort
+      defaultReplicaCount: 2
+      allowCollectingLonghornUsageMetrics: false
+      snapshotDataIntegrityCronjob: "0 4 */7 * *"
+      longGRPCTimeOut: 604800 # 1 week
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: tailscale
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    cluster:
+      name: nishir
+    metrics:
+      enabled: true
+      alloy:
+        metricsTuning:
+          useIntegrationAllowList: true
+      cost:
+        enabled: true
+      kepler:
+        enabled: false
+      node-exporter:
+        enabled: true
+      logs:
+        enabled: true
+        pod_logs:
+          enabled: true
+        cluster_events:
+          enabled: true
+      traces:
+        enabled: true
+      receivers:
+        grpc:
+          enabled: true
+        http:
+          enabled: true
+        zipkin:
+          enabled: true
+        grafanaCloudMetrics:
+          enabled: false
+      opencost:
+        enabled: true
+        opencost:
+          exporter:
+            defaultClusterId: nishir
+          prometheus:
+            external:
+              url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom"
+      kube-state-metrics:
+        enabled: true
+      prometheus-node-exporter:
+        enabled: true
+      prometheus-operator-crds:
+        enabled: true
+      kepler:
+        enabled: false
