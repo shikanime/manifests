@@ -3,7 +3,7 @@ resource "kubernetes_manifest" "tailscale_operator" {
     apiVersion = "helm.cattle.io/v1"
     kind       = "HelmChart"
     metadata = {
-      name      = "tailscale-operator"
+      name      = "tailscale"
       namespace = "kube-system"
     }
     spec = {
@@ -58,7 +58,7 @@ resource "kubernetes_manifest" "grafana_k8s_monitoring" {
     apiVersion = "helm.cattle.io/v1"
     kind       = "HelmChart"
     metadata = {
-      name      = "grafana-k8s-monitoring"
+      name      = "grafana-monitoring"
       namespace = "kube-system"
     }
     spec = {
