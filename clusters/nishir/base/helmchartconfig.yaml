@@ -1,7 +1,7 @@
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
 metadata:
-  name: tailscale-operator
+  name: tailscale
   namespace: kube-system
 spec:
   valuesContent: |-
@@ -13,7 +13,7 @@ spec:
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
 metadata:
-  name: tailscale
+  name: longhorn
   namespace: kube-system
 spec:
   valuesContent: |-
@@ -33,7 +33,7 @@ spec:
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
 metadata:
-  name: grafana-k8s-monitoring
+  name: grafana-monitoring
   namespace: kube-system
 spec:
   valuesContent: |-
