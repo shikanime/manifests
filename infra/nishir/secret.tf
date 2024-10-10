@@ -9,6 +9,17 @@ data "scaleway_secret_version" "tailscale_oauth_client" {
   revision  = "latest"
 }
 
+resource "kubernetes_secret" "tailscale_operator_oauth" {
+  metadata {
+    name      = "operator-oauth"
+    namespace = kubernetes_namespace.tailscale.metadata[0].name
+  }
+  data = {
+    client_id     = local.tailscale_oauth_client_data.clientId
+    client_secret = local.tailscale_oauth_client_data.clientSecret
+  }
+}
+
 resource "kubernetes_secret" "longhorn_scw_backups" {
   metadata {
     name      = "longhorn-scw-backups"
@@ -20,6 +31,47 @@ resource "kubernetes_secret" "longhorn_scw_backups" {
     AWS_ENDPOINTS         = "https://s3.fr-par.scw.cloud"
   }
 }
+
+resource "kubernetes_secret" "grafana_monitoring_prometheus" {
+  metadata {
+    name      = "grafana-monitoring-prometheus"
+    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+  }
+  data = {
+    host     = "https://prometheus-prod-01-eu-west-0.grafana.net"
+    username = data.grafana_data_source.prometheus.basic_auth_username
+    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+  }
+  type = "kubernetes.io/basic-auth"
+}
+
+resource "kubernetes_secret" "grafana_monitoring_loki" {
+  metadata {
+    name      = "grafana-monitoring-loki"
+    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+  }
+  data = {
+    host     = "http://logs-prod-eu-west-0.grafana.net"
+    username = data.grafana_data_source.loki.basic_auth_username
+    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+  }
+  type = "kubernetes.io/basic-auth"
+}
+
+resource "kubernetes_secret" "grafana_monitoring_tempo" {
+  metadata {
+    name      = "grafana-monitoring-tempo"
+    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+  }
+  data = {
+    host     = "https://empo-eu-west-0.grafana.net:443"
+    username = data.grafana_data_source.tempo.basic_auth_username
+    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+
+  }
+  type = "kubernetes.io/basic-auth"
+}
+
 
 resource "random_password" "metatube_token" {
   length = 14

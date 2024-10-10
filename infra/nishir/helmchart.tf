@@ -13,12 +13,6 @@ resource "kubernetes_manifest" "tailscale" {
       version         = "1.74.1"
       helmVersion     = "v3"
       bootstrap       = false
-      valuesContent = jsonencode({
-        oauth = {
-          clientId     = local.tailscale_oauth_client_data.clientId
-          clientSecret = local.tailscale_oauth_client_data.clientSecret
-        }
-      })
     }
   }
 }
@@ -66,24 +60,18 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       valuesContent = jsonencode({
         externalServices = {
           prometheus = {
-            host = "https://prometheus-prod-01-eu-west-0.grafana.net"
-            basicAuth = {
-              username = data.grafana_data_source.prometheus.basic_auth_username
-              password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+            secret = {
+              name = kubernetes_secret.grafana_monitoring_prometheus.metadata[0].name
             }
           }
           loki = {
-            host = "http://logs-prod-eu-west-0.grafana.net"
-            basicAuth = {
-              username = data.grafana_data_source.loki.basic_auth_username
-              password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+            secret = {
+              name = kubernetes_secret.grafana_monitoring_loki.metadata[0].name
             }
           }
           tempo = {
-            host = "https://empo-eu-west-0.grafana.net:443"
-            basicAuth = {
-              username = data.grafana_data_source.tempo.basic_auth_username
-              password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+            secret = {
+              name = kubernetes_secret.grafana_monitoring_tempo.metadata[0].name
             }
           }
         }
