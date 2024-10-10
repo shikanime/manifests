@@ -60,21 +60,21 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       valuesContent = jsonencode({
         externalServices = {
           prometheus = {
-            host = "https://prometheus-prod-01-eu-west-0.grafana.net"
             secret = {
-              name = kubernetes_secret.grafana_monitoring_prometheus.metadata[0].name
+              create = false
+              name   = kubernetes_secret.grafana_monitoring_prometheus.metadata[0].name
             }
           }
           loki = {
-            host = "http://logs-prod-eu-west-0.grafana.net"
             secret = {
-              name = kubernetes_secret.grafana_monitoring_loki.metadata[0].name
+              create = false
+              name   = kubernetes_secret.grafana_monitoring_loki.metadata[0].name
             }
           }
           tempo = {
-            host = "https://empo-eu-west-0.grafana.net:443"
             secret = {
-              name = kubernetes_secret.grafana_monitoring_tempo.metadata[0].name
+              create = false
+              name   = kubernetes_secret.grafana_monitoring_tempo.metadata[0].name
             }
           }
         }
