@@ -35,7 +35,11 @@ spec:
             - name: config
               mountPath: /config
             - name: downloads
-              mountPath: /downloads
+              mountPath: /downloads/complete
+              subPath: complete
+            - name: downloads
+              mountPath: /downloads/incomplete
+              subPath: incomplete
       volumes:
         - name: config
           persistentVolumeClaim:
