@@ -4,7 +4,6 @@ metadata:
   name: homepage
   namespace: shikanime
 spec:
-  serviceAccountName: homepage
   replicas: 1
   selector:
     matchLabels:
@@ -32,6 +31,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /app/config
+      serviceAccountName: homepage
       volumes:
         - name: config
           persistentVolumeClaim:
