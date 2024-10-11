@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: homepage
+    newName: homepage/homepage
+resources:
+  - deployment.yaml
+  - pvc.yaml
+  - svc.yaml
