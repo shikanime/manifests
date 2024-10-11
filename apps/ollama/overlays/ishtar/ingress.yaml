@@ -6,17 +6,11 @@ metadata:
   annotations:
     tailscale.com/tags: tag:web
 spec:
-  rules:
-    - host: ollama.taila659a.ts.net
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: ollama
-                port:
-                  name: http
+  defaultBackend:
+    service:
+      name: ollama
+      port:
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
