@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: vaultwarden
     newName: vaultwarden/server
+    newTag: "1.32.0"
 resources:
   - deployment.yaml
   - pvc.yaml

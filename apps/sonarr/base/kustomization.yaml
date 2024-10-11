@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: sonarr
     newName: lscr.io/linuxserver/sonarr
+    newTag: "4.0.9"
 resources:
   - deployment.yaml
   - pvc.yaml

@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: qbittorrent
     newName: lscr.io/linuxserver/qbittorrent
+    newTag: "4.6.5"
 resources:
   - deployment.yaml
   - pvc.yaml
