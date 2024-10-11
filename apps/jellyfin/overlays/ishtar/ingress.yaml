@@ -7,11 +7,17 @@ metadata:
     tailscale.com/tags: tag:web
     tailscale.com/hostname: ishtar-jellyfin
 spec:
-  defaultBackend:
-    service:
-      name: jellyfin
-      port:
-        name: http
+  rules:
+    - host: jellyfin.taila659a.ts.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  name: http
   ingressClassName: tailscale
   tls:
     - hosts:

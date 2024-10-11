@@ -8,11 +8,17 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: Jackett
 spec:
-  defaultBackend:
-    service:
-      name: jackett
-      port:
-        name: http
+  rules:
+    - host: jackett.taila659a.ts.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jackett
+                port:
+                  name: http
   ingressClassName: tailscale
   tls:
     - hosts:
