@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: whisparr
-          image: whisparr:v3-3.0.0.607
+          image: whisparr
           env:
             - name: PUID
               value: "1000"

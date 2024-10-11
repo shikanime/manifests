@@ -5,6 +5,8 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/tags: tag:web
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Jackett
 spec:
   defaultBackend:
     service:

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: homepage
-          image: homepage:1.21.11
+          image: homepage
           env:
             - name: USER_UID
               value: "1000"
