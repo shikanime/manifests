@@ -4,6 +4,7 @@ metadata:
   name: homepage
   namespace: shikanime
 spec:
+  serviceAccountName: homepage
   replicas: 1
   selector:
     matchLabels:
