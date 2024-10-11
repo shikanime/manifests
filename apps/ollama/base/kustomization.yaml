@@ -8,3 +8,8 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
+commonLabels:
+  app.kubernetes.io/name: ollama
+  app.kubernetes.io/version: "0.1.34"
+  app.kubernetes.io/component: model-serving
+  app.kubernetes.io/part-of: nishir-media
