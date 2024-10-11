@@ -5,20 +5,12 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/tags: tag:web
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: Syncthing
 spec:
-  rules:
-    - host: syncthing.taila659a.ts.net
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: syncthing
-                port:
-                  name: http
+  defaultBackend:
+    service:
+      name: syncthing
+      port:
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:

@@ -6,7 +6,6 @@ resources:
   - recurringjob.yaml
   - storageclass.yaml
   - ../../../apps/gitea/overlays/nishir
-  - ../../../apps/homepage/overlays/nishir
   - ../../../apps/qbittorrent/overlays/nishir
   - ../../../apps/jackett/overlays/nishir
   - ../../../apps/jellyfin/overlays/nishir

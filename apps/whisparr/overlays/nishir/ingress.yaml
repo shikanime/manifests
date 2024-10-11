@@ -5,20 +5,12 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/tags: tag:web
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: Whisparr
 spec:
-  rules:
-    - host: whisparr.taila659a.ts.net
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: whisparr
-                port:
-                  name: http
+  defaultBackend:
+    service:
+      name: whisparr
+      port:
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:

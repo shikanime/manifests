@@ -5,20 +5,12 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/tags: tag:web
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: qBittorrent
 spec:
-  rules:
-    - host: qbittorrent.taila659a.ts.net
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: qbittorrent
-                port:
-                  name: http
+  defaultBackend:
+    service:
+      name: qbittorrent
+      port:
+        name: http
   ingressClassName: tailscale
   tls:
     - hosts:
