@@ -16,9 +16,6 @@ kind: Service
 metadata:
   name: syncthing-replication
   namespace: shikanime
-  annotations:
-    tailscale.com/hostname: syncthing-replication
-    tailscale.com/tags: tag:syncthing
 spec:
   loadBalancerClass: tailscale
   ports:
