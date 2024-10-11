@@ -5,12 +5,20 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/tags: tag:web
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Vaultwarden
 spec:
-  defaultBackend:
-    service:
-      name: vaultwarden
-      port:
-        name: http
+  rules:
+    - host: vaultwarden.taila659a.ts.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  name: http
   ingressClassName: tailscale
   tls:
     - hosts:

@@ -5,12 +5,20 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/tags: tag:web
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Sonarr
 spec:
-  defaultBackend:
-    service:
-      name: sonarr
-      port:
-        name: http
+  rules:
+    - host: sonarr.taila659a.ts.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sonarr
+                port:
+                  name: http
   ingressClassName: tailscale
   tls:
     - hosts:
