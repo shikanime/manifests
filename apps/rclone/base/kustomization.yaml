@@ -7,3 +7,8 @@ images:
 resources:
   - deployment.yaml
   - svc.yaml
+commonLabels:
+  app.kubernetes.io/name: rclone
+  app.kubernetes.io/version: "1.67.0"
+  app.kubernetes.io/component: file-manager
+  app.kubernetes.io/part-of: nishir-operation

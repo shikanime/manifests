@@ -8,3 +8,8 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
+commonLabels:
+  app.kubernetes.io/name: whisparr
+  app.kubernetes.io/version: "3.0.0.607"
+  app.kubernetes.io/component: library-manager
+  app.kubernetes.io/part-of: nishir-media
