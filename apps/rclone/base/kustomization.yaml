@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: rclone
     newName: rclone/rclone
+    newTag: "1.67.0"
 resources:
   - deployment.yaml
   - svc.yaml

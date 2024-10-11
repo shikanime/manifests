@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: jellyfin
     newName: lscr.io/linuxserver/jellyfin
+    newTag: "10.9.7"
 resources:
   - deployment.yaml
   - pvc.yaml

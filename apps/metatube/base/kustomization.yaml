@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: metatube
     newName: metatube/metatube-server
-    newTag: 1.1.3
+    newTag: "1.2.6"
 resources:
   - deployment.yaml
   - pvc.yaml
