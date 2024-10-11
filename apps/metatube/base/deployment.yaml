@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: metatube
-          image: metatube:1.2.6
+          image: metatube
           args:
             - -dsn
             - /data/metatube.db

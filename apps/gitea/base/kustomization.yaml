@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: gitea
     newName: gitea/gitea
+    newTag: "1.21.11"
 resources:
   - deployment.yaml
   - pvc.yaml

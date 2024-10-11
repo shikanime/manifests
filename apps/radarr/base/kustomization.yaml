@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
+    newTag: "5.9.1"
 resources:
   - deployment.yaml
   - pvc.yaml

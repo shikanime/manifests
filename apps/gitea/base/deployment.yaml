@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: gitea
-          image: gitea:1.21.11
+          image: gitea
           env:
             - name: USER_UID
               value: "1000"
