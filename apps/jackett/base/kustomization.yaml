@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: jackett
     newName: lscr.io/linuxserver/jackett
+    newTag: "0.22.233"
 resources:
   - deployment.yaml
   - pvc.yaml

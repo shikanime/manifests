@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: ollama
     newName: ollama/ollama
+    newTag: "0.1.34"
 resources:
   - deployment.yaml
   - pvc.yaml

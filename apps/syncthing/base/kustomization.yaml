@@ -3,6 +3,7 @@ kind: Kustomization
 images:
   - name: syncthing
     newName: lscr.io/linuxserver/syncthing
+    newTag: "1.27.8"
 resources:
   - deployment.yaml
   - pvc.yaml
