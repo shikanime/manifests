@@ -16,9 +16,6 @@ kind: Service
 metadata:
   name: gitea-ssh
   namespace: shikanime
-  annotations:
-    tailscale.com/hostname: gitea-ssh
-    tailscale.com/tags: tag:gitea
 spec:
   loadBalancerClass: tailscale
   ports:

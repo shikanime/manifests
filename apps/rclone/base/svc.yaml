@@ -3,9 +3,6 @@ kind: Service
 metadata:
   name: rclone
   namespace: shikanime
-  annotations:
-    tailscale.com/hostname: rclone
-    tailscale.com/tags: tag:rclone
 spec:
   loadBalancerClass: tailscale
   ports:
