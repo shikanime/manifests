@@ -11,5 +11,5 @@ resources:
 commonLabels:
   app.kubernetes.io/name: jackett
   app.kubernetes.io/version: "0.22.233"
-  app.kubernetes.io/component: tracker
+  app.kubernetes.io/component: torrent-tracker
   app.kubernetes.io/part-of: nishir-media
