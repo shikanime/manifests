@@ -4,5 +4,5 @@ metadata:
   name: rclone
   namespace: shikanime
   annotations:
-    tailscale.com/hostname: ftp
+    tailscale.com/hostname: nfs
     tailscale.com/tags: tag:rclone
