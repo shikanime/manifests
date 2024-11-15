@@ -53,7 +53,13 @@
         };
         devenv.shells.default = {
           containers = pkgs.lib.mkForce { };
-          languages.nix.enable = true;
+          languages = {
+            terraform = {
+              enable = true;
+              package = pkgs.opentofu;
+            };
+            nix.enable = true;
+          };
           cachix = {
             enable = true;
             push = "shikanime";
@@ -64,7 +70,6 @@
             pkgs.kubectl
             pkgs.kubernetes-helm
             pkgs.kustomize
-            pkgs.opentofu
             pkgs.scaleway-cli
             pkgs.skaffold
             pkgs.skopeo
