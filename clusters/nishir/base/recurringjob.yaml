@@ -8,7 +8,7 @@ spec:
   task: backup
   groups:
     - standard
-  retain: 3
+  retain: 7
   concurrency: 1
 ---
 apiVersion: longhorn.io/v1beta1
