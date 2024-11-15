@@ -25,7 +25,10 @@ helm repo update
 declare -a CHART_VERSIONS=()
 for CHART_NAME in "${CHARTS[@]}"; do
   # Search for the latest version of the chart
-  LATEST_VERSION=$(helm search repo $CHART_NAME --output json | jq -r 'sort_by(.version)|first.version')
+  LATEST_VERSION=$(
+    helm search repo $CHART_NAME --output json |
+      jq -r 'map(.version | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | last'
+  )
 
   # Check if the chart was found
   if [[ -z $LATEST_VERSION ]]; then
@@ -40,4 +43,4 @@ done
 echo "{$(
   IFS=,
   echo "${CHART_VERSIONS[*]}"
-)}" | jq . > "$(dirname "$0")/helmchart.json"
+)}" | jq . >"$(dirname "$0")/helmchart.json"

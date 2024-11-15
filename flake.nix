@@ -36,13 +36,13 @@
           enableDefaultExcludes = true;
           programs = {
             actionlint.enable = true;
-            statix.enable = true;
             deadnix.enable = true;
-            shfmt.enable = true;
+            dos2unix.enable = true;
             nixpkgs-fmt.enable = true;
             prettier.enable = true;
+            shfmt.enable = true;
+            statix.enable = true;
             terraform.enable = true;
-            dos2unix.enable = true;
           };
           settings.global.excludes = [
             "*.excalidraw"
@@ -58,13 +58,16 @@
             enable = true;
             push = "shikanime";
           };
+          pre-commit.hooks.shellcheck.enable = true;
           packages = [
             pkgs.gh
             pkgs.kubectl
             pkgs.kubernetes-helm
+            pkgs.kustomize
             pkgs.opentofu
             pkgs.scaleway-cli
             pkgs.skaffold
+            pkgs.skopeo
           ];
         };
       };
