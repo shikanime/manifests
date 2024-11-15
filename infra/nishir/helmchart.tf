@@ -34,7 +34,7 @@ resource "kubernetes_manifest" "longhorn" {
       bootstrap       = false
       valuesContent = jsonencode({
         defaultSettings = {
-          backupTarget                 = "s3://${data.scaleway_object_bucket.longhorn_backups.name}@${data.scaleway_object_bucket.longhorn_backups.region}/"
+          backupTarget                 = local.backup_target
           backupTargetCredentialSecret = kubernetes_secret.longhorn_scw_backups.metadata[0].name
         }
       })
