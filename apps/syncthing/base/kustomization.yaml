@@ -3,13 +3,13 @@ kind: Kustomization
 images:
   - name: syncthing
     newName: lscr.io/linuxserver/syncthing
-    newTag: "1.27.8"
+    newTag: 1.28.0
 resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
 commonLabels:
-  app.kubernetes.io/name: syncthing
-  app.kubernetes.io/version: "1.27.8"
   app.kubernetes.io/component: file-synchronizer
+  app.kubernetes.io/name: syncthing
   app.kubernetes.io/part-of: nishir-office
+  app.kubernetes.io/version: 1.28.0

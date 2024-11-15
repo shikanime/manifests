@@ -2,14 +2,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
   - name: gitea
-    newName: gitea/gitea
-    newTag: "1.21.11"
+    newName: docker.io/gitea/gitea
+    newTag: 1.22.3
 resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
 commonLabels:
-  app.kubernetes.io/name: gitea
-  app.kubernetes.io/version: "1.21.11"
   app.kubernetes.io/component: version-control-server
+  app.kubernetes.io/name: gitea
   app.kubernetes.io/part-of: nishir-platform
+  app.kubernetes.io/version: 1.22.3

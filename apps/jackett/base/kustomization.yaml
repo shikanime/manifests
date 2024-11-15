@@ -3,13 +3,13 @@ kind: Kustomization
 images:
   - name: jackett
     newName: lscr.io/linuxserver/jackett
-    newTag: "0.22.233"
+    newTag: 0.22.937
 resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
 commonLabels:
-  app.kubernetes.io/name: jackett
-  app.kubernetes.io/version: "0.22.233"
   app.kubernetes.io/component: torrent-tracker
+  app.kubernetes.io/name: jackett
   app.kubernetes.io/part-of: nishir-media
+  app.kubernetes.io/version: 0.22.937

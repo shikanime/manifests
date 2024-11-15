@@ -2,13 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
   - name: rclone
-    newName: rclone/rclone
-    newTag: "1.67.0"
+    newName: docker.io/rclone/rclone
+    newTag: 1.68.1
 resources:
   - deployment.yaml
   - svc.yaml
 commonLabels:
-  app.kubernetes.io/name: rclone
-  app.kubernetes.io/version: "1.67.0"
   app.kubernetes.io/component: file-manager
+  app.kubernetes.io/name: rclone
   app.kubernetes.io/part-of: nishir-operation
+  app.kubernetes.io/version: 1.68.1

@@ -3,13 +3,13 @@ kind: Kustomization
 images:
   - name: qbittorrent
     newName: lscr.io/linuxserver/qbittorrent
-    newTag: "4.6.5"
+    newTag: 5.0.1
 resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
 commonLabels:
-  app.kubernetes.io/name: qbittorrent
-  app.kubernetes.io/version: "4.6.5"
   app.kubernetes.io/component: downloader
+  app.kubernetes.io/name: qbittorrent
   app.kubernetes.io/part-of: nishir-media
+  app.kubernetes.io/version: 5.0.1

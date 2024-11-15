@@ -3,13 +3,13 @@ kind: Kustomization
 images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
-    newTag: "5.9.1"
+    newTag: 5.14.0
 resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
 commonLabels:
-  app.kubernetes.io/name: radarr
-  app.kubernetes.io/version: "5.9.1"
   app.kubernetes.io/component: library-manager
+  app.kubernetes.io/name: radarr
   app.kubernetes.io/part-of: nishir-media
+  app.kubernetes.io/version: 5.14.0

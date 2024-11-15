@@ -3,12 +3,11 @@ kind: Kustomization
 images:
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
-    newTag: v3-3.0.0.607
+    newTag: v3-3.0.0.680
 resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
-  app.kubernetes.io/name: whisparr
-  app.kubernetes.io/version: "3.0.0.607"
   app.kubernetes.io/component: library-manager
+  app.kubernetes.io/name: whisparr
   app.kubernetes.io/part-of: nishir-media
