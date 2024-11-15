@@ -15,7 +15,9 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
     echo "Image '$FULL_IMAGE' not found in registry."
   else
     (cd "$(dirname "$0")" &&
-      kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}" &&
-      kustomize edit set label "app.kubernetes.io/version:${LATEST_VERSION}")
+      kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
+    yq -i \
+      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION}\"" \
+      "$(dirname "$0")/kustomization.yaml"
   fi
 done

@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
-    newTag: 1.68.1
+    newTag: 1.68.2
 resources:
   - deployment.yaml
   - svc.yaml
@@ -12,4 +12,4 @@ labels:
       app.kubernetes.io/component: file-manager
       app.kubernetes.io/name: rclone
       app.kubernetes.io/part-of: nishir-operation
-      app.kubernetes.io/version: 1.68.1
+      app.kubernetes.io/version: 1.68.2

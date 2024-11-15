@@ -75,6 +75,7 @@
             pkgs.scaleway-cli
             pkgs.skaffold
             pkgs.skopeo
+            pkgs.yq-go
           ];
         };
       };
