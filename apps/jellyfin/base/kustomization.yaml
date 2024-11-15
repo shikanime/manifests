@@ -8,8 +8,9 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
-commonLabels:
-  app.kubernetes.io/component: media-server
-  app.kubernetes.io/name: jellyfin
-  app.kubernetes.io/part-of: nishir-media
-  app.kubernetes.io/version: 10.10.1
+labels:
+  - pairs:
+      app.kubernetes.io/component: media-server
+      app.kubernetes.io/name: jellyfin
+      app.kubernetes.io/part-of: nishir-media
+      app.kubernetes.io/version: 10.10.1

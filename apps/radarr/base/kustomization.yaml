@@ -8,8 +8,9 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
-commonLabels:
-  app.kubernetes.io/component: library-manager
-  app.kubernetes.io/name: radarr
-  app.kubernetes.io/part-of: nishir-media
-  app.kubernetes.io/version: 5.14.0
+labels:
+  - pairs:
+      app.kubernetes.io/component: library-manager
+      app.kubernetes.io/name: radarr
+      app.kubernetes.io/part-of: nishir-media
+      app.kubernetes.io/version: 5.14.0

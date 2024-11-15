@@ -8,8 +8,9 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
-commonLabels:
-  app.kubernetes.io/component: torrent-tracker
-  app.kubernetes.io/name: jackett
-  app.kubernetes.io/part-of: nishir-media
-  app.kubernetes.io/version: 0.22.937
+labels:
+  - pairs:
+      app.kubernetes.io/component: torrent-tracker
+      app.kubernetes.io/name: jackett
+      app.kubernetes.io/part-of: nishir-media
+      app.kubernetes.io/version: 0.22.937

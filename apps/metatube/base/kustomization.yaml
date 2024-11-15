@@ -8,8 +8,9 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
-commonLabels:
-  app.kubernetes.io/component: metadata-server
-  app.kubernetes.io/name: metatube
-  app.kubernetes.io/part-of: nishir-media
-  app.kubernetes.io/version: 1.2.7
+labels:
+  - pairs:
+      app.kubernetes.io/component: metadata-server
+      app.kubernetes.io/name: metatube
+      app.kubernetes.io/part-of: nishir-media
+      app.kubernetes.io/version: 1.2.7

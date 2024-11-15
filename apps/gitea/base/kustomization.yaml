@@ -8,8 +8,9 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
-commonLabels:
-  app.kubernetes.io/component: version-control-server
-  app.kubernetes.io/name: gitea
-  app.kubernetes.io/part-of: nishir-platform
-  app.kubernetes.io/version: 1.22.3
+labels:
+  - pairs:
+      app.kubernetes.io/component: version-control-server
+      app.kubernetes.io/name: gitea
+      app.kubernetes.io/part-of: nishir-platform
+      app.kubernetes.io/version: 1.22.3
