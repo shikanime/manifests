@@ -4,9 +4,11 @@ terraform {
     bucket                      = "shikanime-studio-fr-par-opentofu-state"
     key                         = "nishir/terraform.tfstate"
     region                      = "fr-par"
-    endpoint                    = "s3.fr-par.scw.cloud"
     skip_region_validation      = true
     skip_credentials_validation = true
+    endpoints = {
+      s3 = "https://s3.fr-par.scw.cloud"
+    }
   }
   required_providers {
     scaleway = {
