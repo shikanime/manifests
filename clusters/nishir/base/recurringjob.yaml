@@ -21,7 +21,7 @@ spec:
   task: filesystem-trim
   groups:
     - default
-  retain: 1
+  retain: 0
   concurrency: 1
 ---
 apiVersion: longhorn.io/v1beta1
@@ -61,4 +61,30 @@ spec:
   groups:
     - default
   retain: 8
+  concurrency: 1
+---
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: weekly-snapshot-cleanup
+  namespace: longhorn-system
+spec:
+  cron: "0 4 */7 * 0"
+  task: snapshot-cleanup
+  groups:
+    - default
+  retain: 0
+  concurrency: 1
+---
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: weekly-snapshot-delete
+  namespace: longhorn-system
+spec:
+  cron: "0 4 */7 * 0"
+  task: snapshot-delete
+  groups:
+    - default
+  retain: 100
   concurrency: 1
