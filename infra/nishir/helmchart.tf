@@ -29,7 +29,7 @@ resource "kubernetes_manifest" "longhorn" {
       repo            = "https://charts.longhorn.io"
       chart           = "longhorn"
       targetNamespace = kubernetes_namespace.longhorn_system.metadata[0].name
-      version         = "1.7.1"
+      version         = "1.7.2"
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
