@@ -8,3 +8,8 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
+commonLabels:
+  app.kubernetes.io/name: vaultwarden
+  app.kubernetes.io/version: "1.32.0"
+  app.kubernetes.io/component: secret-manager
+  app.kubernetes.io/part-of: nishir-security

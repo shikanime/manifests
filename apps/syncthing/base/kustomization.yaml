@@ -8,3 +8,8 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
+commonLabels:
+  app.kubernetes.io/name: syncthing
+  app.kubernetes.io/version: "1.27.8"
+  app.kubernetes.io/component: file-synchronizer
+  app.kubernetes.io/part-of: nishir-office
