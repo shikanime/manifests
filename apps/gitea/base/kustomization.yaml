@@ -11,5 +11,5 @@ resources:
 commonLabels:
   app.kubernetes.io/name: gitea
   app.kubernetes.io/version: "1.21.11"
-  app.kubernetes.io/component: version-control
+  app.kubernetes.io/component: version-control-server
   app.kubernetes.io/part-of: nishir-platform

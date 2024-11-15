@@ -11,5 +11,5 @@ resources:
 commonLabels:
   app.kubernetes.io/name: metatube
   app.kubernetes.io/version: "1.2.6"
-  app.kubernetes.io/component: metadata-provider
+  app.kubernetes.io/component: metadata-server
   app.kubernetes.io/part-of: nishir-media

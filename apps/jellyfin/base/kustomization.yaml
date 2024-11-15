@@ -11,5 +11,5 @@ resources:
 commonLabels:
   app.kubernetes.io/name: jellyfin
   app.kubernetes.io/version: "10.9.7"
-  app.kubernetes.io/component: media-provider
+  app.kubernetes.io/component: media-server
   app.kubernetes.io/part-of: nishir-media
