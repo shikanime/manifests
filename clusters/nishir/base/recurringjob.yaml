@@ -86,5 +86,5 @@ spec:
   task: snapshot-delete
   groups:
     - default
-  retain: 100
+  retain: 90
   concurrency: 1
