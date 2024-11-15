@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 64Gi
+      storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: jellyfin-config
