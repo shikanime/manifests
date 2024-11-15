@@ -26,7 +26,7 @@ declare -a CHART_VERSIONS=()
 for CHART_NAME in "${CHARTS[@]}"; do
   # Search for the latest version of the chart
   LATEST_VERSION=$(
-    helm search repo $CHART_NAME --output json |
+    helm search repo "$CHART_NAME" --output json |
       jq -r 'map(.version | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | last'
   )
 

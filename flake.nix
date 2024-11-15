@@ -63,7 +63,10 @@
             enable = true;
             push = "shikanime";
           };
-          pre-commit.hooks.shellcheck.enable = true;
+          pre-commit.hooks = {
+            shellcheck.enable = true;
+            tflint.enable = true;
+          };
           packages = [
             pkgs.gh
             pkgs.kubectl
