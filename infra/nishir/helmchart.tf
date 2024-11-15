@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "tailscale" {
       repo            = "https://pkgs.tailscale.com/helmcharts"
       chart           = "tailscale-operator"
       targetNamespace = kubernetes_namespace.tailscale.metadata[0].name
-      version         = "1.74.1"
+      version         = "1.76.1"
       helmVersion     = "v3"
       bootstrap       = false
     }
