@@ -1,0 +1,23 @@
+{
+  "longhorn": {
+    "spec": {
+      "version": "1.7.2",
+      "repo": "https://charts.longhorn.io",
+      "chart": "longhorn"
+    }
+  },
+  "grafana_monitoring": {
+    "spec": {
+      "version": "1.6.7",
+      "repo": "https://grafana.github.io/helm-charts",
+      "chart": "k8s-monitoring"
+    }
+  },
+  "tailscale": {
+    "spec": {
+      "version": "1.76.6",
+      "repo": "https://pkgs.tailscale.com/helmcharts",
+      "chart": "tailscale-operator"
+    }
+  }
+}

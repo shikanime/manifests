@@ -1,3 +1,7 @@
+locals {
+  helmchart = jsondecode(file("helmchart.json"))
+}
+
 resource "kubernetes_manifest" "tailscale" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
@@ -7,10 +11,10 @@ resource "kubernetes_manifest" "tailscale" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = "https://pkgs.tailscale.com/helmcharts"
-      chart           = "tailscale-operator"
+      repo            = local.helmchart.tailscale.spec.repo
+      chart           = local.helmchart.tailscale.spec.chart
       targetNamespace = kubernetes_namespace.tailscale.metadata[0].name
-      version         = "1.76.1"
+      version         = local.helmchart.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
     }
@@ -26,10 +30,10 @@ resource "kubernetes_manifest" "longhorn" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = "https://charts.longhorn.io"
-      chart           = "longhorn"
+      repo            = local.helmchart.longhorn.spec.repo
+      chart           = local.helmchart.longhorn.spec.chart
       targetNamespace = kubernetes_namespace.longhorn_system.metadata[0].name
-      version         = "1.7.2"
+      version         = local.helmchart.longhorn.spec.version
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
@@ -51,10 +55,10 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = "https://grafana.github.io/helm-charts"
-      chart           = "k8s-monitoring"
+      repo            = local.helmchart.grafana_monitoring.spec.repo
+      chart           = local.helmchart.grafana_monitoring.spec.chart
       targetNamespace = kubernetes_namespace.grafana.metadata[0].name
-      version         = "1.4.6"
+      version         = local.helmchart.grafana_monitoring.spec.version
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({

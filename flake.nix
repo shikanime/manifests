@@ -61,9 +61,10 @@
           packages = [
             pkgs.gh
             pkgs.kubectl
-            pkgs.skaffold
-            pkgs.scaleway-cli
+            pkgs.kubernetes-helm
             pkgs.opentofu
+            pkgs.scaleway-cli
+            pkgs.skaffold
           ];
         };
       };
