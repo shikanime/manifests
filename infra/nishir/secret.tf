@@ -24,6 +24,9 @@ resource "kubernetes_secret" "longhorn_scw_backups" {
   metadata {
     name      = "longhorn-scw-backups"
     namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+    annotations = {
+      "longhorn.io/backup-target" = "s3://${data.scaleway_object_bucket.longhorn_backups.name}@${data.scaleway_object_bucket.longhorn_backups.region}/"
+    }
   }
   data = {
     AWS_ACCESS_KEY_ID     = scaleway_iam_api_key.longhorn.access_key
