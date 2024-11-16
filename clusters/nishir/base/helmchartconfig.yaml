@@ -27,6 +27,11 @@ spec:
       allowCollectingLonghornUsageMetrics: false
       snapshotDataIntegrityCronjob: "0 4 */7 * *"
       longGRPCTimeOut: 604800 # 1 week
+    longhornDriver:
+      tolerations:
+        - key: node.nishir/longhorn-unavailable
+          operator: Exists
+          effect: NoSchedule
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
