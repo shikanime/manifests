@@ -36,7 +36,7 @@
             src = ./.;
             installPhase = ''
               mkdir -p $out/share
-              cp -r apps clusters infran $out/share
+              cp -r apps clusters infra $out/share
             '';
           };
         };
