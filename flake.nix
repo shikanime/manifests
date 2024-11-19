@@ -35,8 +35,8 @@
             name = "manifests";
             src = ./.;
             installPhase = ''
-              mkdir -p $out/share/shikanime
-              cp -r apps clusters infra $out/share/shikanime
+              mkdir -p $out/share
+              cp -r apps clusters infran $out/share
             '';
           };
         };
