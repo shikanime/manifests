@@ -30,6 +30,16 @@
         "aarch64-darwin"
       ];
       perSystem = { pkgs, ... }: {
+        packages = {
+          default = pkgs.stdenv.mkDerivation {
+            name = "manifests";
+            src = ./.;
+            installPhase = ''
+              mkdir -p $out/share
+              cp -r apps clusters infra $out/share
+            '';
+          };
+        };
         treefmt = {
           projectRootFile = "flake.nix";
           enableDefaultExcludes = true;
