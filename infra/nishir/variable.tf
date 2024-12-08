@@ -1,13 +1,3 @@
-variable "name" {
-  type        = string
-  description = "The name of the cluster"
-}
-
-variable "display_name" {
-  type        = string
-  description = "The display name of the cluster"
-}
-
 variable "account" {
   type        = string
   description = "The Cloudflare account"

@@ -1,7 +1,7 @@
 data "cloudflare_api_token_permission_groups" "default" {}
 
 resource "cloudflare_api_token" "longhorn" {
-  name = "${var.name}-longhorn"
+  name = "nishir-longhorn"
 
   policy {
     permission_groups = [
@@ -15,7 +15,7 @@ resource "cloudflare_api_token" "longhorn" {
 }
 
 resource "cloudflare_api_token" "etcd_snapshot" {
-  name = "${var.name}-etcd-snapshot"
+  name = "nishir-etcd-snapshot"
 
   policy {
     permission_groups = [
@@ -30,8 +30,8 @@ resource "cloudflare_api_token" "etcd_snapshot" {
 
 resource "grafana_cloud_access_policy" "kubernetes" {
   region       = "eu"
-  name         = "${var.stack}-integration-${var.name}"
-  display_name = "Shikanime Integration ${var.display_name}"
+  name         = "${var.stack}-integration-nishir"
+  display_name = "Shikanime Integration Nishir"
 
   scopes = [
     "metrics:read",
@@ -49,6 +49,6 @@ resource "grafana_cloud_access_policy" "kubernetes" {
 resource "grafana_cloud_access_policy_token" "kubernetes" {
   region           = "eu"
   access_policy_id = grafana_cloud_access_policy.kubernetes.policy_id
-  name             = "${var.name}-kubernetes"
-  display_name     = "${var.display_name} Kubernetes"
+  name             = "nishir-kubernetes"
+  display_name     = "Nishir Kubernetes"
 }
