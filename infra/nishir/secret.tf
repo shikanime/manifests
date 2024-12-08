@@ -44,7 +44,7 @@ resource "kubernetes_secret" "longhorn_cf_backups" {
   data = {
     AWS_ACCESS_KEY_ID     = cloudflare_api_token.longhorn.id
     AWS_SECRET_ACCESS_KEY = cloudflare_api_token.longhorn.value
-    AWS_ENDPOINTS         = "https://${local.account_id}.r2.cloudflarestorage.com/${cloudflare_r2_bucket.longhorn_backups.name}"
+    AWS_ENDPOINTS         = "https://d4e789904d6943d8cd524e19c5cb36bd.r2.cloudflarestorage.com/${cloudflare_r2_bucket.longhorn_backups.name}"
   }
 }
 
