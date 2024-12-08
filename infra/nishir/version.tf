@@ -1,13 +1,14 @@
 terraform {
   required_version = "~> 1.8.1"
   backend "s3" {
-    bucket                      = "shikanime-studio-fr-par-opentofu-state"
-    key                         = "nishir/terraform.tfstate"
-    region                      = "fr-par"
+    bucket                      = "nishir-opentofu-state"
+    key                         = "terraform.tfstate"
+    region                      = "WEUR"
     skip_region_validation      = true
     skip_credentials_validation = true
+    skip_s3_checksum            = true
     endpoints = {
-      s3 = "https://d4e789904d6943d8cd524e19c5cb36bd.r2.cloudflarestorage.com/nishir-opentofu-state"
+      s3 = "https://d4e789904d6943d8cd524e19c5cb36bd.r2.cloudflarestorage.com"
     }
   }
   required_providers {

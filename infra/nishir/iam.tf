@@ -1,7 +1,7 @@
 data "cloudflare_api_token_permission_groups" "default" {}
 
 resource "cloudflare_api_token" "longhorn" {
-  name = "nishir-longhorn"
+  name = "nishir_longhorn"
 
   policy {
     permission_groups = [
@@ -9,13 +9,13 @@ resource "cloudflare_api_token" "longhorn" {
       data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Write"],
     ]
     resources = {
-      "com.cloudflare.edge.r2.bucket.${cloudflare_r2_bucket.longhorn_backups.id}" = "*"
+      "com.cloudflare.edge.r2.bucket.${var.account}_default_${cloudflare_r2_bucket.longhorn_backups.id}" = "*"
     }
   }
 }
 
 resource "cloudflare_api_token" "etcd_snapshot" {
-  name = "nishir-etcd-snapshot"
+  name = "nishir_etcd_snapshot"
 
   policy {
     permission_groups = [
@@ -23,7 +23,7 @@ resource "cloudflare_api_token" "etcd_snapshot" {
       data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Write"],
     ]
     resources = {
-      "com.cloudflare.edge.r2.bucket.${cloudflare_r2_bucket.etcd_backups.id}" = "*"
+      "com.cloudflare.edge.r2.bucket.${var.account}_default_${cloudflare_r2_bucket.etcd_backups.id}" = "*"
     }
   }
 }
