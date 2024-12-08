@@ -9,3 +9,13 @@ variable "stack_id" {
   description = "Grafana stack ID"
   default     = "370431"
 }
+
+variable "secret_ids" {
+  type = object({
+    tailscale_operator_oauth_client = string
+  })
+  description = "Scaleway secret IDs"
+  default = {
+    tailscale_operator_oauth_client = "40a23536-72b3-4026-bf4b-cc1db38bcfa7"
+  }
+}

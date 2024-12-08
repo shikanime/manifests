@@ -5,7 +5,7 @@ locals {
 }
 
 data "scaleway_secret_version" "tailscale_operator_oauth_client" {
-  secret_id = "40a23536-72b3-4026-bf4b-cc1db38bcfa7"
+  secret_id = var.secret_ids.tailscale_operator_oauth_client
   revision  = "latest"
 }
 
