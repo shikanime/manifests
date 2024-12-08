@@ -22,7 +22,7 @@ output "rclone_secret_metadata" {
   description = "Rclone secret metadata"
 }
 
-output "nishir_api_token_secret_id" {
-  value       = scaleway_secret.nishir_api_token.id
+output "cloudflare_oauth_client_secret_id" {
+  value       = scaleway_secret.cloudflare_oauth_client.id
   description = "Kubernetes API token secret ID"
 }

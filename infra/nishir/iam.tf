@@ -1,7 +1,7 @@
 data "cloudflare_api_token_permission_groups" "default" {}
 
 resource "cloudflare_api_token" "longhorn" {
-  name = "nishir-longhorn"
+  name = "${var.name}-longhorn"
 
   policy {
     permission_groups = [
@@ -14,8 +14,8 @@ resource "cloudflare_api_token" "longhorn" {
   }
 }
 
-resource "cloudflare_api_token" "k8s" {
-  name = "nishir-k8s"
+resource "cloudflare_api_token" "kubernetes" {
+  name = "${var.name}-kubernetes"
 
   policy {
     permission_groups = [
@@ -28,10 +28,10 @@ resource "cloudflare_api_token" "k8s" {
   }
 }
 
-resource "grafana_cloud_access_policy" "nishir" {
+resource "grafana_cloud_access_policy" "kubernetes" {
   region       = "eu"
-  name         = "stack-370431-integration-nishir"
-  display_name = "Shikanime Integration Nishir"
+  name         = "${var.stack}-integration-${var.name}"
+  display_name = "Shikanime Integration ${var.display_name}"
 
   scopes = [
     "metrics:read",
@@ -46,9 +46,9 @@ resource "grafana_cloud_access_policy" "nishir" {
   }
 }
 
-resource "grafana_cloud_access_policy_token" "nishir_kubernetes" {
+resource "grafana_cloud_access_policy_token" "kubernetes" {
   region           = "eu"
-  access_policy_id = grafana_cloud_access_policy.nishir.policy_id
-  name             = "nishir-kubernetes"
-  display_name     = "Nishir Kubernetes"
+  access_policy_id = grafana_cloud_access_policy.kubernetes.policy_id
+  name             = "${var.name}-kubernetes"
+  display_name     = "${var.display_name} Kubernetes"
 }

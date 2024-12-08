@@ -9,16 +9,16 @@ data "scaleway_secret_version" "tailscale_oauth_client" {
   revision  = "latest"
 }
 
-resource "scaleway_secret" "nishir_api_token" {
-  name        = "nishir-k8s-api-token"
-  description = "Nishir Kubernetes API Token"
+resource "scaleway_secret" "cloudflare_oauth_client" {
+  name        = "cloudflare-oauth-client"
+  description = "Cloudflare API Token"
 }
 
-resource "scaleway_secret_version" "nishir_api_token" {
-  secret_id = scaleway_secret.nishir_api_token.id
+resource "scaleway_secret_version" "cloudflare_oauth_client" {
+  secret_id = scaleway_secret.cloudflare_oauth_client.id
   data = jsonencode({
-    clientId     = cloudflare_api_token.k8s.id
-    clientSecret = cloudflare_api_token.k8s.value
+    clientId     = cloudflare_api_token.kubernetes.id
+    clientSecret = cloudflare_api_token.kubernetes.value
   })
 }
 
@@ -42,8 +42,8 @@ resource "kubernetes_secret" "longhorn_cf_backups" {
     }
   }
   data = {
-    AWS_ACCESS_KEY_ID     = cloudflare_api_token.longhorn.value
-    AWS_SECRET_ACCESS_KEY = cloudflare_api_token.longhorn.id
+    AWS_ACCESS_KEY_ID     = cloudflare_api_token.longhorn.id
+    AWS_SECRET_ACCESS_KEY = cloudflare_api_token.longhorn.value
     AWS_ENDPOINTS         = "https://${var.account}.r2.cloudflarestorage.com/${cloudflare_r2_bucket.longhorn_backups.name}"
   }
 }
@@ -56,7 +56,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
   data = {
     host     = "https://prometheus-prod-01-eu-west-0.grafana.net"
     username = data.grafana_data_source.prometheus.basic_auth_username
-    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
 }
@@ -69,7 +69,7 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
   data = {
     host     = "http://logs-prod-eu-west-0.grafana.net"
     username = data.grafana_data_source.loki.basic_auth_username
-    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
 }
@@ -82,7 +82,7 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
   data = {
     host     = "https://empo-eu-west-0.grafana.net"
     username = data.grafana_data_source.tempo.basic_auth_username
-    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
 }
