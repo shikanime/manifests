@@ -3,13 +3,13 @@ locals {
 }
 
 resource "cloudflare_r2_bucket" "longhorn_backups" {
-  account_id = "d4e789904d6943d8cd524e19c5cb36bd"
+  account_id = var.account_id
   name       = "nishir-longhorn-backups"
   location   = "WEUR"
 }
 
 resource "cloudflare_r2_bucket" "etcd_backups" {
-  account_id = "d4e789904d6943d8cd524e19c5cb36bd"
+  account_id = var.account_id
   name       = "nishir-etcd-backups"
   location   = "WEUR"
 }
