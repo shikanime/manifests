@@ -1,8 +1,15 @@
 locals {
-  backup_target = "s3://${data.cloudflare_r2_bucket.longhorn_backups.name}@${data.cloudflare_r2_bucket.longhorn_backups.location}/"
+  backup_target = "s3://${cloudflare_r2_bucket.longhorn_backups.name}@${cloudflare_r2_bucket.longhorn_backups.location}/"
 }
 
-data "cloudflare_r2_bucket" "longhorn_backups" {
+resource "cloudflare_r2_bucket" "longhorn_backups" {
   account_id = var.account
   name       = var.buckets.longhorn_backups
+  location   = "WEUR"
+}
+
+resource "cloudflare_r2_bucket" "etcd_backups" {
+  account_id = var.account
+  name       = var.buckets.etcd_backups
+  location   = "WEUR"
 }

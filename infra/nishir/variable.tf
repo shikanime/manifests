@@ -25,6 +25,7 @@ variable "data_sources" {
 variable "buckets" {
   type = object({
     longhorn_backups = string
+    etcd_backups     = string
   })
   description = "The name of the buckets"
 }
