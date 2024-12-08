@@ -43,4 +43,4 @@ done
 echo "{$(
   IFS=,
   echo "${CHART_VERSIONS[*]}"
-)}" | jq . >"$(dirname "$0")/helmchart.json"
+)}" | jq . >"$(dirname "$0")/manifest.json"
