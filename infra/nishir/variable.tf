@@ -37,7 +37,7 @@ variable "buckets" {
 
 variable "secrets" {
   type = object({
-    tailscale_oauth_client = string
+    tailscale_operator_oauth_client = string
   })
   description = "The name of the secrets"
 }

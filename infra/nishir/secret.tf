@@ -1,24 +1,24 @@
 locals {
-  tailscale_oauth_client_data = jsondecode(
-    base64decode(data.scaleway_secret_version.tailscale_oauth_client.data)
+  tailscale_operator_oauth_client_data = jsondecode(
+    base64decode(data.scaleway_secret_version.tailscale_operator_oauth_client.data)
   )
 }
 
-data "scaleway_secret_version" "tailscale_oauth_client" {
-  secret_id = var.secrets.tailscale_oauth_client
+data "scaleway_secret_version" "tailscale_operator_oauth_client" {
+  secret_id = var.secrets.tailscale_operator_oauth_client
   revision  = "latest"
 }
 
-resource "scaleway_secret" "cloudflare_oauth_client" {
-  name        = "cloudflare-oauth-client"
-  description = "Cloudflare API Token"
+resource "scaleway_secret" "etcd_snapshot_oauth_client" {
+  name        = "etcd-snapshot-oauth-client"
+  description = "ETCD Snapshot API Token"
 }
 
-resource "scaleway_secret_version" "cloudflare_oauth_client" {
-  secret_id = scaleway_secret.cloudflare_oauth_client.id
+resource "scaleway_secret_version" "etcd_snapshot_oauth_client" {
+  secret_id = scaleway_secret.etcd_snapshot_oauth_client.id
   data = jsonencode({
-    clientId     = cloudflare_api_token.kubernetes.id
-    clientSecret = cloudflare_api_token.kubernetes.value
+    clientId     = cloudflare_api_token.etcd_snapshot.id
+    clientSecret = cloudflare_api_token.etcd_snapshot.value
   })
 }
 
@@ -28,8 +28,8 @@ resource "kubernetes_secret" "tailscale_operator_oauth" {
     namespace = kubernetes_namespace.tailscale.metadata[0].name
   }
   data = {
-    client_id     = local.tailscale_oauth_client_data.clientId
-    client_secret = local.tailscale_oauth_client_data.clientSecret
+    client_id     = local.tailscale_operator_oauth_client_data.clientId
+    client_secret = local.tailscale_operator_oauth_client_data.clientSecret
   }
 }
 

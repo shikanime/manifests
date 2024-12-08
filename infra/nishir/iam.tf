@@ -14,8 +14,8 @@ resource "cloudflare_api_token" "longhorn" {
   }
 }
 
-resource "cloudflare_api_token" "kubernetes" {
-  name = "${var.name}-kubernetes"
+resource "cloudflare_api_token" "etcd_snapshot" {
+  name = "${var.name}-etcd-snapshot"
 
   policy {
     permission_groups = [
