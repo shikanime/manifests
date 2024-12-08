@@ -17,14 +17,6 @@ variable "data_sources" {
   description = "The Grafana data sources"
 }
 
-variable "buckets" {
-  type = object({
-    longhorn_backups = string
-    etcd_backups     = string
-  })
-  description = "The name of the buckets"
-}
-
 variable "secrets" {
   type = object({
     tailscale_operator_oauth_client = string
