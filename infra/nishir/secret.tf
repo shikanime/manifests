@@ -17,8 +17,8 @@ resource "scaleway_secret" "nishir_api_token" {
 resource "scaleway_secret_version" "nishir_api_token" {
   secret_id = scaleway_secret.nishir_api_token.id
   data = jsonencode({
-    id    = cloudflare_api_token.k8s.id
-    token = cloudflare_api_token.k8s.value
+    client_id     = cloudflare_api_token.k8s.id
+    client_secret = cloudflare_api_token.k8s.value
   })
 }
 
