@@ -20,18 +20,18 @@ resource "kubernetes_secret" "tailscale_operator_oauth" {
   }
 }
 
-resource "kubernetes_secret" "longhorn_scw_backups" {
+resource "kubernetes_secret" "longhorn_cf_backups" {
   metadata {
-    name      = "longhorn-scw-backups"
+    name      = "longhorn-cf-backups"
     namespace = kubernetes_namespace.longhorn_system.metadata[0].name
     annotations = {
       "longhorn.io/backup-target" = local.backup_target
     }
   }
   data = {
-    AWS_ACCESS_KEY_ID     = scaleway_iam_api_key.longhorn.access_key
-    AWS_SECRET_ACCESS_KEY = scaleway_iam_api_key.longhorn.secret_key
-    AWS_ENDPOINTS         = "https://s3.fr-par.scw.cloud"
+    AWS_ACCESS_KEY_ID     = cloudflare_api_token.longhorn.value
+    AWS_SECRET_ACCESS_KEY = cloudflare_api_token.longhorn.id
+    AWS_ENDPOINTS         = "https://${var.account}.r2.cloudflarestorage.com/${data.cloudflare_r2_bucket.longhorn_backups.name}"
   }
 }
 

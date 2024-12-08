@@ -3,16 +3,14 @@ variable "name" {
   description = "The name of the cluster"
 }
 
-variable "app" {
+variable "account" {
   type        = string
-  description = "The name of the application"
+  description = "The Cloudflare account"
 }
 
-variable "stacks" {
-  type = object({
-    shikanime = string
-  })
-  description = "The Grafana Cloud stacks"
+variable "stack" {
+  type        = string
+  description = "The Grafana Cloud stack"
 }
 
 variable "data_sources" {

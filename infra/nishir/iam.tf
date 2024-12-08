@@ -1,6 +1,19 @@
-resource "scaleway_iam_api_key" "longhorn" {
-  application_id = var.app
-  description    = "Longhorn Backups"
+data "cloudflare_api_token_permission_groups" "default" {}
+
+resource "cloudflare_api_token" "nishir" {
+  name = "nishir"
+
+  policy = [
+    {
+      permission_groups = [
+        data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Read"],
+        data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Write"],
+      ]
+      resources = {
+        "com.cloudflare.api.account.${var.account}" = "*"
+      }
+    }
+  ]
 }
 
 resource "grafana_cloud_access_policy" "nishir" {
@@ -17,7 +30,7 @@ resource "grafana_cloud_access_policy" "nishir" {
 
   realm {
     type       = "stack"
-    identifier = var.stacks.shikanime
+    identifier = var.stack
   }
 }
 
