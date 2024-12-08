@@ -1,11 +1,11 @@
 data "grafana_data_source" "prometheus" {
-  name = var.data_sources.prometheus
+  name = "grafanacloud-shikanime-prom"
 }
 
 data "grafana_data_source" "loki" {
-  name = var.data_sources.loki
+  name = "grafanacloud-shikanime-logs"
 }
 
 data "grafana_data_source" "tempo" {
-  name = var.data_sources.tempo
+  name = "grafanacloud-shikanime-traces"
 }

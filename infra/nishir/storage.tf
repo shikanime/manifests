@@ -1,7 +1,15 @@
 locals {
-  backup_target = "s3://${data.scaleway_object_bucket.longhorn_backups.name}@${data.scaleway_object_bucket.longhorn_backups.region}/"
+  backup_target = "s3://${cloudflare_r2_bucket.longhorn_backups.name}@${cloudflare_r2_bucket.longhorn_backups.location}/"
 }
 
-data "scaleway_object_bucket" "longhorn_backups" {
-  name = var.buckets.longhorn_backups
+resource "cloudflare_r2_bucket" "longhorn_backups" {
+  account_id = var.account
+  name       = "nishir-longhorn-backups"
+  location   = "WEUR"
+}
+
+resource "cloudflare_r2_bucket" "etcd_backups" {
+  account_id = var.account
+  name       = "nishir-etcd-backups"
+  location   = "WEUR"
 }
