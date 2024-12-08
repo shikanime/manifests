@@ -7,7 +7,7 @@ terraform {
     skip_region_validation      = true
     skip_credentials_validation = true
     endpoints = {
-      s3 = "https://${var.account_id}.r2.cloudflarestorage.com/nishir-opentofu-state"
+      s3 = "https://${var.account}.r2.cloudflarestorage.com/nishir-opentofu-state"
     }
   }
   required_providers {

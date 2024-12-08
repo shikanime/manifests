@@ -5,7 +5,7 @@ locals {
 }
 
 data "scaleway_secret_version" "tailscale_operator_oauth_client" {
-  secret_id = var.secret_ids.tailscale_operator_oauth_client
+  secret_id = var.secrets.tailscale_operator_oauth_client
   revision  = "latest"
 }
 
@@ -44,7 +44,7 @@ resource "kubernetes_secret" "longhorn_cf_backups" {
   data = {
     AWS_ACCESS_KEY_ID     = cloudflare_api_token.longhorn.id
     AWS_SECRET_ACCESS_KEY = cloudflare_api_token.longhorn.value
-    AWS_ENDPOINTS         = "https://${var.account_id}.r2.cloudflarestorage.com/${cloudflare_r2_bucket.longhorn_backups.name}"
+    AWS_ENDPOINTS         = "https://${var.account}.r2.cloudflarestorage.com/${cloudflare_r2_bucket.longhorn_backups.name}"
   }
 }
 

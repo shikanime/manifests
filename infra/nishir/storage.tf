@@ -3,13 +3,13 @@ locals {
 }
 
 resource "cloudflare_r2_bucket" "longhorn_backups" {
-  account_id = var.account_id
+  account_id = var.account
   name       = "nishir-longhorn-backups"
   location   = "WEUR"
 }
 
 resource "cloudflare_r2_bucket" "etcd_backups" {
-  account_id = var.account_id
+  account_id = var.account
   name       = "nishir-etcd-backups"
   location   = "WEUR"
 }

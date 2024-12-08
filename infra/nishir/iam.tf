@@ -30,7 +30,7 @@ resource "cloudflare_api_token" "etcd_snapshot" {
 
 resource "grafana_cloud_access_policy" "kubernetes" {
   region       = "eu"
-  name         = "stack-${var.stack_id}-integration-nishir"
+  name         = "stack-${var.sack}-integration-nishir"
   display_name = "Shikanime Integration Nishir"
 
   scopes = [
@@ -42,7 +42,7 @@ resource "grafana_cloud_access_policy" "kubernetes" {
 
   realm {
     type       = "stack"
-    identifier = var.stack_id
+    identifier = var.sack
   }
 }
 
