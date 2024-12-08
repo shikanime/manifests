@@ -14,7 +14,7 @@ variable "secrets" {
   type = object({
     tailscale_operator_oauth_client = string
   })
-  description = "Scaleway secret IDs"
+  description = "Scaleway secrets ID"
   default = {
     tailscale_operator_oauth_client = "40a23536-72b3-4026-bf4b-cc1db38bcfa7"
   }
