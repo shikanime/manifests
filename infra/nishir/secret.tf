@@ -11,7 +11,7 @@ data "scaleway_secret_version" "tailscale_operator_oauth_client" {
 
 resource "scaleway_secret" "etcd_snapshot_oauth_client" {
   name        = "etcd-snapshot-oauth-client"
-  description = "ETCD Snapshot API Token"
+  description = "ETCD Snapshot OAuth Client"
 }
 
 resource "scaleway_secret_version" "etcd_snapshot_oauth_client" {
