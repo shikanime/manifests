@@ -23,5 +23,9 @@ terraform {
       source  = "hashicorp/grafana"
       version = "~> 2.15"
     }
+    scaleway = {
+      source  = "scaleway/scaleway"
+      version = "~> 2.43"
+    }
   }
 }

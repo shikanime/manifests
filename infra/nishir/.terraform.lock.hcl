@@ -81,8 +81,9 @@ provider "registry.opentofu.org/hashicorp/random" {
   ]
 }
 
-provider "registry.opentofu.org/hashicorp/scaleway" {
-  version = "2.48.0"
+provider "registry.opentofu.org/scaleway/scaleway" {
+  version     = "2.48.0"
+  constraints = "~> 2.43"
   hashes = [
     "h1:5BbGEXuyORjQ9adWey72qJkOCj9zjwly/aUcwXXXqvo=",
     "zh:161e4a2981240645b584acf13a76563ca90fff107efd983cbf7db74bfc3462b6",
