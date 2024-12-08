@@ -31,9 +31,9 @@ variable "buckets" {
   description = "The name of the buckets"
 }
 
-variable "secrets" {
+variable "secret_apps" {
   type = object({
-    tailscale_oauth_client = string
+    nishir = string
   })
-  description = "The name of the secrets"
+  description = "The name of the secret apps"
 }
