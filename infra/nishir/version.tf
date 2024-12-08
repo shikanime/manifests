@@ -13,15 +13,19 @@ terraform {
   required_providers {
     scaleway = {
       source  = "scaleway/scaleway"
-      version = "~> 2.43.0"
+      version = "~> 2.43"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.32.0"
+      version = "~> 2.32"
     }
     grafana = {
       source  = "hashicorp/grafana"
       version = "~> 2.15"
+    }
+    hcp = {
+      source  = "hashicorp/hcp"
+      version = "~> 0.100"
     }
   }
 }
