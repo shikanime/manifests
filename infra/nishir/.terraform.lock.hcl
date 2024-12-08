@@ -2,9 +2,11 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.opentofu.org/hashicorp/grafana" {
-  version = "2.15.0"
+  version     = "2.15.0"
+  constraints = "~> 2.15"
   hashes = [
     "h1:6AUe5xUKZ03SQpwY+IcuzhK1U+LGcZ+W2bFmbBxe4jM=",
+    "h1:nBS2AeOWQklr/0DZ4pMaaUKL/LOmjIt93BTnkOth/hU=",
     "zh:01c5c744409353c1fe0b095aedad21ccfb269e1b2b9fa31664d0e818bb41a818",
     "zh:1499a68faf7ef6f7d10a49dc42ecbd675f5ab07d0fb760489333a1ff9724ac4e",
     "zh:2de9436c6eb9456d7c084385568aa46da00839a0511a9a813df45fa38fb1ab9d",
@@ -23,8 +25,10 @@ provider "registry.opentofu.org/hashicorp/grafana" {
 }
 
 provider "registry.opentofu.org/hashicorp/kubernetes" {
-  version = "2.32.0"
+  version     = "2.32.0"
+  constraints = "~> 2.32"
   hashes = [
+    "h1:I5BAFv+FDb5cLOWJdGQqEMLIXaq3vMv3YQLN/G+xvdM=",
     "h1:ZRCFOIecOlTIrpf1O/kmbFfBMQe9r8/HwiiK9kP0KEk=",
     "zh:06d586c8fcd3ab8fe7f3ac99142ba48b9efbff8bebe05c52b3c7997f83146200",
     "zh:12ce862493717118a6bf68328448d09023a60344da25633e124423cdd734263e",
@@ -42,6 +46,7 @@ provider "registry.opentofu.org/hashicorp/kubernetes" {
 provider "registry.opentofu.org/hashicorp/random" {
   version = "3.6.2"
   hashes = [
+    "h1:JoqIF9dkidInLjgPlDEM3tH5WCA+oOp7I3/M2TFFDCk=",
     "h1:PXvoOj9gj+Or+9k0tQWCQJKxnsVO0GqnQwVahgwRrsU=",
     "zh:1f27612f7099441526d8af59f5b4bdcc35f46915df5d243043d7337ea5a3e38a",
     "zh:2a58e66502825db8b4b96116c04bd0323bca1cf1f5752bdd8f9c26feb84d3b1e",
@@ -57,8 +62,10 @@ provider "registry.opentofu.org/hashicorp/random" {
 }
 
 provider "registry.opentofu.org/scaleway/scaleway" {
-  version = "2.43.0"
+  version     = "2.43.0"
+  constraints = "~> 2.43"
   hashes = [
+    "h1:X3DVBMhFtSx5pSxrxkzVwdK+XIj1TXg6oLGjJc/CJGo=",
     "h1:adTVxpdKkSUVDasMWHrNqoSRDD6ztSVXONOEhnmIkyY=",
     "zh:019b1d05013bed2ac7687d64ff51a5b150cefacaef4cc752d677cdb0c06b07a0",
     "zh:0fc7a5e0178774945ca8135585ea51d755da66a2083e88e87b522efa058ac556",

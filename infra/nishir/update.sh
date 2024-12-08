@@ -40,7 +40,7 @@ for CHART_NAME in "${CHARTS[@]}"; do
   fi
 done
 
-echo "{$(
+echo "{\"kubernetes_manifest\": {$(
   IFS=,
   echo "${CHART_VERSIONS[*]}"
-)}" | jq . >"$(dirname "$0")/helmchart.json"
+)}}" | jq . >"$(dirname "$0")/manifest.json"

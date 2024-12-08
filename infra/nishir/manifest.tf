@@ -1,5 +1,17 @@
 locals {
-  helmchart = jsondecode(file("helmchart.json"))
+  manifest = jsondecode(file("manifest.json"))
+}
+
+resource "kubernetes_namespace" "shikanime" {
+  metadata {
+    name = "shikanime"
+  }
+}
+
+resource "kubernetes_namespace" "tailscale" {
+  metadata {
+    name = "tailscale"
+  }
 }
 
 resource "kubernetes_manifest" "tailscale" {
@@ -11,13 +23,19 @@ resource "kubernetes_manifest" "tailscale" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = local.helmchart.tailscale.spec.repo
-      chart           = local.helmchart.tailscale.spec.chart
+      repo            = local.manifest.kubernetes_manifest.tailscale.spec.repo
+      chart           = local.manifest.kubernetes_manifest.tailscale.spec.chart
       targetNamespace = kubernetes_namespace.tailscale.metadata[0].name
-      version         = local.helmchart.tailscale.spec.version
+      version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
     }
+  }
+}
+
+resource "kubernetes_namespace" "longhorn_system" {
+  metadata {
+    name = "longhorn-system"
   }
 }
 
@@ -30,10 +48,10 @@ resource "kubernetes_manifest" "longhorn" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = local.helmchart.longhorn.spec.repo
-      chart           = local.helmchart.longhorn.spec.chart
+      repo            = local.manifest.kubernetes_manifest.longhorn.spec.repo
+      chart           = local.manifest.kubernetes_manifest.longhorn.spec.chart
       targetNamespace = kubernetes_namespace.longhorn_system.metadata[0].name
-      version         = local.helmchart.longhorn.spec.version
+      version         = local.manifest.kubernetes_manifest.longhorn.spec.version
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
@@ -46,6 +64,12 @@ resource "kubernetes_manifest" "longhorn" {
   }
 }
 
+resource "kubernetes_namespace" "grafana" {
+  metadata {
+    name = "grafana"
+  }
+}
+
 resource "kubernetes_manifest" "grafana_monitoring" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
@@ -55,10 +79,10 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = local.helmchart.grafana_monitoring.spec.repo
-      chart           = local.helmchart.grafana_monitoring.spec.chart
+      repo            = local.manifest.kubernetes_manifest.grafana_monitoring.spec.repo
+      chart           = local.manifest.kubernetes_manifest.grafana_monitoring.spec.chart
       targetNamespace = kubernetes_namespace.grafana.metadata[0].name
-      version         = local.helmchart.grafana_monitoring.spec.version
+      version         = local.manifest.kubernetes_manifest.grafana_monitoring.spec.version
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
