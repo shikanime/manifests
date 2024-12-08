@@ -1,7 +1,7 @@
 data "cloudflare_api_token_permission_groups" "default" {}
 
 resource "cloudflare_api_token" "longhorn" {
-  name = "longhorn"
+  name = "nishir-longhorn"
 
   policy {
     permission_groups = [
@@ -10,6 +10,20 @@ resource "cloudflare_api_token" "longhorn" {
     ]
     resources = {
       "com.cloudflare.edge.r2.bucket.${cloudflare_r2_bucket.longhorn_backups.id}" = "*"
+    }
+  }
+}
+
+resource "cloudflare_api_token" "k8s" {
+  name = "nishir-k8s"
+
+  policy {
+    permission_groups = [
+      data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Read"],
+      data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Write"],
+    ]
+    resources = {
+      "com.cloudflare.edge.r2.bucket.${cloudflare_r2_bucket.etcd_backups.id}" = "*"
     }
   }
 }
