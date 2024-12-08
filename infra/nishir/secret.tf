@@ -9,13 +9,13 @@ data "scaleway_secret_version" "tailscale_oauth_client" {
   revision  = "latest"
 }
 
-resource "scaleway_secret" "k8s_api_token" {
+resource "scaleway_secret" "nishir_api_token" {
   name        = "nishir-k8s-api-token"
   description = "Nishir Kubernetes API Token"
 }
 
-resource "scaleway_secret_version" "k8s_api_token" {
-  secret_id = scaleway_secret.k8s_api_token.id
+resource "scaleway_secret_version" "nishir_api_token" {
+  secret_id = scaleway_secret.nishir_api_token.id
   data = jsonencode({
     id    = cloudflare_api_token.k8s.id
     token = cloudflare_api_token.k8s.value
