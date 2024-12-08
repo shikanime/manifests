@@ -1,11 +1,12 @@
 locals {
   tailscale_oauth_client_data = jsondecode(
-    base64decode(data.hcp_vault_secrets_app.nishir.secrets["tailscale_oauth_client"])
+    base64decode(data.scaleway_secret_version.tailscale_oauth_client.data)
   )
 }
 
-data "hcp_vault_secrets_app" "nishir" {
-  app_name = var.secret_apps.nishir
+data "scaleway_secret_version" "tailscale_oauth_client" {
+  secret_id = var.secrets.tailscale_oauth_client
+  revision  = "latest"
 }
 
 resource "kubernetes_secret" "tailscale_operator_oauth" {
