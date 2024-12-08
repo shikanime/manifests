@@ -23,10 +23,10 @@ resource "kubernetes_manifest" "tailscale" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = local.manifest.tailscale.spec.repo
-      chart           = local.manifest.tailscale.spec.chart
+      repo            = local.manifest.kubernetes_manifest.tailscale.spec.repo
+      chart           = local.manifest.kubernetes_manifest.tailscale.spec.chart
       targetNamespace = kubernetes_namespace.tailscale.metadata[0].name
-      version         = local.manifest.tailscale.spec.version
+      version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
     }
@@ -48,10 +48,10 @@ resource "kubernetes_manifest" "longhorn" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = local.manifest.longhorn.spec.repo
-      chart           = local.manifest.longhorn.spec.chart
+      repo            = local.manifest.kubernetes_manifest.longhorn.spec.repo
+      chart           = local.manifest.kubernetes_manifest.longhorn.spec.chart
       targetNamespace = kubernetes_namespace.longhorn_system.metadata[0].name
-      version         = local.manifest.longhorn.spec.version
+      version         = local.manifest.kubernetes_manifest.longhorn.spec.version
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
@@ -79,10 +79,10 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       namespace = "kube-system"
     }
     spec = {
-      repo            = local.manifest.grafana_monitoring.spec.repo
-      chart           = local.manifest.grafana_monitoring.spec.chart
+      repo            = local.manifest.kubernetes_manifest.grafana_monitoring.spec.repo
+      chart           = local.manifest.kubernetes_manifest.grafana_monitoring.spec.chart
       targetNamespace = kubernetes_namespace.grafana.metadata[0].name
-      version         = local.manifest.grafana_monitoring.spec.version
+      version         = local.manifest.kubernetes_manifest.grafana_monitoring.spec.version
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
