@@ -4,12 +4,12 @@ locals {
 
 resource "cloudflare_r2_bucket" "longhorn_backups" {
   account_id = var.account
-  name       = var.buckets.longhorn_backups
+  name       = "${var.name}-longhorn-backups"
   location   = "WEUR"
 }
 
 resource "cloudflare_r2_bucket" "etcd_backups" {
   account_id = var.account
-  name       = var.buckets.etcd_backups
+  name       = "${var.name}-etcd-backups"
   location   = "WEUR"
 }
