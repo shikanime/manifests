@@ -1,7 +1,7 @@
 data "cloudflare_api_token_permission_groups" "default" {}
 
 resource "cloudflare_api_token" "longhorn" {
-  name = "nishir_longhorn"
+  name = "Nishir Longhorn"
 
   policy {
     permission_groups = [
@@ -15,7 +15,7 @@ resource "cloudflare_api_token" "longhorn" {
 }
 
 resource "cloudflare_api_token" "etcd_snapshot" {
-  name = "nishir_etcd_snapshot"
+  name = "Nishir ETCD Snapshot"
 
   policy {
     permission_groups = [
