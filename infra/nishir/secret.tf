@@ -1,12 +1,25 @@
 locals {
-  tailscale_oauth_client_data = jsondecode(
-    base64decode(data.scaleway_secret_version.tailscale_oauth_client.data)
+  tailscale_operator_oauth_client_data = jsondecode(
+    base64decode(data.scaleway_secret_version.tailscale_operator_oauth_client.data)
   )
 }
 
-data "scaleway_secret_version" "tailscale_oauth_client" {
-  secret_id = var.secrets.tailscale_oauth_client
+data "scaleway_secret_version" "tailscale_operator_oauth_client" {
+  secret_id = var.secrets.tailscale_operator_oauth_client
   revision  = "latest"
+}
+
+resource "scaleway_secret" "etcd_snapshot_oauth_client" {
+  name        = "nishir-etcd-snapshot-oauth-client"
+  description = "Nishir ETCD snapshot OAuth client"
+}
+
+resource "scaleway_secret_version" "etcd_snapshot_oauth_client" {
+  secret_id = scaleway_secret.etcd_snapshot_oauth_client.id
+  data = jsonencode({
+    clientId     = cloudflare_api_token.etcd_snapshot.id
+    clientSecret = cloudflare_api_token.etcd_snapshot.value
+  })
 }
 
 resource "kubernetes_secret" "tailscale_operator_oauth" {
@@ -15,23 +28,23 @@ resource "kubernetes_secret" "tailscale_operator_oauth" {
     namespace = kubernetes_namespace.tailscale.metadata[0].name
   }
   data = {
-    client_id     = local.tailscale_oauth_client_data.clientId
-    client_secret = local.tailscale_oauth_client_data.clientSecret
+    client_id     = local.tailscale_operator_oauth_client_data.clientId
+    client_secret = local.tailscale_operator_oauth_client_data.clientSecret
   }
 }
 
-resource "kubernetes_secret" "longhorn_scw_backups" {
+resource "kubernetes_secret" "longhorn_cf_backups" {
   metadata {
-    name      = "longhorn-scw-backups"
+    name      = "longhorn-cf-backups"
     namespace = kubernetes_namespace.longhorn_system.metadata[0].name
     annotations = {
       "longhorn.io/backup-target" = local.backup_target
     }
   }
   data = {
-    AWS_ACCESS_KEY_ID     = scaleway_iam_api_key.longhorn.access_key
-    AWS_SECRET_ACCESS_KEY = scaleway_iam_api_key.longhorn.secret_key
-    AWS_ENDPOINTS         = "https://s3.fr-par.scw.cloud"
+    AWS_ACCESS_KEY_ID     = cloudflare_api_token.longhorn.id
+    AWS_SECRET_ACCESS_KEY = sha256(cloudflare_api_token.longhorn.value)
+    AWS_ENDPOINTS         = "https://${var.account}.r2.cloudflarestorage.com"
   }
 }
 
@@ -43,7 +56,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
   data = {
     host     = "https://prometheus-prod-01-eu-west-0.grafana.net"
     username = data.grafana_data_source.prometheus.basic_auth_username
-    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
 }
@@ -56,7 +69,7 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
   data = {
     host     = "http://logs-prod-eu-west-0.grafana.net"
     username = data.grafana_data_source.loki.basic_auth_username
-    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
 }
@@ -69,7 +82,7 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
   data = {
     host     = "https://empo-eu-west-0.grafana.net"
     username = data.grafana_data_source.tempo.basic_auth_username
-    password = grafana_cloud_access_policy_token.nishir_kubernetes.token
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
 }

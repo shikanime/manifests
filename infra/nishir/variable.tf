@@ -1,39 +1,21 @@
-variable "name" {
+variable "account" {
   type        = string
-  description = "The name of the cluster"
+  description = "Cloudflare account ID"
+  default     = "d4e789904d6943d8cd524e19c5cb36bd"
 }
 
-variable "app" {
+variable "sack" {
   type        = string
-  description = "The name of the application"
-}
-
-variable "stacks" {
-  type = object({
-    shikanime = string
-  })
-  description = "The Grafana Cloud stacks"
-}
-
-variable "data_sources" {
-  type = object({
-    prometheus = string
-    loki       = string
-    tempo      = string
-  })
-  description = "The Grafana data sources"
-}
-
-variable "buckets" {
-  type = object({
-    longhorn_backups = string
-  })
-  description = "The name of the buckets"
+  description = "Grafana stack ID"
+  default     = "370431"
 }
 
 variable "secrets" {
   type = object({
-    tailscale_oauth_client = string
+    tailscale_operator_oauth_client = string
   })
-  description = "The name of the secrets"
+  description = "Scaleway secrets ID"
+  default = {
+    tailscale_operator_oauth_client = "40a23536-72b3-4026-bf4b-cc1db38bcfa7"
+  }
 }
