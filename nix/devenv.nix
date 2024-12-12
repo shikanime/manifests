@@ -18,7 +18,6 @@
         programs = {
           actionlint.enable = true;
           deadnix.enable = true;
-          dos2unix.enable = true;
           nixfmt.enable = true;
           prettier.enable = true;
           shfmt.enable = true;

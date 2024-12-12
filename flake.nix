@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
     devenv.url = "github:cachix/devenv";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   nixConfig = {
