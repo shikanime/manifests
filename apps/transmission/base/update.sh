@@ -2,7 +2,7 @@
 
 # Define container images to check
 declare -A IMAGES=(
-  ["qbittorrent"]="lscr.io/linuxserver/qbittorrent"
+  ["transmission"]="lscr.io/linuxserver/transmission"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do

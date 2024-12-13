@@ -20,7 +20,7 @@ spec:
             - -dsn
             - /data/metatube.db
           ports:
-            - containerPort: 8080
+            - containerPort: 9091
               name: http
           env:
             - name: TOKEN

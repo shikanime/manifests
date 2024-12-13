@@ -1,20 +1,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent
+  name: transmission
   namespace: shikanime
 spec:
   ports:
     - name: http
-      port: 8080
+      port: 9091
       targetPort: http
   selector:
-    app.kubernetes.io/name: qbittorrent
+    app.kubernetes.io/name: transmission
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent-tracker
+  name: transmission-tracker
   namespace: shikanime
 spec:
   loadBalancerClass: tailscale
@@ -27,5 +27,5 @@ spec:
       port: 6881
       targetPort: bittorrent-udp
   selector:
-    app.kubernetes.io/name: qbittorrent
+    app.kubernetes.io/name: transmission
   type: LoadBalancer
