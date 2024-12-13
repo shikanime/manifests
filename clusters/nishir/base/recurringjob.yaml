@@ -40,32 +40,6 @@ spec:
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: daily-snapshot
-  namespace: longhorn-system
-spec:
-  cron: "0 4 * * 0"
-  task: snapshot
-  groups:
-    - default
-  retain: 28
-  concurrency: 1
----
-apiVersion: longhorn.io/v1beta1
-kind: RecurringJob
-metadata:
-  name: weekly-snapshot
-  namespace: longhorn-system
-spec:
-  cron: "0 4 */7 * 0"
-  task: snapshot
-  groups:
-    - default
-  retain: 8
-  concurrency: 1
----
-apiVersion: longhorn.io/v1beta1
-kind: RecurringJob
-metadata:
   name: weekly-snapshot-cleanup
   namespace: longhorn-system
 spec:
