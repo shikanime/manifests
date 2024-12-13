@@ -133,3 +133,20 @@ resource "kubernetes_secret" "rclone" {
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
 }
+
+resource "random_password" "transmission_password" {
+  length = 14
+}
+
+resource "kubernetes_secret" "transmission" {
+  metadata {
+    name      = "transmission"
+    namespace = kubernetes_namespace.shikanime.metadata[0].name
+  }
+  data = {
+    username = "transmission"
+    password = random_password.transmission_password.result
+  }
+  type       = "kubernetes.io/basic-auth"
+  depends_on = [kubernetes_namespace.shikanime]
+}

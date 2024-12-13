@@ -24,6 +24,6 @@ spec:
                     - key: app.kubernetes.io/name
                       operator: In
                       values:
-                        - qbittorrent
+                        - transmission
                 topologyKey: kubernetes.io/hostname
               weight: 50
