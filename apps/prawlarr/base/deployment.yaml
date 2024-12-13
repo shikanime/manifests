@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jackett
+  name: prawlarr
   namespace: shikanime
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: jackett
+      app.kubernetes.io/name: prawlarr
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: jackett
+        app.kubernetes.io/name: prawlarr
     spec:
       containers:
-        - name: jackett
-          image: jackett
+        - name: prawlarr
+          image: prawlarr
           env:
             - name: PUID
               value: "1000"
@@ -24,7 +24,7 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - containerPort: 9117
+            - containerPort: 9696
               name: http
           volumeMounts:
             - name: config
@@ -32,4 +32,4 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: jackett-config
+            claimName: prawlarr-config
