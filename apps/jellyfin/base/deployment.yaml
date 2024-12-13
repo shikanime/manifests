@@ -44,23 +44,10 @@ spec:
             - name: dev-dri
               mountPath: /dev/dri
             - name: data-sukebe
-              mountPath: /data/sukebe/scenes
-              subPath: Videos/Scenes
-            - name: data-sukebe
-              mountPath: /data/sukebe/movies
-              subPath: Videos/Movies
-            - name: data-sukebe
-              mountPath: /data/sukebe/doujins
-              subPath: Videos/Doujins
-            - name: data-sukebe
-              mountPath: /data/sukebe/series
-              subPath: Videos/Series
+              mountPath: /data/sukebe
+              subPath: Videos
             - name: data-videos
-              mountPath: /data/series
-              subPath: Series
-            - name: data-videos
-              mountPath: /data/movies
-              subPath: Movies
+              mountPath: /data/videos
       volumes:
         - name: cache
           emptyDir: {}
