@@ -43,11 +43,6 @@ spec:
               mountPath: /config
             - name: dev-dri
               mountPath: /dev/dri
-            - name: data-sukebe
-              mountPath: /data/sukebe
-              subPath: Videos
-            - name: data-videos
-              mountPath: /data/videos
       volumes:
         - name: cache
           emptyDir: {}
@@ -58,9 +53,3 @@ spec:
           hostPath:
             path: /dev/dri
             type: Directory
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe
-        - name: data-videos
-          persistentVolumeClaim:
-            claimName: videos
