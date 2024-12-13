@@ -2,7 +2,7 @@
 
 # Define container images to check
 declare -A IMAGES=(
-  ["prawlarr"]="lscr.io/linuxserver/prawlarr"
+  ["prowlarr"]="lscr.io/linuxserver/prowlarr"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
