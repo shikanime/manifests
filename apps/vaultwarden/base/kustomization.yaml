@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: vaultwarden
     newName: docker.io/vaultwarden/server
-    newTag: 1.32.4
+    newTag: 1.32.6
 resources:
   - deployment.yaml
   - pvc.yaml
@@ -13,4 +13,4 @@ labels:
       app.kubernetes.io/component: secret-manager
       app.kubernetes.io/name: vaultwarden
       app.kubernetes.io/part-of: nishir-security
-      app.kubernetes.io/version: 1.32.4
+      app.kubernetes.io/version: 1.32.6

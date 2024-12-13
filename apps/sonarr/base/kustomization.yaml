@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: sonarr
     newName: lscr.io/linuxserver/sonarr
-    newTag: 4.0.10
+    newTag: 4.0.11
 resources:
   - deployment.yaml
   - pvc.yaml
@@ -13,4 +13,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: sonarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 4.0.10
+      app.kubernetes.io/version: 4.0.11

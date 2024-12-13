@@ -9,14 +9,14 @@
     },
     "grafana_monitoring": {
       "spec": {
-        "version": "1.6.13",
+        "version": "1.6.15",
         "repo": "https://grafana.github.io/helm-charts",
         "chart": "k8s-monitoring"
       }
     },
     "tailscale": {
       "spec": {
-        "version": "1.76.6",
+        "version": "1.78.3",
         "repo": "https://pkgs.tailscale.com/helmcharts",
         "chart": "tailscale-operator"
       }
