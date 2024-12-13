@@ -1,9 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-  - name: jackett
-    newName: lscr.io/linuxserver/jackett
-    newTag: 0.22.938
+  - name: prawlarr
+    newName: lscr.io/linuxserver/prawlarr
+    newTag: 1.27.0
 resources:
   - deployment.yaml
   - pvc.yaml
@@ -11,6 +11,6 @@ resources:
 labels:
   - pairs:
       app.kubernetes.io/component: torrent-tracker
-      app.kubernetes.io/name: jackett
+      app.kubernetes.io/name: prawlarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 0.22.938
+      app.kubernetes.io/version: 1.27.0

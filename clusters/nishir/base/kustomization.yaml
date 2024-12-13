@@ -7,7 +7,7 @@ resources:
   - storageclass.yaml
   - ../../../apps/gitea/overlays/nishir
   - ../../../apps/qbittorrent/overlays/nishir
-  - ../../../apps/jackett/overlays/nishir
+  - ../../../apps/prawlarr/overlays/nishir
   - ../../../apps/jellyfin/overlays/nishir
   - ../../../apps/metatube/overlays/nishir
   - ../../../apps/radarr/overlays/nishir
