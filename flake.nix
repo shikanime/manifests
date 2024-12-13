@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
     devenv.url = "github:cachix/devenv";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   nixConfig = {
@@ -17,11 +17,18 @@
     ];
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs =
+    inputs@{
+      devenv,
+      flake-parts,
+      treefmt-nix,
+      ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        inputs.devenv.flakeModule
-        inputs.treefmt-nix.flakeModule
+        devenv.flakeModule
+        treefmt-nix.flakeModule
+        ./nix/devenv.nix
       ];
       systems = [
         "x86_64-linux"
@@ -29,65 +36,5 @@
         "aarch64-linux"
         "aarch64-darwin"
       ];
-      perSystem = { pkgs, ... }: {
-        packages = {
-          default = pkgs.stdenv.mkDerivation {
-            name = "manifests";
-            src = ./.;
-            installPhase = ''
-              mkdir -p $out/share
-              cp -r apps clusters infra $out/share
-            '';
-          };
-        };
-        treefmt = {
-          projectRootFile = "flake.nix";
-          enableDefaultExcludes = true;
-          programs = {
-            actionlint.enable = true;
-            deadnix.enable = true;
-            dos2unix.enable = true;
-            nixpkgs-fmt.enable = true;
-            prettier.enable = true;
-            shfmt.enable = true;
-            statix.enable = true;
-            terraform.enable = true;
-          };
-          settings.global.excludes = [
-            "*.excalidraw"
-            "*.terraform.lock.hcl"
-            ".gitattributes"
-            "LICENSE"
-          ];
-        };
-        devenv.shells.default = {
-          containers = pkgs.lib.mkForce { };
-          languages = {
-            terraform = {
-              enable = true;
-              package = pkgs.opentofu;
-            };
-            nix.enable = true;
-          };
-          cachix = {
-            enable = true;
-            push = "shikanime";
-          };
-          pre-commit.hooks = {
-            shellcheck.enable = true;
-            tflint.enable = true;
-          };
-          packages = [
-            pkgs.gh
-            pkgs.kubectl
-            pkgs.kubernetes-helm
-            pkgs.kustomize
-            pkgs.scaleway-cli
-            pkgs.skaffold
-            pkgs.skopeo
-            pkgs.yq-go
-          ];
-        };
-      };
     };
 }
