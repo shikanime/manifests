@@ -9,6 +9,9 @@ spec:
       mode: "true"
     operatorConfig:
       hostname: nishir-k8s-operator
+    oauthSecretVolume:
+      secret:
+        secretName: tailscale-operator-oauth-client
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig

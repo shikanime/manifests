@@ -22,9 +22,9 @@ resource "scaleway_secret_version" "etcd_snapshot_oauth_client" {
   })
 }
 
-resource "kubernetes_secret" "tailscale_operator_oauth" {
+resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   metadata {
-    name      = "operator-oauth"
+    name      = "tailscale-operator-oauth-client"
     namespace = kubernetes_namespace.tailscale.metadata[0].name
   }
   data = {
