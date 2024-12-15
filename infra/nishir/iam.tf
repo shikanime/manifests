@@ -1,7 +1,7 @@
 data "cloudflare_api_token_permission_groups" "default" {}
 
-resource "cloudflare_api_token" "longhorn" {
-  name = "Nishir Longhorn"
+resource "cloudflare_api_token" "longhorn_backupstore" {
+  name = "Nishir Longhorn Backupstore"
 
   policy {
     permission_groups = [
