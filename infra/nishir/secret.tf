@@ -38,7 +38,7 @@ resource "kubernetes_secret" "longhorn_cf_backups" {
     name      = "longhorn-cf-backups"
     namespace = kubernetes_namespace.longhorn_system.metadata[0].name
     annotations = {
-      "longhorn.io/backup-target" = local.backup_target
+      "longhorn.io/backup-target" = local.longhorn_backup_target
     }
   }
   data = {
