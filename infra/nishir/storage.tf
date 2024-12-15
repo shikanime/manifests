@@ -13,3 +13,21 @@ resource "cloudflare_r2_bucket" "etcd_backups" {
   name       = "nishir-etcd-backups"
   location   = "WEUR"
 }
+
+resource "b2_bucket" "longhorn_backups" {
+  bucket_name = "shikanime-studio-nishir-longhorn-backups"
+  bucket_type = "allPrivate"
+  default_server_side_encryption {
+    algorithm = "AES256"
+    mode      = "SSE-B2"
+  }
+}
+
+resource "b2_bucket" "etcd_backups" {
+  bucket_name = "shikanime-studio-nishir-etcd-backups"
+  bucket_type = "allPrivate"
+  default_server_side_encryption {
+    algorithm = "AES256"
+    mode      = "SSE-B2"
+  }
+}

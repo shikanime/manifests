@@ -1,3 +1,8 @@
+resource "b2_application_key" "longhorn_backupstore" {
+  key_name     = "nishir-longhorn-backupstore"
+  capabilities = ["readFiles", "writeFiles"]
+}
+
 data "cloudflare_api_token_permission_groups" "default" {}
 
 resource "cloudflare_api_token" "longhorn_backupstore" {
