@@ -29,6 +29,13 @@ resource "kubernetes_manifest" "tailscale" {
       version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
+      valuesContent = jsonencode({
+        oauthSecretVolume = {
+          secret = {
+            secretName = one(kubernetes_secret.tailscale_operator_oauth_client.metadata).name
+          }
+        }
+      })
     }
   }
 }
