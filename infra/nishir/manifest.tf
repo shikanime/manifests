@@ -26,7 +26,6 @@ resource "kubernetes_manifest" "tailscale" {
       repo            = local.manifest.kubernetes_manifest.tailscale.spec.repo
       chart           = local.manifest.kubernetes_manifest.tailscale.spec.chart
       targetNamespace = one(kubernetes_namespace.tailscale.metadata).name
-      targetNamespace = one(kubernetes_namespace.tailscale.metadata).name
       version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
