@@ -1,3 +1,15 @@
+variable "name" {
+  type        = string
+  description = "Name of the cluster"
+  default     = "nishir"
+}
+
+variable "display_name" {
+  type        = string
+  description = "Display name of the cluster"
+  default     = "Nishir"
+}
+
 variable "account" {
   type        = string
   description = "Cloudflare account ID"
