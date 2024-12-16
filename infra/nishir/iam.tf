@@ -38,6 +38,19 @@ resource "cloudflare_api_token" "longhorn_backupstore" {
   }
 }
 
+resource "cloudflare_api_token" "etcd_snapshot" {
+  name = "Nishir ETCD Snapshot"
+  policy {
+    permission_groups = [
+      data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Read"],
+      data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Write"],
+    ]
+    resources = {
+      "com.cloudflare.edge.r2.bucket.${var.account}_default_${cloudflare_r2_bucket.etcd_backups.id}" = "*"
+    }
+  }
+}
+
 resource "grafana_cloud_access_policy" "kubernetes" {
   region       = "eu"
   name         = "stack-${var.sack}-integration-nishir"
