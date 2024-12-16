@@ -17,8 +17,8 @@ resource "scaleway_secret" "etcd_snapshot_oauth_client" {
 resource "scaleway_secret_version" "etcd_snapshot_oauth_client" {
   secret_id = scaleway_secret.etcd_snapshot_oauth_client.id
   data = jsonencode({
-    clientId     = cloudflare_api_token.etcd_snapshot.id
-    clientSecret = cloudflare_api_token.etcd_snapshot.value
+    clientId     = b2_application_key.etcd_snapshot.application_key_id
+    clientSecret = b2_application_key.etcd_snapshot.application_key
   })
 }
 
@@ -33,12 +33,27 @@ resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   }
 }
 
+resource "kubernetes_secret" "longhorn_b2_backups" {
+  metadata {
+    name      = "longhorn-b2-backups"
+    namespace = one(kubernetes_namespace.longhorn_system.metadata).name
+    annotations = {
+      "longhorn.io/backup-target" = local.longhorn_b2_backup_target
+    }
+  }
+  data = {
+    AWS_ACCESS_KEY_ID     = b2_application_key.longhorn_backupstore.application_key_id
+    AWS_SECRET_ACCESS_KEY = b2_application_key.longhorn_backupstore.application_key
+    AWS_ENDPOINTS         = "https://s3.${local.longhorn_b2_backup_region}-003.backblazeb2.com"
+  }
+}
+
 resource "kubernetes_secret" "longhorn_cf_backups" {
   metadata {
     name      = "longhorn-cf-backups"
     namespace = one(kubernetes_namespace.longhorn_system.metadata).name
     annotations = {
-      "longhorn.io/backup-target" = local.longhorn_backup_target
+      "longhorn.io/backup-target" = local.longhorn_cf_backup_target
     }
   }
   data = {

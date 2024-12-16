@@ -29,6 +29,13 @@ resource "kubernetes_manifest" "tailscale" {
       version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
+      valuesContent = jsonencode({
+        oauthSecretVolume = {
+          secret = {
+            secretName = one(kubernetes_secret.tailscale_operator_oauth_client.metadata).name
+          }
+        }
+      })
     }
   }
 }
@@ -56,8 +63,8 @@ resource "kubernetes_manifest" "longhorn" {
       bootstrap       = false
       valuesContent = jsonencode({
         defaultSettings = {
-          backupTarget                 = local.longhorn_backup_target
-          backupTargetCredentialSecret = one(kubernetes_secret.longhorn_cf_backups.metadata).name
+          backupTarget                 = local.longhorn_b2_backup_target
+          backupTargetCredentialSecret = one(kubernetes_secret.longhorn_b2_backups.metadata).name
         }
       })
     }

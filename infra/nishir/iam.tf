@@ -1,3 +1,27 @@
+resource "b2_application_key" "longhorn_backupstore" {
+  key_name = "nishir-longhorn-backupstore"
+  capabilities = [
+    "deleteFiles",
+    "listAllBucketNames",
+    "listFiles",
+    "readFiles",
+    "writeFiles",
+  ]
+  bucket_id = b2_bucket.longhorn_backups.id
+}
+
+resource "b2_application_key" "etcd_snapshot" {
+  key_name = "nishir-etcd-snapshot"
+  capabilities = [
+    "deleteFiles",
+    "listAllBucketNames",
+    "listFiles",
+    "readFiles",
+    "writeFiles",
+  ]
+  bucket_id = b2_bucket.etcd_backups.id
+}
+
 data "cloudflare_api_token_permission_groups" "default" {}
 
 resource "cloudflare_api_token" "longhorn_backupstore" {
