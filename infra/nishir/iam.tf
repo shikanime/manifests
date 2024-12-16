@@ -40,6 +40,7 @@ resource "cloudflare_api_token" "longhorn_backupstore" {
 
 resource "cloudflare_api_token" "etcd_snapshot" {
   name = "Nishir ETCD Snapshot"
+
   policy {
     permission_groups = [
       data.cloudflare_api_token_permission_groups.default.account["Workers R2 Storage Read"],

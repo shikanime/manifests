@@ -26,6 +26,7 @@ resource "kubernetes_manifest" "tailscale" {
       repo            = local.manifest.kubernetes_manifest.tailscale.spec.repo
       chart           = local.manifest.kubernetes_manifest.tailscale.spec.chart
       targetNamespace = one(kubernetes_namespace.tailscale.metadata).name
+      targetNamespace = one(kubernetes_namespace.tailscale.metadata).name
       version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
@@ -57,6 +58,7 @@ resource "kubernetes_manifest" "longhorn" {
     spec = {
       repo            = local.manifest.kubernetes_manifest.longhorn.spec.repo
       chart           = local.manifest.kubernetes_manifest.longhorn.spec.chart
+      targetNamespace = one(kubernetes_namespace.longhorn_system.metadata).name
       targetNamespace = one(kubernetes_namespace.longhorn_system.metadata).name
       version         = local.manifest.kubernetes_manifest.longhorn.spec.version
       helmVersion     = "v3"
