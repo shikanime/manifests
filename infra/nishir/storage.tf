@@ -1,5 +1,7 @@
 locals {
-  backup_target = "s3://${cloudflare_r2_bucket.longhorn_backups.name}@${cloudflare_r2_bucket.longhorn_backups.location}/"
+  longhorn_b2_backup_target = "s3://${b2_bucket.longhorn_backups.bucket_name}@${local.longhorn_b2_backup_region}/"
+  longhorn_b2_backup_region = "eu-central"
+  longhorn_cf_backup_target = "s3://${cloudflare_r2_bucket.longhorn_backups.name}@${cloudflare_r2_bucket.longhorn_backups.location}/"
 }
 
 resource "cloudflare_r2_bucket" "longhorn_backups" {

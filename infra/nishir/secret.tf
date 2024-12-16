@@ -17,15 +17,15 @@ resource "scaleway_secret" "etcd_snapshot_oauth_client" {
 resource "scaleway_secret_version" "etcd_snapshot_oauth_client" {
   secret_id = scaleway_secret.etcd_snapshot_oauth_client.id
   data = jsonencode({
-    clientId     = cloudflare_api_token.etcd_snapshot.id
-    clientSecret = cloudflare_api_token.etcd_snapshot.value
+    clientId     = b2_application_key.etcd_snapshot.application_key_id
+    clientSecret = b2_application_key.etcd_snapshot.application_key
   })
 }
 
 resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   metadata {
     name      = "tailscale-operator-oauth-client"
-    namespace = kubernetes_namespace.tailscale.metadata[0].name
+    namespace = one(kubernetes_namespace.tailscale.metadata).name
   }
   data = {
     client_id     = local.tailscale_operator_oauth_client_data.clientId
@@ -33,12 +33,27 @@ resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   }
 }
 
+resource "kubernetes_secret" "longhorn_b2_backups" {
+  metadata {
+    name      = "longhorn-b2-backups"
+    namespace = one(kubernetes_namespace.longhorn_system.metadata).name
+    annotations = {
+      "longhorn.io/backup-target" = local.longhorn_b2_backup_target
+    }
+  }
+  data = {
+    AWS_ACCESS_KEY_ID     = b2_application_key.longhorn_backupstore.application_key_id
+    AWS_SECRET_ACCESS_KEY = b2_application_key.longhorn_backupstore.application_key
+    AWS_ENDPOINTS         = "https://s3.${local.longhorn_b2_backup_region}-003.backblazeb2.com"
+  }
+}
+
 resource "kubernetes_secret" "longhorn_cf_backups" {
   metadata {
     name      = "longhorn-cf-backups"
-    namespace = kubernetes_namespace.longhorn_system.metadata[0].name
+    namespace = one(kubernetes_namespace.longhorn_system.metadata).name
     annotations = {
-      "longhorn.io/backup-target" = local.backup_target
+      "longhorn.io/backup-target" = local.longhorn_cf_backup_target
     }
   }
   data = {
@@ -51,7 +66,7 @@ resource "kubernetes_secret" "longhorn_cf_backups" {
 resource "kubernetes_secret" "grafana_monitoring_prometheus" {
   metadata {
     name      = "grafana-monitoring-prometheus"
-    namespace = kubernetes_namespace.grafana.metadata[0].name
+    namespace = one(kubernetes_namespace.grafana.metadata).name
   }
   data = {
     host     = "https://prometheus-prod-01-eu-west-0.grafana.net"
@@ -64,7 +79,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
 resource "kubernetes_secret" "grafana_monitoring_loki" {
   metadata {
     name      = "grafana-monitoring-loki"
-    namespace = kubernetes_namespace.grafana.metadata[0].name
+    namespace = one(kubernetes_namespace.grafana.metadata).name
   }
   data = {
     host     = "http://logs-prod-eu-west-0.grafana.net"
@@ -77,7 +92,7 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
 resource "kubernetes_secret" "grafana_monitoring_tempo" {
   metadata {
     name      = "grafana-monitoring-tempo"
-    namespace = kubernetes_namespace.grafana.metadata[0].name
+    namespace = one(kubernetes_namespace.grafana.metadata).name
   }
   data = {
     host     = "https://empo-eu-west-0.grafana.net"
@@ -94,7 +109,7 @@ resource "random_password" "metatube_token" {
 resource "kubernetes_secret" "metatube" {
   metadata {
     name      = "metatube"
-    namespace = kubernetes_namespace.shikanime.metadata[0].name
+    namespace = one(kubernetes_namespace.shikanime.metadata).name
   }
   data = {
     token = random_password.metatube_token.result
@@ -109,7 +124,7 @@ resource "random_password" "vaultwarden_admin_password" {
 resource "kubernetes_secret" "vaultwarden" {
   metadata {
     name      = "vaultwarden"
-    namespace = kubernetes_namespace.shikanime.metadata[0].name
+    namespace = one(kubernetes_namespace.shikanime.metadata).name
   }
   data = {
     admin-token = random_password.vaultwarden_admin_password.result
@@ -124,7 +139,7 @@ resource "random_password" "rclone_password" {
 resource "kubernetes_secret" "rclone" {
   metadata {
     name      = "rclone"
-    namespace = kubernetes_namespace.shikanime.metadata[0].name
+    namespace = one(kubernetes_namespace.shikanime.metadata).name
   }
   data = {
     username = "rclone"
@@ -141,7 +156,7 @@ resource "random_password" "transmission_password" {
 resource "kubernetes_secret" "transmission" {
   metadata {
     name      = "transmission"
-    namespace = kubernetes_namespace.shikanime.metadata[0].name
+    namespace = one(kubernetes_namespace.shikanime.metadata).name
   }
   data = {
     username = "transmission"

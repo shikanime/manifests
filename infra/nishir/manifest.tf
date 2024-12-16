@@ -25,10 +25,17 @@ resource "kubernetes_manifest" "tailscale" {
     spec = {
       repo            = local.manifest.kubernetes_manifest.tailscale.spec.repo
       chart           = local.manifest.kubernetes_manifest.tailscale.spec.chart
-      targetNamespace = kubernetes_namespace.tailscale.metadata[0].name
+      targetNamespace = one(kubernetes_namespace.tailscale.metadata).name
       version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
+      valuesContent = jsonencode({
+        oauthSecretVolume = {
+          secret = {
+            secretName = one(kubernetes_secret.tailscale_operator_oauth_client.metadata).name
+          }
+        }
+      })
     }
   }
 }
@@ -50,14 +57,14 @@ resource "kubernetes_manifest" "longhorn" {
     spec = {
       repo            = local.manifest.kubernetes_manifest.longhorn.spec.repo
       chart           = local.manifest.kubernetes_manifest.longhorn.spec.chart
-      targetNamespace = kubernetes_namespace.longhorn_system.metadata[0].name
+      targetNamespace = one(kubernetes_namespace.longhorn_system.metadata).name
       version         = local.manifest.kubernetes_manifest.longhorn.spec.version
       helmVersion     = "v3"
       bootstrap       = false
       valuesContent = jsonencode({
         defaultSettings = {
-          backupTarget                 = local.backup_target
-          backupTargetCredentialSecret = kubernetes_secret.longhorn_cf_backups.metadata[0].name
+          backupTarget                 = local.longhorn_b2_backup_target
+          backupTargetCredentialSecret = one(kubernetes_secret.longhorn_b2_backups.metadata).name
         }
       })
     }
@@ -81,7 +88,7 @@ resource "kubernetes_manifest" "grafana_monitoring" {
     spec = {
       repo            = local.manifest.kubernetes_manifest.grafana_monitoring.spec.repo
       chart           = local.manifest.kubernetes_manifest.grafana_monitoring.spec.chart
-      targetNamespace = kubernetes_namespace.grafana.metadata[0].name
+      targetNamespace = one(kubernetes_namespace.grafana.metadata).name
       version         = local.manifest.kubernetes_manifest.grafana_monitoring.spec.version
       helmVersion     = "v3"
       bootstrap       = false
@@ -90,26 +97,26 @@ resource "kubernetes_manifest" "grafana_monitoring" {
           prometheus = {
             secret = {
               create = false
-              name   = kubernetes_secret.grafana_monitoring_prometheus.metadata[0].name
+              name   = one(kubernetes_secret.grafana_monitoring_prometheus.metadata).name
             }
           }
           loki = {
             secret = {
               create = false
-              name   = kubernetes_secret.grafana_monitoring_loki.metadata[0].name
+              name   = one(kubernetes_secret.grafana_monitoring_loki.metadata).name
             }
           }
           tempo = {
             secret = {
               create = false
-              name   = kubernetes_secret.grafana_monitoring_tempo.metadata[0].name
+              name   = one(kubernetes_secret.grafana_monitoring_tempo.metadata).name
             }
           }
         }
         opencost = {
           opencost = {
             prometheus = {
-              existingSecretName = kubernetes_secret.grafana_monitoring_prometheus.metadata[0].name
+              existingSecretName = one(kubernetes_secret.grafana_monitoring_prometheus.metadata).name
             }
           }
         }
