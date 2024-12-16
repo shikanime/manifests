@@ -28,6 +28,6 @@ variable "secrets" {
   })
   description = "Scaleway secrets ID"
   default = {
-    tailscale_operator_oauth_client = "40a23536-72b3-4026-bf4b-cc1db38bcfa7"
+    tailscale_operator_oauth_client = "371097be-4fd8-4e8f-a3f3-232485c96082"
   }
 }
