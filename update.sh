@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
 
 for dir in "$(dirname "$0")"/apps/*/base; do
   if [ -f "$dir/update.sh" ]; then
