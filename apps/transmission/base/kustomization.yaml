@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: transmission
     newName: lscr.io/linuxserver/transmission
-    newTag: 5.0.2
+    newTag: 2021.11.18
 resources:
   - deployment.yaml
   - pvc.yaml
@@ -13,4 +13,4 @@ labels:
       app.kubernetes.io/component: downloader
       app.kubernetes.io/name: transmission
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 5.0.2
+      app.kubernetes.io/version: 2021.11.18
