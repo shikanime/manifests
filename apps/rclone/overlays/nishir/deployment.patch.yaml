@@ -10,7 +10,7 @@ spec:
         - name: rclone
           env:
             - name: RCLONE_PUBLIC_IP
-              value: "100.123.55.46"
+              value: "100.90.227.1"
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/Sukebe
