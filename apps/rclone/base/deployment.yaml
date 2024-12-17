@@ -98,15 +98,3 @@ spec:
               name: ftp-data-30028
             - containerPort: 30029
               name: ftp-data-30029
-          volumeMounts:
-            - name: data-sukebe
-              mountPath: /data/Sukebe
-            - name: data-videos
-              mountPath: /data/Videos
-      volumes:
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe
-        - name: data-videos
-          persistentVolumeClaim:
-            claimName: videos

@@ -11,3 +11,10 @@ spec:
           env:
             - name: RCLONE_PUBLIC_IP
               value: "100.123.55.46"
+          volumeMounts:
+            - name: data-sukebe
+              mountPath: /data/Sukebe
+      volumes:
+        - name: data-sukebe
+          persistentVolumeClaim:
+            claimName: sukebe
