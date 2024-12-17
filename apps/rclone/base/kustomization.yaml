@@ -13,3 +13,7 @@ labels:
       app.kubernetes.io/name: rclone
       app.kubernetes.io/part-of: nishir-operation
       app.kubernetes.io/version: 1.68.2
+configMapGenerator:
+  - name: rclone-config
+    literals:
+      - rclone.conf=""

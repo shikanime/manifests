@@ -99,6 +99,9 @@ spec:
     - name: ftp-data-30029
       port: 30029
       targetPort: ftp-data-30029
+    - name: webdav
+      port: 8080
+      targetPort: webdav
   selector:
     app.kubernetes.io/name: rclone
   type: LoadBalancer

@@ -14,7 +14,7 @@ spec:
         app.kubernetes.io/name: rclone
     spec:
       containers:
-        - name: rclone
+        - name: rclone-ftp
           image: rclone
           args:
             - serve
@@ -98,3 +98,27 @@ spec:
               name: ftp-data-30028
             - containerPort: 30029
               name: ftp-data-30029
+          volumeMounts:
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+        - name: rclone-webdav
+          image: rclone
+          args:
+            - serve
+            - webdav
+            - /data
+          env:
+            - name: RCLONE_ADDR
+              value: 0.0.0.0:8080
+          ports:
+            - containerPort: 8080
+              name: webdav
+          volumeMounts:
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+      volumes:
+        - name: rclone-config
+          configMap:
+            name: rclone-config
