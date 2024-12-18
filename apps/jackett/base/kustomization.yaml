@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: jackett
+    newName: lscr.io/linuxserver/jackett
+    newTag: 0.22.938
+resources:
+  - deployment.yaml
+  - pvc.yaml
+  - svc.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/component: torrent-tracker
+      app.kubernetes.io/name: jackett
+      app.kubernetes.io/part-of: nishir-media
+      app.kubernetes.io/version: 0.22.938
