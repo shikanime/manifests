@@ -27,6 +27,7 @@ spec:
       allowCollectingLonghornUsageMetrics: false
       snapshotDataIntegrityCronjob: "0 4 */7 * *"
       longGRPCTimeOut: 604800 # 1 week
+      backupstorePollInterval: 1200
     longhornDriver:
       tolerations:
         - key: node.nishir/longhorn-unavailable
