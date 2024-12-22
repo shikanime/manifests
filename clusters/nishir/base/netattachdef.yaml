@@ -1,0 +1,33 @@
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-dhcp-eth0
+  namespace: shikanime
+spec:
+  config: |
+    {
+      "cniVersion": "1.0.0",
+      "type": "macvlan",
+      "master": "eth0",
+      "mode": "bridge",
+      "ipam": {
+        "type": "dhcp"
+      }
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-dhcp-wlan0
+  namespace: shikanime
+spec:
+  config: |
+    {
+      "cniVersion": "1.0.0",
+      "type": "macvlan",
+      "master": "wlan0",
+      "mode": "bridge",
+      "ipam": {
+        "type": "dhcp"
+      }
+    }

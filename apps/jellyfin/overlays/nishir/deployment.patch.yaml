@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
       annotations:
-        k8s.v1.cni.cncf.io/networks: macvlan-dhcp-eth0@eth0, macvlan-dhcp-wlan0@wlan0
+        k8s.v1.cni.cncf.io/networks: "macvlan-dhcp-eth0@eth0,macvlan-dhcp-wlan0@wlan0"
     spec:
       containers:
         - name: jellyfin
