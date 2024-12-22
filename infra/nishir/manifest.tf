@@ -61,6 +61,7 @@ resource "kubernetes_manifest" "longhorn" {
       version         = local.manifest.kubernetes_manifest.longhorn.spec.version
       helmVersion     = "v3"
       bootstrap       = false
+      failurePolicy   = "abort"
       valuesContent = jsonencode({
         defaultSettings = {
           backupTarget                 = local.longhorn_backup_target
