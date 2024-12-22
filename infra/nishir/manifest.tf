@@ -124,3 +124,33 @@ resource "kubernetes_manifest" "grafana_monitoring" {
     }
   }
 }
+
+resource "kubernetes_manifest" "multus" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "multus"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = local.manifest.kubernetes_manifest.multus.spec.repo
+      chart           = local.manifest.kubernetes_manifest.multus.spec.chart
+      targetNamespace = "kube-system"
+      version         = local.manifest.kubernetes_manifest.multus.spec.version
+      valuesContent = jsonencode({
+        config = {
+          fullnameOverride = "multus"
+          cni_conf = {
+            confDir   = "/mnt/nishir/rancher/k3s/agent/etc/cni/net.d"
+            binDir    = "/mnt/nishir/rancher/k3s/data/cni/"
+            kubeconfig = "/mnt/nishir/rancher/k3s/agent/etc/cni/net.d/multus.d/multus.kubeconfig"
+          }
+        }
+        manifests = {
+          dhcpDaemonSet = true
+        }
+      })
+    }
+  }
+}

@@ -9,12 +9,14 @@ declare -A CHARTS=(
   ["grafana_monitoring"]="grafana/k8s-monitoring"
   ["tailscale"]="tailscale/tailscale-operator"
   ["longhorn"]="longhorn/longhorn"
+  ["multus"]="rke2/rke2-multus"
 )
 
 declare -A REPOS=(
   ["grafana"]="https://grafana.github.io/helm-charts"
   ["tailscale"]="https://pkgs.tailscale.com/helmcharts"
   ["longhorn"]="https://charts.longhorn.io"
+  ["rke2"]="https://rke2-charts.rancher.io"
 )
 
 # Add each repository to helm using the repo name and URL from REPOS array
@@ -33,7 +35,7 @@ for CHART_NAME in "${CHARTS[@]}"; do
   # Search for the latest version of the chart
   LATEST_VERSION=$(
     helm search repo "$CHART_NAME" --output json |
-      jq -r 'map(.version | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | last // empty'
+      jq -r 'map(.version | select(test("^(v)?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | last // empty'
   )
   echo "Latest version of $CHART_NAME: $LATEST_VERSION"
 
