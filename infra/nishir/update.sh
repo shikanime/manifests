@@ -28,17 +28,25 @@ helm repo update
 
 declare -a CHART_VERSIONS=()
 for CHART_NAME in "${CHARTS[@]}"; do
+  echo "Checking for updates for $CHART_NAME..."
+
   # Search for the latest version of the chart
   LATEST_VERSION=$(
     helm search repo "$CHART_NAME" --output json |
       jq -r 'map(.version | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | last'
   )
+  echo "Latest version of $CHART_NAME: $LATEST_VERSION"
 
   # Check if the chart was found
   if [[ -z $LATEST_VERSION ]]; then
     echo "Chart '$CHART_NAME' not found in repository."
   else
-    KEY=$(for k in "${!CHARTS[@]}"; do [[ ${CHARTS[$k]} == "$CHART_NAME" ]] && echo "$k"; done)
+    echo "Found latest version: $LATEST_VERSION"
+
+    KEY=""
+    for k in "${!CHARTS[@]}"; do
+      [[ ${CHARTS[$k]} == "$CHART_NAME" ]] && KEY="$k"
+    done
     REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
     CHART_VERSIONS+=("\"$KEY\": {\"spec\": {\"version\": \"$LATEST_VERSION\", \"repo\": \"$REPO_URL\", \"chart\": \"${CHART_NAME#*/}\"}}")
   fi
