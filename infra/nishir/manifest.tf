@@ -61,6 +61,7 @@ resource "kubernetes_manifest" "longhorn" {
       version         = local.manifest.kubernetes_manifest.longhorn.spec.version
       helmVersion     = "v3"
       bootstrap       = false
+      failurePolicy   = "abort"
       valuesContent = jsonencode({
         defaultSettings = {
           backupTarget                 = local.longhorn_backup_target
@@ -142,8 +143,8 @@ resource "kubernetes_manifest" "multus" {
         config = {
           fullnameOverride = "multus"
           cni_conf = {
-            confDir   = "/mnt/nishir/rancher/k3s/agent/etc/cni/net.d"
-            binDir    = "/mnt/nishir/rancher/k3s/data/cni/"
+            confDir    = "/mnt/nishir/rancher/k3s/agent/etc/cni/net.d"
+            binDir     = "/mnt/nishir/rancher/k3s/data/cni/"
             kubeconfig = "/mnt/nishir/rancher/k3s/agent/etc/cni/net.d/multus.d/multus.kubeconfig"
           }
         }
