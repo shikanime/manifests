@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.8.1"
+  required_version = "~> 1.8"
   backend "s3" {
     bucket                      = "nishir-opentofu-state"
     key                         = "terraform.tfstate"
