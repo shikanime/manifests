@@ -41,6 +41,7 @@
         {
           packages.default = pkgs.stdenv.mkDerivation {
             name = "manifests";
+            version = "0.0.0";
             src = ./.;
             installPhase = ''
               mkdir -p $out/share
