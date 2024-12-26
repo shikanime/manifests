@@ -7,6 +7,13 @@
         "chart": "longhorn"
       }
     },
+    "multus": {
+      "spec": {
+        "version": "v4.1.301",
+        "repo": "https://rke2-charts.rancher.io",
+        "chart": "rke2-multus"
+      }
+    },
     "grafana_monitoring": {
       "spec": {
         "version": "1.6.15",
