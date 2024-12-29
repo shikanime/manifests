@@ -1,0 +1,11 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: tailscale
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    apiServerProxyConfig:
+      mode: "true"
+    operatorConfig:
+      hostname: kaltashar-k8s-operator

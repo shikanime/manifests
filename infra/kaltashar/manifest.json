@@ -1,0 +1,11 @@
+{
+  "kubernetes_manifest": {
+    "tailscale": {
+      "spec": {
+        "version": "1.78.3",
+        "repo": "https://pkgs.tailscale.com/helmcharts",
+        "chart": "tailscale-operator"
+      }
+    }
+  }
+}
