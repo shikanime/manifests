@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prowlarr-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 512Mi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  claimRef:
+    namespace: shikanime
+    name: prowlarr-config
+  hostPath:
+    type: Directory
+    path: /Library/Shikanime/Prowlarr
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: radarr-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 4Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  claimRef:
+    namespace: shikanime
+    name: radarr-config
+  hostPath:
+    type: Directory
+    path: /Library/Shikanime/Radarr
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-config
+  namespace: shikanime
+spec:
+  capacity:
+    storage: 4Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  claimRef:
+    namespace: shikanime
+    name: sonarr-config
+  hostPath:
+    type: Directory
+    path: /Library/Shikanime/Sonarr
