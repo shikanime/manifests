@@ -1,20 +1,5 @@
-locals {
-  tailscale_operator_oauth_client_data = jsondecode(
-    base64decode(data.scaleway_secret_version.tailscale_operator_oauth_client.data)
-  )
-  longhorn_backupstore_s3_creds_data = jsondecode(
-    base64decode(data.scaleway_secret_version.longhorn_backupstore_s3_creds.data)
-  )
-}
-
-data "scaleway_secret_version" "tailscale_operator_oauth_client" {
-  secret_id = var.secrets.tailscale_operator_oauth_client
-  revision  = "latest"
-}
-
-data "scaleway_secret_version" "longhorn_backupstore_s3_creds" {
-  secret_id = var.secrets.longhorn_backupstore_s3_creds
-  revision  = "latest"
+data "hcp_vault_secrets_app" "default" {
+  app_name = var.name
 }
 
 resource "kubernetes_secret" "tailscale_operator_oauth_client" {
@@ -23,8 +8,8 @@ resource "kubernetes_secret" "tailscale_operator_oauth_client" {
     namespace = one(kubernetes_namespace.tailscale.metadata).name
   }
   data = {
-    client_id     = local.tailscale_operator_oauth_client_data.clientId
-    client_secret = local.tailscale_operator_oauth_client_data.clientSecret
+    client_id     = data.hcp_vault_secrets_app.default.secrets.etcd_snapshot_client_id
+    client_secret = data.hcp_vault_secrets_app.default.secrets.etcd_snapshot_client_secret
   }
 }
 
@@ -37,8 +22,8 @@ resource "kubernetes_secret" "longhorn_hetzner_backups" {
     }
   }
   data = {
-    AWS_ACCESS_KEY_ID     = local.longhorn_backupstore_s3_creds_data.access_key_id
-    AWS_SECRET_ACCESS_KEY = local.longhorn_backupstore_s3_creds_data.secret_access_key
+    AWS_ACCESS_KEY_ID     = data.hcp_vault_secrets_app.default.secrets.longhorn_backupstore_access_key_id
+    AWS_SECRET_ACCESS_KEY = data.hcp_vault_secrets_app.default.secrets.longhorn_backupstore_secret_access_key
     AWS_ENDPOINTS         = local.longhorn_endpoints
   }
 }

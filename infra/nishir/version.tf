@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.82"
     }
+    hcp = {
+      source = "hashicorp/hcp"
+      version = "~> 0.101"
+    }
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "~> 2.32"
@@ -19,10 +23,6 @@ terraform {
     grafana = {
       source  = "hashicorp/grafana"
       version = "~> 2.15"
-    }
-    scaleway = {
-      source  = "scaleway/scaleway"
-      version = "~> 2.43"
     }
   }
 }
