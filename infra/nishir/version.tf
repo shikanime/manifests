@@ -1,14 +1,10 @@
 terraform {
   required_version = "~> 1.8"
-  backend "s3" {
-    bucket                      = "nishir-opentofu-state"
-    key                         = "terraform.tfstate"
-    region                      = "WEUR"
-    skip_region_validation      = true
-    skip_credentials_validation = true
-    skip_s3_checksum            = true
-    endpoints = {
-      s3 = "https://d4e789904d6943d8cd524e19c5cb36bd.r2.cloudflarestorage.com"
+  cloud {
+    hostname     = "app.terraform.io"
+    organization = "shikanime-studio"
+    workspaces {
+      name = "nishir"
     }
   }
   required_providers {
@@ -36,7 +32,7 @@ terraform {
 }
 
 provider "aws" {
-  region     = "fsn1"
+  region = "fsn1"
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true

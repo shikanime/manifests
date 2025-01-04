@@ -1,6 +1,6 @@
 locals {
   longhorn_backup_target = "s3://${aws_s3_bucket.longhorn_backups.bucket}@fsn1/"
-  longhorn_endpoints     = "https://${aws_s3_bucket.longhorn_backups.bucket}.fsn1.your-objectstorage.com"
+  longhorn_endpoints     = "https://fsn1.your-objectstorage.com"
 }
 
 resource "cloudflare_r2_bucket" "longhorn_backups" {
