@@ -8,11 +8,6 @@ profiles:
       kustomize:
         paths:
           - clusters/kaltashar/base
-  - name: ishtar
-    manifests:
-      kustomize:
-        paths:
-          - clusters/ishtar/base
   - name: nishir
     manifests:
       kustomize:
