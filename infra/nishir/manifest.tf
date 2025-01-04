@@ -66,7 +66,7 @@ resource "kubernetes_manifest" "longhorn" {
       valuesContent = jsonencode({
         defaultSettings = {
           backupTarget                 = local.longhorn_backup_target
-          backupTargetCredentialSecret = one(kubernetes_secret.longhorn_cf_backups.metadata).name
+          backupTargetCredentialSecret = one(kubernetes_secret.longhorn_hetzner_backups.metadata).name
         }
       })
     }

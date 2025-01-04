@@ -8,6 +8,10 @@ terraform {
     }
   }
   required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.82"
+    }
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4.0"
@@ -24,5 +28,16 @@ terraform {
       source  = "scaleway/scaleway"
       version = "~> 2.43"
     }
+  }
+}
+
+provider "aws" {
+  region = "fsn1"
+
+  skip_credentials_validation = true
+  skip_requesting_account_id  = true
+  skip_region_validation      = true
+  endpoints {
+    s3 = "https://fsn1.your-objectstorage.com"
   }
 }
