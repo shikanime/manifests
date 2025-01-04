@@ -37,8 +37,6 @@ terraform {
 
 provider "aws" {
   region     = "fsn1"
-  access_key = "GPVRTMVK8P700FIA5WAM"
-  secret_key = "v5RWH1UmeXNQT0KqCdWlUCPIFZIpLMdAqc0YZij5"
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true
