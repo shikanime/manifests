@@ -1,6 +1,6 @@
 resource "grafana_cloud_access_policy" "kubernetes" {
   region       = "eu"
-  name         = "stack-${var.sack}-integration-${var.name}"
+  name         = "stack-${var.stack}-integration-${var.name}"
   display_name = "Shikanime Integration ${var.display_name}"
 
   scopes = [
@@ -12,7 +12,7 @@ resource "grafana_cloud_access_policy" "kubernetes" {
 
   realm {
     type       = "stack"
-    identifier = var.sack
+    identifier = var.stack
   }
 }
 

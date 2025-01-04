@@ -16,7 +16,7 @@ variable "display_name" {
   default     = "Nishir"
 }
 
-variable "sack" {
+variable "stack" {
   type        = string
   description = "Grafana stack ID"
   default     = "370431"
