@@ -2,10 +2,18 @@ locals {
   tailscale_operator_oauth_client_data = jsondecode(
     base64decode(data.scaleway_secret_version.tailscale_operator_oauth_client.data)
   )
+  longhorn_backupstore_s3_creds_data = jsondecode(
+    base64decode(data.scaleway_secret_version.longhorn_backupstore_s3_creds.data)
+  )
 }
 
 data "scaleway_secret_version" "tailscale_operator_oauth_client" {
   secret_id = var.secrets.tailscale_operator_oauth_client
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "longhorn_backupstore_s3_creds" {
+  secret_id = var.secrets.longhorn_backupstore_s3_creds
   revision  = "latest"
 }
 
@@ -34,18 +42,18 @@ resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   }
 }
 
-resource "kubernetes_secret" "longhorn_cf_backups" {
+resource "kubernetes_secret" "longhorn_hetzner_backups" {
   metadata {
-    name      = "longhorn-cf-backups"
+    name      = "longhorn-hetzner-backups"
     namespace = one(kubernetes_namespace.longhorn_system.metadata).name
     annotations = {
       "longhorn.io/backup-target" = local.longhorn_backup_target
     }
   }
   data = {
-    AWS_ACCESS_KEY_ID     = cloudflare_api_token.longhorn_backupstore.id
-    AWS_SECRET_ACCESS_KEY = sha256(cloudflare_api_token.longhorn_backupstore.value)
-    AWS_ENDPOINTS         = "https://${var.account}.r2.cloudflarestorage.com"
+    AWS_ACCESS_KEY_ID     = local.longhorn_backupstore_s3_creds_data.access_key_id
+    AWS_SECRET_ACCESS_KEY = local.longhorn_backupstore_s3_creds_data.secret_access_key
+    AWS_ENDPOINTS         = local.longhorn_endpoints
   }
 }
 

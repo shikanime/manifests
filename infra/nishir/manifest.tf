@@ -29,6 +29,7 @@ resource "kubernetes_manifest" "tailscale" {
       version         = local.manifest.kubernetes_manifest.tailscale.spec.version
       helmVersion     = "v3"
       bootstrap       = false
+      failurePolicy   = "abort"
       valuesContent = jsonencode({
         oauthSecretVolume = {
           secret = {
@@ -65,7 +66,7 @@ resource "kubernetes_manifest" "longhorn" {
       valuesContent = jsonencode({
         defaultSettings = {
           backupTarget                 = local.longhorn_backup_target
-          backupTargetCredentialSecret = one(kubernetes_secret.longhorn_cf_backups.metadata).name
+          backupTargetCredentialSecret = one(kubernetes_secret.longhorn_hetzner_backups.metadata).name
         }
       })
     }
@@ -93,6 +94,7 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       version         = local.manifest.kubernetes_manifest.grafana_monitoring.spec.version
       helmVersion     = "v3"
       bootstrap       = false
+      failurePolicy   = "abort"
       valuesContent = jsonencode({
         externalServices = {
           prometheus = {

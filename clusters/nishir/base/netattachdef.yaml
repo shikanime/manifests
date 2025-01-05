@@ -1,7 +1,7 @@
 apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
 metadata:
-  name: macvlan-dhcp-eth0
+  name: macvlan1
   namespace: shikanime
 spec:
   config: |
@@ -18,7 +18,7 @@ spec:
 apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
 metadata:
-  name: macvlan-dhcp-wlan0
+  name: macvlan2
   namespace: shikanime
 spec:
   config: |
