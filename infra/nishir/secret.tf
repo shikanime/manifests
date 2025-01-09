@@ -5,8 +5,8 @@ locals {
   longhorn_backupstore_s3_creds_data = jsondecode(
     base64decode(data.scaleway_secret_version.longhorn_backupstore_s3_creds.data)
   )
-  tailscale_singapore_token = jsondecode(
-    base64decode(data.scaleway_secret_version.tailscale_singapore_token.data)
+  tailscale_node_singapore_token = jsondecode(
+    base64decode(data.scaleway_secret_version.tailscale_node_singapore_token.data)
   )
 }
 
@@ -20,8 +20,8 @@ data "scaleway_secret_version" "longhorn_backupstore_s3_creds" {
   revision  = "latest"
 }
 
-data "scaleway_secret_version" "tailscale_singapore_token" {
-  secret_id = var.secrets.tailscale_singapore_token
+data "scaleway_secret_version" "tailscale_node_singapore_token" {
+  secret_id = var.secrets.tailscale_node_singapore_token
   revision  = "latest"
 }
 

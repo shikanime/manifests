@@ -70,7 +70,7 @@ provider "registry.opentofu.org/hashicorp/grafana" {
 provider "registry.opentofu.org/hashicorp/hcloud" {
   version = "1.49.1"
   hashes = [
-    "h1:FKGRNHVbcfQJd8EWrb8Ze5QHkaGr8zI+ZKxBMjvOwPk=",
+    "h1:6j9/70ZTr1G4d0BPSk0163/SSHJZD31f489cdV0k80M=",
     "zh:3d5f9773da4f8203cf625d04a5a0e4ff7e202684c010a801a945756140c61cde",
     "zh:446305d492017cda91e5c15122ec16ff15bfe3ef4d3fd6bcea0cdf7742ab1b86",
     "zh:44d4f9156ed8b4f0444bd4dc456825940be49048828565964a192286d28c9f20",
