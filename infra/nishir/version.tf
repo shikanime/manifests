@@ -20,6 +20,10 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "~> 2.32"
     }
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 6.15"
+    }
     grafana = {
       source  = "hashicorp/grafana"
       version = "~> 2.15"

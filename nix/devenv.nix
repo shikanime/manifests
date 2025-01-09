@@ -40,6 +40,7 @@
         };
         packages = [
           pkgs.gh
+          pkgs.google-cloud-sdk
           pkgs.kubectl
           pkgs.kubernetes-helm
           pkgs.kustomize
