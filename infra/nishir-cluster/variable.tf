@@ -34,6 +34,26 @@ variable "cirds" {
   }
 }
 
+variable "regions" {
+  type = object({
+    aws_s3_bucket = string
+  })
+  description = "Resource regions"
+  default = {
+    aws_s3_bucket = "fsn1"
+  }
+}
+
+variable "buckets" {
+  type = object({
+    etcd_backups = string
+  })
+  description = "The buckets of the cluster"
+  default = {
+    etcd_backups = "shikanime-studio-nishir-etcd-backups-7a256561"
+  }
+}
+
 variable "secrets" {
   type = object({
     etcd_snapshot_s3_creds = string
