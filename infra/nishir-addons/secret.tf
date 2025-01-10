@@ -49,7 +49,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
     namespace = one(kubernetes_namespace.grafana.metadata).name
   }
   data = {
-    host     = "https://prometheus-prod-01-eu-west-0.grafana.net"
+    host     = var.endpoints.prometheus
     username = data.grafana_data_source.prometheus.basic_auth_username
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
@@ -62,7 +62,7 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
     namespace = one(kubernetes_namespace.grafana.metadata).name
   }
   data = {
-    host     = "http://logs-prod-eu-west-0.grafana.net"
+    host     = var.endpoints.loki
     username = data.grafana_data_source.loki.basic_auth_username
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
@@ -75,7 +75,7 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
     namespace = one(kubernetes_namespace.grafana.metadata).name
   }
   data = {
-    host     = "https://empo-eu-west-0.grafana.net"
+    host     = var.endpoints.tempo
     username = data.grafana_data_source.tempo.basic_auth_username
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
