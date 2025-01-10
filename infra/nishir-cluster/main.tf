@@ -24,14 +24,14 @@ resource "terraform_data" "tailscale_nishir" {
     content     = data.http.tailscale.response_body
     destination = "/tmp/nishir-tailscale-install.sh"
   }
-  provisioner "remote-exec" {
-    script = "/tmp/nishir-tailscale-install.sh"
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   script = "/tmp/nishir-tailscale-install.sh"
+  # }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
+  #   ]
+  # }
 }
 
 resource "terraform_data" "k3s_nishir" {
@@ -52,7 +52,7 @@ resource "terraform_data" "k3s_nishir" {
       "K3S_ETCD_S3=true",
       "K3S_ETCD_S3_ACCESS_KEY=${local.etcd_snapshot_s3_creds.access_key_id}",
       "K3S_ETCD_S3_SECRET_KEY=${local.etcd_snapshot_s3_creds.secret_access_key}",
-      "K3S_ETCD_S3_ENDPOINT=fsn1.your-objectstorage.com",
+      "K3S_ETCD_S3_ENDPOINT=${var.endpoints.s3}",
       "K3S_ETCD_S3_REGION=${var.regions.aws_s3_bucket}",
       "K3S_ETCD_S3_BUCKET=${var.buckets.etcd_backups}"
     ])
@@ -62,11 +62,11 @@ resource "terraform_data" "k3s_nishir" {
     content     = data.http.k3s.response_body
     destination = "/tmp/nishir-k3s-install.sh"
   }
-  provisioner "remote-exec" {
-    inline = [
-      "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_token}"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_token}"
+  #   ]
+  # }
 }
 
 resource "terraform_data" "tailscale_flandre" {
@@ -87,14 +87,14 @@ resource "terraform_data" "tailscale_flandre" {
     content     = data.http.tailscale.response_body
     destination = "/tmp/nishir-tailscale-install.sh"
   }
-  provisioner "remote-exec" {
-    script = "/tmp/nishir-tailscale-install.sh"
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   script = "/tmp/nishir-tailscale-install.sh"
+  # }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
+  #   ]
+  # }
 }
 
 resource "terraform_data" "k3s_flandre" {
@@ -120,9 +120,9 @@ resource "terraform_data" "k3s_flandre" {
     content     = data.http.k3s.response_body
     destination = "/tmp/nishir-k3s-install.sh"
   }
-  provisioner "remote-exec" {
-    inline = [
-      "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_server_token}"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_server_token}"
+  #   ]
+  # }
 }

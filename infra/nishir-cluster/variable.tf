@@ -2,11 +2,13 @@ variable "endpoints" {
   type = object({
     nishir  = string
     flandre = string
+    s3      = string
   })
   description = "The endpoints of the cluster"
   default = {
     nishir  = "nishir.taila659a.ts.net"
     flandre = "flandre.taila659a.ts.net"
+    s3      = "fsn1.your-objectstorage.com"
   }
 }
 
