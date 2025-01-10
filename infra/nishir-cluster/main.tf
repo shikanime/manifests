@@ -1,9 +1,43 @@
-data "http" "tailscale" {
-  url = "https://tailscale.com/install.sh"
-}
-
-data "http" "k3s" {
-  url = "https://get.k3s.io"
+locals {
+  k3s_server_install_script = [
+    join(" ", [
+      "curl -fsSL https://get.k3s.io | sh -s -",
+      "--tls-san ${var.endpoints.nishir}",
+      "--cluster-cidrs ${join(",", var.cirds.cluster)}",
+      "--service-cidrs ${join(",", var.cirds.service)}",
+      "--node-ip ${join(",", var.ip_addresses.nishir)}",
+      "--flannel-backend host-gw",
+      "--etcd-s3",
+      "--etcd-s3-access-key ${local.etcd_snapshot_s3_creds.access_key_id}",
+      "--etcd-s3-secret-key ${local.etcd_snapshot_s3_creds.secret_access_key}",
+      "--etcd-s3-endpoint ${var.endpoints.s3}",
+      "--etcd-s3-region ${var.regions.aws_s3_bucket}",
+      "--etcd-s3-bucket ${var.buckets.etcd_backups}"
+    ])
+  ]
+  k3s_agent_install_script = [
+    join(" ", [
+      "curl -fsSL https://get.k3s.io | sh -s -",
+      "--server https://${var.endpoints.nishir}:6443",
+      "--token ${local.tokens.k3s_server_token}",
+      "--tls-san ${var.endpoints.flandre}",
+      "--cluster-cidr ${join(",", var.cirds.cluster)}",
+      "--service-cidr ${join(",", var.cirds.service)}",
+      "--node-ip ${join(",", var.ip_addresses.flandre)}",
+      "--flannel-backend host-gw"
+    ])
+  ]
+  tailscale_install_script = [
+    "curl -fsSL https://tailscale.com/install.sh | sh",
+    join(" ", [
+      "tailscale",
+      "up",
+      "--authkey ${local.tokens.tailscale_auth_key}",
+      "--advertise-exit-node",
+      "--accept-routes",
+      "--ssh"
+    ])
+  ]
 }
 
 resource "terraform_data" "tailscale_nishir" {
@@ -13,23 +47,9 @@ resource "terraform_data" "tailscale_nishir" {
     host     = local.connection_creds.nishir_host
     password = local.connection_creds.nishir_password
   }
-  provisioner "file" {
-    content = join("\n", [
-      "PORT=41641",
-      "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
-    ])
-    destination = "/etc/default/tailscaled"
+  provisioner "remote-exec" {
+    inline = local.tailscale_install_script
   }
-  provisioner "file" {
-    content     = data.http.tailscale.response_body
-    destination = "/tmp/nishir-tailscale-install.sh"
-  }
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sh /tmp/nishir-tailscale-install.sh",
-  #     "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
-  #   ]
-  # }
 }
 
 resource "terraform_data" "k3s_nishir" {
@@ -39,32 +59,9 @@ resource "terraform_data" "k3s_nishir" {
     host     = local.connection_creds.nishir_host
     password = local.connection_creds.nishir_password
   }
-  provisioner "file" {
-    content = join("\n", [
-      "K3S_TLS_SAN=${var.endpoints.nishir}",
-      "K3S_CLUSTER_CIDR=${join(",", var.cirds.cluster)}",
-      "K3S_SERVICE_CIDR=${join(",", var.cirds.service)}",
-      "K3S_DATA_DIR=/mnt/nishir/rancher/k3s",
-      "K3S_NODE_IP=${join(",", var.ip_addresses.nishir)}",
-      "K3S_FLANNEL_BACKEND=host-gw",
-      "K3S_ETCD_S3=true",
-      "K3S_ETCD_S3_ACCESS_KEY=${local.etcd_snapshot_s3_creds.access_key_id}",
-      "K3S_ETCD_S3_SECRET_KEY=${local.etcd_snapshot_s3_creds.secret_access_key}",
-      "K3S_ETCD_S3_ENDPOINT=${var.endpoints.s3}",
-      "K3S_ETCD_S3_REGION=${var.regions.aws_s3_bucket}",
-      "K3S_ETCD_S3_BUCKET=${var.buckets.etcd_backups}"
-    ])
-    destination = "/etc/default/k3s"
+  provisioner "remote-exec" {
+    inline = local.k3s_server_install_script
   }
-  provisioner "file" {
-    content     = data.http.k3s.response_body
-    destination = "/tmp/nishir-k3s-install.sh"
-  }
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_token}"
-  #   ]
-  # }
 }
 
 resource "terraform_data" "tailscale_flandre" {
@@ -75,22 +72,12 @@ resource "terraform_data" "tailscale_flandre" {
     password = local.connection_creds.flandre_password
   }
   provisioner "file" {
-    content = join("\n", [
-      "PORT=41641",
-      "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
-    ])
-    destination = "/etc/default/tailscaled"
-  }
-  provisioner "file" {
     content     = data.http.tailscale.response_body
     destination = "/tmp/nishir-tailscale-install.sh"
   }
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sh /tmp/nishir-tailscale-install.sh",
-  #     "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
-  #   ]
-  # }
+  provisioner "remote-exec" {
+    inline = local.tailscale_install_script
+  }
 }
 
 resource "terraform_data" "k3s_flandre" {
@@ -100,25 +87,7 @@ resource "terraform_data" "k3s_flandre" {
     host     = local.connection_creds.flandre_host
     password = local.connection_creds.flandre_password
   }
-  provisioner "file" {
-    content = join("\n", [
-      "K3S_SERVER=https://${var.endpoints.nishir}:6443",
-      "K3S_TLS_SAN=${var.endpoints.flandre}",
-      "K3S_CLUSTER_CIDR=${join(",", var.cirds.cluster)}",
-      "K3S_SERVICE_CIDR=${join(",", var.cirds.service)}",
-      "K3S_DATA_DIR=/mnt/nishir/rancher/k3s",
-      "K3S_NODE_IP=${join(",", var.ip_addresses.flandre)}",
-      "K3S_FLANNEL_BACKEND=host-gw"
-    ])
-    destination = "/etc/default/k3s"
+  provisioner "remote-exec" {
+    inline = local.k3s_agent_install_script
   }
-  provisioner "file" {
-    content     = data.http.k3s.response_body
-    destination = "/tmp/nishir-k3s-install.sh"
-  }
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_server_token}"
-  #   ]
-  # }
 }
