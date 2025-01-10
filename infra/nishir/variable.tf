@@ -22,6 +22,18 @@ variable "stack" {
   default     = "370431"
 }
 
+variable "regions" {
+  type = object({
+    grafana_cloud_access_policy = string
+    aws_s3_bucket               = string
+  })
+  description = "Resource regions"
+  default = {
+    grafana_cloud_access_policy = "eu"
+    aws_s3_bucket               = "fsn1"
+  }
+}
+
 variable "secrets" {
   type = object({
     tailscale_operator_oauth_client = string

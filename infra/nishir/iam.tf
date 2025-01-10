@@ -1,5 +1,5 @@
 resource "grafana_cloud_access_policy" "kubernetes" {
-  region       = "eu"
+  region       = var.regions.grafana_cloud_access_policy
   name         = "stack-${var.stack}-integration-${var.name}"
   display_name = "Shikanime Integration ${var.display_name}"
 
@@ -17,7 +17,7 @@ resource "grafana_cloud_access_policy" "kubernetes" {
 }
 
 resource "grafana_cloud_access_policy_token" "kubernetes" {
-  region           = "eu"
+  region           = var.regions.grafana_cloud_access_policy
   access_policy_id = grafana_cloud_access_policy.kubernetes.policy_id
   name             = "${var.name}-kubernetes"
   display_name     = "${var.display_name} Kubernetes"
