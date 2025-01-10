@@ -1,29 +1,29 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sukebe
+  name: sukebe-data
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Ti
   storageClassName: nishir-standard
   volumeMode: Filesystem
-  volumeName: sukebe
+  volumeName: sukebe-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sync
+  name: sync-data
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Ti
   storageClassName: nishir-standard
   volumeMode: Filesystem
-  volumeName: sync
+  volumeName: sync-data

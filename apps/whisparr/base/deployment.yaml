@@ -46,4 +46,4 @@ spec:
             claimName: downloads
         - name: data-sukebe
           persistentVolumeClaim:
-            claimName: sukebe
+            claimName: sukebe-data
