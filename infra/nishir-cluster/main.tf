@@ -2,29 +2,29 @@ locals {
   k3s_server_install_script = [
     join(" ", [
       "curl -fsSL https://get.k3s.io | sh -s -",
-      "--tls-san ${var.endpoints.nishir}",
       "--cluster-cidrs ${join(",", var.cirds.cluster)}",
-      "--service-cidrs ${join(",", var.cirds.service)}",
-      "--node-ip ${join(",", var.ip_addresses.nishir)}",
-      "--flannel-backend host-gw",
-      "--etcd-s3",
       "--etcd-s3-access-key ${local.etcd_snapshot_s3_creds.access_key_id}",
-      "--etcd-s3-secret-key ${local.etcd_snapshot_s3_creds.secret_access_key}",
+      "--etcd-s3-bucket ${var.buckets.etcd_backups}",
       "--etcd-s3-endpoint ${var.endpoints.s3}",
       "--etcd-s3-region ${var.regions.aws_s3_bucket}",
-      "--etcd-s3-bucket ${var.buckets.etcd_backups}"
+      "--etcd-s3-secret-key ${local.etcd_snapshot_s3_creds.secret_access_key}",
+      "--etcd-s3",
+      "--flannel-backend host-gw",
+      "--node-ip ${join(",", var.ip_addresses.nishir)}",
+      "--service-cidrs ${join(",", var.cirds.service)}",
+      "--tls-san ${var.endpoints.nishir}",
     ])
   ]
   k3s_agent_install_script = [
     join(" ", [
       "curl -fsSL https://get.k3s.io | sh -s -",
-      "--server https://${var.endpoints.nishir}:6443",
-      "--token ${local.tokens.k3s_server_token}",
-      "--tls-san ${var.endpoints.flandre}",
       "--cluster-cidr ${join(",", var.cirds.cluster)}",
-      "--service-cidr ${join(",", var.cirds.service)}",
+      "--flannel-backend host-gw",
       "--node-ip ${join(",", var.ip_addresses.flandre)}",
-      "--flannel-backend host-gw"
+      "--server https://${var.endpoints.nishir}:6443",
+      "--service-cidr ${join(",", var.cirds.service)}",
+      "--tls-san ${var.endpoints.flandre}",
+      "--token ${local.tokens.k3s_server_token}",
     ])
   ]
   tailscale_install_script = [
@@ -32,9 +32,9 @@ locals {
     join(" ", [
       "tailscale",
       "up",
-      "--authkey ${local.tokens.tailscale_auth_key}",
-      "--advertise-exit-node",
       "--accept-routes",
+      "--advertise-exit-node",
+      "--authkey ${local.tokens.tailscale_auth_key}",
       "--ssh"
     ])
   ]
