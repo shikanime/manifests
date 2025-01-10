@@ -1,5 +1,5 @@
 locals {
-  longhorn_backup_target = "s3://${aws_s3_bucket.longhorn_backups.bucket}@${var.regions.longhorn_backups}/"
+  longhorn_backup_target = "s3://${aws_s3_bucket.longhorn_backups.bucket}@${var.regions.aws_s3_bucket}/"
 }
 
 resource "random_id" "longhorn_backups" {
