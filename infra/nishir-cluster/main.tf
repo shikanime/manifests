@@ -16,7 +16,7 @@ resource "terraform_data" "tailscale_nishir" {
   provisioner "file" {
     content = join("\n", [
       "PORT=41641",
-      "TS_AUTHKEY=${local.tailscale_oauth_client_data.auth_key}",
+      "TS_AUTHKEY=${local.tokens.tailscale_auth_key}",
       "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
     ])
     destination = "/etc/default/tailscaled"
@@ -51,7 +51,7 @@ resource "terraform_data" "k3s_nishir" {
       "K3S_ETCD_S3_ENDPOINT=fsn1.your-objectstorage.com",
       "K3S_ETCD_S3_REGION=${regex("s3://.*@(.*)", var.buckets.etcd_snapshot_s3).0}",
       "K3S_ETCD_S3_BUCKET=${regex("s3://(.*)@.*", var.buckets.etcd_snapshot_s3).0}",
-      "K3S_TOKEN=${local.k3s_token.token}"
+      "K3S_TOKEN=${local.tokens.k3s_server_token}"
     ])
     destination = "/etc/default/k3s"
   }
@@ -74,7 +74,7 @@ resource "terraform_data" "tailscale_flandre" {
   provisioner "file" {
     content = join("\n", [
       "PORT=41641",
-      "TS_AUTHKEY=${local.tailscale_oauth_client_data.auth_key}",
+      "TS_AUTHKEY=${local.tokens.tailscale_auth_key}",
       "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
     ])
     destination = "/etc/default/tailscaled"
@@ -104,7 +104,7 @@ resource "terraform_data" "k3s_flandre" {
       "DATA_DIR=/mnt/nishir/rancher/k3s",
       "NODE_IP=${var.ip_addresses.flandre}",
       "FLANNEL_BACKEND=host-gw",
-      "TOKEN=${local.k3s_token.token}"
+      "TOKEN=${local.tokens.k3s_server_token}"
     ])
     destination = "/etc/default/k3s"
   }

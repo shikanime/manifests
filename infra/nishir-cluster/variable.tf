@@ -36,16 +36,14 @@ variable "cirds" {
 
 variable "secrets" {
   type = object({
-    tailscale_oauth_client = string
     etcd_snapshot_s3_creds = string
     connection_creds       = string
-    k3s_token              = string
+    tokens                 = string
   })
   description = "Scaleway secrets ID"
   default = {
-    tailscale_oauth_client = ""
-    etcd_snapshot_s3_creds = ""
+    etcd_snapshot_s3_creds = "f852d0e5-e603-4a38-8287-f8bd3ec42ebe"
     connection_creds       = ""
-    k3s_token              = ""
+    tokens                 = "3a598e4c-c3cd-46c1-ad85-222bc1224c4d"
   }
 }
