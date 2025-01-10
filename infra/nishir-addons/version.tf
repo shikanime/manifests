@@ -28,7 +28,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.regions.aws_s3_bucket
+  region = var.regions.longhorn_backups
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true
