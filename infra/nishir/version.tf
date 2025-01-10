@@ -34,6 +34,6 @@ provider "aws" {
   skip_requesting_account_id  = true
   skip_region_validation      = true
   endpoints {
-    s3 = "https://${var.regions.aws_s3_bucket}.your-objectstorage.com"
+    s3 = var.endpoints.s3
   }
 }
