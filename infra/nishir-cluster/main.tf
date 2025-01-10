@@ -1,12 +1,3 @@
-locals {
-  tailscale_up_script = <<-EOT
-  tailscale up \
-    --authkey ${local.tailscale_oauth_client_data.auth_key} \
-    --accept-routes \
-    --ssh
-  EOT
-}
-
 data "http" "tailscale" {
   url = "https://tailscale.com/install.sh"
 }
@@ -23,16 +14,19 @@ resource "terraform_data" "tailscale_nishir" {
     password = local.connection_creds.nishir.password
   }
   provisioner "file" {
+    content = <<-EOT
+    PORT="41641"
+    TS_AUTHKEY="${local.tailscale_oauth_client_data.auth_key}"
+    TS_EXTRA_ARGS="--advertise-exit-node --accept-routes --ssh"
+    EOT
+    destination = "/etc/default/tailscaled"
+  }
+  provisioner "file" {
     content     = data.http.tailscale.body
     destination = "/tmp/nishir/tailscale/install.sh"
   }
   provisioner "remote-exec" {
     script = "/tmp/nishir/tailscale/install.sh"
-  }
-  provisioner "remote-exec" {
-    inline = [
-      local.tailscale_up_script
-    ]
   }
 }
 
@@ -50,12 +44,11 @@ resource "terraform_data" "k3s_nishir" {
       service-cidr       = var.cirds.service
       data-dir           = "/mnt/nishir/rancher/k3s"
       node-ip            = var.ip_addresses.nishir
-      flannel-backend    = "wireguard-native"
-      flannel-iface      = "eth0"
+      flannel-backend    = "host-gw"
       etcd-s3            = true
       etcd-s3-access-key = local.etcd_snapshot_s3_creds.access_key_id
       etcd-s3-secret-key = local.etcd_snapshot_s3_creds.secret_access_key
-      etcd-s3-endpoint   = "https://fsn1.your-objectstorage.com"
+      etcd-s3-endpoint   = "fsn1.your-objectstorage.com"
       etcd-s3-region     = regex("s3://.*@(.*)", var.buckets.etcd_snapshot_s3).0
       etcd-s3-bucket     = regex("s3://(.*)@.*", var.buckets.etcd_snapshot_s3).0
       token              = local.k3s_token.token
@@ -79,16 +72,19 @@ resource "terraform_data" "tailscale_flandre" {
     password = local.connection_creds.flandre.password
   }
   provisioner "file" {
+    content = <<-EOT
+    PORT="41641"
+    TS_AUTHKEY="${local.tailscale_oauth_client_data.auth_key}"
+    TS_EXTRA_ARGS="--advertise-exit-node --accept-routes --ssh"
+    EOT
+    destination = "/etc/default/tailscaled"
+  }
+  provisioner "file" {
     content     = data.http.tailscale.body
     destination = "/tmp/nishir/tailscale/install.sh"
   }
   provisioner "remote-exec" {
     script = "/tmp/nishir/tailscale/install.sh"
-  }
-  provisioner "remote-exec" {
-    inline = [
-      local.tailscale_up_script
-    ]
   }
 }
 
@@ -108,8 +104,7 @@ resource "terraform_data" "k3s_flandre" {
       service-cidr    = var.cirds.service
       data-dir        = "/mnt/nishir/rancher/k3s"
       node-ip         = var.ip_addresses.flandre
-      flannel-backend = "wireguard-native"
-      flannel-iface   = "eth0"
+      flannel-backend = "host-gw"
       token           = local.k3s_token.token
     })
     destination = "/etc/rancher/k3s/config.yaml"
