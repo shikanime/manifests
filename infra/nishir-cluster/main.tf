@@ -1,3 +1,12 @@
+locals {
+  tailscale_up_script = <<-EOT
+  tailscale up \
+    --authkey ${local.tailscale_oauth_client_data.auth_key} \
+    --accept-routes \
+    --ssh
+  EOT
+}
+
 data "http" "tailscale" {
   url = "https://tailscale.com/install.sh"
 }
@@ -22,14 +31,7 @@ resource "terraform_data" "tailscale_nishir" {
   }
   provisioner "remote-exec" {
     inline = [
-      join(" ", [
-        "tailscale",
-        "up",
-        "--authkey",
-        local.tailscale_token.auth_key,
-        "--accept-routes",
-        "--ssh"
-      ])
+      local.tailscale_up_script
     ]
   }
 }
@@ -85,14 +87,7 @@ resource "terraform_data" "tailscale_flandre" {
   }
   provisioner "remote-exec" {
     inline = [
-      join(" ", [
-        "tailscale",
-        "up",
-        "--authkey",
-        local.tailscale_token.auth_key,
-        "--accept-routes",
-        "--ssh"
-      ])
+      local.tailscale_up_script
     ]
   }
 }
