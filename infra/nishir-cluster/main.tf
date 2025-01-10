@@ -38,22 +38,22 @@ resource "terraform_data" "k3s_nishir" {
     password = local.connection_creds.nishir.password
   }
   provisioner "file" {
-    content = jsonencode({
-      tls-san            = var.endpoints.nishir
-      cluster-cidr       = var.cirds.cluster
-      service-cidr       = var.cirds.service
-      data-dir           = "/mnt/nishir/rancher/k3s"
-      node-ip            = var.ip_addresses.nishir
-      flannel-backend    = "host-gw"
-      etcd-s3            = true
-      etcd-s3-access-key = local.etcd_snapshot_s3_creds.access_key_id
-      etcd-s3-secret-key = local.etcd_snapshot_s3_creds.secret_access_key
-      etcd-s3-endpoint   = "fsn1.your-objectstorage.com"
-      etcd-s3-region     = regex("s3://.*@(.*)", var.buckets.etcd_snapshot_s3).0
-      etcd-s3-bucket     = regex("s3://(.*)@.*", var.buckets.etcd_snapshot_s3).0
-      token              = local.k3s_token.token
-    })
-    destination = "/etc/rancher/k3s/config.yaml"
+    content = join("\n", [
+      "K3S_TLS_SAN=${var.endpoints.nishir}",
+      "K3S_CLUSTER_CIDR=${var.cirds.cluster}",
+      "K3S_SERVICE_CIDR=${var.cirds.service}",
+      "K3S_DATA_DIR=/mnt/nishir/rancher/k3s",
+      "K3S_NODE_IP=${var.ip_addresses.nishir}",
+      "K3S_FLANNEL_BACKEND=host-gw",
+      "K3S_ETCD_S3=true",
+      "K3S_ETCD_S3_ACCESS_KEY=${local.etcd_snapshot_s3_creds.access_key_id}",
+      "K3S_ETCD_S3_SECRET_KEY=${local.etcd_snapshot_s3_creds.secret_access_key}",
+      "K3S_ETCD_S3_ENDPOINT=fsn1.your-objectstorage.com",
+      "K3S_ETCD_S3_REGION=${regex("s3://.*@(.*)", var.buckets.etcd_snapshot_s3).0}",
+      "K3S_ETCD_S3_BUCKET=${regex("s3://(.*)@.*", var.buckets.etcd_snapshot_s3).0}",
+      "K3S_TOKEN=${local.k3s_token.token}"
+    ])
+    destination = "/etc/default/k3s"
   }
   provisioner "file" {
     content     = data.http.k3s.body
@@ -97,17 +97,17 @@ resource "terraform_data" "k3s_flandre" {
     password = local.connection_creds.flandre.password
   }
   provisioner "file" {
-    content = jsonencode({
-      server          = "https://${var.endpoints.nishir}:6443"
-      tls-san         = var.endpoints.flandre
-      cluster-cidr    = var.cirds.cluster
-      service-cidr    = var.cirds.service
-      data-dir        = "/mnt/nishir/rancher/k3s"
-      node-ip         = var.ip_addresses.flandre
-      flannel-backend = "host-gw"
-      token           = local.k3s_token.token
-    })
-    destination = "/etc/rancher/k3s/config.yaml"
+    content = join("\n", [
+      "SERVER=https://${var.endpoints.nishir}:6443",
+      "TLS_SAN=${var.endpoints.flandre}",
+      "CLUSTER_CIDR=${var.cirds.cluster}",
+      "SERVICE_CIDR=${var.cirds.service}",
+      "DATA_DIR=/mnt/nishir/rancher/k3s",
+      "NODE_IP=${var.ip_addresses.flandre}",
+      "FLANNEL_BACKEND=host-gw",
+      "TOKEN=${local.k3s_token.token}"
+    ])
+    destination = "/etc/default/k3s"
   }
   provisioner "file" {
     content     = data.http.k3s.body
