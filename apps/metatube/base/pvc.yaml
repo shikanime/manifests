@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 256Mi
+      storage: 512Mi
   storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: metatube-data
