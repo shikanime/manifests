@@ -14,11 +14,11 @@ resource "terraform_data" "tailscale_nishir" {
     password = local.connection_creds.nishir.password
   }
   provisioner "file" {
-    content = <<-EOT
-    PORT="41641"
-    TS_AUTHKEY="${local.tailscale_oauth_client_data.auth_key}"
-    TS_EXTRA_ARGS="--advertise-exit-node --accept-routes --ssh"
-    EOT
+    content = join("\n", [
+      "PORT=41641",
+      "TS_AUTHKEY=${local.tailscale_oauth_client_data.auth_key}",
+      "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
+    ])
     destination = "/etc/default/tailscaled"
   }
   provisioner "file" {
@@ -72,11 +72,11 @@ resource "terraform_data" "tailscale_flandre" {
     password = local.connection_creds.flandre.password
   }
   provisioner "file" {
-    content = <<-EOT
-    PORT="41641"
-    TS_AUTHKEY="${local.tailscale_oauth_client_data.auth_key}"
-    TS_EXTRA_ARGS="--advertise-exit-node --accept-routes --ssh"
-    EOT
+    content = join("\n", [
+      "PORT=41641",
+      "TS_AUTHKEY=${local.tailscale_oauth_client_data.auth_key}",
+      "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
+    ])
     destination = "/etc/default/tailscaled"
   }
   provisioner "file" {
