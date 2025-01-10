@@ -17,20 +17,6 @@ data "scaleway_secret_version" "longhorn_backupstore_s3_creds" {
   revision  = "latest"
 }
 
-resource "scaleway_secret" "etcd_snapshot_oauth_client" {
-  name        = "oauth-client"
-  description = "${var.display_name} ETCD snapshot OAuth client"
-  path        = "/${var.name}/etcd-snapshot"
-}
-
-resource "scaleway_secret_version" "etcd_snapshot_oauth_client" {
-  secret_id = scaleway_secret.etcd_snapshot_oauth_client.id
-  data = jsonencode({
-    clientId     = cloudflare_api_token.etcd_snapshot.id
-    clientSecret = sha256(cloudflare_api_token.etcd_snapshot.value)
-  })
-}
-
 resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   metadata {
     name      = "tailscale-operator-oauth-client"
