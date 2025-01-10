@@ -41,6 +41,10 @@ locals {
 }
 
 resource "terraform_data" "nishir" {
+  input = {
+    tailscale_install_script = local.tailscale_install_script
+    k3s_server_install_script = local.k3s_server_install_script
+  }
   connection {
     type     = local.connection_creds.nishir_type
     user     = local.connection_creds.nishir_user
@@ -48,15 +52,19 @@ resource "terraform_data" "nishir" {
     password = local.connection_creds.nishir_password
   }
   provisioner "remote-exec" {
-    inline = local.tailscale_install_script
+    inline = self.tailscale_install_script
   }
 
   provisioner "remote-exec" {
-    inline = local.k3s_server_install_script
+    inline = self.k3s_server_install_script
   }
 }
 
 resource "terraform_data" "flandre" {
+  input = {
+    tailscale_install_script = local.tailscale_install_script
+    k3s_agent_install_script = local.k3s_agent_install_script
+  }
   connection {
     type     = local.connection_creds.flandre_type
     user     = local.connection_creds.flandre_user
@@ -64,9 +72,9 @@ resource "terraform_data" "flandre" {
     password = local.connection_creds.flandre_password
   }
   provisioner "remote-exec" {
-    inline = local.tailscale_install_script
+    inline = self.tailscale_install_script
   }
   provisioner "remote-exec" {
-    inline = local.k3s_agent_install_script
+    inline = self.k3s_agent_install_script
   }
 }
