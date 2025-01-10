@@ -25,10 +25,8 @@ resource "terraform_data" "tailscale_nishir" {
     destination = "/tmp/nishir-tailscale-install.sh"
   }
   # provisioner "remote-exec" {
-  #   script = "/tmp/nishir-tailscale-install.sh"
-  # }
-  # provisioner "remote-exec" {
   #   inline = [
+  #     "sh /tmp/nishir-tailscale-install.sh",
   #     "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
   #   ]
   # }
@@ -88,10 +86,8 @@ resource "terraform_data" "tailscale_flandre" {
     destination = "/tmp/nishir-tailscale-install.sh"
   }
   # provisioner "remote-exec" {
-  #   script = "/tmp/nishir-tailscale-install.sh"
-  # }
-  # provisioner "remote-exec" {
   #   inline = [
+  #     "sh /tmp/nishir-tailscale-install.sh",
   #     "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
   #   ]
   # }
