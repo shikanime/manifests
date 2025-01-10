@@ -39,7 +39,7 @@ resource "kubernetes_secret" "longhorn_hetzner_backups" {
   data = {
     AWS_ACCESS_KEY_ID     = local.longhorn_backupstore_s3_creds_data.access_key_id
     AWS_SECRET_ACCESS_KEY = local.longhorn_backupstore_s3_creds_data.secret_access_key
-    AWS_ENDPOINTS         = local.longhorn_endpoints
+    AWS_ENDPOINTS         = var.endpoints.s3
   }
 }
 
