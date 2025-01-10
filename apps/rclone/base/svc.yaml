@@ -6,9 +6,9 @@ metadata:
 spec:
   loadBalancerClass: tailscale
   ports:
-    - name: http
+    - name: webdav
       port: 80
-      targetPort: http
+      targetPort: webdav
     - name: ftp-control
       port: 21
       targetPort: ftp-control

@@ -14,7 +14,7 @@ spec:
         app.kubernetes.io/name: rclone
     spec:
       containers:
-        - name: rclone
+        - name: rclone-webdav
           image: rclone
           args:
             - serve
@@ -25,7 +25,7 @@ spec:
               value: 0.0.0.0:8080
           ports:
             - containerPort: 8080
-              name: http
+              name: webdav
           volumeMounts:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
