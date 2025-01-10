@@ -1,24 +1,24 @@
 variable "endpoints" {
-  type        = object({
-    nishir = list(string)
-    flandre = list(string)
+  type = object({
+    nishir  = string
+    flandre = string
   })
   description = "The endpoints of the cluster"
-  default     = {
-    nishir = ["nishir.taila659a.ts.net"]
-    flandre=["flandre.taila659a.ts.net"]
+  default = {
+    nishir  = "nishir.taila659a.ts.net"
+    flandre = "flandre.taila659a.ts.net"
   }
 }
 
 variable "ip_addresses" {
-  type        = object({
-    nishir = list(string)
+  type = object({
+    nishir  = list(string)
     flandre = list(string)
   })
   description = "The IP addresses of the node"
-  default     = {
-    nishir =["192.168.1.100", "2001:cafe:42::100"]
-    flandre=["100.78.148.86", "fd7a:115c:a1e0::8001:9456"]
+  default = {
+    nishir  = ["192.168.1.100", "2001:cafe:42::100"]
+    flandre = ["100.78.148.86", "fd7a:115c:a1e0::8001:9456"]
   }
 }
 

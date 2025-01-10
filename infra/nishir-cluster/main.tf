@@ -58,7 +58,7 @@ resource "terraform_data" "k3s_nishir" {
       etcd-s3-endpoint   = "https://fsn1.your-objectstorage.com"
       etcd-s3-region     = regex("s3://.*@(.*)", var.buckets.etcd_snapshot_s3).0
       etcd-s3-bucket     = regex("s3://(.*)@.*", var.buckets.etcd_snapshot_s3).0
-      token             = local.k3s_token.token
+      token              = local.k3s_token.token
     })
     destination = "/etc/rancher/k3s/config.yaml"
   }
@@ -102,14 +102,15 @@ resource "terraform_data" "k3s_flandre" {
   }
   provisioner "file" {
     content = jsonencode({
-      tls-san            = var.endpoints.flandre
-      cluster-cidr       = var.cirds.cluster
-      service-cidr       = var.cirds.service
-      data-dir           = "/mnt/nishir/rancher/k3s"
-      node-ip            = var.ip_addresses.flandre
-      flannel-backend    = "wireguard-native"
-      flannel-iface      = "eth0"
-      token             = local.k3s_token.token
+      server          = "https://${var.endpoints.nishir}:6443"
+      tls-san         = var.endpoints.flandre
+      cluster-cidr    = var.cirds.cluster
+      service-cidr    = var.cirds.service
+      data-dir        = "/mnt/nishir/rancher/k3s"
+      node-ip         = var.ip_addresses.flandre
+      flannel-backend = "wireguard-native"
+      flannel-iface   = "eth0"
+      token           = local.k3s_token.token
     })
     destination = "/etc/rancher/k3s/config.yaml"
   }
