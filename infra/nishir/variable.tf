@@ -25,12 +25,12 @@ variable "stack" {
 variable "regions" {
   type = object({
     grafana_cloud_access_policy = string
-    longhorn_backups            = string
+    aws_s3_bucket               = string
   })
   description = "Resource regions"
   default = {
     grafana_cloud_access_policy = "eu"
-    longhorn_backups            = "fsn1"
+    aws_s3_bucket               = "fsn1"
   }
 }
 
