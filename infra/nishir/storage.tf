@@ -1,6 +1,6 @@
 locals {
-  longhorn_backup_target = "s3://${aws_s3_bucket.longhorn_backups.bucket}@fsn1/"
-  longhorn_endpoints     = "https://fsn1.your-objectstorage.com"
+  longhorn_backup_target = "s3://${aws_s3_bucket.longhorn_backups.bucket}@${var.regions.aws_s3_bucket}/"
+  longhorn_endpoints     = "https://${var.regions.aws_s3_bucket}.your-objectstorage.com"
 }
 
 resource "random_id" "longhorn_backups" {
