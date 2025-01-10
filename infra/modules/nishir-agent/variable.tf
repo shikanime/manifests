@@ -1,9 +1,3 @@
-variable "host" {
-  type        = string
-  description = "The hostname of the node"
-  default     = "flandre.local"
-}
-
 variable "endpoints" {
   type        = list(string)
   description = "The endpoints of the cluster"
