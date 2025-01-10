@@ -88,7 +88,6 @@ resource "terraform_data" "tailscale_flandre" {
   }
 }
 
-
 resource "terraform_data" "k3s_flandre" {
   connection {
     type     = local.connection_creds.flandre.type
