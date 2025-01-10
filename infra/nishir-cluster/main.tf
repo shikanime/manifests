@@ -16,14 +16,21 @@ resource "terraform_data" "tailscale_nishir" {
   provisioner "file" {
     content = join("\n", [
       "PORT=41641",
-      "TS_AUTHKEY=${local.tokens.tailscale_auth_key}",
       "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
     ])
     destination = "/etc/default/tailscaled"
   }
   provisioner "file" {
     content     = data.http.tailscale.response_body
-    destination = "/tmp/nishir/tailscale/install.sh"
+    destination = "/tmp/nishir-tailscale-install.sh"
+  }
+  provisioner "remote-exec" {
+    script = "/tmp/nishir-tailscale-install.sh"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
+    ]
   }
 }
 
@@ -54,7 +61,7 @@ resource "terraform_data" "k3s_nishir" {
   }
   provisioner "file" {
     content     = data.http.k3s.response_body
-    destination = "/tmp/nishir/k3s/install.sh"
+    destination = "/tmp/nishir-k3s-install.sh"
   }
 }
 
@@ -75,7 +82,15 @@ resource "terraform_data" "tailscale_flandre" {
   }
   provisioner "file" {
     content     = data.http.tailscale.response_body
-    destination = "/tmp/nishir/tailscale/install.sh"
+    destination = "/tmp/nishir-tailscale-install.sh"
+  }
+  provisioner "remote-exec" {
+    script = "/tmp/nishir-tailscale-install.sh"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "tailscale up --authkey ${local.tokens.tailscale_auth_key}"
+    ]
   }
 }
 
@@ -93,7 +108,7 @@ resource "terraform_data" "k3s_flandre" {
       "CLUSTER_CIDR=${join(",", var.cirds.cluster)}",
       "SERVICE_CIDR=${join(",", var.cirds.service)}",
       "DATA_DIR=/mnt/nishir/rancher/k3s",
-      "NODE_IP=${join(",",var.ip_addresses.flandre)}",
+      "NODE_IP=${join(",", var.ip_addresses.flandre)}",
       "FLANNEL_BACKEND=host-gw",
       "TOKEN=${local.tokens.k3s_server_token}"
     ])
@@ -101,6 +116,6 @@ resource "terraform_data" "k3s_flandre" {
   }
   provisioner "file" {
     content     = data.http.k3s.response_body
-    destination = "/tmp/nishir/k3s/install.sh"
+    destination = "/tmp/nishir-k3s-install.sh"
   }
 }
