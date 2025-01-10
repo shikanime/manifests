@@ -54,14 +54,18 @@ resource "terraform_data" "k3s_nishir" {
       "K3S_ETCD_S3_SECRET_KEY=${local.etcd_snapshot_s3_creds.secret_access_key}",
       "K3S_ETCD_S3_ENDPOINT=fsn1.your-objectstorage.com",
       "K3S_ETCD_S3_REGION=${var.regions.aws_s3_bucket}",
-      "K3S_ETCD_S3_BUCKET=${var.buckets.etcd_backups}",
-      "K3S_TOKEN=${local.tokens.k3s_server_token}"
+      "K3S_ETCD_S3_BUCKET=${var.buckets.etcd_backups}"
     ])
     destination = "/etc/default/k3s"
   }
   provisioner "file" {
     content     = data.http.k3s.response_body
     destination = "/tmp/nishir-k3s-install.sh"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_token}"
+    ]
   }
 }
 
@@ -75,7 +79,6 @@ resource "terraform_data" "tailscale_flandre" {
   provisioner "file" {
     content = join("\n", [
       "PORT=41641",
-      "TS_AUTHKEY=${local.tokens.tailscale_auth_key}",
       "TS_EXTRA_ARGS=--advertise-exit-node --accept-routes --ssh"
     ])
     destination = "/etc/default/tailscaled"
@@ -103,19 +106,23 @@ resource "terraform_data" "k3s_flandre" {
   }
   provisioner "file" {
     content = join("\n", [
-      "SERVER=https://${var.endpoints.nishir}:6443",
-      "TLS_SAN=${var.endpoints.flandre}",
-      "CLUSTER_CIDR=${join(",", var.cirds.cluster)}",
-      "SERVICE_CIDR=${join(",", var.cirds.service)}",
-      "DATA_DIR=/mnt/nishir/rancher/k3s",
-      "NODE_IP=${join(",", var.ip_addresses.flandre)}",
-      "FLANNEL_BACKEND=host-gw",
-      "TOKEN=${local.tokens.k3s_server_token}"
+      "K3S_SERVER=https://${var.endpoints.nishir}:6443",
+      "K3S_TLS_SAN=${var.endpoints.flandre}",
+      "K3S_CLUSTER_CIDR=${join(",", var.cirds.cluster)}",
+      "K3S_SERVICE_CIDR=${join(",", var.cirds.service)}",
+      "K3S_DATA_DIR=/mnt/nishir/rancher/k3s",
+      "K3S_NODE_IP=${join(",", var.ip_addresses.flandre)}",
+      "K3S_FLANNEL_BACKEND=host-gw"
     ])
     destination = "/etc/default/k3s"
   }
   provisioner "file" {
     content     = data.http.k3s.response_body
     destination = "/tmp/nishir-k3s-install.sh"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "sh /tmp/nishir-k3s-install.sh --token ${local.tokens.k3s_server_token}"
+    ]
   }
 }
