@@ -28,12 +28,12 @@ terraform {
 }
 
 provider "aws" {
-  region = var.regions.aws_s3_bucket
+  region = var.regions.longhorn_backups
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true
   skip_region_validation      = true
   endpoints {
-    s3 = "https://${var.regions.aws_s3_bucket}.your-objectstorage.com"
+    s3 = "https://${var.regions.longhorn_backups}.your-objectstorage.com"
   }
 }
