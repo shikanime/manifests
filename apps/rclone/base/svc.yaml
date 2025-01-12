@@ -11,6 +11,7 @@ spec:
       targetPort: webdav
   selector:
     app.kubernetes.io/name: rclone
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: Service
