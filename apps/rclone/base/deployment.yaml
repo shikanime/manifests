@@ -23,6 +23,8 @@ spec:
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:8080
+            - name: RCLONE_FTP_PORT
+              value: "2121"
           ports:
             - containerPort: 8080
               name: webdav
@@ -30,6 +32,7 @@ spec:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
+              readOnly: true
         - name: rclone-ftp
           image: rclone
           args:
@@ -51,6 +54,8 @@ spec:
                 secretKeyRef:
                   name: rclone
                   key: password
+            - name: RCLONE_FTP_PORT
+              value: "2121"
           ports:
             - containerPort: 2121
               name: ftp-control
@@ -118,6 +123,7 @@ spec:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
+              readOnly: true
       volumes:
         - name: rclone-config
           configMap:
