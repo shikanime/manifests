@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rclone-webdav
+  name: rclone-webdav-server
   namespace: shikanime
 spec:
   loadBalancerClass: tailscale
@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rclone-ftp
+  name: rclone-ftp-server
   namespace: shikanime
 spec:
   loadBalancerClass: tailscale
