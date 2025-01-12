@@ -14,7 +14,7 @@ spec:
         app.kubernetes.io/name: rclone
     spec:
       containers:
-        - name: rclone-webdav-server
+        - name: rclone-server-webdav
           image: rclone
           args:
             - serve
@@ -31,7 +31,7 @@ spec:
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
-        - name: rclone-ftp-server
+        - name: rclone-server-ftp
           image: rclone
           args:
             - serve
