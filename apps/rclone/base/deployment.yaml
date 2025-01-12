@@ -30,6 +30,7 @@ spec:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
+              readOnly: true
         - name: rclone-ftp
           image: rclone
           args:
@@ -118,6 +119,7 @@ spec:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
+              readOnly: true
       volumes:
         - name: rclone-config
           configMap:

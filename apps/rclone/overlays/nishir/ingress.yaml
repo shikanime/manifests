@@ -8,7 +8,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: rclone-webdav
+      name: webdav
       port:
         name: webdav
   ingressClassName: tailscale
