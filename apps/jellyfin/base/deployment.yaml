@@ -31,9 +31,6 @@ spec:
             - containerPort: 7359
               name: discovery
               protocol: UDP
-            - containerPort: 1900
-              name: ssdp
-              protocol: UDP
           securityContext:
             privileged: true
           volumeMounts:
