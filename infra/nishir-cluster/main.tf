@@ -38,11 +38,27 @@ locals {
       "--ssh"
     ])
   ]
+  sysctl_config = join("\n", [
+    "kernel.panic=10",
+    "kernel.panic_on_oops=1",
+    "fs.inotify.max_user_watches=524288",
+    "fs.inotify.max_user_instances=8192",
+    "fs.inotify.max_queued_events=16384",
+    "fs.file-max=131072",
+    "net.core.rmem_default=7340032",
+    "user.max_inotify_instances=8192",
+    "user.max_inotify_watches=524288",
+    "vm.overcommit_memory=1"
+  ])
+  tailscale_sysctl_config = join("\n", [
+    "net.ipv4.ip_forward=1",
+    "net.ipv6.conf.all.forwarding=1"
+  ])
 }
 
 resource "terraform_data" "nishir" {
   input = {
-    tailscale_install_script = local.tailscale_install_script
+    tailscale_install_script  = local.tailscale_install_script
     k3s_server_install_script = local.k3s_server_install_script
   }
   connection {
@@ -50,6 +66,14 @@ resource "terraform_data" "nishir" {
     user     = local.connection_creds.nishir_user
     host     = local.connection_creds.nishir_host
     password = local.connection_creds.nishir_password
+  }
+  provisioner "file" {
+    content     = local.tailscale_sysctl_config
+    destination = "/etc/sysctl.d/99-tailscale.conf"
+  }
+  provisioner "file" {
+    content     = local.sysctl_config
+    destination = "/etc/sysctl.d/99-k8s.conf"
   }
   provisioner "remote-exec" {
     inline = self.tailscale_install_script
@@ -70,6 +94,14 @@ resource "terraform_data" "flandre" {
     user     = local.connection_creds.flandre_user
     host     = local.connection_creds.flandre_host
     password = local.connection_creds.flandre_password
+  }
+  provisioner "file" {
+    content     = local.tailscale_sysctl_config
+    destination = "/etc/sysctl.d/99-tailscale.conf"
+  }
+  provisioner "file" {
+    content     = local.sysctl_config
+    destination = "/etc/sysctl.d/99-k8s.conf"
   }
   provisioner "remote-exec" {
     inline = self.tailscale_install_script
