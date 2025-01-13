@@ -38,22 +38,6 @@ locals {
       "--ssh"
     ])
   ]
-  sysctl_config = join("\n", [
-    "kernel.panic=10",
-    "kernel.panic_on_oops=1",
-    "fs.inotify.max_user_watches=524288",
-    "fs.inotify.max_user_instances=8192",
-    "fs.inotify.max_queued_events=16384",
-    "fs.file-max=131072",
-    "net.core.rmem_default=7340032",
-    "user.max_inotify_instances=8192",
-    "user.max_inotify_watches=524288",
-    "vm.overcommit_memory=1"
-  ])
-  tailscale_sysctl_config = join("\n", [
-    "net.ipv4.ip_forward=1",
-    "net.ipv6.conf.all.forwarding=1"
-  ])
 }
 
 resource "terraform_data" "nishir" {
@@ -68,11 +52,11 @@ resource "terraform_data" "nishir" {
     password = local.connection_creds.nishir_password
   }
   provisioner "file" {
-    content     = local.tailscale_sysctl_config
+    source      = "${path.module}/sysctl/99-tailscale.conf"
     destination = "/etc/sysctl.d/99-tailscale.conf"
   }
   provisioner "file" {
-    content     = local.sysctl_config
+    content     = "${path.module}/sysctl/99-k8s.conf"
     destination = "/etc/sysctl.d/99-k8s.conf"
   }
   provisioner "remote-exec" {
@@ -96,11 +80,11 @@ resource "terraform_data" "flandre" {
     password = local.connection_creds.flandre_password
   }
   provisioner "file" {
-    content     = local.tailscale_sysctl_config
+    source      = "${path.module}/sysctl/99-tailscale.conf"
     destination = "/etc/sysctl.d/99-tailscale.conf"
   }
   provisioner "file" {
-    content     = local.sysctl_config
+    content     = "${path.module}/sysctl/99-k8s.conf"
     destination = "/etc/sysctl.d/99-k8s.conf"
   }
   provisioner "remote-exec" {
