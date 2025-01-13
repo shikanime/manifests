@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: prowlarr
     newName: lscr.io/linuxserver/prowlarr
-    newTag: 1.28.2
+    newTag: 1.29.2
 resources:
   - deployment.yaml
   - pvc.yaml
@@ -13,4 +13,4 @@ labels:
       app.kubernetes.io/component: torrent-tracker
       app.kubernetes.io/name: prowlarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 1.28.2
+      app.kubernetes.io/version: 1.29.2

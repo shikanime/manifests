@@ -14,6 +14,23 @@ spec:
         app.kubernetes.io/name: rclone
     spec:
       containers:
+        - name: rclone-webdav
+          image: rclone
+          args:
+            - serve
+            - webdav
+            - /data
+          env:
+            - name: RCLONE_ADDR
+              value: 0.0.0.0:8080
+          ports:
+            - containerPort: 8080
+              name: webdav
+          volumeMounts:
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
         - name: rclone-ftp
           image: rclone
           args:
@@ -102,22 +119,7 @@ spec:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
-        - name: rclone-webdav
-          image: rclone
-          args:
-            - serve
-            - webdav
-            - /data
-          env:
-            - name: RCLONE_ADDR
-              value: 0.0.0.0:8080
-          ports:
-            - containerPort: 8080
-              name: webdav
-          volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
+              readOnly: true
       volumes:
         - name: rclone-config
           configMap:

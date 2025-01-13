@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: ollama
     newName: docker.io/ollama/ollama
-    newTag: 0.5.4
+    newTag: 0.5.5
 resources:
   - deployment.yaml
   - pvc.yaml
@@ -13,4 +13,4 @@ labels:
       app.kubernetes.io/component: model-server
       app.kubernetes.io/name: ollama
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 0.5.4
+      app.kubernetes.io/version: 0.5.5
