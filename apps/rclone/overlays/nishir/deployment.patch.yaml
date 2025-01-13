@@ -7,18 +7,18 @@ spec:
   template:
     spec:
       containers:
-        - name: rclone-ftp
-          env:
-            - name: RCLONE_PUBLIC_IP
-              value: "100.90.227.1"
-          volumeMounts:
-            - name: data-sukebe
-              mountPath: /data/Sukebe
         - name: rclone-webdav
           volumeMounts:
             - name: data-sukebe
-              mountPath: /data/Sukebe
+              mountPath: /data/sukebe
+        - name: rclone-ftp
+          env:
+            - name: RCLONE_PUBLIC_IP
+              value: "100.95.93.77"
+          volumeMounts:
+            - name: data-sukebe
+              mountPath: /data/sukebe
       volumes:
         - name: data-sukebe
           persistentVolumeClaim:
-            claimName: sukebe
+            claimName: sukebe-data
