@@ -8,6 +8,7 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - svc.yaml
+  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: model-server

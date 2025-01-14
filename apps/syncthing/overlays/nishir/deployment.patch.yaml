@@ -8,13 +8,6 @@ spec:
     spec:
       containers:
         - name: syncthing
-          resources:
-            requests:
-              cpu: 90m
-              memory: 256Mi
-            limits:
-              cpu: 1200m
-              memory: 1Gi
           volumeMounts:
             - name: data-sync
               mountPath: /data/sync
