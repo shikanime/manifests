@@ -8,6 +8,11 @@ profiles:
       kustomize:
         paths:
           - clusters/kaltashar/base
+    portForward:
+      - resourceType: deployment
+        resourceName: airflow-webserver
+        namespace: airflow
+        port: 8080
   - name: nishir
     manifests:
       kustomize:
