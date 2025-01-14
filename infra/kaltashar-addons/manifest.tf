@@ -65,6 +65,7 @@ resource "kubernetes_manifest" "airflow" {
             repo         = "git@github.com:${var.repository}.git"
             branch       = "main"
             ref          = "main"
+            subPath      = ""
             sshKeySecret = kubernetes_secret.airflow_ssh_key.metadata.0.name
             knownHosts   = "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
           }
