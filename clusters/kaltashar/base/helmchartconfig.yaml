@@ -1,0 +1,9 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: airflow
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    gitSync:
+      enabled: true
