@@ -4,10 +4,6 @@ metadata:
   name: shikanime
 profiles:
   - name: kaltashar
-    manifests:
-      kustomize:
-        paths:
-          - clusters/kaltashar/base
     portForward:
       - resourceType: deployment
         resourceName: airflow-webserver
