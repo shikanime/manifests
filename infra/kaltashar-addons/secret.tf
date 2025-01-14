@@ -31,6 +31,16 @@ resource "kubernetes_secret" "airflow_conn_google_cloud" {
   }
 }
 
+resource "kubernetes_secret" "airflow_service_account" {
+  metadata {
+    name      = "airflow-service-account"
+    namespace = "airflow"
+  }
+  data = {
+    "key.json" = module.service_accounts.keys["airflow"]
+  }
+}
+
 resource "kubernetes_secret" "airflow_worker_service_account" {
   metadata {
     name      = "airflow-worker-service-account"
@@ -38,15 +48,5 @@ resource "kubernetes_secret" "airflow_worker_service_account" {
   }
   data = {
     "key.json" = module.service_accounts.keys["airflow-worker"]
-  }
-}
-
-resource "kubernetes_secret" "airflow_executor_service_account" {
-  metadata {
-    name      = "airflow-executor-service-account"
-    namespace = "airflow"
-  }
-  data = {
-    "key.json" = module.service_accounts.keys["airflow-executor"]
   }
 }
