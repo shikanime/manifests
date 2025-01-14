@@ -1,0 +1,11 @@
+{
+  "kubernetes_manifest": {
+    "airflow": {
+      "spec": {
+        "version": "1.15.0",
+        "repo": "https://airflow.apache.org",
+        "chart": "airflow"
+      }
+    }
+  }
+}
