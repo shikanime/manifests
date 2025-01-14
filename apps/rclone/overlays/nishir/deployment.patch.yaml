@@ -15,13 +15,6 @@ spec:
           env:
             - name: RCLONE_PUBLIC_IP
               value: "100.95.93.77"
-          resources:
-            requests:
-              cpu: 150m
-              memory: 64Mi
-            limits:
-              cpu: 500m
-              memory: 128Mi
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe
