@@ -19,7 +19,7 @@ profiles:
         paths:
           - clusters/nishir/base
     portForward:
-     - resourceType: deployment
-       resourceName: longhorn-frontend
-       namespace: longhorn-system
-       port: 80
+      - resourceType: deployment
+        resourceName: longhorn-frontend
+        namespace: longhorn-system
+        port: 80
