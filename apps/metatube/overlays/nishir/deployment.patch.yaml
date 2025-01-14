@@ -6,6 +6,15 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: metatube
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 25m
+              memory: 32Mi
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
