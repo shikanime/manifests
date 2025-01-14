@@ -8,13 +8,6 @@ spec:
     spec:
       containers:
         - name: rclone-webdav
-          resources:
-            requests:
-              cpu: 80m
-              memory: 32Mi
-            limits:
-              cpu: 500m
-              memory: 256Mi
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe
@@ -22,13 +15,6 @@ spec:
           env:
             - name: RCLONE_PUBLIC_IP
               value: "100.113.188.38"
-          resources:
-            requests:
-              cpu: 80m
-              memory: 32Mi
-            limits:
-              cpu: 500m
-              memory: 256Mi
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe
