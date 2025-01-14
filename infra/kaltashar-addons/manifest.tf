@@ -14,7 +14,7 @@ resource "kubernetes_manifest" "airflow" {
     kind       = "HelmChart"
     metadata = {
       name      = "airflow"
-      namespace = "airflow"
+      namespace = "kube-system"
     }
     spec = {
       repo            = local.manifest.kubernetes_manifest.airflow.spec.repo
