@@ -10,3 +10,5 @@ spec:
   version: "1.15.0"
   helmVersion: v3
   bootstrap: false
+  valuesContent: |
+    webserverSecretKeySecretName: airflow-webserver-secret-key
