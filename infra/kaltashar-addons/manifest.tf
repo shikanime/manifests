@@ -59,6 +59,14 @@ resource "kubernetes_manifest" "airflow" {
             }
           ]
         }
+        dags = {
+          gitSync = {
+            enabled           = true
+            repo              = "git@github.com:${var.repository}"
+            branch            = "main"
+            credentialsSecret = kubernetes_secret.airflow_ssh_key.metadata.0.name
+          }
+        }
         secrets = [
           {
             envName    = "AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT"
