@@ -10,10 +10,10 @@ spec:
         - name: syncthing
           resources:
             requests:
-              cpu: 40m
+              cpu: 90m
               memory: 128Mi
             limits:
-              cpu: 100m
+              cpu: 300m
               memory: 256Mi
           volumeMounts:
             - name: data-sync
