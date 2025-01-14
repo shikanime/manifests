@@ -4,6 +4,6 @@ module "service_accounts" {
 
   project_id    = var.project
   prefix        = var.name
-  names         = ["airflow-worker", "airflow-executor"]
+  names         = ["airflow", "airflow-worker"]
   generate_keys = true
 }

@@ -37,7 +37,7 @@ resource "kubernetes_manifest" "airflow" {
               {
                 name = "google-application-credentials"
                 secret = {
-                  secretName = "google-application-credentials"
+                  secretName = kubernetes_secret.airflow_service_account.metadata.0.name
                 }
               }
             ]
@@ -54,7 +54,7 @@ resource "kubernetes_manifest" "airflow" {
             {
               name = "google-application-credentials"
               secret = {
-                secretName = "google-application-credentials"
+                secretName = kubernetes_secret.airflow_worker_service_account.metadata.0.name
               }
             }
           ]
