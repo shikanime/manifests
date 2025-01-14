@@ -8,6 +8,10 @@ terraform {
     }
   }
   required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 6.4"
+    }
     google = {
       source  = "hashicorp/google"
       version = "~> 6.16"
@@ -17,4 +21,8 @@ terraform {
       version = "~> 2.32"
     }
   }
+}
+
+provider "github" {
+  owner = one(slice(split("/", var.repository), 0, 1))
 }

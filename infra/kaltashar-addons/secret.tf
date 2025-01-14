@@ -50,3 +50,28 @@ resource "kubernetes_secret" "airflow_worker_service_account" {
     "key.json" = module.service_accounts.keys["airflow-worker"]
   }
 }
+
+resource "tls_private_key" "github_deploy_key" {
+  algorithm = "ED25519"
+}
+
+resource "kubernetes_secret" "airflow_ssh_key" {
+  metadata {
+    name      = "airflow-ssh-key"
+    namespace = "airflow"
+  }
+  data = {
+    gitSshKey = tls_private_key.github_deploy_key.private_key_openssh
+  }
+}
+
+data "github_repository" "default" {
+  full_name = var.repository
+}
+
+resource "github_repository_deploy_key" "airflow" {
+  title      = "${var.display_name} Airflow"
+  repository = data.github_repository.default.id
+  key        = tls_private_key.github_deploy_key.public_key_openssh
+  read_only  = true
+}
