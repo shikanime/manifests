@@ -4,7 +4,6 @@ metadata:
   name: webdav
   namespace: shikanime
 spec:
-  loadBalancerClass: tailscale
   ports:
     - name: webdav
       port: 80
