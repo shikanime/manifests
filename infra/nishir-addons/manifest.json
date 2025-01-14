@@ -1,5 +1,12 @@
 {
   "kubernetes_manifest": {
+    "vpa": {
+      "spec": {
+        "version": "4.7.1",
+        "repo": "https://charts.fairwinds.com/stable",
+        "chart": "vpa"
+      }
+    },
     "longhorn": {
       "spec": {
         "version": "1.7.2",

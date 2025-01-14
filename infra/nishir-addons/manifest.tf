@@ -127,3 +127,23 @@ resource "kubernetes_manifest" "grafana_monitoring" {
     }
   }
 }
+
+resource "kubernetes_manifest" "vpa" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "vpa"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = local.manifest.kubernetes_manifest.vpa.spec.repo
+      chart           = local.manifest.kubernetes_manifest.vpa.spec.chart
+      targetNamespace = "kube-system"
+      version         = local.manifest.kubernetes_manifest.vpa.spec.version
+      helmVersion     = "v3"
+      bootstrap       = false
+      failurePolicy   = "abort"
+    }
+  }
+}

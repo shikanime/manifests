@@ -9,12 +9,14 @@ declare -A CHARTS=(
   ["grafana_monitoring"]="grafana/k8s-monitoring"
   ["tailscale"]="tailscale/tailscale-operator"
   ["longhorn"]="longhorn/longhorn"
+  ["vpa"]="fairwinds/vpa"
 )
 
 declare -A REPOS=(
   ["grafana"]="https://grafana.github.io/helm-charts"
   ["tailscale"]="https://pkgs.tailscale.com/helmcharts"
   ["longhorn"]="https://charts.longhorn.io"
+  ["fairwinds"]="https://charts.fairwinds.com/stable"
 )
 
 # Add each repository to helm using the repo name and URL from REPOS array
