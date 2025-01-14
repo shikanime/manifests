@@ -17,10 +17,10 @@ spec:
               value: "100.95.93.77"
           resources:
             requests:
-              cpu: 150m
+              cpu: 80m
               memory: 64Mi
             limits:
-              cpu: 500m
+              cpu: 250m
               memory: 128Mi
           volumeMounts:
             - name: data-sukebe
