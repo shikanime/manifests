@@ -10,10 +10,10 @@ spec:
         - name: metatube
           resources:
             requests:
-              cpu: 10m
+              cpu: 5m
               memory: 16Mi
             limits:
-              cpu: 25m
+              cpu: 10m
               memory: 32Mi
       affinity:
         podAntiAffinity:
