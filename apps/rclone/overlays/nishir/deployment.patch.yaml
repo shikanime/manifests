@@ -8,6 +8,13 @@ spec:
     spec:
       containers:
         - name: rclone-webdav
+          resources:
+            requests:
+              cpu: 80m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe
