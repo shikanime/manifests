@@ -21,7 +21,7 @@ spec:
         - name: rclone-ftp
           env:
             - name: RCLONE_PUBLIC_IP
-              value: "100.95.93.77"
+              value: "100.113.188.38"
           resources:
             requests:
               cpu: 80m
