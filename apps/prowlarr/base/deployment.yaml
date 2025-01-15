@@ -25,15 +25,6 @@ spec:
                         - media-server
                 topologyKey: kubernetes.io/hostname
               weight: 100
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/component
-                      operator: In
-                      values:
-                        - downloader
-                topologyKey: kubernetes.io/hostname
-              weight: 50
       containers:
         - name: prowlarr
           image: prowlarr
