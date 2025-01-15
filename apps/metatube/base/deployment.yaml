@@ -32,6 +32,7 @@ spec:
                       operator: In
                       values:
                         - transmission
+                        - qbittorent
                 topologyKey: kubernetes.io/hostname
               weight: 50
       containers:
