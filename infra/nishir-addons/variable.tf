@@ -54,10 +54,12 @@ variable "secrets" {
   type = object({
     tailscale_operator_oauth_client = string
     longhorn_backupstore_s3_creds   = string
+    vaultwarden_admin_password      = string
   })
   description = "Scaleway secrets ID"
   default = {
     tailscale_operator_oauth_client = "371097be-4fd8-4e8f-a3f3-232485c96082"
     longhorn_backupstore_s3_creds   = "b5d61a39-cf9f-44dd-98f9-7d8f73852bde"
+    vaultwarden_admin_password      = "1e770231-025c-440a-b6e9-201490a44043"
   }
 }

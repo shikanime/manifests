@@ -5,6 +5,9 @@ locals {
   longhorn_backupstore_s3_creds_data = jsondecode(
     base64decode(data.scaleway_secret_version.longhorn_backupstore_s3_creds.data)
   )
+  vaultwarden_admin_password = jsondecode(
+    base64decode(data.scaleway_secret_version.vaultwarden_admin_password.data)
+  )
 }
 
 data "scaleway_secret_version" "tailscale_operator_oauth_client" {
@@ -14,6 +17,11 @@ data "scaleway_secret_version" "tailscale_operator_oauth_client" {
 
 data "scaleway_secret_version" "longhorn_backupstore_s3_creds" {
   secret_id = var.secrets.longhorn_backupstore_s3_creds
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "vaultwarden_admin_password" {
+  secret_id = var.secrets.vaultwarden_admin_password
   revision  = "latest"
 }
 
@@ -143,5 +151,17 @@ resource "kubernetes_secret" "transmission" {
     password = random_password.transmission_password.result
   }
   type       = "kubernetes.io/basic-auth"
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "kubernetes_secret" "vaultwarden" {
+  metadata {
+    name      = "vaultwarden"
+    namespace = one(kubernetes_namespace.shikanime.metadata).name
+  }
+  data = {
+    admin-token = local.vaultwarden_admin_password
+  }
+  type       = "Opaque"
   depends_on = [kubernetes_namespace.shikanime]
 }

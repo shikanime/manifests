@@ -23,11 +23,11 @@ spec:
               value: "1000"
             - name: TZ
               value: Europe/Paris
+            - name: JELLYFIN_PublishedServerUrl
+              value: 100.64.0.0/10=jellyfin.taila659a.ts.net,10.0.0.0/8=jellyfin.taila659a.ts.net,192.168.0.0/16=jellyfin.taila659a.ts.net
           ports:
             - containerPort: 8096
               name: http
-            - containerPort: 8920
-              name: https
             - containerPort: 7359
               name: discovery
               protocol: UDP

@@ -6,9 +6,9 @@ resources:
   - pvc.yaml
   - recurringjob.yaml
   - storageclass.yaml
-  - ../../../apps/gitea/overlays/nishir
+  - ../../../apps/gitea/base
   - ../../../apps/jellyfin/overlays/nishir
-  - ../../../apps/metatube/overlays/nishir
-  - ../../../apps/rclone/overlays/nishir
+  - ../../../apps/metatube/base
+  - ../../../apps/rclone/base
   - ../../../apps/syncthing/overlays/nishir
-  - ../../../apps/vaultwarden/overlays/nishir
+  - ../../../apps/vaultwarden/base
