@@ -5,5 +5,9 @@ module "service_accounts" {
   project_id    = var.project
   prefix        = var.name
   names         = ["airflow", "airflow-worker"]
+  display_name  = "Airflow Service Account"
   generate_keys = true
+  project_roles = [
+    "${var.project}=>roles/bigquery.dataEditor",
+  ]
 }

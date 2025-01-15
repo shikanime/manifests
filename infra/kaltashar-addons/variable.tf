@@ -1,7 +1,7 @@
 variable "project" {
   type        = string
   description = "Project name"
-  default     = "shikanime-studio"
+  default     = "shikanime-studio-labs"
 }
 
 variable "name" {
