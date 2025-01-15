@@ -153,15 +153,3 @@ resource "kubernetes_secret" "transmission" {
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
 }
-
-resource "kubernetes_secret" "vaultwarden" {
-  metadata {
-    name      = "vaultwarden"
-    namespace = one(kubernetes_namespace.shikanime.metadata).name
-  }
-  data = {
-    admin-token = local.vaultwarden_admin_token.admin_token
-  }
-  type       = "Opaque"
-  depends_on = [kubernetes_namespace.shikanime]
-}
