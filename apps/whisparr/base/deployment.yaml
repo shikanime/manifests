@@ -19,20 +19,19 @@ spec:
             - podAffinityTerm:
                 labelSelector:
                   matchExpressions:
-                    - key: app.kubernetes.io/name
+                    - key: app.kubernetes.io/component
                       operator: In
                       values:
-                        - jellyfin
+                        - media-server
                 topologyKey: kubernetes.io/hostname
               weight: 100
             - podAffinityTerm:
                 labelSelector:
                   matchExpressions:
-                    - key: app.kubernetes.io/name
+                    - key: app.kubernetes.io/component
                       operator: In
                       values:
-                        - transmission
-                        - qbittorrent
+                        - downloader
                 topologyKey: kubernetes.io/hostname
               weight: 50
       containers:
