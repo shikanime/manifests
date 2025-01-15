@@ -6,6 +6,7 @@ images:
     newTag: 2021.11.18
 resources:
   - deployment.yaml
+  - ingress.yaml
   - pvc.yaml
   - svc.yaml
   - vpa.yaml
