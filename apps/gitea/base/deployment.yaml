@@ -13,28 +13,6 @@ spec:
       labels:
         app.kubernetes.io/name: gitea
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/component
-                      operator: In
-                      values:
-                        - file-synchronizer
-                        - media-server
-                topologyKey: kubernetes.io/hostname
-              weight: 100
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/component
-                      operator: In
-                      values:
-                        - downloader
-                topologyKey: kubernetes.io/hostname
-              weight: 50
       containers:
         - name: gitea
           image: gitea
