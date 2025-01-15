@@ -123,7 +123,8 @@ spec:
               name: ftp-data-30029
           volumeMounts:
             - name: rclone-config
-              mountPath: /config/rclone
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
               readOnly: true
       volumes:
         - name: rclone-config
