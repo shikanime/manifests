@@ -130,8 +130,8 @@ resource "kubernetes_secret" "rclone" {
     namespace = one(kubernetes_namespace.shikanime.metadata).name
   }
   data = {
-    username = "rclone"
-    password = random_password.rclone_password.result
+    "htpasswd"    = "rclone:${bcrypt(random_password.rclone_password.result)}"
+    "rclone.conf" = ""
   }
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
