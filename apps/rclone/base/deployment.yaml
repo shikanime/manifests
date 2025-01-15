@@ -43,8 +43,16 @@ spec:
               value: 0.0.0.0:2121
             - name: RCLONE_PASSIVE_PORT
               value: "30000-30029"
-            - name: RCLONE_HTPASSWD
-              value: /config/rclone/htpasswd
+            - name: RCLONE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rclone-ftp
+                  key: username
+            - name: RCLONE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rclone-ftp
+                  key: password
           ports:
             - containerPort: 2121
               name: ftp-control
@@ -113,6 +121,6 @@ spec:
               mountPath: /config/rclone
               readOnly: true
       volumes:
-        - name: rclone
+        - name: rclone-config
           secret:
             secretName: rclone
