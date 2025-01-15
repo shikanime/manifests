@@ -30,7 +30,12 @@ spec:
               name: webdav
           volumeMounts:
             - name: rclone-config
-              mountPath: /config/rclone
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: rclone-webdav
+              mountPath: /config/rclone/htpasswd
+              subPath: htpasswd
               readOnly: true
         - name: rclone-ftp
           image: rclone
@@ -122,5 +127,8 @@ spec:
               readOnly: true
       volumes:
         - name: rclone-config
+          configMap:
+            name: rclone
+        - name: rclone-webdav
           secret:
-            secretName: rclone
+            secretName: rclone-webdav
