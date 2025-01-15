@@ -26,6 +26,7 @@ resource "kubernetes_manifest" "airflow" {
       failurePolicy   = "abort"
       valuesContent = jsonencode({
         airflow = {
+          executor = "KubernetesExecutor"
           kubernetesPodTemplate = {
             extraVolumeMounts = [
               {
