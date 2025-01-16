@@ -34,6 +34,7 @@ resource "kubernetes_secret" "tailscale_operator_oauth_client" {
     client_id     = local.tailscale_operator_oauth_client_data.clientId
     client_secret = local.tailscale_operator_oauth_client_data.clientSecret
   }
+  depends_on = [kubernetes_namespace.tailscale]
 }
 
 resource "kubernetes_secret" "longhorn_hetzner_backups" {
@@ -49,6 +50,7 @@ resource "kubernetes_secret" "longhorn_hetzner_backups" {
     AWS_SECRET_ACCESS_KEY = local.longhorn_backupstore_s3_creds_data.secret_access_key
     AWS_ENDPOINTS         = var.endpoints.s3
   }
+  depends_on = [kubernetes_namespace.longhorn_system]
 }
 
 resource "kubernetes_secret" "grafana_monitoring_prometheus" {
@@ -62,6 +64,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
+  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "kubernetes_secret" "grafana_monitoring_loki" {
@@ -75,6 +78,7 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
+  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "kubernetes_secret" "grafana_monitoring_tempo" {
@@ -88,6 +92,7 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type = "kubernetes.io/basic-auth"
+  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "random_password" "metatube_token" {
