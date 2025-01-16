@@ -23,10 +23,7 @@
       devenv.shells.default = {
         containers = pkgs.lib.mkForce { };
         languages = {
-          terraform = {
-            enable = true;
-            package = pkgs.opentofu;
-          };
+          opentofu.enable = true;
           nix.enable = true;
         };
         cachix = {
