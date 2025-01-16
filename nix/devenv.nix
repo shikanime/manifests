@@ -6,8 +6,7 @@
         projectRootFile = "flake.nix";
         enableDefaultExcludes = true;
         programs = {
-          actionlint.enable = true;
-          deadnix.enable = true;
+          hclfmt.enable = true;
           nixfmt.enable = true;
           prettier.enable = true;
           shfmt.enable = true;
@@ -35,6 +34,8 @@
           push = "shikanime";
         };
         git-hooks.hooks = {
+          actionlint.enable = true;
+          deadnix.enable = true;
           shellcheck.enable = true;
           terraform-validate.enable = true;
           tflint.enable = true;
