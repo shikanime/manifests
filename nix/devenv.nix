@@ -38,6 +38,7 @@
           deadnix.enable = true;
           flake-checker.enable = true;
           shellcheck.enable = true;
+          terraform-validate.enable = true;
           tflint.enable = true;
         };
         packages = [
