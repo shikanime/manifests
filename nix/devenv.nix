@@ -23,8 +23,8 @@
       devenv.shells.default = {
         containers = pkgs.lib.mkForce { };
         languages = {
-          opentofu.enable = true;
           nix.enable = true;
+          opentofu.enable = true;
         };
         cachix = {
           enable = true;
