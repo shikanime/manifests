@@ -23,6 +23,16 @@ spec:
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:8080
+            - name: RCLONE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rclone
+                  key: username
+            - name: RCLONE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rclone
+                  key: password
           ports:
             - containerPort: 8080
               name: webdav
