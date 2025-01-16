@@ -37,15 +37,11 @@
         "aarch64-darwin"
       ];
       perSystem =
-        { pkgs, ... }:
+        { lib, pkgs, ... }:
         {
           packages.default = pkgs.stdenv.mkDerivation {
             name = "manifests";
-            src = ./.;
-            installPhase = ''
-              mkdir -p $out/share
-              cp -r apps clusters infra $out/share
-            '';
+            src = pkgs.lib.cleanSource ./.;
             passthru.updateScript = ./update.sh;
           };
         };
