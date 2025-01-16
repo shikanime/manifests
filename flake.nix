@@ -36,14 +36,5 @@
         "aarch64-linux"
         "aarch64-darwin"
       ];
-      perSystem =
-        { lib, pkgs, ... }:
-        {
-          packages.default = pkgs.stdenv.mkDerivation {
-            name = "manifests";
-            src = pkgs.lib.cleanSource ./.;
-            passthru.updateScript = ./update.sh;
-          };
-        };
     };
 }

@@ -34,8 +34,9 @@
           enable = true;
           push = "shikanime";
         };
-        pre-commit.hooks = {
+        git-hooks.hooks = {
           shellcheck.enable = true;
+          terraform-validate.enable = true;
           tflint.enable = true;
         };
         packages = [
