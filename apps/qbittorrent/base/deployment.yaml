@@ -13,6 +13,27 @@ spec:
       labels:
         app.kubernetes.io/name: qbittorrent
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/component
+                      operator: In
+                      values:
+                        - media-server
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/component
+                      operator: In
+                      values:
+                        - library-manager
+                topologyKey: kubernetes.io/hostname
+              weight: 50
       containers:
         - name: qbittorrent
           image: qbittorrent

@@ -4,7 +4,6 @@ patches:
   - path: deployment.patch.yaml
 resources:
   - ../../base
-  - ingress.yaml
 components:
   - ../../components/openmax
   - ../../components/v4l

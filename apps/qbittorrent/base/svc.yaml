@@ -16,6 +16,9 @@ kind: Service
 metadata:
   name: qbittorrent-tracker
   namespace: shikanime
+  annotations:
+    tailscale.com/hostname: qbittorrent-tracker
+    tailscale.com/tags: tag:qbittorrent
 spec:
   loadBalancerClass: tailscale
   ports:
