@@ -14,23 +14,6 @@ resource "kubernetes_secret" "airflow_webserver_secret_key" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "airflow_conn_google_cloud" {
-  metadata {
-    name      = "airflow-conn-google-cloud"
-    namespace = "airflow"
-  }
-  data = {
-    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT = jsonencode({
-      conn_type = "google_cloud_platform"
-      extra = {
-        key_path = "/var/secrets/google/key.json"
-        scope    = "https://www.googleapis.com/auth/cloud-platform"
-        project  = var.project
-      }
-    })
-  }
-}
-
 resource "kubernetes_secret" "airflow_service_account" {
   metadata {
     name      = "airflow-service-account"

@@ -60,6 +60,17 @@ resource "kubernetes_manifest" "airflow" {
             }
           ]
         }
+        connections = [
+          {
+            id   = "google_cloud_default",
+            type = "google_cloud_platform",
+            extra = {
+              key_path = "/var/secrets/google/key.json"
+              scope    = "https://www.googleapis.com/auth/cloud-platform"
+              project  = var.project
+            }
+          }
+        ]
         dags = {
           gitSync = {
             enabled      = true
@@ -71,13 +82,6 @@ resource "kubernetes_manifest" "airflow" {
             knownHosts   = "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
           }
         }
-        secrets = [
-          {
-            envName    = "AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT"
-            secretName = "airflow-connection-google-cloud"
-            secretKey  = "AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT"
-          }
-        ]
         webserverSecretKeySecretName = kubernetes_secret.airflow_webserver_secret_key.metadata.0.name
       })
     }

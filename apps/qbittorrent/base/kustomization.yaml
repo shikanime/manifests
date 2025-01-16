@@ -6,6 +6,7 @@ images:
     newTag: 5.0.3
 resources:
   - deployment.yaml
+  - ingress.yaml
   - pvc.yaml
   - svc.yaml
   - vpa.yaml

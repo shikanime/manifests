@@ -19,7 +19,7 @@ spec:
           env:
             - name: ADMIN_TOKEN
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: vaultwarden
                   key: admin-token
           ports:
