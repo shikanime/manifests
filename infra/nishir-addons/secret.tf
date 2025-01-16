@@ -63,7 +63,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
     username = data.grafana_data_source.prometheus.basic_auth_username
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
-  type = "kubernetes.io/basic-auth"
+  type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.grafana]
 }
 
@@ -77,7 +77,7 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
     username = data.grafana_data_source.loki.basic_auth_username
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
-  type = "kubernetes.io/basic-auth"
+  type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.grafana]
 }
 
@@ -91,7 +91,7 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
     username = data.grafana_data_source.tempo.basic_auth_username
     password = grafana_cloud_access_policy_token.kubernetes.token
   }
-  type = "kubernetes.io/basic-auth"
+  type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.grafana]
 }
 
