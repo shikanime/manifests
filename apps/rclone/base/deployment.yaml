@@ -23,16 +23,8 @@ spec:
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:8080
-            - name: RCLONE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: rclone
-                  key: username
-            - name: RCLONE_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: rclone
-                  key: password
+            - name: RCLONE_HTPASSWD
+              value: /config/rclone/htpasswd
           ports:
             - containerPort: 8080
               name: webdav
@@ -40,6 +32,10 @@ spec:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
+              readOnly: true
+            - name: rclone-webdav
+              mountPath: /config/rclone/htpasswd
+              subPath: htpasswd
               readOnly: true
         - name: rclone-ftp
           image: rclone
@@ -55,12 +51,12 @@ spec:
             - name: RCLONE_USER
               valueFrom:
                 secretKeyRef:
-                  name: rclone
+                  name: rclone-ftp
                   key: username
             - name: RCLONE_PASS
               valueFrom:
                 secretKeyRef:
-                  name: rclone
+                  name: rclone-ftp
                   key: password
           ports:
             - containerPort: 2121
@@ -133,4 +129,7 @@ spec:
       volumes:
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
+        - name: rclone-webdav
+          secret:
+            secretName: rclone-webdav

@@ -124,9 +124,21 @@ resource "random_password" "rclone_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "rclone" {
+resource "kubernetes_secret" "rclone_webdav" {
   metadata {
-    name      = "rclone"
+    name      = "rclone-webdav"
+    namespace = one(kubernetes_namespace.shikanime.metadata).name
+  }
+  data = {
+    "htpasswd" = "rclone:${bcrypt(random_password.rclone_password.result)}"
+  }
+  type       = "kubernetes.io/basic-auth"
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "kubernetes_secret" "rclone_ftp" {
+  metadata {
+    name      = "rclone-ftp"
     namespace = one(kubernetes_namespace.shikanime.metadata).name
   }
   data = {
