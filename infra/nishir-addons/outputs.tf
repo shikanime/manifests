@@ -14,10 +14,18 @@ output "metatube_secret_metadata" {
   description = "Metatube secret metadata"
 }
 
-output "rclone_secret_metadata" {
+output "rclone_webdav_secret_metadata" {
   value = {
-    name      = one(kubernetes_secret.rclone.metadata).name
-    namespace = one(kubernetes_secret.rclone.metadata).namespace
+    name      = one(kubernetes_secret.rclone_webdav.metadata).name
+    namespace = one(kubernetes_secret.rclone_webdav.metadata).namespace
   }
-  description = "Rclone secret metadata"
+  description = "Rclone Webdav secret metadata"
+}
+
+output "rclone_ftp_secret_metadata" {
+  value = {
+    name      = one(kubernetes_secret.rclone_ftp.metadata).name
+    namespace = one(kubernetes_secret.rclone_ftp.metadata).namespace
+  }
+  description = "Rclone FTP secret metadata"
 }
