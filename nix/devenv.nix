@@ -6,8 +6,7 @@
         projectRootFile = "flake.nix";
         enableDefaultExcludes = true;
         programs = {
-          actionlint.enable = true;
-          deadnix.enable = true;
+          hclfmt.enable = true;
           nixfmt.enable = true;
           prettier.enable = true;
           shfmt.enable = true;
@@ -34,7 +33,10 @@
           enable = true;
           push = "shikanime";
         };
-        pre-commit.hooks = {
+        git-hooks.hooks = {
+          actionlint.enable = true;
+          deadnix.enable = true;
+          flake-checker.enable = true;
           shellcheck.enable = true;
           tflint.enable = true;
         };
