@@ -9,6 +9,6 @@ resources:
   - ../../../../apps/gitea/base
   - ../../../../apps/jellyfin/overlays/nishir
   - ../../../../apps/metatube/base
-  - ../../../../apps/rclone/overlays/lan
+  - ../../../../apps/rclone/overlays/intranet
   - ../../../../apps/syncthing/overlays/default
   - ../../../../apps/vaultwarden/base
