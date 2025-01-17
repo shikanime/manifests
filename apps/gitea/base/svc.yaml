@@ -16,11 +16,7 @@ kind: Service
 metadata:
   name: git
   namespace: shikanime
-  annotations:
-    tailscale.com/hostname: git
-    tailscale.com/tags: tag:gitea
 spec:
-  loadBalancerClass: tailscale
   ports:
     - name: ssh
       port: 22

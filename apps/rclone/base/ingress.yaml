@@ -3,15 +3,12 @@ kind: Ingress
 metadata:
   name: rclone
   namespace: shikanime
-  annotations:
-    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
       name: webdav
       port:
         name: webdav
-  ingressClassName: tailscale
   tls:
     - hosts:
         - webdav

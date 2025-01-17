@@ -1,37 +1,6 @@
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
 metadata:
-  name: tailscale
-  namespace: kube-system
-spec:
-  valuesContent: |-
-    apiServerProxyConfig:
-      mode: "true"
-    operatorConfig:
-      hostname: nishir-k8s-operator
----
-apiVersion: helm.cattle.io/v1
-kind: HelmChartConfig
-metadata:
-  name: longhorn
-  namespace: kube-system
-spec:
-  valuesContent: |-
-    persistence:
-      defaultFsType: xfs
-      defaultClassReplicaCount: 2
-    defaultSettings:
-      defaultDataLocality: best-effort
-      replicaAutoBalance: best-effort
-      defaultReplicaCount: 2
-      allowCollectingLonghornUsageMetrics: false
-      snapshotDataIntegrityCronjob: "0 4 */7 * *"
-      longGRPCTimeOut: 604800 # 1 week
-      backupstorePollInterval: 6000
----
-apiVersion: helm.cattle.io/v1
-kind: HelmChartConfig
-metadata:
   name: grafana-monitoring
   namespace: kube-system
 spec:

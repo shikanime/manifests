@@ -3,15 +3,12 @@ kind: Ingress
 metadata:
   name: transmission
   namespace: shikanime
-  annotations:
-    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
       name: transmission
       port:
         name: http
-  ingressClassName: tailscale
   tls:
     - hosts:
         - transmission

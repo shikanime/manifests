@@ -3,15 +3,12 @@ kind: Ingress
 metadata:
   name: prowlarr
   namespace: shikanime
-  annotations:
-    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
       name: prowlarr
       port:
         name: http
-  ingressClassName: tailscale
   tls:
     - hosts:
         - prowlarr

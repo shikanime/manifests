@@ -3,15 +3,12 @@ kind: Ingress
 metadata:
   name: whisparr
   namespace: shikanime
-  annotations:
-    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
       name: whisparr
       port:
         name: http
-  ingressClassName: tailscale
   tls:
     - hosts:
         - whisparr

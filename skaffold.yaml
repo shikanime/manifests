@@ -3,8 +3,13 @@ kind: Config
 metadata:
   name: shikanime
 profiles:
-  - name: nishir
+  - name: nishir-tailnet
     manifests:
       kustomize:
         paths:
-          - clusters/nishir/base
+          - clusters/nishir/overlays/tailnet
+  - name: nishir-intranet
+    manifests:
+      kustomize:
+        paths:
+          - clusters/nishir/overlays/intranet

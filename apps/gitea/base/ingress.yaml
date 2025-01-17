@@ -3,15 +3,12 @@ kind: Ingress
 metadata:
   name: gitea
   namespace: shikanime
-  annotations:
-    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
       name: gitea
       port:
         name: http
-  ingressClassName: tailscale
   tls:
     - hosts:
         - gitea

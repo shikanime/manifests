@@ -17,7 +17,6 @@ metadata:
   name: transmission-tracker
   namespace: shikanime
 spec:
-  loadBalancerClass: tailscale
   ports:
     - name: bittorrent
       port: 6881

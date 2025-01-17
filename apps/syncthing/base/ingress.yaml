@@ -3,15 +3,12 @@ kind: Ingress
 metadata:
   name: syncthing
   namespace: shikanime
-  annotations:
-    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
       name: syncthing
       port:
         name: http
-  ingressClassName: tailscale
   tls:
     - hosts:
         - syncthing

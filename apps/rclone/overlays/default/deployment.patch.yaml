@@ -12,9 +12,6 @@ spec:
             - name: data-sukebe
               mountPath: /data/sukebe
         - name: rclone-ftp
-          env:
-            - name: RCLONE_PUBLIC_IP
-              value: "100.113.188.38"
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe
