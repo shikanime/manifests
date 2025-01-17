@@ -16,11 +16,7 @@ kind: Service
 metadata:
   name: ftp
   namespace: shikanime
-  annotations:
-    tailscale.com/hostname: ftp
-    tailscale.com/tags: tag:rclone
 spec:
-  loadBalancerClass: tailscale
   ports:
     - name: ftp-control
       port: 21

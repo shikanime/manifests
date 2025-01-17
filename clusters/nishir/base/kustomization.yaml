@@ -1,13 +1,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - helmchartconfig.yaml
   - pvc.yaml
-  - recurringjob.yaml
-  - storageclass.yaml
-  - ../../../apps/gitea/base
-  - ../../../apps/jellyfin/overlays/nishir
-  - ../../../apps/metatube/base
-  - ../../../apps/rclone/base
-  - ../../../apps/syncthing/overlays/nishir
-  - ../../../apps/vaultwarden/base

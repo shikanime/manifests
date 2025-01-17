@@ -3,15 +3,12 @@ kind: Ingress
 metadata:
   name: jellyfin
   namespace: shikanime
-  annotations:
-    tailscale.com/tags: tag:web
 spec:
   defaultBackend:
     service:
       name: jellyfin
       port:
         name: http
-  ingressClassName: tailscale
   tls:
     - hosts:
         - jellyfin
