@@ -7,7 +7,7 @@ components:
 resources:
   - ../../base
   - ../../../../apps/gitea/base
-  - ../../../../apps/jellyfin/overlays/raspberry-pi
+  - ../../../../apps/jellyfin/overlays/nishir
   - ../../../../apps/metatube/base
   - ../../../../apps/rclone/overlays/lan
   - ../../../../apps/syncthing/overlays/default
