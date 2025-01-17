@@ -5,4 +5,4 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/hostname: ftp
-    tailscale.com/tags: tag:rclone
+    tailscale.com/tags: tag:ftp
