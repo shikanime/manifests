@@ -3,7 +3,7 @@ kind: Kustomization
 configMapGenerator:
   - literals:
       - rclone.conf=""
-    name: rclone-config
+    name: rclone
     namespace: shikanime
 images:
   - name: rclone
