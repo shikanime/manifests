@@ -3,16 +3,10 @@ on:
   push:
     branches:
       - main
-    paths:
-      - flake.nix
-      - flake.lock
-      - pkgs/**
-      - modules/**
-      - .github/**
   pull_request:
     branches:
-      - main
       - gh/*/*/base
+      - main
 jobs:
   check:
     runs-on: ubuntu-latest
