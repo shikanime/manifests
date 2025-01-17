@@ -4,11 +4,17 @@ metadata:
   name: qbittorrent
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: qbittorrent
-      port:
-        name: http
+  rules:
+    - host: qbittorrent.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: qbittorrent
+                port:
+                  name: http
   tls:
     - hosts:
         - qbittorrent

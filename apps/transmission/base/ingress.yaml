@@ -4,11 +4,17 @@ metadata:
   name: transmission
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: transmission
-      port:
-        name: http
+  rules:
+    - host: transmission.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: transmission
+                port:
+                  name: http
   tls:
     - hosts:
         - transmission

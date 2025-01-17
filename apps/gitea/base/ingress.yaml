@@ -4,11 +4,17 @@ metadata:
   name: gitea
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: gitea
-      port:
-        name: http
+  rules:
+    - host: gitea.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gitea
+                port:
+                  name: http
   tls:
     - hosts:
         - gitea

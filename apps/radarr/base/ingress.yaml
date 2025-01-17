@@ -4,11 +4,17 @@ metadata:
   name: radarr
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: radarr
-      port:
-        name: http
+  rules:
+    - host: radarr.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: radarr
+                port:
+                  name: http
   tls:
     - hosts:
         - radarr

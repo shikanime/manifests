@@ -4,11 +4,17 @@ metadata:
   name: ollama
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: ollama
-      port:
-        name: http
+  rules:
+    - host: ollama.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ollama
+                port:
+                  name: http
   tls:
     - hosts:
         - ollama

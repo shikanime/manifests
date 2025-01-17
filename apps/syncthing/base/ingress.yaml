@@ -4,11 +4,17 @@ metadata:
   name: syncthing
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: syncthing
-      port:
-        name: http
+  rules:
+    - host: syncthing.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: syncthing
+                port:
+                  name: http
   tls:
     - hosts:
         - syncthing

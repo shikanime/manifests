@@ -4,11 +4,17 @@ metadata:
   name: vaultwarden
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: vaultwarden
-      port:
-        name: http
+  rules:
+    - host: vaultwarden.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  name: http
   tls:
     - hosts:
         - vaultwarden

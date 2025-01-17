@@ -4,11 +4,17 @@ metadata:
   name: sonarr
   namespace: shikanime
 spec:
-  defaultBackend:
-    service:
-      name: sonarr
-      port:
-        name: http
+  rules:
+    - host: sonarr.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sonarr
+                port:
+                  name: http
   tls:
     - hosts:
         - sonarr
