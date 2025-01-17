@@ -8,8 +8,8 @@ profiles:
       kustomize:
         paths:
           - clusters/nishir/overlays/tailnet
-  - name: nishir-lan
+  - name: nishir-intranet
     manifests:
       kustomize:
         paths:
-          - clusters/nishir/overlays/lan
+          - clusters/nishir/overlays/intranet
