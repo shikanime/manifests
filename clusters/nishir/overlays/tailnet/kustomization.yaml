@@ -8,8 +8,8 @@ components:
 resources:
   - ../../base
   - ../../../../apps/gitea/base
-  - ../../../../apps/jellyfin/overlays/wan
+  - ../../../../apps/jellyfin/overlays/tailnet
   - ../../../../apps/metatube/base
-  - ../../../../apps/rclone/overlays/wan
-  - ../../../../apps/syncthing/overlays/wan
+  - ../../../../apps/rclone/overlays/tailnet
+  - ../../../../apps/syncthing/overlays/tailnet
   - ../../../../apps/vaultwarden/base
