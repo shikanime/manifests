@@ -170,3 +170,34 @@ resource "kubernetes_secret" "transmission" {
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
 }
+
+resource "tls_private_key" "nishir" {
+  algorithm = "ED25519"
+}
+
+resource "tls_self_signed_cert" "nishir" {
+  private_key_pem = tls_private_key.nishir.private_key_pem
+  validity_period_hours = 12
+  allowed_uses = [
+    "key_encipherment",
+    "digital_signature",
+    "server_auth",
+  ]
+  subject {
+    common_name  = "${var.name}.local"
+    organization = var.display_name
+  }
+}
+
+resource "kubernetes_secret" "nishir_tls" {
+metadata {
+  name      = "nishir-tls"
+  namespace = one(kubernetes_namespace.nishir.metadata).name
+}
+  data = {
+    tls.crt = tls_self_signed_cert.nishir.cert_pem
+    tls.key = tls_private_key.nishir.private_key_pem
+  }
+  type = "kubernetes.io/tls"
+  depends_on = [kubernetes_namespace.shikanime]
+}
