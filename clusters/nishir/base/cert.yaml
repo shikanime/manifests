@@ -14,11 +14,12 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: nishir-tls
+  name: jellyfin-tls
   namespace: shikanime
 spec:
-  commonName: nishir.local
+  commonName: jellyfin
   dnsNames:
+    - jellyfin
     - nishir.local
   issuerRef:
     kind: Issuer
@@ -29,6 +30,32 @@ spec:
       create: true
       passwordSecretRef:
         name: jellyfin-pkcs12
+        key: password
+      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitea-tls
+  namespace: shikanime
+spec:
+  commonName: gitea
+  dnsNames:
+    - gitea
+    - nishir.local
+  issuerRef:
+    kind: Issuer
+    name: nishir-ca
+  secretName: nishir-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: gitea-pkcs12
         key: password
       profile: Modern2023
   usages:
