@@ -24,6 +24,13 @@ spec:
     kind: Issuer
     name: nishir-ca
   secretName: nishir-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: jellyfin-pkcs12
+        key: password
+      profile: Modern2023
   usages:
     - digital signature
     - key encipherment

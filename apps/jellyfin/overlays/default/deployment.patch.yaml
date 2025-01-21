@@ -13,7 +13,8 @@ spec:
               mountPath: /data/sukebe
               subPath: Videos
             - name: nishir-tls
-              mountPath: /etc/ssl/nishir
+              mountPath: /tls
+              readOnly: true
       volumes:
         - name: data-sukebe
           persistentVolumeClaim:

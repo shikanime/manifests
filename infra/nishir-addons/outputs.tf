@@ -29,3 +29,11 @@ output "rclone_ftp_secret_object_ref" {
   }
   description = "Rclone FTP secret metadata"
 }
+
+output "jellyfin_pkcs12_secret_object_ref" {
+  value = {
+    name      = local.jellyfin_pkcs12_secret_object_ref.name
+    namespace = local.jellyfin_pkcs12_secret_object_ref.namespace
+  }
+  description = "Jellyfin PKCS12 secret metadata"
+}
