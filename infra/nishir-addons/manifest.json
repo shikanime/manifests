@@ -21,6 +21,13 @@
         "chart": "k8s-monitoring"
       }
     },
+    "cert_manager": {
+      "spec": {
+        "version": "v1.16.3",
+        "repo": "https://charts.jetstack.io",
+        "chart": "cert-manager"
+      }
+    },
     "tailscale": {
       "spec": {
         "version": "1.78.3",
