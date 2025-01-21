@@ -7,9 +7,9 @@ components:
   - ../../components/tailscale
 resources:
   - ../../base
-  - ../../../../apps/gitea/base
+  - ../../../../apps/gitea/base/overlays/tailnet
   - ../../../../apps/jellyfin/overlays/tailnet
   - ../../../../apps/metatube/base
   - ../../../../apps/rclone/overlays/tailnet
   - ../../../../apps/syncthing/overlays/tailnet
-  - ../../../../apps/vaultwarden/base
+  - ../../../../apps/vaultwarden/overlays/tailnet
