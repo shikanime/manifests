@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitea-tls
+  namespace: shikanime
+spec:
+  commonName: gitea
+  dnsNames:
+    - gitea
+    - nishir.local
+  issuerRef:
+    kind: Issuer
+    name: nishir-ca
+  secretName: gitea-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: gitea-pkcs12
+        key: password
+      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
