@@ -1,7 +1,16 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: selfsigned
+  name: nishir-selfsigned
   namespace: shikanime
 spec:
   selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: nishir-ca
+  namespace: shikanime
+spec:
+  ca:
+    secretName: nishir-ca

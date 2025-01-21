@@ -1,6 +1,19 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  name: nishir-ca
+  namespace: shikanime
+spec:
+  isCA: true
+  commonName: nishir-ca
+  secretName: nishir-ca
+  issuerRef:
+    kind: Issuer
+    name: nishir-selfsigned
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
   name: nishir-tls
   namespace: shikanime
 spec:
@@ -8,8 +21,8 @@ spec:
   dnsNames:
     - nishir.local
   issuerRef:
-    name: selfsigned
     kind: Issuer
+    name: nishir-ca
   secretName: nishir-tls
   usages:
     - digital signature
