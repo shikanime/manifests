@@ -17,11 +17,10 @@ locals {
 
   longhorn_hetzner_backups_secret_object_ref = one(kubernetes_secret.longhorn_hetzner_backups.metadata)
 
-  vaultwarden_secret_object_ref     = one(kubernetes_secret.vaultwarden.metadata)
-  metatube_secret_object_ref        = one(kubernetes_secret.metatube.metadata)
-  rclone_webdav_secret_object_ref   = one(kubernetes_secret.rclone_webdav.metadata)
-  rclone_ftp_secret_object_ref      = one(kubernetes_secret.rclone_ftp.metadata)
-  jellyfin_pkcs12_secret_object_ref = one(kubernetes_secret.jellyfin_pkcs12.metadata)
+  vaultwarden_secret_object_ref   = one(kubernetes_secret.vaultwarden.metadata)
+  metatube_secret_object_ref      = one(kubernetes_secret.metatube.metadata)
+  rclone_webdav_secret_object_ref = one(kubernetes_secret.rclone_webdav.metadata)
+  rclone_ftp_secret_object_ref    = one(kubernetes_secret.rclone_ftp.metadata)
 }
 
 data "scaleway_secret_version" "tailscale_operator_oauth_client" {
@@ -181,35 +180,5 @@ resource "kubernetes_secret" "transmission" {
     password = random_password.transmission_password.result
   }
   type       = "kubernetes.io/basic-auth"
-  depends_on = [kubernetes_namespace.shikanime]
-}
-
-resource "random_password" "jellyfin_pkcs12" {
-  length = 14
-}
-
-resource "kubernetes_secret" "jellyfin_pkcs12" {
-  metadata {
-    name      = "jellyfin-pkcs12"
-    namespace = local.shikanime_namespace_object_ref.name
-  }
-  data = {
-    password = random_password.jellyfin_pkcs12.result
-  }
-  depends_on = [kubernetes_namespace.shikanime]
-}
-
-resource "random_password" "gitea_pkcs12" {
-  length = 14
-}
-
-resource "kubernetes_secret" "gitea_pkcs12" {
-  metadata {
-    name      = "gitea-pkcs12"
-    namespace = local.shikanime_namespace_object_ref.name
-  }
-  data = {
-    password = random_password.gitea_pkcs12.result
-  }
   depends_on = [kubernetes_namespace.shikanime]
 }
