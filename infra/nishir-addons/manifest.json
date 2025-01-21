@@ -16,7 +16,7 @@
     },
     "grafana_monitoring": {
       "spec": {
-        "version": "2.0.1",
+        "version": "1.6.21",
         "repo": "https://grafana.github.io/helm-charts",
         "chart": "k8s-monitoring"
       }
