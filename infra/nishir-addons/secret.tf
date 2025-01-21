@@ -182,18 +182,3 @@ resource "kubernetes_secret" "transmission" {
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
 }
-
-resource "random_password" "gitea_pkcs12" {
-  length = 14
-}
-
-resource "kubernetes_secret" "gitea_pkcs12" {
-  metadata {
-    name      = "gitea-pkcs12"
-    namespace = local.shikanime_namespace_object_ref.name
-  }
-  data = {
-    password = random_password.gitea_pkcs12.result
-  }
-  depends_on = [kubernetes_namespace.shikanime]
-}
