@@ -6,7 +6,7 @@ metadata:
 spec:
   commonName: nishir.local
   issuerRef:
-    name: jellyfin
+    name: selfsigned
     kind: Issuer
   secretName: nishir-tls
   usages:
