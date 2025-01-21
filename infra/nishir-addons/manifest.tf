@@ -2,18 +2,6 @@ locals {
   manifest = jsondecode(file("manifest.json"))
 }
 
-resource "kubernetes_namespace" "shikanime" {
-  metadata {
-    name = "shikanime"
-  }
-}
-
-resource "kubernetes_namespace" "tailscale" {
-  metadata {
-    name = "tailscale"
-  }
-}
-
 resource "kubernetes_manifest" "tailscale" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
@@ -41,12 +29,6 @@ resource "kubernetes_manifest" "tailscale" {
   }
 }
 
-resource "kubernetes_namespace" "longhorn_system" {
-  metadata {
-    name = "longhorn-system"
-  }
-}
-
 resource "kubernetes_manifest" "longhorn" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
@@ -70,12 +52,6 @@ resource "kubernetes_manifest" "longhorn" {
         }
       })
     }
-  }
-}
-
-resource "kubernetes_namespace" "grafana" {
-  metadata {
-    name = "grafana"
   }
 }
 
