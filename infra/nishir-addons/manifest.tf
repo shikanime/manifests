@@ -112,7 +112,6 @@ resource "kubernetes_manifest" "grafana_monitoring" {
         ]
         clusterMetrics = {
           opencost = {
-            enabled = true
             opencost = {
               prometheus = {
                 external = {
