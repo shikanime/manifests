@@ -8,6 +8,9 @@ spec:
     spec:
       containers:
         - name: jellyfin
+          ports:
+            - containerPort: 8920
+              name: https
           volumeMounts:
             - name: tls
               mountPath: /tls
