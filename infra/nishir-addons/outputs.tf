@@ -37,11 +37,3 @@ output "jellyfin_pkcs12_secret_object_ref" {
   }
   description = "Jellyfin PKCS12 secret metadata"
 }
-
-output "gitea_pkcs12_secret_object_ref" {
-  value = {
-    name      = local.gitea_pkcs12_secret_object_ref.name
-    namespace = local.gitea_pkcs12_secret_object_ref.namespace
-  }
-  description = "Gitea PKCS12 secret metadata"
-}
