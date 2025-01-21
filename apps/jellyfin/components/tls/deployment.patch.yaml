@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: jellyfin
+          ports:
+            - containerPort: 8920
+              name: https
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: jellyfin-tls
