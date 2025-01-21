@@ -4,6 +4,7 @@ components:
   - ../../components/grafana
   - ../../components/longhorn
   - ../../components/rancher
+  - ../../components/tls
 resources:
   - ../../base
   - ../../../../apps/gitea/base

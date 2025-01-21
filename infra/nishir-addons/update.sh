@@ -10,6 +10,7 @@ declare -A CHARTS=(
   ["tailscale"]="tailscale/tailscale-operator"
   ["longhorn"]="longhorn/longhorn"
   ["vpa"]="fairwinds/vpa"
+  ["cert_manager"]="jetstack/cert-manager"
 )
 
 declare -A REPOS=(
@@ -17,6 +18,7 @@ declare -A REPOS=(
   ["tailscale"]="https://pkgs.tailscale.com/helmcharts"
   ["longhorn"]="https://charts.longhorn.io"
   ["fairwinds"]="https://charts.fairwinds.com/stable"
+  ["jetstack"]="https://charts.jetstack.io"
 )
 
 # Add each repository to helm using the repo name and URL from REPOS array
