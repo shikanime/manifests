@@ -9,6 +9,14 @@ locals {
     base64decode(data.scaleway_secret_version.vaultwarden_admin_token.data)
   )
 
+  grafana_monitoring_prometheus_secret_object_ref = one(kubernetes_secret.grafana_monitoring_prometheus.metadata)
+  grafana_monitoring_loki_secret_object_ref       = one(kubernetes_secret.grafana_monitoring_loki.metadata)
+  grafana_monitoring_tempo_secret_object_ref      = one(kubernetes_secret.grafana_monitoring_tempo.metadata)
+
+  tailscale_operator_oauth_client_secret_object_ref = one(kubernetes_secret.tailscale_operator_oauth_client.metadata)
+
+  longhorn_hetzner_backups_secret_object_ref = one(kubernetes_secret.longhorn_hetzner_backups.metadata)
+
   vaultwarden_secret_object_ref   = one(kubernetes_secret.vaultwarden.metadata)
   metatube_secret_object_ref      = one(kubernetes_secret.metatube.metadata)
   rclone_webdav_secret_object_ref = one(kubernetes_secret.rclone_webdav.metadata)
