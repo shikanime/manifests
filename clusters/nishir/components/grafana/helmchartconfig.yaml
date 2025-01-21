@@ -21,7 +21,7 @@ spec:
             defaultClusterId: nishir
         metricsSource: metricsService
       kepler:
-        enabled: true
+        enabled: false
     alloy-metrics:
       enabled: true
     clusterEvents:
