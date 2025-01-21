@@ -22,6 +22,7 @@ locals {
   rclone_webdav_secret_object_ref   = one(kubernetes_secret.rclone_webdav.metadata)
   rclone_ftp_secret_object_ref      = one(kubernetes_secret.rclone_ftp.metadata)
   jellyfin_pkcs12_secret_object_ref = one(kubernetes_secret.jellyfin_pkcs12.metadata)
+  gitea_pkcs12_secret_object_ref    = one(kubernetes_secret.gitea_pkcs12.metadata)
 }
 
 data "scaleway_secret_version" "tailscale_operator_oauth_client" {
