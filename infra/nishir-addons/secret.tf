@@ -8,6 +8,19 @@ locals {
   vaultwarden_admin_token = jsondecode(
     base64decode(data.scaleway_secret_version.vaultwarden_admin_token.data)
   )
+
+  grafana_monitoring_prometheus_secret_object_ref = one(kubernetes_secret.grafana_monitoring_prometheus.metadata)
+  grafana_monitoring_loki_secret_object_ref       = one(kubernetes_secret.grafana_monitoring_loki.metadata)
+  grafana_monitoring_tempo_secret_object_ref      = one(kubernetes_secret.grafana_monitoring_tempo.metadata)
+
+  tailscale_operator_oauth_client_secret_object_ref = one(kubernetes_secret.tailscale_operator_oauth_client.metadata)
+
+  longhorn_hetzner_backups_secret_object_ref = one(kubernetes_secret.longhorn_hetzner_backups.metadata)
+
+  vaultwarden_secret_object_ref   = one(kubernetes_secret.vaultwarden.metadata)
+  metatube_secret_object_ref      = one(kubernetes_secret.metatube.metadata)
+  rclone_webdav_secret_object_ref = one(kubernetes_secret.rclone_webdav.metadata)
+  rclone_ftp_secret_object_ref    = one(kubernetes_secret.rclone_ftp.metadata)
 }
 
 data "scaleway_secret_version" "tailscale_operator_oauth_client" {
@@ -28,7 +41,7 @@ data "scaleway_secret_version" "vaultwarden_admin_token" {
 resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   metadata {
     name      = "tailscale-operator-oauth-client"
-    namespace = one(kubernetes_namespace.tailscale.metadata).name
+    namespace = local.tailscale_namespace_object_ref.name
   }
   data = {
     client_id     = local.tailscale_operator_oauth_client_data.clientId
@@ -40,7 +53,7 @@ resource "kubernetes_secret" "tailscale_operator_oauth_client" {
 resource "kubernetes_secret" "longhorn_hetzner_backups" {
   metadata {
     name      = "longhorn-hetzner-backups"
-    namespace = one(kubernetes_namespace.longhorn_system.metadata).name
+    namespace = local.longhorn_system_namespace_object_ref.name
     annotations = {
       "longhorn.io/backup-target" = local.longhorn_backup_target
     }
@@ -56,7 +69,7 @@ resource "kubernetes_secret" "longhorn_hetzner_backups" {
 resource "kubernetes_secret" "grafana_monitoring_prometheus" {
   metadata {
     name      = "grafana-monitoring-prometheus"
-    namespace = one(kubernetes_namespace.grafana.metadata).name
+    namespace = local.grafana_namespace_object_ref.name
   }
   data = {
     host     = var.endpoints.prometheus
@@ -70,7 +83,7 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
 resource "kubernetes_secret" "grafana_monitoring_loki" {
   metadata {
     name      = "grafana-monitoring-loki"
-    namespace = one(kubernetes_namespace.grafana.metadata).name
+    namespace = local.grafana_namespace_object_ref.name
   }
   data = {
     host     = var.endpoints.loki
@@ -84,7 +97,7 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
 resource "kubernetes_secret" "grafana_monitoring_tempo" {
   metadata {
     name      = "grafana-monitoring-tempo"
-    namespace = one(kubernetes_namespace.grafana.metadata).name
+    namespace = local.grafana_namespace_object_ref.name
   }
   data = {
     host     = var.endpoints.tempo
@@ -102,7 +115,7 @@ resource "random_password" "metatube_token" {
 resource "kubernetes_secret" "metatube" {
   metadata {
     name      = "metatube"
-    namespace = one(kubernetes_namespace.shikanime.metadata).name
+    namespace = local.shikanime_namespace_object_ref.name
   }
   data = {
     token = random_password.metatube_token.result
@@ -117,7 +130,7 @@ resource "random_password" "vaultwarden_admin_password" {
 resource "kubernetes_secret" "vaultwarden" {
   metadata {
     name      = "vaultwarden"
-    namespace = one(kubernetes_namespace.shikanime.metadata).name
+    namespace = local.shikanime_namespace_object_ref.name
   }
   data = {
     admin-token = random_password.vaultwarden_admin_password.result
@@ -132,10 +145,10 @@ resource "random_password" "rclone_password" {
 resource "kubernetes_secret" "rclone_webdav" {
   metadata {
     name      = "rclone-webdav"
-    namespace = one(kubernetes_namespace.shikanime.metadata).name
+    namespace = local.shikanime_namespace_object_ref.name
   }
   data = {
-    "htpasswd" = "rclone:${bcrypt(random_password.rclone_password.result)}"
+    htpasswd = "rclone:${bcrypt(random_password.rclone_password.result)}"
   }
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
@@ -144,7 +157,7 @@ resource "kubernetes_secret" "rclone_webdav" {
 resource "kubernetes_secret" "rclone_ftp" {
   metadata {
     name      = "rclone-ftp"
-    namespace = one(kubernetes_namespace.shikanime.metadata).name
+    namespace = local.shikanime_namespace_object_ref.name
   }
   data = {
     username = "rclone"
@@ -161,7 +174,7 @@ resource "random_password" "transmission_password" {
 resource "kubernetes_secret" "transmission" {
   metadata {
     name      = "transmission"
-    namespace = one(kubernetes_namespace.shikanime.metadata).name
+    namespace = local.shikanime_namespace_object_ref.name
   }
   data = {
     username = "transmission"
