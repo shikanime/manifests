@@ -1,4 +1,4 @@
-output "vaultwarden_secret_metadata" {
+output "vaultwarden_secret_object_ref" {
   value = {
     name      = one(kubernetes_secret.vaultwarden.metadata).name
     namespace = one(kubernetes_secret.vaultwarden.metadata).namespace
@@ -6,7 +6,7 @@ output "vaultwarden_secret_metadata" {
   description = "Vaultwarden secret metadata"
 }
 
-output "metatube_secret_metadata" {
+output "metatube_secret_object_ref" {
   value = {
     name      = one(kubernetes_secret.metatube.metadata).name
     namespace = one(kubernetes_secret.metatube.metadata).namespace
@@ -14,7 +14,7 @@ output "metatube_secret_metadata" {
   description = "Metatube secret metadata"
 }
 
-output "rclone_webdav_secret_metadata" {
+output "rclone_webdav_secret_object_ref" {
   value = {
     name      = one(kubernetes_secret.rclone_webdav.metadata).name
     namespace = one(kubernetes_secret.rclone_webdav.metadata).namespace
@@ -22,7 +22,7 @@ output "rclone_webdav_secret_metadata" {
   description = "Rclone Webdav secret metadata"
 }
 
-output "rclone_ftp_secret_metadata" {
+output "rclone_ftp_secret_object_ref" {
   value = {
     name      = one(kubernetes_secret.rclone_ftp.metadata).name
     namespace = one(kubernetes_secret.rclone_ftp.metadata).namespace
