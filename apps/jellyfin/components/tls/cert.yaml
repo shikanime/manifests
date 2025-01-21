@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jellyfin-tls
+  namespace: shikanime
+spec:
+  commonName: jellyfin
+  dnsNames:
+    - jellyfin
+    - nishir.local
+  issuerRef:
+    kind: Issuer
+    name: nishir-ca
+  secretName: jellyfin-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: jellyfin-pkcs12
+        key: password
+      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
