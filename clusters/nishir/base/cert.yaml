@@ -24,7 +24,7 @@ spec:
   issuerRef:
     kind: Issuer
     name: nishir-ca
-  secretName: nishir-tls
+  secretName: jellyfin-tls
   keystores:
     pkcs12:
       create: true
@@ -50,7 +50,7 @@ spec:
   issuerRef:
     kind: Issuer
     name: nishir-ca
-  secretName: nishir-tls
+  secretName: gitea-tls
   keystores:
     pkcs12:
       create: true
