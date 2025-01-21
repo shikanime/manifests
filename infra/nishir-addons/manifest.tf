@@ -72,65 +72,57 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       bootstrap       = false
       failurePolicy   = "abort"
       valuesContent = jsonencode({
-    cluster:
-      name: nishir
-    destinations:
-      - name: metricsService
-        type: prometheus
-        url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
-        auth:
-          type: basic
-          username: '441356'
-          password: REPLACE_WITH_ACCESS_POLICY_TOKEN
-      - name: logsService
-        type: loki
-        url: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
-        auth:
-          type: basic
-          username: '219648'
-          password: REPLACE_WITH_ACCESS_POLICY_TOKEN
-      - name: tracesService
-        type: otlp
-        metrics:
-          enabled: false
-        logs:
-          enabled: false
-        traces:
-          enabled: true
-        url: var.endpoints.tempo
-        secret:
-          secret = {
-            create = false
-            name   = local.grafana_monitoring_tempo_secret_object_ref.name
-          }
-    clusterMetrics:
-      opencost:
-        enabled: true
-        opencost:
-          exporter:
-            defaultClusterId: nishir
-          prometheus:
-            external:
-              url: "${var.endpoints.prometheus}/api/prom"
-            existingSecretName = local.grafana_monitoring_prometheus_secret_object_ref.name
-
-        externalServices = {
-          prometheus = {
+        cluster = {
+          name = "nishir"
+        }
+        destinations = [
+          {
+            name = "metricsService"
+            type = "prometheus"
+            url  = var.endpoints.prometheus
             secret = {
               create = false
               name   = local.grafana_monitoring_prometheus_secret_object_ref.name
             }
-          }
-          loki = {
+          },
+          {
+            name = "logsService"
+            type = "loki"
+            url  = var.endpoints.loki
             secret = {
               create = false
               name   = local.grafana_monitoring_loki_secret_object_ref.name
             }
-          }
-          tempo = {
+          },
+          {
+            name = "tracesService"
+            type = "otlp"
+            metrics = {
+              enabled = false
+            }
+            logs = {
+              enabled = false
+            }
+            traces = {
+              enabled = true
+            }
+            url = var.endpoints.tempo
             secret = {
               create = false
-              name   =
+              name   = local.grafana_monitoring_tempo_secret_object_ref.name
+            }
+          }
+        ]
+        clusterMetrics = {
+          opencost = {
+            enabled = true
+            opencost = {
+              prometheus = {
+                external = {
+                  url = "${var.endpoints.prometheus}/api/prom"
+                }
+                existingSecretName = local.grafana_monitoring_prometheus_secret_object_ref.name
+              }
             }
           }
         }
