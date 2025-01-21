@@ -5,6 +5,7 @@ components:
   - ../../components/longhorn
   - ../../components/rancher
   - ../../components/tailscale
+  - ../../components/tls
 resources:
   - ../../base
   - ../../../../apps/gitea/base/overlays/tailnet
