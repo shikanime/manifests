@@ -12,7 +12,12 @@ spec:
             - name: data-sukebe
               mountPath: /data/sukebe
               subPath: Videos
+            - name: nishir-tls
+              mountPath: /etc/ssl/nishir
       volumes:
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe-data
+        - name: nishir-tls
+          secret:
+            secretName: nishir-tls

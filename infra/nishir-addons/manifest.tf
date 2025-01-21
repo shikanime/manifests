@@ -147,3 +147,28 @@ resource "kubernetes_manifest" "vpa" {
     }
   }
 }
+
+resource "kubernetes_manifest" "cert_manager" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "cert-manager"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = local.manifest.kubernetes_manifest.cert_manager.spec.repo
+      chart           = local.manifest.kubernetes_manifest.cert_manager.spec.chart
+      targetNamespace = "kube-system"
+      version         = local.manifest.kubernetes_manifest.cert_manager.spec.version
+      helmVersion     = "v3"
+      bootstrap       = false
+      failurePolicy   = "abort"
+      valuesContent = jsonencode({
+        crds = {
+          enabled = true
+        }
+      })
+    }
+  }
+}
