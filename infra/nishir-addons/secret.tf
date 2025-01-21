@@ -140,7 +140,7 @@ resource "kubernetes_secret" "rclone_webdav" {
     namespace = local.shikanime_namespace_object_ref.name
   }
   data = {
-    "htpasswd" = "rclone:${bcrypt(random_password.rclone_password.result)}"
+    htpasswd = "rclone:${bcrypt(random_password.rclone_password.result)}"
   }
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]
