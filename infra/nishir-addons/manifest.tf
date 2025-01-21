@@ -72,9 +72,6 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       bootstrap       = false
       failurePolicy   = "abort"
       valuesContent = jsonencode({
-        cluster = {
-          name = "nishir"
-        }
         destinations = [
           {
             name = "metricsService"
