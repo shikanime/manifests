@@ -5,6 +5,8 @@ metadata:
   namespace: shikanime
 spec:
   commonName: nishir.local
+  dnsNames:
+    - nishir.local
   issuerRef:
     name: selfsigned
     kind: Issuer
