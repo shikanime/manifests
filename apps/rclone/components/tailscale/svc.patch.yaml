@@ -6,3 +6,5 @@ metadata:
   annotations:
     tailscale.com/hostname: ftp
     tailscale.com/tags: tag:ftp
+spec:
+  loadBalancerClass: tailscale
