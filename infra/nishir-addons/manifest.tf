@@ -72,53 +72,30 @@ resource "kubernetes_manifest" "grafana_monitoring" {
       bootstrap       = false
       failurePolicy   = "abort"
       valuesContent = jsonencode({
-        destinations = [
-          {
-            name = "metricsService"
-            type = "prometheus"
-            url  = var.endpoints.prometheus
+        externalServices = {
+          prometheus = {
             secret = {
               create = false
               name   = local.grafana_monitoring_prometheus_secret_object_ref.name
             }
-          },
-          {
-            name = "logsService"
-            type = "loki"
-            url  = var.endpoints.loki
+          }
+          loki = {
             secret = {
               create = false
               name   = local.grafana_monitoring_loki_secret_object_ref.name
             }
-          },
-          {
-            name = "tracesService"
-            type = "otlp"
-            metrics = {
-              enabled = false
-            }
-            logs = {
-              enabled = false
-            }
-            traces = {
-              enabled = true
-            }
-            url = var.endpoints.tempo
+          }
+          tempo = {
             secret = {
               create = false
               name   = local.grafana_monitoring_tempo_secret_object_ref.name
             }
           }
-        ]
-        clusterMetrics = {
+        }
+        opencost = {
           opencost = {
-            opencost = {
-              prometheus = {
-                external = {
-                  url = "${var.endpoints.prometheus}/api/prom"
-                }
-                existingSecretName = local.grafana_monitoring_prometheus_secret_object_ref.name
-              }
+            prometheus = {
+              existingSecretName = local.grafana_monitoring_prometheus_secret_object_ref.name
             }
           }
         }

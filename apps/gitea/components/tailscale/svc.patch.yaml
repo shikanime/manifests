@@ -6,3 +6,5 @@ metadata:
   annotations:
     tailscale.com/hostname: git
     tailscale.com/tags: tag:gitea
+spec:
+  loadBalancerClass: tailscale
