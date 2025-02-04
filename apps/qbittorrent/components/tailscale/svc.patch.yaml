@@ -6,3 +6,5 @@ metadata:
   annotations:
     tailscale.com/hostname: qbittorrent-tracker
     tailscale.com/tags: tag:bittorrent
+spec:
+  loadBalancerClass: tailscale
