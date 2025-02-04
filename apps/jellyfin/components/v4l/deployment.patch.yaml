@@ -19,12 +19,12 @@ spec:
         - name: dev-video10
           hostPath:
             path: /dev/video10
-            type: BlockDevice
+            type: CharDevice
         - name: dev-video11
           hostPath:
             path: /dev/video11
-            type: BlockDevice
+            type: CharDevice
         - name: dev-video12
           hostPath:
             path: /dev/video12
-            type: BlockDevice
+            type: CharDevice
