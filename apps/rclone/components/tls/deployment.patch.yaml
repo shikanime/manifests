@@ -9,10 +9,10 @@ spec:
       containers:
         - name: rclone-webdav
           env:
-          - name: RCLONE_CERT
-            value: /tls/tls.crt
-          - name: RCLONE_KEY
-            value: /tls/tls.key
+            - name: RCLONE_CERT
+              value: /tls/tls.crt
+            - name: RCLONE_KEY
+              value: /tls/tls.key
           volumeMounts:
             - name: tls
               mountPath: /tls
