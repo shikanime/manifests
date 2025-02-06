@@ -9,3 +9,9 @@ variable "name" {
   description = "Name of the cluster"
   default     = "nishir"
 }
+
+variable "display_name" {
+  type        = string
+  description = "Display name of the cluster"
+  default     = "Shana"
+}
