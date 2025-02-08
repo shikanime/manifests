@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: vaultwarden
+          env:
+            - name: ROCKET_TLS
+              value: |
+                {certs="/tls/tls.crt",key="/tls/tls.key"}
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: vaultwarden-tls
