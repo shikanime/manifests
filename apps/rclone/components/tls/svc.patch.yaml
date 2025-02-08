@@ -8,14 +8,3 @@ spec:
     - name: https
       port: 443
       targetPort: webdav
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ftp
-  namespace: shikanime
-spec:
-  ports:
-    - name: ftps-control
-      port: 990
-      targetPort: ftps-control
