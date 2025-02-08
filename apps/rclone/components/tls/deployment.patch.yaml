@@ -17,18 +17,6 @@ spec:
             - name: tls
               mountPath: /tls
               readOnly: true
-        - name: rclone-ftp
-          env:
-            - name: RCLONE_CERT
-              value: /tls/tls.crt
-            - name: RCLONE_KEY
-              value: /tls/tls.key
-            - name: RCLONE_LOG_LEVEL
-              value: DEBUG
-          volumeMounts:
-            - name: tls
-              mountPath: /tls
-              readOnly: true
       volumes:
         - name: tls
           secret:
