@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8384
+      port: 80
       targetPort: http
   selector:
     app.kubernetes.io/name: syncthing
