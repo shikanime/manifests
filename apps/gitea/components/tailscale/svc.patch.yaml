@@ -5,6 +5,6 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/hostname: git
-    tailscale.com/tags: tag:gitea
+    tailscale.com/tags: tag:git
 spec:
   loadBalancerClass: tailscale
