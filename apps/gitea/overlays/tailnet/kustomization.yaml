@@ -3,4 +3,4 @@ kind: Kustomization
 components:
   - ../../components/tailscale
 resources:
-  - ../overlays/base
+  - ../overlays/default
