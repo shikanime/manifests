@@ -10,14 +10,7 @@ spec:
         - name: jellyfin
           volumeMounts:
             - name: data-sukebe
-              mountPath: /data/sukebe/Mangas
-              subPath: Mangas
-            - name: data-sukebe
-              mountPath: /data/sukebe/Photos
-              subPath: Photos
-            - name: data-sukebe
-              mountPath: /data/sukebe/Videos
-              subPath: Videos
+              mountPath: /data/sukebe
       volumes:
         - name: data-sukebe
           persistentVolumeClaim:
