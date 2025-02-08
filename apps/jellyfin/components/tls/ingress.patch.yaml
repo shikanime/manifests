@@ -1,14 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: rclone
+  name: jellyfin
   namespace: shikanime
 spec:
   defaultBackend:
     service:
-      name: webdav
+      name: jellyfin
       port:
-        name: http
-  tls:
-    - hosts:
-        - webdav
+        name: https

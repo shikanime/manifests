@@ -8,7 +8,4 @@ spec:
     service:
       name: webdav
       port:
-        name: http
-  tls:
-    - hosts:
-        - webdav
+        name: https
