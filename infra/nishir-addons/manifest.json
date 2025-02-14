@@ -14,6 +14,13 @@
         "chart": "longhorn"
       }
     },
+    "node-feature-discovery": {
+      "spec": {
+        "version": "0.17.1",
+        "repo": "https://kubernetes-sigs.github.io/node-feature-discovery/charts",
+        "chart": "node-feature-discovery"
+      }
+    },
     "grafana_monitoring": {
       "spec": {
         "version": "1.6.21",
