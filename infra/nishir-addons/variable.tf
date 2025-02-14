@@ -10,7 +10,7 @@ variable "longhorn" {
   type = object({
     access_key_id     = string
     backup_target     = string
-    endpoints          = string
+    endpoints         = string
     secret_access_key = string
   })
   sensitive = true
