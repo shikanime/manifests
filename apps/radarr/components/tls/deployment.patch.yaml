@@ -8,9 +8,6 @@ spec:
     spec:
       containers:
         - name: radarr
-          ports:
-            - containerPort: 8920
-              name: https
           volumeMounts:
             - name: tls
               mountPath: /tls
