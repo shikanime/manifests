@@ -10,4 +10,5 @@ spec:
       matchFeatures:
         - feature: kernel.loadedmodule
           matchExpressions:
-            bcm2835_codec: {op: Exists}
+            bcm2835_codec:
+              op: Exists
