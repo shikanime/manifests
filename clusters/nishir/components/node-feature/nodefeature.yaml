@@ -6,7 +6,7 @@ spec:
   rules:
     - name: v4l2 labels
       labels:
-        v4l2.enabled: "true"
+        driver-v4l2: "true"
       matchFeatures:
         - feature: kernel.loadedmodule
           matchExpressions:
