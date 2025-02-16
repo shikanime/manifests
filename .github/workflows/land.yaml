@@ -14,6 +14,7 @@ jobs:
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token }}
       - uses: DeterminateSystems/nix-installer-action@v13
         with:
