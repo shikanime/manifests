@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: metatube
     newName: docker.io/metatube/metatube-server
-    newTag: 1.2.8
+    newTag: 1.2.9
 resources:
   - deployment.yaml
   - pvc.yaml
@@ -14,4 +14,4 @@ labels:
       app.kubernetes.io/component: metadata-server
       app.kubernetes.io/name: metatube
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 1.2.8
+      app.kubernetes.io/version: 1.2.9
