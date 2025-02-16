@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: jellyfin
     newName: docker.io/jellyfin/jellyfin
-    newTag: 10.10.5
+    newTag: 10.10.3
 resources:
   - deployment.yaml
   - ingress.yaml
@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: media-server
       app.kubernetes.io/name: jellyfin
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 10.10.5
+      app.kubernetes.io/version: 10.10.3

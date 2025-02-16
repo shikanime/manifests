@@ -6,21 +6,19 @@ set -o pipefail
 
 # Define an array of charts to check
 declare -A CHARTS=(
-  ["cert_manager"]="jetstack/cert-manager"
   ["grafana_monitoring"]="grafana/k8s-monitoring"
-  ["longhorn"]="longhorn/longhorn"
-  ["node_feature_discovery"]="node-feature-discovery/node-feature-discovery"
   ["tailscale"]="tailscale/tailscale-operator"
+  ["longhorn"]="longhorn/longhorn"
   ["vpa"]="fairwinds/vpa"
+  ["cert_manager"]="jetstack/cert-manager"
 )
 
 declare -A REPOS=(
-  ["fairwinds"]="https://charts.fairwinds.com/stable"
   ["grafana"]="https://grafana.github.io/helm-charts"
-  ["jetstack"]="https://charts.jetstack.io"
-  ["longhorn"]="https://charts.longhorn.io"
-  ["node-feature-discovery"]="https://kubernetes-sigs.github.io/node-feature-discovery/charts"
   ["tailscale"]="https://pkgs.tailscale.com/helmcharts"
+  ["longhorn"]="https://charts.longhorn.io"
+  ["fairwinds"]="https://charts.fairwinds.com/stable"
+  ["jetstack"]="https://charts.jetstack.io"
 )
 
 # Add each repository to helm using the repo name and URL from REPOS array

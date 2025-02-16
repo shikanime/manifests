@@ -34,6 +34,6 @@ provider "aws" {
   skip_requesting_account_id  = true
   skip_region_validation      = true
   endpoints {
-    s3 = var.longhorn.endpoint
+    s3 = var.endpoints.s3
   }
 }
