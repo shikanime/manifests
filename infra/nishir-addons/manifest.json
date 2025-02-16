@@ -34,6 +34,13 @@
         "repo": "https://pkgs.tailscale.com/helmcharts",
         "chart": "tailscale-operator"
       }
+    },
+    "node_feature_discovery": {
+      "spec": {
+        "version": "0.17.1",
+        "repo": "https://kubernetes-sigs.github.io/node-feature-discovery/charts",
+        "chart": "node-feature-discovery"
+      }
     }
   }
 }

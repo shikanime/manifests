@@ -148,3 +148,23 @@ resource "kubernetes_manifest" "cert_manager" {
     }
   }
 }
+
+resource "kubernetes_manifest" "node_feature_discovery" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "node-feature-discovery"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = local.manifest.kubernetes_manifest.node_feature_discovery.spec.repo
+      chart           = local.manifest.kubernetes_manifest.node_feature_discovery.spec.chart
+      targetNamespace = "kube-system"
+      version         = local.manifest.kubernetes_manifest.node_feature_discovery.spec.version
+      helmVersion     = "v3"
+      bootstrap       = false
+      failurePolicy   = "abort"
+    }
+  }
+}
