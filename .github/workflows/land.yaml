@@ -21,8 +21,7 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v8
       - uses: shikanime/ghstack-action@main
         with:
-          app-id: ${{ vars.OPERATOR_APP_ID }}
-          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+          token: ${{ steps.createGithubAppToken.outputs.token }}
           sign-commits: true
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
