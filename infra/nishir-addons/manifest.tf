@@ -47,7 +47,7 @@ resource "kubernetes_manifest" "longhorn" {
       failurePolicy   = "abort"
       valuesContent = jsonencode({
         defaultSettings = {
-          backupTarget                 = local.longhorn_backup_target
+          backupTarget                 = var.longhorn.backup_target
           backupTargetCredentialSecret = local.longhorn_hetzner_backups_secret_object_ref.name
         }
       })
