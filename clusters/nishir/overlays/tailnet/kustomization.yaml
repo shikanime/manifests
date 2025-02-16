@@ -3,7 +3,6 @@ kind: Kustomization
 components:
   - ../../components/grafana
   - ../../components/longhorn
-  - ../../components/node-feature
   - ../../components/rancher
   - ../../components/tailscale
   - ../../components/tls

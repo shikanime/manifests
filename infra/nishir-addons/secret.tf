@@ -1,4 +1,14 @@
 locals {
+  tailscale_operator_oauth_client_data = jsondecode(
+    base64decode(data.scaleway_secret_version.tailscale_operator_oauth_client.data)
+  )
+  longhorn_backupstore_s3_creds_data = jsondecode(
+    base64decode(data.scaleway_secret_version.longhorn_backupstore_s3_creds.data)
+  )
+  vaultwarden_admin_token = jsondecode(
+    base64decode(data.scaleway_secret_version.vaultwarden_admin_token.data)
+  )
+
   grafana_monitoring_prometheus_secret_object_ref = one(kubernetes_secret.grafana_monitoring_prometheus.metadata)
   grafana_monitoring_loki_secret_object_ref       = one(kubernetes_secret.grafana_monitoring_loki.metadata)
   grafana_monitoring_tempo_secret_object_ref      = one(kubernetes_secret.grafana_monitoring_tempo.metadata)
@@ -15,14 +25,29 @@ locals {
   vaultwarden_secret_object_ref     = one(kubernetes_secret.vaultwarden.metadata)
 }
 
+data "scaleway_secret_version" "tailscale_operator_oauth_client" {
+  secret_id = var.secrets.tailscale_operator_oauth_client
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "longhorn_backupstore_s3_creds" {
+  secret_id = var.secrets.longhorn_backupstore_s3_creds
+  revision  = "latest"
+}
+
+data "scaleway_secret_version" "vaultwarden_admin_token" {
+  secret_id = var.secrets.vaultwarden_admin_token
+  revision  = "latest"
+}
+
 resource "kubernetes_secret" "tailscale_operator_oauth_client" {
   metadata {
     name      = "tailscale-operator-oauth-client"
     namespace = local.tailscale_namespace_object_ref.name
   }
   data = {
-    client_id     = var.tailscale.client_id
-    client_secret = var.tailscale.client_secret
+    client_id     = local.tailscale_operator_oauth_client_data.clientId
+    client_secret = local.tailscale_operator_oauth_client_data.clientSecret
   }
   depends_on = [kubernetes_namespace.tailscale]
 }
@@ -32,13 +57,13 @@ resource "kubernetes_secret" "longhorn_hetzner_backups" {
     name      = "longhorn-hetzner-backups"
     namespace = local.longhorn_system_namespace_object_ref.name
     annotations = {
-      "longhorn.io/backup-target" = var.longhorn.backup_target
+      "longhorn.io/backup-target" = local.longhorn_backup_target
     }
   }
   data = {
-    AWS_ACCESS_KEY_ID     = var.longhorn.access_key_id
-    AWS_SECRET_ACCESS_KEY = var.longhorn.secret_access_key
-    AWS_ENDPOINTS         = var.longhorn.endpoints
+    AWS_ACCESS_KEY_ID     = local.longhorn_backupstore_s3_creds_data.access_key_id
+    AWS_SECRET_ACCESS_KEY = local.longhorn_backupstore_s3_creds_data.secret_access_key
+    AWS_ENDPOINTS         = var.endpoints.s3
   }
   depends_on = [kubernetes_namespace.longhorn_system]
 }
@@ -49,9 +74,9 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
     namespace = local.grafana_namespace_object_ref.name
   }
   data = {
-    host     = var.prometheus.endpoint
-    username = var.prometheus.username
-    password = var.prometheus.password
+    host     = var.endpoints.prometheus
+    username = data.grafana_data_source.prometheus.basic_auth_username
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.grafana]
@@ -63,9 +88,9 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
     namespace = local.grafana_namespace_object_ref.name
   }
   data = {
-    host     = var.loki.endpoint
-    username = var.loki.username
-    password = var.loki.password
+    host     = var.endpoints.loki
+    username = data.grafana_data_source.loki.basic_auth_username
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.grafana]
@@ -77,9 +102,9 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
     namespace = local.grafana_namespace_object_ref.name
   }
   data = {
-    host     = var.tempo.endpoint
-    username = var.tempo.username
-    password = var.tempo.password
+    host     = var.endpoints.tempo
+    username = data.grafana_data_source.tempo.basic_auth_username
+    password = grafana_cloud_access_policy_token.kubernetes.token
   }
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.grafana]
@@ -138,6 +163,23 @@ resource "kubernetes_secret" "rclone_ftp" {
   data = {
     username = "rclone"
     password = random_password.rclone_password.result
+  }
+  type       = "kubernetes.io/basic-auth"
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "transmission_password" {
+  length = 14
+}
+
+resource "kubernetes_secret" "transmission" {
+  metadata {
+    name      = "transmission"
+    namespace = local.shikanime_namespace_object_ref.name
+  }
+  data = {
+    username = "transmission"
+    password = random_password.transmission_password.result
   }
   type       = "kubernetes.io/basic-auth"
   depends_on = [kubernetes_namespace.shikanime]

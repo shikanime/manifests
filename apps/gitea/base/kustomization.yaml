@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: gitea
     newName: docker.io/gitea/gitea
-    newTag: 1.23.3
+    newTag: 1.23.1
 resources:
   - deployment.yaml
   - ingress.yaml
@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/name: gitea
       app.kubernetes.io/part-of: nishir-platform
-      app.kubernetes.io/version: 1.23.3
+      app.kubernetes.io/version: 1.23.1
