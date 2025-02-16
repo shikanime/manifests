@@ -4,17 +4,13 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "shikanime-studio"
     workspaces {
-      name = "nishir-addons"
+      name = "nishir-services"
     }
   }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.82"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.32"
     }
     grafana = {
       source  = "hashicorp/grafana"
@@ -34,6 +30,6 @@ provider "aws" {
   skip_requesting_account_id  = true
   skip_region_validation      = true
   endpoints {
-    s3 = var.longhorn.endpoint
+    s3 = var.endpoints.s3
   }
 }
