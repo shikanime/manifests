@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: longhorn-hetzner-backups
+  namespace: longhorn
+  annotations:
+    longhorn.io/backup-target: ${backup_target}
+type: Opaque
+data:
+  AWS_ACCESS_KEY_ID: ${access_key_id}
+  AWS_SECRET_ACCESS_KEY: ${secret_access_key}
+  AWS_ENDPOINTS: ${endpoints}
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: longhorn
+  namespace: kube-system
+spec:
+  repo: ${repo}
+  chart: ${chart}
+  targetNamespace: longhorn
+  version: ${version}
+  helmVersion: "v3"
+  bootstrap: false
+  failurePolicy: abort
+  valuesContent: |
+    defaultSettings:
+      backupTarget: ${backup_target}
+      backupTargetCredentialSecret: longhorn-hetzner-backups

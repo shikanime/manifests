@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: cert-manager
+  namespace: kube-system
+spec:
+  repo: ${repo}
+  chart: ${chart}
+  targetNamespace: cert-manager
+  version: ${version}
+  helmVersion: "v3"
+  bootstrap: false
+  failurePolicy: abort
+  valuesContent: |
+    crds:
+      enabled: true

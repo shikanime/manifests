@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-monitoring-prometheus
+  namespace: grafana
+type: kubernetes.io/basic-auth
+data:
+  host: ${prometheus.endpoint}
+  username: ${prometheus.username}
+  password: ${prometheus.password}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-monitoring-loki
+  namespace: grafana
+type: kubernetes.io/basic-auth
+data:
+  host: ${loki.endpoint}
+  username: ${loki.username}
+  password: ${loki.password}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-monitoring-tempo
+  namespace: grafana
+type: kubernetes.io/basic-auth
+data:
+  host: ${tempo.endpoint}
+  username: ${tempo.username}
+  password: ${tempo.password}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: grafana-monitoring
+  namespace: kube-system
+spec:
+  repo: ${repo}
+  chart: ${chart}
+  targetNamespace: grafana
+  version: ${version}
+  helmVersion: "v3"
+  bootstrap: false
+  failurePolicy: abort
+  valuesContent: |
+    externalServices:
+      prometheus:
+        secret:
+          create: false
+          name: grafana-monitoring-prometheus
+      loki:
+        secret:
+          create: false
+          name: grafana-monitoring-loki
+      tempo:
+        secret:
+          create: false
+          name: grafana-monitoring-tempo
+    opencost:
+      opencost:
+        prometheus:
+          existingSecretName: grafana-monitoring-prometheus
