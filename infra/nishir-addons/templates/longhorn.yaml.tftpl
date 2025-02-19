@@ -7,14 +7,14 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: longhorn-hetzner-backups
-  namespace: longhorn
+  namespace: longhorn-system
   annotations:
-    longhorn.io/backup-target: ${backup_target}
+    longhorn.io/backup-target: ${base64encode(backup_target)}
 type: Opaque
 data:
-  AWS_ACCESS_KEY_ID: ${access_key_id}
-  AWS_SECRET_ACCESS_KEY: ${secret_access_key}
-  AWS_ENDPOINTS: ${endpoints}
+  AWS_ACCESS_KEY_ID: ${base64encode(access_key_id)}
+  AWS_SECRET_ACCESS_KEY: ${base64encode(secret_access_key)}
+  AWS_ENDPOINTS: ${base64encode(endpoints)}
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -24,7 +24,7 @@ metadata:
 spec:
   repo: ${repo}
   chart: ${chart}
-  targetNamespace: longhorn
+  targetNamespace: longhorn-system
   version: ${version}
   helmVersion: "v3"
   bootstrap: false

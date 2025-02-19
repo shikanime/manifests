@@ -10,8 +10,8 @@ metadata:
   namespace: tailscale
 type: Opaque
 data:
-  client_id: ${tailscale_client_id}
-  client_secret: ${tailscale_client_secret}
+  client_id: ${base64encode(tailscale_client_id)}
+  client_secret: ${base64encode(tailscale_client_secret)}
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart

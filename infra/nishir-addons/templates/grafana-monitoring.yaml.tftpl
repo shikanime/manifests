@@ -5,9 +5,9 @@ metadata:
   namespace: grafana
 type: kubernetes.io/basic-auth
 data:
-  host: ${prometheus.endpoint}
-  username: ${prometheus.username}
-  password: ${prometheus.password}
+  host: ${base64encode(prometheus.endpoint)}
+  username: ${base64encode(prometheus.username)}
+  password: ${base64encode(prometheus.password)}
 ---
 apiVersion: v1
 kind: Secret
@@ -16,9 +16,9 @@ metadata:
   namespace: grafana
 type: kubernetes.io/basic-auth
 data:
-  host: ${loki.endpoint}
-  username: ${loki.username}
-  password: ${loki.password}
+  host: ${base64encode(loki.endpoint)}
+  username: ${base64encode(loki.username)}
+  password: ${base64encode(loki.password)}
 ---
 apiVersion: v1
 kind: Secret
@@ -27,9 +27,9 @@ metadata:
   namespace: grafana
 type: kubernetes.io/basic-auth
 data:
-  host: ${tempo.endpoint}
-  username: ${tempo.username}
-  password: ${tempo.password}
+  host: ${base64encode(tempo.endpoint)}
+  username: ${base64encode(tempo.username)}
+  password: ${base64encode(tempo.password)}
 ---
 apiVersion: v1
 kind: Namespace

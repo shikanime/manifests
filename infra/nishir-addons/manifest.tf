@@ -3,8 +3,8 @@ locals {
 }
 
 resource "local_file" "shikanime_namespace" {
-  filename        = "${path.module}/manifests/shikanime-namespace.yaml"
-  content         = templatefile("${path.module}/templates/shikanime-namespace.yaml.tftpl", {})
+  filename        = "${path.module}/manifests/shikanime.yaml"
+  content         = templatefile("${path.module}/templates/shikanime.yaml.tftpl", {})
   file_permission = "0600"
 }
 
