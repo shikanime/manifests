@@ -1,7 +1,7 @@
 output "tailscale" {
   value = {
-    client_id     = local.tailscale_operator_oauth_client_data.clientId
-    client_secret = local.tailscale_operator_oauth_client_data.clientSecret
+    client_id     = local.tailscale_operator_oauth_client_data.client_id
+    client_secret = local.tailscale_operator_oauth_client_data.client_secret
   }
   sensitive = true
 }
