@@ -6,10 +6,10 @@ set -o pipefail
 
 # Define an array of charts to check
 declare -A CHARTS=(
-  ["cert_manager"]="jetstack/cert-manager"
-  ["grafana_monitoring"]="grafana/k8s-monitoring"
+  ["cert-manager"]="jetstack/cert-manager"
+  ["grafana-monitoring"]="grafana/k8s-monitoring"
   ["longhorn"]="longhorn/longhorn"
-  ["node_feature_discovery"]="node-feature-discovery/node-feature-discovery"
+  ["nfd"]="node-feature-discovery/node-feature-discovery"
   ["tailscale"]="tailscale/tailscale-operator"
   ["vpa"]="fairwinds/vpa"
 )
@@ -32,7 +32,6 @@ done
 # Update the repository information (optional, but recommended for latest info)
 helm repo update
 
-declare -a CHART_VERSIONS=()
 for CHART_NAME in "${CHARTS[@]}"; do
   echo "Checking for updates for $CHART_NAME..."
 
@@ -53,12 +52,20 @@ for CHART_NAME in "${CHARTS[@]}"; do
     for k in "${!CHARTS[@]}"; do
       [[ ${CHARTS[$k]} == "$CHART_NAME" ]] && KEY="$k"
     done
-    REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
-    CHART_VERSIONS+=("\"$KEY\": {\"spec\": {\"version\": \"$LATEST_VERSION\", \"repo\": \"$REPO_URL\", \"chart\": \"${CHART_NAME#*/}\"}}")
+
+    TEMPLATE_FILE="$(dirname "$0")/templates/${KEY}.yaml.tftpl"
+    if [[ -f $TEMPLATE_FILE ]]; then
+      echo "Updating $TEMPLATE_FILE..."
+      REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
+      TMP_FILE=$(mktemp)
+      sed \
+        -e 's|^  repo: .*$|  repo: '$REPO_URL'|' \
+        -e 's|^  chart: .*$|  chart: '${CHART_NAME#*/}'|' \
+        -e 's|^  version: .*$|  version: '$LATEST_VERSION'|' \
+        "$TEMPLATE_FILE" >"$TMP_FILE" && mv "$TMP_FILE" "$TEMPLATE_FILE"
+      echo "Updated $TEMPLATE_FILE"
+    else
+      echo "Template file not found: $TEMPLATE_FILE"
+    fi
   fi
 done
-
-echo "{\"kubernetes_manifest\": {$(
-  IFS=,
-  echo "${CHART_VERSIONS[*]}"
-)}}" | jq . >"$(dirname "$0")/manifest.json"

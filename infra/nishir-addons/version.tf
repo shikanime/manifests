@@ -12,9 +12,9 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.82"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.32"
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.5"
     }
     grafana = {
       source  = "hashicorp/grafana"
