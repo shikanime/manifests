@@ -9,11 +9,11 @@ metadata:
   name: cert-manager
   namespace: kube-system
 spec:
-  repo: ${repo}
-  chart: ${chart}
+  repo: https://charts.jetstack.io
+  chart: cert-manager
   targetNamespace: cert-manager
-  version: ${version}
-  helmVersion: "v3"
+  version: v1.17.1
+  helmVersion: v3
   bootstrap: false
   failurePolicy: abort
   valuesContent: |

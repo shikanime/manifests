@@ -4,10 +4,10 @@ metadata:
   name: vpa
   namespace: kube-system
 spec:
-  repo: ${repo}
-  chart: ${chart}
+  repo: https://charts.fairwinds.com/stable
+  chart: vpa
   targetNamespace: kube-system
-  version: ${version}
-  helmVersion: "v3"
+  version: 4.7.1
+  helmVersion: v3
   bootstrap: false
   failurePolicy: abort

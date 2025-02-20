@@ -19,11 +19,11 @@ metadata:
   name: tailscale
   namespace: kube-system
 spec:
-  repo: ${repo}
-  chart: ${chart}
+  repo: https://pkgs.tailscale.com/helmcharts
+  chart: tailscale-operator
   targetNamespace: tailscale
-  version: ${version}
-  helmVersion: "v3"
+  version: 1.80.0
+  helmVersion: v3
   bootstrap: false
   failurePolicy: abort
   valuesContent: |
