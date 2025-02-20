@@ -54,7 +54,7 @@ for CHART_NAME in "${CHARTS[@]}"; do
     done
 
     TEMPLATE_FILE="$(dirname "$0")/templates/${KEY}.yaml.tftpl"
-    if [[ -f "$TEMPLATE_FILE" ]]; then
+    if [[ -f $TEMPLATE_FILE ]]; then
       echo "Updating $TEMPLATE_FILE..."
       REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
       TMP_FILE=$(mktemp)
@@ -62,7 +62,7 @@ for CHART_NAME in "${CHARTS[@]}"; do
         -e 's|^  repo: .*$|  repo: '$REPO_URL'|' \
         -e 's|^  chart: .*$|  chart: '${CHART_NAME#*/}'|' \
         -e 's|^  version: .*$|  version: '$LATEST_VERSION'|' \
-        "$TEMPLATE_FILE" > "$TMP_FILE" && mv "$TMP_FILE" "$TEMPLATE_FILE"
+        "$TEMPLATE_FILE" >"$TMP_FILE" && mv "$TMP_FILE" "$TEMPLATE_FILE"
       echo "Updated $TEMPLATE_FILE"
     else
       echo "Template file not found: $TEMPLATE_FILE"
