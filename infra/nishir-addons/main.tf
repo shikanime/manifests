@@ -43,4 +43,9 @@ resource "terraform_data" "nishir" {
     content     = local_file.node_feature_discovery.content
     destination = "/mnt/nishir/rancher/k3s/server/manifests/node-feature-discovery.yaml"
   }
+
+  provisioner "file" {
+    content     = local_file.shikanime.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/shikanime.yaml"
+  }
 }
