@@ -60,7 +60,7 @@ variable "tailscale_operator" {
 
 variable "longhorn_backupstore" {
   type = object({
-    access_key_id = string
+    access_key_id     = string
     secret_access_key = string
   })
   sensitive = true
