@@ -6,7 +6,7 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: tailscale-operator-oauth-client
+  name: oauth-client
   namespace: tailscale
 type: Opaque
 data:
@@ -29,4 +29,4 @@ spec:
   valuesContent: |
     oauthSecretVolume:
       secret:
-        secretName: tailscale-operator-oauth-client
+        secretName: oauth-client

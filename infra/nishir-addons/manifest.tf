@@ -2,14 +2,8 @@ locals {
   manifest = jsondecode(file("manifest.json"))
 }
 
-resource "local_file" "shikanime_namespace" {
-  filename        = "${path.module}/manifests/shikanime.yaml"
-  content         = templatefile("${path.module}/templates/shikanime.yaml.tftpl", {})
-  file_permission = "0600"
-}
-
 resource "local_file" "tailscale" {
-  filename = "${path.module}/manifests/tailscale.yaml"
+  filename = "${path.module}/.terraform/tmp/manifest/tailscale.yaml"
   content = templatefile("${path.module}/templates/tailscale.yaml.tftpl", {
     repo                    = local.manifest.kubernetes_manifest.tailscale.spec.repo
     chart                   = local.manifest.kubernetes_manifest.tailscale.spec.chart
@@ -21,7 +15,7 @@ resource "local_file" "tailscale" {
 }
 
 resource "local_file" "longhorn" {
-  filename = "${path.module}/manifests/longhorn.yaml"
+  filename = "${path.module}/.terraform/tmp/manifest/longhorn.yaml"
   content = templatefile("${path.module}/templates/longhorn.yaml.tftpl", {
     repo              = local.manifest.kubernetes_manifest.longhorn.spec.repo
     chart             = local.manifest.kubernetes_manifest.longhorn.spec.chart
@@ -35,7 +29,7 @@ resource "local_file" "longhorn" {
 }
 
 resource "local_file" "grafana_monitoring" {
-  filename = "${path.module}/manifests/grafana-monitoring.yaml"
+  filename = "${path.module}/.terraform/tmp/manifest/grafana-monitoring.yaml"
   content = templatefile("${path.module}/templates/grafana-monitoring.yaml.tftpl", {
     repo       = local.manifest.kubernetes_manifest.grafana_monitoring.spec.repo
     chart      = local.manifest.kubernetes_manifest.grafana_monitoring.spec.chart
@@ -48,7 +42,7 @@ resource "local_file" "grafana_monitoring" {
 }
 
 resource "local_file" "vpa" {
-  filename = "${path.module}/manifests/vpa.yaml"
+  filename = "${path.module}/.terraform/tmp/manifest/vpa.yaml"
   content = templatefile("${path.module}/templates/vpa.yaml.tftpl", {
     repo    = local.manifest.kubernetes_manifest.vpa.spec.repo
     chart   = local.manifest.kubernetes_manifest.vpa.spec.chart
@@ -58,7 +52,7 @@ resource "local_file" "vpa" {
 }
 
 resource "local_file" "cert_manager" {
-  filename = "${path.module}/manifests/cert-manager.yaml"
+  filename = "${path.module}/.terraform/tmp/manifest/cert-manager.yaml"
   content = templatefile("${path.module}/templates/cert-manager.yaml.tftpl", {
     repo    = local.manifest.kubernetes_manifest.cert_manager.spec.repo
     chart   = local.manifest.kubernetes_manifest.cert_manager.spec.chart
@@ -67,12 +61,12 @@ resource "local_file" "cert_manager" {
   file_permission = "0600"
 }
 
-resource "local_file" "node_feature_discovery" {
-  filename = "${path.module}/manifests/node-feature-discovery.yaml"
-  content = templatefile("${path.module}/templates/node-feature-discovery.yaml.tftpl", {
-    repo    = local.manifest.kubernetes_manifest.node_feature_discovery.spec.repo
-    chart   = local.manifest.kubernetes_manifest.node_feature_discovery.spec.chart
-    version = local.manifest.kubernetes_manifest.node_feature_discovery.spec.version
+resource "local_file" "nfd" {
+  filename = "${path.module}/.terraform/tmp/manifest/nfd.yaml"
+  content = templatefile("${path.module}/templates/nfd.yaml.tftpl", {
+    repo    = local.manifest.kubernetes_manifest.nfd.spec.repo
+    chart   = local.manifest.kubernetes_manifest.nfd.spec.chart
+    version = local.manifest.kubernetes_manifest.nfd.spec.version
   })
   file_permission = "0600"
 }

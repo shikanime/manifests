@@ -1,4 +1,9 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana
+---
+apiVersion: v1
 kind: Secret
 metadata:
   name: grafana-monitoring-prometheus
@@ -30,11 +35,6 @@ data:
   host: ${base64encode(tempo.endpoint)}
   username: ${base64encode(tempo.username)}
   password: ${base64encode(tempo.password)}
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: grafana
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
