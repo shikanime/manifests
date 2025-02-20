@@ -9,7 +9,7 @@ declare -A CHARTS=(
   ["cert_manager"]="jetstack/cert-manager"
   ["grafana_monitoring"]="grafana/k8s-monitoring"
   ["longhorn"]="longhorn/longhorn"
-  ["node_feature_discovery"]="node-feature-discovery/node-feature-discovery"
+  ["nfd"]="node-feature-discovery/node-feature-discovery"
   ["tailscale"]="tailscale/tailscale-operator"
   ["vpa"]="fairwinds/vpa"
 )
