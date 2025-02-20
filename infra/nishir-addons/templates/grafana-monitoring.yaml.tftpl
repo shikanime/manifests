@@ -1,4 +1,9 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana
+---
+apiVersion: v1
 kind: Secret
 metadata:
   name: grafana-monitoring-prometheus
@@ -31,22 +36,17 @@ data:
   username: ${base64encode(tempo.username)}
   password: ${base64encode(tempo.password)}
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: grafana
----
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: grafana-monitoring
   namespace: kube-system
 spec:
-  repo: ${repo}
-  chart: ${chart}
+  repo: https://grafana.github.io/helm-charts
+  chart: k8s-monitoring
   targetNamespace: grafana
-  version: ${version}
-  helmVersion: "v3"
+  version: 1.6.21
+  helmVersion: v3
   bootstrap: false
   failurePolicy: abort
   valuesContent: |

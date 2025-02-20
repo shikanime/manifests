@@ -1,13 +1,13 @@
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: vpa
+  name: nfd
   namespace: kube-system
 spec:
-  repo: https://charts.fairwinds.com/stable
-  chart: vpa
+  repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+  chart: node-feature-discovery
   targetNamespace: kube-system
-  version: 4.7.1
+  version: 0.17.1
   helmVersion: v3
   bootstrap: false
   failurePolicy: abort

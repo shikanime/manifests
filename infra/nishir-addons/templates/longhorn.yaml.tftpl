@@ -22,11 +22,11 @@ metadata:
   name: longhorn
   namespace: kube-system
 spec:
-  repo: ${repo}
-  chart: ${chart}
+  repo: https://charts.longhorn.io
+  chart: longhorn
   targetNamespace: longhorn-system
-  version: ${version}
-  helmVersion: "v3"
+  version: 1.8.0
+  helmVersion: v3
   bootstrap: false
   failurePolicy: abort
   valuesContent: |
