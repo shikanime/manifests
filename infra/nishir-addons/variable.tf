@@ -6,7 +6,7 @@ variable "tailscale" {
   sensitive = true
 }
 
-variable "longhorn" {
+variable "longhorn_backupstore" {
   type = object({
     access_key_id     = string
     backup_target     = string

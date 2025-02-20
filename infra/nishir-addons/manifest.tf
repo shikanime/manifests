@@ -1,8 +1,8 @@
 resource "local_file" "tailscale" {
   filename = "${path.module}/.terraform/tmp/manifest/tailscale.yaml"
   content = templatefile("${path.module}/templates/tailscale.yaml.tftpl", {
-    tailscale_client_id     = var.tailscale.client_id
-    tailscale_client_secret = var.tailscale.client_secret
+    client_id     = var.tailscale_operator.client_id
+    client_secret = var.tailscale_operator.client_secret
   })
   file_permission = "0600"
 }
@@ -10,10 +10,10 @@ resource "local_file" "tailscale" {
 resource "local_file" "longhorn" {
   filename = "${path.module}/.terraform/tmp/manifest/longhorn.yaml"
   content = templatefile("${path.module}/templates/longhorn.yaml.tftpl", {
-    backup_target     = var.longhorn.backup_target
-    access_key_id     = var.longhorn.access_key_id
-    secret_access_key = var.longhorn.secret_access_key
-    endpoints         = var.longhorn.endpoints
+    backup_target     = var.longhorn_backupstore.backup_target
+    access_key_id     = var.longhorn_backupstore.access_key_id
+    secret_access_key = var.longhorn_backupstore.secret_access_key
+    endpoints         = var.longhorn_backupstore.endpoints
   })
   file_permission = "0600"
 }
