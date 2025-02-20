@@ -62,10 +62,6 @@ resource "random_password" "rclone" {
   length = 14
 }
 
-resource "random_password" "vaultwarden_admin" {
-  length = 14
-}
-
 resource "local_file" "shikanime" {
   filename = "${path.module}/.terraform/tmp/manifest/shikanime.yaml"
   content = templatefile("${path.module}/templates/shikanime.yaml.tftpl", {
@@ -74,7 +70,7 @@ resource "local_file" "shikanime" {
     metatube_token              = random_password.metatube.result
     rclone_password             = random_password.rclone.result
     rclone_password_bcrypt_hash = random_password.rclone.bcrypt_hash
-    vaultwarden_admin_password  = random_password.vaultwarden_admin.result
+    vaultwarden_admin_token     = var.vaultwarden.admin_token
   })
   file_permission = "0600"
 }
