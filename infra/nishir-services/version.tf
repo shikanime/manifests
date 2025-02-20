@@ -16,6 +16,10 @@ terraform {
       source  = "hashicorp/grafana"
       version = "~> 2.15"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.6"
+    }
     scaleway = {
       source  = "scaleway/scaleway"
       version = "~> 2.43"
