@@ -9,8 +9,8 @@ output "tailscale_operator" {
 output "longhorn_backupstore" {
   value = {
     backup_target     = local.longhorn_backup_target
-    access_key_id     = var.longhorn_backupstore.access_key
-    secret_access_key = var.longhorn_backupstore.secret_key
+    access_key_id     = var.longhorn_backupstore.access_key_id
+    secret_access_key = var.longhorn_backupstore.secret_access_key
     endpoints         = var.endpoints.s3
   }
   sensitive = true
