@@ -43,25 +43,6 @@ provider "registry.opentofu.org/hashicorp/grafana" {
   ]
 }
 
-provider "registry.opentofu.org/hashicorp/kubernetes" {
-  version     = "2.34.0"
-  constraints = "~> 2.32"
-  hashes = [
-    "h1:3zp9hKLE+BWtCc/u/o6BCUTFzUiCVS+ngV0qHMGkG6c=",
-    "h1:ii9zWnkeN3QfUFPSKkTi7xp0Vd645twuNP4RCOYlj28=",
-    "zh:076f2cddac107b8cebae85980801e14cbcab0a95e542b0db47403d881a0b4276",
-    "zh:1fb388b1e6a8096ebada7557be79734dae95b4d8de2c6668bfd27f1d1182159e",
-    "zh:32e39913423bc912b5221d29af21681afdf765dc6b21649a5c93ed02ec5b9bc6",
-    "zh:4fd19efdc085c8216ebda8d73526cbcfc68ce65c5e0b7dc67675f5fa22b2d8c2",
-    "zh:66017d34ea30aee60db4cca33da5558e62568137342c9f5ce80aca3aa1c45861",
-    "zh:7157100f26f1c9c1416d4244a9aaf036363ccf5a642507da9a05eee970fcb2b6",
-    "zh:9454cb468b5524f5e631e436362ee07e00524983a631aaf66110853e59930f49",
-    "zh:b89017bb25ec6b8eb00218a06e801f82e9b3f0b24dcef34f1934f72dd061a3f5",
-    "zh:d2f24facf3322b38efdd26f0bed7b8e901b7a8c6432a2d1be46d21da7ce6826e",
-    "zh:f1421b4baa47f8221bca5fb557df6059dfe7dcac373f797ec5e9690f11c946d7",
-  ]
-}
-
 provider "registry.opentofu.org/hashicorp/random" {
   version = "3.6.3"
   hashes = [
