@@ -4,10 +4,10 @@ metadata:
   name: nfd
   namespace: kube-system
 spec:
-  repo: ${repo}
-  chart: ${chart}
+  repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+  chart: node-feature-discovery
   targetNamespace: kube-system
-  version: ${version}
-  helmVersion: "v3"
+  version: 0.17.1
+  helmVersion: v3
   bootstrap: false
   failurePolicy: abort
