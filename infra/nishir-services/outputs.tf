@@ -1,16 +1,16 @@
-output "tailscale" {
+output "tailscale_operator" {
   value = {
-    client_id     = local.tailscale_operator_oauth_client_data.client_id
-    client_secret = local.tailscale_operator_oauth_client_data.client_secret
+    client_id     = var.tailscale_operator.client_id
+    client_secret = var.tailscale_operator.client_secret
   }
   sensitive = true
 }
 
-output "longhorn" {
+output "longhorn_backupstore" {
   value = {
     backup_target     = local.longhorn_backup_target
-    access_key_id     = local.longhorn_backupstore_s3_creds_data.access_key_id
-    secret_access_key = local.longhorn_backupstore_s3_creds_data.secret_access_key
+    access_key_id     = var.longhorn_backupstore.access_key_id
+    secret_access_key = var.longhorn_backupstore.secret_access_key
     endpoints         = var.endpoints.s3
   }
   sensitive = true
@@ -39,6 +39,13 @@ output "tempo" {
     endpoint = var.endpoints.tempo
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
     username = data.grafana_data_source.tempo.basic_auth_username
+  }
+  sensitive = true
+}
+
+output "vaultwarden" {
+  value = {
+    admin_token = var.vaultwarden.admin_token
   }
   sensitive = true
 }
