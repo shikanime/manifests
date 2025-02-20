@@ -13,7 +13,7 @@ terraform {
       version = "~> 5.82"
     }
     grafana = {
-      source  = "hashicorp/grafana"
+      source  = "grafana/grafana"
       version = "~> 2.15"
     }
     random = {
