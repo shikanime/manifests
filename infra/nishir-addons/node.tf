@@ -15,7 +15,7 @@ resource "local_file" "nishir" {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    install_script = local_file.nishir.id
+    nishir_id = local_file.nishir.id
   }
 
   connection {
@@ -47,7 +47,7 @@ resource "local_file" "fushi" {
 
 resource "terraform_data" "fushi" {
   triggers_replace = {
-    config_id = local_file.fushi.id
+    fushi_id = local_file.fushi.id
   }
 
   connection {
@@ -81,7 +81,7 @@ resource "local_file" "minish" {
 
 resource "terraform_data" "minish" {
   triggers_replace = {
-    config_id = local_file.minish.id
+    minish_id = local_file.minish.id
   }
 
   connection {
