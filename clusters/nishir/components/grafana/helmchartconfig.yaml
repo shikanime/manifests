@@ -17,6 +17,8 @@ spec:
             defaultClusterId: nishir
       kepler:
         enabled: true
+        image:
+          tag: release-0.7.8 # FIX: https://github.com/sustainable-computing-io/kepler/issues/1866
     clusterEvents:
       enabled: true
     podLogs:
