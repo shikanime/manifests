@@ -1,5 +1,5 @@
 resource "local_file" "nishir" {
-  filename = "${path.module}/.terraform/tmp/scripts/nishir-install-k3s-leader.sh"
+  filename = "${path.module}/.terraform/tmp/scripts/install-k3s-leader.sh"
   content = templatefile("${path.module}/templates/scripts/install-k3s-leader.sh.tftpl", {
     etcd_access_key = var.etcd_snapshot.access_key_id
     etcd_bucket     = var.etcd_snapshot.bucket
