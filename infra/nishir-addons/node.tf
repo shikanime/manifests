@@ -15,7 +15,7 @@ resource "local_file" "nishir" {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    install_script = local_file.nishir.content
+    install_script = local_file.nishir.id
   }
 
   connection {
@@ -42,7 +42,7 @@ resource "local_file" "fushi" {
 
 resource "terraform_data" "fushi" {
   triggers_replace = {
-    config_content = local_file.fushi.content
+    config_id = local_file.fushi.id
   }
 
   connection {
@@ -55,7 +55,7 @@ resource "terraform_data" "fushi" {
     script = local_file.fushi.filename
   }
 
-  depends_on = [terraform_data.nishir_manifests]
+  depends_on = [terraform_data.nishir]
 }
 
 resource "local_file" "minish" {
@@ -71,7 +71,7 @@ resource "local_file" "minish" {
 
 resource "terraform_data" "minish" {
   triggers_replace = {
-    config_content = local_file.minish.content
+    config_id = local_file.minish.id
   }
 
   connection {
@@ -84,5 +84,5 @@ resource "terraform_data" "minish" {
     script = local_file.minish.filename
   }
 
-  depends_on = [terraform_data.nishir_manifests]
+  depends_on = [terraform_data.nishir]
 }

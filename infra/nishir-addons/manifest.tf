@@ -77,13 +77,13 @@ resource "local_file" "shikanime" {
 
 resource "terraform_data" "manifests" {
   triggers_replace = {
-    tailscale_content          = local_file.tailscale.content
-    longhorn_content           = local_file.longhorn.content
-    grafana_monitoring_content = local_file.grafana_monitoring.content
-    vpa_content                = local_file.vpa.content
-    cert_manager_content       = local_file.cert_manager.content
-    nfd_content                = local_file.nfd.content
-    shikanime_content          = local_file.shikanime.content
+    tailscale_id          = local_file.tailscale.id
+    longhorn_id           = local_file.longhorn.id
+    grafana_monitoring_id = local_file.grafana_monitoring.id
+    vpa_id                = local_file.vpa.id
+    cert_manager_id       = local_file.cert_manager.id
+    nfd_id                = local_file.nfd.id
+    shikanime_id          = local_file.shikanime.id
   }
 
   connection {
@@ -126,4 +126,6 @@ resource "terraform_data" "manifests" {
     content     = local_file.shikanime.content
     destination = "/mnt/nishir/rancher/k3s/server/manifests/shikanime.yaml"
   }
+
+  depends_on = [terraform_data.nishir]
 }
