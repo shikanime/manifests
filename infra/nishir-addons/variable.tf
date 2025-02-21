@@ -1,3 +1,9 @@
+variable "addresses" {
+  type = object({
+    nishir = list(string)
+  })
+}
+
 variable "etcd_snapshot" {
   type = object({
     access_key_id     = string
