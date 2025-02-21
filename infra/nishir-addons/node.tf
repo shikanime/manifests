@@ -50,8 +50,8 @@ resource "local_file" "fushi" {
 
 resource "terraform_data" "fushi" {
   triggers_replace = {
-    fushi_id      = local_file.fushi.id
-    sysctl_conf   = filemd5("${path.module}/configs/systctl/99-k3s.conf")
+    fushi_id    = local_file.fushi.id
+    sysctl_conf = filemd5("${path.module}/configs/systctl/99-k3s.conf")
   }
 
   connection {
@@ -83,8 +83,8 @@ resource "local_file" "minish" {
 
 resource "terraform_data" "minish" {
   triggers_replace = {
-    minish_id     = local_file.minish.id
-    sysctl_conf   = filemd5("${path.module}/configs/systctl/99-k3s.conf")
+    minish_id   = local_file.minish.id
+    sysctl_conf = filemd5("${path.module}/configs/systctl/99-k3s.conf")
   }
 
   connection {
