@@ -75,7 +75,7 @@ resource "local_file" "shikanime" {
   file_permission = "0600"
 }
 
-resource "terraform_data" "manifests" {
+resource "terraform_data" "addons" {
   triggers_replace = {
     tailscale_id          = local_file.tailscale.id
     longhorn_id           = local_file.longhorn.id
