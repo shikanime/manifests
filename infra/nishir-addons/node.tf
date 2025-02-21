@@ -1,5 +1,5 @@
 resource "local_file" "nishir" {
-  filename = "${path.module}/.terraform/tmp/scripts/install-k3s-leader.sh"
+  filename = "${path.module}/.terraform/tmp/scripts/nishir-install-k3s-leader.sh"
   content = templatefile("${path.module}/templates/scripts/install-k3s-leader.sh.tftpl", {
     etcd_access_key = var.etcd_snapshot.access_key_id
     etcd_bucket     = var.etcd_snapshot.bucket
@@ -35,7 +35,7 @@ resource "terraform_data" "nishir" {
 }
 
 resource "local_file" "fushi" {
-  filename = "${path.module}/.terraform/tmp/scripts/install-k3s-follower.sh"
+  filename = "${path.module}/.terraform/tmp/scripts/fushi-install-k3s-follower.sh"
   content = templatefile("${path.module}/templates/scripts/install-k3s-follower.sh.tftpl", {
     node_ip = var.ip_addresses.fushi
     server  = "https://${var.endpoints.nishir}:6443"
@@ -69,7 +69,7 @@ resource "terraform_data" "fushi" {
 }
 
 resource "local_file" "minish" {
-  filename = "${path.module}/.terraform/tmp/scripts/install-k3s-follower.sh"
+  filename = "${path.module}/.terraform/tmp/scripts/minish-install-k3s-follower.sh"
   content = templatefile("${path.module}/templates/scripts/install-k3s-follower.sh.tftpl", {
     node_ip = var.ip_addresses.minish
     server  = "https://${var.endpoints.nishir}:6443"
