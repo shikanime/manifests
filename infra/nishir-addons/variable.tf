@@ -1,7 +1,15 @@
-variable "addresses" {
+variable "endpoints" {
+  type = object({
+    nishir = string
+  })
+  description = "Nodes DNS name"
+}
+
+variable "ip_addresses" {
   type = object({
     nishir = list(string)
   })
+  description = "Nodes network addresses"
 }
 
 variable "etcd_snapshot" {
@@ -12,7 +20,8 @@ variable "etcd_snapshot" {
     region            = string
     secret_access_key = string
   })
-  sensitive = true
+  description = "Configuration for etcd snapshot storage in S3-compatible storage"
+  sensitive   = true
 }
 
 variable "tailscale_operator" {
@@ -20,7 +29,8 @@ variable "tailscale_operator" {
     client_id     = string
     client_secret = string
   })
-  sensitive = true
+  description = "Tailscale operator authentication credentials"
+  sensitive   = true
 }
 
 variable "longhorn_backupstore" {
@@ -31,7 +41,8 @@ variable "longhorn_backupstore" {
     region            = string
     secret_access_key = string
   })
-  sensitive = true
+  description = "Longhorn backup storage configuration for S3-compatible storage"
+  sensitive   = true
 }
 
 variable "prometheus" {
@@ -40,7 +51,8 @@ variable "prometheus" {
     password = string
     username = string
   })
-  sensitive = true
+  description = "Prometheus monitoring system authentication and endpoint configuration"
+  sensitive   = true
 }
 
 variable "loki" {
@@ -49,7 +61,8 @@ variable "loki" {
     password = string
     username = string
   })
-  sensitive = true
+  description = "Loki log aggregation system authentication and endpoint configuration"
+  sensitive   = true
 }
 
 variable "tempo" {
@@ -58,12 +71,14 @@ variable "tempo" {
     password = string
     username = string
   })
-  sensitive = true
+  description = "Tempo distributed tracing system authentication and endpoint configuration"
+  sensitive   = true
 }
 
 variable "vaultwarden" {
   type = object({
     admin_token = string
   })
-  sensitive = true
+  description = "Vaultwarden password manager administrative configuration"
+  sensitive   = true
 }
