@@ -1,13 +1,13 @@
 resource "local_file" "config" {
   filename = "${path.module}/.terraform/tmp/nodes/config.yaml"
   content = templatefile("${path.module}/templates/nodes/config.yaml.tftpl", {
-    tls_san            = var.endpoints.nishir
-    node_ip            = var.ip_addresses.nishir
-    etcd_s3_access_key = var.etcd_snapshot.access_key_id
-    etcd_s3_bucket     = var.etcd_snapshot.bucket
-    etcd_s3_endpoint   = var.etcd_snapshot.endpoint
-    etcd_s3_region     = var.etcd_snapshot.region
-    etcd_s3_secret_key = var.etcd_snapshot.secret_access_key
+    tls_san         = var.endpoints.nishir
+    node_ip         = var.ip_addresses.nishir
+    etcd_access_key = var.etcd_snapshot.access_key_id
+    etcd_bucket     = var.etcd_snapshot.bucket
+    etcd_endpoint   = var.etcd_snapshot.endpoint
+    etcd_region     = var.etcd_snapshot.region
+    etcd_secret_key = var.etcd_snapshot.secret_access_key
   })
   file_permission = "0600"
 }
