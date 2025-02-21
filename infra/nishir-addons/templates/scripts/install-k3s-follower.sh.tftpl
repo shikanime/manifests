@@ -3,7 +3,6 @@
 set -euo pipefail
 
 # Ensure system configuration is up to date
-systemd-tmpfiles --create
 sysctl --system
 
 # Install Longhorn dependencies
