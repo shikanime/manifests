@@ -2,6 +2,16 @@
 
 set -euo pipefail
 
+# Install Longhorn dependencies
+apt-get update -y
+apt-get install -y \
+    open-iscsi \
+    nfs-common \
+    cryptsetup \
+    dmsetup \
+    jq
+
+# Install k3s
 curl -sfL https://get.k3s.io | \
   sh -s - server \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
