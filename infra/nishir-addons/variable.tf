@@ -20,7 +20,7 @@ variable "etcd_snapshot" {
     region            = string
     secret_access_key = string
   })
-  description = "Configuration for etcd snapshot storage in S3-compatible storage"
+  description = "ETCD snapshot storage"
   sensitive   = true
 }
 
@@ -41,7 +41,7 @@ variable "longhorn_backupstore" {
     region            = string
     secret_access_key = string
   })
-  description = "Longhorn backup storage configuration for S3-compatible storage"
+  description = "Longhorn backup storage configuration"
   sensitive   = true
 }
 
@@ -51,7 +51,7 @@ variable "prometheus" {
     password = string
     username = string
   })
-  description = "Prometheus monitoring system authentication and endpoint configuration"
+  description = "Prometheus monitoring system authentication"
   sensitive   = true
 }
 
@@ -61,7 +61,7 @@ variable "loki" {
     password = string
     username = string
   })
-  description = "Loki log aggregation system authentication and endpoint configuration"
+  description = "Loki log aggregation system authentication"
   sensitive   = true
 }
 
@@ -71,7 +71,7 @@ variable "tempo" {
     password = string
     username = string
   })
-  description = "Tempo distributed tracing system authentication and endpoint configuration"
+  description = "Tempo distributed tracing system authentication"
   sensitive   = true
 }
 
