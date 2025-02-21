@@ -1,5 +1,20 @@
+resource "local_file" "config" {
+  filename = "${path.module}/.terraform/tmp/nodes/config.yaml"
+  content = templatefile("${path.module}/templates/nodes/config.yaml.tftpl", {
+    tls_san         = var.endpoints.nishir
+    node_ip         = var.ip_addresses.nishir
+    etcd_access_key = var.etcd_snapshot.access_key_id
+    etcd_bucket     = var.etcd_snapshot.bucket
+    etcd_endpoint   = var.etcd_snapshot.endpoint
+    etcd_region     = var.etcd_snapshot.region
+    etcd_secret_key = var.etcd_snapshot.secret_access_key
+  })
+  file_permission = "0600"
+}
+
 resource "terraform_data" "nishir" {
   triggers_replace = {
+    config_content             = local_file.config.content
     tailscale_content          = local_file.tailscale.content
     longhorn_content           = local_file.longhorn.content
     grafana_monitoring_content = local_file.grafana_monitoring.content
@@ -13,6 +28,11 @@ resource "terraform_data" "nishir" {
     type = "ssh"
     user = "root"
     host = "nishir"
+  }
+
+  provisioner "file" {
+    content     = local_file.config.content
+    destination = "/etc/rancher/k3s/config.yaml"
   }
 
   provisioner "file" {

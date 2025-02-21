@@ -1,0 +1,14 @@
+tls-san: ${tls_san}
+cluster-cidr: [10.42.0.0/16, 2001:cafe:42::/56]
+service-cidr: [10.43.0.0/16, 2001:cafe:43::/112]
+data-dir: /mnt/nishir/rancher/k3s
+node-ip: [${join(", ", node_ip)}]
+flannel-backend: host-gw
+protect-kernel-defaults: true
+secrets-encrypt: true
+etcd-s3: true
+etcd-s3-access-key: ${etcd_access_key}
+etcd-s3-secret-key: ${etcd_secret_key}
+etcd-s3-endpoint: ${etcd_endpoint}
+etcd-s3-region: ${etcd_region}
+etcd-s3-bucket: ${etcd_bucket}

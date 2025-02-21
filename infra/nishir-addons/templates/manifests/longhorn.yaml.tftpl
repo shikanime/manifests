@@ -9,7 +9,7 @@ metadata:
   name: longhorn-hetzner-backups
   namespace: longhorn-system
   annotations:
-    longhorn.io/backup-target: ${base64encode(backup_target)}
+    longhorn.io/backup-target: ${backup_target}
 type: Opaque
 data:
   AWS_ACCESS_KEY_ID: ${base64encode(access_key_id)}

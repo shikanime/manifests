@@ -66,6 +66,14 @@ variable "longhorn_backupstore" {
   sensitive = true
 }
 
+variable "etcd_snapshot" {
+  type = object({
+    access_key_id     = string
+    secret_access_key = string
+  })
+  sensitive = true
+}
+
 variable "vaultwarden" {
   type = object({
     admin_token = string
