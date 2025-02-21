@@ -1,3 +1,15 @@
+resource "local_file" "config" {
+  filename = "${path.module}/.terraform/tmp/nodes/config.yaml"
+  content = templatefile("${path.module}/templates/nodes/config.yaml.tftpl", {
+    access_key_id     = var.etcd_snapshot.access_key_id
+    bucket = var.etcd_snapshot.bucket
+    endpoint = var.etcd_snapshot.endpoint
+    region = var.etcd_snapshot.region
+    secret_access_key = var.etcd_snapshot.secret_access_key
+  })
+  file_permission = "0600"
+}
+
 resource "terraform_data" "nishir" {
   triggers_replace = {
     tailscale_content          = local_file.tailscale.content

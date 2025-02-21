@@ -1,0 +1,15 @@
+tls-san: nishir.taila659a.ts.net
+cluster-cidr: [10.42.0.0/16, 2001:cafe:42::/56]
+service-cidr: [10.43.0.0/16, 2001:cafe:43::/112]
+data-dir: /mnt/nishir/rancher/k3s
+node-ip: [100.93.169.85, fd7a:115c:a1e0::c301:a955]
+flannel-backend: host-gw
+protect-kernel-defaults: true
+secrets-encrypt: true
+etcd-s3: true
+etcd-s3-access-key: ${access_key_id}
+etcd-s3-secret-key: ${secret_access_key}
+etcd-s3-endpoint: ${endpoint}
+etcd-s3-region: ${region}
+etcd-s3-bucket: ${bucket}
+node-name: nishir

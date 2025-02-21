@@ -1,4 +1,15 @@
-variable "tailscale" {
+variable "etcd_snapshot" {
+  type = object({
+    access_key_id     = string
+    bucket            = string
+    endpoint          = string
+    region            = string
+    secret_access_key = string
+  })
+  sensitive = true
+}
+
+variable "tailscale_operator" {
   type = object({
     client_id     = string
     client_secret = string
@@ -9,8 +20,9 @@ variable "tailscale" {
 variable "longhorn_backupstore" {
   type = object({
     access_key_id     = string
-    backup_target     = string
-    endpoints         = string
+    bucket            = string
+    endpoint          = string
+    region            = string
     secret_access_key = string
   })
   sensitive = true
