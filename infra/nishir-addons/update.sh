@@ -53,7 +53,7 @@ for CHART_NAME in "${CHARTS[@]}"; do
       [[ ${CHARTS[$k]} == "$CHART_NAME" ]] && KEY="$k"
     done
 
-    TEMPLATE_FILE="$(dirname "$0")/templates/${KEY}.yaml.tftpl"
+    TEMPLATE_FILE="$(dirname "$0")/templates/manifests/${KEY}.yaml.tftpl"
     if [[ -f $TEMPLATE_FILE ]]; then
       echo "Updating $TEMPLATE_FILE..."
       REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
