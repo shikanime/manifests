@@ -22,7 +22,7 @@ variable "ip_addresses" {
   default = {
     nishir = ["100.93.169.85", "fd7a:115c:a1e0::c301:a955"]
     fushi  = ["100.78.148.86", "fd7a:115c:a1e0::8001:9456"]
-    minish = ["100.82.28.89", "fd7a:115c:a1e0::8501:1c59"]
+    minish = ["100.115.159.112", "fd7a:115c:a1e0::d101:9f71"]
   }
 }
 
