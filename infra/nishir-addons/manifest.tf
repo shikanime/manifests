@@ -74,3 +74,58 @@ resource "local_file" "shikanime" {
   })
   file_permission = "0600"
 }
+
+resource "terraform_data" "addons" {
+  triggers_replace = {
+    tailscale_id          = local_file.tailscale.id
+    longhorn_id           = local_file.longhorn.id
+    grafana_monitoring_id = local_file.grafana_monitoring.id
+    vpa_id                = local_file.vpa.id
+    cert_manager_id       = local_file.cert_manager.id
+    nfd_id                = local_file.nfd.id
+    shikanime_id          = local_file.shikanime.id
+  }
+
+  connection {
+    type = "ssh"
+    user = "root"
+    host = "nishir"
+  }
+
+  provisioner "file" {
+    content     = local_file.tailscale.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/tailscale.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.longhorn.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/longhorn.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.grafana_monitoring.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/grafana-monitoring.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.vpa.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/vpa.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.cert_manager.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/cert-manager.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.nfd.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/nfd.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.shikanime.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/shikanime.yaml"
+  }
+
+  depends_on = [terraform_data.nishir]
+}

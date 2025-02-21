@@ -1,6 +1,6 @@
-resource "local_file" "config" {
-  filename = "${path.module}/.terraform/tmp/nodes/primary/config.yaml"
-  content = templatefile("${path.module}/templates/nodes/primary/config.yaml.tftpl", {
+resource "local_file" "nishir" {
+  filename = "${path.module}/.terraform/tmp/scripts/install-k3s-leader.sh"
+  content = templatefile("${path.module}/templates/scripts/install-k3s-leader.sh.tftpl", {
     etcd_access_key = var.etcd_snapshot.access_key_id
     etcd_bucket     = var.etcd_snapshot.bucket
     etcd_endpoint   = var.etcd_snapshot.endpoint
@@ -15,14 +15,7 @@ resource "local_file" "config" {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    config_content             = local_file.config.content
-    tailscale_content          = local_file.tailscale.content
-    longhorn_content           = local_file.longhorn.content
-    grafana_monitoring_content = local_file.grafana_monitoring.content
-    vpa_content                = local_file.vpa.content
-    cert_manager_content       = local_file.cert_manager.content
-    nfd_content                = local_file.nfd.content
-    shikanime_content          = local_file.shikanime.content
+    nishir_id = local_file.nishir.id
   }
 
   connection {
@@ -32,49 +25,18 @@ resource "terraform_data" "nishir" {
   }
 
   provisioner "file" {
-    content     = local_file.config.content
-    destination = "/etc/rancher/k3s/config.yaml"
+    source      = "${path.module}/configs/systctl/99-k3s.conf"
+    destination = "/etc/sysctl.d/99-k3s.conf"
   }
 
-  provisioner "file" {
-    content     = local_file.tailscale.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/tailscale.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.longhorn.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/longhorn.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.grafana_monitoring.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/grafana-monitoring.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.vpa.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/vpa.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.cert_manager.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/cert-manager.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.nfd.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/nfd.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.shikanime.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/shikanime.yaml"
+  provisioner "remote-exec" {
+    script = local_file.nishir.filename
   }
 }
 
 resource "local_file" "fushi" {
-  filename = "${path.module}/.terraform/tmp/nodes/secondary/config.yaml"
-  content = templatefile("${path.module}/templates/nodes/secondary/config.yaml.tftpl", {
+  filename = "${path.module}/.terraform/tmp/scripts/fushi-install-k3s-follower.sh"
+  content = templatefile("${path.module}/templates/scripts/install-k3s-follower.sh.tftpl", {
     node_ip = var.ip_addresses.fushi
     server  = "https://${var.endpoints.nishir}:6443"
     tls_san = var.endpoints.fushi
@@ -85,7 +47,7 @@ resource "local_file" "fushi" {
 
 resource "terraform_data" "fushi" {
   triggers_replace = {
-    config_content = local_file.fushi.content
+    fushi_id = local_file.fushi.id
   }
 
   connection {
@@ -95,14 +57,20 @@ resource "terraform_data" "fushi" {
   }
 
   provisioner "file" {
-    content     = local_file.fushi.content
-    destination = "/etc/rancher/k3s/config.yaml"
+    source      = "${path.module}/configs/systctl/99-k3s.conf"
+    destination = "/etc/sysctl.d/99-k3s.conf"
   }
+
+  provisioner "remote-exec" {
+    script = local_file.fushi.filename
+  }
+
+  depends_on = [terraform_data.nishir]
 }
 
 resource "local_file" "minish" {
-  filename = "${path.module}/.terraform/tmp/nodes/secondary/config.yaml"
-  content = templatefile("${path.module}/templates/nodes/secondary/config.yaml.tftpl", {
+  filename = "${path.module}/.terraform/tmp/scripts/minish-install-k3s-follower.sh"
+  content = templatefile("${path.module}/templates/scripts/install-k3s-follower.sh.tftpl", {
     node_ip = var.ip_addresses.minish
     server  = "https://${var.endpoints.nishir}:6443"
     tls_san = var.endpoints.minish
@@ -113,7 +81,7 @@ resource "local_file" "minish" {
 
 resource "terraform_data" "minish" {
   triggers_replace = {
-    config_content = local_file.minish.content
+    minish_id = local_file.minish.id
   }
 
   connection {
@@ -123,7 +91,13 @@ resource "terraform_data" "minish" {
   }
 
   provisioner "file" {
-    content     = local_file.minish.content
-    destination = "/etc/rancher/k3s/config.yaml"
+    source      = "${path.module}/configs/systctl/99-k3s.conf"
+    destination = "/etc/sysctl.d/99-k3s.conf"
   }
+
+  provisioner "remote-exec" {
+    script = local_file.minish.filename
+  }
+
+  depends_on = [terraform_data.nishir]
 }
