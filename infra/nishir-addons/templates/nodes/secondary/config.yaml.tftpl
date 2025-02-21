@@ -1,0 +1,10 @@
+cluster-cidr: [10.42.0.0/16, 2001:cafe:42::/56]
+data-dir: /mnt/nishir/rancher/k3s
+disable-etcd: true
+flannel-backend: host-gw
+node-ip: [${join(", ", node_ip)}]
+protect-kernel-defaults: true
+server: ${server}
+service-cidr: [10.43.0.0/16, 2001:cafe:43::/112]
+tls-san: ${tls_san}
+token: ${token}
