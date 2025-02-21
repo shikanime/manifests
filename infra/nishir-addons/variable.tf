@@ -1,14 +1,10 @@
 variable "endpoints" {
   type = object({
     nishir = string
-    fushi  = string
-    minish = string
   })
   description = "Nodes DNS name"
   default = {
     nishir = "nishir.taila659a.ts.net"
-    fushi  = "fushi.taila659a.ts.net"
-    minish = "minish.taila659a.ts.net"
   }
 }
 

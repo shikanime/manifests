@@ -27,5 +27,5 @@ curl -sfL https://get.k3s.io | \
     --protect-kernel-defaults \
     --secrets-encryption \
     --service-cidr "10.43.0.0/16,2001:cafe:43::/112" \
-    --tls-san "${tls_san}" \
+    --tls-san "$(tailscale status -json | jq -r '.CertDomains | join(",")')" \
     --token "${token}"
