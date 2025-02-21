@@ -5,7 +5,6 @@ set -euo pipefail
 curl -sfL https://get.k3s.io | \
     sh -s - \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
-    --data-dir "/mnt/nishir/rancher/k3s" \
     --disable-etcd \
     --flannel-backend "host-gw" \
     --node-ip "${join(",", node_ip)}" \
