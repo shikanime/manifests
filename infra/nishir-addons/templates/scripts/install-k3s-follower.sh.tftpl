@@ -7,7 +7,7 @@ curl -sfL https://get.k3s.io | \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
     --disable-etcd \
     --flannel-backend "host-gw" \
-    --node-ip "${join(",", node_ip)}" \
+    --node-ip "$(tailscale status -json | jq -r '.TailscaleIPs | join(",")')" \
     --protect-kernel-defaults \
     --secrets-encryption \
     --server "${server}" \

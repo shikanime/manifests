@@ -6,7 +6,6 @@ resource "local_file" "nishir" {
     etcd_endpoint   = var.etcd_snapshot.endpoint
     etcd_region     = var.etcd_snapshot.region
     etcd_secret_key = var.etcd_snapshot.secret_access_key
-    node_ip         = var.ip_addresses.nishir
     tls_san         = var.endpoints.nishir
     token           = var.k3s.token
   })
@@ -37,7 +36,6 @@ resource "terraform_data" "nishir" {
 resource "local_file" "fushi" {
   filename = "${path.module}/.terraform/tmp/scripts/fushi-install-k3s-follower.sh"
   content = templatefile("${path.module}/templates/scripts/install-k3s-follower.sh.tftpl", {
-    node_ip = var.ip_addresses.fushi
     server  = "https://${var.endpoints.nishir}:6443"
     tls_san = var.endpoints.fushi
     token   = var.k3s.token
@@ -71,7 +69,6 @@ resource "terraform_data" "fushi" {
 resource "local_file" "minish" {
   filename = "${path.module}/.terraform/tmp/scripts/minish-install-k3s-follower.sh"
   content = templatefile("${path.module}/templates/scripts/install-k3s-follower.sh.tftpl", {
-    node_ip = var.ip_addresses.minish
     server  = "https://${var.endpoints.nishir}:6443"
     tls_san = var.endpoints.minish
     token   = var.k3s.token
