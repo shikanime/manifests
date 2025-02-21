@@ -15,13 +15,7 @@ resource "local_file" "nishir" {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    tailscale_content          = local_file.tailscale.content
-    longhorn_content           = local_file.longhorn.content
-    grafana_monitoring_content = local_file.grafana_monitoring.content
-    vpa_content                = local_file.vpa.content
-    cert_manager_content       = local_file.cert_manager.content
-    nfd_content                = local_file.nfd.content
-    shikanime_content          = local_file.shikanime.content
+    install_script = local_file.nishir.content
   }
 
   connection {
@@ -32,41 +26,6 @@ resource "terraform_data" "nishir" {
 
   provisioner "remote-exec" {
     script = local_file.nishir.filename
-  }
-
-  provisioner "file" {
-    content     = local_file.tailscale.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/tailscale.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.longhorn.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/longhorn.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.grafana_monitoring.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/grafana-monitoring.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.vpa.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/vpa.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.cert_manager.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/cert-manager.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.nfd.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/nfd.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.shikanime.content
-    destination = "/mnt/nishir/rancher/k3s/server/manifests/shikanime.yaml"
   }
 }
 
@@ -96,7 +55,7 @@ resource "terraform_data" "fushi" {
     script = local_file.fushi.filename
   }
 
-  depends_on = [terraform_data.nishir]
+  depends_on = [terraform_data.nishir_manifests]
 }
 
 resource "local_file" "minish" {
@@ -125,5 +84,5 @@ resource "terraform_data" "minish" {
     script = local_file.minish.filename
   }
 
-  depends_on = [terraform_data.nishir]
+  depends_on = [terraform_data.nishir_manifests]
 }
