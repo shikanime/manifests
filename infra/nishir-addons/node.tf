@@ -24,6 +24,11 @@ resource "terraform_data" "nishir" {
     host = "nishir"
   }
 
+  provisioner "file" {
+    source      = "${path.module}/configs/systctl/99-k3s.conf"
+    destination = "/etc/sysctl.d/99-k3s.conf"
+  }
+
   provisioner "remote-exec" {
     script = local_file.nishir.filename
   }
@@ -49,6 +54,11 @@ resource "terraform_data" "fushi" {
     type = "ssh"
     user = "root"
     host = "fushi"
+  }
+
+  provisioner "file" {
+    source      = "${path.module}/configs/systctl/99-k3s.conf"
+    destination = "/etc/sysctl.d/99-k3s.conf"
   }
 
   provisioner "remote-exec" {
@@ -78,6 +88,11 @@ resource "terraform_data" "minish" {
     type = "ssh"
     user = "root"
     host = "minish"
+  }
+
+  provisioner "file" {
+    source      = "${path.module}/configs/systctl/99-k3s.conf"
+    destination = "/etc/sysctl.d/99-k3s.conf"
   }
 
   provisioner "remote-exec" {
