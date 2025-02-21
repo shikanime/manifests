@@ -1,15 +1,37 @@
 variable "endpoints" {
   type = object({
     nishir = string
+    fushi  = string
+    minish = string
   })
   description = "Nodes DNS name"
+  default = {
+    nishir = "nishir.taila659a.ts.net"
+    fushi  = "fushi.taila659a.ts.net"
+    minish = "minish.taila659a.ts.net"
+  }
 }
 
 variable "ip_addresses" {
   type = object({
     nishir = list(string)
+    fushi  = list(string)
+    minish = list(string)
   })
   description = "Nodes network addresses"
+  default = {
+    nishir = ["100.93.169.85", "fd7a:115c:a1e0::c301:a955"]
+    fushi  = ["100.78.148.86", "fd7a:115c:a1e0::8001:9456"]
+    minish = ["100.82.28.89", "fd7a:115c:a1e0::8501:1c59"]
+  }
+}
+
+variable "k3s" {
+  type = object({
+    token = string
+  })
+  description = "K3s cluster join token"
+  sensitive   = true
 }
 
 variable "etcd_snapshot" {
