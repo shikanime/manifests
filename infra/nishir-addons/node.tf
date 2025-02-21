@@ -50,9 +50,8 @@ resource "local_file" "fushi" {
 
 resource "terraform_data" "fushi" {
   triggers_replace = {
-    fushi_id      = local_file.fushi.id
-    sysctl_conf   = filemd5("${path.module}/configs/systctl/99-k3s.conf")
-    tmpfiles_conf = filemd5("${path.module}/configs/tmpfiles/var-lib-rancher-k3s.conf")
+    fushi_id    = local_file.fushi.id
+    sysctl_conf = filemd5("${path.module}/configs/systctl/99-k3s.conf")
   }
 
   connection {
@@ -64,11 +63,6 @@ resource "terraform_data" "fushi" {
   provisioner "file" {
     source      = "${path.module}/configs/systctl/99-k3s.conf"
     destination = "/etc/sysctl.d/99-k3s.conf"
-  }
-
-  provisioner "file" {
-    source      = "${path.module}/configs/tmpfiles/var-lib-rancher-k3s.conf"
-    destination = "/etc/tmpfiles.d/var-lib-rancher-k3s.conf"
   }
 
   provisioner "remote-exec" {
@@ -89,9 +83,8 @@ resource "local_file" "minish" {
 
 resource "terraform_data" "minish" {
   triggers_replace = {
-    minish_id     = local_file.minish.id
-    sysctl_conf   = filemd5("${path.module}/configs/systctl/99-k3s.conf")
-    tmpfiles_conf = filemd5("${path.module}/configs/tmpfiles/var-lib-rancher-k3s.conf")
+    minish_id   = local_file.minish.id
+    sysctl_conf = filemd5("${path.module}/configs/systctl/99-k3s.conf")
   }
 
   connection {
@@ -103,11 +96,6 @@ resource "terraform_data" "minish" {
   provisioner "file" {
     source      = "${path.module}/configs/systctl/99-k3s.conf"
     destination = "/etc/sysctl.d/99-k3s.conf"
-  }
-
-  provisioner "file" {
-    source      = "${path.module}/configs/tmpfiles/var-lib-rancher-k3s.conf"
-    destination = "/etc/tmpfiles.d/var-lib-rancher-k3s.conf"
   }
 
   provisioner "remote-exec" {
