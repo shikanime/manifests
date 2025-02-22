@@ -25,8 +25,6 @@ spec:
               value: /tls/tls.crt
             - name: RCLONE_KEY
               value: /tls/tls.key
-            - name: RCLONE_LOG_LEVEL
-              value: DEBUG
           ports:
             - containerPort: 990
               name: ftps-control
