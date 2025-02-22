@@ -1,0 +1,13 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: vpa
+  namespace: kube-system
+spec:
+  repo: https://charts.fairwinds.com/stable
+  chart: vpa
+  targetNamespace: kube-system
+  version: 4.7.1
+  helmVersion: v3
+  bootstrap: false
+  failurePolicy: abort

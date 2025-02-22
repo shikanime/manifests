@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-monitoring-prometheus
+  namespace: grafana
+type: kubernetes.io/basic-auth
+data:
+  host: ${base64encode(prometheus.endpoint)}
+  username: ${base64encode(prometheus.username)}
+  password: ${base64encode(prometheus.password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-monitoring-loki
+  namespace: grafana
+type: kubernetes.io/basic-auth
+data:
+  host: ${base64encode(loki.endpoint)}
+  username: ${base64encode(loki.username)}
+  password: ${base64encode(loki.password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-monitoring-tempo
+  namespace: grafana
+type: kubernetes.io/basic-auth
+data:
+  host: ${base64encode(tempo.endpoint)}
+  username: ${base64encode(tempo.username)}
+  password: ${base64encode(tempo.password)}
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: grafana-monitoring
+  namespace: kube-system
+spec:
+  repo: https://grafana.github.io/helm-charts
+  chart: k8s-monitoring
+  targetNamespace: grafana
+  version: 2.0.12
+  helmVersion: v3
+  bootstrap: false
+  failurePolicy: abort
+  valuesContent: |
+    destinations:
+      - name: grafana-cloud-metrics
+        type: prometheus
+        url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
+        auth:
+          type: basic
+        secret:
+          create: false
+          name: grafana-monitoring-prometheus
+      - name: grafana-cloud-logs
+        type: loki
+        url: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
+        auth:
+          type: basic
+        secret:
+          create: false
+          name: grafana-monitoring-loki
+      - name: grafana-cloud-traces
+        type: otlp
+        url: https://tempo-eu-west-0.grafana.net:443
+        protocol: grpc
+        auth:
+          type: basic
+        secret:
+          create: false
+          name: grafana-monitoring-tempo
+        metrics:
+          enabled: false
+        logs:
+          enabled: false
+        traces:
+          enabled: true
+    clusterMetrics:
+      opencost:
+        opencost:
+          prometheus:
+            existingSecretName: grafana-monitoring-prometheus
+            external:
+              url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom
