@@ -3,5 +3,3 @@ kind: Component
 patches:
   - path: ingress.patch.yaml
   - path: svc.patch.yaml
-resources:
-  - cert.yaml

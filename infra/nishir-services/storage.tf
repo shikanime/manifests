@@ -1,7 +1,3 @@
-locals {
-  longhorn_backup_target = "s3://${aws_s3_bucket.longhorn_backups.bucket}@${var.regions.aws_s3_bucket}/"
-}
-
 resource "random_id" "longhorn_backups" {
   byte_length = 4
   prefix      = "${var.project}-${var.name}-longhorn-backups-"
