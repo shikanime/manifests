@@ -50,16 +50,33 @@ variable "endpoints" {
   }
 }
 
-variable "secrets" {
+variable "tailscale_operator" {
   type = object({
-    tailscale_operator_oauth_client = string
-    longhorn_backupstore_s3_creds   = string
-    vaultwarden_admin_token         = string
+    client_id     = string
+    client_secret = string
   })
-  description = "Scaleway secrets ID"
-  default = {
-    tailscale_operator_oauth_client = "371097be-4fd8-4e8f-a3f3-232485c96082"
-    longhorn_backupstore_s3_creds   = "b5d61a39-cf9f-44dd-98f9-7d8f73852bde"
-    vaultwarden_admin_token         = "4e4b6a04-8885-4579-ad8a-a25d72f63758"
-  }
+  sensitive = true
+}
+
+variable "longhorn_backupstore" {
+  type = object({
+    access_key_id     = string
+    secret_access_key = string
+  })
+  sensitive = true
+}
+
+variable "etcd_snapshot" {
+  type = object({
+    access_key_id     = string
+    secret_access_key = string
+  })
+  sensitive = true
+}
+
+variable "vaultwarden" {
+  type = object({
+    admin_token = string
+  })
+  sensitive = true
 }

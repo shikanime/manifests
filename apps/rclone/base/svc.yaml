@@ -5,7 +5,7 @@ metadata:
   namespace: shikanime
 spec:
   ports:
-    - name: webdav
+    - name: http
       port: 80
       targetPort: webdav
   selector:

@@ -4,7 +4,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "shikanime-studio"
     workspaces {
-      name = "nishir-addons"
+      name = "nishir-services"
     }
   }
   required_providers {
@@ -12,13 +12,13 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.82"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.32"
-    }
     grafana = {
-      source  = "hashicorp/grafana"
+      source  = "grafana/grafana"
       version = "~> 2.15"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.6"
     }
     scaleway = {
       source  = "scaleway/scaleway"
