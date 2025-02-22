@@ -4,7 +4,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "shikanime-studio"
     workspaces {
-      name = "nishir-addons"
+      name = "nishir-cluster"
     }
   }
   required_providers {
