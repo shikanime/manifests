@@ -25,6 +25,8 @@ spec:
               value: 0.0.0.0:8080
             - name: RCLONE_HTPASSWD
               value: /config/rclone/htpasswd
+            - name: RCLONE_VFS_CACHE_MODE
+              value: full
           ports:
             - containerPort: 8080
               name: webdav
@@ -58,6 +60,8 @@ spec:
                 secretKeyRef:
                   name: rclone-ftp
                   key: password
+            - name: RCLONE_VFS_CACHE_MODE
+              value: full
           ports:
             - containerPort: 2121
               name: ftp-control
