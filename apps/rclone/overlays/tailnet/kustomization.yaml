@@ -3,6 +3,6 @@ kind: Kustomization
 components:
   - ../../components/tailscale
 patches:
-  - path: deployment.patch.yaml
+  - path: deployment.yaml
 resources:
   - ../default
