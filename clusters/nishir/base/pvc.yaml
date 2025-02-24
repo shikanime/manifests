@@ -5,7 +5,7 @@ metadata:
   namespace: shikanime
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Ti
