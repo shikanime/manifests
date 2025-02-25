@@ -38,17 +38,10 @@ for MANIFEST_NAME in "${!MANIFESTS[@]}"; do
   echo "Checking for updates for ${MANIFESTS[$MANIFEST_NAME]}..."
 
   # Split the chart string into an array
-  IFS=' ' read -r -a CHARTS <<< "${MANIFESTS[$MANIFEST_NAME]}"
+  IFS=' ' read -r -a CHARTS <<<"${MANIFESTS[$MANIFEST_NAME]}"
 
-  for CHART_NAME in "${CHARTS[@]}"; do
-    # Get the index of current chart in the array
-    INDEX=0
-    for i in "${!CHARTS[@]}"; do
-      if [[ "${CHARTS[$i]}" == "${CHART_NAME}" ]]; then
-        INDEX=$i
-        break
-      fi
-    done
+  for INDEX in "${!CHARTS[@]}"; do
+    CHART_NAME="${CHARTS[$INDEX]}"
 
     # Search for the latest version of the chart
     LATEST_VERSION=$(
