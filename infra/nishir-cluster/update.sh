@@ -57,8 +57,7 @@ for CHART_NAME in "${CHARTS[@]}"; do
     if [[ -f $TEMPLATE_FILE ]]; then
       echo "Updating $TEMPLATE_FILE..."
       REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
-      TMP_FILE=$(mktemp)
-      sed \
+      sed -i \
         -e 's|^  repo: .*$|  repo: '$REPO_URL'|' \
         -e 's|^  chart: .*$|  chart: '${CHART_NAME#*/}'|' \
         -e 's|^  version: .*$|  version: '$LATEST_VERSION'|' \
