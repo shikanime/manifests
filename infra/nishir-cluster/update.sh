@@ -8,7 +8,6 @@ set -o pipefail
 declare -A MANIFESTS=(
   ["cert-manager"]="jetstack/cert-manager"
   ["grafana-monitoring"]="grafana/k8s-monitoring"
-  ["fleet"]="fleet/fleet-crd fleet/fleet"
   ["longhorn"]="longhorn/longhorn"
   ["nfd"]="node-feature-discovery/node-feature-discovery"
   ["tailscale"]="tailscale/tailscale-operator"
@@ -18,7 +17,6 @@ declare -A MANIFESTS=(
 declare -A REPOS=(
   ["fairwinds"]="https://charts.fairwinds.com/stable"
   ["grafana"]="https://grafana.github.io/helm-charts"
-  ["fleet"]="https://rancher.github.io/fleet-helm-charts"
   ["jetstack"]="https://charts.jetstack.io"
   ["longhorn"]="https://charts.longhorn.io"
   ["node-feature-discovery"]="https://kubernetes-sigs.github.io/node-feature-discovery/charts"
