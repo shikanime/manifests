@@ -46,6 +46,12 @@ resource "local_file" "nfd" {
   file_permission = "0600"
 }
 
+resource "local_file" "fleet" {
+  filename        = "${path.module}/.terraform/tmp/manifest/fleet.yaml"
+  content         = templatefile("${path.module}/templates/manifests/fleet.yaml.tftpl", {})
+  file_permission = "0600"
+}
+
 resource "random_password" "gitea_pkcs12" {
   length = 14
 }
@@ -77,13 +83,14 @@ resource "local_file" "shikanime" {
 
 resource "terraform_data" "addons" {
   triggers_replace = {
-    tailscale_id          = local_file.tailscale.id
-    longhorn_id           = local_file.longhorn.id
-    grafana_monitoring_id = local_file.grafana_monitoring.id
-    vpa_id                = local_file.vpa.id
     cert_manager_id       = local_file.cert_manager.id
+    fleet_id              = local_file.fleet.id
+    grafana_monitoring_id = local_file.grafana_monitoring.id
+    longhorn_id           = local_file.longhorn.id
     nfd_id                = local_file.nfd.id
     shikanime_id          = local_file.shikanime.id
+    tailscale_id          = local_file.tailscale.id
+    vpa_id                = local_file.vpa.id
   }
 
   connection {
@@ -120,6 +127,11 @@ resource "terraform_data" "addons" {
   provisioner "file" {
     content     = local_file.nfd.content
     destination = "/mnt/nishir/rancher/k3s/server/manifests/nfd.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.fleet.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/fleet.yaml"
   }
 
   provisioner "file" {

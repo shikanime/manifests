@@ -57,3 +57,14 @@ metadata:
 type: Opaque
 data:
   password: ${base64encode(gitea_pkcs12_password)}
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: shikanime
+  namespace: fleet-local
+spec:
+  branch: main
+  repo: https://github.com/shikanime/manifests
+  paths:
+    - clusters/nishir/overlays/tailnet
