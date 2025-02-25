@@ -1,0 +1,27 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: fleet-crd
+  namespace: kube-system
+spec:
+  repo: https://rancher.github.io/fleet-helm-charts
+  chart: fleet-crd
+  targetNamespace: kube-system
+  version: 0.11.4
+  helmVersion: v3
+  bootstrap: false
+  failurePolicy: abort
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: fleet
+  namespace: kube-system
+spec:
+  repo: https://rancher.github.io/fleet-helm-charts
+  chart: fleet
+  targetNamespace: kube-system
+  version: 0.11.4
+  helmVersion: v3
+  bootstrap: false
+  failurePolicy: abort
