@@ -3,6 +3,11 @@ kind: Config
 metadata:
   name: shikanime
 profiles:
+  - name: nishir-bootsrap
+    manifests:
+      kustomize:
+        paths:
+          - clusters/nishir/overlays/bootsrap
   - name: nishir-tailnet
     manifests:
       kustomize:

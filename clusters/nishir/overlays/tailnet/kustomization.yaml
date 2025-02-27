@@ -1,14 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 components:
-  - ../../components/grafana
-  - ../../components/longhorn
-  - ../../components/node-feature
-  - ../../components/rancher
   - ../../components/tailscale
-  - ../../components/tls
 resources:
-  - ../../base
+  - ../default
   - ../../../../apps/adguardhome/overlays/tailnet
   - ../../../../apps/jellyfin/overlays/tailnet
   - ../../../../apps/metatube/base
