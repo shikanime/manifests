@@ -11,16 +11,19 @@ spec:
           ports:
             - containerPort: 443
               name: https
+              protocol: TCP
             - containerPort: 443
               name: https-udp
               protocol: UDP
             - containerPort: 853
               name: dot
+              protocol: TCP
             - containerPort: 853
               name: doq
               protocol: UDP
             - containerPort: 5443
               name: dnscrypt
+              protocol: TCP
             - containerPort: 5443
               name: dnscrypt-udp
               protocol: UDP

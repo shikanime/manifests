@@ -19,9 +19,6 @@ spec:
           ports:
             - containerPort: 53
               name: dns
-            - containerPort: 53
-              name: dns-udp
-              protocol: UDP
             - containerPort: 80
               name: http
           volumeMounts:

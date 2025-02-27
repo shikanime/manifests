@@ -8,3 +8,24 @@ spec:
     - name: https
       port: 443
       targetPort: https
+      protocol: TCP
+    - name: https-udp
+      port: 443
+      targetPort: https-udp
+      protocol: UDP
+    - name: dot
+      port: 853
+      targetPort: dot
+      protocol: TCP
+    - name: doq
+      port: 853
+      targetPort: doq
+      protocol: UDP
+    - name: dnscrypt
+      port: 5443
+      targetPort: dnscrypt
+      protocol: TCP
+    - name: dnscrypt-udp
+      port: 5443
+      targetPort: dnscrypt-udp
+      protocol: UDP
