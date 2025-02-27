@@ -4,18 +4,10 @@ metadata:
   name: adguardhome
   namespace: shikanime
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: adguardhome
   template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: adguardhome
     spec:
       containers:
         - name: adguardhome
-          image: adguardhome
           ports:
             - containerPort: 3000
               name: http-admin
