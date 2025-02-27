@@ -5,6 +5,5 @@ components:
   - ../../components/longhorn
   - ../../components/node-feature
   - ../../components/rancher
-  - ../../components/tls
 resources:
   - ../../base
