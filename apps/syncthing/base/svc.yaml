@@ -19,6 +19,7 @@ metadata:
 spec:
   ports:
     - name: sync
+      protocol: TCP
       port: 22000
       targetPort: sync
     - name: sync-udp
