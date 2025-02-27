@@ -37,8 +37,10 @@ spec:
       port: 5443
       protocol: TCP
       targetPort: dnscrypt
-    -
-
+    - name: dnscrypt-udp
+      port: 5443
+      protocol: UDP
+      targetPort: dnscrypt-udp
   selector:
     app.kubernetes.io/name: adguardhome
   type: LoadBalancer
