@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adguardhome
+  namespace: shikanime
+spec:
+  defaultBackend:
+    service:
+      name: adguardhome
+      port:
+        name: https

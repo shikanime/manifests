@@ -57,3 +57,12 @@ metadata:
 type: Opaque
 data:
   password: ${base64encode(gitea_pkcs12_password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: adguardhome-pkcs12
+  namespace: shikanime
+type: Opaque
+data:
+  password: ${base64encode(adguardhome_pkcs12_password)}

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns
+  namespace: shikanime
+  annotations:
+    tailscale.com/hostname: dns
+    tailscale.com/tags: tag:dns
+spec:
+  loadBalancerClass: tailscale

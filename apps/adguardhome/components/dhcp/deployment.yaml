@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguardhome
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: adguardhome
+          ports:
+            - containerPort: 67
+              name: dhcp-server
+              protocol: UDP
+            - containerPort: 68
+              name: dhcp-client
+              protocol: UDP

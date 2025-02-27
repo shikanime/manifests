@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguardhome
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: adguardhome
+          ports:
+            - containerPort: 443
+              name: https
+            - containerPort: 443
+              name: https-udp
+              protocol: UDP
+            - containerPort: 853
+              name: dot
+            - containerPort: 853
+              name: doq
+              protocol: UDP
+            - containerPort: 5443
+              name: dnscrypt
+            - containerPort: 5443
+              name: dnscrypt-udp
+              protocol: UDP
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: adguardhome-tls

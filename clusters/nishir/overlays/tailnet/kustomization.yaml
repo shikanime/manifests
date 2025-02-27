@@ -9,7 +9,7 @@ components:
   - ../../components/tls
 resources:
   - ../../base
-  - ../../../../apps/gitea/overlays/tailnet
+  - ../../../../apps/adguardhome/overlays/tailnet
   - ../../../../apps/jellyfin/overlays/tailnet
   - ../../../../apps/metatube/base
   - ../../../../apps/rclone/overlays/tailnet
