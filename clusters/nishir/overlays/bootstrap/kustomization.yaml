@@ -7,4 +7,4 @@ resources:
   - ../../../../apps/metatube/base
   - ../../../../apps/rclone/overlays/intranet
   - ../../../../apps/syncthing/overlays/default
-  - ../../../../apps/vaultwarden/base
+  - ../../../../apps/vaultwarden/overlays/bootstrap

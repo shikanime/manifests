@@ -16,12 +16,6 @@ spec:
       containers:
         - name: vaultwarden
           image: vaultwarden
-          env:
-            - name: ADMIN_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: vaultwarden
-                  key: admin-token
           ports:
             - containerPort: 80
               name: http
