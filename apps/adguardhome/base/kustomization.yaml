@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: adguardhome
+    newName: docker.io/adguard/adguardhome
+    newTag: v0.107.43
+resources:
+  - deployment.yaml
+  - ingress.yaml
+  - pvc.yaml
+  - svc.yaml
+  - vpa.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/component: dns-server
+      app.kubernetes.io/name: adguardhome
+      app.kubernetes.io/part-of: nishir-security
+      app.kubernetes.io/version: 0.107.43
