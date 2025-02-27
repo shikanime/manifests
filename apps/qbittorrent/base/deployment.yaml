@@ -49,6 +49,7 @@ spec:
               name: http
             - containerPort: 6881
               name: bittorrent
+              protocol: TCP
             - containerPort: 6881
               name: bittorrent-udp
               protocol: UDP
