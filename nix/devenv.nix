@@ -44,7 +44,6 @@
           pkgs.kubectl
           pkgs.kubernetes-helm
           pkgs.kustomize
-          pkgs.scaleway-cli
           pkgs.skaffold
           pkgs.skopeo
           pkgs.yq-go
