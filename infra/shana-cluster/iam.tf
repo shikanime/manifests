@@ -3,5 +3,5 @@ resource "tailscale_tailnet_key" "default" {
   ephemeral     = false
   preauthorized = true
   description   = var.display_name
-  tags          = ["tag:k8s-node", "tag:server"]
+  tags          = ["tag:k8s-node"]
 }
