@@ -39,6 +39,8 @@
         };
         packages = [
           pkgs.gh
+          pkgs.gnugrep
+          pkgs.gnused
           pkgs.kubectl
           pkgs.kubernetes-helm
           pkgs.kustomize

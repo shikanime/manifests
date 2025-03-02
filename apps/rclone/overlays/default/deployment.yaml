@@ -11,11 +11,18 @@ spec:
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe
+            - name: data-sync
+              mountPath: /data/sync
         - name: rclone-ftp
           volumeMounts:
             - name: data-sukebe
               mountPath: /data/sukebe
+            - name: data-sync
+              mountPath: /data/sync
       volumes:
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe-data
+        - name: data-sync
+          persistentVolumeClaim:
+            claimName: sync-data
