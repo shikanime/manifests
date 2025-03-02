@@ -1,0 +1,80 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - curl
+  - open-iscsi
+  - nfs-client
+  - cryptsetup
+  - device-mapper
+write_files:
+  - path: /etc/sysctl.d/99-tailscale.conf
+    content: |
+      net.ipv4.ip_forward = 1
+      net.ipv6.conf.all.forwarding = 1
+    owner: root:root
+    permissions: "0644"
+  - path: /etc/sysctl.d/99-k3s.conf
+    content: |
+      kernel.panic=10
+      kernel.panic_on_oops=1
+      fs.inotify.max_user_watches=524288
+      fs.inotify.max_user_instances=8192
+      fs.inotify.max_queued_events=16384
+      fs.file-max=131072
+      net.core.rmem_default=7340032
+      user.max_inotify_instances=8192
+      user.max_inotify_watches=524288
+      vm.overcommit_memory=1
+    owner: root:root
+    permissions: "0644"
+  - path: /var/lib/rancher/k3s/server/manifests/tailscale.yaml
+    content: |
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: tailscale
+      ---
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: oauth-client
+        namespace: tailscale
+      type: Opaque
+      data:
+        client_id: ${base64encode(tailscale_client_id)}
+        client_secret: ${base64encode(tailscale_client_secret)}
+      ---
+      apiVersion: helm.cattle.io/v1
+      kind: HelmChart
+      metadata:
+        name: tailscale
+        namespace: kube-system
+      spec:
+        repo: https://pkgs.tailscale.com/helmcharts
+        chart: tailscale-operator
+        targetNamespace: tailscale
+        version: 1.80.0
+        helmVersion: v3
+        bootstrap: false
+        failurePolicy: abort
+        valuesContent: |
+          apiServerProxyConfig:
+            mode: "true"
+          oauthSecretVolume:
+            secret:
+              secretName: oauth-client
+          operatorConfig:
+            hostname: ${name}-k8s-operator
+    owner: root:root
+    permissions: "0644"
+runcmd:
+  - sysctl -p /etc/sysctl.d/99-tailscale.conf
+  - curl -fsSL https://tailscale.com/install.sh | sh
+  - |
+    tailscale up --authkey ${tailscale_authkey} \
+      --advertise-exit-node \
+      --accept-routes \
+      --ssh
+  - curl -sfL https://get.k3s.io | sh -s - server \
+      --cluster-init
