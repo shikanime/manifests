@@ -1,3 +1,9 @@
+variable "name" {
+  type        = string
+  description = "Name of the cluster"
+  default     = "nishir"
+}
+
 variable "endpoints" {
   type = object({
     nishir = string
