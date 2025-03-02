@@ -31,5 +31,13 @@ spec:
   failurePolicy: abort
   valuesContent: |
     defaultSettings:
+      allowCollectingLonghornUsageMetrics: false
+      backupstorePollInterval: 6000
       backupTarget: ${backup_target}
       backupTargetCredentialSecret: longhorn-hetzner-backups
+      defaultReplicaCount: 2
+      replicaAutoBalance: best-effort
+      snapshotDataIntegrityCronjob: "0 4 */7 * *"
+    persistence:
+      defaultClassReplicaCount: 2
+      defaultFsType: xfs
