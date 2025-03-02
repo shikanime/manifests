@@ -13,6 +13,10 @@ resource "hcloud_server" "default" {
   packages:
     - curl
     - tailscale
+    - open-iscsi
+    - nfs-common
+    - cryptsetup
+    - dmsetup
   runcmd:
     - curl -fsSL https://tailscale.com/install.sh | sh
     - tailscale up --authkey ${tailscale_tailnet_key.default.key} \
