@@ -7,7 +7,10 @@ resource "hcloud_server" "default" {
     ipv6_enabled = true
   }
   user_data = templatefile("${path.module}/templates/user-data.txt.tftpl", {
-    tailscale_authkey = tailscale_tailnet_key.default.key
+    name                    = var.name
+    tailscale_client_id     = var.tailscale_client_id
+    tailscale_client_secret = var.tailscale_client_secret
+    tailscale_authkey       = tailscale_tailnet_key.default.key
   })
   ssh_keys = [hcloud_ssh_key.default.id]
 }

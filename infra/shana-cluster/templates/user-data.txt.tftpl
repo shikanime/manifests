@@ -28,6 +28,46 @@ write_files:
       vm.overcommit_memory=1
     owner: root:root
     permissions: "0644"
+  - path: /var/lib/rancher/k3s/server/manifests/tailscale.yaml
+    content: |
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: tailscale
+      ---
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: oauth-client
+        namespace: tailscale
+      type: Opaque
+      data:
+        client_id: ${base64encode(tailscale_client_id)}
+        client_secret: ${base64encode(tailscale_client_secret)}
+      ---
+      apiVersion: helm.cattle.io/v1
+      kind: HelmChart
+      metadata:
+        name: tailscale
+        namespace: kube-system
+      spec:
+        repo: https://pkgs.tailscale.com/helmcharts
+        chart: tailscale-operator
+        targetNamespace: tailscale
+        version: 1.80.0
+        helmVersion: v3
+        bootstrap: false
+        failurePolicy: abort
+        valuesContent: |
+          apiServerProxyConfig:
+            mode: "true"
+          oauthSecretVolume:
+            secret:
+              secretName: oauth-client
+          operatorConfig:
+            hostname: ${name}-k8s-operator
+    owner: root:root
+    permissions: "0644"
 runcmd:
   - sysctl -p /etc/sysctl.d/99-tailscale.conf
   - curl -fsSL https://tailscale.com/install.sh | sh
