@@ -7,7 +7,7 @@ variable "project" {
 variable "name" {
   type        = string
   description = "Name of the cluster"
-  default     = "nishir"
+  default     = "shana"
 }
 
 variable "display_name" {

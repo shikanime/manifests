@@ -12,7 +12,13 @@ resource "hcloud_server" "default" {
   package_upgrade: true
   packages:
     - curl
+    - tailscale
   runcmd:
+    - curl -fsSL https://tailscale.com/install.sh | sh
+    - tailscale up --authkey ${tailscale_tailnet_key.default.key} \
+        --advertise-exit-node \
+        --accept-routes \
+        --ssh
     - curl -sfL https://get.k3s.io | sh -s - server \
         --cluster-init
   EOF
