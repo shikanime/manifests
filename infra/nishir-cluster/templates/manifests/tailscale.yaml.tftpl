@@ -27,6 +27,10 @@ spec:
   bootstrap: false
   failurePolicy: abort
   valuesContent: |
+    apiServerProxyConfig:
+      mode: "true"
     oauthSecretVolume:
       secret:
         secretName: oauth-client
+    operatorConfig:
+      hostname: ${name}-k8s-operator

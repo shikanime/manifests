@@ -1,6 +1,7 @@
 resource "local_file" "tailscale" {
   filename = "${path.module}/.terraform/tmp/manifest/tailscale.yaml"
   content = templatefile("${path.module}/templates/manifests/tailscale.yaml.tftpl", {
+    name          = var.name
     client_id     = var.tailscale_operator.client_id
     client_secret = var.tailscale_operator.client_secret
   })
