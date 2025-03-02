@@ -10,14 +10,10 @@ variable "display_name" {
   default     = "Shana"
 }
 
-variable "tailscale_client_id" {
-  type        = string
-  description = "Tailscale OAuth client ID"
-  sensitive   = true
-}
-
-variable "tailscale_client_secret" {
-  type        = string
-  description = "Tailscale OAuth client secret key"
-  sensitive   = true
+variable "tailscale_operator" {
+  type = object({
+    client_id     = string
+    client_secret = string
+  })
+  sensitive = true
 }
