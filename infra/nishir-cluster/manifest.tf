@@ -22,6 +22,7 @@ resource "local_file" "longhorn" {
 resource "local_file" "grafana_monitoring" {
   filename = "${path.module}/.terraform/tmp/manifest/grafana-monitoring.yaml"
   content = templatefile("${path.module}/templates/manifests/grafana-monitoring.yaml.tftpl", {
+    name       = var.name
     prometheus = var.prometheus
     loki       = var.loki
     tempo      = var.tempo
