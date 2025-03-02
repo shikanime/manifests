@@ -9,6 +9,7 @@ resource "hcloud_server" "default" {
   user_data = templatefile("${path.module}/templates/user-data.txt.tftpl", {
     tailscale_authkey = tailscale_tailnet_key.default.key
   })
+  ssh_keys = [hcloud_ssh_key.default.id]
 }
 
 resource "hcloud_server_network" "default" {
