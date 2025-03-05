@@ -5,6 +5,7 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/hostname: qbittorrent-tracker
+    tailscale.com/proxy-class: nishir-qbittorrent
     tailscale.com/tags: tag:bittorrent
 spec:
   loadBalancerClass: tailscale
