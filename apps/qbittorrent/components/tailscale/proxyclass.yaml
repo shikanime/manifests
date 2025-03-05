@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  qbittorrent
+                    app.kubernetes.io/name: qbittorrent
                 topologyKey: kubernetes.io/hostname

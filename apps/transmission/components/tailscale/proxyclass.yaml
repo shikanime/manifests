@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  transmission
+                    app.kubernetes.io/name: transmission
                 topologyKey: kubernetes.io/hostname

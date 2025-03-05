@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  ollam
+                    app.kubernetes.io/name: ollam
                 topologyKey: kubernetes.io/hostname

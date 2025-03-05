@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  rclone
+                    app.kubernetes.io/name: rclone
                 topologyKey: kubernetes.io/hostname

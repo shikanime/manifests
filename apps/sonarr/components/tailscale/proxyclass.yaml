@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  sonarr
+                    app.kubernetes.io/name: sonarr
                 topologyKey: kubernetes.io/hostname

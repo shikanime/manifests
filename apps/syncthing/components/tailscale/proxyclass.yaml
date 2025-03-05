@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  syncthing
+                    app.kubernetes.io/name: syncthing
                 topologyKey: kubernetes.io/hostname

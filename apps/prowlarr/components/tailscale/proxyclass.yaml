@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  prowlarr
+                    app.kubernetes.io/name: prowlarr
                 topologyKey: kubernetes.io/hostname

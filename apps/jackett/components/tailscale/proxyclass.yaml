@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  jackett
+                    app.kubernetes.io/name: jackett
                 topologyKey: kubernetes.io/hostname

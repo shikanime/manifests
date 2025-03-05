@@ -12,5 +12,5 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name:  jellyfin
+                    app.kubernetes.io/name: jellyfin
                 topologyKey: kubernetes.io/hostname
