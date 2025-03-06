@@ -1,6 +1,6 @@
 {
   perSystem =
-    { pkgs, ... }:
+    { self', pkgs, ... }:
     {
       treefmt = {
         projectRootFile = "flake.nix";
@@ -38,6 +38,7 @@
           tflint.enable = true;
         };
         packages = [
+          self'.packages.longhornctl
           pkgs.gh
           pkgs.gnugrep
           pkgs.gnused
@@ -49,5 +50,6 @@
           pkgs.yq-go
         ];
       };
+      packages.longhornctl = pkgs.callPackage ../../pkgs/longhornctl { };
     };
 }
