@@ -9,14 +9,18 @@ buildGoModule rec {
 
   src = fetchFromGitHub {
     owner = "longhorn";
-    repo = "longhorn-manager";
+    repo = "cli";
     rev = "v${version}";
-    hash = "sha256-cggdc/ibeSabGVCZdZEQqeHbl77OrN9lHMvTWWYxZ74=";
+    hash = "sha256-b4baSLYsibdhEgOPbgZxD5M63rdSiztofmB73JPvY4E=";
   };
 
-  vendorHash = "";
+  vendorHash = null;
 
-  subPackages = [ "app/cmd/longhornctl" ];
+  subPackages = [ "cmd/remote" ];
+
+  postInstall = ''
+    mv $out/bin/remote $out/bin/longhornctl
+  '';
 
   meta = with lib; {
     description = "Longhorn command line tool";
