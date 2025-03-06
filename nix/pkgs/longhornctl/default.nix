@@ -11,22 +11,16 @@ buildGoModule rec {
     owner = "longhorn";
     repo = "longhorn-manager";
     rev = "v${version}";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Replace with actual hash
+    hash = "sha256-cggdc/ibeSabGVCZdZEQqeHbl77OrN9lHMvTWWYxZ74=";
   };
 
-  vendorHash = ""; # Replace with actual hash
+  vendorHash = "";
 
   subPackages = [ "app/cmd/longhornctl" ];
 
-  ldflags = [
-    "-s"
-    "-w"
-    "-X github.com/longhorn/longhorn-manager/meta.Version=${version}"
-  ];
-
   meta = with lib; {
     description = "Longhorn command line tool";
-    homepage = "https://github.com/longhorn/longhorn-manager";
+    homepage = "https://github.com/longhorn/cli";
     license = licenses.asl20;
     maintainers = with maintainers; [ shikanime ];
     mainProgram = "longhornctl";

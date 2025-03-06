@@ -2,7 +2,7 @@
   perSystem =
     { pkgs, ... }:
     let
-      longhornctl = pkgs.callPackage ../pkgs/longhornctl { };
+      longhornctl = pkgs.callPackage ./pkgs/longhornctl { };
     in
     {
       treefmt = {
