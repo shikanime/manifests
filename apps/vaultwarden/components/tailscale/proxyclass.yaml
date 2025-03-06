@@ -1,0 +1,16 @@
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: nishir-vaultwarden
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: vaultwarden
+                topologyKey: kubernetes.io/hostname

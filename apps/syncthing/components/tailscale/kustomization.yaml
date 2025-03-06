@@ -3,3 +3,5 @@ kind: Component
 patches:
   - path: ingress.yaml
   - path: svc.yaml
+resources:
+  - proxyclass.yaml
