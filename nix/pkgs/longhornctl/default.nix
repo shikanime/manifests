@@ -1,11 +1,12 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
 }:
 
 buildGoModule rec {
   pname = "longhornctl";
-  version = "1.8.1";
+  version = "1.8.0";
 
   src = fetchFromGitHub {
     owner = "longhorn";

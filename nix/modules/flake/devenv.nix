@@ -50,6 +50,6 @@
           pkgs.yq-go
         ];
       };
-         packages.longhornctl = pkgs.callPackage ../../pkgs/longhornctl { };
+      packages.longhornctl = pkgs.callPackage ../../pkgs/longhornctl { };
     };
 }
