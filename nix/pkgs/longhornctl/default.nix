@@ -6,7 +6,7 @@
 
 buildGoModule rec {
   pname = "longhornctl";
-  version = "1.8.0";
+  version = "1.8.1";
 
   src = fetchFromGitHub {
     owner = "longhorn";

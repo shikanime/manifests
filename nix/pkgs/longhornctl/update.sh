@@ -20,6 +20,6 @@ GIT_PREFETCH=$(nix-prefetch-url --unpack https://github.com/longhorn/cli/archive
 GIT_HASH=$(nix hash to-sri --type sha256 ${GIT_PREFETCH})
 
 sed -i \
-  -e "s|version = .*$|version = \"${LATEST_VERSION:-}\"|" \
-  -e "s|hash = .*$|hash = \"${GIT_HASH}\"|" \
+  -e "s|version = \".*\"|version = \"${LATEST_VERSION:-}\"|" \
+  -e "s|hash = \".*\"|hash = \"${GIT_HASH}\"|" \
   "$(dirname "$0")"/default.nix
