@@ -19,6 +19,14 @@ buildGoModule rec {
 
   subPackages = [ "cmd/remote" ];
 
+  ldflags = [
+    "-s"
+    "-w"
+    "-X github.com/longhorn/cli/pkg/version.Version=${version}"
+    "-X github.com/longhorn/cli/pkg/version.GitCommit=${src.rev}"
+    "-X github.com/longhorn/cli/pkg/version.BuildDate=unknown"
+  ];
+
   postInstall = ''
     mv $out/bin/remote $out/bin/longhornctl
   '';
