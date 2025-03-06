@@ -28,7 +28,7 @@
       imports = [
         devenv.flakeModule
         treefmt-nix.flakeModule
-        ./nix/devenv.nix
+        ./nix/modules/flake/devenv.nix
       ];
       systems = [
         "x86_64-linux"
