@@ -9,12 +9,12 @@ gitnr create \
   ghc:Nix \
   repo:shikanime/gitignore/refs/heads/main/Devenv.gitignore \
   tt:jetbrains+all \
-  tt:Linux \
-  tt:Macos \
-  tt:Terraform \
+  tt:linux \
+  tt:macos \
+  tt:terraform \
   tt:vim \
   tt:visualstudiocode \
-  tt:Windows >.gitignore
+  tt:windows >.gitignore
 
 for dir in "$(dirname "$0")"/apps/*/base; do
   if [ -f "$dir/update.sh" ]; then
