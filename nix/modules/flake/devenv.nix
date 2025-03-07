@@ -38,8 +38,8 @@
           tflint.enable = true;
         };
         packages = [
-          self'.packages.longhornctl
           pkgs.gh
+          pkgs.gitnr
           pkgs.gnugrep
           pkgs.gnused
           pkgs.kubectl
@@ -48,6 +48,7 @@
           pkgs.skaffold
           pkgs.skopeo
           pkgs.yq-go
+          self'.packages.longhornctl
         ];
       };
       packages.longhornctl = pkgs.callPackage ../../pkgs/longhornctl { };
