@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: jackett
     newName: lscr.io/linuxserver/jackett
-    newTag: 0.22.1425
+    newTag: 0.22.1524
 resources:
   - deployment.yaml
   - ingress.yaml
@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: torrent-tracker
       app.kubernetes.io/name: jackett
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 0.22.1425
+      app.kubernetes.io/version: 0.22.1524
