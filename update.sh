@@ -8,9 +8,12 @@ set -o pipefail
 gitnr create \
   ghc:Nix \
   repo:shikanime/gitignore/refs/heads/main/Devenv.gitignore \
+  tt:jetbrains+all \
   tt:Linux \
   tt:Macos \
   tt:Terraform \
+  tt:vim \
+  tt:visualstudiocode \
   tt:Windows >.gitignore
 
 for dir in "$(dirname "$0")"/apps/*/base; do
