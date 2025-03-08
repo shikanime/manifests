@@ -19,7 +19,7 @@ torrent_info=$(transmission-remote --torrent "$TR_TORRENT_ID" --info)
 label=$(echo "$torrent_info" | grep "^Label:" | awk '{print $2}')
 
 # Check if the label matches any of the allowed labels
-if [[ "$label" =~ $ALLOWED_LABELS ]]; then
+if [[ $label =~ $ALLOWED_LABELS ]]; then
   transmission-remote \
     --torrent "$TR_TORRENT_ID" \
     --remove-and-delete
