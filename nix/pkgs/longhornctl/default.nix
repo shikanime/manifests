@@ -22,9 +22,9 @@ buildGoModule rec {
   ldflags = [
     "-s"
     "-w"
-    "-X github.com/longhorn/cli/pkg/version.Version=${version}"
-    "-X github.com/longhorn/cli/pkg/version.GitCommit=${src.rev}"
-    "-X github.com/longhorn/cli/pkg/version.BuildDate=unknown"
+    "-X github.com/longhorn/cli/meta.Version=${version}"
+    "-X github.com/longhorn/cli/meta.GitCommit=${src.rev}"
+    "-X github.com/longhorn/cli/meta.BuildDate=unknown"
   ];
 
   postInstall = ''
