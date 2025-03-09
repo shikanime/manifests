@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: prowlarr-tls
+  namespace: shikanime
+spec:
+  commonName: prowlarr
+  dnsNames:
+    - prowlarr
+    - nishir.local
+  issuerRef:
+    kind: Issuer
+    name: nishir-ca
+  secretName: prowlarr-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: prowlarr-pkcs12
+        key: password
+      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth

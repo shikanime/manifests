@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: sonarr
+          volumeMounts:
+            - name: downloads-data
+              mountPath: /downloads
+            - name: data-shows
+              mountPath: /data/shows
+      volumes:
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: data-shows
+          persistentVolumeClaim:
+            claimName: shows-data

@@ -41,18 +41,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: downloads
-              mountPath: /downloads
-            - name: data-videos
-              mountPath: /data/series
-              subPath: Series
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: sonarr-config
-        - name: downloads
-          persistentVolumeClaim:
-            claimName: downloads
-        - name: data-videos
-          persistentVolumeClaim:
-            claimName: videos

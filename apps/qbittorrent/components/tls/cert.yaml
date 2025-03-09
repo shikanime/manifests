@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: qbittorrent-tls
+  namespace: shikanime
+spec:
+  commonName: qbittorrent
+  dnsNames:
+    - qbittorrent
+    - nishir.local
+  issuerRef:
+    kind: Issuer
+    name: nishir-ca
+  secretName: qbittorrent-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: qbittorrent-pkcs12
+        key: password
+      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth

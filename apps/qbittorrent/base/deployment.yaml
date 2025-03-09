@@ -56,16 +56,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: downloads
-              mountPath: /downloads/complete
-              subPath: complete
-            - name: downloads
-              mountPath: /downloads/incomplete
-              subPath: incomplete
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: qbittorrent-config
-        - name: downloads
-          persistentVolumeClaim:
-            claimName: downloads
