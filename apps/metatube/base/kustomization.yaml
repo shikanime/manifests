@@ -5,8 +5,8 @@ images:
     newName: docker.io/metatube/metatube-server
     newTag: 1.2.9
 resources:
-  - sts.yaml
   - pvc.yaml
+  - sts.yaml
   - svc.yaml
   - vpa.yaml
 labels:

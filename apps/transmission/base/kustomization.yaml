@@ -10,9 +10,9 @@ images:
     newName: lscr.io/linuxserver/transmission
     newTag: 2021.11.18
 resources:
-  - sts.yaml
   - ingress.yaml
   - pvc.yaml
+  - sts.yaml
   - svc.yaml
   - vpa.yaml
 labels:
