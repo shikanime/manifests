@@ -57,3 +57,39 @@ metadata:
 type: Opaque
 data:
   password: ${base64encode(gitea_pkcs12_password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sonarr-pkcs12
+  namespace: shikanime
+type: Opaque
+data:
+  password: ${base64encode(sonarr_pkcs12_password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: radarr-pkcs12
+  namespace: shikanime
+type: Opaque
+data:
+  password: ${base64encode(radarr_pkcs12_password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: prowlarr-pkcs12
+  namespace: shikanime
+type: Opaque
+data:
+  password: ${base64encode(prowlarr_pkcs12_password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: qbittorrent-pkcs12
+  namespace: shikanime
+type: Opaque
+data:
+  password: ${base64encode(qbittorrent_pkcs12_password)}

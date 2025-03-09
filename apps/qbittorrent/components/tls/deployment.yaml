@@ -1,16 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: radarr
+  name: qbittorrent
   namespace: shikanime
 spec:
   template:
     spec:
       containers:
-        - name: radarr
-          ports:
-            - containerPort: 9898
-              name: https
+        - name: qbittorrent
           volumeMounts:
             - name: tls
               mountPath: /tls
@@ -18,4 +15,4 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: radarr-tls
+            secretName: qbittorrent-tls

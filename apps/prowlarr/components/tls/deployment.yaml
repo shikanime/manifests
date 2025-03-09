@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: radarr
+  name: prowlarr
   namespace: shikanime
 spec:
   template:
     spec:
       containers:
-        - name: radarr
+        - name: prowlarr
           ports:
-            - containerPort: 9898
+            - containerPort: 6969
               name: https
           volumeMounts:
             - name: tls
@@ -18,4 +18,4 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: radarr-tls
+            secretName: prowlarr-tls

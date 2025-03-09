@@ -65,21 +65,12 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: downloads
-              mountPath: /downloads/complete
-              subPath: complete
-            - name: downloads
-              mountPath: /downloads/incomplete
-              subPath: incomplete
             - name: scripts
               mountPath: /scripts
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: transmission-config
-        - name: downloads
-          persistentVolumeClaim:
-            claimName: downloads
         - name: scripts
           configMap:
             name: transmission-scripts

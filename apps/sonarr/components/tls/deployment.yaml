@@ -8,6 +8,9 @@ spec:
     spec:
       containers:
         - name: sonarr
+          ports:
+            - containerPort: 9898
+              name: https
           volumeMounts:
             - name: tls
               mountPath: /tls
