@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: transmission
+          volumeMounts:
+            - name: downloads-data
+              mountPath: /downloads
+      volumes:
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
