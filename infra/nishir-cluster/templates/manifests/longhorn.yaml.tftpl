@@ -36,7 +36,7 @@ spec:
       backupTarget: ${backup_target}
       backupTargetCredentialSecret: longhorn-hetzner-backups
       defaultReplicaCount: 2
-      replicaAutoBalance: best-effort
+      replicaAutoBalance: least-effort
       snapshotDataIntegrityCronjob: "0 4 */7 * *"
     persistence:
       defaultClassReplicaCount: 2
