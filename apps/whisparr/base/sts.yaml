@@ -42,21 +42,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: downloads-data
-              mountPath: /downloads
-            - name: data-sukebe
-              mountPath: /data/sukebe/scenes
-              subPath: Videos/Scenes
-            - name: data-sukebe
-              mountPath: /data/sukebe/movies
-              subPath: Videos/Movies
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: whisparr-config
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe-data
