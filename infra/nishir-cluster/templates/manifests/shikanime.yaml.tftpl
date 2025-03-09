@@ -43,6 +43,16 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
+  name: transmission
+  namespace: shikanime
+type: Opaque
+data:
+  username: ${base64encode("transmission")}
+  password: ${base64encode(transmission_password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
   name: jellyfin-pkcs12
   namespace: shikanime
 type: Opaque
