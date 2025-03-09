@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: prowlarr
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: prowlarr
   selector:
     matchLabels:
       app.kubernetes.io/name: prowlarr

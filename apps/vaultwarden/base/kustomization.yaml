@@ -5,7 +5,7 @@ images:
     newName: docker.io/vaultwarden/server
     newTag: 1.33.2
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml

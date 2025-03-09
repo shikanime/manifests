@@ -5,7 +5,7 @@ images:
     newName: lscr.io/linuxserver/radarr
     newTag: 5.19.3
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml

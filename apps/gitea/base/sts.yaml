@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: gitea
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: gitea
   selector:
     matchLabels:
       app.kubernetes.io/name: gitea

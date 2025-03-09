@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: syncthing
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: syncthing
   selector:
     matchLabels:
       app.kubernetes.io/name: syncthing

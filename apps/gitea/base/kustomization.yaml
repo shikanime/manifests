@@ -5,7 +5,7 @@ images:
     newName: docker.io/gitea/gitea
     newTag: 1.23.5
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml

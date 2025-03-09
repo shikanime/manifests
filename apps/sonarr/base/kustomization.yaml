@@ -5,7 +5,7 @@ images:
     newName: lscr.io/linuxserver/sonarr
     newTag: 4.0.13
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml

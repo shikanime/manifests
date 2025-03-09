@@ -1,22 +1,22 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: radarr
+  name: whisparr
   namespace: shikanime
 spec:
   template:
     spec:
       containers:
-        - name: radarr
+        - name: whisparr
           volumeMounts:
             - name: downloads-data
               mountPath: /downloads
-            - name: data-movies
-              mountPath: /data/movies
+            - name: data-sukebe
+              mountPath: /data/sukebe
       volumes:
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
-        - name: data-movies
+        - name: data-sukebe
           persistentVolumeClaim:
-            claimName: movies-data
+            claimName: sukebe-data

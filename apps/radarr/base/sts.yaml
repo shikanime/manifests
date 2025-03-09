@@ -1,17 +1,18 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: qbittorrent
+  name: radarr
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: radarr
   selector:
     matchLabels:
-      app.kubernetes.io/name: qbittorrent
+      app.kubernetes.io/name: radarr
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: qbittorrent
+        app.kubernetes.io/name: radarr
     spec:
       affinity:
         podAntiAffinity:
@@ -25,18 +26,9 @@ spec:
                         - media-server
                 topologyKey: kubernetes.io/hostname
               weight: 100
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/component
-                      operator: In
-                      values:
-                        - library-manager
-                topologyKey: kubernetes.io/hostname
-              weight: 50
       containers:
-        - name: qbittorrent
-          image: qbittorrent
+        - name: radarr
+          image: radarr
           env:
             - name: PUID
               value: "1000"
@@ -45,18 +37,12 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - containerPort: 8080
+            - containerPort: 7878
               name: http
-            - containerPort: 6881
-              name: bittorrent
-              protocol: TCP
-            - containerPort: 6881
-              name: bittorrent-udp
-              protocol: UDP
           volumeMounts:
             - name: config
               mountPath: /config
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: qbittorrent-config
+            claimName: radarr-config

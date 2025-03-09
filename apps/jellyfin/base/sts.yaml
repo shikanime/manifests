@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: jellyfin
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: jellyfin
   selector:
     matchLabels:
       app.kubernetes.io/name: jellyfin
@@ -41,9 +42,6 @@ spec:
       volumes:
         - name: cache
           emptyDir: {}
-        - name: config
-          persistentVolumeClaim:
-            claimName: jellyfin-config
         - name: dev-dri
           hostPath:
             path: /dev/dri

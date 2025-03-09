@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: transmission
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: transmission
   selector:
     matchLabels:
       app.kubernetes.io/name: transmission
