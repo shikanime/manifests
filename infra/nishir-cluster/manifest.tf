@@ -72,6 +72,10 @@ resource "random_password" "qbittorrent_pkcs12" {
   length = 14
 }
 
+resource "random_password" "whisparr_pkcs12" {
+  length = 14
+}
+
 resource "random_password" "metatube" {
   length = 14
 }
@@ -89,6 +93,7 @@ resource "local_file" "shikanime" {
     radarr_pkcs12_password      = random_password.radarr_pkcs12.result
     prowlarr_pkcs12_password    = random_password.prowlarr_pkcs12.result
     qbittorrent_pkcs12_password = random_password.qbittorrent_pkcs12.result
+    whisparr_pkcs12_password    = random_password.prowlarr_pkcs12.result
     metatube_token              = random_password.metatube.result
     rclone_password             = random_password.rclone.result
     rclone_password_bcrypt_hash = random_password.rclone.bcrypt_hash
