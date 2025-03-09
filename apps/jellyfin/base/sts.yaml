@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: jellyfin
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: jellyfin
   selector:
     matchLabels:
       app.kubernetes.io/name: jellyfin

@@ -93,3 +93,12 @@ metadata:
 type: Opaque
 data:
   password: ${base64encode(qbittorrent_pkcs12_password)}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: whisparr-pkcs12
+  namespace: shikanime
+type: Opaque
+data:
+  password: ${base64encode(whisparr_pkcs12_password)}

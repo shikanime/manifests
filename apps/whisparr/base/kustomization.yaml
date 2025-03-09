@@ -5,7 +5,7 @@ images:
     newName: ghcr.io/hotio/whisparr
     newTag: v3-3.0.0.786
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml

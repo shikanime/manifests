@@ -5,7 +5,7 @@ images:
     newName: lscr.io/linuxserver/qbittorrent
     newTag: 5.0.4
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml

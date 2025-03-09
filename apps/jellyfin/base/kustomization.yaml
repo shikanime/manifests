@@ -5,7 +5,7 @@ images:
     newName: docker.io/jellyfin/jellyfin
     newTag: 10.10.6
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml

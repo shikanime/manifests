@@ -5,4 +5,4 @@ components:
 resources:
   - ../../base
 patches:
-  - path: deployment.yaml
+  - path: sts.yaml

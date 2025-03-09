@@ -1,16 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: radarr
+  name: gitea
   namespace: shikanime
 spec:
   template:
     spec:
       containers:
-        - name: radarr
-          ports:
-            - containerPort: 9898
-              name: https
+        - name: gitea
           volumeMounts:
             - name: tls
               mountPath: /tls
@@ -18,4 +15,4 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: radarr-tls
+            secretName: gitea-tls

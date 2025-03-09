@@ -1,13 +1,16 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: whisparr
+  name: prowlarr
   namespace: shikanime
 spec:
   template:
     spec:
       containers:
-        - name: whisparr
+        - name: prowlarr
+          ports:
+            - containerPort: 6969
+              name: https
           volumeMounts:
             - name: tls
               mountPath: /tls
@@ -15,4 +18,4 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: whisparr-tls
+            secretName: prowlarr-tls

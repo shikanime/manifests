@@ -5,7 +5,7 @@ images:
     newName: lscr.io/linuxserver/syncthing
     newTag: 1.29.2
 resources:
-  - deployment.yaml
+  - sts.yaml
   - ingress.yaml
   - pvc.yaml
   - svc.yaml
