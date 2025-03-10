@@ -18,10 +18,15 @@ COMMIT=$(
 
 GIT_PREFETCH=$(nix-prefetch-url --unpack https://github.com/longhorn/cli/archive/${COMMIT}.tar.gz)
 GIT_HASH=$(nix hash convert --hash-algo sha256 --to sri ${GIT_PREFETCH})
-BUILD_DATE=$(date --iso-8601=seconds)
 
 sed -i \
   -e "s|version = \".*\"|version = \"${LATEST_VERSION:-}\"|" \
   -e "s|hash = \".*\"|hash = \"${GIT_HASH}\"|" \
+  "$(dirname "$0")"/default.nix
+
+# Update build date based on file modification time
+BUILD_DATE=$(date -r "$(dirname "$0")/default.nix" --iso-8601=seconds)
+
+sed -i \
   -e "s|\"-X github.com/longhorn/cli/meta.BuildDate=.*\"|\"-X github.com/longhorn/cli/meta.BuildDate=${BUILD_DATE}\"|" \
   "$(dirname "$0")"/default.nix
