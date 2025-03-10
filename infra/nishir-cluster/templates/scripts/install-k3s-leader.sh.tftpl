@@ -27,6 +27,7 @@ curl -sfL https://get.k3s.io | \
     --etcd-s3-region "${etcd_region}" \
     --etcd-s3-secret-key "${etcd_secret_key}" \
     --flannel-backend "host-gw" \
+    --flannel-ipv6-masq \
     --node-ip "$(tailscale status -json | jq -r '.TailscaleIPs | join(",")')" \
     --protect-kernel-defaults \
     --secrets-encryption \
