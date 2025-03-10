@@ -128,42 +128,42 @@ resource "terraform_data" "addons" {
 
   provisioner "file" {
     content     = local_file.tailscale.content
-    destination = "/var/lib/rancher/k3s/server/manifests/tailscale.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/tailscale.yaml"
   }
 
   provisioner "file" {
     content     = local_file.longhorn.content
-    destination = "/var/lib/rancher/k3s/server/manifests/longhorn.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/longhorn.yaml"
   }
 
   provisioner "file" {
     content     = local_file.multus.content
-    destination = "/var/lib/rancher/k3s/server/manifests/multus.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/multus.yaml"
   }
 
   provisioner "file" {
     content     = local_file.grafana_monitoring.content
-    destination = "/var/lib/rancher/k3s/server/manifests/grafana-monitoring.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/grafana-monitoring.yaml"
   }
 
   provisioner "file" {
     content     = local_file.vpa.content
-    destination = "/var/lib/rancher/k3s/server/manifests/vpa.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/vpa.yaml"
   }
 
   provisioner "file" {
     content     = local_file.cert_manager.content
-    destination = "/var/lib/rancher/k3s/server/manifests/cert-manager.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/cert-manager.yaml"
   }
 
   provisioner "file" {
     content     = local_file.nfd.content
-    destination = "/var/lib/rancher/k3s/server/manifests/nfd.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/nfd.yaml"
   }
 
   provisioner "file" {
     content     = local_file.shikanime.content
-    destination = "/var/lib/rancher/k3s/server/manifests/shikanime.yaml"
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/shikanime.yaml"
   }
 
   depends_on = [terraform_data.nishir]
