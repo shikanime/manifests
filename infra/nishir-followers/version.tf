@@ -4,17 +4,13 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "shikanime-studio"
     workspaces {
-      name = "nishir-cluster"
+      name = "nishir-followers"
     }
   }
   required_providers {
     local = {
       source  = "hashicorp/local"
       version = "~> 2.5"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.6"
     }
   }
 }
