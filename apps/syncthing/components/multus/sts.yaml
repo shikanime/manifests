@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: syncthing
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: syncthing
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: syncthing
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan0
+      labels:
+        app.kubernetes.io/name: syncthing
