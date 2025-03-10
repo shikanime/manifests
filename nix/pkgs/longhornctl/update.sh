@@ -24,11 +24,9 @@ sed -i \
   -e "s|hash = \".*\"|hash = \"${GIT_HASH}\"|" \
   "$(dirname "$0")"/default.nix
 
-# Only update build date if default.nix was modified
-if [ -n "$(git diff "$(dirname "$0")/default.nix")" ]; then
-  BUILD_DATE=$(date --iso-8601=seconds)
+# Update build date based on file modification time
+BUILD_DATE=$(date -r "$(dirname "$0")/default.nix" --iso-8601=seconds)
 
-  sed -i \
-    -e "s|\"-X github.com/longhorn/cli/meta.BuildDate=.*\"|\"-X github.com/longhorn/cli/meta.BuildDate=${BUILD_DATE}\"|" \
-    "$(dirname "$0")"/default.nix
-fi
+sed -i \
+  -e "s|\"-X github.com/longhorn/cli/meta.BuildDate=.*\"|\"-X github.com/longhorn/cli/meta.BuildDate=${BUILD_DATE}\"|" \
+  "$(dirname "$0")"/default.nix
