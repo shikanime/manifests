@@ -6,7 +6,6 @@ resource "local_file" "nishir" {
     etcd_endpoint   = var.etcd_snapshot.endpoint
     etcd_region     = var.etcd_snapshot.region
     etcd_secret_key = var.etcd_snapshot.secret_access_key
-    token           = var.k3s.token
   })
   file_permission = "0600"
 }
