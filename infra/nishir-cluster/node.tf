@@ -15,7 +15,7 @@ resource "terraform_data" "nishir" {
   triggers_replace = {
     nishir_id     = local_file.nishir.id
     sysctl_conf   = filemd5("${path.module}/configs/systctl/99-k3s.conf")
-    tmpfiles_conf = filemd5("${path.module}/configs/tmpfiles/var-lib-rancher-k3s.conf")
+    tmpfiles_conf = filemd5("${path.module}/configs/tmpfiles/var-lib-rancher.conf")
   }
 
   connection {
@@ -30,8 +30,8 @@ resource "terraform_data" "nishir" {
   }
 
   provisioner "file" {
-    source      = "${path.module}/configs/tmpfiles/var-lib-rancher-k3s.conf"
-    destination = "/etc/tmpfiles.d/var-lib-rancher-k3s.conf"
+    source      = "${path.module}/configs/tmpfiles/var-lib-rancher.conf"
+    destination = "/etc/tmpfiles.d/var-lib-rancher.conf"
   }
 
   provisioner "remote-exec" {
