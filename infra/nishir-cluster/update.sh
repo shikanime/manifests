@@ -9,6 +9,7 @@ declare -A MANIFESTS=(
   ["cert-manager"]="jetstack/cert-manager"
   ["grafana-monitoring"]="grafana/k8s-monitoring"
   ["longhorn"]="longhorn/longhorn"
+  ["multus"]="rke2/rke2-multus"
   ["nfd"]="node-feature-discovery/node-feature-discovery"
   ["tailscale"]="tailscale/tailscale-operator"
   ["vpa"]="fairwinds/vpa"
@@ -20,6 +21,7 @@ declare -A REPOS=(
   ["jetstack"]="https://charts.jetstack.io"
   ["longhorn"]="https://charts.longhorn.io"
   ["node-feature-discovery"]="https://kubernetes-sigs.github.io/node-feature-discovery/charts"
+  ["rke2"]="https://rke2-charts.rancher.io"
   ["tailscale"]="https://pkgs.tailscale.com/helmcharts"
 )
 
