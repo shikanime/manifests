@@ -20,8 +20,8 @@ resource "local_file" "longhorn" {
 }
 
 resource "local_file" "multus" {
-  filename = "${path.module}/.terraform/tmp/manifest/multus.yaml"
-  content = templatefile("${path.module}/templates/manifests/multus.yaml.tftpl", {  })
+  filename        = "${path.module}/.terraform/tmp/manifest/multus.yaml"
+  content         = templatefile("${path.module}/templates/manifests/multus.yaml.tftpl", {})
   file_permission = "0600"
 }
 
