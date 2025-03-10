@@ -21,7 +21,6 @@ curl -sfL https://get.k3s.io | \
   K3S_ETCD_S3_SECRET_KEY="${etcd_secret_key}" \
   sh -s - server \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
-    --data-dir "/mnt/nishir/rancher/k3s" \
     --etcd-s3 \
     --etcd-s3-access-key "${etcd_access_key}" \
     --etcd-s3-bucket "${etcd_bucket}" \
