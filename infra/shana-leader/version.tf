@@ -4,7 +4,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "shikanime-studio"
     workspaces {
-      name = "shana-cluster"
+      name = "shana-leader"
     }
   }
   required_providers {

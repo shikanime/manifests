@@ -14,14 +14,6 @@ variable "endpoints" {
   }
 }
 
-variable "k3s" {
-  type = object({
-    token = string
-  })
-  description = "K3s cluster join token"
-  sensitive   = true
-}
-
 variable "etcd_snapshot" {
   type = object({
     access_key_id     = string
