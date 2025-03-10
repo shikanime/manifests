@@ -19,6 +19,12 @@ resource "local_file" "longhorn" {
   file_permission = "0600"
 }
 
+resource "local_file" "multus" {
+  filename = "${path.module}/.terraform/tmp/manifest/multus.yaml"
+  content = templatefile("${path.module}/templates/manifests/multus.yaml.tftpl", {  })
+  file_permission = "0600"
+}
+
 resource "local_file" "grafana_monitoring" {
   filename = "${path.module}/.terraform/tmp/manifest/grafana-monitoring.yaml"
   content = templatefile("${path.module}/templates/manifests/grafana-monitoring.yaml.tftpl", {
@@ -106,6 +112,7 @@ resource "terraform_data" "addons" {
   triggers_replace = {
     tailscale_id          = local_file.tailscale.id
     longhorn_id           = local_file.longhorn.id
+    multus_id             = local_file.multus.id
     grafana_monitoring_id = local_file.grafana_monitoring.id
     vpa_id                = local_file.vpa.id
     cert_manager_id       = local_file.cert_manager.id
@@ -127,6 +134,11 @@ resource "terraform_data" "addons" {
   provisioner "file" {
     content     = local_file.longhorn.content
     destination = "/mnt/nishir/rancher/k3s/server/manifests/longhorn.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.multus.content
+    destination = "/mnt/nishir/rancher/k3s/server/manifests/multus.yaml"
   }
 
   provisioner "file" {
