@@ -1,6 +1,6 @@
 resource "local_file" "fushi" {
   filename = "${path.module}/.terraform/tmp/scripts/fushi-install-k3s.sh"
-  content = templatefile("${path.module}/templates/scripts/install-k3s.sh.tftpl", {
+  content = templatefile("${path.module}/templates/scripts/install-k3s.sh", {
     server = "https://${var.k3s.server}:6443"
     token  = var.k3s.token
   })
@@ -31,7 +31,7 @@ resource "terraform_data" "fushi" {
 
 resource "local_file" "minish" {
   filename = "${path.module}/.terraform/tmp/scripts/minish-install-k3s.sh"
-  content = templatefile("${path.module}/templates/scripts/install-k3s.sh.tftpl", {
+  content = templatefile("${path.module}/templates/scripts/install-k3s.sh", {
     server = "https://${var.k3s.server}:6443"
     token  = var.k3s.token
   })
