@@ -21,7 +21,7 @@ output "etcd_snapshot" {
   value = {
     access_key_id     = var.etcd_snapshot.access_key_id
     bucket            = aws_s3_bucket.etcd_backups.bucket
-    endpoint          = var.endpoints.s3
+    endpoint          = replace(var.endpoints.s3, "^https?://", "")
     region            = var.regions.aws_s3_bucket
     secret_access_key = var.etcd_snapshot.secret_access_key
   }
