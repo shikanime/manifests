@@ -22,7 +22,7 @@ buildGoModule rec {
   ldflags = [
     "-s"
     "-w"
-    "-X github.com/longhorn/cli/meta.Version=${version}"
+    "-X github.com/longhorn/cli/meta.Version=v${version}"
     "-X github.com/longhorn/cli/meta.GitCommit=${src.rev}"
     "-X github.com/longhorn/cli/meta.BuildDate=2025-03-08T15:00:05+00:00"
   ];
