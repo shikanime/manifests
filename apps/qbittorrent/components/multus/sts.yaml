@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: qbittorrent
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: qbittorrent
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: qbittorrent
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan0
+      labels:
+        app.kubernetes.io/name: qbittorrent
