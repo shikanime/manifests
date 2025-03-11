@@ -48,9 +48,9 @@ resource "local_file" "cert_manager" {
   file_permission = "0600"
 }
 
-resource "local_file" "nfd" {
-  filename        = "${path.module}/.terraform/tmp/manifest/nfd.yaml"
-  content         = templatefile("${path.module}/templates/manifests/nfd.yaml", {})
+resource "local_file" "node_feature_discovery" {
+  filename        = "${path.module}/.terraform/tmp/manifest/node-feature-discovery.yaml"
+  content         = templatefile("${path.module}/templates/manifests/node-feature-discovery.yaml", {})
   file_permission = "0600"
 }
 
@@ -110,14 +110,14 @@ resource "local_file" "shikanime" {
 
 resource "terraform_data" "addons" {
   triggers_replace = {
-    tailscale_id          = local_file.tailscale.id
-    longhorn_id           = local_file.longhorn.id
-    multus_id             = local_file.multus.id
-    grafana_monitoring_id = local_file.grafana_monitoring.id
-    vpa_id                = local_file.vpa.id
-    cert_manager_id       = local_file.cert_manager.id
-    nfd_id                = local_file.nfd.id
-    shikanime_id          = local_file.shikanime.id
+    cert_manager_id           = local_file.cert_manager.id
+    grafana_monitoring_id     = local_file.grafana_monitoring.id
+    longhorn_id               = local_file.longhorn.id
+    multus_id                 = local_file.multus.id
+    node_feature_discovery_id = local_file.node_feature_discovery.id
+    shikanime_id              = local_file.shikanime.id
+    tailscale_id              = local_file.tailscale.id
+    vpa_id                    = local_file.vpa.id
   }
 
   connection {
@@ -127,8 +127,13 @@ resource "terraform_data" "addons" {
   }
 
   provisioner "file" {
-    content     = local_file.tailscale.content
-    destination = "/var/lib/rancher/k3s/server/manifests/tailscale.yaml"
+    content     = local_file.cert_manager.content
+    destination = "/var/lib/rancher/k3s/server/manifests/cert-manager.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.grafana_monitoring.content
+    destination = "/var/lib/rancher/k3s/server/manifests/grafana-monitoring.yaml"
   }
 
   provisioner "file" {
@@ -142,28 +147,23 @@ resource "terraform_data" "addons" {
   }
 
   provisioner "file" {
-    content     = local_file.grafana_monitoring.content
-    destination = "/var/lib/rancher/k3s/server/manifests/grafana-monitoring.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.vpa.content
-    destination = "/var/lib/rancher/k3s/server/manifests/vpa.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.cert_manager.content
-    destination = "/var/lib/rancher/k3s/server/manifests/cert-manager.yaml"
-  }
-
-  provisioner "file" {
-    content     = local_file.nfd.content
-    destination = "/var/lib/rancher/k3s/server/manifests/nfd.yaml"
+    content     = local_file.node_feature_discovery.content
+    destination = "/var/lib/rancher/k3s/server/manifests/node-feature-discovery.yaml"
   }
 
   provisioner "file" {
     content     = local_file.shikanime.content
     destination = "/var/lib/rancher/k3s/server/manifests/shikanime.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.tailscale.content
+    destination = "/var/lib/rancher/k3s/server/manifests/tailscale.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.vpa.content
+    destination = "/var/lib/rancher/k3s/server/manifests/vpa.yaml"
   }
 
   depends_on = [terraform_data.nishir]
