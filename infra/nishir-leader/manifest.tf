@@ -14,7 +14,7 @@ resource "local_file" "longhorn" {
     backup_target     = "s3://${var.longhorn_backupstore.bucket}@${var.longhorn_backupstore.region}/"
     access_key_id     = var.longhorn_backupstore.access_key_id
     secret_access_key = var.longhorn_backupstore.secret_access_key
-    endpoints         = "https://${var.longhorn_backupstore.endpoint}"
+    endpoints         = var.longhorn_backupstore.endpoint
   })
   file_permission = "0600"
 }
