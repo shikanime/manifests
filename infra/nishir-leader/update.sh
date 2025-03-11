@@ -10,7 +10,7 @@ declare -A MANIFESTS=(
   ["grafana-monitoring"]="grafana/k8s-monitoring"
   ["longhorn"]="longhorn/longhorn"
   ["multus"]="rke2/rke2-multus"
-  ["nfd"]="node-feature-discovery/node-feature-discovery"
+  ["node-feature-discovery"]="node-feature-discovery/node-feature-discovery"
   ["tailscale"]="tailscale/tailscale-operator"
   ["vpa"]="fairwinds/vpa"
 )
