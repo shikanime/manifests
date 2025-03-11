@@ -14,7 +14,7 @@ token=$(ssh "root@${server}" "cat /var/lib/rancher/k3s/server/token")
 jq -n \
   --arg token "${token}" \
   --arg server "${server}" \
-  '{k3s: {token: $token, server: $server}}' >"$(dirname "$0")"/terraform.tfvars.json
+  '{k3s: {token: $token, server: $server}}' >"$(dirname "$0")/terraform.tfvars.json"
 
 # Set secure permissions for the tfvars file
-chmod 600 "$(dirname "$0")"/terraform.tfvars.json
+chmod 600 "$(dirname "$0")/terraform.tfvars.json"
