@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: adguardhome
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: adguardhome
+          ports:
+            - containerPort: 3000
+              name: http-admin
