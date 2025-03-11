@@ -9,16 +9,16 @@ sysctl --system
 # Install Longhorn dependencies
 apt-get update -y
 apt-get install -y \
-    open-iscsi \
-    nfs-common \
-    cryptsetup \
-    dmsetup \
-    jq
+  open-iscsi \
+  nfs-common \
+  cryptsetup \
+  dmsetup \
+  jq
 
 # Install k3s
-curl -sfL https://get.k3s.io | \
+curl -sfL https://get.k3s.io |
   K3S_ETCD_S3_SECRET_KEY="${etcd_secret_key}" \
-  sh -s - server \
+    sh -s - server \
     --cluster-init \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
     --etcd-s3 \

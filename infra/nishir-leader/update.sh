@@ -56,7 +56,7 @@ update() {
     else
       echo "[${MANIFEST_NAME}] Found latest version: $LATEST_VERSION"
 
-      TEMPLATE_FILE="$(dirname "$0")/templates/manifests/${MANIFEST_NAME}.yaml.tftpl"
+      TEMPLATE_FILE="$(dirname "$0")/templates/manifests/${MANIFEST_NAME}.yaml"
       if [[ -f $TEMPLATE_FILE ]]; then
         echo "[${MANIFEST_NAME}] Updating $TEMPLATE_FILE..."
         REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
