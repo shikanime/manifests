@@ -3,6 +3,6 @@ kind: Kustomization
 components:
   - ../../components/tailscale
 patches:
-  - path: deployment.yaml
+  - path: sts.yaml
 resources:
   - ../nishir

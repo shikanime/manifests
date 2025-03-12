@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: rclone
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: rclone
   selector:
     matchLabels:
       app.kubernetes.io/name: rclone
@@ -28,7 +29,7 @@ spec:
             - name: RCLONE_CACHE_DIR
               value: /cache
             - name: RCLONE_VFS_CACHE_MODE
-              value: full
+              value: writes
           ports:
             - containerPort: 8080
               name: webdav
@@ -67,7 +68,7 @@ spec:
             - name: RCLONE_CACHE_DIR
               value: /cache
             - name: RCLONE_VFS_CACHE_MODE
-              value: full
+              value: writes
           ports:
             - containerPort: 2121
               name: ftp-control
