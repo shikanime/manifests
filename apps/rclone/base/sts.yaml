@@ -20,6 +20,7 @@ spec:
           args:
             - serve
             - webdav
+            - -v
             - /data
           env:
             - name: RCLONE_ADDR
@@ -49,6 +50,7 @@ spec:
           args:
             - serve
             - ftp
+            - -v
             - /data
           env:
             - name: RCLONE_ADDR
