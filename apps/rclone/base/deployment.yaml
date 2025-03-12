@@ -23,6 +23,8 @@ spec:
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:8080
+            - name: RCLONE_CACHE_DIR
+              value: /cache
             - name: RCLONE_HTPASSWD
               value: /config/rclone/htpasswd
             - name: RCLONE_LOG_LEVEL
@@ -33,14 +35,16 @@ spec:
             - containerPort: 8080
               name: webdav
           volumeMounts:
-            - name: rclone-config
+            - name: config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
-            - name: rclone-webdav
+            - name: config-webdav
               mountPath: /config/rclone/htpasswd
               subPath: htpasswd
               readOnly: true
+            - name: cache
+              mountPath: /cache
         - name: rclone-ftp
           image: rclone
           args:
@@ -64,8 +68,6 @@ spec:
                 secretKeyRef:
                   name: rclone-ftp
                   key: password
-            - name: RCLONE_VFS_CACHE_MODE
-              value: full
           ports:
             - containerPort: 2121
               name: ftp-control
@@ -130,14 +132,18 @@ spec:
             - containerPort: 30029
               name: ftp-data-30029
           volumeMounts:
-            - name: rclone-config
+            - name: config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
+            - name: cache
+              mountPath: /cache
       volumes:
-        - name: rclone-config
+        - name: config
           configMap:
             name: rclone
-        - name: rclone-webdav
+        - name: config-webdav
           secret:
             secretName: rclone-webdav
+        - name: cache
+          emptyDir: {}
