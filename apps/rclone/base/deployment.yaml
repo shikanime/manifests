@@ -1,11 +1,10 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: rclone
   namespace: shikanime
 spec:
   replicas: 1
-  serviceName: rclone
   selector:
     matchLabels:
       app.kubernetes.io/name: rclone
