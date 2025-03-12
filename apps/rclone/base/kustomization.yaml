@@ -10,6 +10,7 @@ images:
     newName: docker.io/rclone/rclone
     newTag: 1.69.1
 resources:
+  - deployment.yaml
   - ingress.yaml
   - svc.yaml
   - vpa.yaml
