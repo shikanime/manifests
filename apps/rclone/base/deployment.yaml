@@ -144,6 +144,6 @@ spec:
             name: rclone
         - name: config-webdav
           secret:
-            secretName: config-webdav
+            secretName: rclone-webdav
         - name: cache
           emptyDir: {}
