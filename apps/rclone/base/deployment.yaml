@@ -25,6 +25,8 @@ spec:
               value: 0.0.0.0:8080
             - name: RCLONE_HTPASSWD
               value: /config/rclone/htpasswd
+            - name: RCLONE_LOG_LEVEL
+              value: INFO
             - name: RCLONE_VFS_CACHE_MODE
               value: full
           ports:
@@ -48,6 +50,8 @@ spec:
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:2121
+            - name: RCLONE_LOG_LEVEL
+              value: INFO
             - name: RCLONE_PASSIVE_PORT
               value: "30000-30029"
             - name: RCLONE_USER
