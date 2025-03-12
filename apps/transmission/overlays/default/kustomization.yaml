@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - ../../base
 patches:
-  - path: sts.yaml
+  - path: patch-sts.yaml
