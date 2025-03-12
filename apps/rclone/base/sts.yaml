@@ -20,17 +20,18 @@ spec:
           args:
             - serve
             - webdav
-            - -v
             - /data
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:8080
-            - name: RCLONE_HTPASSWD
-              value: /config/rclone/htpasswd
             - name: RCLONE_CACHE_DIR
               value: /cache
+            - name: RCLONE_HTPASSWD
+              value: /config/rclone/htpasswd
+            - name: RCLONE_LOG_LEVEL
+              value: INFO
             - name: RCLONE_VFS_CACHE_MODE
-              value: writes
+              value: full
           ports:
             - containerPort: 8080
               name: webdav
@@ -50,11 +51,12 @@ spec:
           args:
             - serve
             - ftp
-            - -v
             - /data
           env:
             - name: RCLONE_ADDR
               value: 0.0.0.0:2121
+            - name: RCLONE_LOG_LEVEL
+              value: INFO
             - name: RCLONE_PASSIVE_PORT
               value: "30000-30029"
             - name: RCLONE_USER
@@ -67,10 +69,6 @@ spec:
                 secretKeyRef:
                   name: rclone-ftp
                   key: password
-            - name: RCLONE_CACHE_DIR
-              value: /cache
-            - name: RCLONE_VFS_CACHE_MODE
-              value: writes
           ports:
             - containerPort: 2121
               name: ftp-control
