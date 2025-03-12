@@ -10,8 +10,8 @@ spec:
         - name: rclone-webdav
           env:
             - name: RCLONE_VFS_CACHE_MAX_SIZE
-              value: 32Gi
+              value: 16Gi
       volumes:
         - name: cache
           emptyDir:
-            sizeLimit: 32Gi
+            sizeLimit: 16Gi
