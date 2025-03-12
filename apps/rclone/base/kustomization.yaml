@@ -11,7 +11,6 @@ images:
     newTag: 1.69.1
 resources:
   - ingress.yaml
-  - sts.yaml
   - svc.yaml
   - vpa.yaml
 labels:

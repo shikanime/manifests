@@ -3,6 +3,6 @@ kind: Kustomization
 components:
   - ../../components/tls
 patches:
-  - path: sts.yaml
+  - path: deployment.yaml
 resources:
   - ../../base
