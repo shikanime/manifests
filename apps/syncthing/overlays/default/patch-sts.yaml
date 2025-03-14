@@ -11,7 +11,12 @@ spec:
           volumeMounts:
             - name: data-sync
               mountPath: /data/sync
+            - name: data-sukebe
+              mountPath: /data/sukebe
       volumes:
         - name: data-sync
           persistentVolumeClaim:
             claimName: sync-data
+        - name: data-sukebe
+          persistentVolumeClaim:
+            claimName: sukebe-data
