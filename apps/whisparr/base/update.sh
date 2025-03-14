@@ -21,7 +21,7 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
     (cd "$(dirname "$0")" &&
       kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
     yq -i \
-      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION}\"" \
+      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION#v3-}\"" \
       "$(dirname "$0")/kustomization.yaml"
   fi
 done
