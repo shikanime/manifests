@@ -24,7 +24,7 @@ buildGoModule rec {
     "-w"
     "-X github.com/longhorn/cli/meta.Version=v${version}"
     "-X github.com/longhorn/cli/meta.GitCommit=${src.rev}"
-    "-X github.com/longhorn/cli/meta.BuildDate=2025-03-08T15:00:05+00:00"
+    "-X github.com/longhorn/cli/meta.BuildDate=2025-03-14T18:38:33+01:00"
   ];
 
   postInstall = ''
