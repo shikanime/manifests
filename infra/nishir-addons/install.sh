@@ -23,7 +23,7 @@ tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
     )) |
     .value = .value.value
   )' \
-  >"$(dirname "$0")/terraform.tfvars.json"
+    >"$(dirname "$0")/terraform.tfvars.json"
 
 # Set secure permissions for the tfvars file
 chmod 600 "$(dirname "$0")/terraform.tfvars.json"
