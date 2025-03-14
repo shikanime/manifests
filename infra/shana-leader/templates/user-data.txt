@@ -77,7 +77,8 @@ runcmd:
       --accept-routes \
       --ssh
   - |
-    curl -sfL https://get.k3s.io | \
+    curl -sfL https://get.k3s.io |
+      K3S_ETCD_S3_SECRET_KEY="${etcd_secret_key}" \
       sh -s - server \
         --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
         --etcd-s3 \
@@ -85,12 +86,8 @@ runcmd:
         --etcd-s3-bucket "${etcd_bucket}" \
         --etcd-s3-endpoint "${etcd_endpoint}" \
         --etcd-s3-region "${etcd_region}" \
-        --etcd-s3-secret-key "${etcd_secret_key}" \
         --flannel-ipv6-masq \
         --node-ip "$(tailscale status -json | jq -r '.TailscaleIPs | join(",")')" \
         --protect-kernel-defaults \
-        --secrets-encryption \
         --service-cidr "10.43.0.0/16,2001:cafe:43::/112" \
-        --tls-san "$(tailscale status -json | jq -r '.CertDomains | join(",")')" \
-        --token "${token}"
-
+        --tls-san "$(tailscale status -json | jq -r '.CertDomains | join(",")')"
