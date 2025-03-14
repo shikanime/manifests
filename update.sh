@@ -16,7 +16,7 @@ gitnr create \
   tt:visualstudiocode \
   tt:windows >.gitignore
 
-for app_dir in "$(dirname "$0")"/apps/*; do
+for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
   # Update base directory
   base_dir="$app_dir/base"
   if [ -f "$base_dir/update.sh" ]; then
