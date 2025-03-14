@@ -1,0 +1,272 @@
+resource "random_password" "gitea_pkcs12" {
+  length = 14
+}
+
+resource "kubernetes_secret" "gitea_pkcs12" {
+  metadata {
+    name      = "gitea-pkcs12"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    password = random_password.gitea_pkcs12.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "kubernetes_secret" "grafana_monitoring_loki" {
+  metadata {
+    name      = "grafana-monitoring-loki"
+    namespace = "grafana"
+  }
+
+  type = "kubernetes.io/basic-auth"
+
+  data = {
+    host     = var.loki.endpoint
+    username = var.loki.username
+    password = var.loki.password
+  }
+
+  depends_on = [kubernetes_namespace.grafana]
+}
+
+resource "kubernetes_secret" "grafana_monitoring_prometheus" {
+  metadata {
+    name      = "grafana-monitoring-prometheus"
+    namespace = "grafana"
+  }
+
+  type = "kubernetes.io/basic-auth"
+
+  data = {
+    host     = var.prometheus.endpoint
+    username = var.prometheus.username
+    password = var.prometheus.password
+  }
+
+  depends_on = [kubernetes_namespace.grafana]
+}
+
+resource "kubernetes_secret" "grafana_monitoring_tempo" {
+  metadata {
+    name      = "grafana-monitoring-tempo"
+    namespace = "grafana"
+  }
+
+  type = "kubernetes.io/basic-auth"
+
+  data = {
+    host     = var.tempo.endpoint
+    username = var.tempo.username
+    password = var.tempo.password
+  }
+
+  depends_on = [kubernetes_namespace.grafana]
+}
+
+resource "random_password" "jellyfin_pkcs12" {
+  length = 14
+}
+
+resource "kubernetes_secret" "jellyfin_pkcs12" {
+  metadata {
+    name      = "jellyfin-pkcs12"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    password = random_password.jellyfin_pkcs12.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "kubernetes_secret" "longhorn_hetzner_backups" {
+  metadata {
+    name      = "longhorn-hetzner-backups"
+    namespace = "longhorn-system"
+    annotations = {
+      "longhorn.io/backup-target" = "s3://${var.longhorn_backupstore.bucket}@${var.longhorn_backupstore.region}/"
+    }
+  }
+
+  type = "Opaque"
+
+  data = {
+    AWS_ACCESS_KEY_ID     = var.longhorn_backupstore.access_key_id
+    AWS_SECRET_ACCESS_KEY = var.longhorn_backupstore.secret_access_key
+    AWS_ENDPOINTS         = var.longhorn_backupstore.endpoint
+  }
+
+  depends_on = [kubernetes_namespace.longhorn_system]
+}
+
+resource "random_password" "metatube" {
+  length = 14
+}
+
+resource "kubernetes_secret" "metatube" {
+  metadata {
+    name      = "metatube"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    token = random_password.metatube.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "prowlarr_pkcs12" {
+  length = 14
+}
+
+resource "kubernetes_secret" "prowlarr_pkcs12" {
+  metadata {
+    name      = "prowlarr-pkcs12"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    password = random_password.prowlarr_pkcs12.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "qbittorrent_pkcs12" {
+  length = 14
+}
+
+resource "kubernetes_secret" "qbittorrent_pkcs12" {
+  metadata {
+    name      = "qbittorrent-pkcs12"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    password = random_password.qbittorrent_pkcs12.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "radarr_pkcs12" {
+  length = 14
+}
+
+resource "kubernetes_secret" "radarr_pkcs12" {
+  metadata {
+    name      = "radarr-pkcs12"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    password = random_password.radarr_pkcs12.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "rclone" {
+  length = 14
+}
+
+resource "kubernetes_secret" "rclone_ftp" {
+  metadata {
+    name      = "rclone-ftp"
+    namespace = "shikanime"
+  }
+
+  type = "kubernetes.io/basic-auth"
+
+  data = {
+    username = "rclone"
+    password = random_password.rclone.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "kubernetes_secret" "rclone_webdav" {
+  metadata {
+    name      = "rclone-webdav"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    htpasswd = "rclone:${random_password.rclone.bcrypt_hash}"
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "sonarr_pkcs12" {
+  length = 14
+}
+
+resource "kubernetes_secret" "sonarr_pkcs12" {
+  metadata {
+    name      = "sonarr-pkcs12"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    password = random_password.sonarr_pkcs12.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "kubernetes_secret" "vaultwarden" {
+  metadata {
+    name      = "vaultwarden"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    admin-token = (var.vaultwarden.admin_token)
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "random_password" "whisparr_pkcs12" {
+  length = 14
+}
+
+resource "kubernetes_secret" "whisparr_pkcs12" {
+  metadata {
+    name      = "whisparr-pkcs12"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    password = random_password.whisparr_pkcs12.result
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
