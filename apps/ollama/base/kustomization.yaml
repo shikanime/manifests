@@ -14,5 +14,5 @@ labels:
   - pairs:
       app.kubernetes.io/component: model-server
       app.kubernetes.io/name: ollama
-      app.kubernetes.io/part-of: nishir-media
+      app.kubernetes.io/part-of: nishir-lab
       app.kubernetes.io/version: 0.6.0
