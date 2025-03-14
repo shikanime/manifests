@@ -5,6 +5,7 @@ components:
   - ../../components/multus
   - ../../components/node-feature
   - ../../components/rancher
+  - ../../components/tailscale
   - ../../components/tls
 resources:
   - ../../base
