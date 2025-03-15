@@ -47,18 +47,8 @@ update() {
       TEMPLATE_FILE="$(dirname "$0")/templates/manifests/${TEMPLATE_NAME}.yaml"
       if [[ -f $TEMPLATE_FILE ]]; then
         echo "[${TEMPLATE_NAME}] Updating $TEMPLATE_FILE..."
-
-        OCCURRENCE=$((INDEX + 1))
-        REPO_LINE=$(grep -n "repo:" "$TEMPLATE_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-        CHART_LINE=$(grep -n "chart:" "$TEMPLATE_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-        VERSION_LINE=$(grep -n "version:" "$TEMPLATE_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-
         REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
-        sed -i \
-          -e "${REPO_LINE}s|repo: .*$|repo: ${REPO_URL}|" \
-          -e "${CHART_LINE}s|chart: .*$|chart: ${CHART_NAME#*/}|" \
-          -e "${VERSION_LINE}s|version: .*$|version: ${LATEST_VERSION}|" \
-          "$TEMPLATE_FILE"
+        yq -i "(select(.apiVersion == \"helm.cattle.io/v1\" and .kind == \"HelmChart\" and .metadata.name == \"$TEMPLATE_NAME\") | .spec.chart = \"${CHART_NAME#*/}\" | .spec.repo = \"$REPO_URL\" | .spec.version = \"$LATEST_VERSION\") // ." "$TEMPLATE_FILE"
         echo "[${TEMPLATE_NAME}] Updated $TEMPLATE_FILE"
       else
         echo "[${TEMPLATE_NAME}] Template file not found: $TEMPLATE_FILE"
