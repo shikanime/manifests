@@ -1,3 +1,13 @@
+resource "local_file" "tailscale" {
+  filename = "${path.module}/.terraform/tmp/manifests/tailscale.yaml"
+  content = templatefile("${path.module}/templates/manifests/tailscale.yaml", {
+    name          = var.name
+    client_id     = var.tailscale_operator.client_id
+    client_secret = var.tailscale_operator.client_secret
+  })
+  file_permission = "0600"
+}
+
 resource "local_file" "nishir" {
   filename = "${path.module}/.terraform/tmp/scripts/install-k3.sh"
   content = templatefile("${path.module}/templates/scripts/install-k3s.sh", {
@@ -13,6 +23,7 @@ resource "local_file" "nishir" {
 resource "terraform_data" "nishir" {
   triggers_replace = {
     nishir_id     = local_file.nishir.id
+    tailscale_id  = local_file.tailscale.id
     sysctl_conf   = filemd5("${path.module}/configs/systctl/99-k3s.conf")
     tmpfiles_conf = filemd5("${path.module}/configs/tmpfiles/var-lib-rancher.conf")
   }
@@ -35,5 +46,10 @@ resource "terraform_data" "nishir" {
 
   provisioner "remote-exec" {
     script = local_file.nishir.filename
+  }
+
+  provisioner "file" {
+    content     = local_file.tailscale.content
+    destination = "/var/lib/rancher/k3s/server/manifests/tailscale.yaml"
   }
 }
