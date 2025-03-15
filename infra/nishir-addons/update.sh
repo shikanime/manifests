@@ -5,13 +5,13 @@ set -o nounset
 set -o pipefail
 
 # Define an array of charts to check
-declare -A MANIFESTS=(
-  ["cert-manager"]="jetstack/cert-manager"
-  ["grafana-monitoring"]="grafana/k8s-monitoring"
-  ["longhorn"]="longhorn/longhorn"
-  ["multus"]="rke2/rke2-multus"
-  ["node-feature-discovery"]="node-feature-discovery/node-feature-discovery"
-  ["vpa"]="fairwinds/vpa"
+CHARTS=(
+  "jetstack/cert-manager"
+  "grafana/k8s-monitoring"
+  "longhorn/longhorn"
+  "rke2/rke2-multus"
+  "node-feature-discovery/node-feature-discovery"
+  "fairwinds/vpa"
 )
 
 declare -A REPOS=(
@@ -34,52 +34,36 @@ wait
 # Update the repository information
 helm repo update
 
-update() {
-  local MANIFEST_NAME=$1
-  echo "[${MANIFEST_NAME}] Checking for updates for ${MANIFESTS[$MANIFEST_NAME]}..."
-
-  IFS=' ' read -r -a CHARTS <<<"${MANIFESTS[$MANIFEST_NAME]}"
-
-  for INDEX in "${!CHARTS[@]}"; do
-    CHART_NAME="${CHARTS[$INDEX]}"
-
-    LATEST_VERSION=$(
-      helm search repo "$CHART_NAME" --output json |
-        jq -r 'map(select(.name == "'"$CHART_NAME"'") | .version | select(test("^[v]?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | last // empty'
-    )
-    echo "[${MANIFEST_NAME}] Latest version of $CHART_NAME: $LATEST_VERSION"
-
-    if [[ -z $LATEST_VERSION ]]; then
-      echo "[${MANIFEST_NAME}] Chart '$CHART_NAME' not found in repository."
-    else
-      echo "[${MANIFEST_NAME}] Found latest version: $LATEST_VERSION"
-
-      TEMPLATE_FILE="$(dirname "$0")/templates/manifests/${MANIFEST_NAME}.yaml"
-      if [[ -f $TEMPLATE_FILE ]]; then
-        echo "[${MANIFEST_NAME}] Updating $TEMPLATE_FILE..."
-        REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
-        OCCURRENCE=$((INDEX + 1))
-
-        REPO_LINE=$(grep -n "repo:" "$TEMPLATE_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-        CHART_LINE=$(grep -n "chart:" "$TEMPLATE_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-        VERSION_LINE=$(grep -n "version:" "$TEMPLATE_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-
-        sed -i \
-          -e "${REPO_LINE}s|repo: .*$|repo: ${REPO_URL}|" \
-          -e "${CHART_LINE}s|chart: .*$|chart: ${CHART_NAME#*/}|" \
-          -e "${VERSION_LINE}s|version: .*$|version: ${LATEST_VERSION}|" \
-          "$TEMPLATE_FILE"
-        echo "[${MANIFEST_NAME}] Updated $TEMPLATE_FILE"
-      else
-        echo "[${MANIFEST_NAME}] Template file not found: $TEMPLATE_FILE"
-      fi
-    fi
-  done
-}
-
 # Process manifests in parallel
-for MANIFEST_NAME in "${!MANIFESTS[@]}"; do
-  update "$MANIFEST_NAME" &
+for INDEX in "${!CHARTS[@]}"; do
+  CHART_NAME=${CHARTS[$INDEX]}
+  echo "[${CHART_NAME}] Checking for updates for ${CHARTS[$INDEX]}..."
+
+  LATEST_VERSION=$(
+    helm search repo "$CHART_NAME" --output json |
+      jq -r 'map(select(.name == "'"$CHART_NAME"'") | .version | select(test("^[v]?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | last // empty'
+  )
+  echo "[${CHART_NAME}] Latest version of $CHART_NAME: $LATEST_VERSION"
+
+  if [[ -z $LATEST_VERSION ]]; then
+    echo "[${CHART_NAME}] Chart '$CHART_NAME' not found in repository."
+  else
+    echo "[${CHART_NAME}] Found latest version: $LATEST_VERSION"
+
+    OCCURRENCE=$((INDEX + 1))
+
+    REPO_LINE=$(grep -n "repo            =" "$(dirname "$0")/helmchart.tf" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
+    CHART_LINE=$(grep -n "chart           =" "$(dirname "$0")/helmchart.tf" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
+    VERSION_LINE=$(grep -n "version         =" "$(dirname "$0")/helmchart.tf" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
+
+    REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
+    sed -i \
+      -e "${REPO_LINE}s|repo            = .*$|repo            = \"${REPO_URL}\"|" \
+      -e "${CHART_LINE}s|chart           = .*$|chart           = \"${CHART_NAME#*/}\"|" \
+      -e "${VERSION_LINE}s|version         = .*$|version         = \"${LATEST_VERSION}\"|" \
+      "$(dirname "$0")/helmchart.tf"
+    echo "[${CHART_NAME}] Updated $(dirname "$0")/helmchart.tf"
+  fi
 done
 
 wait
