@@ -28,17 +28,9 @@ for INDEX in "${!HOSTS[@]}"; do
   SVC_FILE="$(dirname "$0")/svc.yaml"
   if [[ -f $SVC_FILE ]]; then
     echo "[${HOST}] Updating $SVC_FILE..."
-    OCCURRENCE=$((INDEX + 1))
 
-    NAMN_LINE=$(grep -n "name:" "$SVC_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-    ANNOTATION_LINE=$(grep -n "tailscale.com/tailnet-fqdn:" "$SVC_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-    EXTENRAL_NAME_LINE=$(grep -n "externalName:" "$SVC_FILE" | cut -d: -f1 | sed -n "${OCCURRENCE}p")
-
-    sed -i \
-      -e "${NAMN_LINE}s|name:.*|name: ${HOST}|" \
-      -e "${ANNOTATION_LINE}s|tailscale.com/tailnet-fqdn: .*|tailscale.com/tailnet-fqdn: ${DNS_NAME}|" \
-      -e "${EXTENRAL_NAME_LINE}s|externalName: .*|externalName: ${DNS_NAME}|" \
-      "$SVC_FILE"
+    # Update the YAML document at the specified index
+    yq -i "(select(di == ${INDEX}) | .metadata.name = \"${HOST}\" | .metadata.annotations.\"tailscale.com/hostname\" = \"nishir-egress-${HOST}\" | .metadata.annotations.\"tailscale.com/tailnet-fqdn\" = \"${DNS_NAME}\" | .spec.externalName = \"${DNS_NAME}\") // ." "$SVC_FILE"
 
     echo "[${HOST}] Updated $SVC_FILE"
   else
