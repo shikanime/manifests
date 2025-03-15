@@ -11,7 +11,6 @@ declare -A MANIFESTS=(
   ["longhorn"]="longhorn/longhorn"
   ["multus"]="rke2/rke2-multus"
   ["node-feature-discovery"]="node-feature-discovery/node-feature-discovery"
-  ["tailscale"]="tailscale/tailscale-operator"
   ["vpa"]="fairwinds/vpa"
 )
 
@@ -22,7 +21,6 @@ declare -A REPOS=(
   ["longhorn"]="https://charts.longhorn.io"
   ["node-feature-discovery"]="https://kubernetes-sigs.github.io/node-feature-discovery/charts"
   ["rke2"]="https://rke2-charts.rancher.io"
-  ["tailscale"]="https://pkgs.tailscale.com/helmcharts"
 )
 
 # Add each repository to helm using the repo name and URL from REPOS array

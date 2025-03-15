@@ -14,10 +14,10 @@ resource "kubernetes_manifest" "helmchart_cert_manager" {
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
-      valuesContent   = <<-EOT
-        crds:
-          enabled: true
-      EOT
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/cert-manager/values.yaml",
+        {}
+      )
     }
   }
 
@@ -40,107 +40,15 @@ resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
-      valuesContent   = <<-EOT
-        cluster:
-          name: ${var.name}
-        clusterMetrics:
-          enabled: true
-          opencost:
-            enabled: true
-            metricsSource: grafana-cloud-metrics
-            opencost:
-              exporter:
-                defaultClusterId: ${var.name}
-              prometheus:
-                existingSecretName: grafana-monitoring-prometheus
-                external:
-                  url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom
-          kepler:
-            enabled: true
-            image:
-              tag: release-0.7.8 # FIX: https://github.com/sustainable-computing-io/kepler/issues/1866
-        clusterEvents:
-          enabled: true
-        destinations:
-          - name: grafana-cloud-metrics
-            type: prometheus
-            url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
-            auth:
-              type: basic
-            secret:
-              create: false
-              name: grafana-monitoring-prometheus
-          - name: grafana-cloud-logs
-            type: loki
-            url: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
-            auth:
-              type: basic
-            secret:
-              create: false
-              name: grafana-monitoring-loki
-          - name: grafana-cloud-traces
-            type: otlp
-            url: https://tempo-eu-west-0.grafana.net:443
-            protocol: grpc
-            auth:
-              type: basic
-            secret:
-              create: false
-              name: grafana-monitoring-tempo
-            metrics:
-              enabled: false
-            logs:
-              enabled: false
-            traces:
-              enabled: true
-        podLogs:
-          enabled: true
-        applicationObservability:
-          enabled: true
-          receivers:
-            otlp:
-              grpc:
-                enabled: true
-                port: 4317
-              http:
-                enabled: true
-                port: 4318
-            zipkin:
-              enabled: true
-              port: 9411
-        integrations:
-          alloy:
-            instances:
-              - name: alloy
-                labelSelectors:
-                  app.kubernetes.io/name:
-                    - alloy-metrics
-                    - alloy-singleton
-                    - alloy-logs
-                    - alloy-receiver
-        alloy-metrics:
-          enabled: true
-        alloy-singleton:
-          enabled: true
-        alloy-logs:
-          enabled: true
-        alloy-receiver:
-          enabled: true
-          alloy:
-            extraPorts:
-              - name: otlp-grpc
-                port: 4317
-                targetPort: 4317
-                protocol: TCP
-              - name: otlp-http
-                port: 4318
-                targetPort: 4318
-                protocol: TCP
-              - name: zipkin
-                port: 9411
-                targetPort: 9411
-                protocol: TCP
-        EOT
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/grafana-monitoring/values.yaml",
+        {
+          name       = var.name
+          prometheus = var.prometheus
+          loki       = var.loki
+          tempo      = var.tempo
+        }
+      )
     }
   }
 
@@ -163,20 +71,10 @@ resource "kubernetes_manifest" "helmchart_longhorn" {
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
-      valuesContent   = <<-EOT
-        defaultSettings:
-          allowCollectingLonghornUsageMetrics: false
-          backupstorePollInterval: 6000
-          defaultReplicaCount: 2
-          replicaAutoBalance: least-effort
-          snapshotDataIntegrityCronjob: "0 4 */7 * *"
-        defaultBackupStore:
-          backupTarget: s3://${var.longhorn_backupstore.bucket}@${var.longhorn_backupstore.region}/
-          backupTargetCredentialSecret: longhorn-hetzner-backups
-        persistence:
-          defaultClassReplicaCount: 2
-          defaultFsType: xfs
-      EOT
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/longhorn/values.yaml",
+        { longhorn_backupstore = var.longhorn_backupstore }
+      )
     }
   }
 
@@ -199,16 +97,10 @@ resource "kubernetes_manifest" "helmchart_multus" {
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
-      valuesContent   = <<-EOT
-        config:
-          fullnameOverride: multus
-          cni_conf:
-            confDir: /var/lib/rancher/k3s/agent/etc/cni/net.d
-            binDir: /var/lib/rancher/k3s/data/cni/
-            kubeconfig: /var/lib/rancher/k3s/agent/etc/cni/net.d/multus.d/multus.kubeconfig
-        manifests:
-          dhcpDaemonSet: true
-      EOT
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/multus/values.yaml",
+        {}
+      )
     }
   }
 }
