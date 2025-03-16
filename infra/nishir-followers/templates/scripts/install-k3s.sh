@@ -13,8 +13,7 @@ apt-get install -y \
   open-iscsi \
   nfs-common \
   cryptsetup \
-  dmsetup \
-  jq
+  dmsetup
 
 # Install k3s
 curl -sfL https://get.k3s.io |
