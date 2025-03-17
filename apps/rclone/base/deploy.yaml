@@ -37,18 +37,13 @@ spec:
           readinessProbe:
             tcpSocket:
               port: webdav
-            initialDelaySeconds: 5
-            periodSeconds: 10
           livenessProbe:
             tcpSocket:
               port: webdav
-            initialDelaySeconds: 15
-            periodSeconds: 20
           startupProbe:
             tcpSocket:
               port: webdav
             failureThreshold: 30
-            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /config/rclone/rclone.conf
@@ -149,18 +144,13 @@ spec:
           readinessProbe:
             tcpSocket:
               port: ftp-control
-            initialDelaySeconds: 5
-            periodSeconds: 10
           livenessProbe:
             tcpSocket:
               port: ftp-control
-            initialDelaySeconds: 15
-            periodSeconds: 20
           startupProbe:
             tcpSocket:
               port: ftp-control
             failureThreshold: 30
-            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /config/rclone/rclone.conf

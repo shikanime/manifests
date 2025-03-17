@@ -8,15 +8,6 @@ spec:
     spec:
       containers:
         - name: qbittorrent
-          readinessProbe:
-            httpGet:
-              scheme: HTTPS
-          livenessProbe:
-            httpGet:
-              scheme: HTTPS
-          startupProbe:
-            httpGet:
-              scheme: HTTPS
           volumeMounts:
             - name: tls
               mountPath: /tls
