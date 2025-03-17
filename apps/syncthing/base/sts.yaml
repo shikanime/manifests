@@ -36,6 +36,30 @@ spec:
             - containerPort: 21027
               name: discovery
               protocol: UDP
+          readinessProbe:
+            httpGet:
+              path: /rest/system/ping
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /rest/system/ping
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /rest/system/ping
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 30
           volumeMounts:
             - name: config
               mountPath: /config

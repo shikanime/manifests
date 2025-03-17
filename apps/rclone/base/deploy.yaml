@@ -34,6 +34,24 @@ spec:
           ports:
             - containerPort: 8080
               name: webdav
+          readinessProbe:
+            httpGet:
+              path: /
+              port: webdav
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: webdav
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          startupProbe:
+            httpGet:
+              path: /
+              port: webdav
+            failureThreshold: 30
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /config/rclone/rclone.conf
@@ -131,6 +149,21 @@ spec:
               name: ftp-data-30028
             - containerPort: 30029
               name: ftp-data-30029
+          readinessProbe:
+            tcpSocket:
+              port: ftp-control
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: ftp-control
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          startupProbe:
+            tcpSocket:
+              port: ftp-control
+            failureThreshold: 30
+            periodSeconds: 10
           volumeMounts:
             - name: config
               mountPath: /config/rclone/rclone.conf
