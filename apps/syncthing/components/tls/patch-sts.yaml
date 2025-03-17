@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: gitea
+  name: syncthing
   namespace: shikanime
 spec:
   template:
     spec:
       containers:
-        - name: gitea
+        - name: syncthing
           readinessProbe:
             httpGet:
               scheme: HTTPS
@@ -17,11 +17,3 @@ spec:
           startupProbe:
             httpGet:
               scheme: HTTPS
-          volumeMounts:
-            - name: tls
-              mountPath: /tls
-              readOnly: true
-      volumes:
-        - name: tls
-          secret:
-            secretName: gitea-tls

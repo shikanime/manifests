@@ -39,6 +39,22 @@ spec:
           ports:
             - containerPort: 9696
               name: http
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 60
+          startupProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 5
+            failureThreshold: 30
           volumeMounts:
             - name: config
               mountPath: /config

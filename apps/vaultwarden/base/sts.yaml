@@ -20,6 +20,23 @@ spec:
           ports:
             - containerPort: 80
               name: http
+          readinessProbe:
+            httpGet:
+              path: /alive
+              port: http
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /alive
+              port: http
+            initialDelaySeconds: 60
+          startupProbe:
+            httpGet:
+              path: /alive
+              port: http
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 30
           volumeMounts:
             - name: data
               mountPath: /data

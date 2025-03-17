@@ -35,6 +35,18 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 60
+          startupProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 30
           env:
             - name: TOKEN
               valueFrom:

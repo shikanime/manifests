@@ -54,6 +54,19 @@ spec:
             - containerPort: 6881
               name: bittorrent-udp
               protocol: UDP
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 60
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 10
+            failureThreshold: 30
           volumeMounts:
             - name: config
               mountPath: /config
