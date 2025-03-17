@@ -35,20 +35,17 @@ spec:
             - containerPort: 8080
               name: webdav
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: webdav
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: webdav
             initialDelaySeconds: 15
             periodSeconds: 20
           startupProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: webdav
             failureThreshold: 30
             periodSeconds: 10
