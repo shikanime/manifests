@@ -16,7 +16,11 @@ for INDEX in "${!HOSTS[@]}"; do
   echo "[${HOST}] Updating DNS configuration..."
 
   # Get DNS name from Tailscale
-  DNS_NAME=$(tailscale status -json | jq -r '({("\(.Self.PublicKey)"): .Self} + .Peer)[] | select(.HostName=="'"${HOST}"'") | .DNSName' | sed 's/\.$//')
+  DNS_NAME=$(
+    tailscale status -json |
+      jq -r '({("\(.Self.PublicKey)"): .Self} + .Peer)[] | select(.HostName=="'"${HOST}"'") | .DNSName' |
+      sed 's/\.$//'
+  )
 
   if [[ -z $DNS_NAME ]]; then
     echo "[${HOST}] Host not found in Tailscale network"
