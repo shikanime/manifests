@@ -55,22 +55,19 @@ spec:
               name: bittorrent-udp
               protocol: UDP
           readinessProbe:
-            httpGet:
-              path: /api/v2/app/version
+            tcpSocket:
               port: http
             initialDelaySeconds: 30
           livenessProbe:
-            httpGet:
-              path: /api/v2/app/version
+            tcpSocket:
               port: http
             initialDelaySeconds: 60
           startupProbe:
-            httpGet:
-              path: /api/v2/app/version
+            tcpSocket:
               port: http
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 2
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
             failureThreshold: 30
           volumeMounts:
             - name: config
