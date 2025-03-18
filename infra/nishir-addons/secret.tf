@@ -13,20 +13,20 @@ resource "kubernetes_secret" "ca_cloudflare_issuer" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "random_password" "gitea_pkcs12" {
+resource "random_password" "gitea_tls_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "gitea_pkcs12" {
+resource "kubernetes_secret" "gitea_tls_password" {
   metadata {
-    name      = "gitea-pkcs12"
+    name      = "gitea-tls-password"
     namespace = "shikanime"
   }
 
   type = "Opaque"
 
   data = {
-    password = random_password.gitea_pkcs12.result
+    password = random_password.gitea_tls_password.result
   }
 
   depends_on = [kubernetes_namespace.shikanime]
@@ -83,20 +83,20 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
   depends_on = [kubernetes_namespace.grafana]
 }
 
-resource "random_password" "jellyfin_pkcs12" {
+resource "random_password" "jellyfin_tls_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "jellyfin_pkcs12" {
+resource "kubernetes_secret" "jellyfin_tls_password" {
   metadata {
-    name      = "jellyfin-pkcs12"
+    name      = "jellyfin-tls-password"
     namespace = "shikanime"
   }
 
   type = "Opaque"
 
   data = {
-    password = random_password.jellyfin_pkcs12.result
+    password = random_password.jellyfin_tls_password.result
   }
 
   depends_on = [kubernetes_namespace.shikanime]
@@ -141,58 +141,58 @@ resource "kubernetes_secret" "metatube" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "random_password" "prowlarr_pkcs12" {
+resource "random_password" "prowlarr_tls_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "prowlarr_pkcs12" {
+resource "kubernetes_secret" "prowlarr_tls_password" {
   metadata {
-    name      = "prowlarr-pkcs12"
+    name      = "prowlarr-tls-password"
     namespace = "shikanime"
   }
 
   type = "Opaque"
 
   data = {
-    password = random_password.prowlarr_pkcs12.result
+    password = random_password.prowlarr_tls_password.result
   }
 
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "random_password" "qbittorrent_pkcs12" {
+resource "random_password" "qbittorrent_tls_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "qbittorrent_pkcs12" {
+resource "kubernetes_secret" "qbittorrent_tls_password" {
   metadata {
-    name      = "qbittorrent-pkcs12"
+    name      = "qbittorrent-tls-password"
     namespace = "shikanime"
   }
 
   type = "Opaque"
 
   data = {
-    password = random_password.qbittorrent_pkcs12.result
+    password = random_password.qbittorrent_tls_password.result
   }
 
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "random_password" "radarr_pkcs12" {
+resource "random_password" "radarr_tls_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "radarr_pkcs12" {
+resource "kubernetes_secret" "radarr_tls_password" {
   metadata {
-    name      = "radarr-pkcs12"
+    name      = "radarr-tls-password"
     namespace = "shikanime"
   }
 
   type = "Opaque"
 
   data = {
-    password = random_password.radarr_pkcs12.result
+    password = random_password.radarr_tls_password.result
   }
 
   depends_on = [kubernetes_namespace.shikanime]
@@ -233,20 +233,20 @@ resource "kubernetes_secret" "rclone_webdav" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "random_password" "sonarr_pkcs12" {
+resource "random_password" "sonarr_tls_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "sonarr_pkcs12" {
+resource "kubernetes_secret" "sonarr_tls_password" {
   metadata {
-    name      = "sonarr-pkcs12"
+    name      = "sonarr-tls-password"
     namespace = "shikanime"
   }
 
   type = "Opaque"
 
   data = {
-    password = random_password.sonarr_pkcs12.result
+    password = random_password.sonarr_tls_password.result
   }
 
   depends_on = [kubernetes_namespace.shikanime]
@@ -267,20 +267,20 @@ resource "kubernetes_secret" "vaultwarden" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "random_password" "whisparr_pkcs12" {
+resource "random_password" "whisparr_tls_password" {
   length = 14
 }
 
-resource "kubernetes_secret" "whisparr_pkcs12" {
+resource "kubernetes_secret" "whisparr_tls_password" {
   metadata {
-    name      = "whisparr-pkcs12"
+    name      = "whisparr-tls-password"
     namespace = "shikanime"
   }
 
   type = "Opaque"
 
   data = {
-    password = random_password.whisparr_pkcs12.result
+    password = random_password.whisparr_tls_password.result
   }
 
   depends_on = [kubernetes_namespace.shikanime]

@@ -15,7 +15,7 @@ spec:
     pkcs12:
       create: true
       passwordSecretRef:
-        name: sonarr-pkcs12
+        name: sonarr-tls-password
         key: password
       profile: Modern2023
   usages:

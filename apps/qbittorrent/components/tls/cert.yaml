@@ -15,7 +15,7 @@ spec:
     pkcs12:
       create: true
       passwordSecretRef:
-        name: qbittorrent-pkcs12
+        name: qbittorrent-tls-password
         key: password
       profile: Modern2023
   usages:
