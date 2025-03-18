@@ -4,13 +4,12 @@ metadata:
   name: vaultwarden-tls
   namespace: shikanime
 spec:
-  commonName: vaultwarden
+  commonName: vaultwarden.i.shikanime.studio
   dnsNames:
-    - vaultwarden
-    - nishir.local
+    - vaultwarden.i.shikanime.studio
   issuerRef:
     kind: Issuer
-    name: nishir-ca
+    name: nishir
   secretName: vaultwarden-tls
   usages:
     - digital signature

@@ -4,13 +4,12 @@ metadata:
   name: prowlarr-tls
   namespace: shikanime
 spec:
-  commonName: prowlarr
+  commonName: prowlarr.i.shikanime.studio
   dnsNames:
-    - prowlarr
-    - nishir.local
+    - prowlarr.i.shikanime.studio
   issuerRef:
     kind: Issuer
-    name: nishir-ca
+    name: nishir
   secretName: prowlarr-tls
   keystores:
     pkcs12:

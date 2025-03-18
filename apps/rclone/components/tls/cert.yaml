@@ -4,13 +4,12 @@ metadata:
   name: rclone-tls
   namespace: shikanime
 spec:
-  commonName: rclone
+  commonName: rclone.i.shikanime.studio
   dnsNames:
-    - rclone
-    - nishir.local
+    - rclone.i.shikanime.studio
   issuerRef:
     kind: Issuer
-    name: nishir-ca
+    name: nishir
   secretName: rclone-tls
   usages:
     - digital signature
