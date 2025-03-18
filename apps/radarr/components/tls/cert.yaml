@@ -4,13 +4,12 @@ metadata:
   name: radarr-tls
   namespace: shikanime
 spec:
-  commonName: radarr
+  commonName: radarr.i.shikanime.studio
   dnsNames:
-    - radarr
-    - nishir.local
+    - radarr.i.shikanime.studio
   issuerRef:
     kind: Issuer
-    name: nishir-ca
+    name: nishir
   secretName: radarr-tls
   keystores:
     pkcs12:

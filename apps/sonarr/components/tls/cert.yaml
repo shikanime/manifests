@@ -4,13 +4,12 @@ metadata:
   name: sonarr-tls
   namespace: shikanime
 spec:
-  commonName: sonarr
+  commonName: sonarr.i.shikanime.studio
   dnsNames:
-    - sonarr
-    - nishir.local
+    - sonarr.i.shikanime.studio
   issuerRef:
     kind: Issuer
-    name: nishir-ca
+    name: nishir
   secretName: sonarr-tls
   keystores:
     pkcs12:
