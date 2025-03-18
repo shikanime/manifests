@@ -218,9 +218,9 @@ resource "kubernetes_secret" "rclone_ftp" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "kubernetes_secret" "rclone_webdav" {
+resource "kubernetes_secret" "rclone_htpasswd" {
   metadata {
-    name      = "rclone-webdav"
+    name      = "rclone-htpasswd"
     namespace = "shikanime"
   }
 

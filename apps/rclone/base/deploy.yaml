@@ -49,7 +49,7 @@ spec:
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
-            - name: config-webdav
+            - name: htpasswd
               mountPath: /config/rclone/htpasswd
               subPath: htpasswd
               readOnly: true
@@ -162,8 +162,8 @@ spec:
         - name: config
           configMap:
             name: rclone
-        - name: config-webdav
+        - name: htpasswd
           secret:
-            secretName: rclone-webdav
+            secretName: rclone-htpasswd
         - name: cache
           emptyDir: {}
