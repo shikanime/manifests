@@ -23,7 +23,16 @@ spec:
               scheme: HTTPS
           volumeMounts:
             - name: tls
-              mountPath: /tls
+              mountPath: /tls/tls.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /tls/tls.key
+              subPath: tls.key
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/certs/ca-cert-Nishir.crt
+              subPath: ca.crt
               readOnly: true
       volumes:
         - name: tls
