@@ -4,9 +4,9 @@ metadata:
   name: gitea-tls
   namespace: shikanime
 spec:
-  commonName: gitea.i.shikanime.studio
+  commonName: gitea
   dnsNames:
-    - gitea.i.shikanime.studio
+    - gitea
   issuerRef:
     kind: Issuer
     name: nishir

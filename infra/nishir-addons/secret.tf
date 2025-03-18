@@ -1,18 +1,3 @@
-resource "kubernetes_secret" "ca_cloudflare_issuer" {
-  metadata {
-    name      = "${var.name}-cloudflare"
-    namespace = "shikanime"
-  }
-
-  type = "Opaque"
-
-  data = {
-    "api-token" = var.cert_manager.cloudflare.api_token
-  }
-
-  depends_on = [kubernetes_namespace.shikanime]
-}
-
 resource "random_password" "gitea_tls_password" {
   length = 14
 }

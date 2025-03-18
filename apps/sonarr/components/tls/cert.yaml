@@ -4,9 +4,9 @@ metadata:
   name: sonarr-tls
   namespace: shikanime
 spec:
-  commonName: sonarr.i.shikanime.studio
+  commonName: sonarr
   dnsNames:
-    - sonarr.i.shikanime.studio
+    - sonarr
   issuerRef:
     kind: Issuer
     name: nishir

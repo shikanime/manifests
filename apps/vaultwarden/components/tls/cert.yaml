@@ -4,9 +4,9 @@ metadata:
   name: vaultwarden-tls
   namespace: shikanime
 spec:
-  commonName: vaultwarden.i.shikanime.studio
+  commonName: vaultwarden
   dnsNames:
-    - vaultwarden.i.shikanime.studio
+    - vaultwarden
   issuerRef:
     kind: Issuer
     name: nishir

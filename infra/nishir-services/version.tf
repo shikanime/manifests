@@ -12,10 +12,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.82"
     }
-    cloudflare = {
-      source  = "cloudflare/cloudflare"
-      version = "~> 5.1"
-    }
     grafana = {
       source  = "grafana/grafana"
       version = "~> 2.15"

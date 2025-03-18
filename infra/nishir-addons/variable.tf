@@ -63,13 +63,3 @@ variable "vaultwarden" {
   description = "Vaultwarden password manager administrative configuration"
   sensitive   = true
 }
-
-variable "cert_manager" {
-  type = object({
-    cloudflare = object({
-      api_token = string
-    })
-  })
-  description = "Cloudflare API token"
-  sensitive   = true
-}
