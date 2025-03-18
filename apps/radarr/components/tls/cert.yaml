@@ -4,9 +4,9 @@ metadata:
   name: radarr-tls
   namespace: shikanime
 spec:
-  commonName: radarr.i.shikanime.studio
+  commonName: radarr
   dnsNames:
-    - radarr.i.shikanime.studio
+    - radarr
   issuerRef:
     kind: Issuer
     name: nishir

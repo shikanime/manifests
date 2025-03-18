@@ -4,9 +4,9 @@ metadata:
   name: qbittorrent-tls
   namespace: shikanime
 spec:
-  commonName: qbittorrent.i.shikanime.studio
+  commonName: qbittorrent
   dnsNames:
-    - qbittorrent.i.shikanime.studio
+    - qbittorrent
   issuerRef:
     kind: Issuer
     name: nishir

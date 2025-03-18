@@ -4,9 +4,9 @@ metadata:
   name: rclone-tls
   namespace: shikanime
 spec:
-  commonName: rclone.i.shikanime.studio
+  commonName: rclone
   dnsNames:
-    - rclone.i.shikanime.studio
+    - rclone
   issuerRef:
     kind: Issuer
     name: nishir

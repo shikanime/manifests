@@ -4,9 +4,9 @@ metadata:
   name: whisparr-tls
   namespace: shikanime
 spec:
-  commonName: whisparr.i.shikanime.studio
+  commonName: whisparr
   dnsNames:
-    - whisparr.i.shikanime.studio
+    - whisparr
   issuerRef:
     kind: Issuer
     name: nishir

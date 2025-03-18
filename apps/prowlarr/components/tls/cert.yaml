@@ -4,9 +4,9 @@ metadata:
   name: prowlarr-tls
   namespace: shikanime
 spec:
-  commonName: prowlarr.i.shikanime.studio
+  commonName: prowlarr
   dnsNames:
-    - prowlarr.i.shikanime.studio
+    - prowlarr
   issuerRef:
     kind: Issuer
     name: nishir

@@ -61,12 +61,3 @@ output "vaultwarden" {
   }
   sensitive = true
 }
-
-output "cert_manager" {
-  value = {
-    cloudflare = {
-      api_token = cloudflare_api_token.cert_manager.value
-    }
-  }
-  sensitive = true
-}

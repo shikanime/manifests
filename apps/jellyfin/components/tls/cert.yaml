@@ -4,9 +4,9 @@ metadata:
   name: jellyfin-tls
   namespace: shikanime
 spec:
-  commonName: jellyfin.i.shikanime.studio
+  commonName: jellyfin
   dnsNames:
-    - jellyfin.i.shikanime.studio
+    - jellyfin
   issuerRef:
     kind: Issuer
     name: nishir
