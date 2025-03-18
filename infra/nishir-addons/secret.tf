@@ -1,3 +1,18 @@
+resource "kubernetes_secret" "ca_cloudflare_issuer" {
+  metadata {
+    name      = "${var.name}-cloudflare"
+    namespace = "shikanime"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "api-token" = var.cert_manager.cloudflare.api_token
+  }
+
+  depends_on = [kubernetes_namespace.shikanime]
+}
+
 resource "random_password" "gitea_pkcs12" {
   length = 14
 }
@@ -246,7 +261,7 @@ resource "kubernetes_secret" "vaultwarden" {
   type = "Opaque"
 
   data = {
-    admin-token = (var.vaultwarden.admin_token)
+    admin-token = var.vaultwarden.admin_token
   }
 
   depends_on = [kubernetes_namespace.shikanime]

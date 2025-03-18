@@ -19,7 +19,8 @@ tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
       "prometheus",
       "loki",
       "tempo",
-      "vaultwarden"
+      "vaultwarden",
+      "cert_manager"
     )) |
     .value = .value.value
   )' \

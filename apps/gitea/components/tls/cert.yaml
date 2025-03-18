@@ -4,13 +4,12 @@ metadata:
   name: gitea-tls
   namespace: shikanime
 spec:
-  commonName: gitea
+  commonName: gitea.i.shikanime.studio
   dnsNames:
-    - gitea
-    - nishir.local
+    - gitea.i.shikanime.studio
   issuerRef:
     kind: Issuer
-    name: nishir-ca
+    name: nishir
   secretName: gitea-tls
   keystores:
     pkcs12:

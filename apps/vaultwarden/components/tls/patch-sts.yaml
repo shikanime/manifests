@@ -12,15 +12,6 @@ spec:
             - name: ROCKET_TLS
               value: |
                 {certs="/tls/tls.crt",key="/tls/tls.key"}
-          readinessProbe:
-            httpGet:
-              scheme: HTTPS
-          livenessProbe:
-            httpGet:
-              scheme: HTTPS
-          startupProbe:
-            httpGet:
-              scheme: HTTPS
           volumeMounts:
             - name: tls
               mountPath: /tls
