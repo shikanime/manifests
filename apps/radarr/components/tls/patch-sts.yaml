@@ -29,7 +29,7 @@ spec:
               subPath: keystore.p12
               readOnly: true
             - name: tls
-              mountPath: /etc/ssl/certs/ca-cert-Nishir.crt
+              mountPath: /etc/ssl/certs/ca-cert-nishir.crt
               subPath: ca.crt
               readOnly: true
       volumes:
