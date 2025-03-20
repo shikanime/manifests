@@ -24,10 +24,7 @@ curl -sfL https://get.k3s.io |
     --cluster-init \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
     --etcd-s3 \
-    --etcd-s3-access-key "${etcd_access_key}" \
-    --etcd-s3-bucket "${etcd_bucket}" \
-    --etcd-s3-endpoint "${etcd_endpoint}" \
-    --etcd-s3-region "${etcd_region}" \
+    --etcd-s3-config-secret k3s-etcd-snapshot \
     --flannel-backend "host-gw" \
     --flannel-ipv6-masq \
     --node-ip "$(tailscale status -json | jq -r '.TailscaleIPs | join(",")')" \

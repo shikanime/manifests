@@ -10,13 +10,7 @@ resource "local_file" "tailscale" {
 
 resource "local_file" "nishir" {
   filename = "${path.module}/.terraform/tmp/scripts/install-k3.sh"
-  content = templatefile("${path.module}/templates/scripts/install-k3s.sh", {
-    etcd_access_key = var.etcd_snapshot.access_key_id
-    etcd_bucket     = var.etcd_snapshot.bucket
-    etcd_endpoint   = var.etcd_snapshot.endpoint
-    etcd_region     = var.etcd_snapshot.region
-    etcd_secret_key = var.etcd_snapshot.secret_access_key
-  })
+  content = templatefile("${path.module}/templates/scripts/install-k3s.sh", {})
   file_permission = "0600"
 }
 

@@ -1,3 +1,20 @@
+resource "kubernetes_secret" "k3s_etcd_snapshot" {
+  metadata {
+    name      = "k3s-etcd-snapshot"
+    namespace = "kube-system"
+  }
+
+  type = "Opaque"
+
+  data = {
+    etcd_access_key = var.etcd_snapshot.access_key_id
+    etcd_bucket     = var.etcd_snapshot.bucket
+    etcd_endpoint   = var.etcd_snapshot.endpoint
+    etcd_region     = var.etcd_snapshot.region
+    etcd_secret_key = var.etcd_snapshot.secret_access_key
+  }
+}
+
 resource "random_password" "gitea_tls_password" {
   length = 14
 }
