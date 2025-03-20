@@ -9,8 +9,8 @@ resource "local_file" "tailscale" {
 }
 
 resource "local_file" "nishir" {
-  filename = "${path.module}/.terraform/tmp/scripts/install-k3.sh"
-  content = templatefile("${path.module}/templates/scripts/install-k3s.sh", {})
+  filename        = "${path.module}/.terraform/tmp/scripts/install-k3.sh"
+  content         = templatefile("${path.module}/templates/scripts/install-k3s.sh", {})
   file_permission = "0600"
 }
 

@@ -19,7 +19,7 @@ apt-get install -y \
 
 # Install k3s
 curl -sfL https://get.k3s.io |
-    sh -s - server \
+  sh -s - server \
     --cluster-init \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
     --etcd-s3 \

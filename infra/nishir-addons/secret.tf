@@ -7,11 +7,11 @@ resource "kubernetes_secret" "k3s_etcd_snapshot" {
   type = "Opaque"
 
   data = {
-    etcd_access_key = var.etcd_snapshot.access_key_id
-    etcd_bucket     = var.etcd_snapshot.bucket
-    etcd_endpoint   = var.etcd_snapshot.endpoint
-    etcd_region     = var.etcd_snapshot.region
-    etcd_secret_key = var.etcd_snapshot.secret_access_key
+    etcd-s3-access-key = var.etcd_snapshot.access_key_id
+    etcd-s3-bucket     = var.etcd_snapshot.bucket
+    etcd-s3-endpoint   = var.etcd_snapshot.endpoint
+    etcd-s3-region     = var.etcd_snapshot.region
+    etcd-s3-secret-key = var.etcd_snapshot.secret_access_key
   }
 }
 
