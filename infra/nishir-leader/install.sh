@@ -8,7 +8,6 @@ set -o pipefail
 tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
   jq 'with_entries(
     select(.key | IN(
-      "etcd_snapshot",
       "tailscale_operator"
     )) |
     .value = .value.value
