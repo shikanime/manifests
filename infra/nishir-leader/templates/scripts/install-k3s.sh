@@ -19,7 +19,6 @@ apt-get install -y \
 
 # Install k3s
 curl -sfL https://get.k3s.io |
-  K3S_ETCD_S3_SECRET_KEY="${etcd_secret_key}" \
     sh -s - server \
     --cluster-init \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
