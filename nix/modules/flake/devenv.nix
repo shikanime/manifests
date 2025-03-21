@@ -38,6 +38,7 @@
           tflint.enable = true;
         };
         packages = [
+          pkgs.clusterctl
           pkgs.gh
           pkgs.gitnr
           pkgs.gnugrep
@@ -48,6 +49,7 @@
           pkgs.skaffold
           pkgs.skopeo
           pkgs.yq-go
+          pkgs.vcluster
           self'.packages.longhornctl
         ];
       };

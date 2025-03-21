@@ -6,6 +6,7 @@ set -o pipefail
 
 # Define an array of charts to check
 CHARTS=(
+  "capi-operator/cluster-api-operator"
   "jetstack/cert-manager"
   "grafana/k8s-monitoring"
   "longhorn/longhorn"
@@ -15,6 +16,7 @@ CHARTS=(
 )
 
 declare -A REPOS=(
+  ["capi-operator"]="https://kubernetes-sigs.github.io/cluster-api-operator"
   ["fairwinds"]="https://charts.fairwinds.com/stable"
   ["grafana"]="https://grafana.github.io/helm-charts"
   ["jetstack"]="https://charts.jetstack.io"
