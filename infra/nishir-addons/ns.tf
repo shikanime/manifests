@@ -1,3 +1,9 @@
+resource "kubernetes_namespace" "capi_operator_system" {
+  metadata {
+    name = "capi-operator-system"
+  }
+}
+
 resource "kubernetes_namespace" "cert_manager" {
   metadata {
     name = "cert-manager"

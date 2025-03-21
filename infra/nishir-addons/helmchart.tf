@@ -1,3 +1,25 @@
+resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "cluster-api-operator"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = "https://kubernetes-sigs.github.io/cluster-api-operator"
+      chart           = "cluster-api-operator"
+      targetNamespace = "capi-operator-system"
+      version         = "0.17.1"
+      helmVersion     = "v3"
+      bootstrap       = false
+      failurePolicy   = "abort"
+    }
+  }
+
+  depends_on = [kubernetes_namespace.capi_operator_system]
+}
+
 resource "kubernetes_manifest" "helmchart_cert_manager" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
