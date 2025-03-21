@@ -1,4 +1,29 @@
+resource "kubernetes_manifest" "helmchart_cluster_autoscaler" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "cluster-autoscaler"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = "https://kubernetes.github.io/autoscaler"
+      chart           = "cluster-autoscaler"
+      targetNamespace = "kube-system"
+      version         = "9.35.0"
+      helmVersion     = "v3"
+      bootstrap       = false
+      failurePolicy   = "abort"
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/cluster-autoscaler/values.yaml",
+        {}
+      )
+    }
+  }
+}
+
 resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
+
   manifest = {
     apiVersion = "helm.cattle.io/v1"
     kind       = "HelmChart"
