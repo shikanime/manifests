@@ -14,6 +14,10 @@ resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/cluster-api-operator/values.yaml",
+        {}
+      )
     }
   }
 
