@@ -1,0 +1,29 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: VCluster
+metadata:
+  name: shikanime
+spec:
+  controlPlaneEndpoint:
+    host: ""
+    port: 0
+  helmRelease:
+    chart:
+      name: vcluster
+      repo: https://charts.loft.sh
+      version: 0.22.1
+    values: ""
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: VCluster
+metadata:
+  name: infinity-horizons
+spec:
+  controlPlaneEndpoint:
+    host: ""
+    port: 0
+  helmRelease:
+    chart:
+      name: vcluster
+      repo: https://charts.loft.sh
+      version: 0.22.1
+    values: ""

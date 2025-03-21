@@ -1,1 +1,3 @@
 infrastructure: vcluster
+cert-manager:
+  enabled: true
