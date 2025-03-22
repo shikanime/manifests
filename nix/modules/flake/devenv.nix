@@ -49,7 +49,6 @@
           pkgs.skaffold
           pkgs.skopeo
           pkgs.yq-go
-          pkgs.vcluster
           self'.packages.longhornctl
         ];
       };
