@@ -38,6 +38,7 @@
           tflint.enable = true;
         };
         packages = [
+          pkgs.clusterctl
           pkgs.gh
           pkgs.gitnr
           pkgs.gnugrep

@@ -1,0 +1,3 @@
+infrastructure: hetzner
+cert-manager:
+  enabled: true
