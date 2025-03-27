@@ -17,19 +17,47 @@ static_resources:
                     - name: backend_routing
                       domains: ["*"]
                       routes:
+                        # Proxy specific domains with timeout bypass
+                        - match:
+                            prefix: "/" # Match any path
+                            headers:
+                              - name: ":authority"
+                                safe_regex_match:
+                                  google_re2: {}
+                                  regex: ".*\\.dmm\\.co\\.jp$"
+                          route:
+                            cluster: upstream_proxy_cluster
+                            timeout: 30s
+                            retry_policy:
+                              retry_on: connect-failure,refused-stream,unavailable,retriable-status-codes,gateway-error,5xx
+                              num_retries: 2
+                              retriable_status_codes: [503, 504]
+                              per_try_timeout: 15s
+
+                        # Direct connection as fallback
+                        - match:
+                            prefix: "/" # Match any path
+                            headers:
+                              - name: ":authority"
+                                safe_regex_match:
+                                  google_re2: {}
+                                  regex: ".*\\.dmm\\.co\\.jp$"
+                          route:
+                            cluster: original_dst_cluster
+                            timeout: 60s
+
+                        # Bypass Proxy for all other domains
                         - match:
                             prefix: "/"
                           route:
-                            cluster: upstream_proxy_cluster
-                            timeout: 60s
-                            retry_policy:
-                              retry_on: connect-failure,refused-stream,unavailable,retriable-status-codes
-                              num_retries: 2
-                              retriable_status_codes: [503]
+                            cluster: original_dst_cluster
+                            timeout: 15s
+
                 http_filters:
                   - name: envoy.filters.http.router
 
   clusters:
+    # Cluster for the External Proxies
     - name: upstream_proxy_cluster
       connect_timeout: 10s
       type: STATIC
@@ -40,14 +68,16 @@ static_resources:
           unhealthy_threshold: 3
           healthy_threshold: 2
           http_health_check:
-            path: "*"
+            path: "/"
             request_headers_to_add:
               - header:
                   key: Host
-                  value: localhost
+                  value: www.dmm.co.jp
             expected_statuses:
               - start: 200
-                end: 400
+                # Allow 4xx errors as potentially "healthy" connectivity
+                end: 499
+
       load_assignment:
         cluster_name: upstream_proxy_cluster
         endpoints:
@@ -68,6 +98,13 @@ static_resources:
                     socket_address:
                       address: 133.130.102.101
                       port_value: 8080
+
+    # Cluster for Direct Connections
+    - name: original_dst_cluster
+      type: ORIGINAL_DST
+      connect_timeout: 5s
+      lb_policy: CLUSTER_PROVIDED
+      cleanup_interval: 5s
 
 admin:
   access_log_path: "/dev/null"
