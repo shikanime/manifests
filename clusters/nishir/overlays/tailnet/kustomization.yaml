@@ -2,14 +2,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../default
-  - ../../../../apps/gitea/overlays/tailnet
-  - ../../../../apps/jellyfin/overlays/tailnet
+  # - ../../../../apps/gitea/overlays/tailnet
+  # - ../../../../apps/jellyfin/overlays/tailnet
   - ../../../../apps/metatube/base
-  - ../../../../apps/prowlarr/overlays/tailnet
-  - ../../../../apps/qbittorrent/overlays/tailnet
-  - ../../../../apps/radarr/overlays/tailnet
-  - ../../../../apps/rclone/overlays/tailnet
-  - ../../../../apps/sonarr/overlays/tailnet
-  - ../../../../apps/syncthing/overlays/tailnet
-  - ../../../../apps/vaultwarden/overlays/tailnet
-  - ../../../../apps/whisparr/overlays/tailnet
+  # - ../../../../apps/prowlarr/overlays/tailnet
+  # - ../../../../apps/qbittorrent/overlays/tailnet
+  # - ../../../../apps/radarr/overlays/tailnet
+  # - ../../../../apps/rclone/overlays/tailnet
+  # - ../../../../apps/sonarr/overlays/tailnet
+  # - ../../../../apps/syncthing/overlays/tailnet
+  # - ../../../../apps/vaultwarden/overlays/tailnet
+  # - ../../../../apps/whisparr/overlays/tailnet
