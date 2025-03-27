@@ -19,7 +19,7 @@ static_resources:
                       routes:
                         # Proxy specific domains with timeout bypass
                         - match:
-                            prefix: "/" # Match any path
+                            prefix: "/"
                             headers:
                               - name: ":authority"
                                 safe_regex_match:
@@ -36,7 +36,7 @@ static_resources:
 
                         # Direct connection as fallback
                         - match:
-                            prefix: "/" # Match any path
+                            prefix: "/"
                             headers:
                               - name: ":authority"
                                 safe_regex_match:
