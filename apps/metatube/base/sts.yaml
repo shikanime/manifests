@@ -60,9 +60,9 @@ spec:
                   name: metatube
                   key: token
             - name: HTTP_PROXY
-              value: "http://localhost:7890"
+              value: http://localhost:7890
             - name: HTTPS_PROXY
-              value: "http://localhost:7890"
+              value: http://localhost:7890
           volumeMounts:
             - name: data
               mountPath: /data
