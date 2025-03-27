@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
+  - name: envoy
+    newName: docker.io/envoyproxy/envoy
+    newTag: v1.16.5
   - name: metatube
     newName: docker.io/metatube/metatube-server
     newTag: 1.2.9
@@ -14,4 +17,4 @@ labels:
       app.kubernetes.io/component: metadata-server
       app.kubernetes.io/name: metatube
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 1.2.9
+      app.kubernetes.io/version: v1.16.5

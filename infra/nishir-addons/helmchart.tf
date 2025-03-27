@@ -62,7 +62,7 @@ resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
       targetNamespace = "grafana"
-      version         = "2.0.18"
+      version         = "2.0.21"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -119,7 +119,7 @@ resource "kubernetes_manifest" "helmchart_multus" {
       repo            = "https://rke2-charts.rancher.io"
       chart           = "rke2-multus"
       targetNamespace = "kube-system"
-      version         = "v4.1.404"
+      version         = "v4.2.000"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
