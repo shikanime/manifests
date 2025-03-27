@@ -6,9 +6,6 @@ configMapGenerator:
     name: metatube-envoy
     namespace: shikanime
 images:
-  - name: envoy
-    newName: docker.io/envoyproxy/envoy
-    newTag: v1.16.5
   - name: metatube
     newName: docker.io/metatube/metatube-server
     newTag: 1.2.9

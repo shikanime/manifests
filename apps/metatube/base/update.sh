@@ -13,7 +13,7 @@ declare -A IMAGES=(
 for IMAGE_NAME in "${!IMAGES[@]}"; do
   FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
   LATEST_VERSION=$(
-    if [[ "$IMAGE_NAME" == "envoy" ]]; then
+    if [[ $IMAGE_NAME == "envoy" ]]; then
       skopeo list-tags "docker://${FULL_IMAGE}" |
         jq -r '.Tags | map(select(test("^v1\\.16\\.[0-9]+$"))) | map(sub("^v"; "")) | sort_by(split(".") | map(tonumber)) | "v" + last'
     else
