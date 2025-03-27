@@ -1,5 +1,3 @@
-# Envoy v1.16 configuration for K8s (ARM64) - HTTP conditional proxy
-
 static_resources:
   listeners:
     - name: listener_http_interceptor
