@@ -4,7 +4,7 @@ static_resources:
       address:
         socket_address:
           address: 0.0.0.0
-          port_value: 80 # Assuming port 80 for HTTP interceptor
+          port_value: 7890
       filter_chains:
         - filters:
             - name: envoy.filters.network.http_connection_manager
@@ -19,11 +19,6 @@ static_resources:
                       routes:
                         - match:
                             prefix: "/"
-                            headers:
-                              - name: ":authority"
-                                safe_regex_match:
-                                  google_re2: {}
-                                  regex: ".*\\.dmm\\.co\\.jp$"
                           route:
                             cluster: upstream_proxy_cluster
                             timeout: 60s
@@ -31,12 +26,6 @@ static_resources:
                               retry_on: connect-failure,refused-stream,unavailable,retriable-status-codes
                               num_retries: 2
                               retriable_status_codes: [503]
-                        - match:
-                            prefix: "/"
-                          route:
-                            cluster: origin_direct_cluster
-                            host_rewrite_header: ""
-                            timeout: 30s
                 http_filters:
                   - name: envoy.filters.http.router
 
@@ -64,7 +53,6 @@ static_resources:
         endpoints:
           - priority: 0
             lb_endpoints:
-              # !!! Replace with currently working free HTTP proxies from Japan !!!
               - endpoint:
                   address:
                     socket_address:
@@ -80,21 +68,6 @@ static_resources:
                     socket_address:
                       address: 133.130.102.101
                       port_value: 8080
-
-    - name: origin_direct_cluster
-      connect_timeout: 5s
-      type: STRICT_DNS
-      lb_policy: ROUND_ROBIN
-      dns_lookup_family: V4_ONLY
-      load_assignment:
-        cluster_name: origin_direct_cluster
-        endpoints:
-          - lb_endpoints:
-              - endpoint:
-                  address:
-                    socket_address:
-                      address: 127.0.0.1 # Ignored
-                      port_value: 80 # Ignored
 
 admin:
   access_log_path: "/dev/null"
