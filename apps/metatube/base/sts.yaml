@@ -53,10 +53,6 @@ spec:
                 secretKeyRef:
                   name: metatube
                   key: token
-            - name: HTTP_PROXY
-              value: 43.133.13.187:10809
-            - name: HTTPS_PROXY
-              value: 43.133.13.187:10809
           volumeMounts:
             - name: data
               mountPath: /data
