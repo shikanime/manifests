@@ -6,14 +6,20 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
+  ["envoy"]="docker.io/envoyproxy/envoy"
   ["metatube"]="docker.io/metatube/metatube-server"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
   FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
   LATEST_VERSION=$(
-    skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(split(".") | map(tonumber)) | last'
+    if [[ "$IMAGE_NAME" == "envoy" ]]; then
+      skopeo list-tags "docker://${FULL_IMAGE}" |
+        jq -r '.Tags | map(select(test("^v1\\.16\\.[0-9]+$"))) | map(sub("^v"; "")) | sort_by(split(".") | map(tonumber)) | "v" + last'
+    else
+      skopeo list-tags "docker://${FULL_IMAGE}" |
+        jq -r '.Tags | map(select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(split(".") | map(tonumber)) | last'
+    fi
   )
   if [[ -z $LATEST_VERSION ]]; then
     echo "Image '$FULL_IMAGE' not found in registry."

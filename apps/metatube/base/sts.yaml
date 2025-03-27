@@ -27,6 +27,12 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       containers:
+        - name: envoy
+          image: envoy
+          volumeMounts:
+            - name: envoy
+              mountPath: /etc/envoy
+              readOnly: true
         - name: metatube
           image: metatube
           args:
@@ -53,6 +59,10 @@ spec:
                 secretKeyRef:
                   name: metatube
                   key: token
+            - name: HTTP_PROXY
+              value: "socks5://localhost:7890"
+            - name: HTTPS_PROXY
+              value: "socks5://localhost:7890"
           volumeMounts:
             - name: data
               mountPath: /data
@@ -60,3 +70,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: metatube-data
+        - name: envoy
+          configMap:
+            name: metatube-envoy
