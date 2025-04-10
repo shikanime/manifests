@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix
+  labels:
+    app.kubernetes.io/name: matrix
+spec:
+  ports:
+    - name: http
+      port: 8008
+      targetPort: http
+    - name: metrics
+      port: 9090
+      targetPort: metrics
+  selector:
+    app.kubernetes.io/name: matrix

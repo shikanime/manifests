@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: synapse
+    newName: docker.io/matrixdotorg/synapse
+    newTag: v1.99.0
+resources:
+  - ingress.yaml
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/component: communication
+      app.kubernetes.io/name: matrix
+      app.kubernetes.io/part-of: nishir-services
+      app.kubernetes.io/version: 1.99.0

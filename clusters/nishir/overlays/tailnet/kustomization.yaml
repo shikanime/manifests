@@ -4,6 +4,7 @@ resources:
   - ../default
   - ../../../../apps/gitea/overlays/tailnet
   - ../../../../apps/jellyfin/overlays/tailnet
+  - ../../../../apps/matrix/overlays/tailnet
   - ../../../../apps/metatube/base
   - ../../../../apps/prowlarr/overlays/tailnet
   - ../../../../apps/qbittorrent/overlays/tailnet
