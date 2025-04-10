@@ -57,6 +57,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: config
           persistentVolumeClaim:
