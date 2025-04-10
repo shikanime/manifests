@@ -6,7 +6,7 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-  ["whisparr"]="ghcr.io/hotio/whisparr"
+  ["synapse"]="docker.io/matrixdotorg/synapse"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
@@ -21,7 +21,7 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
     (cd "$(dirname "$0")" &&
       kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
     yq -i \
-      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION#v3-}\"" \
+      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION#v}\"" \
       "$(dirname "$0")/kustomization.yaml"
   fi
 done

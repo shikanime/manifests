@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: generate
+          env:
+            - name: SYNAPSE_SERVER_NAME
+              value: matrix.taila659a.ts.net
+      containers:
+        - name: synapse
+          env:
+            - name: SYNAPSE_SERVER_NAME
+              value: matrix.taila659a.ts.net
