@@ -54,6 +54,8 @@ spec:
               mountPath: /config
             - name: dev-dri
               mountPath: /dev/dri
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: cache
           emptyDir: {}
