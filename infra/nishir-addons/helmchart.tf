@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
       repo            = "https://kubernetes-sigs.github.io/cluster-api-operator"
       chart           = "cluster-api-operator"
       targetNamespace = "capi-operator-system"
-      version         = "0.18.0"
+      version         = "0.18.1"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -62,7 +62,7 @@ resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
       targetNamespace = "grafana"
-      version         = "2.0.22"
+      version         = "2.0.23"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -119,7 +119,7 @@ resource "kubernetes_manifest" "helmchart_multus" {
       repo            = "https://rke2-charts.rancher.io"
       chart           = "rke2-multus"
       targetNamespace = "kube-system"
-      version         = "v4.2.000"
+      version         = "v4.2.001"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
