@@ -24,6 +24,26 @@ resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
   depends_on = [kubernetes_namespace.capi_operator_system]
 }
 
+resource "kubernetes_manifest" "helmchart_descheduler" {
+  manifest = {
+    apiVersion = "helm.cattle.io/v1"
+    kind       = "HelmChart"
+    metadata = {
+      name      = "descheduler"
+      namespace = "kube-system"
+    }
+    spec = {
+      repo            = "https://kubernetes-sigs.github.io/descheduler"
+      chart           = "descheduler"
+      targetNamespace = "kube-system"
+      version         = "0.32.2"
+      helmVersion     = "v3"
+      bootstrap       = false
+      failurePolicy   = "abort"
+    }
+  }
+}
+
 resource "kubernetes_manifest" "helmchart_cert_manager" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
