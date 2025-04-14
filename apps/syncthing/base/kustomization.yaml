@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: syncthing
     newName: lscr.io/linuxserver/syncthing
-    newTag: 1.29.4
+    newTag: 1.29.5
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: file-synchronizer
       app.kubernetes.io/name: syncthing
       app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 1.29.4
+      app.kubernetes.io/version: 1.29.5
