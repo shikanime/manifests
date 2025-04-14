@@ -2,7 +2,7 @@ defaultSettings:
   allowCollectingLonghornUsageMetrics: false
   backupstorePollInterval: 6000
   defaultReplicaCount: 2
-  replicaAutoBalance: least-effort
+  replicaAutoBalance: best-effort
   snapshotDataIntegrityCronjob: "0 4 */7 * *"
 defaultBackupStore:
   backupTarget: s3://${longhorn_backupstore.bucket}@${longhorn_backupstore.region}/
