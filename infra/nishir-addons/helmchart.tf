@@ -42,8 +42,6 @@ resource "kubernetes_manifest" "helmchart_descheduler" {
       failurePolicy   = "abort"
     }
   }
-
-  depends_on = [kubernetes_namespace.kube_system]
 }
 
 resource "kubernetes_manifest" "helmchart_cert_manager" {
