@@ -33,7 +33,7 @@ for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
   done
 done
 
-for dir in "$(dirname "$0")"/nix/pkgs/*; do
+for dir in "$(dirname "$0")"/nix/packages/*; do
   if [ -f "$dir/update.sh" ]; then
     bash "$dir/update.sh" 2>&1 |
       sed 's/^/['"$(basename "$(dirname "$dir")")"'] /' &
