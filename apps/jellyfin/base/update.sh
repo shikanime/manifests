@@ -1,27 +1,33 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix
+#! nix shell nixpkgs#nushell nixpkgs#skopeo nixpkgs#kustomize --command nu
 
-set -o errexit
-set -o nounset
-set -o pipefail
+def --wrapped kustomize [...rest] {
+    cd $env.FILE_PWD
+    exec kustomize ...$rest
+}
 
-# Define container images to check
-declare -A IMAGES=(
-  ["jellyfin"]="docker.io/jellyfin/jellyfin"
-)
+{ jellyfin: docker.io/jellyfin/jellyfin } | items { |name, image|
+    let latest_version = (
+        ^skopeo list-tags $"docker://($image)"
+        | from json
+        | get Tags
+        | where ($it  =~ ^[0-9]+\.[0-9]+\.[0-9]+$)
+        | sort-by { |tag| $tag | split row "." | each { |n| ($n | into int) } }
+        | last
+    )
 
-for IMAGE_NAME in "${!IMAGES[@]}"; do
-  FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
-  LATEST_VERSION=$(
-    skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(split(".") | map(tonumber)) | last'
-  )
-  if [[ -z $LATEST_VERSION ]]; then
-    echo "Image '$FULL_IMAGE' not found in registry."
-  else
-    (cd "$(dirname "$0")" &&
-      kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
-    yq -i \
-      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION}\"" \
-      "$(dirname "$0")/kustomization.yaml"
-  fi
-done
+    if ($latest_version | is-empty) {
+        print $"Image '$image' not found in registry."
+        return
+    }
+
+    kustomize edit set image $"($name)=($image):($latest_version)"
+
+    open $"($env.FILE_PWD)/kustomization.yaml"
+    | update labels { |label|
+        $label | update pairs { |it|
+            $it | upsert "app.kubernetes.io/version" $latest_version
+        }
+    }
+    | save -f kustomization.yaml
+}
