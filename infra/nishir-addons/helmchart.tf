@@ -40,6 +40,14 @@ resource "kubernetes_manifest" "helmchart_descheduler" {
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/descheduler/values.yaml",
+        {
+          prometheus_secret_ref = {
+            name = kubernetes_secret.descheduler_prometheus.metadata.0.name
+          }
+        }
+      )
     }
   }
 }
@@ -89,10 +97,16 @@ resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
       valuesContent = templatefile(
         "${path.module}/templates/charts/grafana-monitoring/values.yaml",
         {
-          name       = var.name
-          prometheus = var.prometheus
-          loki       = var.loki
-          tempo      = var.tempo
+          name = var.name
+          prometheus_secret_ref = {
+            name = kubernetes_secret.grafana_monitoring_prometheus.metadata.0.name
+          }
+          loki_secret_ref = {
+            name = kubernetes_secret.grafana_monitoring_loki.metadata.0.name
+          }
+          tempo_secret_ref = {
+            name = kubernetes_secret.grafana_monitoring_tempo.metadata.0.name
+          }
         }
       )
     }
@@ -119,7 +133,12 @@ resource "kubernetes_manifest" "helmchart_longhorn" {
       failurePolicy   = "abort"
       valuesContent = templatefile(
         "${path.module}/templates/charts/longhorn/values.yaml",
-        { longhorn_backupstore = var.longhorn_backupstore }
+        {
+          backupstore_target = var.longhorn_backupstore
+          backupstore_secret_ref = {
+            name = kubernetes_secret.longhorn_hetzner_backups.metadata.0.name
+          }
+        }
       )
     }
   }
