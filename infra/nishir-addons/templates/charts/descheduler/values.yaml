@@ -1,0 +1,5 @@
+prometheus:
+  url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
+  authToken:
+    secretReference:
+      name: ${prometheus_secret_ref.name}
