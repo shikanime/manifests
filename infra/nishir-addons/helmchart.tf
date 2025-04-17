@@ -40,6 +40,14 @@ resource "kubernetes_manifest" "helmchart_descheduler" {
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
+      valuesContent = templatefile(
+        "${path.module}/templates/charts/descheduler/values.yaml",
+        {
+          prometheus_secret_ref = {
+            name = kubernetes_secret.descheduler_prometheus.metadata.0.name
+          }
+        }
+      )
     }
   }
 }
