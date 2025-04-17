@@ -9,7 +9,7 @@ clusterMetrics:
       exporter:
         defaultClusterId: ${name}
       prometheus:
-        existingSecretName: ${prometheus_secret_ref.name}
+        existingSecretName: grafana-monitoring-prometheus
         external:
           url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom
   kepler:
@@ -26,7 +26,7 @@ destinations:
       type: basic
     secret:
       create: false
-      name: ${prometheus_secret_ref.name}
+      name: grafana-monitoring-prometheus
   - name: grafana-cloud-logs
     type: loki
     url: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
@@ -34,7 +34,7 @@ destinations:
       type: basic
     secret:
       create: false
-      name: ${loki_secret_ref.name}
+      name: grafana-monitoring-loki
   - name: grafana-cloud-traces
     type: otlp
     url: https://tempo-eu-west-0.grafana.net:443
@@ -43,7 +43,7 @@ destinations:
       type: basic
     secret:
       create: false
-      name: ${tempo_secret_ref.name}
+      name: grafana-monitoring-tempo
     metrics:
       enabled: false
     logs:

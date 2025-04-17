@@ -5,8 +5,8 @@ defaultSettings:
   replicaAutoBalance: best-effort
   snapshotDataIntegrityCronjob: "0 4 */7 * *"
 defaultBackupStore:
-  backupTarget: s3://${backupstore_target.bucket}@${backupstore_target.region}/
-  backupTargetCredentialSecret: ${backupstore_secret_ref.name}
+  backupTarget: s3://${longhorn_backupstore.bucket}@${longhorn_backupstore.region}/
+  backupTargetCredentialSecret: longhorn-hetzner-backups
 persistence:
   defaultClassReplicaCount: 2
   defaultFsType: xfs
