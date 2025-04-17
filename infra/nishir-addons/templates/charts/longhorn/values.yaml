@@ -15,5 +15,5 @@ defaultBackupStore:
 longhornUI:
   replicas: 1
 persistence:
-  defaultClassReplicaCount: 2
+  defaultClassReplicaCount: 1
   defaultFsType: xfs
