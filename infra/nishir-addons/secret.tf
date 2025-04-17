@@ -4,8 +4,6 @@ resource "kubernetes_secret" "descheduler_prometheus" {
     namespace = "kube-system"
   }
 
-  type = "kubernetes.io/basic-auth"
-
   data = {
     prometheusAuthToken = var.prometheus.password
   }
