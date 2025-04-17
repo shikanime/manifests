@@ -6,7 +6,7 @@ csi:
 defaultSettings:
   allowCollectingLonghornUsageMetrics: false
   backupstorePollInterval: 6000
-  defaultReplicaCount: 2
+  defaultReplicaCount: 1
   replicaAutoBalance: best-effort
   snapshotDataIntegrityCronjob: "0 4 */7 * *"
 defaultBackupStore:
