@@ -1,3 +1,8 @@
+csi:
+  attacherReplicaCount: 1
+  provisionerReplicaCount: 1
+  resizerReplicaCount: 1
+  snapshotterReplicaCount: 1
 defaultSettings:
   allowCollectingLonghornUsageMetrics: false
   backupstorePollInterval: 6000
@@ -7,6 +12,8 @@ defaultSettings:
 defaultBackupStore:
   backupTarget: s3://${backupstore_target.bucket}@${backupstore_target.region}/
   backupTargetCredentialSecret: ${backupstore_secret_ref.name}
+longhornUI:
+  replicas: 1
 persistence:
   defaultClassReplicaCount: 2
   defaultFsType: xfs
