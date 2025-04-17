@@ -15,7 +15,7 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
     skopeo list-tags "docker://${FULL_IMAGE}" |
       jq -r '.Tags | map(select(test("^v[0-9]+[.-].*[0-9]+\\.[0-9]+$") and . != "v2-v0.6.3")) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
 
-    )
+  )
 
   if [[ -z $LATEST_VERSION ]]; then
     echo "Image '$FULL_IMAGE' not found in registry."

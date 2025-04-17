@@ -1,14 +1,3 @@
-resource "kubernetes_secret" "descheduler_prometheus" {
-  metadata {
-    name      = "descheduler-prometheus"
-    namespace = "kube-system"
-  }
-
-  data = {
-    prometheusAuthToken = var.prometheus.password
-  }
-}
-
 resource "kubernetes_secret" "k3s_etcd_snapshot" {
   metadata {
     name      = "k3s-etcd-snapshot"

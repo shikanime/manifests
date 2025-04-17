@@ -30,9 +30,9 @@ spec:
         cni: calico
         kubeAPIServer:
           extraArgs:
-          - --anonymous-auth=true
+            - --anonymous-auth=true
         disableComponents:
-          kubernetesComponents: [ "cloudController"]
+          kubernetesComponents: ["cloudController"]
       rolloutStrategy:
         type: "RollingUpdate"
 ---
@@ -122,12 +122,12 @@ spec:
     matchLabels:
       nodepool: shana-0
   unhealthyConditions:
-  - status: Unknown
-    timeout: 180s
-    type: Ready
-  - status: "False"
-    timeout: 180s
-    type: Ready
+    - status: Unknown
+      timeout: 180s
+      type: Ready
+    - status: "False"
+      timeout: 180s
+      type: Ready
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: HCloudRemediationTemplate
