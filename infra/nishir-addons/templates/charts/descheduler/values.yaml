@@ -7,13 +7,13 @@ deschedulerPolicy:
         - name: DefaultEvictor
           args:
             ignorePvcPods: true
-            evictLocalStoragePods: true
+            evictLocalStoragePods: false
         - name: HighNodeUtilization
           args:
             thresholds:
-              cpu: 80
-              memory: 80
-              pods: 80
+              cpu: 20
+              memory: 20
+              pods: 20
             metricsUtilization:
               metricsServer: true
         - name: LowNodeUtilization
@@ -31,7 +31,7 @@ deschedulerPolicy:
         - name: RemoveDuplicates
         - name: RemovePodsHavingTooManyRestarts
           args:
-            podRestartThreshold: 100
+            podRestartThreshold: 50
             includingInitContainers: true
         - name: RemovePodsViolatingInterPodAntiAffinity
         - name: RemovePodsViolatingNodeAffinity
