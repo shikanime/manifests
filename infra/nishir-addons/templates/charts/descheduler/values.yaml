@@ -8,39 +8,48 @@ deschedulerPolicy:
           args:
             ignorePvcPods: true
             evictLocalStoragePods: true
-        - name: RemoveDuplicates
-        - name: RemovePodsHavingTooManyRestarts
-          args:
-            podRestartThreshold: 100
-            includingInitContainers: true
-        - name: RemovePodsViolatingNodeAffinity
-          args:
-            nodeAffinityType:
-              - requiredDuringSchedulingIgnoredDuringExecution
-        - name: RemovePodsViolatingNodeTaints
-        - name: RemovePodsViolatingInterPodAntiAffinity
-        - name: RemovePodsViolatingTopologySpreadConstraint
-        - name: LowNodeUtilization
+        - name: HighNodeUtilization
           args:
             thresholds:
-              cpu: 50
-              memory: 50
-              pods: 50
-            targetThresholds:
               cpu: 80
               memory: 80
               pods: 80
             metricsUtilization:
               metricsServer: true
+        - name: LowNodeUtilization
+          args:
+            thresholds:
+              cpu: 20
+              memory: 20
+              pods: 20
+            targetThresholds:
+              cpu: 50
+              memory: 50
+              pods: 50
+            metricsUtilization:
+              metricsServer: true
+        - name: RemoveDuplicates
+        - name: RemovePodsHavingTooManyRestarts
+          args:
+            podRestartThreshold: 100
+            includingInitContainers: true
+        - name: RemovePodsViolatingInterPodAntiAffinity
+        - name: RemovePodsViolatingNodeAffinity
+          args:
+            nodeAffinityType:
+              - requiredDuringSchedulingIgnoredDuringExecution
+        - name: RemovePodsViolatingNodeTaints
+        - name: RemovePodsViolatingTopologySpreadConstraint
       plugins:
         balance:
           enabled:
+            - HighNodeUtilization
+            - LowNodeUtilization
             - RemoveDuplicates
             - RemovePodsViolatingTopologySpreadConstraint
-            - LowNodeUtilization
         deschedule:
           enabled:
             - RemovePodsHavingTooManyRestarts
-            - RemovePodsViolatingNodeTaints
-            - RemovePodsViolatingNodeAffinity
             - RemovePodsViolatingInterPodAntiAffinity
+            - RemovePodsViolatingNodeAffinity
+            - RemovePodsViolatingNodeTaints
