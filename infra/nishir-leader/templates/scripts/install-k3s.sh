@@ -22,6 +22,7 @@ curl -sfL https://get.k3s.io |
   sh -s - server \
     --cluster-init \
     --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
+    --disable traefik \
     --etcd-s3 \
     --etcd-s3-config-secret k3s-etcd-snapshot \
     --flannel-backend "host-gw" \
