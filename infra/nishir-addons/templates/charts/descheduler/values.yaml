@@ -1,6 +1,55 @@
 deschedulerPolicy:
-  prometheus:
-    url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
-    authToken:
-      secretReference:
-        name: ${prometheus_secret_ref.name}
+  metricsCollector:
+    enabled: true
+  profiles:
+    - name: default
+      pluginConfig:
+        - name: DefaultEvictor
+          args:
+            ignorePvcPods: true
+            evictLocalStoragePods: false
+        - name: HighNodeUtilization
+          args:
+            thresholds:
+              cpu: 20
+              memory: 20
+              pods: 20
+            metricsUtilization:
+              metricsServer: true
+        - name: LowNodeUtilization
+          args:
+            thresholds:
+              cpu: 60
+              memory: 60
+              pods: 60
+            targetThresholds:
+              cpu: 80
+              memory: 80
+              pods: 80
+            metricsUtilization:
+              metricsServer: true
+        - name: RemoveDuplicates
+        - name: RemovePodsHavingTooManyRestarts
+          args:
+            podRestartThreshold: 50
+            includingInitContainers: true
+        - name: RemovePodsViolatingInterPodAntiAffinity
+        - name: RemovePodsViolatingNodeAffinity
+          args:
+            nodeAffinityType:
+              - requiredDuringSchedulingIgnoredDuringExecution
+        - name: RemovePodsViolatingNodeTaints
+        - name: RemovePodsViolatingTopologySpreadConstraint
+      plugins:
+        balance:
+          enabled:
+            - HighNodeUtilization
+            - LowNodeUtilization
+            - RemoveDuplicates
+            - RemovePodsViolatingTopologySpreadConstraint
+        deschedule:
+          enabled:
+            - RemovePodsHavingTooManyRestarts
+            - RemovePodsViolatingInterPodAntiAffinity
+            - RemovePodsViolatingNodeAffinity
+            - RemovePodsViolatingNodeTaints
