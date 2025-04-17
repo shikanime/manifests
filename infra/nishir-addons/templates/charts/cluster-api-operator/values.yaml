@@ -1,3 +1,5 @@
+bootstrap: rke2
+controlPlane: rke2
 infrastructure: hetzner
 cert-manager:
   enabled: true
