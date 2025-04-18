@@ -9,6 +9,21 @@ spec:
   groups:
     - standard
   parameters:
+    full-backup-interval: "7"
+  retain: 14
+  task: backup
+---
+apiVersion: longhorn.io/v1beta1
+kind: RecurringJob
+metadata:
+  name: daily-backup-large
+  namespace: longhorn-system
+spec:
+  concurrency: 1
+  cron: "0 4 * * *"
+  groups:
+    - large
+  parameters:
     full-backup-interval: "30"
   retain: 14
   task: backup
