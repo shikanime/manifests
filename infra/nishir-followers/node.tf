@@ -2,7 +2,7 @@ resource "local_file" "config_rke2" {
   filename = "${path.module}/.terraform/tmp/configs/rke2/config.yaml"
   content = templatefile("${path.module}/templates/configs/rke2/config.yaml", {
     server = "https://${var.rke2.server}:9345"
-    token  = var.rke2.token
+    token  = var.rke2.node_token
   })
   file_permission = "0600"
 }
@@ -62,7 +62,7 @@ resource "local_file" "minish" {
   filename = "${path.module}/.terraform/tmp/scripts/minish-install-rke2.sh"
   content = templatefile("${path.module}/templates/scripts/install-rke2.sh", {
     server = "https://${var.rke2.server}:6443"
-    token  = var.rke2.token
+    token  = var.rke2.node_token
   })
   file_permission = "0600"
 }
