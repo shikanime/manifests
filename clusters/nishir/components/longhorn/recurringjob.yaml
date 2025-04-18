@@ -4,12 +4,14 @@ metadata:
   name: daily-backup
   namespace: longhorn-system
 spec:
+  concurrency: 1
   cron: "0 4 * * *"
-  task: backup
   groups:
     - standard
+  parameters:
+    full-backup-interval: "30"
   retain: 14
-  concurrency: 1
+  task: backup
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
@@ -17,12 +19,12 @@ metadata:
   name: weekly-filesystem-trim
   namespace: longhorn-system
 spec:
+  concurrency: 1
   cron: "0 4 */7 * *"
-  task: filesystem-trim
   groups:
     - default
   retain: 0
-  concurrency: 1
+  task: filesystem-trim
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
@@ -30,12 +32,12 @@ metadata:
   name: hourly-snapshot
   namespace: longhorn-system
 spec:
+  concurrency: 1
   cron: "0 * * * *"
-  task: snapshot
   groups:
     - default
   retain: 48
-  concurrency: 1
+  task: snapshot
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
@@ -43,12 +45,12 @@ metadata:
   name: weekly-snapshot-cleanup
   namespace: longhorn-system
 spec:
+  concurrency: 1
   cron: "0 4 */7 * 0"
-  task: snapshot-cleanup
   groups:
     - default
   retain: 0
-  concurrency: 1
+  task: snapshot-cleanup
 ---
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
@@ -56,9 +58,9 @@ metadata:
   name: weekly-snapshot-delete
   namespace: longhorn-system
 spec:
+  concurrency: 1
   cron: "0 4 */7 * 0"
-  task: snapshot-delete
   groups:
     - default
   retain: 90
-  concurrency: 1
+  task: snapshot-delete
