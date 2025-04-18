@@ -14,6 +14,26 @@ variable "endpoints" {
   }
 }
 
+variable "etcd_snapshot" {
+  type = object({
+    access_key_id     = string
+    bucket            = string
+    endpoint          = string
+    region            = string
+    secret_access_key = string
+  })
+  description = "ETCD snapshot storage"
+  sensitive   = true
+}
+
+variable "rke2" {
+  type = object({
+    node_ip = list(string)
+    tls_san = string
+  })
+  description = "RKE2 configuration"
+}
+
 variable "tailscale_operator" {
   type = object({
     client_id     = string

@@ -10,7 +10,7 @@ variable "display_name" {
   default     = "Shana"
 }
 
-variable "k3s" {
+variable "rke2" {
   type = object({
     token = string
   })

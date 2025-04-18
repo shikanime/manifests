@@ -11,7 +11,7 @@ resource "hcloud_server" "default" {
     tailscale_authkey       = tailscale_tailnet_key.default.key
     tailscale_client_id     = var.tailscale_operator.client_id
     tailscale_client_secret = var.tailscale_operator.client_secret
-    token                   = var.k3s.token
+    token                   = var.rke2.token
   })
   ssh_keys = [hcloud_ssh_key.default.id]
 }
