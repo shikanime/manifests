@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "k3s_etcd_snapshot" {
   metadata {
-    name      = "k3s-etcd-snapshot"
+    name      = "rke2-etcd-snapshot"
     namespace = "kube-system"
   }
 

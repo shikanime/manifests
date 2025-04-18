@@ -14,7 +14,7 @@ write_files:
       net.ipv6.conf.all.forwarding = 1
     owner: root:root
     permissions: "0644"
-  - path: /etc/sysctl.d/99-k3s.conf
+  - path: /etc/sysctl.d/99-k8s.conf
     content: |
       kernel.panic=10
       kernel.panic_on_oops=1
@@ -28,7 +28,7 @@ write_files:
       vm.overcommit_memory=1
     owner: root:root
     permissions: "0644"
-  - path: /var/lib/rancher/k3s/server/manifests/tailscale.yaml
+  - path: /var/lib/rancher/rke2/server/manifests/tailscale.yaml
     content: |
       apiVersion: v1
       kind: Namespace
@@ -77,11 +77,11 @@ runcmd:
       --accept-routes \
       --ssh
   - |
-    curl -sfL https://get.k3s.io |
+    curl -sfL https://get.rke2.io |
       sh -s - server \
         --cluster-cidr "10.42.0.0/16,2001:cafe:42::/56" \
         --etcd-s3 \
-        --etcd-s3-config-secret k3s-etcd-snapshot \
+        --etcd-s3-config-secret rke2-etcd-snapshot \
         --flannel-ipv6-masq \
         --node-ip "$(tailscale status -json | jq -r '.TailscaleIPs | join(",")')" \
         --protect-kernel-defaults \

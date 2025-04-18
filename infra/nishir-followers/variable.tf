@@ -1,4 +1,4 @@
-variable "k3s" {
+variable "rke2" {
   type = object({
     token  = string
     server = string

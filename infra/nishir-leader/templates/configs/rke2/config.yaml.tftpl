@@ -1,0 +1,20 @@
+cluster-cidr:
+  - "10.42.0.0/16"
+  - "2001:cafe:42::/56"
+disable:
+  - rke2-ingress-nginx
+etcd-s3: true
+etcd-s3-access-key: ${etcd_s3_access_key_id}
+etcd-s3-bucket: ${etcd_s3_bucket}
+etcd-s3-endpoint: ${etcd_s3_endpoint}
+etcd-s3-region: ${etcd_s3_region}
+etcd-s3-secret-key: ${etcd_s3_secret_access_key}
+node-ip:
+%{ for ip in node_ip ~}
+  - ${ip}
+%{ endfor ~}
+protect-kernel-defaults: true
+service-cidr:
+  - "10.43.0.0/16"
+  - "2001:cafe:43::/112"
+tls-san: ${tls_san}
