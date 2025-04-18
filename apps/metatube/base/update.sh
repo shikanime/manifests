@@ -6,7 +6,7 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-  ["metatube"]="docker.io/metatube/metatube-server"
+  ["metatube"]="ghcr.io/metatube-community/metatube-server"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
