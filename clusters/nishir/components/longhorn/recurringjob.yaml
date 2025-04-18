@@ -9,7 +9,7 @@ spec:
   groups:
     - standard
   parameters:
-    full-backup-interval: "7"
+    full-backup-interval: "30"
   retain: 14
   task: backup
 ---
