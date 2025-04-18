@@ -142,30 +142,6 @@ resource "kubernetes_manifest" "helmchart_longhorn" {
   depends_on = [kubernetes_namespace.longhorn_system]
 }
 
-resource "kubernetes_manifest" "helmchart_multus" {
-  manifest = {
-    apiVersion = "helm.cattle.io/v1"
-    kind       = "HelmChart"
-    metadata = {
-      name      = "multus"
-      namespace = "kube-system"
-    }
-    spec = {
-      repo            = "https://rke2-charts.rancher.io"
-      chart           = "rke2-multus"
-      targetNamespace = "kube-system"
-      version         = "v4.2.001"
-      helmVersion     = "v3"
-      bootstrap       = false
-      failurePolicy   = "abort"
-      valuesContent = templatefile(
-        "${path.module}/templates/charts/multus/values.yaml",
-        {}
-      )
-    }
-  }
-}
-
 resource "kubernetes_manifest" "helmchart_node_feature_discovery" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
