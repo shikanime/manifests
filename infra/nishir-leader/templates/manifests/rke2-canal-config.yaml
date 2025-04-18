@@ -6,3 +6,4 @@ spec:
   valuesContent: |-
     flannel:
       backend: host-gw
+      iface: eth0
