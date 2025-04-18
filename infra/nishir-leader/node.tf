@@ -52,6 +52,11 @@ resource "local_file" "manifest_canal" {
   file_permission = "0600"
 }
 
+resource "local_file" "manifest_coredns" {
+  filename        = "${path.module}/.terraform/tmp/manifests/rke2-coredns-config.yaml"
+  content         = file("${path.module}/templates/manifests/rke2-coredns-config.yaml")
+  file_permission = "0600"
+}
 resource "local_file" "manifest_multus" {
   filename        = "${path.module}/.terraform/tmp/manifests/rke2-multus-config.yaml"
   content         = file("${path.module}/templates/manifests/rke2-multus-config.yaml")
@@ -63,9 +68,10 @@ resource "terraform_data" "nishir" {
     config_rke2          = local_file.config_rke2.id
     config_sysctl_conf   = local_file.config_sysctl_k8s.id
     config_tmpfiles_conf = local_file.config_tmpfiles_rancher.id
-    manifest_tailscale   = local_file.manifest_tailscale.id
     manifest_canal       = local_file.manifest_canal.id
+    manifest_coredns     = local_file.manifest_coredns.id
     manifest_multus      = local_file.manifest_multus.id
+    manifest_tailscale   = local_file.manifest_tailscale.id
     script_install_rke2  = local_file.script_install_rke2.id
     script_start_rke2    = local_file.script_start_rke2.id
   }
@@ -100,17 +106,22 @@ resource "terraform_data" "nishir" {
   }
 
   provisioner "file" {
-    content     = local_file.manifest_tailscale.content
-    destination = "/var/lib/rancher/rke2/server/manifests/tailscale.yaml"
-  }
-
-  provisioner "file" {
     content     = local_file.manifest_canal.content
     destination = "/var/lib/rancher/rke2/server/manifests/rke2-canal-config.yaml"
   }
 
   provisioner "file" {
+    content     = local_file.manifest_coredns.content
+    destination = "/var/lib/rancher/rke2/server/manifests/rke2-coredns-config.yaml"
+  }
+
+  provisioner "file" {
     content     = local_file.manifest_multus.content
     destination = "/var/lib/rancher/rke2/server/manifests/rke2-multus-config.yaml"
+  }
+
+  provisioner "file" {
+    content     = local_file.manifest_tailscale.content
+    destination = "/var/lib/rancher/rke2/server/manifests/tailscale.yaml"
   }
 }
