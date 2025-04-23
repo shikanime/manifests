@@ -68,20 +68,16 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
   depends_on = [kubernetes_namespace.grafana]
 }
 
-resource "kubernetes_secret" "rke2_hetzner_manifests" {
+resource "kubernetes_secret" "hetzner" {
   metadata {
-    name      = "rke2-hetzner-manifests"
+    name      = "hetzner"
     namespace = "default"
   }
 
   type = "Opaque"
 
   data = {
-    "hcloud-cloud-controller-manager.yaml" = file("${path.module}/templates/manifests/hcloud-cloud-controller-manager.yaml")
-    "hcloud-csi.yaml"                      = file("${path.module}/templates/manifests/hcloud-csi.yaml")
-    "hetzner.yaml" = templatefile("${path.module}/templates/manifests/hetzner.yaml.tftpl", {
-      hcloud_token = var.hetzner.hcloud_token
-    })
+    hcloud-token = var.hetzner.hcloud_token
   }
 }
 
@@ -235,6 +231,40 @@ resource "kubernetes_secret" "rclone_htpasswd" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
+resource "kubernetes_secret" "rke2_hetzner_manifests" {
+  metadata {
+    name      = "rke2-hetzner-manifests"
+    namespace = "default"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "hcloud-cloud-controller-manager.yaml" = file("${path.module}/templates/manifests/hcloud-cloud-controller-manager.yaml")
+    "hcloud-csi.yaml"                      = file("${path.module}/templates/manifests/hcloud-csi.yaml")
+    "hetzner.yaml" = templatefile("${path.module}/templates/manifests/hetzner.yaml.tftpl", {
+      hcloud_token = var.hetzner.hcloud_token
+    })
+  }
+}
+
+resource "kubernetes_secret" "rke2_tailscale_operator_manifests" {
+  metadata {
+    name      = "rke2-tailscale-operator-manifests"
+    namespace = "default"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "tailscale-operator.yaml" = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
+      name          = var.name
+      client_id     = var.tailscale_operator.client_id
+      client_secret = var.tailscale_operator.client_secret
+    })
+  }
+}
+
 resource "random_password" "sonarr_tls_password" {
   length = 14
 }
@@ -252,23 +282,6 @@ resource "kubernetes_secret" "sonarr_tls_password" {
   }
 
   depends_on = [kubernetes_namespace.shikanime]
-}
-
-resource "kubernetes_secret" "tailscale_operator_manifests" {
-  metadata {
-    name      = "rke2-tailscale-operator-manifests"
-    namespace = "default"
-  }
-
-  type = "Opaque"
-
-  data = {
-    "tailscale-operator.yaml" = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
-      name          = var.name
-      client_id     = var.tailscale_operator.client_id
-      client_secret = var.tailscale_operator.client_secret
-    })
-  }
 }
 
 resource "kubernetes_secret" "vaultwarden" {
