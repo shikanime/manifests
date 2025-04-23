@@ -65,15 +65,15 @@ resource "local_file" "manifest_multus" {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    config_rke2          = local_file.config_rke2.id
-    config_sysctl_conf   = local_file.config_sysctl_k8s.id
-    config_tmpfiles_conf = local_file.config_tmpfiles_rancher.id
-    manifest_canal       = local_file.manifest_canal.id
-    manifest_coredns     = local_file.manifest_coredns.id
-    manifest_multus      = local_file.manifest_multus.id
+    config_rke2                 = local_file.config_rke2.id
+    config_sysctl_conf          = local_file.config_sysctl_k8s.id
+    config_tmpfiles_conf        = local_file.config_tmpfiles_rancher.id
+    manifest_canal              = local_file.manifest_canal.id
+    manifest_coredns            = local_file.manifest_coredns.id
+    manifest_multus             = local_file.manifest_multus.id
     manifest_tailscale_operator = local_file.manifest_tailscale_operator.id
-    script_install_rke2  = local_file.script_install_rke2.id
-    script_start_rke2    = local_file.script_start_rke2.id
+    script_install_rke2         = local_file.script_install_rke2.id
+    script_start_rke2           = local_file.script_start_rke2.id
   }
 
   connection {
