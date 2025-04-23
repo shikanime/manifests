@@ -50,20 +50,12 @@ variable "endpoints" {
   }
 }
 
-variable "tailscale_operator" {
+variable "hetzner" {
   type = object({
-    client_id     = string
-    client_secret = string
+    hcloud_token = string
   })
-  sensitive = true
-}
-
-variable "longhorn_backupstore" {
-  type = object({
-    access_key_id     = string
-    secret_access_key = string
-  })
-  sensitive = true
+  description = "Hetzner Cloud API credentials"
+  sensitive   = true
 }
 
 variable "etcd_snapshot" {
@@ -71,12 +63,32 @@ variable "etcd_snapshot" {
     access_key_id     = string
     secret_access_key = string
   })
-  sensitive = true
+  description = "S3 credentials for etcd snapshot storage"
+  sensitive   = true
+}
+
+variable "longhorn_backupstore" {
+  type = object({
+    access_key_id     = string
+    secret_access_key = string
+  })
+  description = "S3 credentials for Longhorn backup storage"
+  sensitive   = true
+}
+
+variable "tailscale_operator" {
+  type = object({
+    client_id     = string
+    client_secret = string
+  })
+  description = "Tailscale OAuth credentials for the operator"
+  sensitive   = true
 }
 
 variable "vaultwarden" {
   type = object({
     admin_token = string
   })
-  sensitive = true
+  description = "Vaultwarden admin interface access token"
+  sensitive   = true
 }
