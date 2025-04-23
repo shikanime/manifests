@@ -1,0 +1,27 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HCloudMachineTemplate
+metadata:
+  name: shana-control-plane
+  namespace: default
+spec:
+  template:
+    spec:
+      imageName: ubuntu-24.04
+      placementGroupName: control-plane
+      publicNetwork:
+        enableIPv4: false
+      type: cax11
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HCloudMachineTemplate
+metadata:
+  name: shana-md-0
+  namespace: default
+spec:
+  template:
+    spec:
+      imageName: ubuntu-24.04
+      placementGroupName: md-0
+      publicNetwork:
+        enableIPv4: false
+      type: cax11
