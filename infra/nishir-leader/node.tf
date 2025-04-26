@@ -40,8 +40,8 @@ resource "local_file" "manifest_tailscale_operator" {
   filename = "${path.module}/.terraform/tmp/manifests/tailscale-operator.yaml"
   content = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
     name          = var.name
-    client_id     = var.tailscale_operator_operator.client_id
-    client_secret = var.tailscale_operator_operator.client_secret
+    client_id     = var.tailscale_operator.client_id
+    client_secret = var.tailscale_operator.client_secret
   })
   file_permission = "0600"
 }
