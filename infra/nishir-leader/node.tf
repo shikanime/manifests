@@ -36,9 +36,9 @@ resource "local_file" "script_start_rke2" {
   file_permission = "0600"
 }
 
-resource "local_file" "manifest_tailscale" {
-  filename = "${path.module}/.terraform/tmp/manifests/tailscale.yaml"
-  content = templatefile("${path.module}/templates/manifests/tailscale.yaml.tftpl", {
+resource "local_file" "manifest_tailscale_operator" {
+  filename = "${path.module}/.terraform/tmp/manifests/tailscale-operator.yaml"
+  content = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
     name          = var.name
     client_id     = var.tailscale_operator.client_id
     client_secret = var.tailscale_operator.client_secret
@@ -65,15 +65,15 @@ resource "local_file" "manifest_multus" {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    config_rke2          = local_file.config_rke2.id
-    config_sysctl_conf   = local_file.config_sysctl_k8s.id
-    config_tmpfiles_conf = local_file.config_tmpfiles_rancher.id
-    manifest_canal       = local_file.manifest_canal.id
-    manifest_coredns     = local_file.manifest_coredns.id
-    manifest_multus      = local_file.manifest_multus.id
-    manifest_tailscale   = local_file.manifest_tailscale.id
-    script_install_rke2  = local_file.script_install_rke2.id
-    script_start_rke2    = local_file.script_start_rke2.id
+    config_rke2                 = local_file.config_rke2.id
+    config_sysctl_conf          = local_file.config_sysctl_k8s.id
+    config_tmpfiles_conf        = local_file.config_tmpfiles_rancher.id
+    manifest_canal              = local_file.manifest_canal.id
+    manifest_coredns            = local_file.manifest_coredns.id
+    manifest_multus             = local_file.manifest_multus.id
+    manifest_tailscale_operator = local_file.manifest_tailscale_operator.id
+    script_install_rke2         = local_file.script_install_rke2.id
+    script_start_rke2           = local_file.script_start_rke2.id
   }
 
   connection {
@@ -121,7 +121,7 @@ resource "terraform_data" "nishir" {
   }
 
   provisioner "file" {
-    content     = local_file.manifest_tailscale.content
-    destination = "/var/lib/rancher/rke2/server/manifests/tailscale.yaml"
+    content     = local_file.manifest_tailscale_operator.content
+    destination = "/var/lib/rancher/rke2/server/manifests/tailscale-operator.yaml"
   }
 }
