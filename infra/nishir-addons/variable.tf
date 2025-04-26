@@ -14,14 +14,6 @@ variable "endpoints" {
   }
 }
 
-variable "hetzner" {
-  type = object({
-    hcloud_token = string
-  })
-  description = "Hetzner Cloud API token"
-  sensitive   = true
-}
-
 variable "longhorn_backupstore" {
   type = object({
     access_key_id     = string
@@ -51,15 +43,6 @@ variable "loki" {
     username = string
   })
   description = "Loki log aggregation system authentication"
-  sensitive   = true
-}
-
-variable "tailscale_operator" {
-  type = object({
-    client_id     = string
-    client_secret = string
-  })
-  description = "Tailscale operator authentication credentials"
   sensitive   = true
 }
 
