@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-pkgs.dockerTools.buildImage {
+pkgs.dockerTools.buildLayeredImage {
   name = "syncthing";
   tag = "latest";
 

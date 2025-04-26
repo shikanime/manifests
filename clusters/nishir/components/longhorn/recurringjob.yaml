@@ -50,7 +50,7 @@ spec:
   concurrency: 1
   cron: "0 * * * *"
   groups:
-    - default
+    - standard
   retain: 48
   task: snapshot
 ---
