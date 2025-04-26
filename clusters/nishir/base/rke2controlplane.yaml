@@ -14,28 +14,28 @@ spec:
       permissions: "0600"
       contentFrom:
         secret:
-          name: rke2-hetzner-manifest
+          name: rke2-hetzner-manifests
           key: hcloud-cloud-controller-manager.yaml
     - path: /var/lib/rancher/rke2/server/manifests/hcloud-csi.yaml
       owner: root:root
       permissions: "0600"
       contentFrom:
         secret:
-          name: rke2-hetzner-manifest
+          name: rke2-hetzner-manifests
           key: hcloud-csi.yaml
     - path: /var/lib/rancher/rke2/server/manifests/hetzner.yaml
       owner: root:root
       permissions: "0600"
       contentFrom:
         secret:
-          name: rke2-hetzner-manifest
+          name: rke2-hetzner-manifests
           key: hetzner.yaml
     - path: /var/lib/rancher/rke2/server/manifests/tailscale-operator.yaml
       owner: root:root
       permissions: "0600"
       contentFrom:
         secret:
-          name: rke2-tailscale-manifest
+          name: rke2-tailscale-operator-manifests
           key: tailscale-operator.yaml
   machineTemplate:
     infrastructureRef:

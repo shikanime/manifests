@@ -5,10 +5,10 @@ metadata:
   namespace: default
 spec:
   controlPlaneEndpoint:
-    host: shana.taila659a.ts.net"
+    host: ""
     port: 443
   controlPlaneLoadBalancer:
-    enabled: false
+    region: fsn1
   controlPlaneRegions:
     - fsn1
   hcloudNetwork:
