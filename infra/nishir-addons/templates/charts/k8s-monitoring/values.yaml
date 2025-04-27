@@ -50,7 +50,13 @@ clusterMetrics:
     enabled: true
     image:
       tag: release-0.7.8 # FIX: https://github.com/sustainable-computing-io/kepler/issues/1866
+annotationAutodiscovery:
+  enabled: true
+prometheusOperatorObjects:
+  enabled: true
 clusterEvents:
+  enabled: true
+nodeLogs:
   enabled: true
 podLogs:
   enabled: true
