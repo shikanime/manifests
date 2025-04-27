@@ -86,7 +86,7 @@ resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
       targetNamespace = "grafana"
-      version         = "2.0.26"
+      version         = "2.0.24"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
