@@ -4,11 +4,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# SSH into nishir and retrieve the server token
-NODE_TOKEN=$(ssh "root@${SERVER}" "cat /var/lib/rancher/rke2/server/node-token")
-
 # Find the nishir server name from tailscale
 SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .DNSName' | sed 's/\.$//')
+
+# SSH into nishir and retrieve the server token
+NODE_TOKEN=$(ssh "root@${SERVER}" "cat /var/lib/rancher/rke2/server/node-token")
 
 # Create JSON using jq
 jq -n \
