@@ -1,13 +1,9 @@
-data "grafana_data_source" "loki" {
-  name = "grafanacloud-shikanime-logs"
-}
-
 data "grafana_data_source" "prometheus" {
   name = "grafanacloud-shikanime-prom"
 }
 
-data "grafana_data_source" "pyroscope" {
-  name = "grafanacloud-shikanime-profiles"
+data "grafana_data_source" "loki" {
+  name = "grafanacloud-shikanime-logs"
 }
 
 data "grafana_data_source" "tempo" {
