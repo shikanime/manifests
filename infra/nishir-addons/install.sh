@@ -16,6 +16,7 @@ tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
       "name",
       "endpoints",
       "hetzner",
+      "loki",
       "longhorn_backupstore",
       "prometheus",
       "loki",
