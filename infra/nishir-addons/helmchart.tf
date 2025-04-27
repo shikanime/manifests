@@ -1,4 +1,3 @@
-
 resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
