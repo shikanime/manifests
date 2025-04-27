@@ -85,6 +85,9 @@ resource "kubernetes_secret" "hetzner" {
   metadata {
     name      = "hetzner"
     namespace = "default"
+    labels = {
+      "caph.environment" = "owned"
+    }
   }
 
   type = "Opaque"
