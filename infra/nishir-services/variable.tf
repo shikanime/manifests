@@ -36,10 +36,16 @@ variable "regions" {
 
 variable "endpoints" {
   type = object({
+    prometheus = string
+    loki       = string
+    tempo      = string
     s3         = string
   })
   description = "Resource API endpoints"
   default = {
+    prometheus = "https://prometheus-prod-01-eu-west-0.grafana.net"
+    loki       = "https://logs-prod-eu-west-0.grafana.net"
+    tempo      = "https://tempo-eu-west-0.grafana.net"
     s3         = "https://fsn1.your-objectstorage.com"
   }
 }

@@ -17,52 +17,55 @@ resource "kubernetes_secret" "gitea_tls_password" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "kubernetes_secret" "grafana_cloud_logs_k8s_monitoring" {
+resource "kubernetes_secret" "grafana_monitoring_loki" {
   metadata {
-    name      = "grafana-cloud-logs-k8s-monitoring"
-    namespace = "grafana-system"
+    name      = "grafana-monitoring-loki"
+    namespace = "grafana"
   }
 
   type = "kubernetes.io/basic-auth"
 
   data = {
+    host     = var.loki.endpoint
     username = var.loki.username
     password = var.loki.password
   }
 
-  depends_on = [kubernetes_namespace.grafana_system]
+  depends_on = [kubernetes_namespace.grafana]
 }
 
-resource "kubernetes_secret" "grafana_cloud_metrics_k8s_monitoring" {
+resource "kubernetes_secret" "grafana_monitoring_prometheus" {
   metadata {
-    name      = "grafana-cloud-metrics-k8s-monitoring"
-    namespace = "grafana-system"
+    name      = "grafana-monitoring-prometheus"
+    namespace = "grafana"
   }
 
   type = "kubernetes.io/basic-auth"
 
   data = {
+    host     = var.prometheus.endpoint
     username = var.prometheus.username
     password = var.prometheus.password
   }
 
-  depends_on = [kubernetes_namespace.grafana_system]
+  depends_on = [kubernetes_namespace.grafana]
 }
 
-resource "kubernetes_secret" "grafana_cloud_traces_k8s_monitoring" {
+resource "kubernetes_secret" "grafana_monitoring_tempo" {
   metadata {
-    name      = "grafana-cloud-traces-k8s-monitoring"
-    namespace = "grafana-system"
+    name      = "grafana-monitoring-tempo"
+    namespace = "grafana"
   }
 
   type = "kubernetes.io/basic-auth"
 
   data = {
+    host     = var.tempo.endpoint
     username = var.tempo.username
     password = var.tempo.password
   }
 
-  depends_on = [kubernetes_namespace.grafana_system]
+  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "random_password" "jellyfin_tls_password" {

@@ -26,17 +26,9 @@ variable "longhorn_backupstore" {
   sensitive   = true
 }
 
-variable "loki" {
-  type = object({
-    password = string
-    username = string
-  })
-  description = "Loki log aggregation system authentication"
-  sensitive   = true
-}
-
 variable "prometheus" {
   type = object({
+    endpoint = string
     password = string
     username = string
   })
@@ -44,17 +36,19 @@ variable "prometheus" {
   sensitive   = true
 }
 
-variable "pyroscope" {
+variable "loki" {
   type = object({
+    endpoint = string
     password = string
     username = string
   })
-  description = "Pyroscope continuous profiling system authentication"
+  description = "Loki log aggregation system authentication"
   sensitive   = true
 }
 
 variable "tempo" {
   type = object({
+    endpoint = string
     password = string
     username = string
   })

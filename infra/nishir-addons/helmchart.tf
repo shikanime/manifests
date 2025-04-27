@@ -74,44 +74,41 @@ resource "kubernetes_manifest" "helmchart_cert_manager" {
   depends_on = [kubernetes_namespace.cert_manager]
 }
 
-resource "kubernetes_manifest" "helmchart_k8s_monitoring" {
+resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
   manifest = {
     apiVersion = "helm.cattle.io/v1"
     kind       = "HelmChart"
     metadata = {
-      name      = "k8s-monitoring"
+      name      = "grafana-monitoring"
       namespace = "kube-system"
     }
     spec = {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
-      targetNamespace = "grafana-system"
+      targetNamespace = "grafana"
       version         = "2.0.25"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
       valuesContent = templatefile(
-        "${path.module}/templates/charts/k8s-monitoring/values.yaml",
+        "${path.module}/templates/charts/grafana-monitoring/values.yaml",
         {
           name = var.name
-          logs_secret_ref = {
-            name = kubernetes_secret.grafana_cloud_logs_k8s_monitoring.metadata.0.name
+          prometheus_secret_ref = {
+            name = kubernetes_secret.grafana_monitoring_prometheus.metadata.0.name
           }
-          metrics_secret_ref = {
-            name = kubernetes_secret.grafana_cloud_metrics_k8s_monitoring.metadata.0.name
+          loki_secret_ref = {
+            name = kubernetes_secret.grafana_monitoring_loki.metadata.0.name
           }
-          profiles_secret_ref = {
-            name = kubernetes_secret.grafana_cloud_profiles_k8s_monitoring.metadata.0.name
-          }
-          traces_secret_ref = {
-            name = kubernetes_secret.grafana_cloud_traces_k8s_monitoring.metadata.0.name
+          tempo_secret_ref = {
+            name = kubernetes_secret.grafana_monitoring_tempo.metadata.0.name
           }
         }
       )
     }
   }
 
-  depends_on = [kubernetes_namespace.grafana_system]
+  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "kubernetes_manifest" "helmchart_longhorn" {
