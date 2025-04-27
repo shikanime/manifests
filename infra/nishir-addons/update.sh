@@ -11,7 +11,6 @@ CHARTS=(
   "jetstack/cert-manager"
   "grafana/k8s-monitoring"
   "longhorn/longhorn"
-  "rke2/rke2-multus"
   "node-feature-discovery/node-feature-discovery"
   "fairwinds/vpa"
 )
@@ -24,7 +23,6 @@ declare -A REPOS=(
   ["jetstack"]="https://charts.jetstack.io"
   ["longhorn"]="https://charts.longhorn.io"
   ["node-feature-discovery"]="https://kubernetes-sigs.github.io/node-feature-discovery/charts"
-  ["rke2"]="https://rke2-charts.rancher.io"
 )
 
 # Add each repository to helm using the repo name and URL from REPOS array
