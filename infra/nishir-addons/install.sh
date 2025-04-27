@@ -19,7 +19,7 @@ tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
       "loki",
       "longhorn_backupstore",
       "prometheus",
-      "loki",
+      "pyroscope",
       "tailscale_operator",
       "tempo",
       "vaultwarden"
