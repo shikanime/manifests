@@ -10,6 +10,12 @@ resource "kubernetes_namespace" "cert_manager" {
   }
 }
 
+resource "kubernetes_namespace" "grafana_system" {
+  metadata {
+    name = "grafana-system"
+  }
+}
+
 resource "kubernetes_namespace" "longhorn_system" {
   metadata {
     name = "longhorn-system"
