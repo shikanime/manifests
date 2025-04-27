@@ -20,7 +20,7 @@ resource "kubernetes_secret" "gitea_tls_password" {
 resource "kubernetes_secret" "grafana_monitoring_loki" {
   metadata {
     name      = "grafana-monitoring-loki"
-    namespace = "grafana"
+    namespace = "kube-system"
   }
 
   type = "kubernetes.io/basic-auth"
@@ -30,14 +30,12 @@ resource "kubernetes_secret" "grafana_monitoring_loki" {
     username = var.loki.username
     password = var.loki.password
   }
-
-  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "kubernetes_secret" "grafana_monitoring_prometheus" {
   metadata {
     name      = "grafana-monitoring-prometheus"
-    namespace = "grafana"
+    namespace = "kube-system"
   }
 
   type = "kubernetes.io/basic-auth"
@@ -47,14 +45,12 @@ resource "kubernetes_secret" "grafana_monitoring_prometheus" {
     username = var.prometheus.username
     password = var.prometheus.password
   }
-
-  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "kubernetes_secret" "grafana_monitoring_tempo" {
   metadata {
     name      = "grafana-monitoring-tempo"
-    namespace = "grafana"
+    namespace = "kube-system"
   }
 
   type = "kubernetes.io/basic-auth"
@@ -64,8 +60,6 @@ resource "kubernetes_secret" "grafana_monitoring_tempo" {
     username = var.tempo.username
     password = var.tempo.password
   }
-
-  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "kubernetes_secret" "hetzner" {
