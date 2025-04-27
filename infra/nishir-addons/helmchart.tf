@@ -85,7 +85,7 @@ resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
     spec = {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
-      targetNamespace = "grafana"
+      targetNamespace = "kube-system"
       version         = "2.0.25"
       helmVersion     = "v3"
       bootstrap       = false
@@ -107,8 +107,6 @@ resource "kubernetes_manifest" "helmchart_grafana_monitoring" {
       )
     }
   }
-
-  depends_on = [kubernetes_namespace.grafana]
 }
 
 resource "kubernetes_manifest" "helmchart_longhorn" {
