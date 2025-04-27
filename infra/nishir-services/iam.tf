@@ -4,9 +4,11 @@ resource "grafana_cloud_access_policy" "kubernetes" {
   display_name = "Shikanime Integration ${var.display_name}"
 
   scopes = [
-    "metrics:read",
+    "fleet-management:read",
     "logs:write",
+    "metrics:read",
     "metrics:write",
+    "profiles:write",
     "traces:write"
   ]
 
