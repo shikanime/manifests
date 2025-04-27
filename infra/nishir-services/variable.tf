@@ -36,11 +36,11 @@ variable "regions" {
 
 variable "endpoints" {
   type = object({
-    s3         = string
+    s3 = string
   })
   description = "Resource API endpoints"
   default = {
-    s3         = "https://fsn1.your-objectstorage.com"
+    s3 = "https://fsn1.your-objectstorage.com"
   }
 }
 
