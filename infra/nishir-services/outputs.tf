@@ -28,27 +28,32 @@ output "etcd_snapshot" {
   sensitive = true
 }
 
-output "prometheus" {
-  value = {
-    endpoint = var.endpoints.prometheus
-    password = resource.grafana_cloud_access_policy_token.kubernetes.token
-    username = data.grafana_data_source.prometheus.basic_auth_username
-  }
-  sensitive = true
-}
-
 output "loki" {
   value = {
-    endpoint = var.endpoints.loki
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
     username = data.grafana_data_source.loki.basic_auth_username
   }
   sensitive = true
 }
 
+output "pyroscope" {
+  value = {
+    password = resource.grafana_cloud_access_policy_token.kubernetes.token
+    username = data.grafana_data_source.pyroscope.basic_auth_username
+  }
+  sensitive = true
+}
+
+output "prometheus" {
+  value = {
+    password = resource.grafana_cloud_access_policy_token.kubernetes.token
+    username = data.grafana_data_source.prometheus.basic_auth_username
+  }
+  sensitive = true
+}
+
 output "tempo" {
   value = {
-    endpoint = var.endpoints.tempo
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
     username = data.grafana_data_source.tempo.basic_auth_username
   }

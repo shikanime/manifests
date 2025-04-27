@@ -10,9 +10,9 @@ resource "kubernetes_namespace" "cert_manager" {
   }
 }
 
-resource "kubernetes_namespace" "grafana" {
+resource "kubernetes_namespace" "grafana_system" {
   metadata {
-    name = "grafana"
+    name = "grafana-system"
   }
 }
 

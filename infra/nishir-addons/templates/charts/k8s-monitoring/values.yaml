@@ -1,5 +1,37 @@
 cluster:
   name: ${name}
+destinations:
+  - name: grafana-cloud-metrics
+    type: prometheus
+    url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
+    auth:
+      type: basic
+    secret:
+      create: false
+      name: ${metrics_secret_ref.name}
+  - name: grafana-cloud-logs
+    type: loki
+    url: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
+    auth:
+      type: basic
+    secret:
+      create: false
+      name: ${logs_secret_ref.name}
+  - name: grafana-cloud-traces
+    type: otlp
+    url: https://tempo-eu-west-0.grafana.net:443
+    protocol: grpc
+    auth:
+      type: basic
+    secret:
+      create: false
+      name: ${traces_secret_ref.name}
+    metrics:
+      enabled: false
+    logs:
+      enabled: false
+    traces:
+      enabled: true
 clusterMetrics:
   enabled: true
   opencost:
@@ -9,47 +41,21 @@ clusterMetrics:
       exporter:
         defaultClusterId: ${name}
       prometheus:
-        existingSecretName: ${prometheus_secret_ref.name}
+        existingSecretName: ${metrics_secret_ref.name}
         external:
           url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom
   kepler:
     enabled: true
     image:
       tag: release-0.7.8 # FIX: https://github.com/sustainable-computing-io/kepler/issues/1866
+annotationAutodiscovery:
+  enabled: true
+prometheusOperatorObjects:
+  enabled: true
 clusterEvents:
   enabled: true
-destinations:
-  - name: grafana-cloud-metrics
-    type: prometheus
-    url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
-    auth:
-      type: basic
-    secret:
-      create: false
-      name: ${prometheus_secret_ref.name}
-  - name: grafana-cloud-logs
-    type: loki
-    url: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
-    auth:
-      type: basic
-    secret:
-      create: false
-      name: ${loki_secret_ref.name}
-  - name: grafana-cloud-traces
-    type: otlp
-    url: https://tempo-eu-west-0.grafana.net:443
-    protocol: grpc
-    auth:
-      type: basic
-    secret:
-      create: false
-      name: ${tempo_secret_ref.name}
-    metrics:
-      enabled: false
-    logs:
-      enabled: false
-    traces:
-      enabled: true
+nodeLogs:
+  enabled: true
 podLogs:
   enabled: true
 applicationObservability:

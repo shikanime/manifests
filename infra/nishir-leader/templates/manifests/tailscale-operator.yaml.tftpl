@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: tailscale
+  name: tailscale-system
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: oauth-client
-  namespace: tailscale
+  namespace: tailscale-system
 type: Opaque
 data:
   client_id: ${base64encode(client_id)}
@@ -21,7 +21,7 @@ metadata:
 spec:
   repo: https://pkgs.tailscale.com/helmcharts
   chart: tailscale-operator
-  targetNamespace: tailscale
+  targetNamespace: tailscale-system
   version: 1.82.0
   helmVersion: v3
   bootstrap: false
