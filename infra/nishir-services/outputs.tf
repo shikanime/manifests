@@ -27,20 +27,26 @@ output "longhorn_backupstore" {
   sensitive = true
 }
 
-output "prometheus" {
+output "loki" {
   value = {
-    endpoint = var.endpoints.prometheus
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
-    username = data.grafana_data_source.prometheus.basic_auth_username
+    username = data.grafana_data_source.loki.basic_auth_username
   }
   sensitive = true
 }
 
-output "loki" {
+output "pyroscope" {
   value = {
-    endpoint = var.endpoints.loki
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
-    username = data.grafana_data_source.loki.basic_auth_username
+    username = data.grafana_data_source.pyroscope.basic_auth_username
+  }
+  sensitive = true
+}
+
+output "prometheus" {
+  value = {
+    password = resource.grafana_cloud_access_policy_token.kubernetes.token
+    username = data.grafana_data_source.prometheus.basic_auth_username
   }
   sensitive = true
 }
@@ -55,7 +61,6 @@ output "tailscale_operator" {
 
 output "tempo" {
   value = {
-    endpoint = var.endpoints.tempo
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
     username = data.grafana_data_source.tempo.basic_auth_username
   }

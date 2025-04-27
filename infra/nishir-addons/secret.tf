@@ -17,49 +17,68 @@ resource "kubernetes_secret" "gitea_tls_password" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "kubernetes_secret" "grafana_monitoring_loki" {
+resource "kubernetes_secret" "grafana_cloud_logs_k8s_monitoring" {
   metadata {
-    name      = "grafana-monitoring-loki"
-    namespace = "kube-system"
+    name      = "grafana-cloud-logs-k8s-monitoring"
+    namespace = "grafana-system"
   }
 
   type = "kubernetes.io/basic-auth"
 
   data = {
-    host     = var.loki.endpoint
     username = var.loki.username
     password = var.loki.password
   }
+
+  depends_on = [kubernetes_namespace.grafana_system]
 }
 
-resource "kubernetes_secret" "grafana_monitoring_prometheus" {
+resource "kubernetes_secret" "grafana_cloud_metrics_k8s_monitoring" {
   metadata {
-    name      = "grafana-monitoring-prometheus"
-    namespace = "kube-system"
+    name      = "grafana-cloud-metrics-k8s-monitoring"
+    namespace = "grafana-system"
   }
 
   type = "kubernetes.io/basic-auth"
 
   data = {
-    host     = var.prometheus.endpoint
     username = var.prometheus.username
     password = var.prometheus.password
   }
+
+  depends_on = [kubernetes_namespace.grafana_system]
 }
 
-resource "kubernetes_secret" "grafana_monitoring_tempo" {
+resource "kubernetes_secret" "grafana_cloud_traces_k8s_monitoring" {
   metadata {
-    name      = "grafana-monitoring-tempo"
-    namespace = "kube-system"
+    name      = "grafana-cloud-traces-k8s-monitoring"
+    namespace = "grafana-system"
   }
 
   type = "kubernetes.io/basic-auth"
 
   data = {
-    host     = var.tempo.endpoint
     username = var.tempo.username
     password = var.tempo.password
   }
+
+  depends_on = [kubernetes_namespace.grafana_system]
+}
+
+resource "kubernetes_secret" "grafana_cloud_profiles_k8s_monitoring" {
+  metadata {
+    name      = "grafana-cloud-profiles-k8s-monitoring"
+    namespace = "grafana-system"
+  }
+
+  type = "kubernetes.io/basic-auth"
+
+  data = {
+    username = var.pyroscope.username
+    password = var.pyroscope.password
+  }
+
+  depends_on = [kubernetes_namespace.grafana_system]
 }
 
 resource "kubernetes_secret" "hetzner" {
