@@ -4,4 +4,3 @@ node-label:
 %{ for key, value in node_labels ~}
   - ${key}=${value}
 %{ endfor ~}
-protect-kernel-defaults: true
