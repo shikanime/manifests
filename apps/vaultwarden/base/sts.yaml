@@ -21,10 +21,10 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchExpressions:
-                    - key: app.kubernetes.io/component
+                    - key: app.kubernetes.io/part-of
                       operator: NotIn
                       values:
-                        - secret-manager
+                        - nishir-security
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: vaultwarden
