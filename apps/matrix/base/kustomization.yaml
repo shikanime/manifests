@@ -14,5 +14,5 @@ labels:
   - pairs:
       app.kubernetes.io/component: communication
       app.kubernetes.io/name: matrix
-      app.kubernetes.io/part-of: nishir-services
+      app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.99.0
