@@ -4,6 +4,6 @@ components:
   - ../../components/v4l
   - ../../components/multus
 patches:
-- path: patch-sts.yaml
+  - path: patch-sts.yaml
 resources:
   - ../default
