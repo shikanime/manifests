@@ -7,6 +7,9 @@ resource "local_file" "config_rke2" {
     etcd_s3_region            = var.etcd_snapshot.region
     etcd_s3_secret_access_key = var.etcd_snapshot.secret_access_key
     node_ip                   = var.rke2.node_ip
+    node_labels = {
+      "node.kubernetes.io/instance-type" = "rpi5-large"
+    }
     tls_san                   = var.rke2.tls_san
   })
   file_permission = "0600"

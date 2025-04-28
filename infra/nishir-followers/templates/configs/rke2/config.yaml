@@ -1,2 +1,6 @@
 server: ${server}
 token: ${token}
+node-label:
+%{ for key, value in node_labels ~}
+  - ${key}=${value}
+%{ endfor ~}

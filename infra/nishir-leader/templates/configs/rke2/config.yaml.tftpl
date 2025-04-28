@@ -16,6 +16,10 @@ node-ip:
 %{ for ip in node_ip ~}
   - ${ip}
 %{ endfor ~}
+node-label:
+%{ for key, value in node_labels ~}
+  - ${key}=${value}
+%{ endfor ~}
 protect-kernel-defaults: true
 service-cidr:
   - "10.43.0.0/16"
