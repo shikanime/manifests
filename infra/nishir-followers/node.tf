@@ -2,6 +2,7 @@ resource "local_file" "config_rke2_fushi" {
   filename = "${path.module}/.terraform/tmp/configs/rke2/config-fushi.yaml"
   content = templatefile("${path.module}/templates/configs/rke2/config.yaml", {
     node_labels = {
+      "beta.kubernetes.io/instance-type" = "rpi4-large"
       "node.kubernetes.io/instance-type" = "rpi4-large"
     }
     server = "https://${var.rke2.server}:9345"
@@ -14,6 +15,7 @@ resource "local_file" "config_rke2_minish" {
   filename = "${path.module}/.terraform/tmp/configs/rke2/config-minish.yaml"
   content = templatefile("${path.module}/templates/configs/rke2/config.yaml", {
     node_labels = {
+      "beta.kubernetes.io/instance-type" = "rpi4-medium"
       "node.kubernetes.io/instance-type" = "rpi4-medium"
     }
     server = "https://${var.rke2.server}:9345"
