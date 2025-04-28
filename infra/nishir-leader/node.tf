@@ -1,5 +1,5 @@
 resource "local_file" "config_rke2" {
-  filename = "${path.module}/.terraform/tmp/configs/rke2/config.yaml"
+  filename = "${path.module}/.terraform/tmp/configs/rke2/config.yaml.tftpl"
   content = templatefile("${path.module}/templates/configs/rke2/config.yaml.tftpl", {
     etcd_s3_access_key_id     = var.etcd_snapshot.access_key_id
     etcd_s3_bucket            = var.etcd_snapshot.bucket
@@ -11,7 +11,7 @@ resource "local_file" "config_rke2" {
       "beta.kubernetes.io/instance-type" = "rpi5-large"
       "node.kubernetes.io/instance-type" = "rpi5-large"
     }
-    tls_san                   = var.rke2.tls_san
+    tls_san = var.rke2.tls_san
   })
   file_permission = "0600"
 }
