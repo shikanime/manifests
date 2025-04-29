@@ -86,7 +86,7 @@ resource "kubernetes_manifest" "helmchart_k8s_monitoring" {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
       targetNamespace = "grafana-system"
-      version         = "2.0.25"
+      version         = "2.0.24"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -99,9 +99,6 @@ resource "kubernetes_manifest" "helmchart_k8s_monitoring" {
           }
           metrics_secret_ref = {
             name = kubernetes_secret.grafana_cloud_metrics_k8s_monitoring.metadata.0.name
-          }
-          profiles_secret_ref = {
-            name = kubernetes_secret.grafana_cloud_profiles_k8s_monitoring.metadata.0.name
           }
           traces_secret_ref = {
             name = kubernetes_secret.grafana_cloud_traces_k8s_monitoring.metadata.0.name
