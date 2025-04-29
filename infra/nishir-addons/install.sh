@@ -15,10 +15,12 @@ tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
     select(.key | IN(
       "name",
       "endpoints",
+      "hetzner",
       "loki",
       "longhorn_backupstore",
       "prometheus",
       "pyroscope",
+      "tailscale_operator",
       "tempo",
       "vaultwarden"
     )) |
