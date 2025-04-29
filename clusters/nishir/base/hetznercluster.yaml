@@ -1,0 +1,27 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HetznerCluster
+metadata:
+  name: shana
+  namespace: default
+spec:
+  controlPlaneEndpoint:
+    host: ""
+    port: 443
+  controlPlaneLoadBalancer:
+    region: fsn1
+  controlPlaneRegions:
+    - fsn1
+  hcloudNetwork:
+    enabled: true
+  hcloudPlacementGroups:
+    - name: control-plane
+      type: spread
+    - name: md-0
+      type: spread
+  hetznerSecretRef:
+    key:
+      hcloudToken: hcloud-token
+    name: hetzner
+  sshKeys:
+    hcloud:
+      - name: shikanimedeva@kaltashar
