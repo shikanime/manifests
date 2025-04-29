@@ -23,7 +23,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Ti
+      storage: 2Ti
   storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: sukebe-data
@@ -38,7 +38,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Ti
+      storage: 2Ti
   storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: sync-data
