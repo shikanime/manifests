@@ -10,4 +10,4 @@ spec:
         - name: rclone-ftp
           env:
             - name: RCLONE_PUBLIC_IP
-              value: "100.66.81.7"
+              value: "100.70.108.83"

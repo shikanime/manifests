@@ -1,6 +1,23 @@
-resource "local_file" "config_rke2" {
-  filename = "${path.module}/.terraform/tmp/configs/rke2/config.yaml"
-  content = templatefile("${path.module}/templates/configs/rke2/config.yaml", {
+resource "local_file" "config_rke2_fushi" {
+  filename = "${path.module}/.terraform/tmp/configs/rke2/config-fushi.yaml"
+  content = templatefile("${path.module}/templates/configs/rke2/config.yaml.tftpl", {
+    node_labels = {
+      "beta.kubernetes.io/instance-type" = "rpi4-large"
+      "node.kubernetes.io/instance-type" = "rpi4-large"
+    }
+    server = "https://${var.rke2.server}:9345"
+    token  = var.rke2.node_token
+  })
+  file_permission = "0600"
+}
+
+resource "local_file" "config_rke2_minish" {
+  filename = "${path.module}/.terraform/tmp/configs/rke2/config-minish.yaml"
+  content = templatefile("${path.module}/templates/configs/rke2/config.yaml.tftpl", {
+    node_labels = {
+      "beta.kubernetes.io/instance-type" = "rpi4-medium"
+      "node.kubernetes.io/instance-type" = "rpi4-medium"
+    }
     server = "https://${var.rke2.server}:9345"
     token  = var.rke2.node_token
   })
@@ -27,7 +44,7 @@ resource "local_file" "script_start_rke2" {
 
 resource "terraform_data" "fushi" {
   triggers_replace = {
-    config_rke2         = local_file.config_rke2.id
+    config_rke2         = local_file.config_rke2_fushi.id
     config_sysctl_k8s   = local_file.config_sysctl_k8s.id
     script_install_rke2 = local_file.script_install_rke2.id
     script_start_rke2   = local_file.script_start_rke2.id
@@ -49,7 +66,7 @@ resource "terraform_data" "fushi" {
   }
 
   provisioner "file" {
-    source      = local_file.config_rke2.filename
+    source      = local_file.config_rke2_fushi.filename
     destination = "/etc/rancher/rke2/config.yaml"
   }
 
@@ -69,7 +86,7 @@ resource "local_file" "minish" {
 
 resource "terraform_data" "minish" {
   triggers_replace = {
-    config_rke2         = local_file.config_rke2.id
+    config_rke2         = local_file.config_rke2_minish.id
     config_sysctl_k8s   = local_file.config_sysctl_k8s.id
     script_install_rke2 = local_file.script_install_rke2.id
     script_start_rke2   = local_file.script_start_rke2.id
@@ -91,7 +108,7 @@ resource "terraform_data" "minish" {
   }
 
   provisioner "file" {
-    source      = local_file.config_rke2.filename
+    source      = local_file.config_rke2_minish.filename
     destination = "/etc/rancher/rke2/config.yaml"
   }
 
