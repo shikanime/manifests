@@ -16,7 +16,7 @@ spec:
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: daily-backup-large
+  name: monthly-backup
   namespace: longhorn-system
 spec:
   concurrency: 1
@@ -50,7 +50,7 @@ spec:
   concurrency: 1
   cron: "0 * * * *"
   groups:
-    - standard
+    - default
   retain: 48
   task: snapshot
 ---
