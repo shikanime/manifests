@@ -24,7 +24,7 @@ spec:
   groups:
     - large
   parameters:
-    full-backup-interval: "30"
+    full-backup-interval: "28"
   retain: 14
   task: backup
 ---
