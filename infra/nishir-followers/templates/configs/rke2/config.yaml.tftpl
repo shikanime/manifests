@@ -1,7 +1,8 @@
-server: ${server}
-token: ${token}
+node-ip: ${node_ip}
 node-label:
 %{ for key, value in node_labels ~}
   - ${key}=${value}
 %{ endfor ~}
 protect-kernel-defaults: true
+server: ${server}
+token: ${token}
