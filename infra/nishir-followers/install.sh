@@ -12,7 +12,7 @@ MINISH_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "minis
 FUSHI_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "fushi") | .TailscaleIPs')
 
 # SSH into nishir and retrieve the server token
-NODE_TOKEN=$(ssh "root@${SERVER}" "cat /var/lib/rancher/rke2/server/node-token")
+NODE_TOKEN=$(ssh "root@${SERVER}" "cat /var/lib/rancher/rke2/server/token")
 
 # Create JSON using jq
 jq -n \
