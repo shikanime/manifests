@@ -1,6 +1,6 @@
 variable "nodes" {
   type = map(object({
-    node_ip = string
+    node_ip = list(string)
   }))
   description = "List of nodes with their IP addresses"
 }
