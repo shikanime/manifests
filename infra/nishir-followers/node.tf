@@ -1,6 +1,5 @@
 locals {
   install_commands = [
-    "systemd-tmpfiles --create",
     "sysctl --system",
     "apt-get update -y",
     "apt-get install -y open-iscsi nfs-common cryptsetup dmsetup jq",
