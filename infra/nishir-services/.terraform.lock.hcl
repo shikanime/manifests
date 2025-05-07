@@ -43,7 +43,8 @@ provider "registry.opentofu.org/hashicorp/aws" {
 }
 
 provider "registry.opentofu.org/hashicorp/random" {
-  version = "3.6.3"
+  version     = "3.6.3"
+  constraints = "~> 3.6"
   hashes = [
     "h1:Ry0Lr0zaoicslZlcUR4rAySPpl/a7QupfMfuAxhW3fw=",
     "h1:ohM08k4QVd81oVSJnFI53wJjPcH23XlYG4WslS9og2Q=",

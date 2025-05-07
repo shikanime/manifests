@@ -1,0 +1,30 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: MachineDeployment
+metadata:
+  name: shana-md-0
+  namespace: default
+  labels:
+    cluster.x-k8s.io/cluster-name: shana
+spec:
+  clusterName: shana
+  replicas: 2
+  selector:
+    matchLabels:
+      cluster.x-k8s.io/cluster-name: shana
+  template:
+    metadata:
+      labels:
+        cluster.x-k8s.io/cluster-name: shana
+    spec:
+      bootstrap:
+        configRef:
+          apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+          kind: RKE2ConfigTemplate
+          name: shana-md-0
+      clusterName: shana
+      failureDomain: fsn1
+      infrastructureRef:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+        kind: HCloudMachineTemplate
+        name: shana-md-0
+      version: v1.31.7+rke2r1
