@@ -36,7 +36,7 @@ resource "kubernetes_manifest" "helmchart_descheduler" {
       repo            = "https://kubernetes-sigs.github.io/descheduler"
       chart           = "descheduler"
       targetNamespace = "kube-system"
-      version         = "0.32.2"
+      version         = "0.33.0"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
