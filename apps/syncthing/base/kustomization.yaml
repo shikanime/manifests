@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
   - name: syncthing
-    newName: lscr.io/linuxserver/syncthing
-    newTag: 1.29.5
+    newName: docker.io/syncthing/syncthing
+    newTag: 1.29.6
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: file-synchronizer
       app.kubernetes.io/name: syncthing
       app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 1.29.5
+      app.kubernetes.io/version: 1.29.6
