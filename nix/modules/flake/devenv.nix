@@ -52,6 +52,5 @@
           self'.packages.longhornctl
         ];
       };
-      packages.longhornctl = pkgs.callPackage ../../packages/longhornctl { };
     };
 }
