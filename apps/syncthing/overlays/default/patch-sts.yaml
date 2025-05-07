@@ -10,9 +10,9 @@ spec:
         - name: syncthing
           volumeMounts:
             - name: data-sync
-              mountPath: /data/sync
+              mountPath: /var/syncthing/Sync
             - name: data-sukebe
-              mountPath: /data/sukebe
+              mountPath: /var/syncthing/Sukebe
       volumes:
         - name: data-sync
           persistentVolumeClaim:
