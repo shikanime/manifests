@@ -1,5 +1,6 @@
 defaultSettings:
   allowCollectingLonghornUsageMetrics: false
+  allowRecurringJobWhileVolumeDetached: true
   backupstorePollInterval: 6000
   defaultReplicaCount: 1
   replicaAutoBalance: best-effort
