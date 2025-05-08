@@ -7,7 +7,7 @@ parameters:
     - fast
   fsType: xfs
   nodeSelector:
-    - data
+    - storage
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
@@ -28,7 +28,7 @@ parameters:
     - balanced
   fsType: xfs
   nodeSelector:
-    - data
+    - storage
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
@@ -49,7 +49,7 @@ parameters:
     - balanced
   fsType: xfs
   nodeSelector:
-    - data
+    - storage
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
