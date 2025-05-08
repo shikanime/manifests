@@ -46,10 +46,10 @@ metadata:
   name: nishir-ephemeral
 parameters:
   diskSelector:
-    - data
+    - balanced
   fsType: xfs
   nodeSelector:
-    - balanced
+    - data
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
