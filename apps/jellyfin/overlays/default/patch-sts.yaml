@@ -30,4 +30,3 @@ spec:
         - name: data-sync
           persistentVolumeClaim:
             claimName: sync-data
-
