@@ -15,6 +15,8 @@ spec:
               mountPath: /data/shows
             - name: data-sukebe
               mountPath: /data/sukebe
+            - name: data-sync
+              mountPath: /data/sync
       volumes:
         - name: data-movies
           persistentVolumeClaim:
@@ -25,3 +27,7 @@ spec:
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe-data
+        - name: data-sync
+          persistentVolumeClaim:
+            claimName: sync-data
+
