@@ -1,7 +1,7 @@
 output "drive" {
   value = {
     access_key_id     = var.drive.access_key_id
-    bucket            = aws_s3_bucket.etcd_backups.bucket
+    bucket            = aws_s3_bucket.drive.bucket
     endpoint          = replace(var.endpoints.s3, "/http[s|]?:\\/\\//", "")
     region            = var.regions.aws_s3_bucket
     secret_access_key = var.drive.secret_access_key

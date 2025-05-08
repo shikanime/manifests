@@ -52,7 +52,7 @@ variable "tailscale_operator" {
   sensitive = true
 }
 
-variable "longhorn_backupstore" {
+variable "drive" {
   type = object({
     access_key_id     = string
     secret_access_key = string
@@ -61,6 +61,14 @@ variable "longhorn_backupstore" {
 }
 
 variable "etcd_snapshot" {
+  type = object({
+    access_key_id     = string
+    secret_access_key = string
+  })
+  sensitive = true
+}
+
+variable "longhorn_backupstore" {
   type = object({
     access_key_id     = string
     secret_access_key = string
