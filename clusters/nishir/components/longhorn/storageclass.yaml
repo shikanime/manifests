@@ -11,8 +11,8 @@ parameters:
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
-      {"name": "default","isGroup": true},
-      {"name": "standard","isGroup": true}
+      {"name": "default", "isGroup": true},
+      {"name": "standard", "isGroup": true}
     ]
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
@@ -32,8 +32,8 @@ parameters:
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
-      {"name": "default","isGroup": true},
-      {"name": "standard","isGroup": true}
+      {"name": "default", "isGroup": true},
+      {"name": "standard", "isGroup": true}
     ]
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
@@ -53,8 +53,8 @@ parameters:
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
-      {"name": "default","isGroup": true},
-      {"name": "ephemeral","isGroup": true}
+      {"name": "default", "isGroup": true},
+      {"name": "ephemeral", "isGroup": true}
     ]
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
