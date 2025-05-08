@@ -1,7 +1,21 @@
-output "tailscale_operator" {
+output "drive" {
   value = {
-    client_id     = var.tailscale_operator.client_id
-    client_secret = var.tailscale_operator.client_secret
+    access_key_id     = var.drive.access_key_id
+    bucket            = aws_s3_bucket.etcd_backups.bucket
+    endpoint          = replace(var.endpoints.s3, "/http[s|]?:\\/\\//", "")
+    region            = var.regions.aws_s3_bucket
+    secret_access_key = var.drive.secret_access_key
+  }
+  sensitive = true
+}
+
+output "etcd_snapshot" {
+  value = {
+    access_key_id     = var.etcd_snapshot.access_key_id
+    bucket            = aws_s3_bucket.etcd_backups.bucket
+    endpoint          = replace(var.endpoints.s3, "/http[s|]?:\\/\\//", "")
+    region            = var.regions.aws_s3_bucket
+    secret_access_key = var.etcd_snapshot.secret_access_key
   }
   sensitive = true
 }
@@ -17,13 +31,10 @@ output "longhorn_backupstore" {
   sensitive = true
 }
 
-output "etcd_snapshot" {
+output "tailscale_operator" {
   value = {
-    access_key_id     = var.etcd_snapshot.access_key_id
-    bucket            = aws_s3_bucket.etcd_backups.bucket
-    endpoint          = replace(var.endpoints.s3, "/http[s|]?:\\/\\//", "")
-    region            = var.regions.aws_s3_bucket
-    secret_access_key = var.etcd_snapshot.secret_access_key
+    client_id     = var.tailscale_operator.client_id
+    client_secret = var.tailscale_operator.client_secret
   }
   sensitive = true
 }
