@@ -34,8 +34,6 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
-            - name: TZ
-              value: Europe/Paris
           ports:
             - containerPort: 8384
               name: http
@@ -67,7 +65,7 @@ spec:
             failureThreshold: 30
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /var/syncthing/config
       securityContext:
         fsGroup: 1000
       volumes:
