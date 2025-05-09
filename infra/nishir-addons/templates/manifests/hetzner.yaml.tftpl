@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: hcloud-csi
-  namespace: kube-system
-type: Opaque
-data:
-  hcloud-token: ${base64encode(hcloud_token)}

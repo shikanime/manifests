@@ -6,7 +6,7 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-  ["syncthing"]="lscr.io/linuxserver/syncthing"
+  ["syncthing"]="docker.io/syncthing/syncthing"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
