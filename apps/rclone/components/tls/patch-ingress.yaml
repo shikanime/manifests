@@ -6,6 +6,6 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: webdav
+      name: s3
       port:
         name: https
