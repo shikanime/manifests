@@ -11,12 +11,16 @@ spec:
           volumeMounts:
             - name: data-movies
               mountPath: /data/movies
+              readOnly: true
             - name: data-shows
               mountPath: /data/shows
+              readOnly: true
             - name: data-sukebe
               mountPath: /data/sukebe
+              readOnly: true
             - name: data-sync
               mountPath: /data/sync
+              readOnly: true
       volumes:
         - name: data-movies
           persistentVolumeClaim:
