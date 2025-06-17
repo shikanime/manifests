@@ -5,16 +5,16 @@ set -o nounset
 set -o pipefail
 
 # Update gitignore
-gitnr create \
-  ghc:Nix \
-  repo:shikanime/gitignore/refs/heads/main/Devenv.gitignore \
-  tt:jetbrains+all \
-  tt:linux \
-  tt:macos \
-  tt:terraform \
-  tt:vim \
-  tt:visualstudiocode \
-  tt:windows >.gitignore
+# gitnr create \
+#   ghc:Nix \
+#   repo:shikanime/gitignore/refs/heads/main/Devenv.gitignore \
+#   tt:jetbrains+all \
+#   tt:linux \
+#   tt:macos \
+#   tt:terraform \
+#   tt:vim \
+#   tt:visualstudiocode \
+#   tt:windows >.gitignore
 
 for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
   # Update base directory
@@ -59,6 +59,6 @@ GIT_HASH=$(nix hash convert --hash-algo sha256 --to sri ${GIT_PREFETCH})
 sed -i \
   -e "s|version = \".*\"|version = \"${LATEST_VERSION:-}\"|" \
   -e "s|hash = \".*\"|hash = \"${GIT_HASH}\"|" \
-  "$(dirname "$0")/default.nix"
+  "$(dirname "$0")/flake.nix"
 
 wait
