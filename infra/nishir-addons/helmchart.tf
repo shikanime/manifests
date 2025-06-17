@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
       repo            = "https://kubernetes-sigs.github.io/cluster-api-operator"
       chart           = "cluster-api-operator"
       targetNamespace = "capi-operator-system"
-      version         = "0.19.0"
+      version         = "0.20.0"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -36,7 +36,7 @@ resource "kubernetes_manifest" "helmchart_descheduler" {
       repo            = "https://kubernetes-sigs.github.io/descheduler"
       chart           = "descheduler"
       targetNamespace = "kube-system"
-      version         = "0.32.2"
+      version         = "0.33.0"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -60,7 +60,7 @@ resource "kubernetes_manifest" "helmchart_cert_manager" {
       repo            = "https://charts.jetstack.io"
       chart           = "cert-manager"
       targetNamespace = "cert-manager"
-      version         = "v1.17.2"
+      version         = "v1.18.0"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -86,7 +86,7 @@ resource "kubernetes_manifest" "helmchart_k8s_monitoring" {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
       targetNamespace = "grafana-system"
-      version         = "2.0.24"
+      version         = "3.0.1"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -123,7 +123,7 @@ resource "kubernetes_manifest" "helmchart_longhorn" {
       repo            = "https://charts.longhorn.io"
       chart           = "longhorn"
       targetNamespace = "longhorn-system"
-      version         = "1.8.1"
+      version         = "1.9.0"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"

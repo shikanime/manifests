@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: qbittorrent
     newName: lscr.io/linuxserver/qbittorrent
-    newTag: 5.0.4
+    newTag: 5.1.0
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: torrent-downloader
       app.kubernetes.io/name: qbittorrent
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 5.0.4
+      app.kubernetes.io/version: 5.1.0
