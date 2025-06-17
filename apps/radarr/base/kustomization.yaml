@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
-    newTag: 5.21.1
+    newTag: 5.26.2
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: radarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 5.21.1
+      app.kubernetes.io/version: 5.26.2
