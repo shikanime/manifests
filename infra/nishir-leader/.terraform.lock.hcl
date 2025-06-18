@@ -5,6 +5,7 @@ provider "registry.opentofu.org/hashicorp/local" {
   version     = "2.5.2"
   constraints = "~> 2.5"
   hashes = [
+    "h1:MBgBjJljfDl1i2JPcIoH4hW+2XLJ+D1l12iH/xd3uTo=",
     "h1:k+9gXoahOyHbA/zkzl5kEFWJSeiREjczJjtPBtf7LKs=",
     "zh:25b95b76ceaa62b5c95f6de2fa6e6242edbf51e7fc6c057b7f7101aa4081f64f",
     "zh:3c974fdf6b42ca6f93309cf50951f345bfc5726ec6013b8832bcd3be0eb3429e",
