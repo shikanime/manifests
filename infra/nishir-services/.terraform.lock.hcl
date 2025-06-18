@@ -6,6 +6,7 @@ provider "registry.opentofu.org/grafana/grafana" {
   constraints = "~> 2.15"
   hashes = [
     "h1:1raJ41S6iQbEsUt8Gw/f2WundrJVSFZ472LT+upQty4=",
+    "h1:XjYARXNAS1YMgABhI5J3RknJbHvh/DjlVOcywc5I5w4=",
     "zh:10e1db6012433e84592cee299e7014deda1d9772f86f0f6f635e9d46543ebf25",
     "zh:2ef424112ff8b6fbd6ea918b3d1498af6bcbd5407b8adc862ad892b1ff3f7047",
     "zh:34697e3abbef0b01b883792983bcf0f9e55c131ce3afa167f76b8712384fbc50",
@@ -28,6 +29,7 @@ provider "registry.opentofu.org/hashicorp/aws" {
   constraints = "~> 5.82"
   hashes = [
     "h1:65B6GjFmKobkuaO58AcDPUu/otnTR7qRTynWTgU5A7Q=",
+    "h1:9QRxRf9iCT7UPymoHdcif0DcKwKAM/PiQ75VBrl9W+o=",
     "h1:wEwqAP2jUhjiTUKJCrluI+MyHXyb2u6N+yTTCosk+d8=",
     "zh:0c662b1f27119941e2329155070c8a81f6979e3d5e98296949f373c46487d84e",
     "zh:56cbaeaf050174bb9ba9a00f31fe441365ffece6ad39254885c9d4e6517e27e3",
@@ -43,8 +45,10 @@ provider "registry.opentofu.org/hashicorp/aws" {
 }
 
 provider "registry.opentofu.org/hashicorp/random" {
-  version = "3.6.3"
+  version     = "3.6.3"
+  constraints = "~> 3.6"
   hashes = [
+    "h1:32/UZofQoXk8zPj9vpIDiSEmERA3Mx2VPvk1lHTTHvw=",
     "h1:Ry0Lr0zaoicslZlcUR4rAySPpl/a7QupfMfuAxhW3fw=",
     "h1:ohM08k4QVd81oVSJnFI53wJjPcH23XlYG4WslS9og2Q=",
     "zh:1bfd2e54b4eee8c761a40b6d99d45880b3a71abc18a9a7a5319204da9c8363b2",
