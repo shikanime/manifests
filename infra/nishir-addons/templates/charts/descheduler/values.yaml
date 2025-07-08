@@ -14,8 +14,6 @@ deschedulerPolicy:
               cpu: 20
               memory: 20
               pods: 20
-            metricsUtilization:
-              metricsServer: true
         - name: LowNodeUtilization
           args:
             thresholds:
@@ -27,7 +25,7 @@ deschedulerPolicy:
               memory: 80
               pods: 80
             metricsUtilization:
-              metricsServer: true
+              source: KubernetesMetrics
         - name: RemoveDuplicates
         - name: RemovePodsHavingTooManyRestarts
           args:
