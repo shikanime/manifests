@@ -30,7 +30,6 @@ locals {
 
   canal_manifest   = file("${path.module}/templates/manifests/rke2-canal-config.yaml")
   coredns_manifest = file("${path.module}/templates/manifests/rke2-coredns-config.yaml")
-  multus_manifest  = file("${path.module}/templates/manifests/rke2-multus-config.yaml")
   tailscale_manifest = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
     name          = var.name
     client_id     = var.tailscale_operator.client_id
@@ -45,7 +44,6 @@ resource "terraform_data" "nishir" {
     rke2_config             = sha256(local.rke2_config)
     canal_manifest          = sha256(local.canal_manifest)
     coredns_manifest        = sha256(local.coredns_manifest)
-    multus_manifest         = sha256(local.multus_manifest)
     tailscale_manifest      = sha256(local.tailscale_manifest)
   }
 
@@ -86,11 +84,6 @@ resource "terraform_data" "nishir" {
   provisioner "file" {
     content     = local.coredns_manifest
     destination = "/var/lib/rancher/rke2/server/manifests/rke2-coredns-config.yaml"
-  }
-
-  provisioner "file" {
-    content     = local.multus_manifest
-    destination = "/var/lib/rancher/rke2/server/manifests/rke2-multus-config.yaml"
   }
 
   provisioner "file" {
