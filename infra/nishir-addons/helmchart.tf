@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "helmchart_cluster_api_operator" {
       repo            = "https://kubernetes-sigs.github.io/cluster-api-operator"
       chart           = "cluster-api-operator"
       targetNamespace = "capi-operator-system"
-      version         = "0.20.0"
+      version         = "0.21.0"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -60,7 +60,7 @@ resource "kubernetes_manifest" "helmchart_cert_manager" {
       repo            = "https://charts.jetstack.io"
       chart           = "cert-manager"
       targetNamespace = "cert-manager"
-      version         = "v1.18.0"
+      version         = "v1.18.2"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
@@ -86,7 +86,7 @@ resource "kubernetes_manifest" "helmchart_k8s_monitoring" {
       repo            = "https://grafana.github.io/helm-charts"
       chart           = "k8s-monitoring"
       targetNamespace = "grafana-system"
-      version         = "2.0.24"
+      version         = "3.1.2"
       helmVersion     = "v3"
       bootstrap       = false
       failurePolicy   = "abort"
