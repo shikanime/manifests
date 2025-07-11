@@ -12,8 +12,6 @@ locals {
     "systemctl start rke2-server.service"
   ]
 
-  sysctl_k8s_config       = file("${path.module}/templates/configs/systctl/99-k8s.conf")
-  tmpfiles_rancher_config = file("${path.module}/templates/configs/tmpfiles/var-lib-rancher.conf")
   rke2_config = templatefile("${path.module}/templates/configs/rke2/config.yaml.tftpl", {
     etcd_s3_access_key_id     = var.etcd_snapshot.access_key_id
     etcd_s3_bucket            = var.etcd_snapshot.bucket
@@ -26,11 +24,13 @@ locals {
       "node.kubernetes.io/instance-type" = "rpi5-large"
     }
     tls_san = var.rke2.tls_san
+  sysctl_k8s_config       = file("${path.module}/templates/configs/systctl/99-k8s.conf")
+  tmpfiles_rancher_config = file("${path.module}/templates/configs/tmpfiles/var-lib-rancher.conf")
   })
 
-  canal_manifest   = file("${path.module}/templates/manifests/rke2-canal-config.yaml")
-  coredns_manifest = file("${path.module}/templates/manifests/rke2-coredns-config.yaml")
-  tailscale_manifest = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
+  rke2_canal_config_manifest   = file("${path.module}/templates/manifests/rke2-canal-config.yaml")
+  rke2_coredns_config_manifest = file("${path.module}/templates/manifests/rke2-coredns-config.yaml")
+  tailscale_operator_manifest = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
     name          = var.name
     client_id     = var.tailscale_operator.client_id
     client_secret = var.tailscale_operator.client_secret
@@ -39,12 +39,12 @@ locals {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    sysctl_k8s_config       = sha256(local.sysctl_k8s_config)
-    tmpfiles_rancher_config = sha256(local.tmpfiles_rancher_config)
-    rke2_config             = sha256(local.rke2_config)
-    canal_manifest          = sha256(local.canal_manifest)
-    coredns_manifest        = sha256(local.coredns_manifest)
-    tailscale_manifest      = sha256(local.tailscale_manifest)
+    rke2_canal_config_manifest   = sha256(local.rke2_canal_config_manifest)
+    rke2_config                  = sha256(local.rke2_config)
+    rke2_coredns_config_manifest = sha256(local.rke2_coredns_config_manifest)
+    sysctl_k8s_config            = sha256(local.sysctl_k8s_config)
+    tailscale_operator_manifest  = sha256(local.tailscale_operator_manifest)
+    tmpfiles_rancher_config      = sha256(local.tmpfiles_rancher_config)
   }
 
   connection {
@@ -77,17 +77,17 @@ resource "terraform_data" "nishir" {
   }
 
   provisioner "file" {
-    content     = local.canal_manifest
+    content     = local.rke2_canal_config_manifest
     destination = "/var/lib/rancher/rke2/server/manifests/rke2-canal-config.yaml"
   }
 
   provisioner "file" {
-    content     = local.coredns_manifest
+    content     = local.rke2_coredns_config_manifest
     destination = "/var/lib/rancher/rke2/server/manifests/rke2-coredns-config.yaml"
   }
 
   provisioner "file" {
-    content     = local.tailscale_manifest
+    content     = local.tailscale_operator_manifest
     destination = "/var/lib/rancher/rke2/server/manifests/tailscale-operator.yaml"
   }
 }
