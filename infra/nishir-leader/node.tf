@@ -24,9 +24,9 @@ locals {
       "node.kubernetes.io/instance-type" = "rpi5-large"
     }
     tls_san = var.rke2.tls_san
+  })
   sysctl_k8s_config       = file("${path.module}/templates/configs/systctl/99-k8s.conf")
   tmpfiles_rancher_config = file("${path.module}/templates/configs/tmpfiles/var-lib-rancher.conf")
-  })
 
   rke2_canal_config_manifest   = file("${path.module}/templates/manifests/rke2-canal-config.yaml")
   rke2_coredns_config_manifest = file("${path.module}/templates/manifests/rke2-coredns-config.yaml")
