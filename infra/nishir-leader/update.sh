@@ -6,7 +6,7 @@ set -o pipefail
 
 # Define an array of charts to check
 declare -A TEMPLATES=(
-  ["tailscale"]="tailscale/tailscale-operator"
+  ["tailscale-operator"]="tailscale/tailscale-operator"
 )
 
 declare -A REPOS=(
@@ -44,7 +44,7 @@ update() {
     else
       echo "[${TEMPLATE_NAME}] Found latest version: $LATEST_VERSION"
 
-      TEMPLATE_FILE="$(dirname "$0")/templates/manifests/${TEMPLATE_NAME}.yaml"
+      TEMPLATE_FILE="$(dirname "$0")/templates/manifests/${TEMPLATE_NAME}.yaml.tftpl"
       if [[ -f $TEMPLATE_FILE ]]; then
         echo "[${TEMPLATE_NAME}] Updating $TEMPLATE_FILE..."
         REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
