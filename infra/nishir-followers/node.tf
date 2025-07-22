@@ -11,7 +11,7 @@ locals {
     "echo '${var.rke2.node_token}' | install -m 600 /dev/stdin /etc/rancher/rke2/token"
   ]
   start_commands = [
-    "systemctl start rke2-agent.service"
+    "systemctl restart rke2-agent.service"
   ]
 
   sysctl_k8s_config = file("${path.module}/templates/configs/systctl/99-k8s.conf")
