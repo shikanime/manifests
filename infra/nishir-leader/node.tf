@@ -9,7 +9,7 @@ locals {
     "mkdir -p /etc/rancher/rke2"
   ]
   start_commands = [
-    "systemctl start rke2-server.service"
+    "systemctl restart rke2-server.service"
   ]
 
   rke2_config = templatefile("${path.module}/templates/configs/rke2/config.yaml.tftpl", {
@@ -39,12 +39,9 @@ locals {
 
 resource "terraform_data" "nishir" {
   triggers_replace = {
-    rke2_canal_config_manifest   = sha256(local.rke2_canal_config_manifest)
-    rke2_config                  = sha256(local.rke2_config)
-    rke2_coredns_config_manifest = sha256(local.rke2_coredns_config_manifest)
-    sysctl_k8s_config            = sha256(local.sysctl_k8s_config)
-    tailscale_operator_manifest  = sha256(local.tailscale_operator_manifest)
-    tmpfiles_rancher_config      = sha256(local.tmpfiles_rancher_config)
+    rke2_config             = sha256(local.rke2_config)
+    sysctl_k8s_config       = sha256(local.sysctl_k8s_config)
+    tmpfiles_rancher_config = sha256(local.tmpfiles_rancher_config)
   }
 
   connection {
@@ -75,6 +72,20 @@ resource "terraform_data" "nishir" {
   provisioner "remote-exec" {
     inline = local.start_commands
   }
+}
+
+resource "terraform_data" "nishir_manifests" {
+  triggers_replace = {
+    rke2_canal_config_manifest   = sha256(local.rke2_canal_config_manifest)
+    rke2_coredns_config_manifest = sha256(local.rke2_coredns_config_manifest)
+    tailscale_operator_manifest  = sha256(local.tailscale_operator_manifest)
+  }
+
+  connection {
+    type = "ssh"
+    user = "root"
+    host = "nishir"
+  }
 
   provisioner "file" {
     content     = local.rke2_canal_config_manifest
@@ -90,4 +101,6 @@ resource "terraform_data" "nishir" {
     content     = local.tailscale_operator_manifest
     destination = "/var/lib/rancher/rke2/server/manifests/tailscale-operator.yaml"
   }
+
+  depends_on = [terraform_data.nishir]
 }
