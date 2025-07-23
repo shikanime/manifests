@@ -5,8 +5,6 @@ metadata:
 spec:
   hosts:
   - dataDir: /mnt/nishir/k0s
-    installFlags:
-      - --disable-components=autopilot
     noTaints: true
     role: controller+worker
     ssh:
