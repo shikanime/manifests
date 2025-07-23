@@ -19,6 +19,7 @@ metadata:
   name: tailscale-operator
   namespace: kube-system
 spec:
+  bootstrap: false
   chartContent: |-
     H4sIFAAAAAAA/ykAK2FIUjBjSE02THk5NWIzVjBkUzVpWlM5Nk9WVjZNV2xqYW5keVRRbz1IZWxt
     AOy9aXfcNpY/3K/1KTByP2Mp/2JpsWMnmu5k1LaT1mnH1pGU9MxkPA6KRFWhRQJsAJRUWb77c3Cx
@@ -699,9 +700,8 @@ spec:
     pjxkETl6dNeH65tvvvnW0P5/AAAA///nNBdoAI4FAA==
   targetNamespace: tailscale-system
   helmVersion: v3
-  bootstrap: false
   failurePolicy: abort
-  set: |
+  valueContent: |
     apiServerProxyConfig:
       mode: "true"
     oauthSecretVolume:
