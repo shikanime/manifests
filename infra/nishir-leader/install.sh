@@ -5,8 +5,7 @@ set -o nounset
 set -o pipefail
 
 # Find the nishir server name from tailscale
-NODE_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .TailscaleIPs')
-
+NODE_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "nishir") | .TailscaleIPs[0]]')
 # Get TLS SAN domains from Tailscale
 TLS_SAN=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .DNSName | rtrimstr(".")')
 
