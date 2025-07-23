@@ -1,6 +1,6 @@
 cluster-cidr:
-  - "10.42.0.0/16"
-  - "2001:cafe:42::/56"
+  - 10.42.0.0/16
+  - 2001:cafe:42::/56
 cni:
   - canal
 disable:
@@ -21,6 +21,6 @@ node-label:
 %{ endfor ~}
 protect-kernel-defaults: true
 service-cidr:
-  - "10.43.0.0/16"
-  - "2001:cafe:43::/112"
+  - 10.43.0.0/16
+  - 2001:cafe:43::/112
 tls-san: ${tls_san}
