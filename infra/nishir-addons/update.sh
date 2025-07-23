@@ -60,9 +60,9 @@ for INDEX in "${!CHARTS[@]}"; do
 
     REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
     sed -i \
-      -e "${REPO_LINE}s|repo            = .*$|repo            = \"${REPO_URL}\"|" \
-      -e "${CHART_LINE}s|chart           = .*$|chart           = \"${CHART_NAME#*/}\"|" \
-      -e "${VERSION_LINE}s|version         = .*$|version         = \"${LATEST_VERSION}\"|" \
+      -e "${REPO_LINE}s|repo            =.*$|repo            = \"${REPO_URL}\"|" \
+      -e "${CHART_LINE}s|chart           =.*$|chart           = \"${CHART_NAME#*/}\"|" \
+      -e "${VERSION_LINE}s|version         =.*$|version         = \"${LATEST_VERSION}\"|" \
       "$(dirname "$0")/helmchart.tf"
     echo "[${CHART_NAME}] Updated $(dirname "$0")/helmchart.tf"
   fi
