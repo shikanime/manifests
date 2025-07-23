@@ -8,8 +8,8 @@ set -o pipefail
 SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .DNSName' | sed 's/\.$//')
 
 # Get node IPs for minish and fushi from tailscale
-MINISH_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "minish") | .TailscaleIPs')
-FUSHI_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "fushi") | .TailscaleIPs')
+MINISH_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "minish") | .TailscaleIPs[0]]')
+FUSHI_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "fushi") | .TailscaleIPs[0]]')
 
 # SSH into nishir and retrieve the server token
 NODE_TOKEN=$(ssh "root@${SERVER}" "cat /var/lib/rancher/rke2/server/token")
