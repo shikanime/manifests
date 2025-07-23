@@ -5,11 +5,11 @@ set -o nounset
 set -o pipefail
 
 # Find the nishir server name from tailscale
-SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .DNSName' | sed 's/\.$//')
+SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .HostName')
 
-# Get node IPs for minish and fushi from tailscale
-MINISH_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "minish") | .TailscaleIPs[0]]')
-FUSHI_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "fushi") | .TailscaleIPs[0]]')
+# Get Tailscale IPs for minish and fushi
+MINISH_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "minish") | .TailscaleIPs')
+FUSHI_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "fushi") | .TailscaleIPs')
 
 # SSH into nishir and retrieve the server token
 NODE_TOKEN=$(ssh "root@${SERVER}" "cat /var/lib/rancher/rke2/server/token")

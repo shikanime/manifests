@@ -5,14 +5,19 @@ set -o nounset
 set -o pipefail
 
 # Find the nishir server name from tailscale
-NODE_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "nishir") | .TailscaleIPs[0]]')
-# Get TLS SAN domains from Tailscale
-TLS_SAN=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .DNSName | rtrimstr(".")')
+SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .HostName')
+
+# Get TLS SAN domains from Tailscale - DNSName first, then HostName
+TLS_SANS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | [.DNSName | rtrimstr("."), "nishir"]')
+
+# Get Tailscale IPs
+NODE_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .TailscaleIPs')
 
 # Fetch all outputs at once and combine with RKE2 configuration
 tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
-  jq --argjson node_ip "${NODE_IP}" \
-    --arg tls_san "${TLS_SAN}" \
+  jq \
+    --argjson node_ip "${NODE_IP}" \
+    --argjson tls_san "${TLS_SANS}" \
     'with_entries(
     select(.key | IN(
       "etcd_snapshot",
