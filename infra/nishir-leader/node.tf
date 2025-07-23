@@ -29,7 +29,6 @@ locals {
   tmpfiles_rancher_config = file("${path.module}/templates/configs/tmpfiles/var-lib-rancher.conf")
 
   rke2_canal_config_manifest = file("${path.module}/templates/manifests/rke2-canal-config.yaml")
-  rke2_coredns_config_manifest = file("${path.module}/templates/manifests/rke2-coredns-config.yaml")
   tailscale_operator_manifest = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
     name          = var.name
     client_id     = var.tailscale_operator.client_id
@@ -77,7 +76,6 @@ resource "terraform_data" "nishir" {
 resource "terraform_data" "nishir_manifests" {
   triggers_replace = {
     rke2_canal_config_manifest = sha256(local.rke2_canal_config_manifest)
-    rke2_coredns_config_manifest = sha256(local.rke2_coredns_config_manifest)
     tailscale_operator_manifest = sha256(local.tailscale_operator_manifest)
   }
 
