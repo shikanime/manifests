@@ -5,9 +5,22 @@ set -o nounset
 set -o pipefail
 
 # Find the nishir server name from tailscale
-NODE_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .TailscaleIPs')
+SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .HostName')
+
 # Get TLS SAN domains from Tailscale
 TLS_SANS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | [.HostName, .HostName + ".local", .DNSName | rtrimstr(".")]')
+
+# Get Tailscale IPs
+TAILSCALE_IPS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .TailscaleIPs')
+
+# SSH into nishir and retrieve IPv4 addresses from eth0 and wlan0 interfaces only
+ETH_IPV4=$(ssh "root@${SERVER}" "ip -j addr show | jq -r '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet\") | .local]'")
+
+# SSH into nishir and retrieve IPv6 addresses from eth0 and wlan0 interfaces only
+ETH_IPV6=$(ssh "root@${SERVER}" "ip -j addr show | jq -r '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet6\") | .local]'")
+
+# Combine Tailscale and Ethernet IPs (both IPv4 and IPv6)
+NODE_IP=$(jq -n --argjson tailscale "${TAILSCALE_IPS}" --argjson ipv4 "${ETH_IPV4}" --argjson ipv6 "${ETH_IPV6}" '$ipv4 + $ipv6 + $tailscale')
 
 # Fetch all outputs at once and combine with RKE2 configuration
 tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
