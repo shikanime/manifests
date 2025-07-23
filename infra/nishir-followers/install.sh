@@ -5,9 +5,9 @@ set -o nounset
 set -o pipefail
 
 # Find the nishir server name from tailscale
-SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .HostName')
+SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .DNSName' | sed 's/\.$//')
 
-# Get Tailscale IPs for minish and fushi
+# Get node IPs for minish and fushi from tailscale
 MINISH_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "minish") | .TailscaleIPs')
 FUSHI_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "fushi") | .TailscaleIPs')
 

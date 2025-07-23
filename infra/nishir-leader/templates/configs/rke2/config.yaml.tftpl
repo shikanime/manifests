@@ -1,3 +1,6 @@
+cluster-cidr:
+  - "10.42.0.0/16"
+  - "2001:cafe:42::/56"
 cni:
   - canal
 disable:
@@ -17,7 +20,7 @@ node-label:
   - ${key}=${value}
 %{ endfor ~}
 protect-kernel-defaults: true
-tls-san:
-%{ for value in tls_san ~}
-  - ${value}
-%{ endfor ~}
+service-cidr:
+  - "10.43.0.0/16"
+  - "2001:cafe:43::/112"
+tls-san: ${tls_san}

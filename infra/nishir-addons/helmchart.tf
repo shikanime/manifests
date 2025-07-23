@@ -75,7 +75,6 @@ resource "kubernetes_manifest" "helmchart_cert_manager" {
 }
 
 resource "kubernetes_manifest" "helmchart_k8s_monitoring" {
-  count = 0
   manifest = {
     apiVersion = "helm.cattle.io/v1"
     kind       = "HelmChart"

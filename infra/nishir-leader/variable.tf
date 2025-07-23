@@ -4,6 +4,16 @@ variable "name" {
   default     = "nishir"
 }
 
+variable "endpoints" {
+  type = object({
+    nishir = string
+  })
+  description = "Nodes DNS name"
+  default = {
+    nishir = "nishir.taila659a.ts.net"
+  }
+}
+
 variable "etcd_snapshot" {
   type = object({
     access_key_id     = string
@@ -18,8 +28,8 @@ variable "etcd_snapshot" {
 
 variable "rke2" {
   type = object({
-    node_ip  = list(string)
-    tls_san = list(string)
+    node_ip = list(string)
+    tls_san = string
   })
   description = "RKE2 configuration"
 }
