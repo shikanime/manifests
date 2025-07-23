@@ -93,6 +93,11 @@ resource "terraform_data" "nishir_manifests" {
   }
 
   provisioner "file" {
+    content     = local.rke2_coredns_config_manifest
+    destination = "/var/lib/rancher/rke2/server/manifests/rke2-coredns-config.yaml"
+  }
+
+  provisioner "file" {
     content     = local.tailscale_operator_manifest
     destination = "/var/lib/rancher/rke2/server/manifests/tailscale-operator.yaml"
   }
