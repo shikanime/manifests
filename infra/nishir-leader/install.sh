@@ -7,17 +7,11 @@ set -o pipefail
 # Find the nishir server name from tailscale
 SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .HostName')
 
-# Get TLS SAN domains from Tailscale
-TLS_SANS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | [.HostName, .DNSName | rtrimstr(".")]')
+# Get TLS SAN domains from Tailscale - DNSName first, then HostName
+TLS_SANS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | [.DNSName | rtrimstr("."), "nishir"]')
 
 # Get Tailscale IPs
-TAILSCALE_IPS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .TailscaleIPs')
-
-# Retrieve both IPv4 and IPv6 addresses (excluding link-local) from eth0 and wlan0 interfaces in a single SSH command
-INTERFACE_IPS=$(ssh "root@${SERVER}" "ip -j addr show | jq '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet\" or (.family == \"inet6\" and (.local | startswith(\"fe80:\") | not))) | .local]'")
-
-# Combine Tailscale and interface IPs - putting Tailscale IPs first
-NODE_IP=$(jq -n --argjson tailscale "${TAILSCALE_IPS}" --argjson interface_ips "${INTERFACE_IPS}" '$tailscale + $interface_ips')
+NODE_IP=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .TailscaleIPs')
 
 # Fetch all outputs at once and combine with RKE2 configuration
 tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
