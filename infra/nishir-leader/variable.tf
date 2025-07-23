@@ -4,16 +4,6 @@ variable "name" {
   default     = "nishir"
 }
 
-variable "endpoints" {
-  type = object({
-    nishir = string
-  })
-  description = "Nodes DNS name"
-  default = {
-    nishir = "nishir.taila659a.ts.net"
-  }
-}
-
 variable "etcd_snapshot" {
   type = object({
     access_key_id     = string
