@@ -18,6 +18,6 @@ node-label:
 %{ endfor ~}
 protect-kernel-defaults: true
 tls-san:
-%{ for value in tls_sans ~}
+%{ for value in tls_san ~}
   - ${value}
 %{ endfor ~}

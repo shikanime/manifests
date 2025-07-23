@@ -7,9 +7,19 @@ set -o pipefail
 # Find the nishir server name from tailscale
 SERVER=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .HostName')
 
-# Get node IPs for minish and fushi from tailscale
-MINISH_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "minish") | .TailscaleIPs[0]]')
-FUSHI_IP=$(tailscale status -json | jq -r '[.Peer[] | select(.HostName == "fushi") | .TailscaleIPs[0]]')
+# Get Tailscale IPs for minish and fushi
+MINISH_TAILSCALE_IPS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "minish") | .TailscaleIPs')
+FUSHI_TAILSCALE_IPS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "fushi") | .TailscaleIPs')
+
+# Retrieve both IPv4 and IPv6 addresses from eth0 and wlan0 interfaces for minish in a single SSH command
+MINISH_INTERFACE_IPS=$(ssh "root@minish" "ip -j addr show | jq '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet\" or .family == \"inet6\") | .local]'")
+
+# Retrieve both IPv4 and IPv6 addresses from eth0 and wlan0 interfaces for fushi in a single SSH command
+FUSHI_INTERFACE_IPS=$(ssh "root@fushi" "ip -j addr show | jq '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet\" or .family == \"inet6\") | .local]'")
+
+# Combine Tailscale and interface IPs for each node
+MINISH_IP=$(jq -n --argjson tailscale "${MINISH_TAILSCALE_IPS}" --argjson interface_ips "${MINISH_INTERFACE_IPS}" '$interface_ips + $tailscale')
+FUSHI_IP=$(jq -n --argjson tailscale "${FUSHI_TAILSCALE_IPS}" --argjson interface_ips "${FUSHI_INTERFACE_IPS}" '$interface_ips + $tailscale')
 
 # SSH into nishir and retrieve the server token
 NODE_TOKEN=$(ssh "root@${SERVER}" "cat /var/lib/rancher/rke2/server/token")
