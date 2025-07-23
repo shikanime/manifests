@@ -3,11 +3,9 @@ kind: StorageClass
 metadata:
   name: nishir-fast
 parameters:
-  diskSelector:
-    - fast
+  diskSelector: fast
   fsType: xfs
-  nodeSelector:
-    - worker
+  nodeSelector: worker
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
@@ -24,11 +22,9 @@ kind: StorageClass
 metadata:
   name: nishir-standard
 parameters:
-  diskSelector:
-    - balanced
+  diskSelector: balanced
   fsType: xfs
-  nodeSelector:
-    - worker
+  nodeSelector: worker
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
@@ -45,11 +41,9 @@ kind: StorageClass
 metadata:
   name: nishir-ephemeral
 parameters:
-  diskSelector:
-    - balanced
+  diskSelector: balanced
   fsType: xfs
-  nodeSelector:
-    - worker
+  nodeSelector: worker
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
