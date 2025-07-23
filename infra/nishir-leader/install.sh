@@ -13,14 +13,11 @@ TLS_SANS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir
 # Get Tailscale IPs
 TAILSCALE_IPS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "nishir") | .TailscaleIPs')
 
-# SSH into nishir and retrieve IPv4 addresses from eth0 and wlan0 interfaces only
-ETH_IPV4=$(ssh "root@${SERVER}" "ip -j addr show | jq -r '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet\") | .local]'")
+# Retrieve both IPv4 and IPv6 addresses from eth0 and wlan0 interfaces in a single SSH command
+INTERFACE_IPS=$(ssh "root@${SERVER}" "ip -j addr show | jq '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet\" or .family == \"inet6\") | .local]'")
 
-# SSH into nishir and retrieve IPv6 addresses from eth0 and wlan0 interfaces only
-ETH_IPV6=$(ssh "root@${SERVER}" "ip -j addr show | jq -r '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet6\") | .local]'")
-
-# Combine Tailscale and Ethernet IPs (both IPv4 and IPv6)
-NODE_IP=$(jq -n --argjson tailscale "${TAILSCALE_IPS}" --argjson ipv4 "${ETH_IPV4}" --argjson ipv6 "${ETH_IPV6}" '$ipv4 + $ipv6 + $tailscale')
+# Combine Tailscale and interface IPs
+NODE_IP=$(jq -n --argjson tailscale "${TAILSCALE_IPS}" --argjson interface_ips "${INTERFACE_IPS}" '$interface_ips + $tailscale')
 
 # Fetch all outputs at once and combine with RKE2 configuration
 tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
