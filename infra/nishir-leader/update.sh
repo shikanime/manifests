@@ -48,8 +48,31 @@ update() {
       if [[ -f $TEMPLATE_FILE ]]; then
         echo "[${TEMPLATE_NAME}] Updating $TEMPLATE_FILE..."
         REPO_URL="${REPOS[${CHART_NAME%%/*}]}"
-        yq -i "(select(.apiVersion == \"helm.cattle.io/v1\" and .kind == \"HelmChart\" and .metadata.name == \"$TEMPLATE_NAME\") | .spec.chart = \"${CHART_NAME#*/}\" | .spec.repo = \"$REPO_URL\" | .spec.version = \"$LATEST_VERSION\") // ." "$TEMPLATE_FILE"
-        echo "[${TEMPLATE_NAME}] Updated $TEMPLATE_FILE"
+
+        # Download the chart to a temporary directory
+        TEMP_DIR=$(mktemp -d)
+        echo "[${TEMPLATE_NAME}] Downloading chart to $TEMP_DIR..."
+        helm pull "$CHART_NAME" --version "$LATEST_VERSION" --destination "$TEMP_DIR"
+
+        # Find the downloaded chart file (it will have a specific naming pattern)
+        CHART_FILE=$(find "$TEMP_DIR" -name "*.tgz" | head -n 1)
+
+        if [[ -f "$CHART_FILE" ]]; then
+          echo "[${TEMPLATE_NAME}] Found chart file: $CHART_FILE"
+
+          # Base64 encode the chart file
+          CHART_CONTENT=$(base64 -i "$CHART_FILE")
+
+          # Update the template file with the latest version info and chart content
+          yq -i "(select(.apiVersion == \"helm.cattle.io/v1\" and .kind == \"HelmChart\" and .metadata.name == \"$TEMPLATE_NAME\") | .spec.chartContent = \"$CHART_CONTENT\") // ." "$TEMPLATE_FILE"
+
+          echo "[${TEMPLATE_NAME}] Updated $TEMPLATE_FILE with chartContent"
+        else
+          echo "[${TEMPLATE_NAME}] Error: Chart file not found in $TEMP_DIR"
+        fi
+
+        # Clean up temporary directory
+        rm -rf "$TEMP_DIR"
       else
         echo "[${TEMPLATE_NAME}] Template file not found: $TEMPLATE_FILE"
       fi
