@@ -28,8 +28,8 @@ variable "etcd_snapshot" {
 
 variable "rke2" {
   type = object({
-    node_ip = list(string)
-    tls_san = string
+    node_ip  = list(string)
+    tls_sans = list(string)
   })
   description = "RKE2 configuration"
 }

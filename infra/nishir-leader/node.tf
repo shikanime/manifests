@@ -23,7 +23,7 @@ locals {
       "beta.kubernetes.io/instance-type" = "rpi5-large"
       "node.kubernetes.io/instance-type" = "rpi5-large"
     }
-    tls_san = var.rke2.tls_san
+    tls_sans = var.rke2.tls_sans
   })
   sysctl_k8s_config       = file("${path.module}/templates/configs/systctl/99-k8s.conf")
   tmpfiles_rancher_config = file("${path.module}/templates/configs/tmpfiles/var-lib-rancher.conf")
