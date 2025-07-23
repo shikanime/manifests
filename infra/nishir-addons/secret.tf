@@ -17,54 +17,6 @@ resource "kubernetes_secret" "gitea_tls_password" {
   depends_on = [kubernetes_namespace.shikanime]
 }
 
-resource "kubernetes_secret" "grafana_cloud_logs_k8s_monitoring" {
-  metadata {
-    name      = "grafana-cloud-logs-k8s-monitoring"
-    namespace = "grafana-system"
-  }
-
-  type = "kubernetes.io/basic-auth"
-
-  data = {
-    username = var.loki.username
-    password = var.loki.password
-  }
-
-  depends_on = [kubernetes_namespace.grafana_system]
-}
-
-resource "kubernetes_secret" "grafana_cloud_metrics_k8s_monitoring" {
-  metadata {
-    name      = "grafana-cloud-metrics-k8s-monitoring"
-    namespace = "grafana-system"
-  }
-
-  type = "kubernetes.io/basic-auth"
-
-  data = {
-    username = var.prometheus.username
-    password = var.prometheus.password
-  }
-
-  depends_on = [kubernetes_namespace.grafana_system]
-}
-
-resource "kubernetes_secret" "grafana_cloud_traces_k8s_monitoring" {
-  metadata {
-    name      = "grafana-cloud-traces-k8s-monitoring"
-    namespace = "grafana-system"
-  }
-
-  type = "kubernetes.io/basic-auth"
-
-  data = {
-    username = var.tempo.username
-    password = var.tempo.password
-  }
-
-  depends_on = [kubernetes_namespace.grafana_system]
-}
-
 resource "random_password" "jellyfin_tls_password" {
   length = 14
 }
@@ -100,8 +52,6 @@ resource "kubernetes_secret" "longhorn_hetzner_backups" {
     AWS_SECRET_ACCESS_KEY = var.longhorn_backupstore.secret_access_key
     AWS_ENDPOINTS         = var.longhorn_backupstore.endpoint
   }
-
-  depends_on = [kubernetes_namespace.longhorn_system]
 }
 
 resource "random_password" "metatube" {
@@ -266,4 +216,18 @@ resource "kubernetes_secret" "whisparr_tls_password" {
   }
 
   depends_on = [kubernetes_namespace.shikanime]
+}
+
+resource "kubernetes_secret" "oauth_client" {
+  metadata {
+    name      = "oauth-client"
+    namespace = "tailscale-system"
+  }
+
+  type = "Opaque"
+
+  data = {
+    client_id     = var.tailscale_operator.client_id
+    client_secret = var.tailscale_operator.client_secret
+  }
 }

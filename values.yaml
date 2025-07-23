@@ -1,0 +1,7 @@
+apiServerProxyConfig:
+  mode: "true"
+oauthSecretVolume:
+  secret:
+    secretName: oauth-client
+operatorConfig:
+  hostname: nishir-k8s-operator

@@ -73,6 +73,7 @@
               pkgs.gitnr
               pkgs.gnugrep
               pkgs.gnused
+              pkgs.k0sctl
               pkgs.kubectl
               pkgs.kubernetes-helm
               pkgs.kustomize
