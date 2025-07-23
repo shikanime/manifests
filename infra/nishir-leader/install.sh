@@ -16,8 +16,8 @@ TAILSCALE_IPS=$(tailscale status -json | jq -r '.Peer[] | select(.HostName == "n
 # Retrieve both IPv4 and IPv6 addresses (excluding link-local) from eth0 and wlan0 interfaces in a single SSH command
 INTERFACE_IPS=$(ssh "root@${SERVER}" "ip -j addr show | jq '[.[] | select(.ifname == \"eth0\" or .ifname == \"wlan0\") | .addr_info[] | select(.family == \"inet\" or (.family == \"inet6\" and (.local | startswith(\"fe80:\") | not))) | .local]'")
 
-# Combine Tailscale and interface IPs
-NODE_IP=$(jq -n --argjson tailscale "${TAILSCALE_IPS}" --argjson interface_ips "${INTERFACE_IPS}" '$interface_ips + $tailscale')
+# Combine Tailscale and interface IPs - putting Tailscale IPs first
+NODE_IP=$(jq -n --argjson tailscale "${TAILSCALE_IPS}" --argjson interface_ips "${INTERFACE_IPS}" '$tailscale + $interface_ips')
 
 # Fetch all outputs at once and combine with RKE2 configuration
 tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
