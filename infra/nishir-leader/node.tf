@@ -4,7 +4,7 @@ locals {
     "sysctl --system",
     "apt-get update -y",
     "apt-get install -y open-iscsi nfs-common cryptsetup dmsetup jq",
-    "curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE=server INSTALL_RKE2_VERSION=v1.32.6+rke2r1 sh -s -",
+    "curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE=server sh -s -",
     "systemctl enable rke2-server.service",
     "mkdir -p /etc/rancher/rke2"
   ]
@@ -29,6 +29,7 @@ locals {
   tmpfiles_rancher_config = file("${path.module}/templates/configs/tmpfiles/var-lib-rancher.conf")
 
   rke2_canal_config_manifest = file("${path.module}/templates/manifests/rke2-canal-config.yaml")
+  rke2_coredns_config_manifest = file("${path.module}/templates/manifests/rke2-coredns-config.yaml")
   tailscale_operator_manifest = templatefile("${path.module}/templates/manifests/tailscale-operator.yaml.tftpl", {
     name          = var.name
     client_id     = var.tailscale_operator.client_id
@@ -76,6 +77,7 @@ resource "terraform_data" "nishir" {
 resource "terraform_data" "nishir_manifests" {
   triggers_replace = {
     rke2_canal_config_manifest = sha256(local.rke2_canal_config_manifest)
+    rke2_coredns_config_manifest = sha256(local.rke2_coredns_config_manifest)
     tailscale_operator_manifest = sha256(local.tailscale_operator_manifest)
   }
 
