@@ -5,16 +5,22 @@ metadata:
 spec:
   hosts:
     - dataDir: /mnt/nishir/k0s
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
       noTaints: true
       role: controller+worker
       ssh:
         address: 100.117.159.56
         user: root
     - role: worker
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
       ssh:
         address: 100.78.148.86
         user: root
     - role: worker
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
       ssh:
         address: 100.92.12.65
         user: root
