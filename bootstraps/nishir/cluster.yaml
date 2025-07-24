@@ -4,14 +4,22 @@ metadata:
   name: nishir
 spec:
   hosts:
-    - dataDir: /mnt/nishir/k0s
-      installFlags:
+    - installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
       noTaints: true
       role: controller+worker
       ssh:
         address: 100.117.159.56
         user: root
+      files:
+        - name: tmpfiles-var-lib-k0s-conf
+          src: tmpfiles/var-lib-k0s.conf
+          dstDir: /etc/tmpfiles.d
+          perm: "0644"
+      hooks:
+        apply:
+          before:
+            - systemd-tmpfiles --create
     - role: worker
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
