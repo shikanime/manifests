@@ -40,7 +40,7 @@ for dir in "$(dirname "$0")"/infra/*; do
   fi
 done
 
-for dir in "$(dirname "$0")"/machines/*; do
+for dir in "$(dirname "$0")"/bootstraps/*; do
   if [ -f "$dir/update.sh" ]; then
     bash "$dir/update.sh" 2>&1 |
       sed 's/^/['"$(basename "$dir")"'] /' &
