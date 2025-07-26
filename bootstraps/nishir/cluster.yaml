@@ -170,6 +170,8 @@ spec:
                 values: |
                   apiServerProxyConfig:
                     mode: "true"
+                  apiServerProxyConfig:
+                    mode: "true"
                   oauthSecretVolume:
                     secret:
                       secretName: oauth-client
