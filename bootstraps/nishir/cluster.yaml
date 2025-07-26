@@ -70,9 +70,9 @@ spec:
                 namespace: capi-operator-system
                 values: |
                   bootstrap:
-                    k0smotron: {}
+                    k0sproject-k0smotron: {}
                   controlPlane:
-                    k0smotron: {}
+                    k0sproject-k0smotron: {}
                   infrastructure:
                     hetzner: {}
                   cert-manager:
@@ -168,8 +168,6 @@ spec:
                 version: "1.84.0"
                 namespace: tailscale-system
                 values: |
-                  apiServerProxyConfig:
-                    mode: "true"
                   oauthSecretVolume:
                     secret:
                       secretName: oauth-client
