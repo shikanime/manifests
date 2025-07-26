@@ -169,6 +169,8 @@ spec:
                 version: "1.84.0"
                 namespace: tailscale-system
                 values: |
+                  apiServerProxyConfig:
+                    mode: "true"
                   oauthSecretVolume:
                     secret:
                       secretName: oauth-client
