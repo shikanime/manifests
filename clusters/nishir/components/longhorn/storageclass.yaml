@@ -5,7 +5,7 @@ metadata:
 parameters:
   diskSelector: fast
   fsType: xfs
-  nodeSelector: storage
+  nodeSelector: worker
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
@@ -24,7 +24,7 @@ metadata:
 parameters:
   diskSelector: balanced
   fsType: xfs
-  nodeSelector: storage
+  nodeSelector: worker
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
@@ -43,7 +43,7 @@ metadata:
 parameters:
   diskSelector: balanced
   fsType: xfs
-  nodeSelector: storage
+  nodeSelector: worker
   numberOfReplicas: "2"
   recurringJobSelector: |
     [

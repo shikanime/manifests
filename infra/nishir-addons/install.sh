@@ -6,8 +6,8 @@ set -o pipefail
 
 # Configure Kubeconfig
 mkdir -p "$(dirname "$0")/.terraform/tmp/kubernetes"
-KUBECONFIG="$(dirname "$0")/.terraform/tmp/kubernetes/config" \
-  tailscale configure kubeconfig nishir-k8s-operator
+k0sctl kubeconfig -c "$(dirname "$0")/../../bootstraps/nishir/cluster.yaml" \
+  >"$(dirname "$0")/.terraform/tmp/kubernetes/config"
 
 # Fetch all outputs at once and save them to terraform.tfvars.json
 tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
@@ -19,6 +19,7 @@ tofu -chdir="$(dirname "$0")/../nishir-services" output -json |
       "longhorn_backupstore",
       "prometheus",
       "pyroscope",
+      "tailscale_operator",
       "tempo",
       "vaultwarden"
     )) |

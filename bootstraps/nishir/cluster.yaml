@@ -1,0 +1,178 @@
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: nishir
+spec:
+  hosts:
+    - installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
+      noTaints: true
+      role: controller+worker
+      ssh:
+        address: 100.117.159.56
+        user: root
+      files:
+        - name: tmpfiles-var-lib-k0s-conf
+          src: tmpfiles/var-lib-k0s.conf
+          dstDir: /etc/tmpfiles.d
+          perm: "0644"
+      hooks:
+        apply:
+          before:
+            - systemd-tmpfiles --create
+    - role: worker
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
+      ssh:
+        address: 100.78.148.86
+        user: root
+    - role: worker
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
+      ssh:
+        address: 100.92.12.65
+        user: root
+  k0s:
+    config:
+      apiVersion: k0s.k0sproject.io/v1beta1
+      kind: ClusterConfig
+      metadata:
+        name: nishir
+      spec:
+        extensions:
+          helm:
+            repositories:
+              - name: fairwinds-stable
+                url: https://charts.fairwinds.com/stable
+              - name: jetstack
+                url: https://charts.jetstack.io
+              - name: kubernetes-sigs-cluster-api-operator
+                url: https://kubernetes-sigs.github.io/cluster-api-operator
+              - name: kubernetes-sigs-descheduler
+                url: https://kubernetes-sigs.github.io/descheduler
+              - name: kubernetes-sigs-nfd
+                url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+              - name: longhorn
+                url: https://charts.longhorn.io
+              - name: tailscale
+                url: https://pkgs.tailscale.com/helmcharts
+            charts:
+              - name: cert-manager
+                chartname: jetstack/cert-manager
+                version: "v1.18.2"
+                namespace: cert-manager
+                values: |
+                  crds:
+                    enabled: true
+              - name: cluster-api-operator
+                chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
+                version: "0.21.0"
+                namespace: capi-operator-system
+                values: |
+                  bootstrap:
+                    k0smotron: {}
+                  controlPlane:
+                    k0smotron: {}
+                  infrastructure:
+                    hetzner: {}
+                  cert-manager:
+                    enabled: true
+              - name: descheduler
+                chartname: kubernetes-sigs-descheduler/descheduler
+                version: "0.33.0"
+                namespace: kube-system
+                values: |
+                  deschedulerPolicy:
+                    metricsCollector:
+                      enabled: true
+                    profiles:
+                      - name: default
+                        pluginConfig:
+                          - name: DefaultEvictor
+                            args:
+                              ignorePvcPods: true
+                              evictLocalStoragePods: false
+                          - name: HighNodeUtilization
+                            args:
+                              thresholds:
+                                cpu: 20
+                                memory: 20
+                                pods: 20
+                          - name: LowNodeUtilization
+                            args:
+                              thresholds:
+                                cpu: 60
+                                memory: 60
+                                pods: 60
+                              targetThresholds:
+                                cpu: 80
+                                memory: 80
+                                pods: 80
+                              metricsUtilization:
+                                source: KubernetesMetrics
+                          - name: RemoveDuplicates
+                          - name: RemovePodsHavingTooManyRestarts
+                            args:
+                              podRestartThreshold: 50
+                              includingInitContainers: true
+                          - name: RemovePodsViolatingInterPodAntiAffinity
+                          - name: RemovePodsViolatingNodeAffinity
+                            args:
+                              nodeAffinityType:
+                                - requiredDuringSchedulingIgnoredDuringExecution
+                          - name: RemovePodsViolatingNodeTaints
+                          - name: RemovePodsViolatingTopologySpreadConstraint
+                        plugins:
+                          balance:
+                            enabled:
+                              - HighNodeUtilization
+                              - LowNodeUtilization
+                              - RemoveDuplicates
+                              - RemovePodsViolatingTopologySpreadConstraint
+                          deschedule:
+                            enabled:
+                              - RemovePodsHavingTooManyRestarts
+                              - RemovePodsViolatingInterPodAntiAffinity
+                              - RemovePodsViolatingNodeAffinity
+                              - RemovePodsViolatingNodeTaints
+              - name: longhorn
+                chartname: longhorn/longhorn
+                version: "1.9.0"
+                namespace: longhorn-system
+                values: |
+                  defaultSettings:
+                    allowCollectingLonghornUsageMetrics: false
+                    allowRecurringJobWhileVolumeDetached: true
+                    backupstorePollInterval: 6000
+                    defaultReplicaCount: 1
+                    replicaAutoBalance: best-effort
+                    snapshotDataIntegrityCronjob: "0 4 */7 * *"
+                  defaultBackupStore:
+                    backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
+                    backupTargetCredentialSecret: longhorn-hetzner-backups
+                  persistence:
+                    defaultClassReplicaCount: 1
+                    defaultFsType: xfs
+              - name: node-feature-discovery
+                chartname: kubernetes-sigs-nfd/node-feature-discovery
+                version: "0.17.3"
+                namespace: kube-system
+                values: ""
+              - name: vpa
+                chartname: fairwinds-stable/vpa
+                version: "4.7.2"
+                namespace: kube-system
+                values: ""
+              - name: tailscale-operator
+                chartname: tailscale/tailscale-operator
+                version: "1.84.0"
+                namespace: tailscale-system
+                values: |
+                  apiServerProxyConfig:
+                    mode: "true"
+                  oauthSecretVolume:
+                    secret:
+                      secretName: oauth-client
+                  operatorConfig:
+                    hostname: nishir-k8s-operator
+    version: v1.33.3+k0s.0

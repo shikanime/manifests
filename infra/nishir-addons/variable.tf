@@ -53,6 +53,15 @@ variable "pyroscope" {
   sensitive   = true
 }
 
+variable "tailscale_operator" {
+  type = object({
+    client_id     = string
+    client_secret = string
+  })
+  description = "Tailscale operator authentication configuration"
+  sensitive   = true
+}
+
 variable "tempo" {
   type = object({
     password = string
