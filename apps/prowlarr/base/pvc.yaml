@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: prowlarr-config
