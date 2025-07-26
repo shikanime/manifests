@@ -75,6 +75,7 @@ spec:
                     k0sproject-k0smotron: {}
                   infrastructure:
                     hetzner: {}
+                    k0sproject-k0smotron: {}
                   cert-manager:
                     enabled: true
               - name: descheduler
