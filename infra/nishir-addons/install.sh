@@ -6,7 +6,7 @@ set -o pipefail
 
 # Configure Kubeconfig
 mkdir -p "$(dirname "$0")/.terraform/tmp/kubernetes"
-k0sctl kubeconfig -c "$(dirname "$0")/../../machines/nishir/cluster.yaml" \
+k0sctl kubeconfig -c "$(dirname "$0")/../../bootstraps/nishir/cluster.yaml" \
   >"$(dirname "$0")/.terraform/tmp/kubernetes/config"
 
 # Fetch all outputs at once and save them to terraform.tfvars.json
