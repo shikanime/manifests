@@ -70,11 +70,12 @@ spec:
                 namespace: capi-operator-system
                 values: |
                   bootstrap:
-                    k0smotron: {}
+                    k0sproject-k0smotron: {}
                   controlPlane:
-                    k0smotron: {}
+                    k0sproject-k0smotron: {}
                   infrastructure:
                     hetzner: {}
+                    k0sproject-k0smotron: {}
                   cert-manager:
                     enabled: true
               - name: descheduler
