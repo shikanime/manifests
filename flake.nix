@@ -79,6 +79,7 @@
               pkgs.kustomize
               pkgs.skaffold
               pkgs.skopeo
+              pkgs.sops
               pkgs.yq-go
               self'.packages.longhornctl
             ];
