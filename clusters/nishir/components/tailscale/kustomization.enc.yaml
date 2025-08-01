@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+secretGenerator:
+  - literals:
+      - ENC[AES256_GCM,data:1E5oAfzmPFYjfA+msRyrOaqsmwhd4BtV66tx,iv:SqNm7oOc0REPKF6DAGqhs8mXR4pRpkBV6fPPkaujDrs=,tag:/vUTDIPGc6KyA/kcmpnqCw==,type:str]
+      - ENC[AES256_GCM,data:wZhroU7XtBeqAVA4iN6XiNz3MYWeiokjKQAyCCrgupodFU0ecmZVNk6cbxf8p0/B6DDwYxhIDcsonIbTejHZ0TNJJDhHpGjlTk58gHFk,iv:rM9J3bYD/ok6VmgbKR2z/Q93N/aG8f0+OHZLo+hst8M=,tag:Sx/0vxfeN77nlEAY6QQfvQ==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsMUhDM1NuNVRaNUJXUWFp
+        TEJqZEY2ZnRhU0N4aVVvZTY5SmtMRFU0S1FnClowdU9uSG9oZGMwdTFWZkM4OWZQ
+        cS9zYjlxbmt3VU1uZDgxanp3YzlqVGMKLS0tIFh5bDRUODVneFFVamJHWlUxZ1Nl
+        bnN3ZnR1VXNSaXlwSXZic0I0b0ZjQzAK2417V349qHaOi7ib++lz2L1nxIkF517l
+        Y87XomWhxcioxdrA70s/47GgFjEolGzT6x5XSTG/ovTOmtjNCcFzPg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-07-31T22:47:01Z"
+  mac: ENC[AES256_GCM,data:HuKskvbGl1QI/hnaZJZp4ZxiY+CNgy0Dq5x5j4yantgGYiSw9vI1HUfZO75Wbi+JNs0yUa6pfb/cpXNmBmXEnl4lUXzn+rNh4E848tNHNo0VSbkqyyWh44kKQ9XyAL67HGi7rhdysvACZasFN/F8q6k8umCW1PknNv0NLkPjUts=,iv:ejnOzUESvKC79tPmiZ4gE9aXkGPx+chRhpoe/Bu6oN8=,tag:ANpfhEdGV6tP0lVlFcDmPg==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

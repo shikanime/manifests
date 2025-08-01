@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: rclone-ftp
+    literals:
+      - ENC[AES256_GCM,data:pdPGzd3JpLWhQfz3xS2z,iv:qK8+hnMtjNR0+VG4WnJ/u/hibmQ6HCJtgyZENgu7Owc=,tag:Y1gqxkDi8KWFMpxyC1Oq1A==,type:str]
+      - ENC[AES256_GCM,data:qBPmv0lIbHr/j2EYfpakIl1vfxi9G1UXrXXueS4T0rl1B5UjMxuhYi4AHGiiyh1ngmUrHLY=,iv:D0pTaDs8ff+ukoLSxSaUr+TEmygF2hIN9MgDdvll6NI=,tag:/pqsN+dwE0FJMruzlNm5yQ==,type:str]
+  - name: rclone-htpasswd
+    literals:
+      - ENC[AES256_GCM,data:cCfLWwzBFqf1GxM/yA1ZIIZQN5hruizeGGJigiE2U323SR/pTgxImwh/eomeN3dkPXr1nGLXdL/2fo8K/QlFFIO8aNXIq7mVuBeXTg==,iv:tacRLh1RSm+8VFJSYmf/PnFgR0NnAOvJCZa6UoWOeWA=,tag:OQkvp8sL3NmthNEhvH1ZAg==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYampsOE1CbUU2aWVOUEJW
+        VzdnWFZtM2l0QllvSDZ0dmo0Y3N5amhMLzBVCmpNditZKzNHOWkza1dUTXFPTmhK
+        Q0pCNFVkTGkvRUlETHE4VTJlSXVXc0UKLS0tIFJZMmphbE1DNU56ekk3NlhXc1FD
+        bTFyRzMzZTBuSklHV2hpa3NIZnhxdlkKigOzQ7ARGkmJHHD1Ck+vP30Bw76twyXq
+        VmtIeKhiPWrlTlKUPmYnZTdH+N/hOg72Mo2c5CB1pwiJ6ZqBSQ+OhA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-07-31T23:51:52Z"
+  mac: ENC[AES256_GCM,data:PTOflUtMBZwW8kwm1f/C+39v8dNlRVMmRyCad9bDIYn1LLAyNFQusv4EB9p53OoLfMo/O1ye2bziQgHEnUtb1ulwXsrfxW1I7NoJsgDvYORBzJk6v7RQe93RYJA5cdiJe+97Vo4J4bpkTnjlI9bpLk51au0hQ7puQpsWNKomLWA=,iv:BuW+rlBbftSj3uRIsu2iGgSeuyO/BQMD1vkWohEPrvA=,tag:aduWrRZKOu3GR0t5c75WqA==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: gitea-tls-password
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:x0PPkRiKGRYDT88eyLaekPkUUUJFLdE=,iv:MZXZiufgya2363asCpjbRhsXJtsGxv7S6pHnuGRkIkc=,tag:5g5Jfu6zct51A+iwiBh1Mw==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpWnp5Rkl5NTlEZ1dqYWZS
+        Q3RRa1dDWHg5eldjWitnQkNMcDg2bmhMbGlvCmY0ZjdRVlI0TCtKbDYzc0pRaWkv
+        MWltZDNMWkx1dnB5QlBPK2NOckduQTgKLS0tIDFnL3Brc1RiOTY0cUFGNTdEZVVQ
+        Z3BCbHJqOXh4ZktBZUZrWGRld0VVa0EKs48QiFluKWqbaO6tyGe08lRgZIP/Pct6
+        r4xf1CML2b5z29eYeK9bbAWdqwbc7KgQJkrOS/u9KL222tPfBQrZXA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-07-31T23:59:18Z"
+  mac: ENC[AES256_GCM,data:ts46zgWoXd1R1qOj0kMzCmZgfK5boRM6+J3SoRq9GYmVTEgntir2GDy7iU1GhrERTWg50kKhCYrz/GcBh2hHlrsW+QHHJ6LbjqSu8Cpbtu8SsMQftg+pZShQwJxdY4eOHunrASXSI5YeAG5b4Fm6BtZIfeg1nZ7nFYMELSVqfCQ=,iv:CvtZPxUgBAo+hwaf5cKs/jMIVDeRxM0dLMmh8cDisV4=,tag:gUzZNzurfH/lEj8JLfudgw==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

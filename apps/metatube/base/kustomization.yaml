@@ -15,3 +15,8 @@ labels:
       app.kubernetes.io/name: metatube
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 1.3.1
+secretGenerator:
+  - literals:
+      - token=vgKac>q!57Tj!-
+    name: metatube
+    namespace: shikanime

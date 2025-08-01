@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: jellyfin-tls-password
+    literals:
+      - ENC[AES256_GCM,data:RwUSR4hPFBfjzJkPx2vCFD/nyUlskBZmyhVSHM4uH9ufCw5JczN2S2qFci6mX85jUHZUZeA=,iv:zZXrra4jBTUzugKzxfRAtlC1VI8R7S5LjhwvVvKk3VM=,tag:on9606pZLaG/4y6Uwqx9jw==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTSWVWaFJoOUx4UlRwd0tZ
+        ODlMb08walpmMmpUYk9vbG9FeEIzNkp4QkhnCm9TMUMvMkVwcXlmNGlmdW9YelEr
+        Z0pUcHRJcW5WL3FyVVhSb1JWOHlwQkEKLS0tIHNrV0NZMDdreEJvcy9KaC9teVJh
+        SWI2bUhKWHhZSGlUNnducHEwUVk1N28KX7Bb2ONQLDTgRmjhYPCbUMEY/I2bSnz7
+        p4lVGEX1Db7cmCKKp9pXFzJ4jhd6V1yMRYcW/Jp8lmhzDZMfDOu7xQ==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-07-31T23:48:30Z"
+  mac: ENC[AES256_GCM,data:o6MsTPJKdPKABmqT2ctaqsmSLbE+aa48CUEatO9DzAgqs0Yg2vAhou0dyWBFgGD84TD4nxNlT1VMH9mpauOs8XVSJZsjuUL9+9YVOkkZ/A8mJLZsz5n1gtV2H2U2+Hq6fHltjgXGhAmsJ6lo52P/6n7+pV5b32LKuDQfiTc9N0M=,iv:11v+JgOnl6pFnmenKV02xO75j8+jOk8x8KycgTPdxT4=,tag:Q/HXIrSmx888WaMJDB7QSQ==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

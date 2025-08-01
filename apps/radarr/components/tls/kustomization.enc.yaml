@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - literals:
+      - ENC[AES256_GCM,data:BJFcApjT8osP/xDUq/51D3/7RIEDPOKvAfyr66hUuHbXsFNgbO6F3S1i3D09bb20QWbP1OI=,iv:VYsrd6V5wMz8IWGV+azGV4rCuuUAT/9bkOX1fdRdmVc=,tag:DbgaFzzTbe+5fopC+oZthg==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHRVNkNGRDVHBQUUkwcFhE
+        cTRaNnJvVG80SkIrQjErR1puM2FBdEk1MWxzClBRclNmMGNRSHpVbEhCN083clVj
+        clRWQ1JlR2FldVdJUUdkdmZHcVJSa3cKLS0tIEszNFNkbmtrd3Z1djdhdzRPR2pl
+        VlB5N1Q4ZmFmYTVxWHduQk4rcFBpK0kKTcuoLlpX9njIRS8izHf+reiNUlHHoTL5
+        nJBRJduFjn8J9NpwGNq85JIn22pbjrL8Yh9cUzg95kY9mY1hYc+ayA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-07-31T23:50:24Z"
+  mac: ENC[AES256_GCM,data:m3mx99W4SFInv/NGXcKSSju5JgCkdfZBzuCZetHk0mEF1R49rTN9ayU5mYpEJCeQKM3qt+grqLjah33rK0lQ8s3xmYQ2UhXH+Wk2Eg/NETRsBP2HZGKRyzXaRE0lUULQ13HoCYe3FVPPDypD1pdqdwmBfjSwmDdc+pFyqpkMw9g=,iv:5klnVIzmCOutWtfpJhP68x/Bdfi71bWJzHlTqbZltQ4=,tag:sdsZi6nbqqdB23lTij8hag==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

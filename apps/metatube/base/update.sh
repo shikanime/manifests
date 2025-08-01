@@ -25,3 +25,24 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
       "$(dirname "$0")/kustomization.yaml"
   fi
 done
+
+# Get current token if it exists
+CURRENT_TOKEN=$(yq '.secretGenerator[0].literals[0]' "$(dirname "$0")/kustomization.yaml" | sed 's/^token=//')
+
+# Generate new token only if current token is empty
+if [ -z "$CURRENT_TOKEN" ]; then
+  TOKEN=$(openssl rand -base64 32)
+else
+  TOKEN="$CURRENT_TOKEN"
+fi
+
+# Handle SOPS encryption/decryption
+yq -i \
+  ".secretGenerator[0].literals[0] = \"token=$TOKEN\"" \
+  "$(dirname "$0")/kustomization.yaml"
+
+sops \
+  --encrypt \
+  --encrypted-regex "^(literals)$" \
+  "$(dirname "$0")/kustomization.yaml" > \
+  "$(dirname "$0")/kustomization.enc.yaml"

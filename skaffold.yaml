@@ -2,10 +2,6 @@ apiVersion: skaffold/v4beta9
 kind: Config
 metadata:
   name: shikanime
-build:
-  artifacts:
-    - image: ghcr.io/shikanime/manifests/sops-secret-generator
-      ko: {}
 profiles:
   - name: nishir-tailnet
     manifests:
