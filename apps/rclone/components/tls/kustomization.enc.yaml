@@ -14,24 +14,24 @@ secretGenerator:
   - name: rclone-ftp
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:gtTT7CLBg1mPuOAa/QBs,iv:Hqf7aOyiGal57kL7hgspBobgMe5PdRcfLWP310ngBAY=,tag:Kg55821gjlyDTTxtiif46g==,type:str]
-      - ENC[AES256_GCM,data:Cg956ahwmDHVErbLJAQL403D6hmqsYg=,iv:KtYpjTqsLNpdfJHi7MAjHD7Ai6kyGDZFo5SEDi5TF7A=,tag:XKTD6HfTvF4/CxmwTQHSGQ==,type:str]
+      - ENC[AES256_GCM,data:JmodooL9i8giWns2Tc6X,iv:T77zPt/pHvNFz3A3AXJw2qA1gbb2MW7kCmV0odL/UEo=,tag:dkblOSZrpTWb0c44eMJr1g==,type:str]
+      - ENC[AES256_GCM,data:A1MwXSSUyQbeCnSRapms5UavqKPJF+0=,iv:KnSyE+sl4e/me56zdt3sGmzGpBAdr+5U1NLtqNs6Bgs=,tag:2HuxNk0ucAjGCfFw7B81Vw==,type:str]
   - name: rclone-htpasswd
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:i8N/guJfsFfvw+37XH+gbdf28QTUa2d7Xr4xYR1lbU9J119sPeYnZcdWDaJQrNVn938dEEJoIQ+CELS2eQEeaeDDoQFDyPgWHcSyDQ==,iv:y3VGyGrpCXDxYeFCCMcdfgd88wvXs0ZiqJsr7G5/0hA=,tag:nea63vsAqo8CzN1BubBkMA==,type:str]
+      - ENC[AES256_GCM,data:9mBRdFBglx8Fnxynqhn3leXGRBtBDWbBsiOE4hdXr6SG+OsdDww0F0Htp2sOUFt5qFrlPHqsy8citjcjP2/ZwSrxgB2a9Vs4zcbsRA==,iv:v4Bctexi78KPAJlbnVV3p01Jr2RFeoh3zTtUk45yBaw=,tag:LVxcNc3xKYdV7rgSpU8L6g==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6M0tkbjJkcGo0Q0l6cmdE
-        RWVGUGZQdkd4c1h5YmJQZ1daamV3YlpPNXh3CnpJa0dHYXMzdXlxY01mY2diOGNB
-        bjFkWDVhVHhjZzYxWG1acllyU01jRHcKLS0tIHZOUjc2RXZxQy9WRmE2WU1taXZk
-        RWg0QndPMlVhdEo0Rzh6YUcyQi9HWXMKjBOujBsdsAipHIib9jOZ11NDj8kg6yiv
-        f8xAMm5gKF13dQiczXVWs2SnCOYblXpIH6aj3soH6sZmWtS56BxU5A==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYbEwxOWsyZlYrZ1U3d1VK
+        ZjZKajVkTStZT05SUEptcllEcXRja0J0VEFJClpHbXl1bldkM0ozd3NCR2ZOd0ZQ
+        TmxiKzhJRlRBOXBMMkZERDJhLzBzVU0KLS0tIGFzVEJQcnZDMTRVWXlzUHluQW5u
+        U3VHT3pmZk9ucEVoM250L3VNTHpJdUUK9QrUJ9xKWuBkVz1myvpV+LjM+uOs5MPB
+        vscsGCnxyP8B6pgJrYROKorEQIQXvGANklMzVM5evde8BcZHk58z3g==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:25:55Z"
-  mac: ENC[AES256_GCM,data:pYFIRCCA4Bvug8NHCu7C8bL/YA6hnVMXcLo4TxDYfE1glyuwmVD/ioATZO4Hv4zCxlHnqWy1Ttp7QOkvCF2V22vSzUR5FYwm9ynnzf+Wy49m+kdKg0mA9kosvmu0h6bO9ehfRLVqqyufvQDVfk45nPBIvfzPHpUhRLQzkU99tLo=,iv:G+tIX2bLLl5yGppeOrLs5yaSWimymiBF/JNlyEA0DLU=,tag:kbU9cMORGeh/kxDiUq21hg==,type:str]
+  lastmodified: "2025-08-01T00:27:34Z"
+  mac: ENC[AES256_GCM,data:w5CllxTgt6JA7aJTBl1XFt9CNUhjy/WCt7KJVPcLim3aC7owZ2jW6tN/QsN7LK/pYJ9GGPMvxBUk89dHqZDjfgFBVseHF+6IX113TyZpZCdgb2JR99ATuRxDRtaKi/lPrzpYOnAvucRTmVc1rtbCiDcYA7g6w79g40cF5yp5YaQ=,iv:lkiWdWbglh+eFZCnJitbi1nD1Mc93qeQohTNq9VovmY=,tag:E5iwKB5YZkfYDwyxlLCH2Q==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
