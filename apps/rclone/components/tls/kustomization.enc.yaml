@@ -1,7 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-configurations:
-  - namereference.yaml
 patches:
   - path: patch-ingress.yaml
   - path: patch-svc.yaml
@@ -11,24 +9,24 @@ secretGenerator:
   - name: rclone-ftp
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:nl0XxxIRpf19qaz7xbW9,iv:74hdo4j0TD+e8xglQTveNDb/OMPkldTHqZ/RHBoOL4A=,tag:upagyqLof4VcwZdf1HSE4A==,type:str]
-      - ENC[AES256_GCM,data:arTUcETo+3FWg/qZBiaf4174SATJ7QU=,iv:hYaNoGqDkUeVMYstwrWE2ZPMLOkQt6LOk03F94/rb+k=,tag:5sxsRegWlGFaPn6Dq2hcvA==,type:str]
+      - ENC[AES256_GCM,data:KeXnu4id0A50pmefStqa,iv:TRImaB2efe7IC80yiPQ/J6mO1TVovUZsKW5dYonnE0Q=,tag:oEkfcDfdY5+wXPvNsxIZvg==,type:str]
+      - ENC[AES256_GCM,data:Zv2iDj8Hf3ds+WGTCoHZeH9dFcHdeME=,iv:28ALNelmk+/FPqC4MjrGw4V0LRWa/3XgFnShV1WhMaE=,tag:sLViOhCi94NnBP4JDMUZFg==,type:str]
   - name: rclone-htpasswd
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:L3inrnvo2kTEAo7bDfHDYwSn/cpjd8g8nq3pA5Ds3eMlqEepSM5+BuQHEsf0giQQcE1j4PlsinxxKMCZMqXADhHP9wotraAEW9bbNg==,iv:bFQWNDlzVN3Z+dPrI5uciahsnPYnQ/GCTHLlkQCMvLU=,tag:y1APwPjZu5rv3fZvTFDtuQ==,type:str]
+      - ENC[AES256_GCM,data:BAkUg+gGZlz+LwcV+XphFtheuSrkmkqYnE1aku54T1XTAjlc9ift6+2xvCjjxdbSmbiOZ08Tb1VDARo7vYC/CC16ELZ9EuzB4TeNLA==,iv:yUlkDPiqCbkiTydhbrbhUn0INHS1Ac476rH6ipFyJdA=,tag:iqHNKWOHxbQ1e2iEDF7yYA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBReVh3M3E0NzZydENrUlJD
-        eFhaa2hpRlhScEhnbmJyUXRiNkxyQk1ncFNNCjM4TkFNYitOSmtubnBIcGs1QlVV
-        bkNkRll3R0grYkdYdm1wRFJhUVlmTTQKLS0tIEtGQkZIcWo5UzNWdFRVcGUybTJW
-        V0h5eEhzbTBKYXVWZDV3L2xvdW9aMkEKdTA8P1x8227T2RwcChVx152cQG/34ATT
-        FYfAyXdU/tvgVHnzTogakNPskwbaQg1TbrA3cx/cW82HsA7mTlSpNA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhelJ6ZHVZY1h1YWJ3Q1Fm
+        U1NNY2RSQ1VUZ1E0UGIwQjlqRlE3cjdqWldvCjdFT25UczkvY3AxS0RMZGpoSkJ3
+        TWNFUjBKdVhzeVBaTXI2eFB4MDlnZDAKLS0tIGsyZngzM2tpZ280WjVRc0hOT0lH
+        a3lWV1VGYmUrSW4zdFFqYy85LzhneVUKJvgWtAmGzW33B1THJZO/MtbwtTl9kNRc
+        wW4r64Pk99kV+oKOyEjUp0HSgAANHz2WAETrLF2EOLVEUHUCOiWzrw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:35:33Z"
-  mac: ENC[AES256_GCM,data:DMJ7JVUkJkyOvvYrb61MEgUDAONXGNdNh2qAbYlJ7VMdB4Bkf6Zis8XkEgrmzMOnpFiF3rS9qYbuR1EcibDSoo7fR+yoGW1Ro5eh5woOkaV6MYviqH/bT0rONB94L2ZxL23VRYDHUuUghQIqDWyI+LhI4PS1oYUlP/xBKiUFeCc=,iv:opT/4vGzxPpuhI+BPgn2t2tLvj0c/LMRpd481GB5VAM=,tag:TfTRxFl2xw+LuMvkkDZIBA==,type:str]
+  lastmodified: "2025-08-01T00:50:44Z"
+  mac: ENC[AES256_GCM,data:NG2AVNfjpWqSAqHpRr5LcQCSi2zCVZHdhMzuXhqEQO1M2RRucZMBJRpoxx+zSj7U/xY88R6WUWokKXeLC2+yffbwonMo1wSvlwqKkGktBS2piJZndDy05UJGIZwa8u+DRg4Wql8kpTIgdVk0wSHtg+26TdmOyyNyNQ9rv5DFWl8=,iv:QmGzByhcvj9vRPxIprh9H8YpcTJhdw1Gv8ZyIgWvqM4=,tag:PW8BrxT2Au9xMcLCjvIHlw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

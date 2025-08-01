@@ -12,19 +12,19 @@ secretGenerator:
   - name: gitea-tls-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:ywU+07SaLhHj3mwXy/CLWNjqnAfS5/E=,iv:t1Q8l0wACJItT8KphVyHkO6SnCZkfOuxIbx/SPGQJ/8=,tag:KKY3YYSUuSoYrmTv+gqRcQ==,type:str]
+      - ENC[AES256_GCM,data:wIOcFEe6Qpzn0Wjgq6We3tqGcdtkY8w=,iv:zAgmyIZlNrVnsJ9YveY5J2jTHdjG+JOL4EXwwPMfeeY=,tag:jDyRKD2SzU2HZXqy2oROzw==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtbWZ0YUtsT1p6U2x2bTVV
-        Z2xCTHltcmV2VGlnVFBnR2V2K2VNVUhxOFhrCkxuUTFDUkdJa2Mwd3RmUFB1U1Fv
-        WCs5bWtOcHJwb3pKV0VnOWR2TzFRNTgKLS0tIFBTeVFTS25NRVdyV2ExNk9CTTdF
-        N09Cb3oyeW4rbGlBbHFVclY2aTBzK1EKHru7u5pc3977mlH3ULFXDjr1m0iMEenV
-        UcZS5NQoRjW6S6Ay1nWBM9tCaJ5Ysu8cNWAwRTwxii+HTkpfYDWnaw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDWWV2N2ZTVWxwZS9OLzFK
+        SzBSR2QvSjd1c1U3Unc2UDBjdFZDUjRZTm1ZCm1pd3RDWXZ4a2RFM05KcVUrczhi
+        QkhBOW8va1dDSkQxUHUyd0cvVVYvZUUKLS0tIGNXcXFMdXRYaU5xN1NmUWdFSTBS
+        a3pRamlwejFNQ1MyZUptcnV1V3RhSmcKekiQUdbW9VazsXcN7sFN2kKvUqQx+4do
+        Jj+ipTh/CA8tT5PCAYGibv3HM0ZI77NzhH91tXRr6wiAwgIlYCSXMQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:35:33Z"
-  mac: ENC[AES256_GCM,data:1Q3hvq91mdGX/vYF3+AXIKFJ2A9kzgSGs/SjMj6qwA+oaGzRCIM0iG2Ae4FSuUifFt+bDymONMRrj+LZSMby+zCijJiGryGnHbZSafqb8/UNHU+XBDW7ga2DBe/zyK4Blllv19o9KCXAIbSyXWM5BM+Bx5cWvg5SAT6UBWziwJg=,iv:poYKuyf4Q1cM6OOvnInJ1xVEJ3U6nCmw1O4GbNMK+xU=,tag:aWMjWc/NV9kjibl69wJAvQ==,type:str]
+  lastmodified: "2025-08-01T00:50:43Z"
+  mac: ENC[AES256_GCM,data:ax8ghnJluCoThQi13TKGV/Kb757Z/iVp8TAXONeYTkQlmp1mxNpWjJLZvuHlwKdb/9sdEVqHgjE8tBdTsDVY+TuJyoSqoRebGUzEJMEB6n3DAqJfIWN85iAf6itRfoA2ki/msbtjFxzMaZjvFgkKUOyynNGHmvGaLq5fQh3eNfg=,iv:ULq/DSbry8ouTyErg7dFNVOoC60UQdRp6GHWnYPQcHk=,tag:pkx70qIY5K+zMppz52zfDQ==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
