@@ -1,7 +1,7 @@
 nameReference:
-  - kind: Certificate
+  - kind: Secret
     fieldSpecs:
       - path: spec/keystores/pkcs12/passwordSecretRef/name
-        kind: Secret
+        kind: Certificate
       - path: spec/secretName
-        kind: Secret
+        kind: Certificate
