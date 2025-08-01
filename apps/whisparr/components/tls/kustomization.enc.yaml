@@ -1,10 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-nameReference:
-  - kind: Certificate
-    fieldSpecs:
-      - path: spec/secretName
-        kind: Certificate
+configurations:
+  - namereference.yaml
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -15,19 +12,19 @@ secretGenerator:
   - name: whisparr-tls-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:aendqklwYdMNqZiUFhAb/EMRstoscSYKKtzhv5nkcURMGO8FmenvryoX0h1YGp/qQjT2ysw=,iv:rO2PtF6c+HCk/NRa3f0TmzWeS/YKv7X3uwRGf3Gv0hc=,tag:RgMEAl1LWDxwiJQx0w+Y5g==,type:str]
+      - ENC[AES256_GCM,data:MRN/dfLRBdhT/3+bDYPnvTydWPds/4lzbClXyZUJNdpaLEo+sT5j63tz9tiBdtu6wJ8JQFw=,iv:Ey8X83I2jIfh1x0x6UxLrCK6l/dmRC4Zx8Pf4SYRFmo=,tag:49ZeCA3FnV/VhYrK98LnAw==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFQmVCVTVhaDdiOEphN3dZ
-        VGN1YkRDci9ha0R0SmVvUXlKTG1SQUJhQVZJCkNhUm40aVk1elRycUl6Nlg3RFM4
-        WjV6RFFXVy8vZFQ2b2w0bmhZVVlFNW8KLS0tIGZoampKa1pwazV0Y2NTaVRQV2pt
-        U25FUWp6Q1hYUnBSbzA1TTk5dm5rMTQKoTIfemXIfDjHYIA3t6Md700L42Vn6s9q
-        wYQ5GZU9RJrMqDmWLLv9DVlvsFhOsm23sUN4LAUF609US5B4uxekbg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSYzRXS0NVbHowVlkxQUNE
+        K0l3T1NwOVRZUGxuY0xMdXdreGMyWk1tLzE0CnA1eUVNd25tcW9WYVo0ZlMydlJj
+        eGhoalVMYUlMN1lIWVNzTHcxdm9TcUUKLS0tIFlEZTBWeVcrMFNuSkVVMTE5N3pp
+        ejNoZWt0b3dLNGgzTVRhVWR2dWtsNTAKIJDY8vdfkd+yd9yHNHX6r+u0bLCWDUtR
+        3MCo13g6DwTDDUZ17j0eNUCbgz9+Wtm3rqCkLvef2p3amVukDqufbw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:27:34Z"
-  mac: ENC[AES256_GCM,data:MOs+In9PPY9LLNYYMOlNj5Kxsx5cE1BfpdAkC/OsVUJaH8Sn1wz14GEkN2QA7PFG/GW5HJk4uF54z4XZX23A1hj/4Cg65rQN1r2pMgNLoBr2xuZFXaGptV9DCZNibNA3/0LPzmtzjt41p/xEfBqs/Y3ppld+3INHQp85v8saQCM=,iv:9dmW2jUIHSUsIb88ybVWpCDrFGeMJLAC+iyvOHG3IiA=,tag:dY97nh+hwD555BHRBDeN5Q==,type:str]
+  lastmodified: "2025-08-01T00:35:33Z"
+  mac: ENC[AES256_GCM,data:iQHCOWjAITvSfAvuCmtnDjcQ8ufVhgcAgdplwNfBYyFSXbhrt8sMol1m6SaEsjIp+YCm9ZuLY8LjQsWhu0qTNfCQoXpVOi/5TAgLPRfJjaKTFYJRQiCQgZENeCy4Wr1XuEP13MXMf3He7BifoIBAe53RlHyFbuvHMgAI+eK0b3w=,iv:uBfrb8LinyaYbso1TBeUOOlXyQ9zYEjbYj0W2rZtnwQ=,tag:hM7JGGLSTAH5IhYztENWlg==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
