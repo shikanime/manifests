@@ -15,7 +15,7 @@ spec:
     pkcs12:
       create: true
       passwordSecretRef:
-        name: radarr-tls-password
+        name: radarr-pkcs12-password
         key: password
       profile: Modern2023
   usages:

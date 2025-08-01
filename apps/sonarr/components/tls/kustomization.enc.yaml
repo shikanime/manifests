@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+configurations:
+  - namereference.yaml
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: sonarr-pkcs12-password
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:dwHuutEHPANo8aP7Qw9Cz/tjHyhDQQo=,iv:ZgK8H6ZLNRBTenL8b1VXAtxG4Zenf0B5YXMl5o90zMc=,tag:Bvy88mimPOXcnhZmZaKjXw==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqdlVQdndTbkt5am1RaWls
+        OWpJTmJtaTZ2bitadG9rZUZINmtOZThPS2pvCjMrZkRmcHBVTksyMWc3Rkw4ZDdu
+        eTRUMWc4cHlrNjBwbmxSU3YyZWRTSkUKLS0tIDNCZTlCZitUWGw0ckhOK21ZYnhq
+        VUVRcHZaOVpicmNZOTc2V1V4QzYwTncKOIG2EegwwiQoTYHv+ZRTKTVUywupDoh9
+        ddVKWZHc5PWeED0XGrdD7rZjhWQhi83Gf6+Qr+vx+QTmz+uLGW68Cg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-01T01:00:57Z"
+  mac: ENC[AES256_GCM,data:IHAS4QmLVU6/6jCO4drI6rMGCEdtfGE8q8kTfTwp0vT5h3bqmGkVdZjthi+W6qArAEGi86cPRKhvES0El5tK1l5Cld6jXdSGg9iJPPMouI3E8tQ2wLDzeac7bFQQkwBiatI/J4Uy5nGfbS22uukTd/PqVmx7Ek+wgnYNGiW8OCQ=,iv:0lLGuNhN/Rkg9UXVyG7OnOh9Dq7LNHBR3jzkF0DjTCY=,tag:uR9nAR8g+/euxW8bYxLeKg==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

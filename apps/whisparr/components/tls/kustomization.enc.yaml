@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+configurations:
+  - namereference.yaml
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: whisparr-pkcs12-password
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:ufYQF1Pu+8OyeZ6E4Co7CpW+SDeY50zHQn3OJESxKr5nPXZ2X5TC0ai+o8UYYKf3KvObNg8=,iv:VvkSksavCgI5/ySxOJeBe1lsCKePXTA1qYOEM6shdCs=,tag:LH/3oh4rbnKqQjzad9CFJA==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAvbWZ2cTVVQzB0bXhzVVEw
+        LzJMN1hVTnhhNFhpOVgyMUh5U2Zrc0pyTG1nCnZZQU9mRXdYSDd6Q2xKTEtsMVcw
+        ZGtlSnh1cHpNK2FvZGdIVE1oK1VCc00KLS0tIERNMXhmejYvakFHZHp3a2RKU1oz
+        b2J2OXgrQTNaMUVKeEQ2Nk85Q0VqbEUK8Y+f3cVt8/9p4c5OFogQ/cA0skPN05nU
+        tXJuUqMvbVVtSMVM5Rw5PBPOTvPapDYgsyhauC53zBPGsOPzR0Y3Vw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-01T01:00:57Z"
+  mac: ENC[AES256_GCM,data:V+xcphQfZMWHsfCqCH1cKLfZkKGeAP3bX6pNbjHM/nxt/rjXeuvtBo0U4w3xLrCz5Q+IyTWWjKCAY4GFToaxlny2tXLEMlrixJ42tzBbk6MY6hXT6r2IuPmMMZpnPF1CMrOGZOytbSNJrPKtgPT2lzkFlzjJj03lwpM6Pto1TdY=,iv:B2DW6MYBB3JRO9nb43/lIWxBS3ZrrrB/fykSbUer4ws=,tag:uXgWSl3PpYuBeNYxGB4EZQ==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

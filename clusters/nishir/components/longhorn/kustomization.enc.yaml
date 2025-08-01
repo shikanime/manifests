@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+resources:
+  - recurringjob.yaml
+  - storageclass.yaml
+secretGenerator:
+  - name: longhorn-hetzner-backups
+    namespace: longhorn-system
+    literals:
+      - ENC[AES256_GCM,data:WZ1VrcFSws/O33lgSAJask5HSG3v8j0SdcLFSduWM6+JUDmtFsg=,iv:uFTQ1eB7+AdeKICEbmYM9+UfqvlywpnJ+S7ZjoeYx48=,tag:Nq4Seu/nISqhedcBW97dew==,type:str]
+      - ENC[AES256_GCM,data:7WifwvW3wAWUl+EvtVw28tVq7RyqfdF4C6AaUXfIEi1rJZoB7U8BeVsgoYfn2JX09V7xZj5Br8pRrcX6WI0=,iv:1PIASurWDSalb+owSJt4YOp7FZC33DNMPXwpI2mGujM=,tag:+Jl3wgdV82ltctdW2qJNnw==,type:str]
+      - ENC[AES256_GCM,data:RUMwZdfAUf0xk3KYSW1t+zShlME0kKjLcc/JpC3lyCLUAcH4BrmXZorCdlmsPvsyCg==,iv:FU24JVsq/7wDk/tHqnjw7Lg/gj8wCwPSA6D4rLma7ts=,tag:tIZocDbJA5S3nqvDm/VTsw==,type:str]
+    options:
+      annotations:
+        longhorn.io/backup-target: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSTUxBdTltU2duNTZEYlph
+        NitlaFM3bFJlZmJTNEV4bzdXNWdEQ3hoTUc0Ci9NYnZqQmIxRW1KM0pQVSt3VGo1
+        SHc3b2ZqdjZFRVJ0bTBKc0JhczZtbFEKLS0tIGdGVXJtRTZMeVlFVFNOMkNZbUpn
+        UExCOGNhVENwOWRJWGNYclQ4TXBRT1UKrxBfVZ5zHQbomnR6WulsfhBhX9bEzxUf
+        jRedeCFMxz8KqwAcqihWBzmARCeKvlZQroLhj5zPPT5/6qQ7+jCZuQ==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-01T01:01:03Z"
+  mac: ENC[AES256_GCM,data:Wu/tS4DKW1IqPQyJfDwizxDEbT1YgL+WMLE0V0S09kkBKM33eJX9NVgoHL36b7hmwfNjIOCk6+UyCY3m8dJjAAnWgyoI1ij+bGLNkCyQKdyTs2VxZoCen7jbE2bwjSbKTFgiXnRtMMM3yAD1qrr9TtSRV4sNKu/BNxZA/bYbpfI=,iv:oJ5NZlAtOXhzOBKyPdNHLIjVzulVzgYDLEOuLEt+Ql0=,tag:SO/h0TV9r5c1W93h7yrVYw==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

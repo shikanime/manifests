@@ -1,0 +1,7 @@
+creation_rules:
+  - key_groups:
+      - age:
+          - age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c # telsha host
+stores:
+  yaml:
+    indent: 2

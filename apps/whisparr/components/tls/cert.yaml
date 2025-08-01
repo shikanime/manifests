@@ -15,7 +15,7 @@ spec:
     pkcs12:
       create: true
       passwordSecretRef:
-        name: whisparr-tls-password
+        name: whisparr-pkcs12-password
         key: password
       profile: Modern2023
   usages:
