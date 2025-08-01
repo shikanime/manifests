@@ -9,22 +9,22 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: gitea-tls-password
+  - name: gitea-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:Nu1ggdIwYhXu7/JOggeNnfZTTUFUgRA=,iv:zN+MFYG1crgaUQa+Ud2WtJTP3+VzrUoc76TIK9jDxCE=,tag:BHnNJgDPr5cD75DZ99cYQA==,type:str]
+      - ENC[AES256_GCM,data:/EOlyl301sCIjBLxeBZB7hQucVGwRe8=,iv:dVupAOPbY1owcuX4YoQa1cHknFm6/v4RBkPbQ3VN9S8=,tag:mCLdODbfJyZiaa9C/3XFbQ==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByL01qTkl6ZFIzMkludE1X
-        MEhSczB0T3R5VnZoTXViaE94S1F6THM0TW1RCjV4OHI3OHRiRTVRaFhCRy9iTjF2
-        K2t4OXJHSnpLU3h0TTlWWi84STJLOEEKLS0tIGdLdkV3ZWZJOWhab3Z2LzJ3MGg4
-        MkxOcnRoeVZsT1RDYlFEL2FnNThCMDAK8QvO8iusyb0wwb6CRtNz93ErorMaw0Rl
-        7R/fAloKIZcGMbEY+uzj3MVl1K/M3FqZhFysfdtZIq3vvaigOfUR3w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB3N2hZYnR0YUc1UUJQTi9W
+        U3FBWVFlMWxqRE94UU1XMEdKSVBPNVczNkRRCk5uR1lVazNoWFNaN1NSK3oycjdL
+        NE1kRWpxUUN2Q243S1RXWlBEbjAvUWcKLS0tIHpiVEt2cjRHLzllNDNjVkxyZlpY
+        N1EvaXc1a0svYWsxSFJOWVVWZFVpTHMKzaTSEUdbuAMHTgiCdZzupaUFznJPrQhX
+        LFloLBfD6TkJB6pxAOWWz2Zg8GR1wr/zoIUEJDlH84f577GeDSDUAQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:52:42Z"
-  mac: ENC[AES256_GCM,data:KDw8hLJNDMIh1Ybaa9Ux0qNPSvJMSXtPGsP3Rx7jiWZDry2JvpJJEWqsx0qZRURqPYuDqSVThMaC10ecEhunFH2shSPnTWjXMZU0oQiF8uP8AunAqIAxqEObPHSi88zBREuYlZsHAE1R4AH94mBK8aeEY8bJ5+bHs/OQ60T7x4g=,iv:EnaQGAtq2BOogQmHJO1Gl+Hh2OvWdTSA2w0rVuhesT4=,tag:CbXHTzRz5w03MchPrc4q4A==,type:str]
+  lastmodified: "2025-08-01T00:54:50Z"
+  mac: ENC[AES256_GCM,data:RE8+IGn3ooCraLMFLa56D59zXJz7PxRcyArGx36aTiVgv6a1XdD922ZcBG87A2Vh8SyNlLaMhS+vT5ndijZgf++zqXzUBnF6sftZgqHL6/7ek3JEjAEZEJ/6J8XiKXvmDLGtWx3e5arUkfHb8fuXzDm8pni8G2QUB6pk5eQvCRc=,iv:y2UUbYPSXYFL3junVwjtfxFm9kOg3OuGp36uJbsA+4g=,tag:gTEfD2h8kJk0c0+DuGtEsQ==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

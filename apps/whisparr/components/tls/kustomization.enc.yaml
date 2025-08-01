@@ -9,22 +9,22 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: whisparr-tls-password
+  - name: whisparr-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:Yiq1oXRbRgHoVvsdpSodMcvdyKtw5m6l48dwWCUhLgzeK+VyREo/MJi9D2WpC48ezBX0JJs=,iv:qvhq2LthkE9Gp4K9IR1S6ZfCC4h/cSgm8+yg4QYdhEs=,tag:TC//r48DnxWNJYvyppxlxQ==,type:str]
+      - ENC[AES256_GCM,data:jZLCDfyAEv6FjBPxsQWV2+01HNWO7qHV9BNPUk0Sy50/lAuHUQqt1HYasolAcaxf4TXoxXM=,iv:0kPIrQ+prFVXRHpUm+AW/d0JqV94PJuWcoil5/Gon5Q=,tag:yGMW6j2a2TwcFwVQ6/5SnA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCSi80YldNd3c5UXpGWDFv
-        MFE0bTlZU29wOWo3WEM2SWFxenUvQXdSM2djCnNBZ2pHRVhEQVk3M2tsdnAzVGM3
-        aHZnNmtMM0VuODFEY3BZSklqZ2dsVzAKLS0tIFlVcC9tQXhSN1lDQ2RZVUZaVWRF
-        UTVPNDREbHl6MWdsYlJiQ2V2QkVmYm8KPwEYUOwDnyqV0x4uCkZQJpNO2uDGnjjp
-        mukAxWEZQQtp6znmXLfWS3PSB4eOlvGCBjl2D5c8S5ao6zDV3kKyIA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDM0czRm11b2dtbmVjL1VN
+        dFR0RkhvMW9wSFVWNlhLbUdPdGNCaXltNXcwCkhpVXl3b3dJdENENEUyS0kvenBz
+        ejN0eVZ3S3RDdkxJM3lad1ZlNzYxelUKLS0tIFZ3VitXVDIvMWNrS1lNcjIwNGNq
+        YjNzcHNOQ0tmdWU0dnIvaGo0Um9TYjQKY+Q2FDzG//n2r/JObVubD7aVz8WeCQr3
+        0QR95wcg5JpC3KzgzkJ1nCrqU0CfzQMVmE6ilQ31yVUAawq2kk95Cg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:52:42Z"
-  mac: ENC[AES256_GCM,data:kQY9KK+tjCFgzHoTjZfVCmv895VFRzTzn4coHcrcsgJKKXGLha+59T9nWlgZEW65pRykZjQW3H7PFZuXnPVC18SrW2fmbVOUjHoBBiI9htRWtGqppoCWbmyAnU1YV2h2QRU8eRNnYHHQ+bbxBtkZNdewqZNTWBvNliwDtCQGQH4=,iv:fNMtCDVHnIZhvvIup3QgRtn4kzvxzhd6/glBORDESmQ=,tag:pGiRlVRaHxohi7jByPXXyA==,type:str]
+  lastmodified: "2025-08-01T00:54:50Z"
+  mac: ENC[AES256_GCM,data:A9ZXdzOjyoBcUHLUCkHc0EbamNljjoU/PUNRE4NhWpGPqtGoj6wqs0thbOxPSNxCYI61tReckMANGEy/zeczZLBZmUsdZXiKxKTsO0GLVIRm1SKLrnNj2369ey5n7YVrRAakpwHXVu/T/JciKS+ha7wvVBPQsaEVu+Qkak0XU1k=,iv:oIlnFaQUFgPbcsrqvpPgOQdlG09uvXCiwRVFN9s+mjs=,tag:fSpk1YhzOKvuOQh/IBq1BA==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

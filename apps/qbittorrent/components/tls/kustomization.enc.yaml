@@ -9,22 +9,22 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: qbittorrent-tls-password
+  - name: qbittorrent-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:xe/Igddd4lmh40WpO0WbxfHsRxTZ5Eg=,iv:+nasqfTgKn9xWlY1CydaiMt5/dbsbjDsWdGEKGK5/bY=,tag:3II/9XDUY9KhEcuEMesa7Q==,type:str]
+      - ENC[AES256_GCM,data:QedSFzmF+FR+I2PrfEeeZ4Qv4A4jBIw=,iv:2KPgOCPSEKB6rV9FJn2uFrjTyzH0T1Ro8jUdODeLiF4=,tag:uGrkf9zs/W+GxO99bYcwJQ==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaY0Qxc2JqS1BOUVpaek9Y
-        NlNiNU10NzZKbW0veDdYUVpVanhNOGN1clNjCmFJVjYxR1JucnpRR0ozODh6di9X
-        eHc5Q1lYVTFISmUycFRTSFUrV2o2N1EKLS0tIGtoWTlGVENtNGxGM05qMzFjRVhH
-        Tnp1a2RyZXV3M0U5YzY1S0lUZzZVdXcK++Pcr1v+IZTKC65dchvZng1xCmSZEPLa
-        EqCU9stKXXpZrttsLu0z183ef8KWQm3Jtraq4fmE7pb+3pYeEKz/RQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTWXQzbVNuK1BWU3pHY2pZ
+        V09UZXprZHFrdnpnRmVCWW5lMlVrcFJCblNvCno3NHducWVTeXM3MldSYVdJRDdS
+        aVF4SWtES2RSYVpOWWJEcjFuc3RxcWcKLS0tIEZod290UGdjQjEwejRqL1NIRTJ1
+        NVlWVjVGV25Ma290Y05xTUtCUGI3SXcKomBF1cJzxRqTNppYW/uw7bJGOm0DG/sL
+        00f7xu33wvdTljMTsNmafC6xGOtk54doWtmMM8Xd6zi5IbtQu8QbEg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:52:42Z"
-  mac: ENC[AES256_GCM,data:v5k2LKKdiqP0U0THN36m5Ran9qBqLiKfYbtojms3S+t+M1dsguyzoQGd60zsbdoQDPMB5fJNlV6ZWbIeYO4G+JDrui5Ko1jtdJeTkvzl2tWlk+0NE1k3f3wrKpPPzabHe16KNWb5ewr/hcM4OKJBsfJKHSMCseNnXbKYnmmnySU=,iv:vTRzNo9ATunPoABgrFC6KsL5yP9Yg+q3cr+B2yJ8UWY=,tag:m9zQpVmeteLbPU9EkMkZhw==,type:str]
+  lastmodified: "2025-08-01T00:54:50Z"
+  mac: ENC[AES256_GCM,data:ckXQ7BlSMofJSibyS+d4z2OCzgi1+k0AhwB6fzTmRFEHu48w6kH8j3nZkfBUSZUTYXv6Ih7NeSlObJNg8ndfSA4kzK01fYStwlEm1bn2AGP41mOLUw8yaXkwzUdLN4BLoVUiBDg9gJ2PrsN70vcGdNxYILtZqH46NJNmtZa/RnU=,iv:R1ZWJae9SNiWpjtfRjiqPryCbfOFAUCaO4lwHsTqNgs=,tag:hLQD2HGGtT32qn38i3cg8A==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

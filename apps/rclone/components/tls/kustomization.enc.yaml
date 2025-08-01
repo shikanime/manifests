@@ -9,24 +9,24 @@ secretGenerator:
   - name: rclone-ftp
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:IZTz3T1SHiiA95QeGN3+,iv:6jZQWjDpkHN3a/5cQe1miy17+cj7oS6wT+vBIsXCRKg=,tag:9dtux9wPGmY3kLrDsrCtxg==,type:str]
-      - ENC[AES256_GCM,data:sHpjqEcX2UTfs9bLT1FO+YGYNK+i68Q=,iv:dLmz7JSyBBx9f+uv3SRl+xCWqUEHDywPdFHIYr/TJk4=,tag:yCYG3zjGbci0FVcfkpm7aw==,type:str]
+      - ENC[AES256_GCM,data:PyG6kgO8MWiR5VmyB8gR,iv:BU6T3m6FyILtkHdgFixSE8VVkecSvYQ8yUBN1ZgzA3w=,tag:5q2D/o4SUWkQEspLlOsBjg==,type:str]
+      - ENC[AES256_GCM,data:+icvZe9QMc4Oq6Y4dYfVyasHyJnatKI=,iv:nTtTWVlh1UbU8HUwHsHw0S5vvuYSjJrSUjQSjUyZT54=,tag:/HprRWqqjerK1EBWTesrww==,type:str]
   - name: rclone-htpasswd
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:9llKsePRyev0rRYWQDIGFI9yB8WagtkTQSdyqcI7Dt6FM1Brv/hU09Lzvx7haIaYNIwZZrerxlb/bSES5HHhc3S/p+Nb/SqXOD9lTw==,iv:OKIK6YlCEt8aFirgKaYkiVxCb6eb+RNzOnoDkSOGQFc=,tag:+dxlap21JaU4n/iSDhZryA==,type:str]
+      - ENC[AES256_GCM,data:o4BuG5D6B3+PGCXmS9i1Sv/X2RVwVl0ZmRue1HLsBBQo0RTFNli6frxdqJvW9fz6Ov903GUILms0foj/f/teilo8JRrqpNo0Tt4pBQ==,iv:BrGyeticNvll32mljjIUfeRNvV+rmb6fc3/Rqc5sBEA=,tag:pDM8oL8FrELK9o2aBaFVGA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQeG9FOGs1ZytWSnc4RGJn
-        RU5LczdIb0J6d2NvZzRVZUJoWjBneXF2RDNRCmhvL2x0UE4zYklJTmh3K1hMUEQz
-        QWhiZ1Noam53SVNQeG1VTGx0eUFqcUUKLS0tIGZ2TXRHSUxhcEdhN1p5cm4xSzFF
-        YkFUWXJpcHNhZDN2dGt3Q2l0ZWFqc2MKRTeF3L+Oe3xcGok/EZWtFaEUVpTfR3PC
-        8lkrT07MqJcjk0T0k4HyKPqKM3kAshmJlHm430MiP35XAsCZaB766Q==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6WmdZc2phUEFtTFFSdEto
+        VVM5WjNhOFhhcTVSaWNHNTlWRUZHa1pnVng4CjMvNHhaSjdqaGhncUtDWStyUUxs
+        US9UZ2s4V0xCL1JZeHlWMnQ1bFdNY2MKLS0tIHRvRC80WFlJWEpoOWJiRUlmRlVR
+        UE1mWjMwQUU5dXJmOG4xKytqQTIwMlEKOIc8ee6EFEaNj+7Sp2WST2yrwwoUvtZj
+        /OcwOFphDBf+RCTLd5AIq5rvZe2/zgEW0Ix+ksw9eByfmVA5l8NE1w==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:52:42Z"
-  mac: ENC[AES256_GCM,data:sigjdedNhrRkN2utFdKkk6CdmBI9ePf9a0pC9h/HQ5Wqh6PtQgWrdZ/pwvdOUfg6oxBQCK1EJw4hfcrFR/CTcxDCb/2tLxEeY5d/SH3MI6a+hTmR1L2fM8uEXu7NynoigBFXI7UW/gu1KXlhTIohJo8lqOJ2cqtTBysZtRIeJ2Y=,iv:/NqKxqsMLj/CybThxf+DhOqOe5JoRsgJ4likVoI57Oo=,tag:tyL6+E6lqEEVG0TNtQUwwg==,type:str]
+  lastmodified: "2025-08-01T00:54:50Z"
+  mac: ENC[AES256_GCM,data:rvmyAbS2cYSfsljmJ5tBH2f9cCR+aNlNWqlFlgvh3S0qkLzc0j7caobvKoDFisi+ZtH4npnlwiuB/G62zCo7xYaoPfNibf4KWwuGslw8XFDp/4pskEQlJrPHaOG7/EWeAhWkMxP8kHhInA0QAxEq0oaGjTOW4PHKOdLKJ/RemgE=,iv:pWs+5xsUsRE2dG5PfW29x/xCTVe/ymh+72RG3tOV+Ds=,tag:B6Tx0tOjZQavMqdKE8z20g==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

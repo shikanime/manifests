@@ -9,22 +9,22 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: prowlarr-tls-password
+  - name: prowlarr-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:cK/KMJOoBw03N7aGr3q8cLszn6vf1Dc=,iv:q4o6g7m+EMaYF6+5MWPDqKagFugVilZfBNvIhN2Dspw=,tag:smuqfK9v8+2s4YjVVnWvSg==,type:str]
+      - ENC[AES256_GCM,data:60fXhWAGIs5zlc6vPUQ16kdNhqG9P04=,iv:IS6mHsdfaeK0aWNJctzHWNIY+bSUa2+7gWxpvY3M7LE=,tag:zhP721A9l1cf9sNX0C2pvg==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2YjJRdGMxeVVON05pczZl
-        LzBBRktEc2UyYVAwMlEwRDZOZEVucDBsQXcwCm5TYU0zSjVGZEthVGpKYnZOUy9M
-        NnlXcGN5TUJDRFh3dGJlaWNGNDV6cTAKLS0tIHNxYXVTWmdGbnpIRmRhRmlidndJ
-        a0VmMCtCRXZ3TGFoMWtNbWNTN25MZTQKWWPnT3lhFDbLHZSWHy+6ld2TBH7pCWmS
-        xk653p5UMX4ijFczMCXfKqJ75gijiE0oItJT6fgtj7x4d+hFphxD6w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhUEhkNHd6SGNsdVpQQTZP
+        VEJPVVB6M3RyUE55bXI4OFBiU25hNVFHcGlRCkRXdVY2NUJsL0p0TlgxWHlML1pY
+        dzQxSUNtTHVQcnVWcSt2VjhFbGxqK0UKLS0tIExoMWJNZmgrNDdTNDRRVkNaeTFp
+        TmVleWhRUnZWSG44aHIreWVZWjg5U00Kb9UFyDcd7be5mqJti78BWydtO1V3FLu2
+        tkG5IY9GsWNEL6dqsKdz6e2Xn4Uqt4wWxLLnuIA9ns79mLdd+cAzcw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:52:42Z"
-  mac: ENC[AES256_GCM,data:340HraUJzpVQm5p2f05P3MIDoovYpY63oH/u0iPVCo5z8ZMGVQEWWlQAwySKsYsxjkNJEwXikyVFZiaN/N/WP8h+5FOIHsvbtHR70EdJPjVeo+Bsi5ozGHeaiDsPAj2O8v4Y6gsG6youakgnthHe0lFOf+vFB0mcQMyFxz3Uesc=,iv:6TeOJInzgR8Wsl0CypIOrqiwDgRk2iTg4K469Zn9OG4=,tag:XsaCwGxUqxaCHcyk2+sg8g==,type:str]
+  lastmodified: "2025-08-01T00:54:50Z"
+  mac: ENC[AES256_GCM,data:dkIwm/lQtm/mADU6WY2E7++ejBcK4JL/SA9MUtFKITjOZBt0MnpaW8ys+xWt0NyneCQltgi5cmNwDKpiBgCSInLBkmT3CHj+sS9REz3NJ4FQWA3XKn0fSsExEO045zeJ+fEadbrokx4NrzmAW/R/RDRayhAGWilotFkliAlkWqw=,iv:nSL6qvu34hYvrH7ud15WW/kZnYCrRURQxUT0MCnm8tg=,tag:RrE9QQEiSw8g1g4SAs62FA==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
