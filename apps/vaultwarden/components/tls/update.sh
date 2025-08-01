@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 
 # Get current admin-token if it exists
-CURRENT_ADMIN_TOKEN=$(yq '.secretGenerator[0].literals[0]' "$(dirname "$0")/kustomization.yaml" | sed 's/^admin-token=//')
+CURRENT_ADMIN_TOKEN=$(yq '.secretGenerator[0].literals[0]' "$(dirname "$0")"/kustomization.yaml | sed 's/^admin-token=//')
 
 # Generate new admin-token only if current admin-token is empty
 if [ -z "$CURRENT_ADMIN_TOKEN" ]; then
@@ -20,10 +20,10 @@ fi
 # Handle SOPS encryption/decryption
 yq -i \
   ".secretGenerator[0].literals[0] = \"admin-token=$ADMIN_TOKEN\"" \
-  "$(dirname "$0")/kustomization.yaml"
+  "$(dirname "$0")"/kustomization.yaml
 
 sops \
   --encrypt \
   --encrypted-regex "^(literals)$" \
-  "$(dirname "$0")/kustomization.yaml" > \
+  "$(dirname "$0")"/kustomization.yaml > \
   "$(dirname "$0")/kustomization.enc.yaml"
