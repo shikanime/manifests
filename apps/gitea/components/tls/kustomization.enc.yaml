@@ -1,5 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
+nameReference:
+  - kind: Certificate
+    fieldSpecs:
+      - path: spec/secretName
+        kind: Certificate
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -10,19 +15,19 @@ secretGenerator:
   - name: gitea-tls-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:x0PPkRiKGRYDT88eyLaekPkUUUJFLdE=,iv:MZXZiufgya2363asCpjbRhsXJtsGxv7S6pHnuGRkIkc=,tag:5g5Jfu6zct51A+iwiBh1Mw==,type:str]
+      - ENC[AES256_GCM,data:WlGOzAop5qV/0y2xHIBujtjnoI7fH44=,iv:ofJlHn9868kUnUMlBk5CQZV7XIe/xcTqKp8SN4hrKaQ=,tag:2Qgf0a1X7oGgownWqkcT1g==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpWnp5Rkl5NTlEZ1dqYWZS
-        Q3RRa1dDWHg5eldjWitnQkNMcDg2bmhMbGlvCmY0ZjdRVlI0TCtKbDYzc0pRaWkv
-        MWltZDNMWkx1dnB5QlBPK2NOckduQTgKLS0tIDFnL3Brc1RiOTY0cUFGNTdEZVVQ
-        Z3BCbHJqOXh4ZktBZUZrWGRld0VVa0EKs48QiFluKWqbaO6tyGe08lRgZIP/Pct6
-        r4xf1CML2b5z29eYeK9bbAWdqwbc7KgQJkrOS/u9KL222tPfBQrZXA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmKzBmSENjWkxMbkpwYllX
+        VEJ3MXFWd3lFOVNSejJKbnJIOFd2cWxlVlhvCkRrdytuWkROem9nZ3gwY2NXWGlJ
+        bFB0dDIyMENJT0xrZHo0RCthVVdiSkkKLS0tIEM5alVTb3BoY08xREkzdVRmODBG
+        RGI4dzBzbmRMaS9pZ3Vha1ZRaUd3eEUKjTC9QAuA9EPGYoanOstKA3rHknILpBwj
+        WOXv5qDkVl3/jMcVY+SUKm6K2nJjTJIzXnlz7+yxME3y1QAjcytIdg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-07-31T23:59:18Z"
-  mac: ENC[AES256_GCM,data:ts46zgWoXd1R1qOj0kMzCmZgfK5boRM6+J3SoRq9GYmVTEgntir2GDy7iU1GhrERTWg50kKhCYrz/GcBh2hHlrsW+QHHJ6LbjqSu8Cpbtu8SsMQftg+pZShQwJxdY4eOHunrASXSI5YeAG5b4Fm6BtZIfeg1nZ7nFYMELSVqfCQ=,iv:CvtZPxUgBAo+hwaf5cKs/jMIVDeRxM0dLMmh8cDisV4=,tag:gUzZNzurfH/lEj8JLfudgw==,type:str]
+  lastmodified: "2025-08-01T00:25:55Z"
+  mac: ENC[AES256_GCM,data:cWlaPuncx5JOKzFugdipfDyom1+Il4tuPFFBKxmj0jnACgilN2G4Wffdh9PEesX6CoFk19Eze0W7Wj3M+O88yUfr1o8agkCKHZQ6lqPAgaj19i2D6lmc/8Vhv0g0thN+VRI2jWgH+6xJZR8wdeEHYfyGdVxirjtHCb9qJPJahtg=,iv:Ge5o1lLeE6RfWM2QAUaPJjxCJWkYHrfdJZxkLVbAHXo=,tag:iCo8Mo6698PeDmgVS9jk9A==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

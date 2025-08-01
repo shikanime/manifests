@@ -1,5 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
+nameReference:
+  - kind: Certificate
+    fieldSpecs:
+      - path: spec/secretName
+        kind: Certificate
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -7,20 +12,22 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - literals:
-      - ENC[AES256_GCM,data:sxci0aS1ksrNOvjdFbjIW87TI1xgUfB1k+fzIIT8ZtdgyDJc3FDBbCLoOhpqlRV4Z2ONg/Q=,iv:mXuKF0hL32TIlnB7pA1ds440jx5mjOENK6oxSgQ6/kk=,tag:GEVIA++0uCfe3sV8TYl/bg==,type:str]
+  - name: qbittorrent-tls-password
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:qzMnpY7h76yKvVf5KFdU0Y/8m12HWgQ=,iv:VrruPzvyOBfiSQ4NMyJPeGrl88nzG6EXA6MrDYaVpnA=,tag:+ue+XaYmXs9+uupRQXgkQA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBocml5VkU2cWh2ZmxnV3JE
-        T1VtNUF2ZkluUzZyWEl6cFNHWFRaNkQ5VFdjCmthTWFoN1JZaU5XUEVKOUt4WnQ1
-        R2JIZndJQ1h6a1hKVFk3elJ4L3FwQUUKLS0tIE05QWlSa0lSdXFKQzluZjUyaHhj
-        QnhReDhnUWxJWThzbEM4T1Z4ZDg2NFkKpy1Ufbh84lnwgeUbMLkV7v5CJ5SU1XmC
-        pdCPL/rpRI+E+Io548uJAz9/7+sWzaGOjmVsUcAOhv5EWyPJknKbXw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJbXVhUWRqN1pUNERMNUt4
+        aGRIa1VpWEZ6WXZOSzdIMEN6Y1JTbDhmcXpZCjhZbGY2QW1JRkNVRVRXQk93S1Fq
+        TGNPNXNLZFpheEJjS0pHL1U1RzNSZ2sKLS0tIGNZL0FzVFNMWGRvMzUzTXN4NnRY
+        R0JuVzU5UnM0YUdyOGZYT2Vvb2ZZOE0KM64Yc4t1v51d77SymQ+A2Femep+wNTib
+        Ukxo9PQYzc5Pz5H9bUPzFjXQsQr1viV5L3RO2kbj5uknQtjWw81NAw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-07-31T23:50:09Z"
-  mac: ENC[AES256_GCM,data:3y6mya1Dc8hMTG/GISVzed2dkLh8BqwEQxtiSXjUTZlvShHwWcgPRsP6SYEEcb+kKOUIS/sC7Rruifso6Bu88rOypJWRTSdgoRF4BqQXNuJ0IChdE2O9YZp6t1auq1gs2JNfK79bU5tCw+cqE2TfenbpXnxvCd7ef+EgYoHukyc=,iv:UkWwWLdgtECOuOL2BJemjsP3ttTDMeqCWgiHa/citmo=,tag:qNHH6aFYKrk1vcjwpa4zIA==,type:str]
+  lastmodified: "2025-08-01T00:25:55Z"
+  mac: ENC[AES256_GCM,data:s+r8dzqmOsoXkjT9p1yiLuTFc3UBLlwtb1QDukaeO6z2BtkNTy3h25mb6pLJaBG2f9GWb0d1DEjQHrrChzeG2Q29Oq5AFKX0FzVobvzEMVdV7e18VFDoyQ+RKc41GdK9fVxOCSHzOdxgE0qLoyPKw34XNNYHS4j+vULxku6GbaQ=,iv:/3jt8bqiJj4ToZUuO0n1O/bHIQWBH/izuCMfTaPMZWI=,tag:867Om0gmPser9WXlpf9bvw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
