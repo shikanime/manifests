@@ -7,20 +7,22 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - literals:
-      - ENC[AES256_GCM,data:2okmLMtIqwZA6EpsIsSfeDJNvHk3b0oEGQ8qO31GfcD3pA24pIGB/jOOOXl4rR8KFZNxatoCDkKeMNuqAli+7ZLpiWHnJxCj5DOXgeV/3PzGH3KN9W7trak3CcRyq4bnboyoT/E+62CN46T4jLbYlMW3xURqneva1LUmH0VxVB4tjQ==,iv:cFli2zQpeXz4QN0sD6VHo8uC9EqaQpjpJclWSpUGGg0=,tag:WnrY1e9K0jYOXkcLB1CZHA==,type:str]
+  - name: vaultwarden
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:tWeNlUC0f8pKiEbKLUbBu+9XZc00BOXPBM2G6m8tDzb46kzOoD/OxgX42qP4DPi31zM4xgtPy1ortWaV3YYczegKs69LG7QrmFKYEt/O3WNgMUQEW2oq2BOt9pmtiqWYwbhidSfgq3roxGxdY3Fos7QMNjE5sSiyCNXWCEKgRbzjWQ==,iv:OOJHXt61bEzdJE8LKSgCbQFOYqBWfK7+yVZGoXXNdC8=,tag:rJPAuyaMwSaOT8qVMKVlDw==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxWDN6ZkpiVjdYbXA3SXJz
-        ZStnMDA0TmYvOHFhU3RiajdUSDZiNHdyeXpzCjNrUGtGaDJyU2UvYTB2ZDRqS3dC
-        SGIvRmJqTTl6eUxSMlBwM0FZSkRTQVEKLS0tIGwzZTZqQzhFODErUTNLZXZBdkxB
-        clJjU3JaYUtWWld0RnkxVDlpeW8rTGsKnV18aJPmYG5VqnQtc1fsZabVSv5YOWdU
-        O7GL4smW3HNehppBxDfAtJB36sfB/vAJ4Jiiyvii/8lg1wcfwoZfIQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxdFlDN3p2M2NORkVMYTUz
+        SEtna3BWWjI5cGdpekxrNThjN014YkhzcGljCkJUdlZzZUJwRnlhNUkvM2hRc1Bv
+        VE1UT3puK29HNGdPaU5HOEFUNDJnaFEKLS0tIEFaUVhxYk55bXpra1N5b0tjQmhE
+        WmtieXR6UUQvSE5YSW5qeElZcW9EbTQKkhAOixpcIwI1cRNAJ/XN7MzJWpcUlJQs
+        PgEa6VvwnH72c2APaNSR/OHxXbrxCHydq8ECdWkh6k7E6TFjNdFL9w==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-07-31T23:59:43Z"
-  mac: ENC[AES256_GCM,data:PVYYEBdZztx6Fj46uw/DvB+I1DQnyxXhkbgq+GMGTG1BgQlEo7y4aMVoYf66QuFWXY3EZuYdj3aQK7yzzFUC2znf+PzuLQJcyjBgpOhluZg9mdIn0qQCsI0bWpo3zQjarj2xG6iysh1P2PzPlIi2XWS6WWJekzbcOAY8cmoNWS8=,iv:b6tJ3jRmU70/nLiV6PYgrxYn1Vj2mDfacPjZfCqHsLQ=,tag:l8v6YUvmHBMFipdPhRUHKg==,type:str]
+  lastmodified: "2025-08-01T00:14:25Z"
+  mac: ENC[AES256_GCM,data:wGyGzv0BStqHG7vyIMWKoP553u8Ob64MBHkscdxbbalve6SUDd//8gBmV4hExQFKVoJJQf8Qguc00JnfnlWnAgQ3dICCF07pbC/y5trZzyfVxyf8r1vAgwkh8qxZmxTfM0bB3+msz58qlbShYHHs41d7EwItQIaFpdXDCAZ3wII=,iv:fJ7lxWuvz9MyvjGKlx/2DVmdxloF7Gn0VPJ6Q6uU79w=,tag:KLSSFS4dt2a88zpf1s1EAw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
