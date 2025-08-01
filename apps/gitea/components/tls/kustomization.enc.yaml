@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+nameReference:
+  - kind: Secret
+    fieldSpecs:
+      - path: spec/secretName
+        kind: Certificate
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: gitea-tls-password
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:0GFDRbHEHePA0E6L1dFp4kWoRW8+gZY=,iv:SPNX/6zZG8CZoipPOfVCN4iPa/s6wWjDqzERtmPBFYI=,tag:/ajRKTEd1AjWgbPxde/4Lg==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0ek8xRkswTFdJRFhQaVJs
+        d3lreUVGcGpFc2l1YXlLTmZBRHRQdmFWUDJnCk5XRWo4VjlhUCtkYVMzbDduL3k4
+        Q2hWYnNINHlqSU1KNko1QkZpdHVLNFkKLS0tIGx1YlcwNmZrQnRkK0dFYXlUSnBs
+        MDZMd3psNXNHTXhQajVKQ2NlNm9temsKYTi7IlIZzvno1pEWzUH6M4wxZZRsWMOQ
+        foIAuthZOmPlHNC5rZrDNAdRS4KfwYPCi6YHMLq0G8g35utxjpXMgg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-01T00:27:34Z"
+  mac: ENC[AES256_GCM,data:tkOhr/+8fqD4IgZWdo+uDnPaAPEwCmcs5p88OhOzRhpKJHUT4sPl9eqSl3E6o36QlzidbProjaGTVoeCeqWNI9z0QGGsNJuFPAyXQCapXFyIfnQ41V0QKokTjFzy4MyzjA4qMV3oSfwh4GXvGAYLxkTrWCiqV4Pr0gLTlOHzt7E=,iv:7bVp4G0BtYYhH2gozif8RFesZPN/SlD4djrTSDIFJ1k=,tag:VblcEE/DpedZ3msOuIl7Og==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

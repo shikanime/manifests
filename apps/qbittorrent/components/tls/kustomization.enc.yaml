@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+nameReference:
+  - kind: Certificate
+    fieldSpecs:
+      - path: spec/secretName
+        kind: Certificate
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: qbittorrent-tls-password
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:AbqhOGo/ocBX8KGcRNncTIXBBkMU0wU=,iv:4i50/ELt64uZBHZO2dJoZZUzAhXnQb3Y1hdx+YLhgRU=,tag:vuTJezeoWIzx5uJ3jDkq+Q==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNdlFMK29MZkhJa3VGMGY2
+        Q05qdGdQOTEzZnRtOWozSGRuV2FDdXdUTndBCjZFNzZ0TTV1a3gxV3Nuc3VmRDVG
+        d3FxbmN5cWV6Q1pkeXJEQ0RJYzNFS00KLS0tIEI3N0ViTTUrZ3pKdTNWdUROcDRr
+        UUZuV0tsTnJUa0VoNUFIS3NJdTV2dmcKRpCS0BekI+BIymiNB8uWdChMy9uSnO7A
+        lx55XXJi2yMgQGX08D/k4AhELVrpT6RJYc1IMgcewUFLQ9gMA0WkXw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-01T00:27:34Z"
+  mac: ENC[AES256_GCM,data:rtN+gIbfxhkYDxsPsU1RX/shxHbiy3EXnqnlMV0jMvlqAh/EkfAW8BIOC3AT0hW19YW/yB55huWfwUdsBB+DNRI89vLG6ef529dS5dIBOZ7NjFwdImQlG6h2GmCDLqvwS72hslHeD8V0ntvMfxj7HAaIhVRoxW2wSeOClnexFSo=,iv:qdmQwg27qFJj/JdS7FxLMsAI8kR8GVTNz1HQLjB0Szs=,tag:RqiRH6xn9lngLf3Sp2aqNg==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

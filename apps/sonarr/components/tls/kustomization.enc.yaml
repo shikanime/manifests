@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+nameReference:
+  - kind: Certificate
+    fieldSpecs:
+      - path: spec/secretName
+        kind: Certificate
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - name: sonarr-tls-password
+    namespace: shikanime
+    literals:
+      - ENC[AES256_GCM,data:dyJf3WZdGOAHLpzmy029NkJ5BhnoNpQ=,iv:zxOczmhaUPD87fYzx01RkKvrkADHkqgp8UvP9qkx+UI=,tag:D2aURzigPiK3uo1wgdXEGg==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTYjFQYnlEZy9GV1RNQWFP
+        aXpWUDVoMER6d0paSktTMXdvRnBWYnNycGhvClZnVkM3cWpwZVp6cE8xQkJ3NXRP
+        aXg1MFBxMFF4aEgweUNHdzBPSjA5Vm8KLS0tIC9KTzEzODZ5bGx5R1JCcTBhTlpY
+        ZTJFU0UrOUJ1bURoVFB5VWZ4SWpXQTgK746dcgrdtZPUW8ctYnBlR26PpU8TML++
+        YfLdXWFjwVjBIqfuvpiMT9ZOAcf/PWstMz0mDphaw6dS9gnKbCMXDg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-01T00:27:34Z"
+  mac: ENC[AES256_GCM,data:N6Sroxp1B2lq43/pzf4vhBmnkR3xUA2jtFCsSzoXbjbm675BoQ8HMgcwrT2Vkt439ZlpUVsbrv6X+Fe/HGzOpQ0QQUM5L+A/59Cz4jzidLB9ShacqplDzmOpbesg4YHMv5ezI5vOSATRe4HemnwCMPSx4Az+aOyWKgw9telijGc=,iv:p36WQ0D20C9LWrJAkkSpIOv3iJDxN5AphaN/25s+zP8=,tag:k1d219PZwY8eZyZSiUjy8g==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2
