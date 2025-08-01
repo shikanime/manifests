@@ -4,4 +4,4 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-sops --decrypt kustomization.enc.yaml >kustomization.yaml
+sops --decrypt "$(dirname "$0")"/kustomization.enc.yaml >kustomization.yaml

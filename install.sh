@@ -12,6 +12,14 @@ for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
       sed 's/^/['"$(basename "$app_dir")"'] /' &
   fi
 
+  # Update component directories
+  for component_dir in "$app_dir"/components/*; do
+    if [ -f "$component_dir/install.sh" ]; then
+      bash "$component_dir/install.sh" 2>&1 |
+        sed 's/^/['"$(basename "$app_dir")"'\/'"$(basename "$component_dir")"'] /' &
+    fi
+  done
+
   # Update overlay directories
   for overlay_dir in "$app_dir"/overlays/*; do
     if [ -f "$overlay_dir/install.sh" ]; then
