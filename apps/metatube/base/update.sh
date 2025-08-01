@@ -22,7 +22,7 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
       kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
     yq -i \
       ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION}\"" \
-      "$(dirname "$0")/kustomization.yaml"
+      "$(dirname "$0")"/kustomization.yaml
   fi
 done
 
@@ -45,4 +45,4 @@ sops \
   --encrypt \
   --encrypted-regex "^(literals)$" \
   "$(dirname "$0")"/kustomization.yaml > \
-  "$(dirname "$0")/kustomization.enc.yaml"
+  "$(dirname "$0")"/kustomization.enc.yaml
