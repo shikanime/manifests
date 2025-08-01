@@ -31,4 +31,4 @@ yq -i \
   "$(dirname "$0")"/kustomization.yaml
 
 # Re-encrypt with SOPS
-sops encrypt --encrypted-regex "^(literals)$" "$(dirname "$0")"/kustomization.yaml > "$(dirname "$0")"/kustomization.enc.yaml
+sops encrypt --encrypted-regex "^(literals)$" "$(dirname "$0")"/kustomization.yaml >"$(dirname "$0")"/kustomization.enc.yaml
