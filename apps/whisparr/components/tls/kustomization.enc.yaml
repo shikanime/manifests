@@ -12,19 +12,19 @@ secretGenerator:
   - name: whisparr-tls-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:ComMUhmA0YHmDYnLlavwUCO/ktNDbfzr5PiR3XWKTwjWQEl6OQqJGtfF0X7zhRHhekTsMOs=,iv:h8aq9rKvlMIitxcJ0guYJGgmvTI8aeWjh/hqv/eJaHI=,tag:dNdBEkwj6ypzrxMHx9VrUw==,type:str]
+      - ENC[AES256_GCM,data:Yiq1oXRbRgHoVvsdpSodMcvdyKtw5m6l48dwWCUhLgzeK+VyREo/MJi9D2WpC48ezBX0JJs=,iv:qvhq2LthkE9Gp4K9IR1S6ZfCC4h/cSgm8+yg4QYdhEs=,tag:TC//r48DnxWNJYvyppxlxQ==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGUHI0MHlhOUNlNXM5eFJS
-        VWt1NWNVb2hpcWVuQWxXUmEybi81c2hhaFI0CjhqZi9acWZEcmx5dnVtdnhGSDdm
-        MCsyQ0c3R3ZneExjU255d2JKekhHNEEKLS0tIGl0cDFpTFVveHo1UDNuOWdQNTJw
-        TTc0Mlg0YjZLWGlxdC9sUEJCdUtsZVEKlz6bgRbqyOL8GNsB/ZXCg/s1K+C3tAWQ
-        2gOMYxzXvDa8C7it02mULhv7NzUeutQlSBv/kmfuqkY/Nb/y7FV7Hg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCSi80YldNd3c5UXpGWDFv
+        MFE0bTlZU29wOWo3WEM2SWFxenUvQXdSM2djCnNBZ2pHRVhEQVk3M2tsdnAzVGM3
+        aHZnNmtMM0VuODFEY3BZSklqZ2dsVzAKLS0tIFlVcC9tQXhSN1lDQ2RZVUZaVWRF
+        UTVPNDREbHl6MWdsYlJiQ2V2QkVmYm8KPwEYUOwDnyqV0x4uCkZQJpNO2uDGnjjp
+        mukAxWEZQQtp6znmXLfWS3PSB4eOlvGCBjl2D5c8S5ao6zDV3kKyIA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:50:43Z"
-  mac: ENC[AES256_GCM,data:fbZfQ56hJ9oHgRCE3g7lElsF0vji9fm6iTZDmeBwKBOnvaDkeRDCJN9xoUbKZ4PvtIGXSgxxuklL+EPoFgOOterOHHLRuiUxp42r7zOQowSr44Ho6tm0903eXqCqLZ0F6avj6+dJKRJn8qidzWioAE7dkLRLQiLaIu2XX2XIyOY=,iv:u1JSz/hM9md28hkikYJjcsHtMbaRbFjqjKpQtQ8J9iU=,tag:u6L4xmrqZPLKgnfgh1+bJQ==,type:str]
+  lastmodified: "2025-08-01T00:52:42Z"
+  mac: ENC[AES256_GCM,data:kQY9KK+tjCFgzHoTjZfVCmv895VFRzTzn4coHcrcsgJKKXGLha+59T9nWlgZEW65pRykZjQW3H7PFZuXnPVC18SrW2fmbVOUjHoBBiI9htRWtGqppoCWbmyAnU1YV2h2QRU8eRNnYHHQ+bbxBtkZNdewqZNTWBvNliwDtCQGQH4=,iv:fNMtCDVHnIZhvvIup3QgRtn4kzvxzhd6/glBORDESmQ=,tag:pGiRlVRaHxohi7jByPXXyA==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

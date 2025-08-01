@@ -12,19 +12,19 @@ secretGenerator:
   - name: sonarr-tls-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:Cr8bjD3Y6sp9XDBzv1fabAXdMXraWDs=,iv:rPed/jSn75vfGavvMZgOqULVHEOQ+NFiUZeCFKcZMaU=,tag:HIS4pzlzXdpCIU+4SFZ9cw==,type:str]
+      - ENC[AES256_GCM,data:HcmcDidJ8JOAvGNOSJe+U7F6ADXGouI=,iv:8pFBUdTybagcJi/jC9BVscCmWjB70Rt02To3K1PcXkk=,tag:sQ6KfcCFT2tbiZXx6ZkNlw==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4djNEZFdKdldQU2J3RzNt
-        Z2ZFbW5lOFV3RzRUYzhCU2Y3MVlOakJwSWh3ClpaWVhrcU9jclRjNVM1WXpWUElL
-        YlNQbHU3dnZUWGxWT3cxZUFOWHdkRDgKLS0tIGJBRFJzLzJoVElMWHBGODN5YkhX
-        c0phRTBwdGlCUUZVY3pSSkhjNnR6dmcKqt+5GEYsRIlMxJashU4+VDJbHT2r1e+2
-        mvv4Ib0Dhgw5vniXoz2NDiUNjvlZ0uFNiUq8koOdissV9XmGRrCTlw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKVjBHamZZK3ExMGQzZ2U3
+        dm5yOUUxMExrSUJkc1JYMmppWk1KRGYrSVNzCnJxbHlDLzQvK2phWFUzOU5tTVRD
+        WDBOckxSWFFWcENkYzNBNU9GVmxEa0EKLS0tIHFBUHZkaExobXVReE9WejVFMGpC
+        bUx0M1BPNTdtelZhZE1kdkZDMVRxSHcKS4Nus20Jwh85QdzdeoaGbBXrEl6R2lCE
+        N1TL1tIhzKq2J29KxLM2wdqXMf1P44ZfvuJjOc8VKTKC8F1W3QLSiw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:50:43Z"
-  mac: ENC[AES256_GCM,data:sAKIong1xvQ7mRUUUocoLTti2C2CCsBVIR2ZME+3gEOD29jNeR30Q7B7Xy+GpqSgH7DOClDfM/+DMohEvlkXgQiRDyz1+GtzM5Q4BOTUeDEfSYiKj7cDPfmwDyx45mjiEai4qjXBue19KmTxzsPmAPmgDqkYgTVGrM7m9sWMvSs=,iv:nrfj81JYU/QzaPPQ7gg+fUZMMtv74chnY7ce3OJGNVs=,tag:zCrjE/a2X5+ArkXs8ChR6A==,type:str]
+  lastmodified: "2025-08-01T00:52:42Z"
+  mac: ENC[AES256_GCM,data:PSKbdBYM+ffiLm0OVJMsyZOTxsGR/1P3fhTZXEEhqU0kR3hnYB0/e6vF+9RJwBFG8yfLv9zVOp92umAzeKJwO36qWjN4Q5IZzeXei9Vc4Rpayjr5tbDGcIGxYwif8T2+a/2ms/OokKr6ayWmfqOlPov6yzTz3Ywr/oWQpf3lins=,iv:y7Vvzc1G4DTOaRFF3TNKSZ8+du7kxLNa00GTSBERShg=,tag:jdbFwVOjMuk8693shREYuQ==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

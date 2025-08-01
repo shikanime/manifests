@@ -17,7 +17,7 @@ labels:
       app.kubernetes.io/version: 1.3.1
 secretGenerator:
   - literals:
-      - ENC[AES256_GCM,data:+/0B4UM8WNaVINlcXkeq4OkdKtA=,iv:8cgPhSPMpylW/qqy18HbPOf5PI5B1M/wM4fcX5swkj0=,tag:SitnC0/KmATo49e3P5MD+g==,type:str]
+      - ENC[AES256_GCM,data:6DJ6ejWtAE1+ThFYyEjoFLNF6NQ=,iv:RvdFrF+As7iPbqE6Nt+I2q94CwdP2ULE6WN7dqKM3Rg=,tag:82qCBLUGFojZDS14CTyclw==,type:str]
     name: metatube
     namespace: shikanime
 sops:
@@ -25,13 +25,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5RlNhWDY0SEtQTXdMM0NJ
-        aUZLaWZoMnhQU0tzaUxxcWZZM0VaZnRVeVNzCnNhUE9VUG1kUlpjNjJVclFzUllF
-        a2hOUkpKeGx4ZG41anZpMXd5Ulo2WXMKLS0tIC9LMjg0UmJ1Z0w3ZHMvRkNVd2tF
-        STdZcmhMZkluUXN6SzB6T0haSTBKZWMKpSDpp4NteO3f6bFL6fPLpryXZOF1WqVl
-        63Uh0HQDFDNsDNPEEscz7Es5HW26BW2rK0xj5HiXjchr4DynCuKxAg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDSnZJZ3dBTWVXcStsT1Ft
+        UlZBSUNCZGpMb0h2QkNYWG5CUkdseU9BdWlBCmZySXVrbDVTM1FnRzNFL1QvRTdY
+        R2YrSURnNWJLMWVEcnlTeENkRFpKV2cKLS0tIG9SdDlSNUhpOWRLdGxzV25MVkFF
+        NjRKdG1XQ1BpQXBkRmZnclFvUUlEYWMK1KWIeuqkuDPAAfECE9/ZuNHtlSs0/Eqm
+        M4aIxkXLO7mGX/mLlDLeid7lAH3W06hoDcBjShgZAFPIeu3OnaSyXQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:50:45Z"
-  mac: ENC[AES256_GCM,data:Q348kXZyAO1OHd+c23pSGHiTw0iov63zHVQ+GfZyHYMyGGbZT3cxU51YPRpsSeMRrKSE5pQKvHBHF29S8WLBO1E6UoNBkUuvEerkF1uleAC02mQriNol4cceKEA0oeL9e1n2ELoR0vx5c/pON4XlTNnO3IsxOnL0Yc1FhSYr+cs=,iv:iqgw8kU75IIfyxzwg5gwI4RIHZR62YdBZxDAI/N32T8=,tag:nxoAFgBJ5pO8gIfEotLV/w==,type:str]
+  lastmodified: "2025-08-01T00:52:43Z"
+  mac: ENC[AES256_GCM,data:nLTajH4zr2J5Tl1wmT+bVnjf0g06PgNBOcwQe4l9UjP2D7zwOfOWZMMD/Rd3wqTsJG0I3NQdWtBPiZHYBOiyl19PJxPC6mYXn9zYD908OY6ZMJK4U66i91OtK3z6GqEcSm79Ys1GMFF0c1n6M93J1Z2YD252/cnnPgQZd5fStpk=,iv:HJwimXAEKVK0f9XJcgy5Y40AV/4lY9ybiUSR+jPtrX8=,tag:rwuQjFK52+m9l52PK2ll9A==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
