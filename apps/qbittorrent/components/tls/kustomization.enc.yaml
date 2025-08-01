@@ -1,10 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
-nameReference:
-  - kind: Secret
-    fieldSpecs:
-      - path: spec/secretName
-        kind: Certificate
+configurations:
+  - namereference.yaml
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -15,19 +12,19 @@ secretGenerator:
   - name: qbittorrent-tls-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:exUeyi6232pmxokY4F446s6irvTBzXU=,iv:oAnT37Ga+8ooykM7bMKG1dtM9nqIqq58ESNdRPd8Du0=,tag:HC7JUI/nPN/7EHrmOCg9ag==,type:str]
+      - ENC[AES256_GCM,data:RmEogVCtQALIanf8/qzMD2Yd+iwA29U=,iv:0ivCo7MTuGuuSt2ps6gD6wuaQv5dcvIBYtUxLIUAuo8=,tag:/+xh+PkSFQaB2TsGo+n9LA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJZ05rNzlyeDJ0d2k2QUVs
-        UkxzRzhFdU5LNDlPZEJGN0lGNjVQNmdsSlQ0CkhIY2QvN0dWSEJFdUd3ell0MWpJ
-        eDE5a2ROZ0dMSkxzWWVPbEdQa0o3U3MKLS0tIHpCNHhDZWpQem9BM0ZZSHc0MkZq
-        aW1GMEhldEptQmdTQ1R1Y2ZISWJHVG8KFS25+aVBWVd8csTOnEWk6ZpZMGTVdu72
-        5oeicwv7okz+EJLtPP2ZxtEAzFeMAKhd/RXIkcJDAf04rbGc2Kyylg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArY2phU1RlbXNyQ0NCWTRQ
+        aGh5M3VJc2M3QXBKbVVxWXhTTG9hWnI0VkJvCjhRUmYyaEc1MVBQRExMb3M0VEVp
+        WmdBTWlWS1JsdjRtbmErdzV2Q1ljdjgKLS0tIHZ3OVc3aFEwS1pwUjdBTFlYK3hG
+        MFVDaFc2Tk1aZmZPU0Iza3VReUMxRWsKaQsNHca6LaN1uwLhtL5eWE66FzQ67+fp
+        kcZVEIbJlWazyk4eFMNMy8DlIr7OztdsdIucd7BqBHTKK3gE6T9/Fg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:35:33Z"
-  mac: ENC[AES256_GCM,data:DRiloTfC4/UVynY8SKqsu0OPebMy9iUbdZ631hmEfbhv6PePERsElrPrWQCE9pWR8ZU7UDJIidnKsyfJTgeeT8Zv+j4q4hofigoVHl24Jtu4uH720WFcY/WCqM6KRfmrGBy+XqQ/8QsCJhvtt97Qu4XW935xJY/HzUgVFGlsvys=,iv:UVAhRfMqkk2HSXTL2Lo55wr+roATGe/OWqvQnnCgwMQ=,tag:0bFOB1xuKYhw0oVbUM5FRQ==,type:str]
+  lastmodified: "2025-08-01T00:39:32Z"
+  mac: ENC[AES256_GCM,data:iMmmpumHnwet9S7okeOEj1M4AKshrSlvtls7IMA8OvIjtY5ceaSeethheJ31jA7Ca84TCMrPnT1XSB2vdUg2v1bB04Q2V6DnSY1q+7w1G23qoPnmS6IEqcjjlKSwmTgawNrRVHTOuun0YJBGjqKbJJLv6/TJJSiUDhcesrwVQag=,iv:Rn0SZBLvgWzY2YzYJJIl/U29WMRBCB1dvnhIQtdaydE=,tag:xS2iYXGkxU6AznAM6aGrJg==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
