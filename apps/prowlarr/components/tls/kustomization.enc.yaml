@@ -15,19 +15,19 @@ secretGenerator:
   - name: prowlarr-tls-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:hml5zZEejiWcjeTWg2MO5arFmPAjD7A=,iv:CHpxuSboLI4o58e1UdREAyG0cuQr3Tgn0h+R2Tn6TXw=,tag:ypkUdEfKDcw0yCkE6Ua5KA==,type:str]
+      - ENC[AES256_GCM,data:bRB/2f78a1RWB5T2jeEe1IyHNf2W1sY=,iv:zLQlz+S85W8QwTGLeUWpg9rR+Yhu6HIBb7M1tI7PSU4=,tag:gHTzfDe8okEBpdqTEVnMUg==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvOTNURWpoNEtQa2t0bTRB
-        c20vMFVDcnhvTENrTW9BQ2IzZHZLdWM0bUJjCmhJaHdrWmVuRDZFSklzM0V4Vjl4
-        VjlmOFFUYlBCQnBMQ3BBUVV3czI5RW8KLS0tIFIya1RyM0NIbmhUd1FMN3daRWVJ
-        eVhBZ3ZETlNzQzFUUXBMWG1UWWljTHcKR90708foAEzpFXOHtjG634fyw+B2WXJx
-        XUK6+kAc7zWlAc6Hxvo8oTm5b5gVuMwAyHdNZocGs8CoHg7cvyfPhw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYdWN3cTRKVm9qY0gxL0Yx
+        T084c2xqL0tPRUFUZFA1a1ZpZ3NOUXpMR1ZvClNIUDdZNVFJQ0xwN25FQkVETDVq
+        QVM0ZE41cEgwZjkvRXRzbHh3cnc4M00KLS0tIGh4bTdqUVRGTmM5b3RDQWlTMW9u
+        TFc1aCt6OWd5TVVIcklxY0ZqUjFOdW8K//XiuRIHVWePtopyY3Uid0lJip3rKDXJ
+        RphmvTEZ/p6EcekLINpz3ZeXtSB/AwLHaiGmOpgfLh7GRNwneL1Vng==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:25:55Z"
-  mac: ENC[AES256_GCM,data:krSF+R9tYHqMrtkq+ydkVpD5qFKu6LqCvG2lCJKJq8oSEaKId6Xky2vRrtCHq4T2rd0gmYlp/D6BWY6wM5PWirsAZv+G93tAq1nwCIxxZGBnMw4y+ZlGq60p5b8ccnAidrd2aWYMJLmz3t94ySM7hdpMAWxAS0WepdQ2rhzwSRo=,iv:i7HsGZG+QFrYFZ7l/CuWhoA0wO24COV+vwRo1BWXp1M=,tag:GwBbP0WmQ3tQhQ/dZKnQ7A==,type:str]
+  lastmodified: "2025-08-01T00:27:34Z"
+  mac: ENC[AES256_GCM,data:MFX0d6Lve/V1Q5WDAtn+YYN3MbSVeNE8HhfvIxF81t771SVfS8ok9Xj7BrTCnTlFw9gE1lDE3MmKqySqrcJMN9+rJRqJFe47zhFz2zXFVVJxL752vPdsUd1IneAfIVFnLNTcuh5tFE0R3CGhXVWuNYhd4ReAplvPAm17lCWxc3k=,iv:qDIzcDSIK9UjF0IKhrRbeW4Rqq5mntOUPG+PNwXT6K8=,tag:cwHCFsbXvlKq9dTR2IRIGA==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

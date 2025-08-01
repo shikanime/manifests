@@ -15,19 +15,19 @@ secretGenerator:
   - name: vaultwarden
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:zEFkJMCZXPEPCfT6FMsOQu2WJrTyIZOpkyXbyg0C/KeSVMAGPhWNGI9MXyD5FqOYBREBZtGWiggeJw5LF1ux295xHpHzpGEF2TQcNAdKWemQ4m3VppUmVfWmHeh/KnLZ1ZRctAjhVHniaiW+7vkG85wF2+ZMNn/Cvh24ZpmYr5kojQ==,iv:uiyGXVofeyL1c++ZSGIR2NlkOcJFCT1JH7ziCE9dUEc=,tag:7KzkRvxrf5OIOr2Nb6S7kQ==,type:str]
+      - ENC[AES256_GCM,data:84Enneb78cEZ7Q1Wnvbp95JzBdUowEQpncP/SvGRe1O6DVflZ3VHb5NQnKw96qLoYSvLaVOV6Z1ew7SiMoIc+B2gH2rPrTUp9gHn1+QB4CkNpai+SIJmtMwQQlKra7wwXZE8AGiAkwy3rGRSZglKCTRnYEmhNGrzQKa7RSJ613wJpA==,iv:E6WDjMzGz8nXCWoY2+m/L7VOe39N70Ejk8reqEZwJ4E=,tag:4SMcjtbm7+EatwK00inHGA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyTTl4Rk91UTJmSUR4ZjdT
-        KzZaSjlrSDQxNVljcW1TWTFreWdQSFpEalJ3CjYzU0t0SnBycys0MnZhK09DcXpT
-        NjBveFhKU0hFNmJrK2ZjblJsbUF6aWMKLS0tIDRMaVROMjdGWnhsZHFCY0xGWU1P
-        QXUrUTBuY2VZTXlzcHM5U2dVK1ZneHcKYQwfawa7lWJU6Fptf5WrBif40z5KFqjQ
-        VMYXFWVYx5DeJtRcm0dhVp9nySeDiLzTWONRGtRNgnhaSHU4BmdsYg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBOTWxQQThsalAzR1NkM3hV
+        ZTE2Z1RFUkw3R3JyaFpmbkxIUFJReUJTbGcwCjBFWWRwdGVkZHkyakVzVUNWelB0
+        RVhMaTB4d1NZak5hc1JCd25GTEZCMG8KLS0tIFBKN2lTMXlQb205MW5ZU2o5UzBm
+        aU5qUVd0SHU1bDFJeGlCeFBTRURGU0EK4bBdSpe+VdtE5QTMkQ1w4bz/8TJwg7Jg
+        /BoBlNJ+yiNpQaAQSt4jm/FVAgsSuJx7X9wBwWfGWGiapbmoiLWT5Q==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T00:25:55Z"
-  mac: ENC[AES256_GCM,data:80AbYht2i0ZCajWbizr2Bryo4Enbafcy1CHSf+V+fiS62biDNleweOEnLk/Jca+r/TcGWod3OEoduof768hafZyevkG/LWC3FZRZOuHFGxDQ/AsUgu/pNbgcDVj5r8qNJQ2epmtVEIeFmpRyhzZXRK7I+2rBPB7/SLouhBm28Co=,iv:6mrvi5fvK0waRARitCe/PfeaGmccDCvxqXab663wpIM=,tag:GWEx/g9TFXi52iIcO91hcA==,type:str]
+  lastmodified: "2025-08-01T00:27:34Z"
+  mac: ENC[AES256_GCM,data:ffl9ErJGhN3gijotl1pK5E7W+PDe+9uza9+7Mv4GXebZwB1AU9s4xBaWc1svecmGpGtqS2gd4Oe9OgFYEVQQ1b2pAh6Lc6dtEqZoKmXM155uWoF+RX/JP1lprZ2pjsmM2xIQbRO9aDmy5w6p79AchgUjp+PKW8sB8gY22aeEGDw=,iv:CMbUIrXQxd/y4sMjzFt1AT3TGOTGvqXR+YK5ezQvN3I=,tag:YcaGTuKVpNOu/RvHXpbdQw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
