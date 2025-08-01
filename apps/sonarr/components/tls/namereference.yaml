@@ -3,5 +3,3 @@ nameReference:
     fieldSpecs:
       - path: spec/keystores/pkcs12/passwordSecretRef/name
         kind: Certificate
-      - path: spec/secretName
-        kind: Certificate
