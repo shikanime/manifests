@@ -9,8 +9,8 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: jellyfin-tls-passwor
-    namespace: shikanimed
+  - name: jellyfin-tls-password
+    namespace: shikanime
     literals:
       - ENC[AES256_GCM,data:6GJCagWE7JfmEEpNI2VtZk4U0W11GwM=,iv:mdSqGwDR9DtPsw2qB6vn1sFSu31DmE/sOCIsGvKHHH0=,tag:VRfWxdn5Ww1ri63YgIV/LA==,type:str]
 sops:
