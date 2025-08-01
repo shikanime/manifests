@@ -1,8 +1,0 @@
-apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-kind: RemoteCluster
-metadata:
-  name: nishir
-spec:
-  controlPlaneEndpoint:
-    host: 192.168.1.49
-    port: 6443
