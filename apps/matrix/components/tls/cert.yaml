@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: matrix-tls
+  namespace: shikanime
+spec:
+  commonName: matrix
+  dnsNames:
+    - matrix
+  issuerRef:
+    kind: Issuer
+    name: nishir
+  secretName: matrix-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: matrix-pkcs12-password
+        key: password
+      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth

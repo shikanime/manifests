@@ -27,21 +27,13 @@ spec:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
       initContainers:
-        - name: generate-googlechat
-          image: mautrix-googlechat
           volumeMounts:
-            - name: mautrix-googlechat-data
-              mountPath: /var/lib/mautrix-googlechat
-            - name: mautrix-googlechat-config
-              mountPath: /data/config.yaml
-              subPath: config.yaml
-              readOnly: true
       containers:
         - name: conduit
           image: conduit
           ports:
             - name: http
-              containerPort: 6167
+              containerPort: 8000
           readinessProbe:
             httpGet:
               path: /_matrix/client/versions
@@ -59,27 +51,30 @@ spec:
             initialDelaySeconds: 5
             failureThreshold: 30
           volumeMounts:
-            - name: data
-              mountPath: /var/lib/conduit
-            - name: conduit-config
+            - name: config
               mountPath: /etc/conduit.toml
               subPath: conduit.toml
               readOnly: true
+            - name: data
+              mountPath: /var/lib/conduit
         - name: mautrix-googlechat
           image: mautrix-googlechat
           ports:
             - name: bridge
               containerPort: 29320
           volumeMounts:
-            - name: mautrix-googlechat-data
-              mountPath: /var/lib/mautrix-googlechat
             - name: mautrix-googlechat-config
               mountPath: /data/config.yaml
               subPath: config.yaml
               readOnly: true
+            - name: mautrix-googlechat-data
+              mountPath: /var/lib/mautrix-googlechat
       securityContext:
         fsGroup: 991
       volumes:
+        - name: config
+          configMap:
+            name: config
         - name: data
           persistentVolumeClaim:
             claimName: conduit-data
@@ -89,6 +84,3 @@ spec:
         - name: mautrix-googlechat-config
           secret:
             name: mautrix-googlechat-config
-        - name: conduit-config
-          configMap:
-            name: conduit-config

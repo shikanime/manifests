@@ -1,6 +1,6 @@
 # Homeserver details
 homeserver:
-  address: http://localhost:6167
+  address: http://localhost:8000
   domain: matrix.taila659a.ts.net
 # Application service host/registration related details
 appservice:
