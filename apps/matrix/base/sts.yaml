@@ -73,9 +73,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: conduit-data
+        - name: mautrix-googlechat-config
+          secret:
+            secretName: mautrix-googlechat
         - name: mautrix-googlechat-data
           persistentVolumeClaim:
             claimName: mautrix-googlechat-data
-        - name: mautrix-googlechat-config
-          secret:
-            secretName: mautrix-googlechat-config
