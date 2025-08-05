@@ -1,0 +1,30 @@
+id: googlechat
+as_token: ENC[AES256_GCM,data:ba+3mW6fWjliOdciQTiGcHHAn2Zl4tA5DBmyav9RwOslVaeA21yQOmJu9r3jTIino1vQjijO0alTAX5+p1fMLA==,iv:ZU5UnHvmcqqin1eu5jait0E0j+D4Y8bRjv/5MjcBRsI=,tag:68bJ6Jz8CgXjMegUO+mAsw==,type:str]
+hs_token: ENC[AES256_GCM,data:cmVHhUTX3MhDVJHq5F/LfBrF5BTf4lT9shgYNjg3R1/ebqEQIG+8hZyrqb7cnzr83Pf8bsh+GkdVofN9YMQ+Rw==,iv:Ai+UpdF+xQHGo6fV0oyK9WPfit+D7I1cdQT3j7674qE=,tag:Fk7FsOOW/niNJVQ85NnOZA==,type:str]
+namespaces:
+  users:
+    - exclusive: true
+      regex: '@googlechat_.*:matrix\.taila659a\.ts\.net'
+    - exclusive: true
+      regex: '@googlechatbot:matrix\.taila659a\.ts\.net'
+  aliases: []
+url: http://localhost:29320
+sender_localpart: gXVfzly_ywqPffS8WZ_YGGRRw-IVUojZSXjiz12vUHHMDqheAGHYRHlBs264Skjg
+rate_limited: false
+de.sorunome.msc2409.push_ephemeral: true
+receive_ephemeral: true
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkZEExZGorQUNrRCt1cFZL
+        aGl4ZjRkZThxR3YxLy8rS2l5dldETjBVb1RJCmNTVzF1cFR5M1FBa1RKRkhsQnY5
+        ZW1yQnVRVTZiMjZjcGpVT1A0Q2NkUm8KLS0tIHluV2tUTDdvemJtazJGYWhHWUpi
+        TGhnMVc3OE1UZXlSV28yZ3dnQ2lRdWMK+uqk62wG1kt80NEU4fK154lt9nNephzk
+        6rRqE4hnxdpiNE7Tx/JJLqhVwz33VISyrnJBaDEBLp7uEW2dSRs9pQ==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-05T19:46:37Z"
+  mac: ENC[AES256_GCM,data:hqnoOMaFkQPnl795nbH22RrHMewJIXCcbtj4HXpjyDmtCrjIheDkiQN4qh01ZmDKnjZAo90IBYpp2XvccNC1o9vZfYULzbkSbC9E0RQk+2Dvj9bibOYIEsoJNOuAfyYOVnBabcb3TLBQ5zzM3KBm2BQ5hcC0FlnDoguuWCZ/2iE=,iv:CUnDH8qt0jWRjlHFFMhaJRn9mPB+mLmBAFQ/RmXXg48=,tag:mO2LP8k6T44WXt5bFPaGVw==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
+  version: 3.10.2

@@ -26,6 +26,16 @@ spec:
                       values:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
+      initContainers:
+        - name: mautrix-googlechat
+          image: mautrix-googlechat
+            - --no-update
+          volumeMounts:
+            - name: mautrix-googlechat-config
+              mountPath: /data
+              readOnly: true
+            - name: mautrix-googlechat-data
+              mountPath: /var/lib/mautrix-googlechat
       containers:
         - name: conduit
           image: conduit
@@ -58,18 +68,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /var/lib/conduit
-        - name: mautrix-googlechat
-          image: mautrix-googlechat
-            - --no-update
-            - --registration
-            - /var/lib/conduit/registration.yaml
-          volumeMounts:
-            - name: mautrix-googlechat-config
-              mountPath: /data/config.yaml
-              subPath: config.yaml
-              readOnly: true
-            - name: mautrix-googlechat-data
-              mountPath: /var/lib/mautrix-googlechat
       securityContext:
         supplementalGroups:
           - 1337
