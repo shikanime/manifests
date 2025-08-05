@@ -27,27 +27,26 @@ spec:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
       initContainers:
-        - name: generate
-          image: synapse
-          args:
-            - generate
-          env:
-            - name: SYNAPSE_REPORT_STATS
-              value: "no"
+        - name: generate-googlechat
+          image: googlechat
           volumeMounts:
-            - name: data
+            - name: googlechat-data
               mountPath: /data
       containers:
-        - name: synapse
-          image: synapse
+        - name: matrix
+          image: matrix
           ports:
             - name: http
-              containerPort: 8008
+              containerPort: 8080
             - name: metrics
               containerPort: 9090
           env:
-            - name: SYNAPSE_REPORT_STATS
-              value: "no"
+            - name: CONDUIT_DATABASE_BACKEND
+              value: "rocksdb"
+            - name: CONDUIT_ALLOW_REGISTRATION
+              value: "true"
+            - name: CONDUIT_ALLOW_FEDERATION
+              value: "true"
           readinessProbe:
             httpGet:
               path: /health
@@ -67,9 +66,20 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+        - name: matrix-googlechat
+          image: matrix-googlechat
+          ports:
+            - name: bridge
+              containerPort: 29320
+          volumeMounts:
+            - name: matrix-googlechat-data
+              mountPath: /data
       securityContext:
         fsGroup: 991
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: matrix-data
+        - name: matrix-googlechat-data
+          persistentVolumeClaim:
+            claimName: matrix-googlechat-data

@@ -12,3 +12,17 @@ spec:
   storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: matrix-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: matrix-googlechat-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem

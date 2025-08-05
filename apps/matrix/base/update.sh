@@ -6,7 +6,8 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-  ["synapse"]="docker.io/matrixdotorg/synapse"
+  ["matrix"]="docker.io/matrixconduit/matrix-conduit"
+  ["matrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do

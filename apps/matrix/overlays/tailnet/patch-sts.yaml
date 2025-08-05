@@ -6,13 +6,8 @@ metadata:
 spec:
   template:
     spec:
-      initContainers:
-        - name: generate
-          env:
-            - name: SYNAPSE_SERVER_NAME
-              value: matrix.taila659a.ts.net
       containers:
         - name: synapse
           env:
-            - name: SYNAPSE_SERVER_NAME
+            - name: CONDUIT_SERVER_NAME
               value: matrix.taila659a.ts.net
