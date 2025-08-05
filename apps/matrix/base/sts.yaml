@@ -29,6 +29,7 @@ spec:
       initContainers:
         - name: mautrix-googlechat
           image: mautrix-googlechat
+          args:
             - --no-update
           volumeMounts:
             - name: mautrix-googlechat-config
