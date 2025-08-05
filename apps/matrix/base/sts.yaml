@@ -26,10 +26,6 @@ spec:
                       values:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
-      initContainers:
-          args:
-          volumeMounts:
-              mountPath: /data
       containers:
         - name: conduit
           image: conduit
@@ -64,8 +60,6 @@ spec:
               mountPath: /var/lib/conduit
         - name: mautrix-googlechat
           image: mautrix-googlechat
-          args:
-            - --no-update
           volumeMounts:
             - name: mautrix-googlechat-config
               mountPath: /data
