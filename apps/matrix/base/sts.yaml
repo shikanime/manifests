@@ -57,9 +57,6 @@ spec:
               mountPath: /var/lib/conduit
         - name: mautrix-googlechat
           image: mautrix-googlechat
-          ports:
-            - name: bridge
-              containerPort: 29320
           volumeMounts:
             - name: mautrix-googlechat-config
               mountPath: /data/config.yaml
