@@ -1,0 +1,63 @@
+# Homeserver details
+homeserver:
+  address: http://localhost:6167
+  domain: matrix.taila659a.ts.net
+# Application service host/registration related details
+appservice:
+  address: http://localhost:29320
+  hostname: 0.0.0.0
+  port: 29320
+  database: sqlite:/data/googlechat.db
+  id: googlechat
+  bot_username: googlechatbot
+  bot_displayname: Google Chat bridge bot
+  bot_avatar: mxc://maunium.net/BDIWAQcbpPGASPUUBuEGWXnQ
+  as_token: ENC[AES256_GCM,data:my4WAVx1vmIvkpjlFvA9KOKXkONbMqtBGxzzCqThKWyRLIB5kNWrHXO6/9etTUTM/vlqKNIT0pvgSplVGp9J1A==,iv:Bt0QjzOqmkaFXB6Z8XGIBxnW9DB2yv43CBtTs44JXS0=,tag:LjujsnmDyBbHS/EEqsd5PQ==,type:str]
+  hs_token: ENC[AES256_GCM,data:KZ4Jfs0ClUT3QpzPmKI+u9MC+nS59Dz9lxosnyrvITWdpdWzjNk/tJa4JqBUoUBe51vkXyf/51txQBoAdahCuQ==,iv:QAHiQ+51ARotP8UYZp32Y1AhoLOBV2OoAysPqBWvXVw=,tag:1BHf6li/R61G4b9Y+IOY/Q==,type:str]
+bridge:
+  username_template: googlechat_{userid}
+  displayname_template: '{full_name} (Google Chat)'
+  command_prefix: '!gc'
+  initial_chat_sync: 10
+  provisioning:
+    prefix: /_matrix/provision
+    shared_secret: ENC[AES256_GCM,data:Gjceaj0Mc+Q9mykp7Bt1Q1EcXcA4w+QvbLOzKjm8lWcjHKPc1uST0ZJ3xVbbHLjIR9tZPyrs02Ujn0AwW05V5g==,iv:T+XlSnm7P0rh37dlAlmbgT4LQo58liPc4RC5c0wIvpk=,tag:45KnSSgIig/cVJcJ26N2cA==,type:str]
+  permissions:
+    matrix.taila659a.ts.net: user
+    '@admin:matrix.taila659a.ts.net': admin
+logging:
+  version: 1
+  formatters:
+    colored:
+      (): mautrix_googlechat.util.ColorFormatter
+      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: colored
+  loggers:
+    mau:
+      level: DEBUG
+    maugclib:
+      level: INFO
+    aiohttp:
+      level: INFO
+  root:
+    level: DEBUG
+    handlers:
+      - console
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBzbFdGbERHL1Axd3ZjR2Ux
+        VkpUeGh0elJsK1R4emRiRFpRZitEdGdpQmt3CnpQbjBHanl6U1dRaVQzWG9qVE16
+        R1YzOTZicmwxemgzT2NyMzdZaG52YUkKLS0tIGhRSGFNcEs5Q25DbGJESTVLL010
+        eTlidUdITzB4L056SEdCVm1JNlBZcTQKV63i27G6jp8WLR/PVsbu0HMKYrjy8se5
+        P1D5vZX20/NqbJirhhSfmu46zk8IIONO2dIMZO5oXyXAuZ7f59FIwA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-05T18:41:41Z"
+  mac: ENC[AES256_GCM,data:/TiqLU1CYHmAG9utmK26VsBlLf0z8RZumUW0N6v6BFeaDUveE0OcnxMxZVHGu0Mxqe95iW+y53dfjCCw1DuppYWEqiNK0UNfsAUYRGuHInc5m8U4TaqIiGH+nRJXOl2hQjT0NtWy6rBmuymx/dDee4k1X2bt1J/gWlQJCJ/ZD/M=,iv:uVw+xZRsu+2sFMrH/CJYKMWZsKD0XdDnyY2z6W3A3Og=,tag:sdvNBz93UMKlPhlm4JTkfQ==,type:str]
+  encrypted_regex: ^(as_token|hs_token|shared_secret)$
+  version: 3.10.2

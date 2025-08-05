@@ -28,58 +28,67 @@ spec:
                 topologyKey: kubernetes.io/hostname
       initContainers:
         - name: generate-googlechat
-          image: googlechat
+          image: mautrix-googlechat
           volumeMounts:
-            - name: googlechat-data
-              mountPath: /data
+            - name: mautrix-googlechat-data
+              mountPath: /var/lib/mautrix-googlechat
+            - name: mautrix-googlechat-config
+              mountPath: /data/config.yaml
+              subPath: config.yaml
+              readOnly: true
       containers:
-        - name: matrix
-          image: matrix
+        - name: conduit
+          image: conduit
           ports:
             - name: http
-              containerPort: 8080
-            - name: metrics
-              containerPort: 9090
-          env:
-            - name: CONDUIT_DATABASE_BACKEND
-              value: "rocksdb"
-            - name: CONDUIT_ALLOW_REGISTRATION
-              value: "true"
-            - name: CONDUIT_ALLOW_FEDERATION
-              value: "true"
+              containerPort: 6167
           readinessProbe:
             httpGet:
-              path: /health
+              path: /_matrix/client/versions
               port: http
             initialDelaySeconds: 30
           livenessProbe:
             httpGet:
-              path: /health
+              path: /_matrix/client/versions
               port: http
             initialDelaySeconds: 60
           startupProbe:
             httpGet:
-              path: /health
+              path: /_matrix/client/versions
               port: http
             initialDelaySeconds: 5
             failureThreshold: 30
           volumeMounts:
             - name: data
-              mountPath: /data
-        - name: matrix-googlechat
-          image: matrix-googlechat
+              mountPath: /var/lib/conduit
+            - name: conduit-config
+              mountPath: /etc/conduit.toml
+              subPath: conduit.toml
+              readOnly: true
+        - name: mautrix-googlechat
+          image: mautrix-googlechat
           ports:
             - name: bridge
               containerPort: 29320
           volumeMounts:
-            - name: matrix-googlechat-data
-              mountPath: /data
+            - name: mautrix-googlechat-data
+              mountPath: /var/lib/mautrix-googlechat
+            - name: mautrix-googlechat-config
+              mountPath: /data/config.yaml
+              subPath: config.yaml
+              readOnly: true
       securityContext:
         fsGroup: 991
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: matrix-data
-        - name: matrix-googlechat-data
+            claimName: conduit-data
+        - name: mautrix-googlechat-data
           persistentVolumeClaim:
-            claimName: matrix-googlechat-data
+            claimName: mautrix-googlechat-data
+        - name: mautrix-googlechat-config
+          secret:
+            name: mautrix-googlechat-config
+        - name: conduit-config
+          configMap:
+            name: conduit-config

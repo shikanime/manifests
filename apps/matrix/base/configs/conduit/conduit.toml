@@ -1,0 +1,5 @@
+[global]
+database_backend = "rocksdb"
+allow_registration = true
+allow_federation = true
+database_path = "/var/lib/conduit/"

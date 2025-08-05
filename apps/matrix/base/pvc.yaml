@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: matrix-data
+  name: conduit-data
   namespace: shikanime
 spec:
   accessModes:
@@ -11,12 +11,12 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
-  volumeName: matrix-data
+  volumeName: conduit-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: matrix-googlechat-data
+  name: mautrix-googlechat-data
   namespace: shikanime
 spec:
   accessModes:
