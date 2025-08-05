@@ -70,7 +70,8 @@ spec:
             - name: mautrix-googlechat-data
               mountPath: /var/lib/mautrix-googlechat
       securityContext:
-        fsGroup: 991
+        supplementalGroups:
+          - 1337
       volumes:
         - name: config
           configMap:
