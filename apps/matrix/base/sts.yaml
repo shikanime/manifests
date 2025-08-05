@@ -81,4 +81,4 @@ spec:
             claimName: mautrix-googlechat-data
         - name: mautrix-googlechat-config
           secret:
-            name: mautrix-googlechat-config
+            secretName: mautrix-googlechat-config
