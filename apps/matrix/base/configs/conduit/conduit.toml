@@ -1,4 +1,5 @@
 [global]
+server_name = "matrix.taila659a.ts.net"
 database_backend = "rocksdb"
 allow_registration = true
 allow_federation = true
