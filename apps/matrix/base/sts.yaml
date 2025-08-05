@@ -26,8 +26,6 @@ spec:
                       values:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
-      initContainers:
-          volumeMounts:
       containers:
         - name: conduit
           image: conduit
