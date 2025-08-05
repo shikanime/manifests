@@ -10,7 +10,7 @@ images:
     newName: dock.mau.dev/mautrix/googlechat
     newTag: v0.5.2
   - name: conduit
-    newName: docker.io/matrixconduit/conduit
+    newName: docker.io/matrixconduit/matrix-conduit
     newTag: v0.9.0
 resources:
   - ingress.yaml

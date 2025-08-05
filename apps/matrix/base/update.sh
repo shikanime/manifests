@@ -6,7 +6,7 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-  ["conduit"]="docker.io/matrixconduit/conduit"
+  ["conduit"]="docker.io/matrixconduit/matrix-conduit"
   ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
 )
 
