@@ -60,7 +60,7 @@ bridge:
     "@admin:matrix.taila659a.ts.net": admin
 database:
   type: sqlite
-  uri: sqlite:/data/googlechat.db
+  uri: sqlite:///data/googlechat.db
   max_open_conns: 5
   max_idle_conns: 1
   max_conn_idle_time: null
@@ -86,8 +86,8 @@ appservice:
     avatar: mxc://maunium.net/pVtzLmChZejGxLqmXtQjFxem
   ephemeral_events: true
   async_transactions: false
-  as_token: ENC[AES256_GCM,data:8zWUlWPPeTOrlcggVy491FjuByC/vT0VWPvoMarFVc/kxrX59piPPm9EJ65rME0qbUuBqUKazF7HtENtXttnDg==,iv:J/pDPwEuOuqdaX1+rH9c1wU1Y6e6AzJb4aAPJFde3VU=,tag:wB35dXXrZezccoRnC3WYBA==,type:str]
-  hs_token: ENC[AES256_GCM,data:9+Ex0ujestzRZVY8HpmBs0JvNY8DNXzUmfnEL3dMfww6gOlLNHw6GtBi9ylwqg9DvhAns/cPUbJB95cI7H0Qog==,iv:Rr/ZV/96dV0uvQVpZfLz8ToKKztBOwc7NH2DMBhHT8w=,tag:yuIspJ5wR7d7TO2wpnM6Tw==,type:str]
+  as_token: ENC[AES256_GCM,data:tmjuOZCBKZYEL6WsU8zgP9rs2LlTr6R/Lx/D+C3WYz0rMEc4VhmCB0yz21ulw66FeecK8M/X1HqeoTOqbB6mig==,iv:/RcH8NqA+mVePcRRwYPIBOctJ1gXGTj8zxeXBXo3cf8=,tag:2LHy/piz1Gi7raQJKwN1pw==,type:str]
+  hs_token: ENC[AES256_GCM,data:Nrjy/XADDXHdabUH+bl4OcnJf3mB8OVMA2Mevdy2X/wVLsMTT1boRciPs9Rh22KKXV0QcZGkFLbwpnFM3iLLOQ==,iv:H8g86Tm7M5iMmO+Ej4m0De8ZbggwyJSxtxtRkAiNbZs=,tag:qeZYQEF5t6wl9yg79dRKNA==,type:str]
   username_template: slack_{{.}}
 matrix:
   message_status_events: false
@@ -102,7 +102,7 @@ analytics:
   user_id: null
 provisioning:
   prefix: /_matrix/provision
-  shared_secret: ENC[AES256_GCM,data:1SqpKhrp8HLFv0r9TYKeXXsSWKt1pfDGdh/1GOrRAxDpeqNoYb7c+z6MJxX4617Rri9pG9SBmfLMBc9aBsUF+w==,iv:4nL4/1N0EnLB1E85rj02gqcx/F0lqzYvdQA+IYgOC1I=,tag:mUkGeGZg7QA1zI/R0GQVWg==,type:str]
+  shared_secret: ENC[AES256_GCM,data:Z1gO6+plFp7q4CF0lLoLeT0yf4jrhcenaua6DInsNFUgngOds92vnnmnsIWPNHJbde0SVHwfIINoo7O4eBCO5g==,iv:df0MWGU0VJhWv1EKK8MKlDvOQPt16SrclrEL/nnI0Z8=,tag:V+A8KMS8YargPWKLZ2Wqnw==,type:str]
   allow_matrix_auth: true
   debug_endpoints: false
   enable_session_transfers: false
@@ -179,13 +179,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTbkErWmtrYXhhVFdzRXcw
-        TnJ5N1hsWFl4K0tFTThCYWVpcXBrRWVoT3hrCm5JcGZlZXhWeWFVcnh0N1dBbG9T
-        cWYwNXNjWHRrT1JaaVJkMEZyYXM2QU0KLS0tIFlzblMzK2gwUHcxL2QzUGZmR0R1
-        U0RYRzF1UnFXVm95N3dlQ04yNnMyUFUKJoi8KaFIfoo5RXL3QnlZVxRJVGzWFH59
-        USLe/XxO0mq6pdyd6balMswwghjWFFMtirlOsRAwbHf0SksY9RJF6Q==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4OGxLT3JBUFlENVZraWl1
+        QU1pZTNSS3hYdHRCcnZpMWJ5RS81RTBWSzJrCnJjbUYwdFZCVEhNdGNOdFpSamVu
+        RVZYZmc5bmcxam42RUhNZ3NTMmx1TDAKLS0tIGxVdmZxUithMk1vUVd1Sm1PeWU2
+        VmtycEVLNm5RUHRtcUIyWXFzVm0rc0UKkc9LfyaxvXBdQNtSw4dNP+cJ+CfEYo01
+        YVbHNSXGh7bfUWKKlOCWwDrS9k3zAzsr7RGx4k+mNlXSWTDZMW9cUQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-06T17:15:07Z"
-  mac: ENC[AES256_GCM,data:L7ireqsTR061Q5iv7q7C21Ze1nzipzvjjKOUri85bFswAcBaz7i+QMiIXORYAfVZbWZOSTqGh5wRR5gkGsh6mB6n281/UgQ2r+HU277WRZ9HFnfm8bGkYMUmlriU3p97CcaJvOeI/kfAy363ddUqRlBJkKDVwp+Z6T8YWU/2ADA=,iv:w4vjVJw4fYXel/LE1wMFD834BvPtXusuHeBQz2jZyts=,tag:b/p5CyLexIUhW3eRKzNWLA==,type:str]
+  lastmodified: "2025-08-06T17:25:02Z"
+  mac: ENC[AES256_GCM,data:aWFfZdgFzRNxln4jOVeX2uasqpbbz7HXsYq1p7Zu+PBYYZ7OkYCIxGxSwEXKZoJGANXMkmMcE5M73wqkcWnloCjXQHieqKZXhB2tsipQ1poihSg3aPAWcdYbJbplUgU1gSEGkQJuIwuoD0u1jZj6DtgnaEWZk5ugxa6bIODQCc8=,iv:0tdD7Zk8hs11pkQ6nChOnhkysxTKGsxsJ2Ygc714jn0=,tag:ws2h/WJ0yifsmtZUxeUGaw==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
