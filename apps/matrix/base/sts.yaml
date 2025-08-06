@@ -26,50 +26,63 @@ spec:
                       values:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
-      initContainers:
-        - name: generate
-          image: synapse
-          args:
-            - generate
-          env:
-            - name: SYNAPSE_REPORT_STATS
-              value: "no"
-          volumeMounts:
-            - name: data
-              mountPath: /data
       containers:
-        - name: synapse
-          image: synapse
+        - name: conduit
+          image: conduit
+          env:
+            - name: CONDUIT_CONFIG
+              value: /etc/conduit.toml
           ports:
             - name: http
-              containerPort: 8008
-            - name: metrics
-              containerPort: 9090
-          env:
-            - name: SYNAPSE_REPORT_STATS
-              value: "no"
+              containerPort: 8000
           readinessProbe:
             httpGet:
-              path: /health
+              path: /_matrix/client/versions
               port: http
             initialDelaySeconds: 30
           livenessProbe:
             httpGet:
-              path: /health
+              path: /_matrix/client/versions
               port: http
             initialDelaySeconds: 60
           startupProbe:
             httpGet:
-              path: /health
+              path: /_matrix/client/versions
               port: http
             initialDelaySeconds: 5
             failureThreshold: 30
           volumeMounts:
+            - name: config
+              mountPath: /etc/conduit.toml
+              subPath: conduit.toml
+              readOnly: true
             - name: data
+              mountPath: /var/lib/conduit
+        - name: mautrix-googlechat
+          image: mautrix-googlechat
+          command:
+            - /docker-run.sh
+          args:
+            - --no-update
+          volumeMounts:
+            - name: mautrix-googlechat-config
               mountPath: /data
+              readOnly: true
+            - name: mautrix-googlechat-data
+              mountPath: /var/lib/mautrix-googlechat
       securityContext:
-        fsGroup: 991
+        supplementalGroups:
+          - 1337
       volumes:
+        - name: config
+          configMap:
+            name: conduit
         - name: data
           persistentVolumeClaim:
-            claimName: matrix-data
+            claimName: conduit-data
+        - name: mautrix-googlechat-config
+          secret:
+            secretName: mautrix-googlechat
+        - name: mautrix-googlechat-data
+          persistentVolumeClaim:
+            claimName: mautrix-googlechat-data
