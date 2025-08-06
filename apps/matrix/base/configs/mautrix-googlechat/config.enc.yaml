@@ -33,8 +33,8 @@ manhole:
     - 0
 bridge:
   username_template: googlechat_{userid}
-  displayname_template: '{full_name} (Google Chat)'
-  command_prefix: '!gc'
+  displayname_template: "{full_name} (Google Chat)"
+  command_prefix: "!gc"
   initial_chat_sync: 10
   invite_own_puppet_to_pm: false
   sync_with_custom_puppets: false
@@ -90,13 +90,13 @@ bridge:
     shared_secret: ENC[AES256_GCM,data:NNRK5SYg7IexN9Ib/DKvwr43Xm0WPYr6F+B2RG4TCTviXuHs5haN6hNILtjgcrODCz0HWEHfolnJ0WQfCpXMQA==,iv:38cVG2/bDvEHs7Yukqin/tizrFVVlsxyhetSn/q8awA=,tag:w7YyoGXhHoyrM9nS6PSqlA==,type:str]
   permissions:
     matrix.taila659a.ts.net: user
-    '@admin:matrix.taila659a.ts.net': admin
+    "@admin:matrix.taila659a.ts.net": admin
 logging:
   version: 1
   formatters:
     colored:
       (): mautrix_googlechat.util.ColorFormatter
-      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
+      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
   handlers:
     console:
       class: logging.StreamHandler
