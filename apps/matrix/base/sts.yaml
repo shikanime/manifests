@@ -150,18 +150,18 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mautrix-slack
+  name: matrix-slack
   namespace: shikanime
 spec:
   replicas: 1
-  serviceName: mautrix-slack
+  serviceName: matrix-slack
   selector:
     matchLabels:
-      app.kubernetes.io/name: mautrix-slack
+      app.kubernetes.io/name: matrix-slack
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: mautrix-slack
+        app.kubernetes.io/name: matrix-slack
     spec:
       initContainers:
         - name: config-copier
