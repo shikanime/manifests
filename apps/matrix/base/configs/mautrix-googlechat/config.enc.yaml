@@ -1,5 +1,5 @@
 homeserver:
-  address: http://localhost:8000
+  address: http://matrix:8008
   domain: matrix.taila659a.ts.net
   verify_ssl: true
   software: standard
@@ -12,7 +12,7 @@ appservice:
   hostname: 0.0.0.0
   port: 29320
   max_body_size: 1
-  database: sqlite:/var/lib/mautrix-googlechat/googlechat.db
+  database: sqlite:/data/googlechat.db
   database_opts:
     min_size: 1
     max_size: 10
@@ -21,8 +21,8 @@ appservice:
   bot_displayname: Google Chat bridge bot
   bot_avatar: mxc://maunium.net/BDIWAQcbpPGASPUUBuEGWXnQ
   ephemeral_events: true
-  as_token: ENC[AES256_GCM,data:6nMdmLM7OEOiD9aSlZAu0XSRphRpU5Dnf9Eqtzm8VElQexyI1Tg1Rqk6DnlZ44bIJZ94OEPywRNNFwIC8k+IGA==,iv:ErqsTvdX8fiDUcEtX6bLJcgWwXP9aWwxY8NLQnBi9LU=,tag:XXc4UpAySw8I6oVFOJnQrA==,type:str]
-  hs_token: ENC[AES256_GCM,data:YJWoK2Yebo8ntxjmUsaX8X0yQpYyJSvo7NgnecFlckmEP+J55qoJ8hPRZ2QzceBuScRNQWCZu+L271RIgdgnwg==,iv:SO4DyAHmSgBzTryNucGMdHOc9i+hRyYCdfdKckiCDdY=,tag:GDWRJKNNkg8i0mcLe20+1w==,type:str]
+  as_token: ENC[AES256_GCM,data:mn8xqOwq2CK25SR9cE6u7jbyTHNdxifwyK/cQd/sCRc8iST5oZVvVbvpVkLdF03CCzzj3L2KovXVyFWk6b1aBQ==,iv:JvJToYfXCThVIPNCcRy4AeFUeH72B6aphmaVs5gk3tU=,tag:E98eCTbbfVzYTnQa6HAMJw==,type:str]
+  hs_token: ENC[AES256_GCM,data:7K1H7D5MIo+IScHiQa6AmSc7u/Uhq0YoaLM6AbOE1wJm+XSYi746bxmVFpm5/9JymQMOw4k81Xo/clP9AVU1ag==,iv:dLkv/Akz7glJVE6g+f8xbqU3X6C5KtLYrTKKFxbVYlY=,tag:loPo1GTWXfKoD+ujP4WVJA==,type:str]
 metrics:
   enabled: false
   listen_port: 8000
@@ -43,7 +43,7 @@ bridge:
     matrix.taila659a.ts.net: https://matrix.taila659a.ts.net
   double_puppet_allow_discovery: false
   login_shared_secret_map:
-    matrix.taila659a.ts.net: foobar
+    matrix.taila659a.ts.net: shikanime
   update_avatar_initial_sync: true
   encryption:
     allow: false
@@ -85,12 +85,12 @@ bridge:
   unimportant_bridge_notices: false
   disable_bridge_notices: false
   private_chat_portal_meta: default
-provisioning:
-  prefix: /_matrix/provision
-  shared_secret: ENC[AES256_GCM,data:SkzKLKq1VaVUsdoGxmCXMNRe1t6U1GhT80Her8hP5Uz7vEJfS7AYtqJbB5OckjicLmT7muY9wwBWZ3hGMMikoQ==,iv:J4hyJhoY/33LhmDeL6/uzU5/PMDYPy+5Kdu5YkDdi7A=,tag:HL0LhsznW4tKMO6GOTsHbw==,type:str]
-permissions:
-  matrix.taila659a.ts.net: user
-  '@admin:matrix.taila659a.ts.net': admin
+  provisioning:
+    prefix: /_matrix/provision
+    shared_secret: ENC[AES256_GCM,data:cz90neizkz+IXxE2K/nTbZecTqnnNBS8MieYnYwwh8iXHlR0Gy08SROJZntUdb59ETuYrlDL0Cr9nb0qJfYGfw==,iv:3JFPfkIzyu3AyhNgIrSq2nVejD1S8IuDCgRskMC+8d4=,tag:5bHA1YxgGUlr1rGW9TjFnQ==,type:str]
+  permissions:
+    matrix.taila659a.ts.net: user
+    '@admin:matrix.taila659a.ts.net': admin
 logging:
   version: 1
   formatters:
@@ -117,13 +117,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2WjR6UGFYbTYyRnErc2hG
-        UUpZTFRaVjdaeFo2N2VxWlZ3Y2VRazQzUFFZCjd2bjBQQ1dGRS9OKzZ1K3Q2VUl5
-        dFlJK1lrcDNzdzJldEJqN3RDNkYvdkkKLS0tIGkzaE0vRS8xUTBBWGlJQXo2c2V1
-        WklNVlNRNWllM1dlOC8rWnVFUkxFcFEK3Sru5DwdZ5BmdPy8tk7BG6B+Lmr5Rbz6
-        REcCWo8VNcojHqg+ySclj4IvHiY+G88ljzBwAm4MlGdrvTOYQkcHsA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTWmxJdWJINzJjYnBKR1A4
+        N21mb0FCTDFCMzBSanBnRERCUE9vMFVDTVRRCkpLa2R2M1pqbUthSi9LNXRYOUQ4
+        Z0xwYXJxV1MxWWY3ZGliQ2pxamx6UWcKLS0tIHBLam9ycGRFTkNCWGw0MkZWUmFS
+        VXpVYm44dW5mYThNbFVHSTVFSDJuSW8KJnaeyHkqxyKlm+nsNmYVZaBWShXzzmt7
+        tLfF9SSpqdlRb68ByU+Jvmu0wO8P26N1yHN0xzn00otA3qUZTV+HIw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-05T19:52:13Z"
-  mac: ENC[AES256_GCM,data:SwikhMivZerPvrw4QTvgAo9atzeV7WnPkUY4jYouIrH32werY33+FFK1m6WI/lyzAlre0UGNVZpoO91RvGHmChxwpNIlbsjDctERWiWtE4x3cOxGx+UEgpKgC8cXTLj1JR6okcbvuqcwyck4zau/hhcXvku2E9Okcc0lOYun9hU=,iv:ju+77shsgKDR7jaMKRZ6jpptzmu5J6NoM2PRtwN9ZzU=,tag:iVdj4wzcsZ7A4zwAQK6Bkg==,type:str]
+  lastmodified: "2025-08-06T16:07:04Z"
+  mac: ENC[AES256_GCM,data:zFm3tP2cVBLvDl5VEzuph3m1ZyFZ+gtdaCypyPCtqhG3rs0Rw9L56t/JXFDubNSZenbbZ3AZDj1tZn84lN492i+fhzzts+UFi8z/PdWFQfgok7IF6JD03ExA56kPrqaQFd+EfdwL/YfFByBfUj+CMHh18Nnhnks9BW9d2bZ027Y=,iv:T/Qm9n1t+woiP/Iav5VnKwDunQZ4qJIEpwTdUd68vmk=,tag:y/cM8bS0czVn93BbnjNW4A==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
