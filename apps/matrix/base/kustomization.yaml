@@ -1,17 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-configMapGenerator:
-  - name: conduit
-    namespace: shikanime
-    files:
-      - configs/conduit/conduit.toml
 images:
+  - name: busybox
+    newName: docker.io/library/busybox
+    newTag: 1.37.0
   - name: mautrix-googlechat
     newName: dock.mau.dev/mautrix/googlechat
     newTag: v0.5.2
-  - name: conduit
-    newName: docker.io/matrixconduit/matrix-conduit
-    newTag: v0.9.0
+  - name: synapse
+    newName: docker.io/matrixdotorg/synapse
+    newTag: v1.99.0
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -23,10 +21,14 @@ labels:
       app.kubernetes.io/component: communication
       app.kubernetes.io/name: matrix
       app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 0.9.0
+      app.kubernetes.io/version: 1.99.0
 secretGenerator:
-  - name: mautrix-googlechat
+  - files:
+      - configs/synapse/homeserver.yaml
+    name: synapse
     namespace: shikanime
-    files:
+  - files:
       - configs/mautrix-googlechat/config.yaml
       - configs/mautrix-googlechat/registration.yaml
+    name: mautrix-googlechat
+    namespace: shikanime

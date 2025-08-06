@@ -6,15 +6,16 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-  ["conduit"]="docker.io/matrixconduit/matrix-conduit"
+  ["busybox"]="docker.io/library/busybox"
   ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
+  ["synapse"]="docker.io/matrixdotorg/synapse"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
   FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
   LATEST_VERSION=$(
     skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
+      jq -r '.Tags | map(select(test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
   )
   if [[ -z $LATEST_VERSION ]]; then
     echo "Image '$FULL_IMAGE' not found in registry."

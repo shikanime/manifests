@@ -26,15 +26,38 @@ spec:
                       values:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
+      initContainers:
+        - name: config-copier
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              # Copy synapse config
+              cp /config/synapse/homeserver.yaml /data/homeserver.yaml
+
+              # Create necessary directories
+              mkdir -p /data/appservices
+
+              # Copy registration to synapse appservices
+              cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
+          volumeMounts:
+            - name: mautrix-googlechat-config
+              mountPath: /config/mautrix-googlechat
+              readOnly: true
+            - name: synapse-config
+              mountPath: /config/synapse
+              readOnly: true
+            - name: synapse-data
+              mountPath: /data
       containers:
-        - name: conduit
-          image: conduit
-          env:
-            - name: CONDUIT_CONFIG
-              value: /etc/conduit.toml
+        - name: synapse
+          image: synapse
           ports:
             - name: http
-              containerPort: 8000
+              containerPort: 8008
+            - name: metrics
+              containerPort: 9090
           readinessProbe:
             httpGet:
               path: /_matrix/client/versions
@@ -52,34 +75,65 @@ spec:
             initialDelaySeconds: 5
             failureThreshold: 30
           volumeMounts:
-            - name: config
-              mountPath: /etc/conduit.toml
-              subPath: conduit.toml
-              readOnly: true
-            - name: data
-              mountPath: /var/lib/conduit
-        - name: mautrix-googlechat
-          image: mautrix-googlechat
+            - name: synapse-data
+              mountPath: /data
+      securityContext:
+        fsGroup: 991
+      volumes:
+        - name: mautrix-googlechat-config
+          secret:
+            secretName: mautrix-googlechat
+        - name: synapse-config
+          secret:
+            secretName: synapse
+        - name: synapse-data
+          persistentVolumeClaim:
+            claimName: synapse-data
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-googlechat-bridge
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: matrix-googlechat-bridge
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-googlechat-bridge
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-googlechat-bridge
+    spec:
+      initContainers:
+        - name: config-copier
+          image: busybox
           command:
-            - /docker-run.sh
-          args:
-            - --no-update
+            - sh
+            - -c
+            - |
+              # Copy mautrix-googlechat config
+              cp /config/config.yaml /data/config.yaml
+              cp /config/registration.yaml /data/registration.yaml
           volumeMounts:
             - name: mautrix-googlechat-config
-              mountPath: /data
+              mountPath: /config
               readOnly: true
             - name: mautrix-googlechat-data
-              mountPath: /var/lib/mautrix-googlechat
+              mountPath: /data
+      containers:
+        - name: mautrix-googlechat
+          image: mautrix-googlechat
+          ports:
+            - name: appservice
+              containerPort: 29320
+          volumeMounts:
+            - name: mautrix-googlechat-data
+              mountPath: /data
       securityContext:
-        supplementalGroups:
-          - 1337
+        fsGroup: 1337
       volumes:
-        - name: config
-          configMap:
-            name: conduit
-        - name: data
-          persistentVolumeClaim:
-            claimName: conduit-data
         - name: mautrix-googlechat-config
           secret:
             secretName: mautrix-googlechat

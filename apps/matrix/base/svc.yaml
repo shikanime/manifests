@@ -6,10 +6,23 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8000
+      port: 8008
       targetPort: http
     - name: metrics
       port: 9090
       targetPort: metrics
   selector:
     app.kubernetes.io/name: matrix
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-googlechat-bridge
+  namespace: shikanime
+spec:
+  ports:
+    - name: appservice
+      port: 29320
+      targetPort: 29320
+  selector:
+    app.kubernetes.io/name: matrix-googlechat-bridge
