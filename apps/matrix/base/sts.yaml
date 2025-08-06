@@ -95,18 +95,18 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-googlechat-bridge
+  name: matrix-googlechat
   namespace: shikanime
 spec:
   replicas: 1
-  serviceName: matrix-googlechat-bridge
+  serviceName: matrix-googlechat
   selector:
     matchLabels:
-      app.kubernetes.io/name: matrix-googlechat-bridge
+      app.kubernetes.io/name: matrix-googlechat
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: matrix-googlechat-bridge
+        app.kubernetes.io/name: matrix-googlechat
     spec:
       initContainers:
         - name: config-copier

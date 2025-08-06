@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: matrix-googlechat-bridge
+  name: matrix-googlechat
   namespace: shikanime
 spec:
   ports:
@@ -25,4 +25,4 @@ spec:
       port: 29320
       targetPort: 29320
   selector:
-    app.kubernetes.io/name: matrix-googlechat-bridge
+    app.kubernetes.io/name: matrix-googlechat
