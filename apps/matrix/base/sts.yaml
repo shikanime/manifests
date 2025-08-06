@@ -48,6 +48,9 @@ spec:
             - name: mautrix-googlechat-config
               mountPath: /config/mautrix-googlechat
               readOnly: true
+            - name: mautrix-slack-config
+              mountPath: /config/mautrix-slack
+              readOnly: true
             - name: synapse-config
               mountPath: /config/synapse
               readOnly: true
