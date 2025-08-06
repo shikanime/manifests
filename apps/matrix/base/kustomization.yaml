@@ -25,6 +25,7 @@ labels:
 secretGenerator:
   - files:
       - configs/synapse/homeserver.yaml
+      - configs/synapse/log.config
     name: synapse
     namespace: shikanime
   - files:

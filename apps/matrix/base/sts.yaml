@@ -33,11 +33,13 @@ spec:
             - sh
             - -c
             - |
+              # Create necessary directories
+              mkdir -p /data/logs
+              mkdir -p /data/appservices
+
               # Copy synapse config
               cp /config/synapse/homeserver.yaml /data/homeserver.yaml
-
-              # Create necessary directories
-              mkdir -p /data/appservices
+              cp /config/synapse/log.config /data/log.config
 
               # Copy registration to synapse appservices
               cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
