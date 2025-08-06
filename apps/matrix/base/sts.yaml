@@ -60,6 +60,10 @@ spec:
               mountPath: /var/lib/conduit
         - name: mautrix-googlechat
           image: mautrix-googlechat
+          command:
+            - /docker-run.sh
+          args:
+            - --no-update
           volumeMounts:
             - name: mautrix-googlechat-config
               mountPath: /data
