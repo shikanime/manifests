@@ -36,3 +36,8 @@ secretGenerator:
       - configs/mautrix-googlechat/registration.yaml
     name: mautrix-googlechat
     namespace: shikanime
+  - files:
+      - configs/mautrix-slack/config.yaml
+      - configs/mautrix-slack/registration.yaml
+    name: mautrix-slack
+    namespace: shikanime
