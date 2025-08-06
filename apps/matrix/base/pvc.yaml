@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: conduit-data
+  name: synapse-data
   namespace: shikanime
 spec:
   accessModes:
@@ -9,9 +9,6 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
-  volumeMode: Filesystem
-  volumeName: conduit-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

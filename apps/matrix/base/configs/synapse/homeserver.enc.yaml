@@ -1,0 +1,42 @@
+server_name: matrix.taila659a.ts.net
+pid_file: /data/homeserver.pid
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    resources:
+      - names:
+          - client
+          - federation
+        compress: false
+database:
+  name: sqlite3
+  args:
+    database: /data/homeserver.db
+log_config: /data/log.config
+media_store_path: /data/media_store
+registration_shared_secret: ENC[AES256_GCM,data:j/QjLaeFswnG32/S8yB7U6QW7VpfaEQBgI8DLJK17JZaHY8Kqn+x+qilFHsALmOw7Gk=,iv:ofsHVyYWbRAUJQCS9Au3oYBvR8K08xjEjlM9jzupGdM=,tag:k3/wohTalE2PQeZlgmxVVQ==,type:str]
+report_stats: false
+macaroon_secret_key: ENC[AES256_GCM,data:KZkNqA1h22AV0E9I4Mj95coPqEy0Hh2rap4e2su7vNWb2Eo4u2+NGSWudfQs+FombmI=,iv:PN3CxJpFq3Jj3UW+AaiQnQgCXgNngmvtgvCmPmTKEaA=,tag:bw8Vp20jLF6OWGMJT5vUjw==,type:str]
+form_secret: ENC[AES256_GCM,data:iqzn0Z6YLjsS1V+TAJZbEh6NVM8u7KgcndFWSPoICqsYEv7BjvxdO1uNEJw/VBOtfBw=,iv:JLz/9WfWw89j4TQP4K1C7791WszUuEkXCeyxq9yljdw=,tag:sqwRHFGlmyXaunpwoWLHUA==,type:str]
+signing_key_path: /data/matrix.taila659a.ts.net.signing.key
+trusted_key_servers:
+  - server_name: matrix.org
+app_service_config_files:
+  - /data/appservices/mautrix-googlechat.yaml
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1dFZXZmRKUm5oK25ObGZl
+        cDhLMlZnUVJScFZUaWt4MTlvSWNVLzMybDN3CkNjWS93LzVJcnRPejA4YjJVNEpB
+        MlN1TkNKMGtZNzNFYW81T0JRbDJaczgKLS0tIFhzMytYKzhEVXVQWjNEMlQ4ZTd4
+        Zk9JWG9QeDRmcDN6cXpQdTVjcXUxSVEKUbfZAbJUNJNJmpkk9XpFP+ovWX6C5F5/
+        xYYjckJ+Zjp7W35I72QiVQ4FNPMwNJrXMf/DlLByzxxPUXw6seWH1w==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-06T15:56:33Z"
+  mac: ENC[AES256_GCM,data:wjimhj+OsFonAHNXOGc22qsKoaAAOuvspPZPcwPrkzZ9zS2GgZVII/PFVSoppjFlar2CuEjVbFu/GZ9ovs5PoKf0rdFclhFr/bS75b+SYGQAWZ9q5yDdF6AANxNkYsRpH5sQB9XZ52Vy5xmRk/v5BnFxDRvnrlY5OLiW2bZwLHU=,iv:czGVdf0onmbNUconEi2Xt7/XBa31NUhvk7BaY/v5zRE=,tag:Yd9eB6G7SswS0GnZR5VG4w==,type:str]
+  encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
+  version: 3.10.2
