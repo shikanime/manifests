@@ -1,6 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
+  - name: busybox
+    newName: docker.io/library/busybox
+    newTag: 1.37.0
+  - name: mautrix-googlechat
+    newName: dock.mau.dev/mautrix/googlechat
+    newTag: v0.5.2
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
     newTag: v1.99.0
@@ -16,3 +22,14 @@ labels:
       app.kubernetes.io/name: matrix
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.99.0
+secretGenerator:
+  - files:
+      - configs/synapse/homeserver.yaml
+      - configs/synapse/log.config
+    name: synapse
+    namespace: shikanime
+  - files:
+      - configs/mautrix-googlechat/config.yaml
+      - configs/mautrix-googlechat/registration.yaml
+    name: mautrix-googlechat
+    namespace: shikanime

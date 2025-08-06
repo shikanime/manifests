@@ -1,7 +1,19 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: matrix-data
+  name: synapse-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mautrix-googlechat-data
   namespace: shikanime
 spec:
   accessModes:
@@ -11,4 +23,3 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
-  volumeName: matrix-data

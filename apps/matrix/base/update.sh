@@ -4,8 +4,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+for dir in "$(dirname "$0")"/configs/*; do
+  if [ -f "$dir/update.sh" ]; then
+    bash "$dir/update.sh" 2>&1 |
+      sed 's/^/['"$(basename "$dir")"'] /' &
+  fi
+done
+
 # Define container images to check
 declare -A IMAGES=(
+  ["busybox"]="docker.io/library/busybox"
+  ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
   ["synapse"]="docker.io/matrixdotorg/synapse"
 )
 
@@ -13,7 +22,7 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
   FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
   LATEST_VERSION=$(
     skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
+      jq -r '.Tags | map(select(test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
   )
   if [[ -z $LATEST_VERSION ]]; then
     echo "Image '$FULL_IMAGE' not found in registry."

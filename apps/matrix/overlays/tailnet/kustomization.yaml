@@ -4,5 +4,3 @@ components:
   - ../../components/tailscale
 resources:
   - ../../base
-patches:
-  - path: patch-sts.yaml
