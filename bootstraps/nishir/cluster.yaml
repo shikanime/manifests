@@ -167,4 +167,7 @@ spec:
                       secretName: oauth-client
                   operatorConfig:
                     hostname: nishir-k8s-operator
+        network:
+          extraArgs:
+            - --advertise-loadbalancer-ip
     version: v1.33.3+k0s.0
