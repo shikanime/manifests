@@ -171,6 +171,6 @@ spec:
           kuberouter:
             extraArgs:
               advertise-cluster-ip: "true"
-              advertise-external: "true"
+              advertise-external-ip: "true"
               advertise-loadbalancer-ip: "true"
     version: v1.33.3+k0s.0
