@@ -26,16 +26,3 @@ spec:
       targetPort: 29320
   selector:
     app.kubernetes.io/name: matrix-googlechat
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: matrix-slack
-  namespace: shikanime
-spec:
-  ports:
-    - name: appservice
-      port: 29320
-      targetPort: 29320
-  selector:
-    app.kubernetes.io/name: matrix-googlechat
