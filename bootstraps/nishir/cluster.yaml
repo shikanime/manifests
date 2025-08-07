@@ -168,6 +168,9 @@ spec:
                   operatorConfig:
                     hostname: nishir-k8s-operator
         network:
-          extraArgs:
-            - --advertise-loadbalancer-ip
+          kuberouter:
+            extraArgs:
+              advertise-cluster-ip: "true"
+              advertise-external: "true"
+              advertise-loadbalancer-ip: "true"
     version: v1.33.3+k0s.0
