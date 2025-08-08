@@ -2,12 +2,9 @@ apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
   name: nishir-matrix
-  namespace: shikanime
 spec:
   statefulSet:
     pod:
-      labels:
-        foo: bar
       affinity:
         podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
