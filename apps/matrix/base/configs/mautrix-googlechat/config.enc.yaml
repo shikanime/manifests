@@ -19,7 +19,6 @@ appservice:
   id: googlechat
   bot_username: googlechatbot
   bot_displayname: Google Chat bridge bot
-  bot_avatar: mxc://maunium.net/BDIWAQcbpPGASPUUBuEGWXnQ
   ephemeral_events: true
   as_token: ENC[AES256_GCM,data:UIqyuMT/NgPVe/2Ysb/e9jQqJAMDtCTp8jMPiumzYFWO4+B3BvWB7Ud1q2sCO2MeeUIRGOtNhPaWvIEYCPnToA==,iv:k7sdhujvFjDfyZbuQnIUhaGaJ2v8B5UlosTmXFOtoN8=,tag:/DjUz1i0NAF5U7TaqBDyeg==,type:str]
   hs_token: ENC[AES256_GCM,data:vrP/djUQPELUKqXLuyUOXo7+DfHgFDI+a/qeTVFqPIrRxtW0JGxAhc6eoICG8y3jDgPGWD1te5KCY4NSAq28pQ==,iv:/kCfYFCohU4IqKIzXv111zzP/jKfluKfIOU9zLsrDHw=,tag:vNMKVsntYGawjaH3GTTrJg==,type:str]
