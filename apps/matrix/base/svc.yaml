@@ -21,8 +21,8 @@ metadata:
   namespace: shikanime
 spec:
   ports:
-    - name: appservice
-      port: 29320
-      targetPort: 29320
+    - name: http
+      port: 29335
+      targetPort: http
   selector:
     app.kubernetes.io/name: matrix-googlechat
