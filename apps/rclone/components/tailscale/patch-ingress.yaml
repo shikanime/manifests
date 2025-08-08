@@ -4,7 +4,7 @@ metadata:
   name: rclone
   namespace: shikanime
   annotations:
-    tailscale.com/tags: tag:web
     tailscale.com/proxy-class: nishir-rclone
+    tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

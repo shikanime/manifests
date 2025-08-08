@@ -2,6 +2,7 @@ apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
   name: nishir-whisparr
+  namespace: shikanime
 spec:
   statefulSet:
     pod:
