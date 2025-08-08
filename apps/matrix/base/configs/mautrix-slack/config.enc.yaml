@@ -1,7 +1,7 @@
 network:
-  displayname_template: "{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}"
-  channel_name_template: "{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}"
-  team_name_template: "{{ .Name }}"
+  displayname_template: '{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}'
+  channel_name_template: '{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}'
+  team_name_template: '{{ .Name }}'
   custom_emoji_reactions: true
   workspace_avatar_in_rooms: false
   participant_sync_count: 5
@@ -10,7 +10,7 @@ network:
   backfill:
     conversation_count: -1
 bridge:
-  command_prefix: "!slack"
+  command_prefix: '!slack'
   personal_filtering_spaces: true
   private_chat_portal_meta: true
   async_events: false
@@ -45,22 +45,22 @@ bridge:
     admin_only: true
     default_relays: []
     message_formats:
-      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
-      m.file: "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.image: "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.audio: "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.video: "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.location: "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}"
-    displayname_format: "{{ .DisambiguatedName }}"
+      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
+      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
+    displayname_format: '{{ .DisambiguatedName }}'
   permissions:
-    "*": relay
+    '*': relay
     matrix.taila659a.ts.net: user
-    "@admin:matrix.taila659a.ts.net": admin
+    '@admin:matrix.taila659a.ts.net': admin
 database:
-  type: sqlite3
-  uri: sqlite:///data/googlechat.db
+  type: sqlite3-fk-wal
+  uri: file:/data/googlechat.db
   max_open_conns: 5
   max_idle_conns: 1
   max_conn_idle_time: null
@@ -86,8 +86,8 @@ appservice:
     avatar: mxc://maunium.net/pVtzLmChZejGxLqmXtQjFxem
   ephemeral_events: true
   async_transactions: false
-  as_token: ENC[AES256_GCM,data:tmjuOZCBKZYEL6WsU8zgP9rs2LlTr6R/Lx/D+C3WYz0rMEc4VhmCB0yz21ulw66FeecK8M/X1HqeoTOqbB6mig==,iv:/RcH8NqA+mVePcRRwYPIBOctJ1gXGTj8zxeXBXo3cf8=,tag:2LHy/piz1Gi7raQJKwN1pw==,type:str]
-  hs_token: ENC[AES256_GCM,data:Nrjy/XADDXHdabUH+bl4OcnJf3mB8OVMA2Mevdy2X/wVLsMTT1boRciPs9Rh22KKXV0QcZGkFLbwpnFM3iLLOQ==,iv:H8g86Tm7M5iMmO+Ej4m0De8ZbggwyJSxtxtRkAiNbZs=,tag:qeZYQEF5t6wl9yg79dRKNA==,type:str]
+  as_token: ENC[AES256_GCM,data:u4rmi8rgqxp6Q8JtuVCevzaHtocLA6lE5Jr2AfXMqLdQ3uaLaMMX7dK2mSR6s5IvvVD/nMDClv3AV3rx2EUVRA==,iv:to8WHFMFYUI92PMEMLfADwICPnd88lHcIPDbLqI34us=,tag:McTodAnPG5UhpNy0nFLD5w==,type:str]
+  hs_token: ENC[AES256_GCM,data:zUPO75LLkIWeTLTiIqEKOnf3dqvp5yMz2JB1+7GILsKbeg8RtrEVu/bM+RcDf8haHImUGZyUeF9H2W2gSSWxbg==,iv:uqR2FrCmTBjL/OgHYq1+UUs03ftykij3qDNEkYch0UI=,tag:VcN5Vh1BLKpvpB/oEwVDxw==,type:str]
   username_template: slack_{{.}}
 matrix:
   message_status_events: false
@@ -102,7 +102,7 @@ analytics:
   user_id: null
 provisioning:
   prefix: /_matrix/provision
-  shared_secret: ENC[AES256_GCM,data:Z1gO6+plFp7q4CF0lLoLeT0yf4jrhcenaua6DInsNFUgngOds92vnnmnsIWPNHJbde0SVHwfIINoo7O4eBCO5g==,iv:df0MWGU0VJhWv1EKK8MKlDvOQPt16SrclrEL/nnI0Z8=,tag:V+A8KMS8YargPWKLZ2Wqnw==,type:str]
+  shared_secret: ENC[AES256_GCM,data:bkYKS1Au7bGMTw+dxkbo90CB8lM7NrDbZGV/o5odMZlEcVO+vz41fyuJFOUO4hwqHfcgOccT5T6ZO2fnidj1Ag==,iv:S1258zN1vdd+xddIkzFokhF2V8Sv1fNeehBMJp6R948=,tag:VgY0zPDEs/si6ifcPz/V/A==,type:str]
   allow_matrix_auth: true
   debug_endpoints: false
   enable_session_transfers: false
@@ -179,13 +179,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4OGxLT3JBUFlENVZraWl1
-        QU1pZTNSS3hYdHRCcnZpMWJ5RS81RTBWSzJrCnJjbUYwdFZCVEhNdGNOdFpSamVu
-        RVZYZmc5bmcxam42RUhNZ3NTMmx1TDAKLS0tIGxVdmZxUithMk1vUVd1Sm1PeWU2
-        VmtycEVLNm5RUHRtcUIyWXFzVm0rc0UKkc9LfyaxvXBdQNtSw4dNP+cJ+CfEYo01
-        YVbHNSXGh7bfUWKKlOCWwDrS9k3zAzsr7RGx4k+mNlXSWTDZMW9cUQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5YWdtMXcvYmlFNXRWb0tq
+        VUtrWUtlZVB6TWRTdXo5dyt0REd5WUVlWkNNCjNYU2ZGRWlYb1pJRGRrNWRDRG1s
+        aFZQd0lZeTNybVE5VEZTV2hQWTBCMzQKLS0tIFNWR0EvV2ZhK3dRWlRJdDFFaUJE
+        Vi9TWjgwWnBNNzEyaE1taHZObVpvczQKNtk0ZtnvHwQNR6aKroNQELucrsI2cxnh
+        DDO8oAYxcvLvXzn4IEGk6DcnxPGKe341ulpG/nclkL3BqwX90vKdeg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-06T17:25:02Z"
-  mac: ENC[AES256_GCM,data:aWFfZdgFzRNxln4jOVeX2uasqpbbz7HXsYq1p7Zu+PBYYZ7OkYCIxGxSwEXKZoJGANXMkmMcE5M73wqkcWnloCjXQHieqKZXhB2tsipQ1poihSg3aPAWcdYbJbplUgU1gSEGkQJuIwuoD0u1jZj6DtgnaEWZk5ugxa6bIODQCc8=,iv:0tdD7Zk8hs11pkQ6nChOnhkysxTKGsxsJ2Ygc714jn0=,tag:ws2h/WJ0yifsmtZUxeUGaw==,type:str]
+  lastmodified: "2025-08-08T12:01:30Z"
+  mac: ENC[AES256_GCM,data:qZxswG1jzWxsc9PCB78QtvWfG3kYX4cANk8oYu6po3Y/k9eSOQSXTfmz+fXYY3PYTVNnUI8YxnguQaDb8YHQSUJXnVDOeytRFCcBnQudTjhrOao1uVEz9B0y88e0tG/MW8asae0c+yRZNCk9i/LQFLXdx4eMu+TamVXKGY1ELuY=,iv:sGBIHeRPrckp+eQk+s7VlgG99niUUhi3N3HUMgpC7XQ=,tag:Qt97AuELwJx4+hLs5jfSTg==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
