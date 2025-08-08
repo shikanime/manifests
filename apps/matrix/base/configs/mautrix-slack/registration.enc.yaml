@@ -1,0 +1,29 @@
+id: slack
+url: http://matrix-slack:29320
+as_token: ENC[AES256_GCM,data:zBI5qgJv3D3rNzSrwHLiPqqYnwIQk7m51D3Mx488tK0Ak9XEuinQYCqRJ6KkvD1GAXNATCk6k4If0UkLHtpk4w==,iv:KZYoWWzNVJRALTRBHx4ZFzbRq064JSjg4FQ1XNFB2Tw=,tag:+ewKG6XB1uWgNG2TiWBJZw==,type:str]
+hs_token: ENC[AES256_GCM,data:oM0ipb/Z7FZ7BWvVtJK5QadWYyXVQTCfu4na1EL2T/Vv5SgJtNQTwwdXn1M/nyF7A98C5GTUTkyAjIFBAH/J8A==,iv:3PxDPDPy2E/je0HCoye8FjbXlP0e1aG7s+j3PJsEGmc=,tag:LsRBZTusEB+xzD3L+FhmHA==,type:str]
+sender_localpart: OoonQgifIvOdLgA4wRCCk757goDNkJfn
+rate_limited: false
+namespaces:
+  users:
+    - regex: ^@slackbot:matrix\.taila659a\.ts\.net$
+      exclusive: true
+    - regex: ^@slack_.*:matrix\.taila659a\.ts\.net$
+      exclusive: true
+de.sorunome.msc2409.push_ephemeral: true
+receive_ephemeral: true
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnVUgxMGtlcWJGdFN3QnJZ
+        b21TVEJIcHFXaWhBN214eU9oSEloQlVHcWswCnBka0xPY0VZWFFPK3ova3FRMGN4
+        U1JiZ3lPeW1yT3RWeFRkV3pWTjluZkEKLS0tIFAxaWJ1T0RCRGl6TFI3WE1lYWZx
+        WmwzQWZvQ29oYURUT2NFUDlNSW5mUWsK8uuc4atMfImuq1ZDU+sG7vrhe9X2PDzF
+        JxHJSfdP63pGdO5BGQYzk86qsQZ9xPl3NWB1vDaiejHaagt2y9ZIag==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-08T12:20:49Z"
+  mac: ENC[AES256_GCM,data:Hdm+55iVphzNpNgEUymVZJBUleS4rERpNtGXOIz/NtnhYkka2ZLXBDLOE0uyA8xCkTT+9KCRnz84Wr+Ke0Lf1ctUNelgRVbG0LPrhMteeEOXwqzR34ahJK5EMWu49qHAgLpa5DTcvceM/lGezVUDFR39dgiK2GqCDaSe2YWxZsU=,iv:fvJ34Gmz1e29vKrFixxglYUlqmZu5EZg9f8sS4HGiBI=,tag:egvAwVRIFXrWJv5b3DQT0Q==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
+  version: 3.10.2
