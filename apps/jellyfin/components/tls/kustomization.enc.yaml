@@ -2,6 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 configurations:
   - namereference.yaml
+images:
+  - name: jellyfin
+    newName: docker.io/jellyfin/jellyfin
+    newTag: 10.10.7
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -12,19 +16,19 @@ secretGenerator:
   - name: jellyfin-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:5I+YvauB0m+nAQhT3YGTaAY7PaVzFr8=,iv:VQoyHqCYvWHrugxPIpd0FCw44swNGlUhGmcYBws7hmY=,tag:0SIhBShqBMAaupQ3EnA4pA==,type:str]
+      - ENC[AES256_GCM,data:Fbh+2Xy6euyiDvqyYY40vO6as6nf63w=,iv:87nTUdvJADXLU0ZQpNZ4bW+J6IW8S4qO/HWIPet2sik=,tag:9Lx/ieUUY+cKQe8TvTx6gQ==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSUVZ5eVUwaE41WUF2cFNp
-        amtacTZIa0dmVU5XN2FaY1p4b244ZmF1N0hFCmdaZ1MrSDZJMlRJUFQwZlIyWk9u
-        eVJmWTJ3QlNtRGxubGlrY2pQeDFZa1kKLS0tIGhTcDFLazJ4TC93NnBBMFVvOFBO
-        QU1hR2hDUHFhS05jOHhONGVJVWlaTHcK0IvGIbugmtuG16pc0bRAGp5GrW743j1P
-        sHLtDpMAcKe0QuJ/J6iz2IFDHxb8hEfWB863rJqd5ahvT8IGlw+ZVw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByZlp5TzV0YjZ0Nkk1cHF5
+        ZUxzMnpyZmJTajhacXlyZXBOckRIZXZjdGowCi9NSkVaTXlEaUVodUU3bTJwK3Bn
+        TFhESVNQZW5qdTdCTWtkVFFYa3VseEUKLS0tIEIrV01rMWM1Sk5XeURrWWhRZHRP
+        cFB5TnBuMXdSTkJTZDg3NXpNajRXbFkKL84jMDSp+BvWQFsSSIjqXwTQss72yMwJ
+        GV4LVZgzvwPEYBqQzpM5IXwl0oB7UjszZfrGK/pNXspahGBy9+3tcA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:12:55Z"
-  mac: ENC[AES256_GCM,data:0e8QJPjpxXRPOKZfikC7enzY3FVNAMSls26oKt8g0+8LA3B2lpy6ZUgiV/5SpJ7KyY0VB9nPPTEww3t6XQRnjs21ur3llwXV1fCt9nMT09i90DVbmwjnV/O3x/oIASJdKYglzWsIU+eO4pvrHaIhYrluPdRwUkS10KjGfb+0wEg=,iv:447+iptmVo9281JdE4GaRKuFmfZ1wgwvYftFcdKmGDw=,tag:01JawY45uVr3QRB2YzGRrQ==,type:str]
+  lastmodified: "2025-08-08T16:55:56Z"
+  mac: ENC[AES256_GCM,data:jaqHocPJRzyPCH6SAzi393adDplEUJIZA7myuPMHbHfQpelhIkCJdvmVs8vpV6LexwovgKVcNWkZJIp4nGj19qOQrxbLMtcrE0BHywdHQPRiJspYomVx5920U9dv2dstSszI89jbPsf6eyNmjvVMTxqL/P2YJiT3MzHre8vYO7s=,iv:7yvRbCiqCESHu1RowcqAlCdRfU6vLLuI71g1ZvQEPGQ=,tag:x2qiKAHdUqNrdFy5u8yfbg==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
