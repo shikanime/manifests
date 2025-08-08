@@ -86,8 +86,8 @@ appservice:
     avatar: mxc://maunium.net/pVtzLmChZejGxLqmXtQjFxem
   ephemeral_events: true
   async_transactions: false
-  as_token: ENC[AES256_GCM,data:sKuPah5ujje+47PXtFVC6jCT6zB58q5aqegSh9vzyIW/RJAdVQcwnpaAG6LvDlSdVsyKfL787k2RSXmM9O6oXw==,iv:t1j8HXVbgkV+bflSKOrpwHNLKr4YECKHn7YP2HzM4cY=,tag:3COHA659aUu+sbK3tmktOg==,type:str]
-  hs_token: ENC[AES256_GCM,data:iKnjuYsLuxNX+rKRaUJgHSgABMnpU0SHRpekFlWVk5qxpbeXjcbbEQqM7gkPTjsUAHhnodqd376+S0OKvLkrdA==,iv:fGm5Sjl+O3T1EkvNL4jfsQlL0ZAOpBV0Nz8ARcFaDKE=,tag:srUzQ5bo91KLMZ/11ZCefw==,type:str]
+  as_token: ENC[AES256_GCM,data:TmMKg77By9DJAbeFSKjh6RAFo8d5e1shWKR0pSjNWTItD99uCIBagchjnyB+tYa+cFbQCT3bP/JN2lgRwvd6pQ==,iv:Tsh31qPrYiAimz8sKWbdBhHkewLrtZ3Zhn0IiW8lIsg=,tag:7ZfNkozkWSXmf+Cnce1yfg==,type:str]
+  hs_token: ENC[AES256_GCM,data:fcJLu1gbiQ1SakYWHfkk/YSd5GRV583gHxkqMw8VYIC77/cv86HOBO+sMPLp9lCpepoCu6mNfBKZxZJprEbmuA==,iv:VuPF46WWQh9Qs6WYrYva5eDFeyi9T25Qz0qtGRDbjVg=,tag:17fqXX4c66/kA24m8QmGwg==,type:str]
   username_template: slack_{{.}}
 matrix:
   message_status_events: false
@@ -102,7 +102,7 @@ analytics:
   user_id: null
 provisioning:
   prefix: /_matrix/provision
-  shared_secret: ENC[AES256_GCM,data:0AH9hd5MXvJ1n/vcdx1su1z/7DePdwg7xTSG/Awr6ULPTcBfG8FVrc2c+5TgdEFjPdp6aG35VSopKTTGhSy6+w==,iv:XCIYA2v8ud8p02OdKk0eMch6l0Pa0XMKHXUreskFcCE=,tag:p0NBFdK7BuR3mHJ0oQhG5A==,type:str]
+  shared_secret: ENC[AES256_GCM,data:wtfA+Nnp9eMwgEcSG2dQ+CNOgys81SpSaMn50qR244LCQMpNiSfihDy852j8wGwalV144ezlCVTUhS+6CMe+QA==,iv:fRq1cMDmTbUqgJcZFh038wzzB3TAO/NzthJ/nyYtK4Y=,tag:ZrVNzJ/KT0Wifb4KjZo8lw==,type:str]
   allow_matrix_auth: true
   debug_endpoints: false
   enable_session_transfers: false
@@ -133,10 +133,10 @@ backfill:
     max_batches_override: {}
 double_puppet:
   servers:
-    anotherserver.example.org: https://matrix.anotherserver.example.org
+    matrix.taila659a.ts.net: https://matrix.taila659a.ts.net
   allow_discovery: false
   secrets:
-    matrix.taila659a.ts.net: as_token:foobar
+    matrix.taila659a.ts.net: as_token:shikanime
 encryption:
   allow: false
   default: false
@@ -179,13 +179,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtTldxV2xrczh5ek5BUHY2
-        VkdQeTVSQS9EVVNuZm51RGI2bjlOd3ZGd21nCjc2U24zQXo4dWJ6d2xJeXUyZmM1
-        Ymo5ckpRTnRkZE05cEZGTUkrRDhxYUEKLS0tIG1UeC9ndGp1Tzd0QnhwTktyUndw
-        S1BBa0N2SjF3TERmR2pYZFltSXlic3MKXJUc3X3joFHQC43FSMzqchOzmyAORPbg
-        66kRVdRdc+h6RMJKSiczpdRCOdbMjshwd6H6M5fDpvkOz0q1GzUa8w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtdEdjc2wzbG0zRXA4UEV0
+        c0tMaHRiaHJtVUhEaWFDMjYzNnAwUWh4ZVI4CnVqblo5eEpmREVaei9ENjNBcDhS
+        SG1MUHFQelNZZ1VValRVY2lod0p2ejAKLS0tIHZUVVgzSmZzSjUwK0J2VTFwWGk5
+        WWFiMThsdmZ4eDlwNUhtRy8rVkhMYVkKVE5HURI7rJ8fT8oUlgP0fB5u9n4O7WuG
+        1KtLmTZRgN10PL+5hcbkuz9EY66a96+a5Py+/ab/LutjRAxQllZ5dw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T13:19:50Z"
-  mac: ENC[AES256_GCM,data:/Leqkv6xqdpVGXYhSDdd6OTQo0etRuC2Cgu77KUJL9JBg7Mo7aHxJUBl+QqUjNHxCFt061Dd8K3DFKsrWBvuBhHJ+A1I642zpZAuZlTCGWhzHmcvsE4PyZRon+7WtD2zST+163RpvR6P3ekOnwbVTxp55CAVuoJcAAFtJoi6ALQ=,iv:BlDhVdyzqImY/rwIeRtL2GdtkQxsZDgKqxTauIN6obw=,tag:hp/6wuEwIdQbUAjT2Q63ew==,type:str]
+  lastmodified: "2025-08-08T13:35:30Z"
+  mac: ENC[AES256_GCM,data:1GiwXVeILh9+TTCbWK98ing2PmX+BLWEaJb4HhZEjM8tiOTydsqGexvMDGFOVvvBHKrXxMvLSTYoH7VLlf90wrjqRshhA22wZUOzOBdARpyw96uMHjIwi3cSEL8Ju53TFiO7pRbvtRzJNLf5aWCOzivcoYNfbzEmqFWHaY0M5ho=,iv:VxQp2UkUO3XVJ7bRDtUDF00xvLIQFWwEaUytxKOczCk=,tag:yuh/RrLRbSO8Q8+ua4XbIw==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
