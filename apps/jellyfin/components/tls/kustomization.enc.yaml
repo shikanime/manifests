@@ -12,19 +12,19 @@ secretGenerator:
   - name: jellyfin-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:iRPtDACdjj7uYwPus0bwrHl15i8+XCg=,iv:xZXrRaMnrZTj2wzuZQK7l4ZE4NNuGpVs5nzeS1sFnHE=,tag:RtcG+6NFHR/eb/V3xdcmlA==,type:str]
+      - ENC[AES256_GCM,data:5I+YvauB0m+nAQhT3YGTaAY7PaVzFr8=,iv:VQoyHqCYvWHrugxPIpd0FCw44swNGlUhGmcYBws7hmY=,tag:0SIhBShqBMAaupQ3EnA4pA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2ZGlNbkxIaU5pY3JyU2Rv
-        bmV6NWZFcDQ2VHo4blZFKy8vMWdUSThUV1VFCkhzK3NoeVFaNTkvVnVoS3pzMXI2
-        WFJZQ2JpSXhSV3Ayd3pJN3ZFQk5nVW8KLS0tIE43NW9IRVY4V1JkSTJqdExIRm1k
-        SURkbnJuMXFWYVoxTE56b0NaSHlBRmMKk8LHBdQh2Hl2f61lzQ99/GWetbcUg0tN
-        7PqjfLhOasJk3q94B4so7xvtc2JG8e7n0scZTGkUaoYqwxoFpzqsLg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSUVZ5eVUwaE41WUF2cFNp
+        amtacTZIa0dmVU5XN2FaY1p4b244ZmF1N0hFCmdaZ1MrSDZJMlRJUFQwZlIyWk9u
+        eVJmWTJ3QlNtRGxubGlrY2pQeDFZa1kKLS0tIGhTcDFLazJ4TC93NnBBMFVvOFBO
+        QU1hR2hDUHFhS05jOHhONGVJVWlaTHcK0IvGIbugmtuG16pc0bRAGp5GrW743j1P
+        sHLtDpMAcKe0QuJ/J6iz2IFDHxb8hEfWB863rJqd5ahvT8IGlw+ZVw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:01:26Z"
-  mac: ENC[AES256_GCM,data:KMeKaWPJm2bil4BEURgGTjcFt+aOH77U/mQ620oA1HH7wHHvxzDzL/kmx/XoIPMAgXU/dYTjgLwQN/qA5d1F94Irf7DpZfzMtxEuw528yWom6bIk0F2UUD4SHucatvjvrLoZ8hk0DLYq76FxAbEjdLyHNz3LWIfEt37tbOS8Alk=,iv:OwzsqUm3ppS9p9wKtOvTzORBrSWCVWcOUK2X6mKLfMQ=,tag:hYvWaWgUVKYEeVrbQQzDSw==,type:str]
+  lastmodified: "2025-08-08T12:12:55Z"
+  mac: ENC[AES256_GCM,data:0e8QJPjpxXRPOKZfikC7enzY3FVNAMSls26oKt8g0+8LA3B2lpy6ZUgiV/5SpJ7KyY0VB9nPPTEww3t6XQRnjs21ur3llwXV1fCt9nMT09i90DVbmwjnV/O3x/oIASJdKYglzWsIU+eO4pvrHaIhYrluPdRwUkS10KjGfb+0wEg=,iv:447+iptmVo9281JdE4GaRKuFmfZ1wgwvYftFcdKmGDw=,tag:01JawY45uVr3QRB2YzGRrQ==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

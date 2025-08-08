@@ -12,19 +12,19 @@ secretGenerator:
   - name: whisparr-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:lQVVkTelxVKuhWrSX9L+xFjTz9o93OkN6r1VzE7UWWCc71FDsss2vtlyMDy/sdAC7z0/Ckc=,iv:x1p51HgOgUeBzehX7VN+LWmlQI0Rdp8VYtxvop/0g4E=,tag:98MdtBgPow1/smr41V+/iQ==,type:str]
+      - ENC[AES256_GCM,data:VJOxFyHPlExSX6A3nblfgqseyMZgB20lmXFK/7sDzOUaUjdy0Q/Xe0/oJqwaIDyv7aLebLY=,iv:refQsp/pFaErLcTrkymLfBp9Gw/jWFNU5ECm8F9BnrU=,tag:YbWuyPgfDonoydHOX7gRfw==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0Q3BvNk1IL014cGpJcW5Z
-        OStHemRMTVhmQW5YdVRUK281V0t4ZERHVWtzCnBZSUdLWjlMaU9uQVFxejV1YlBI
-        bkVEY1FyRHlSNzQ4eHQ5ZWVwTGwwaFUKLS0tIHRsY0JxMjVmbVRxWVB6SXFDRzVR
-        cWRjdVRYcEYyM2tkS0ZBZWFKUzZQOGMKl/51rC5+GGRRMzE8j7lQ45iMc574gRSd
-        TTRo4t8YGUTHk+bz6nSFGmpIdMmaWl4LGfhZS+zp9GMo9/Klb03uHQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBzdUduTGYxak1rMFc0MHVM
+        K2p5RFpEVTc2elVnZ2FoRER1aHdCZEpmbkJvCjRmTFdDNzZRUVVobUlXUDhzVlJw
+        MTdqTnVJQ29iZ0Y2Ni9mZUVWK0ZQdzQKLS0tIEc5RXE0eVBDZWhLdWJYQmNab3lB
+        RVZ1Y0hoWWpnN00yaHloUUpUSDh2cXcKhJfAHTP7BI4EOuHaR6Rz+30uGa9ae4Gp
+        hcgm5Cd0e3pOW77dCxMDs+5X8Y9xWORgUQBea2d60JfW882Md+x93w==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:01:26Z"
-  mac: ENC[AES256_GCM,data:IPELbmCCFsXw34h+nBkWrYmutVB7qDUoqTpy6m34RK+WKOGj4dt9BbSFzAkV0FNmEnrXPpadiZPdEJcUNa1RHPCWGfBOgYPfwEO5L5dnlXRRP5/qVA6Esfb6g/2p+XeszwpfPo7tCxVYSzVXxFmw57KFuEd7eHPZhca1mN6NITA=,iv:n+F0etagDmRIxBndym3IaPlGebTcJMjnNIUeP5rMpEc=,tag:lVArUYT/mCQAGCTqRZ6AvA==,type:str]
+  lastmodified: "2025-08-08T12:12:55Z"
+  mac: ENC[AES256_GCM,data:n/Z64Zny301D2KEW94GUOcvDKFZwgV+roLtErmGCdq3A9S2nSJxmRkilG34W2aeGKCpCRuSJDfbAT9VTWC+Cb1mv1ylh5h0Amks6ULr3+6qinNwCUymkstvRGidG0JIhVjC2O8+kc+maNfLZPpVAExIeaPyeyS6CKOfn5ZCHHRU=,iv:cHMkgsW9nNVgNXT3YSYCZB4rthZPoz+A++vwOtn0BS8=,tag:+ya4Amwdd+YqYYtmmZwBIQ==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

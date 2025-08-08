@@ -12,19 +12,19 @@ secretGenerator:
   - name: matrix-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:mhc8o7lz+V3bxWop9aTO6uX+TOnMhvE=,iv:LA1gd0un+uimjaA+1s6tIlOwOJ/RflCzUrnrtk/NuMI=,tag:RY+R8cok4kUFTl8k6SUJXw==,type:str]
+      - ENC[AES256_GCM,data:VmwLxa/T+MGe+ij0w2Y+PAnZcNBU/yw=,iv:urp3WIBHsE1UN/6aQQbB4M+2XWb48DFkX0eIqVgeABk=,tag:o1IF8vEIZj50D5L/bZU6kw==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4M21YWnJVU0pUZXRxY3d4
-        Ullib3AxOUw3V0lDTEEvZ0lwMzVuN3JTcjJvCkVidFhJeVlxTmpVUnhjb1pud0hS
-        RVR0dnlSZnA2SGxBV3cvZnd2VGE0WTQKLS0tIEJGM1pzQW1OeEhJM21PTndXQllP
-        a054aUhzMnNwYlNJSU9tbG9xM1grN2cKS/3sXSWJDcjAKVH2R05Ypu5Lm6Ric/I8
-        aq1B0vMDY+BYGowS417sszQzvNHVqRFjVhZPE36uK+SxNt4QLuVHUw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEL2JPY05rZkNuajdCbWli
+        enZmM25FTnlXbHdrR0U1WXZtbkNIVm1EQ0Z3ClZCamN4OXE0eUZhb05GUnpqYVho
+        YWhnNXlGYU1sbExxNjBvbERqTWVMK3cKLS0tIG04dk8ydkNkeWxGU0xOZkdMYmMw
+        MWNneTBqYVJ5SHlxTkhyZGlLLzZMS3cKDTF1dHKvKfWWlou1HHIaALvvOkR3dXU+
+        3tVH7lkKeLRvNLdmCKcz9760P33SMMycZVtkFq9To7zyeEEHtXW2hA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:01:26Z"
-  mac: ENC[AES256_GCM,data:EOHjWWe8UIpQG/LYurJFUEpVSZVcBjsXGVXq0KJZjZZFvPpwIhikRt7dN+WebEJ8rVrpb8NMouvWdgteZ8CS1gQr/Jwn/pdiqenEcNmIZJzrsA/GgQbbUpKe3zdjDY9mEsS+1nUajaMzROUtxk2/otvOT+x6PRQJ7tycu6H8LDo=,iv:dSVwbrgNJv0ccgczK35U4Jwzri8WF1nD3TZy/DEPQq0=,tag:BFrV5iFs75dwHqihDbauLg==,type:str]
+  lastmodified: "2025-08-08T12:12:55Z"
+  mac: ENC[AES256_GCM,data:kqROKYfF+MrsHLm7pEvA7C++HNc8Bl3s17qq5poChdbnrUC7xn+l1FYxDHRKKuzs1bSBz3VlSZCzEiVfviTA4UNNmuxx3eTOXqROxfp+lvTgpIm4f7lVVJ0G+riWbxO8mt80E2KXMXD+wAc3GjpZLkkbyjRv9u7kp3v7kn53MwI=,iv:2fQn9nSbHpCCR+St0sRZbB/reVHJz8rBg6Dlkhoi1p4=,tag:KWk+TZlFR4XNiu7L6ch+9w==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
