@@ -15,10 +15,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/qBittorrent.crt
-              subPath: tls.crt
-              readOnly: true
-            - name: tls
               mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
               subPath: ca.crt
               readOnly: true
@@ -45,7 +41,7 @@ spec:
               subPath: tls.key
               readOnly: true
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/qBittorrent.crt
+              mountPath: /etc/ssl/private/tls.crt
               subPath: tls.crt
               readOnly: true
             - name: tls

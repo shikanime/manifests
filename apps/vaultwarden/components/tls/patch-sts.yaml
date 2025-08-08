@@ -15,10 +15,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/Vaultwarden.crt
-              subPath: tls.crt
-              readOnly: true
-            - name: tls
               mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
               subPath: ca.crt
               readOnly: true
@@ -27,9 +23,9 @@ spec:
           env:
             - name: ROCKET_TLS
               value: |
-                {certs="/usr/local/share/ca-certificates/Vaultwarden.crt",key="/etc/ssl/private/tls.key"}
+                {certs="/etc/ssl/private/tls.crt",key="/etc/ssl/private/tls.key"}
           ports:
-            - containerPort: 8000
+            - containerPort: 80
               name: https
           readinessProbe:
             httpGet:
@@ -52,7 +48,7 @@ spec:
               subPath: tls.key
               readOnly: true
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/Vaultwarden.crt
+              mountPath: /etc/ssl/private/tls.crt
               subPath: tls.crt
               readOnly: true
             - name: tls
