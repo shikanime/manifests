@@ -137,6 +137,21 @@ spec:
           ports:
             - name: appservice
               containerPort: 29320
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: appservice
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: appservice
+            initialDelaySeconds: 30
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: appservice
+            failureThreshold: 12
           volumeMounts:
             - name: mautrix-googlechat-data
               mountPath: /data
