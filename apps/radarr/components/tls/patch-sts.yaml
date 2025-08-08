@@ -6,6 +6,18 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: update-ca-certificates
+          image: radarr
+          command:
+            - update-ca-certificates
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/ca.crt
+              subPath: ca.crt
+              readOnly: true
       containers:
         - name: radarr
           ports:
@@ -24,10 +36,20 @@ spec:
               port: https
               scheme: HTTPS
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: tls
-              mountPath: /tls
+              mountPath: /etc/ssl/private/keystore.p12
+              subPath: keystore.p12
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/ca.crt
+              subPath: ca.crt
               readOnly: true
       volumes:
+        - name: certs
+          emptyDir: {}
         - name: tls
           secret:
             secretName: radarr-tls

@@ -2,6 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 configurations:
   - namereference.yaml
+images:
+  - name: prowlarr
+    newName: lscr.io/linuxserver/prowlarr
+    newTag: 1.37.0
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -9,22 +13,23 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: prowlarr-pkcs12-password
+  - literals:
+      - ENC[AES256_GCM,data:iyfpqXl0+2GKZWpP4ndqOdqscKLXnn4=,iv:AqZLU8gUjUhYAwE9ARRLHN0br3tpt/r6RHLW9Zb9xqE=,tag:8zkpxs8+pmhX+lUiQ8EgkQ==,type:str]
+    name: prowlarr-pkcs12-password
     namespace: shikanime
-    literals:
-      - ENC[AES256_GCM,data:Sgl6wluwknjDUhClZDA0GxjjU4Pcvcs=,iv:ZnCPGBEMWDtIASxdgJcTXSwTis+NfwOkSuJLBf+pYqo=,tag:Y2y81vLFZJ3SxCQsB4Zw4w==,type:str]
+labels: []
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUWjAzLzRyNWllcWFRaVBk
-        QmQzaGJjK3A4a3NxVjlCY2RqTzlNbkZBbjN3Cm14Tm1CUkhseWREandoQkI1YXlC
-        V3l1SmhyTmVtaWs0bytqQ3RVQW1vd2cKLS0tIFNCczV1b2JTUG5GUFJ1Z1NwaldE
-        VVpoL1V2REpmZHUxOE5ueFI4WWgwSjQK637xVru+yijvEMycfhlqDGnc7KdWDSIL
-        X65aAng97sC30WojV1WF2wRjqv1G0/XOi8p4NlROU283NasxuAK94w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRWi9wRjQ1dE9XRTdoUU4w
+        WmxldUtlRjVSV2J2YStOaGxNUHNIWWRnRGxjClhyT09BbzlEL1Z1SE4wNGNSbFph
+        ZUcrOUdqTHJoeWxwczd2S0lMVDVCLzAKLS0tIC9PbzNLbXA5N1dXTjlSR0RtYkk4
+        T3JBNFdobXJUMzNVQnExMDMwblFwSzAKHyvsxLI/C5NNKWH9ZZULXaJ01eZ7zscI
+        3IptZ/cCVzUogvghG+vQknW2Zj+WyFEueGeF7hInVU0DXOOjj6P8Sg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:12:55Z"
-  mac: ENC[AES256_GCM,data:Mpb0upe0oXVsmsBRgzRiVgSl6PqvHFiBJA416FmToxq78VPL+UC4ztKWwu+rRTPGPtbRrVZiWtI/b5PjxhDrzP6t8j+Ksg/gd4b53sYwEQ8RsrTY8HvWKQxGDzKHrEftU2d+32nP+72681Z8Flc7IuGdft0HHVOBc7qPndrG/iA=,iv:XrmFEdrloelrPNNac7uITK5TnVucdAEu9hWnHwlHrI8=,tag:9z2VvVBOyZU6JmKc1TupLw==,type:str]
+  lastmodified: "2025-08-08T15:46:31Z"
+  mac: ENC[AES256_GCM,data:0VLz2qLdy5Z6J+BfNtwsnzC++/PY28PrcrUE/YfkOq0O14CgCJULcwSZHL7M63TEePPldrHjgNYiaDLUaeOyq5zEUSersjeDZvNvPPdOcLpYlBlC6CEvMHMwm59vRELmPILQhwzmI/uryQ8ZjFrtIjhA0653/i2f3S7U7+zwMHo=,iv:LkrOVTGFzVi1v6kKY+sHCRW8uUpMYbIYCHE2cB9y03E=,tag:YVnZ21ntcn0eqyIoEd57RA==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
