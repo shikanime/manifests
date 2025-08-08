@@ -4,3 +4,19 @@ components:
   - ../../components/tailscale
 resources:
   - ../../base
+secretGenerator:
+  - files:
+      - configs/synapse/homeserver.yaml
+      - configs/synapse/log.config
+    name: synapse
+    namespace: shikanime
+  - files:
+      - configs/mautrix-googlechat/config.yaml
+      - configs/mautrix-googlechat/registration.yaml
+    name: mautrix-googlechat
+    namespace: shikanime
+  - files:
+      - configs/mautrix-slack/config.yaml
+      - configs/mautrix-slack/registration.yaml
+    name: mautrix-slack
+    namespace: shikanime
