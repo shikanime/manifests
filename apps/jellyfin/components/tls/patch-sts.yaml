@@ -6,6 +6,22 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: update-ca-certificates
+          image: jellyfin
+          command:
+            - update-ca-certificates
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Jellyfin.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
       containers:
         - name: jellyfin
           ports:
@@ -24,10 +40,24 @@ spec:
               port: https
               scheme: HTTPS
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: tls
-              mountPath: /tls
+              mountPath: /etc/ssl/private/tls.key
+              subPath: tls.key
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Jellyfin.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
               readOnly: true
       volumes:
+        - name: certs
+          emptyDir: {}
         - name: tls
           secret:
             secretName: jellyfin-tls
