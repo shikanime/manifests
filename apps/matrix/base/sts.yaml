@@ -128,7 +128,7 @@ spec:
         - name: mautrix-googlechat
           image: mautrix-googlechat
           ports:
-            - name: appservice
+            - name: http
               containerPort: 29320
           volumeMounts:
             - name: mautrix-googlechat-data
