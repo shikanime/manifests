@@ -15,7 +15,7 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/ca.crt
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
               subPath: ca.crt
               readOnly: true
       containers:
@@ -44,7 +44,7 @@ spec:
               subPath: keystore.p12
               readOnly: true
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/ca.crt
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
               subPath: ca.crt
               readOnly: true
       volumes:
