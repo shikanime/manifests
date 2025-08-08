@@ -7,6 +7,9 @@ images:
   - name: mautrix-googlechat
     newName: dock.mau.dev/mautrix/googlechat
     newTag: v0.5.2
+  - name: mautrix-slack
+    newName: dock.mau.dev/mautrix/slack
+    newTag: v0.1.0
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
     newTag: v1.99.0
@@ -32,4 +35,9 @@ secretGenerator:
       - configs/mautrix-googlechat/config.yaml
       - configs/mautrix-googlechat/registration.yaml
     name: mautrix-googlechat
+    namespace: shikanime
+  - files:
+      - configs/mautrix-slack/config.yaml
+      - configs/mautrix-slack/registration.yaml
+    name: mautrix-slack
     namespace: shikanime

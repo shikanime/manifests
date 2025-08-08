@@ -22,8 +22,22 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 29335
+      port: 29320
       targetPort: http
   publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/name: matrix-googlechat
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-slack
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 29335
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: matrix-slack
