@@ -6,7 +6,7 @@ database:
     database: /data/homeserver.db
   name: sqlite3
 enable_authenticated_media: true
-form_secret: ENC[AES256_GCM,data:WbZ9gAn+5aQuzXk7Up4DCwTj1ehbhhsR500ouxvycDmzhN9J+Yyc3ac3ec1SdXZKa8E=,iv:gzX6gWgyLEPh9TluFqaeZ7b5ZGYEBDeK80zsddTDGec=,tag:GgQJbF6T3RyHveYjJq4M9Q==,type:str]
+form_secret: ENC[AES256_GCM,data:xx28neprX7Xb5646HXmhqGk0omY5irZdrMAsHN+m0vV7hktV+131q2kQiF4KYsQuVTg=,iv:gas/ldAary1mz4fWgRm2DFpw7TxfmZzmLD3X4kCEDnE=,tag:Pogpjl/4WFYfjh3mV08Djw==,type:str]
 listeners:
   - port: 8008
     resources:
@@ -18,7 +18,7 @@ listeners:
     type: http
     x_forwarded: true
 log_config: /data/log.config
-macaroon_secret_key: ENC[AES256_GCM,data:hH9d14USRy3IXV5+ovkExGQNAKLQHeOeKQJZ/IvRpb/Rt8Uuyhkks1NixpuHtym4eoE=,iv:oBPlCBlyhTjZM2wUz3hoTJAyfhZ29KFWzP6xur5nf94=,tag:oCjWfMJiUYNwop9xkHIb6Q==,type:str]
+macaroon_secret_key: ENC[AES256_GCM,data:+r+40/EWtXJ77yHcIBeo/kvoQ1H5v0jpxQpS7tdkph9YUNQxkv7ISJF8QOs58Io7Kmk=,iv:aHooZD6I2z1CGCjLskffu7rthUc1uKMluiXdgnQqng8=,tag:QaCydlzbho34GdoeUr7sFw==,type:str]
 media_store_path: /data/media_store
 registration_shared_secret: ENC[AES256_GCM,data:TgSoqpeAGA47wuAdN8yQJtrjNQXy65bPnrAuY1dqUmgN2jge3E00vnQonnqo1He7vUk=,iv:JmfUqQXuMyCK9+yQzTOQFfrqnh7mVt3v2Ro09TzTz70=,tag:Gg36imW9OCJOvzNRv+IxXA==,type:str]
 report_stats: false
