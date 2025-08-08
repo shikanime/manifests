@@ -6,26 +6,53 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: update-ca-certificates
+          image: vaultwarden
+          command:
+            - update-ca-certificates
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/ca.crt
+              subPath: ca.crt
+              readOnly: true
       containers:
         - name: vaultwarden
           env:
             - name: ROCKET_TLS
               value: |
-                {certs="/tls/tls.crt",key="/tls/tls.key"}
+                {certs="/etc/ssl/certs/tls.crt",key="/etc/ssl/certs/tls.key"}
+          ports:
+            - containerPort: 8000
+              name: https
           readinessProbe:
             httpGet:
+              port: https
               scheme: HTTPS
           livenessProbe:
             httpGet:
+              port: https
               scheme: HTTPS
           startupProbe:
             httpGet:
+              port: https
               scheme: HTTPS
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: tls
               mountPath: /tls
               readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/ca.crt
+              subPath: ca.crt
+              readOnly: true
       volumes:
+        - name: certs
+          emptyDir: {}
         - name: tls
           secret:
             secretName: vaultwarden-tls

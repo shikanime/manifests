@@ -1,5 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
+images:
+  - name: vaultwarden
+    newName: docker.io/vaultwarden/server
+    newTag: 1.34.3
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -7,22 +11,23 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: vaultwarden
+  - literals:
+      - ENC[AES256_GCM,data:X3OB2LiQ5124vPwDuyCQN96TLywv5Fc8jZhoyeK0sIeX37g2zCS8xFFDbD32CizN2PzmdnnLsu3R2ldlTq+FW0KTJ4yEjLqApz7R+f5uESgIJnCrk96SALTKHHsdpdT0PDhQBs/PFYqQxMQqnloJB4tYZf33/L+GHdFhjjTKILg+rQ==,iv:CogcuGSwlsRsFG/RIUVTaPdO3wjPESF5lzUj7yin1lk=,tag:dWeCBbX//6HB84lkarzFOQ==,type:str]
+    name: vaultwarden
     namespace: shikanime
-    literals:
-      - ENC[AES256_GCM,data:fcx8l65WlUlSwRZMn7ANCGe5NEY8ko4uc0k217oVbjri+sCg/OMDMBd8WLSo+iMp+RTYm+k81OR9O4JiFdw2bDXcE5w5JHHumtVoDTB1tgQyKoH2qfBY7X564lz+n+PkUiLhNJevaN874gn+C8c4H1AmrG86jnG8cBR3XFvK6HuYyA==,iv:+N5edD2N0C8RIWVO9hZmvFJ0852IqgJfgtNVKmSh8Dc=,tag:eszhrGfnrEXbRejjhdQm4A==,type:str]
+labels: []
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFcXFLTkVHVDFlQTlZVzFZ
-        bGNxbGxOMFZMdnNWNkY3ZHM3TlIraWdrQkFZCmVicm5rR3Rmem9USGZlVGZHd0RP
-        Nk1oSU9OU0daTlhITGcrS2JibzVsVkkKLS0tIFZnRHU0b0MwTi90S3JabmJ2K0d2
-        VUtadUZUeW9UZjJmYkhFeXBhYkhxWjQKesQ9FsDK8KH/AtyQ/mzjxW5Mi3pMH8ZC
-        VNdgAw2HQ8lVwImztzEmhC18VY1oEDOWqRk7Hg+ZAbdLBK0ge02mdg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0K0o1MmZwUWMydmdxRmxI
+        cmJBSW1YODBFZTdyUXNWR0lrM0gxMnlSakZnCnAxMTJDUWlsWHBNSDRSYmpWUGVJ
+        YWRoWS9HNmYyRWkwQWUrQ1Q2ZmJlanMKLS0tIGtySWpVR3RGMUlUS3BjYVBKZVhK
+        QUdJS2ZIbGIyYkpKL2JFcjRrNkYwSlEKSn4IFPP7tgY2yDGeaINfcFeIla5aIidh
+        qxQpYi6+HbkXP6MNA8w2J5gch8/rOiDKlNExKLBzUDhB2iB0nkv7mQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:12:55Z"
-  mac: ENC[AES256_GCM,data:jH+5hX5Zcawj9S1yCzJkdl7rmI5oTGtB+SYWMivqCvi5YRxmGuOyhYIMsyn9rf7TMwKe+kdWLNbq43cA4pO3JJSAFpD9N+uFXFTCiwEHL/dhBA7EQDYM+tx2eZidCENrc03PcGWK32rohO3Q5HvHnUP9NHgjvssvfwrHymgTpMQ=,iv:iO2/WGqD2zv+SJGNZptyacBaBh01Ncz9JoGvSlgZxjI=,tag:QvvcoGMRwweL4uXojfsTWg==,type:str]
+  lastmodified: "2025-08-08T16:25:30Z"
+  mac: ENC[AES256_GCM,data:aWHcnzEXEbVIBmFl0jfnclYCy3EieFgL7S5oPE7lmI/f7W/Pf/TgHgaeCpgbmT6EL7L5EdhAblXoCl2QNr3YjmgX5IFYyAff9kWxC/PFjmm2H3x0yXna6CZnuXDKf9CUtYZzafvKZRp6GYu8ZjlYm50OppnFUvwnFsy5gGa+Zfk=,iv:7H0U9CLqsphuhuIo7nddPzpSyNR7rtihA0YDWYm5/EM=,tag:5rrbWphn5a9SFx/FPwLR8Q==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

@@ -15,10 +15,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/tls.crt
-              subPath: tls.crt
-              readOnly: true
-            - name: tls
               mountPath: /usr/local/share/ca-certificates/ca.crt
               subPath: ca.crt
               readOnly: true
@@ -41,12 +37,8 @@ spec:
               mountPath: /etc/ssl/certs
               readOnly: true
             - name: tls
-              mountPath: /etc/ssl/private/tls.key
-              subPath: tls.key
-              readOnly: true
-            - name: tls
-              mountPath: /usr/local/share/ca-certificates/tls.crt
-              subPath: tls.crt
+              mountPath: /etc/ssl/private/keystore.p12
+              subPath: keystore.p12
               readOnly: true
             - name: tls
               mountPath: /usr/local/share/ca-certificates/ca.crt
