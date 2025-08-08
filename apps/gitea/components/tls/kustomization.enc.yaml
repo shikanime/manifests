@@ -2,6 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 configurations:
   - namereference.yaml
+images:
+  - name: gitea
+    newName: docker.io/gitea/gitea
+    newTag: 1.24.4
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -9,22 +13,22 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: gitea-pkcs12-password
+  - literals:
+      - ENC[AES256_GCM,data:crKm3sVm1fssRuSznVl3peQeE2sflwE=,iv:K5HNBH3wrfL0UFb/D0m7REezB4nTjxMoRbKvSMtZbpo=,tag:Y8HySYY8MbJZv3+AYHiTFA==,type:str]
+    name: gitea-pkcs12-password
     namespace: shikanime
-    literals:
-      - ENC[AES256_GCM,data:05rEb3OnMnUepBu0s8G/W3sA5BjTWxw=,iv:sxz3NczXwOCNhCLprmEWujtMZNGj/vJRut9BxFHPFtA=,tag:rLOyG1+zAWAyqHr1vk0SGA==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMTERwYVpudEl3aytpN3oy
-        Z2FyVkxSSWp4VUw5d2VkQVFPQmFQaGFaZnhJCnkzOW1yQWhIdTZORXdsTEFhS0Zh
-        a3kvOCtxRVQyODdCbmdyQjFyWU1MSkkKLS0tIFhxeG03bTB5WjVSaVdFVU9nM3hJ
-        QzRGTlhRVThCWXBDT2Q4WGtFdDQxbEUKc4t2t9e1Y3NEP84MeECcKwZmTGBig9Hk
-        7YtQfFL0IehGY3EFsLJPxZn4wHU30scnocLUwQtApEuJ3Pp9uNIhlQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByTVdOVTRua25aa1k2dzJL
+        L2x6N0NCczRYUytXU0FHZ0lzVXN6d2RDbzE0Ci9ySzFlYklYUlk5c2s3d2p5UFUx
+        MmVDL0h1VnlZK2ZyNUFVWU44MUMrQjAKLS0tIGc1emFQeVFEMmI5amlNTStIdk10
+        UkRhalhmUVR4VncvU0s5ZkVyYVRMbTgKX4Wwd5JzSY6I6NpV3dsR6qwGEilMITVl
+        4pFpzJzZf/ikwQlIzto4QXBPTCDZOzcWawKESxdIK2ho9J/W51329g==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:12:55Z"
-  mac: ENC[AES256_GCM,data:jgm1LgK+8fzQ68G7S6bBAb2+KPgdBKx7ZJVucQS1jRidYNjOLxOMrRkg+T5UjS8mOAQwQLL19JVOIw87PQE1w2KXsDTu1ZtZ9id72CJ5ixEfwif49Qhdw0r0V23gk0dR1gnqbSSj101D9Z5GaA27l9KMNcAXDYcuAklCYFz5W70=,iv:4Xd3GE9vB4y4vQO4+xokxu8OQyUKjo9DubZDYBzfJA4=,tag:rR8DCR0BVDVzWlfdZuJGSg==,type:str]
+  lastmodified: "2025-08-08T16:56:54Z"
+  mac: ENC[AES256_GCM,data:FLGnmi/idLOvKzG1kwV2O5MUzsVpEIiHqa79zTI3+Iqn/ogaUgKout3VgOJphWuhCoeS6Rjx49HobQNv2OSdSyAdjUnSKGyn/P5OM3KKDAEGwVNqJKf7DVvX/v1kYd/o0Eibb47zaZbzMgjO8uXa4hDhKdKPRnsmcdxG6vxLNAk=,iv:fAj1Uvw2qM19HYwstXlSjdhRulGM1XTL+4036wbFZgc=,tag:LnHvIzuMl0NiCp8kP8r9+w==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
