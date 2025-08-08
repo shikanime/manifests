@@ -24,5 +24,6 @@ spec:
     - name: http
       port: 29335
       targetPort: http
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/name: matrix-googlechat
