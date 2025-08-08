@@ -2,6 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 configurations:
   - namereference.yaml
+images:
+  - name: synapse
+    newName: docker.io/matrixdotorg/synapse
+    newTag: v1.99.0
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -9,22 +13,23 @@ patches:
 resources:
   - cert.yaml
 secretGenerator:
-  - name: matrix-pkcs12-password
+  - literals:
+      - ENC[AES256_GCM,data:9caNiSanktQBapGtLnsjUvrTu+4GPNs=,iv:vEWMojHvcKTvMgCEd3YKfcFlsGUuJT1roxiuY9DinX0=,tag:tyNazMpKaBBYkycUYpwSSQ==,type:str]
+    name: matrix-pkcs12-password
     namespace: shikanime
-    literals:
-      - ENC[AES256_GCM,data:VmwLxa/T+MGe+ij0w2Y+PAnZcNBU/yw=,iv:urp3WIBHsE1UN/6aQQbB4M+2XWb48DFkX0eIqVgeABk=,tag:o1IF8vEIZj50D5L/bZU6kw==,type:str]
+labels: []
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEL2JPY05rZkNuajdCbWli
-        enZmM25FTnlXbHdrR0U1WXZtbkNIVm1EQ0Z3ClZCamN4OXE0eUZhb05GUnpqYVho
-        YWhnNXlGYU1sbExxNjBvbERqTWVMK3cKLS0tIG04dk8ydkNkeWxGU0xOZkdMYmMw
-        MWNneTBqYVJ5SHlxTkhyZGlLLzZMS3cKDTF1dHKvKfWWlou1HHIaALvvOkR3dXU+
-        3tVH7lkKeLRvNLdmCKcz9760P33SMMycZVtkFq9To7zyeEEHtXW2hA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5bnVNRWV0UEtjcnZlUGVW
+        a0NGZi9CNFVZM3RLUVhGR3VpcGZMNktiUFVnCm5QR1QvNVBFMlBPcG1GUmZ4NXpJ
+        Z3l1N1ZpdnRhK2VNL3oyQSt2ZTlab00KLS0tIGhyWDB2cUtCcDRhTldibjBsY2Mz
+        Q1piTWRwVjI3VkZwOW5LdnRDVnQvc3MKcL46CBnDXTgcWQnOy8IGoSIg9INmBI0V
+        8xSVs/ESpCMVahyuUYdIhKK559M83rj4r1vQ1x5wpKF84GXVloGpmw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:12:55Z"
-  mac: ENC[AES256_GCM,data:kqROKYfF+MrsHLm7pEvA7C++HNc8Bl3s17qq5poChdbnrUC7xn+l1FYxDHRKKuzs1bSBz3VlSZCzEiVfviTA4UNNmuxx3eTOXqROxfp+lvTgpIm4f7lVVJ0G+riWbxO8mt80E2KXMXD+wAc3GjpZLkkbyjRv9u7kp3v7kn53MwI=,iv:2fQn9nSbHpCCR+St0sRZbB/reVHJz8rBg6Dlkhoi1p4=,tag:KWk+TZlFR4XNiu7L6ch+9w==,type:str]
+  lastmodified: "2025-08-08T17:01:49Z"
+  mac: ENC[AES256_GCM,data:14xgN//lJNWW8ruFCdNpidcnYckNpdpCsX+7QaPtstIvk3hlS7LXbH36tarmSFuQRE6esCJJNefVN/dq4PaYxVr1kEFMfAKTB3HN/n5biQgy3BlU85eYh97/WV139a3Lmcb99vEihDrIIjaDoV3jPRK2T35dgTNi0xYcVsF3I9U=,iv:cjYQqVo/ubej6WwvBYIHZrGBefmuSo0SUb3UFW8pNYA=,tag:ppYSeDBV4PuGmqYurMyYNw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
