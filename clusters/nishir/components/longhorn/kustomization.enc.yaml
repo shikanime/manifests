@@ -7,9 +7,9 @@ secretGenerator:
   - name: longhorn-hetzner-backups
     namespace: longhorn-system
     literals:
-      - ENC[AES256_GCM,data:AML50oOQ0VixhRpI4Sj4T4roHEsRRF6GwdOMTE4Gh6+usZqogXA=,iv:j5m62w4VIJ8/KXF24phU/RyTt/0lCCmAYC1Ttx8wojs=,tag:A+M9rqLVKtVFMb8FOMazxA==,type:str]
-      - ENC[AES256_GCM,data:4gEuqI/DMlkyyfnG5totDNOZxNxIeLmc1UaxiZzgLTqXbFOJCKENWVKVnQs4ksV/5So7GOth+yndbOcpxKQ=,iv:vekfpuBAfT4P2JRShCK0pMMCaY0zQX/SRMy6UzSEpvg=,tag:hUadB6/rrX6uBUWd82bZeg==,type:str]
-      - ENC[AES256_GCM,data:r/DOGJZHkSd7imexFJyYPuVtuYjswhpA+Ad0FgEUgRwfMHvB5vS5EeP3R0cfRQCwlA==,iv:nBvoD3JDJ4JXKQwxKJKY61oryVRkDTe2vOZwiM5YHXk=,tag:Uv/m6QOPwfA2KxtA3e58Cw==,type:str]
+      - ENC[AES256_GCM,data:WZ1VrcFSws/O33lgSAJask5HSG3v8j0SdcLFSduWM6+JUDmtFsg=,iv:uFTQ1eB7+AdeKICEbmYM9+UfqvlywpnJ+S7ZjoeYx48=,tag:Nq4Seu/nISqhedcBW97dew==,type:str]
+      - ENC[AES256_GCM,data:7WifwvW3wAWUl+EvtVw28tVq7RyqfdF4C6AaUXfIEi1rJZoB7U8BeVsgoYfn2JX09V7xZj5Br8pRrcX6WI0=,iv:1PIASurWDSalb+owSJt4YOp7FZC33DNMPXwpI2mGujM=,tag:+Jl3wgdV82ltctdW2qJNnw==,type:str]
+      - ENC[AES256_GCM,data:RUMwZdfAUf0xk3KYSW1t+zShlME0kKjLcc/JpC3lyCLUAcH4BrmXZorCdlmsPvsyCg==,iv:FU24JVsq/7wDk/tHqnjw7Lg/gj8wCwPSA6D4rLma7ts=,tag:tIZocDbJA5S3nqvDm/VTsw==,type:str]
     options:
       annotations:
         longhorn.io/backup-target: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
@@ -18,13 +18,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBIMHk1bmJPbWswaFY5ZWZI
-        a0szVE5iV2o1MlVUL2FKc0w1MnJMQlhvYXgwCjR2b3p6N0pvdHZ2Z2NmNWw3Vyt1
-        ajFITURKRExNQ25GTWlXQWpWRnU2aWcKLS0tIERldURpd2JJTWtNaUVsYXNrQ0M1
-        aTlBVERYVGpGSU5ndTJZOHZDMFJQVGcKDzLsCvfGoA2lJGGikoObOsKBTzI1u/dV
-        Ox/bjyeaaKHdjZtf+/gRZirBTj8w0AMvoq0PIkNWiMriHUJYORyHQw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSTUxBdTltU2duNTZEYlph
+        NitlaFM3bFJlZmJTNEV4bzdXNWdEQ3hoTUc0Ci9NYnZqQmIxRW1KM0pQVSt3VGo1
+        SHc3b2ZqdjZFRVJ0bTBKc0JhczZtbFEKLS0tIGdGVXJtRTZMeVlFVFNOMkNZbUpn
+        UExCOGNhVENwOWRJWGNYclQ4TXBRT1UKrxBfVZ5zHQbomnR6WulsfhBhX9bEzxUf
+        jRedeCFMxz8KqwAcqihWBzmARCeKvlZQroLhj5zPPT5/6qQ7+jCZuQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:01:35Z"
-  mac: ENC[AES256_GCM,data:3T1fcBIU+t7mpyLdsv2VcKCJjwbLA4Ul7hYkHh+iMhbC0zRMCHAlJBAVBYVbMHqa2pu9ukBJfaa8gJkIkog+AOx2TjeyJ9cT1yZHQyiSwTLtbz9HFl1L5CUFA7DgWjm7E4v5NVobHarDmF2rrvPjeGQN/AkiUu1VllyiBjdyScU=,iv:mvStsYcjKN5vTxxa2GwQpGcnsaGnZR+8lL55rkahQj4=,tag:j+ADUynQLRUztBPeEepDVQ==,type:str]
+  lastmodified: "2025-08-01T01:01:03Z"
+  mac: ENC[AES256_GCM,data:Wu/tS4DKW1IqPQyJfDwizxDEbT1YgL+WMLE0V0S09kkBKM33eJX9NVgoHL36b7hmwfNjIOCk6+UyCY3m8dJjAAnWgyoI1ij+bGLNkCyQKdyTs2VxZoCen7jbE2bwjSbKTFgiXnRtMMM3yAD1qrr9TtSRV4sNKu/BNxZA/bYbpfI=,iv:oJ5NZlAtOXhzOBKyPdNHLIjVzulVzgYDLEOuLEt+Ql0=,tag:SO/h0TV9r5c1W93h7yrVYw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
