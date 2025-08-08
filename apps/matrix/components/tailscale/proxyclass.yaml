@@ -14,20 +14,3 @@ spec:
                   matchLabels:
                     app.kubernetes.io/name: matrix
                 topologyKey: kubernetes.io/hostname
----
-apiVersion: tailscale.com/v1alpha1
-kind: ProxyClass
-metadata:
-  name: nishir-matrix-slack
-spec:
-  statefulSet:
-    pod:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: matrix-slack
-                topologyKey: kubernetes.io/hostname
