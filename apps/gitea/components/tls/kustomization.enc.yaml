@@ -12,19 +12,19 @@ secretGenerator:
   - name: gitea-pkcs12-password
     namespace: shikanime
     literals:
-      - ENC[AES256_GCM,data:ay3ZWe1Oous+WLPs88mZBPsb9NpYRRY=,iv:Uy2kwqyvi88hJdZ9UmDYiNQPVv0c6Uk4z/cLjK3sdnU=,tag:7a9cZJ6BLJXQB+Qlcq04kg==,type:str]
+      - ENC[AES256_GCM,data:MA8fM6at/40Ui4AFjino5N6TnQEMqmk=,iv:Pskl8U7RY3hDDWii0LgnMPNsVFJebbprfbDwLOkdNgM=,tag:0GYEgjSphDVCSuGPOT+0/w==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrV1dDUVdxeGJjbHdUYjhE
-        UHRvdExLZk9nOU0xa284VlUwa01SNys2TEFJCmdWeElJRWg4NzcxaXFsZkFJUWk5
-        a3JsdUhPK28rQlBNa0Z6WS8wNFlHMDQKLS0tIHJiU3FHN3kwZXZjVDE5S0podVE4
-        NWk3My92d2poWFhRWjZQWWdRc1E1U0EK7a6/DwHLBZ7ggbfW/2S+z7nLoT7Pw9qo
-        3Z5gjlTkNmqdUstADQEBr/WLdHqXg6hVlxLwskKjhJ3z/dJI+bV50w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0bnY0b0ZwamViMzExa25s
+        UjlFS2Q0UFNaaHVrUXFQOGM4NDI2KzY5aGljCk1UeEc1NnAxN1c5emdmK1dPZlVt
+        b1hZS2dvL1Y1MG42Y3ZIbURkNEovOFEKLS0tIHJ4WW9DS3BpYng5QkJDemZVOGJ3
+        NkJ4cFhqREt4dk5Ga3FiSSthc283SGMKVk/XAKl1yV7lwIfUW0H8zH4/TQ/AjdDH
+        vTzAJotxqq+CTJq3FMJ5VUGQI11mXLOL/Cx9Q1mUpjmYCSNtVWGdaA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-01T01:00:57Z"
-  mac: ENC[AES256_GCM,data:NDkwTBanHuO1BThAsGx4s34S3lgWC7JD0o8kWFaOxENYgOTXVerioA7MMTc4bi6S/Fs7Wv/ZxBvvqeOI5QSRCze5zmryA5IGHy6+v9s14AqczLetqC4WvDJrjYgf0ydpf5dfsEam6sXBPL7PlSLorH/Bh7Pmst2horQVVVeXCBI=,iv:fhSZtBJ0zMVfK5R1hWD3TauNW4RmzTFMhWqZbWGNpCQ=,tag:KcT5uGKpN/7OGFcOzQbJ5Q==,type:str]
+  lastmodified: "2025-08-08T12:01:26Z"
+  mac: ENC[AES256_GCM,data:VkByLHyqu9Dq4s6y/8un/5Jmx0UCGK2Bt8vFvD6i2YLMpeMLmI4d4oxcHRLIpFqcNg+GbayVVuPjfmcvUIlyIRvO1ucZUSq4Llj9/sDa+9ksngvZTaYe5qhRm4YweMho41cHUFUguEdsUIOyXbMnBJDUQkLXsR5jk792j/x0QAc=,iv:lvjvdozRBl4AEpKo1F6pxNL8QMbkJeuh6Mv2RufOA6g=,tag:9z5G5wTSVtAYNY+Ufix8Zw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
