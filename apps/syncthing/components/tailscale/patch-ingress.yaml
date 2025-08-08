@@ -4,7 +4,7 @@ metadata:
   name: syncthing
   namespace: shikanime
   annotations:
-    tailscale.com/tags: tag:web
     tailscale.com/proxy-class: nishir-syncthing
+    tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
