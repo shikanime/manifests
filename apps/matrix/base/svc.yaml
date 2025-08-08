@@ -11,6 +11,7 @@ spec:
     - name: metrics
       port: 9090
       targetPort: metrics
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/name: matrix
 ---
@@ -24,6 +25,7 @@ spec:
     - name: appservice
       port: 29320
       targetPort: 29320
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/name: matrix-googlechat
 ---
