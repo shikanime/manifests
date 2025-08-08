@@ -25,19 +25,3 @@ labels:
       app.kubernetes.io/name: matrix
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.99.0
-secretGenerator:
-  - files:
-      - configs/synapse/homeserver.yaml
-      - configs/synapse/log.config
-    name: synapse
-    namespace: shikanime
-  - files:
-      - configs/mautrix-googlechat/config.yaml
-      - configs/mautrix-googlechat/registration.yaml
-    name: mautrix-googlechat
-    namespace: shikanime
-  - files:
-      - configs/mautrix-slack/config.yaml
-      - configs/mautrix-slack/registration.yaml
-    name: mautrix-slack
-    namespace: shikanime
