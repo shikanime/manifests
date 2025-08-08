@@ -23,7 +23,7 @@ spec:
     service:
       name: matrix-slack
       port:
-        name: http
+        name: appservice
   tls:
     - hosts:
         - matrix-slack
