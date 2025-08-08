@@ -1,20 +1,24 @@
-server_name: matrix.taila659a.ts.net
-pid_file: /data/homeserver.pid
+app_service_config_files:
+  - /data/appservices/mautrix-googlechat.yaml
+  - /data/appservices/mautrix-slack.yaml
+database:
+  args:
+    database: /data/homeserver.db
+  name: sqlite3
+enable_authenticated_media: true
+form_secret: ENC[AES256_GCM,data:xx28neprX7Xb5646HXmhqGk0omY5irZdrMAsHN+m0vV7hktV+131q2kQiF4KYsQuVTg=,iv:gas/ldAary1mz4fWgRm2DFpw7TxfmZzmLD3X4kCEDnE=,tag:Pogpjl/4WFYfjh3mV08Djw==,type:str]
 listeners:
   - port: 8008
+    resources:
+      - compress: false
+        names:
+          - client
+          - federation
     tls: false
     type: http
     x_forwarded: true
-    resources:
-      - names:
-          - client
-          - federation
-        compress: false
-database:
-  name: sqlite3
-  args:
-    database: /data/homeserver.db
 log_config: /data/log.config
+macaroon_secret_key: ENC[AES256_GCM,data:+r+40/EWtXJ77yHcIBeo/kvoQ1H5v0jpxQpS7tdkph9YUNQxkv7ISJF8QOs58Io7Kmk=,iv:aHooZD6I2z1CGCjLskffu7rthUc1uKMluiXdgnQqng8=,tag:QaCydlzbho34GdoeUr7sFw==,type:str]
 media_store_path: /data/media_store
 registration_shared_secret: ENC[AES256_GCM,data:TgSoqpeAGA47wuAdN8yQJtrjNQXy65bPnrAuY1dqUmgN2jge3E00vnQonnqo1He7vUk=,iv:JmfUqQXuMyCK9+yQzTOQFfrqnh7mVt3v2Ro09TzTz70=,tag:Gg36imW9OCJOvzNRv+IxXA==,type:str]
 report_stats: false
@@ -23,8 +27,6 @@ form_secret: ENC[AES256_GCM,data:MIN8jbd8v6AmsPaxQcXz7gXuFfWSI1IH184Oxfqc93yMihR
 signing_key_path: /data/matrix.taila659a.ts.net.signing.key
 trusted_key_servers:
   - server_name: matrix.org
-app_service_config_files:
-  - /data/appservices/mautrix-googlechat.yaml
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
