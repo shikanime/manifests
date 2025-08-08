@@ -15,10 +15,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
             - name: tls
-              mountPath: /usr/local/share/ca-certificates/Jellyfin.crt
-              subPath: tls.crt
-              readOnly: true
-            - name: tls
               mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
               subPath: ca.crt
               readOnly: true
@@ -44,12 +40,8 @@ spec:
               mountPath: /etc/ssl/certs
               readOnly: true
             - name: tls
-              mountPath: /etc/ssl/private/tls.key
-              subPath: tls.key
-              readOnly: true
-            - name: tls
-              mountPath: /usr/local/share/ca-certificates/Jellyfin.crt
-              subPath: tls.crt
+              mountPath: /etc/ssl/private/keystore.p12
+              subPath: keystore.p12
               readOnly: true
             - name: tls
               mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
