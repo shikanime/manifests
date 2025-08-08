@@ -4,8 +4,7 @@ metadata:
   name: prowlarr
   namespace: shikanime
   annotations:
-    tailscale.com/tags: tag:web
-  labels:
     tailscale.com/proxy-class: nishir-prowlarr
+    tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
