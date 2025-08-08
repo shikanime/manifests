@@ -59,7 +59,7 @@ bridge:
     matrix.taila659a.ts.net: user
     "@admin:matrix.taila659a.ts.net": admin
 database:
-  type: sqlite
+  type: sqlite3
   uri: sqlite:///data/googlechat.db
   max_open_conns: 5
   max_idle_conns: 1
