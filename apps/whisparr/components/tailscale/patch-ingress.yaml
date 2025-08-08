@@ -4,7 +4,7 @@ metadata:
   name: whisparr
   namespace: shikanime
   annotations:
-    tailscale.com/tags: tag:web
     tailscale.com/proxy-class: nishir-whisparr
+    tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
