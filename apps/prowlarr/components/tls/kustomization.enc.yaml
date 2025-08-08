@@ -14,22 +14,21 @@ resources:
   - cert.yaml
 secretGenerator:
   - literals:
-      - ENC[AES256_GCM,data:iyfpqXl0+2GKZWpP4ndqOdqscKLXnn4=,iv:AqZLU8gUjUhYAwE9ARRLHN0br3tpt/r6RHLW9Zb9xqE=,tag:8zkpxs8+pmhX+lUiQ8EgkQ==,type:str]
+      - ENC[AES256_GCM,data:BhhJYbtym7o7fjSvh1hEASbTkC5NgU0=,iv:/jAsBcDdsdx4Yo2kPQzoQpZ9IRjr7CkONEWFty1rDVQ=,tag:CvsOOxTv0xkDzwpw1NrOyQ==,type:str]
     name: prowlarr-pkcs12-password
     namespace: shikanime
-labels: []
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRWi9wRjQ1dE9XRTdoUU4w
-        WmxldUtlRjVSV2J2YStOaGxNUHNIWWRnRGxjClhyT09BbzlEL1Z1SE4wNGNSbFph
-        ZUcrOUdqTHJoeWxwczd2S0lMVDVCLzAKLS0tIC9PbzNLbXA5N1dXTjlSR0RtYkk4
-        T3JBNFdobXJUMzNVQnExMDMwblFwSzAKHyvsxLI/C5NNKWH9ZZULXaJ01eZ7zscI
-        3IptZ/cCVzUogvghG+vQknW2Zj+WyFEueGeF7hInVU0DXOOjj6P8Sg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCVHhKU1Irbm9BcStERUg1
+        Z1lwNFM3YjhNNG9YbE5scGV1V3NDSXNIS1NFCmFweXVtY0thYlcrVGJubGowU2R2
+        OTVaazZpemJEejlMYU9LWisvb3RLalUKLS0tIDVqV3l6WXYwTU9jV2VWT0tNNUht
+        RTIwOWs0U011Q005c25tL3RvQ2NDU0UKSRPk/uxppR9lGitcnVNaXaLhoeyOKZrU
+        +xBldopLvvZbGLIpIsfsFT+gMdKmvVbOvPUXAwQOzdXUg6vfh4wmhA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T15:46:31Z"
-  mac: ENC[AES256_GCM,data:0VLz2qLdy5Z6J+BfNtwsnzC++/PY28PrcrUE/YfkOq0O14CgCJULcwSZHL7M63TEePPldrHjgNYiaDLUaeOyq5zEUSersjeDZvNvPPdOcLpYlBlC6CEvMHMwm59vRELmPILQhwzmI/uryQ8ZjFrtIjhA0653/i2f3S7U7+zwMHo=,iv:LkrOVTGFzVi1v6kKY+sHCRW8uUpMYbIYCHE2cB9y03E=,tag:YVnZ21ntcn0eqyIoEd57RA==,type:str]
+  lastmodified: "2025-08-08T15:56:00Z"
+  mac: ENC[AES256_GCM,data:A1/NpcRNqAM3iBiQetR81xV5hIE1w7C+Bc3kHceUf9bjfwBOE7T+f7NeMzWA0RaMw9f/wgCvnoO5KsX4yIXdFuw7P4+G8Ms9/tnlpXBZWbOVs1vLrwZcVESdNqoYnKqHYcoqEK/8QJSU35ZmLWqmP3mbGhPZSAkXPAwv+imEVTo=,iv:eBO74Kps2OGJPy570l2hMcyyoQH7V6/vIwseW5ECxF8=,tag:rhVlEPemFBzE72poQo6uIw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
