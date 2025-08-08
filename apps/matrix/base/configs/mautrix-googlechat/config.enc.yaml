@@ -21,8 +21,8 @@ appservice:
   bot_displayname: Google Chat bridge bot
   bot_avatar: mxc://maunium.net/BDIWAQcbpPGASPUUBuEGWXnQ
   ephemeral_events: true
-  as_token: ENC[AES256_GCM,data:GUZ4Cj8+4JsBCdR3d0RgkOyaZAGwl87t6yDBH/RiQbAKRVrsm0wj/vVNAtMpfulDHNvHcYpsxNpLg107qB08cQ==,iv:sngsh4oTNs5qEvXl4Jh2tRsbqkXkpMW5Ofwd9z9fk3Q=,tag:4lUsZsoAvJQT2asRoXxWSw==,type:str]
-  hs_token: ENC[AES256_GCM,data:NDUkJ84Z4hWVcGl9VAa9KNyZZOAG6zlnq8yDxhDyqNWV33W1RpgI4h/JmRhSoSHia3oufgy+gcKbJxPfzPAocQ==,iv:tYLVJMAfYQfWnsIc30q45AbmMq7+BpOkP1A+OVoI3Nc=,tag:WxQVy9gWxcJchPzsoV/Yig==,type:str]
+  as_token: ENC[AES256_GCM,data:rLdOpMvV8E9sBRe34c9Q6efIKzN3AQzGjTpEo1a9NHB/LVp9wjNo4mVH2M6K1NOAd343oODPa8cg8FVgjo5kEQ==,iv:ZghMFoU1qqrh5frV3V1kXNvJzDTpNrwT1ZB0zYWwhzI=,tag:JuBeitfZCGElHRgmFs3vgg==,type:str]
+  hs_token: ENC[AES256_GCM,data:StfGrE8ugDjvVFh7F+c9jmCiqX/Q2oxd3Hew1z2Vkkxfwe8ezH9w+tp5mNOI209SHNn+nST8TCJzqdUv/VO51A==,iv:Umq1ogP9NKsTyB6Q8ntvRRc1IHOIxYhA0NIGix2IFRY=,tag:IGsiJ16gH7yIWladSGcvoA==,type:str]
 metrics:
   enabled: false
   listen_port: 8000
@@ -33,8 +33,8 @@ manhole:
     - 0
 bridge:
   username_template: googlechat_{userid}
-  displayname_template: "{full_name} (Google Chat)"
-  command_prefix: "!gc"
+  displayname_template: '{full_name} (Google Chat)'
+  command_prefix: '!gc'
   initial_chat_sync: 10
   invite_own_puppet_to_pm: false
   sync_with_custom_puppets: false
@@ -87,16 +87,16 @@ bridge:
   private_chat_portal_meta: default
   provisioning:
     prefix: /_matrix/provision
-    shared_secret: ENC[AES256_GCM,data:Qu+JRKwK9h1qKFnp7vXEnnsugexHlGk9wTiijPNxqt9Ml4EsLSmMiG/TQHo8E2UpKl7q8ZVaSXPjNHfmS8AqqQ==,iv:udIIZTOD/W/ED3WwW7kTbMVPvUdd6op96v508g/TfGA=,tag:n3ZqLvefjePaFajwHdgL9A==,type:str]
+    shared_secret: ENC[AES256_GCM,data:4oGaEGTRaVe/NuslMZ0ceLA3M5/i6TD8h8S33+3J5dkkzUccdZJ+ICM7GYfudJLnV6FVI3jeRoQIy1vArhQjSw==,iv:OHP6VhIKxXJjqJvwA4XtQOMI3zqx/LOuLXx6HE3JggM=,tag:haWtjh3CVnGNdKUOBnOFYg==,type:str]
   permissions:
     matrix.taila659a.ts.net: user
-    "@admin:matrix.taila659a.ts.net": admin
+    '@admin:matrix.taila659a.ts.net': admin
 logging:
   version: 1
   formatters:
     colored:
       (): mautrix_googlechat.util.ColorFormatter
-      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
+      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
   handlers:
     console:
       class: logging.StreamHandler
@@ -117,13 +117,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiNlVjVHJPZTMzaWFPZ0xo
-        b0ZRNW04VDRzaDdnSjErMW1Ja2c3ZDNqWjBZCmU2Z0dQZ2VkTXNxUVBxTTR0Wk1D
-        NzVVbDltbGR6VHFZZWx6VW9abURvekkKLS0tIDBiL1JacTF2b2xNc1ZhU3BmVWor
-        SnB0a3VEQ05yaHo4aCtnNEd5WkFBQkEKDEFIZFtL/jDYarBfK9Sw5TIFuhaeZpgy
-        p0CyHIUjfi0GrS7B/U56VzmNxwpFtIb0IrW4kKS/EAYEVKC6qN0tDg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB4TWdrK3FzaGRvNjA5MDRi
+        Uy94MUp0KzlLTzVvTmFha2FHOWFUV3pWSEI4ClAwbnYwVVYweDVUSytGZ0laRXM4
+        NExiVFFiZmZ5UkpmRm5Kd2pTd0ZKU1EKLS0tIFhjRDgvN2VlWDJldEo3NTdiZnFQ
+        andVMmExNEowNXVaZDBKbVd0aGdSOWcKlC+WDYZKGGGPmbz1CJuFpWL377QU0hGZ
+        rveWt61afntMHcjhVGjucQR+xBypFpECPfQ3UvXgTwCiCTwZZN0qOQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T12:27:15Z"
-  mac: ENC[AES256_GCM,data:dtHLXr6Hd9OgOQL3S2MvfmLl1HQcP5duB0q13YBj5uHK5DnEprokyqvxyGRt2s86k+TzYENPWPgzYSWb0m49t4WCJEiGfuzu74ner9gAL0qwQnnc9SiPULs6zaCZTuefAO8xTVobH1IejwytrXuHYKXn35IbbJlq1zBfPQuYFZY=,iv:L3H43mvEpSrxllb1tK8Ib2BICnOHuDYz/rPvgKlM0Jk=,tag:erYvFerEoIzi6werwMziuQ==,type:str]
+  lastmodified: "2025-08-08T13:19:50Z"
+  mac: ENC[AES256_GCM,data:gwnUdZjiwkgPvxlQJIu/K7XP6LKrv027PeVNJj9j6V0TTGh4PXayHyuiW9teSEvzo9PVxBcgF0BxBi0h6/HhvgKoBkxPPiHQEiUYggmBzGgMwoLxIXQ7XDS1UGU+RNrLc7evtEUudpx94/TincnWWyEv4i+M+sZzg2VM+K6M+Xc=,iv:x/SZES6TVNtJIONYnags0bMVuUTyyJ7hR9oqEWx8Ncg=,tag:rRbNsT7ospEPxtEElai2PA==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
