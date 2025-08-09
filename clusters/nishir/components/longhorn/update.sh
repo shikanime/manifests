@@ -14,21 +14,17 @@ AWS_ENDPOINTS=$(echo "$LONGHORN_CONFIG" | jq -r '.endpoint')
 BUCKET=$(echo "$LONGHORN_CONFIG" | jq -r '.bucket')
 REGION=$(echo "$LONGHORN_CONFIG" | jq -r '.region')
 
-# Update the decrypted content
-yq -i \
-  ".secretGenerator[0].literals[0] = \"AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID\"" \
-  "$(dirname "$0")"/kustomization.yaml
-yq -i \
-  ".secretGenerator[0].literals[1] = \"AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY\"" \
-  "$(dirname "$0")"/kustomization.yaml
-yq -i \
-  ".secretGenerator[0].literals[2] = \"AWS_ENDPOINTS=$AWS_ENDPOINTS\"" \
-  "$(dirname "$0")"/kustomization.yaml
-
 # Add backup target annotation
 yq -i \
   ".secretGenerator[0].options.annotations.[\"longhorn.io/backup-target\"] = \"s3://${BUCKET}@${REGION}/\"" \
   "$(dirname "$0")"/kustomization.yaml
 
+# Update the environment file
+sed -i \
+  -e "s|AWS_ACCESS_KEY_ID=.*|AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID|g" \
+  -e "s|AWS_SECRET_ACCESS_KEY=.*|AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY|g" \
+  -e "s|AWS_ENDPOINTS=.*|AWS_ENDPOINTS=$AWS_ENDPOINTS|g" \
+  "$(dirname "$0")"/configs/longhorn-hetzner-backups.env
+
 # Re-encrypt with SOPS
-sops encrypt --encrypted-regex "^(literals)$" "$(dirname "$0")"/kustomization.yaml >"$(dirname "$0")"/kustomization.enc.yaml
+sops encrypt "$(dirname "$0")"/configs/longhorn-hetzner-backups.env >"$(dirname "$0")"/configs/longhorn-hetzner-backups.enc.env
