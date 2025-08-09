@@ -6,18 +6,68 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: update-ca-certificates
+          image: rclone
+          command:
+            - update-ca-certificates
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
       containers:
+        - name: rclone-ftp
+          env:
+            - name: RCLONE_CERT
+              value: /etc/ssl/private/tls.crt
+            - name: RCLONE_KEY
+              value: /etc/ssl/private/tls.key
+            - name: RCLONE_FTP_EXPLICIT_TLS
+              value: "true"
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.key
+              subPath: tls.key
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
         - name: rclone-webdav
           env:
             - name: RCLONE_CERT
-              value: /tls/tls.crt
+              value: /etc/ssl/private/tls.crt
             - name: RCLONE_KEY
-              value: /tls/tls.key
+              value: /etc/ssl/private/tls.key
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: tls
-              mountPath: /tls
+              mountPath: /etc/ssl/private/tls.key
+              subPath: tls.key
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
               readOnly: true
       volumes:
+        - name: certs
+          emptyDir: {}
         - name: tls
           secret:
             secretName: rclone-tls
