@@ -25,11 +25,8 @@ spec:
               value: /etc/ssl/private/tls.crt
             - name: RCLONE_KEY
               value: /etc/ssl/private/tls.key
-            - name: RCLONE_FTP_TLS
+            - name: RCLONE_FTP_EXPLICIT_TLS
               value: "true"
-          ports:
-            - containerPort: 990
-              name: ftps
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs
