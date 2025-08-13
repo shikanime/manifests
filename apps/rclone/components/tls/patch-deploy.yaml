@@ -20,22 +20,9 @@ spec:
               readOnly: true
       containers:
         - name: rclone-ftp
-          env:
-            - name: RCLONE_CERT
-              value: /etc/ssl/private/tls.crt
-            - name: RCLONE_KEY
-              value: /etc/ssl/private/tls.key
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs
-              readOnly: true
-            - name: tls
-              mountPath: /etc/ssl/private/tls.key
-              subPath: tls.key
-              readOnly: true
-            - name: tls
-              mountPath: /etc/ssl/private/tls.crt
-              subPath: tls.crt
               readOnly: true
             - name: tls
               mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
