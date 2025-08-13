@@ -7,7 +7,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: webdav
+      targetPort: http
   selector:
     app.kubernetes.io/name: rclone
 ---
