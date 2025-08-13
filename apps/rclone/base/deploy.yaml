@@ -136,16 +136,16 @@ spec:
               value: full
           ports:
             - containerPort: 8080
-              name: webdav
+              name: http
           readinessProbe:
             tcpSocket:
-              port: webdav
+              port: http
           livenessProbe:
             tcpSocket:
-              port: webdav
+              port: http
           startupProbe:
             tcpSocket:
-              port: webdav
+              port: http
             failureThreshold: 30
           volumeMounts:
             - name: config

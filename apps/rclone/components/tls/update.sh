@@ -4,6 +4,25 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# Define container images to check
+declare -A IMAGES=(
+  ["rclone"]="docker.io/rclone/rclone"
+)
+
+for IMAGE_NAME in "${!IMAGES[@]}"; do
+  FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
+  LATEST_VERSION=$(
+    skopeo list-tags "docker://${FULL_IMAGE}" |
+      jq -r '.Tags | map(select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(split(".") | map(tonumber)) | last'
+  )
+  if [[ -z $LATEST_VERSION ]]; then
+    echo "Image '$FULL_IMAGE' not found in registry."
+  else
+    (cd "$(dirname "$0")" &&
+      kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
+  fi
+done
+
 # Get current password if it exists
 CURRENT_PASSWORD=$(yq '.secretGenerator[] | select(.name == "rclone-ftp") | .literals[1]' "$(dirname "$0")"/kustomization.yaml | sed 's/^password=//' 2>/dev/null || echo "")
 
