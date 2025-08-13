@@ -136,7 +136,7 @@ spec:
               value: full
           ports:
             - containerPort: 8080
-              name: webdav
+              name: http
           readinessProbe:
             tcpSocket:
               port: webdav
