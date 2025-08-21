@@ -1,0 +1,7 @@
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+kind: K0sWorkerConfig
+metadata:
+  name: shana
+  namespace: nishir
+spec:
+  version: v1.33.3+k0s.0

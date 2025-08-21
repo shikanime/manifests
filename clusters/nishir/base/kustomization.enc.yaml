@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configurations:
+  - namereference.yaml
+resources:
+  - cluster.yaml
+  - hetzner-cluster.yaml
+  - hetzner-machine-template.yaml
+  - k0s-control-plane.yaml
+  - k0s-worker-config.yaml
+  - machine-deployment.yaml
+  - ns.yaml
+  - pvc.yaml
+secretGenerator:
+  - name: hetzner
+    namespace: nishir
+    literals:
+      - ENC[AES256_GCM,data:OY2i80tAxQCu9+fS3w6+maITxpS72o4ff2I30TrIYHxppbq2KzmL0byl8yswAG48OWrq1pL5wLKTqOC2aZjFuCdDy99sCTb1gY4DwaU=,iv:YvEqvcAFNk2K5qzG1r+w+Ke4Ao3o86mkNIoRFBVAcTc=,tag:dr/kF2PuoCVU/EUmtERVKg==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2RWU3c3UyNUhOMkI3cTRz
+        Tk9WVEd3ZGdNZUtyTHh5ZTg0Zmd5S3RTdXd3CkF6a29yMXF3YlRSMUdTVENpMlRv
+        bU9qczBOYk56YjBVeldKaFFOeFlwSlUKLS0tIGdTLytCSG5FYzRMODE3QVBQTzNn
+        dVQvdUJoNVFSdUFIZjJZaWtnQUg5Y1kK6VCkKV9qN6xNbvQcidX62xMRua4PnAtH
+        DcuNKvisPVNLeiFaT9eayUCmLNjWfvxvcn8swSg5IdViEGUbiN6XMA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-08-21T17:14:06Z"
+  mac: ENC[AES256_GCM,data:83F/UzBK2DUJXnwfB++nD6NTTIvChvp/lJimcjt4zou1yknqEN2kwANB7ivDBh5AoZhLppGyc0mm/BBvuLezqsV82/lyXXYD1tGG5s8xAchL7rqA1qVvy5Ytnxfd67DZIa3o59oxsvleACG329Yw+NquhdTEmfeT7LikqwL+pZc=,iv:uGzE52KxPMi/rAO969fCALZI2m5rpws3aPY5C6evdIA=,tag:LngOz+rg0WS9Cqjhm8BQVQ==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

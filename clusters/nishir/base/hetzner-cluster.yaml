@@ -1,0 +1,20 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HetznerCluster
+metadata:
+  name: shana
+  namespace: nishir
+spec:
+  controlPlaneEndpoint:
+    host: 0.0.0.0
+    port: 6443
+  controlPlaneRegions:
+    - fsn1
+  hcloudNetwork:
+    enabled: true
+    cidrBlock: 10.0.0.0/16
+    subnetCidrBlock: 10.0.0.0/24
+    networkZone: eu-central
+  hetznerSecretRef:
+    name: hetzner
+    key:
+      hcloudToken: hcloud-token
