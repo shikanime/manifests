@@ -4,8 +4,8 @@ configurations:
   - namereference.yaml
 resources:
   - cluster.yaml
+  - hcloud-machine-template.yaml
   - hetzner-cluster.yaml
-  - hetzner-machine-template.yaml
   - k0s-control-plane.yaml
   - k0s-worker-config.yaml
   - machine-deployment.yaml
@@ -15,19 +15,19 @@ secretGenerator:
   - name: hetzner
     namespace: nishir
     literals:
-      - ENC[AES256_GCM,data:OY2i80tAxQCu9+fS3w6+maITxpS72o4ff2I30TrIYHxppbq2KzmL0byl8yswAG48OWrq1pL5wLKTqOC2aZjFuCdDy99sCTb1gY4DwaU=,iv:YvEqvcAFNk2K5qzG1r+w+Ke4Ao3o86mkNIoRFBVAcTc=,tag:dr/kF2PuoCVU/EUmtERVKg==,type:str]
+      - ENC[AES256_GCM,data:XZ2caP3ino/6aXndq5qvs9HV+Cb6pymVp4LNvXgZtAByj4KStz/cI7L6CA4MtPK9nABvHcVziDpJludVsGsCgbrxSU+C3sXC8JNwQ6A=,iv:S5BCt5tmrmUxGH6uEcusCWA55lR5wMo8ahSM5Xxyexk=,tag:GOHJGItSw8MiuwFTB6Vjrw==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2RWU3c3UyNUhOMkI3cTRz
-        Tk9WVEd3ZGdNZUtyTHh5ZTg0Zmd5S3RTdXd3CkF6a29yMXF3YlRSMUdTVENpMlRv
-        bU9qczBOYk56YjBVeldKaFFOeFlwSlUKLS0tIGdTLytCSG5FYzRMODE3QVBQTzNn
-        dVQvdUJoNVFSdUFIZjJZaWtnQUg5Y1kK6VCkKV9qN6xNbvQcidX62xMRua4PnAtH
-        DcuNKvisPVNLeiFaT9eayUCmLNjWfvxvcn8swSg5IdViEGUbiN6XMA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiSzI1YjdQQkdpbDlLSUpQ
+        d1dVbTFxS2pXN0FLYUJ1LzhNOGtod1NQbEEwCm5lbnFIU0IvTHVpdFR2aUZrNEtZ
+        YXJ3eDRHWlZTeUpjNlpPN2cvaWdpY3cKLS0tIEl0L2p0N2FFNXUvSkM5cXhoaGpS
+        QnZ5M2xWNHB2c3VIQ2hLOTExcGFrZ2MKNaTcmoUfbIkZMCgGVjo65CnHbQ/f1SP3
+        oVmJIdO21DvmnkZpOPYzuki9U+h+a7DMnpWgcOdo0deYu6/98cR9fQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-21T17:14:06Z"
-  mac: ENC[AES256_GCM,data:83F/UzBK2DUJXnwfB++nD6NTTIvChvp/lJimcjt4zou1yknqEN2kwANB7ivDBh5AoZhLppGyc0mm/BBvuLezqsV82/lyXXYD1tGG5s8xAchL7rqA1qVvy5Ytnxfd67DZIa3o59oxsvleACG329Yw+NquhdTEmfeT7LikqwL+pZc=,iv:uGzE52KxPMi/rAO969fCALZI2m5rpws3aPY5C6evdIA=,tag:LngOz+rg0WS9Cqjhm8BQVQ==,type:str]
+  lastmodified: "2025-08-22T13:28:29Z"
+  mac: ENC[AES256_GCM,data:Q1oluBQvX9WSuNQeRl4y6e6CEG8Sf1lASXby5EQg8aX38pbcNq+tL3/bSfji2Gb19J/goqjCKZ13X28N+q46zQBUXKn9QZ7zeQ/bgcjoJ9+KXJl/C51PHwTmFhKmYPaC4P9OEbDtIJwqKqMVfDWTnL7PreMjL4CM8j3ADgEQs1E=,iv:puldc0ajIA3dKoVJ8vl7vEgd92B04LyI6VDwDmo8B3Q=,tag:6Wfjpxuc7STcdPzoOsRd4w==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

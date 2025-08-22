@@ -4,107 +4,107 @@ metadata:
   name: shana
   namespace: nishir
 spec:
-  version: v1.33.3+k0s.0
+  version: v1.33.3-k0s.0
   persistence:
     type: emptyDir
-  k0sConfigSpec:
-    k0s:
-      apiVersion: k0s.k0sproject.io/v1beta1
-      kind: ClusterConfig
-      spec:
-        network:
-          kuberouter:
-            extraArgs:
-              advertise-cluster-ip: "true"
-              advertise-external-ip: "true"
-              advertise-loadbalancer-ip: "true"
-        extensions:
-          helm:
-            repositories:
-              - name: longhorn
-                url: https://charts.longhorn.io
-            charts:
-              - name: descheduler
-                chartname: kubernetes-sigs-descheduler/descheduler
-                version: "0.33.0"
-                namespace: kube-system
-                values: |
-                  deschedulerPolicy:
-                    metricsCollector:
-                      enabled: true
-                    profiles:
-                      - name: default
-                        pluginConfig:
-                          - name: DefaultEvictor
-                            args:
-                              ignorePvcPods: true
-                              evictLocalStoragePods: false
-                          - name: HighNodeUtilization
-                            args:
-                              thresholds:
-                                cpu: 20
-                                memory: 20
-                                pods: 20
-                          - name: LowNodeUtilization
-                            args:
-                              thresholds:
-                                cpu: 60
-                                memory: 60
-                                pods: 60
-                              targetThresholds:
-                                cpu: 80
-                                memory: 80
-                                pods: 80
-                              metricsUtilization:
-                                source: KubernetesMetrics
-                          - name: RemoveDuplicates
-                          - name: RemovePodsHavingTooManyRestarts
-                            args:
-                              podRestartThreshold: 50
-                              includingInitContainers: true
-                          - name: RemovePodsViolatingInterPodAntiAffinity
-                          - name: RemovePodsViolatingNodeAffinity
-                            args:
-                              nodeAffinityType:
-                                - requiredDuringSchedulingIgnoredDuringExecution
-                          - name: RemovePodsViolatingNodeTaints
-                          - name: RemovePodsViolatingTopologySpreadConstraint
-                        plugins:
-                          balance:
-                            enabled:
-                              - HighNodeUtilization
-                              - LowNodeUtilization
-                              - RemoveDuplicates
-                              - RemovePodsViolatingTopologySpreadConstraint
-                          deschedule:
-                            enabled:
-                              - RemovePodsHavingTooManyRestarts
-                              - RemovePodsViolatingInterPodAntiAffinity
-                              - RemovePodsViolatingNodeAffinity
-                              - RemovePodsViolatingNodeTaints
-              - name: longhorn
-                chartname: longhorn/longhorn
-                version: "1.9.0"
-                namespace: longhorn-system
-                values: |
-                  defaultSettings:
-                    allowCollectingLonghornUsageMetrics: false
-                    allowRecurringJobWhileVolumeDetached: true
-                    backupstorePollInterval: 6000
-                    replicaAutoBalance: best-effort
-                    snapshotDataIntegrityCronjob: "0 4 */7 * *"
-                  defaultBackupStore:
-                    backupTarget: s3://shana-longhorn-backups-e9750005@fsn1/
-                    backupTargetCredentialSecret: longhorn-hetzner-backups
-                  persistence:
-                    defaultFsType: xfs
-              - name: vpa
-                chartname: fairwinds-stable/vpa
-                version: "4.7.2"
-                namespace: kube-system
-                values: ""
-  machineTemplate:
-    infrastructureRef:
-      apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-      kind: HCloudMachineTemplate
-      name: shana-control-plane
+  k0sConfig:
+    apiVersion: k0s.k0sproject.io/v1beta1
+    kind: ClusterConfig
+    spec:
+      network:
+        kuberouter:
+          extraArgs:
+            advertise-cluster-ip: "true"
+            advertise-external-ip: "true"
+            advertise-loadbalancer-ip: "true"
+      extensions:
+        helm:
+          repositories:
+            - name: longhorn
+              url: https://charts.longhorn.io
+          charts:
+            - name: descheduler
+              chartname: kubernetes-sigs-descheduler/descheduler
+              version: "0.33.0"
+              namespace: kube-system
+              values: |
+                deschedulerPolicy:
+                  metricsCollector:
+                    enabled: true
+                  profiles:
+                    - name: default
+                      pluginConfig:
+                        - name: DefaultEvictor
+                          args:
+                            ignorePvcPods: true
+                            evictLocalStoragePods: false
+                        - name: HighNodeUtilization
+                          args:
+                            thresholds:
+                              cpu: 20
+                              memory: 20
+                              pods: 20
+                        - name: LowNodeUtilization
+                          args:
+                            thresholds:
+                              cpu: 60
+                              memory: 60
+                              pods: 60
+                            targetThresholds:
+                              cpu: 80
+                              memory: 80
+                              pods: 80
+                            metricsUtilization:
+                              source: KubernetesMetrics
+                        - name: RemoveDuplicates
+                        - name: RemovePodsHavingTooManyRestarts
+                          args:
+                            podRestartThreshold: 50
+                            includingInitContainers: true
+                        - name: RemovePodsViolatingInterPodAntiAffinity
+                        - name: RemovePodsViolatingNodeAffinity
+                          args:
+                            nodeAffinityType:
+                              - requiredDuringSchedulingIgnoredDuringExecution
+                        - name: RemovePodsViolatingNodeTaints
+                        - name: RemovePodsViolatingTopologySpreadConstraint
+                      plugins:
+                        balance:
+                          enabled:
+                            - HighNodeUtilization
+                            - LowNodeUtilization
+                            - RemoveDuplicates
+                            - RemovePodsViolatingTopologySpreadConstraint
+                        deschedule:
+                          enabled:
+                            - RemovePodsHavingTooManyRestarts
+                            - RemovePodsViolatingInterPodAntiAffinity
+                            - RemovePodsViolatingNodeAffinity
+                            - RemovePodsViolatingNodeTaints
+            - name: longhorn
+              chartname: longhorn/longhorn
+              version: "1.9.0"
+              namespace: longhorn-system
+              values: |
+                defaultSettings:
+                  allowCollectingLonghornUsageMetrics: false
+                  allowRecurringJobWhileVolumeDetached: true
+                  backupstorePollInterval: 6000
+                  replicaAutoBalance: best-effort
+                  snapshotDataIntegrityCronjob: "0 4 */7 * *"
+                defaultBackupStore:
+                  backupTarget: s3://shana-longhorn-backups-e9750005@fsn1/
+                  backupTargetCredentialSecret: longhorn-hetzner-backups
+                persistence:
+                  defaultFsType: xfs
+            - name: vpa
+              chartname: fairwinds-stable/vpa
+              version: "4.7.2"
+              namespace: kube-system
+              values: ""
+  service:
+    type: LoadBalancer
+    apiPort: 6443
+    konnectivityPort: 8132
+    annotations:
+      load-balancer.hetzner.cloud/location: fsn1

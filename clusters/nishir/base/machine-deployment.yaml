@@ -9,20 +9,17 @@ spec:
   selector:
     matchLabels:
       cluster.x-k8s.io/cluster-name: shana
-      cluster.x-k8s.io/deployment-name: shana-workers
   template:
     metadata:
       labels:
         cluster.x-k8s.io/cluster-name: shana
-        cluster.x-k8s.io/deployment-name: shana-workers
     spec:
-      clusterName: shana
-      version: v1.33.3+k0s.0
       bootstrap:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
-          kind: K0sWorkerConfig
+          kind: K0sWorkerConfigTemplate
           name: shana
+      clusterName: shana
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: HCloudMachineTemplate

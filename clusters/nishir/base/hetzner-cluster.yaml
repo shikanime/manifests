@@ -3,18 +3,22 @@ kind: HetznerCluster
 metadata:
   name: shana
   namespace: nishir
+  annotations:
+    cluster.x-k8s.io/managed-by: k0smotron
 spec:
   controlPlaneEndpoint:
     host: 0.0.0.0
     port: 6443
+  controlPlaneLoadBalancer:
+    enabled: false
   controlPlaneRegions:
     - fsn1
   hcloudNetwork:
-    enabled: true
     cidrBlock: 10.0.0.0/16
-    subnetCidrBlock: 10.0.0.0/24
+    enabled: true
     networkZone: eu-central
+    subnetCidrBlock: 10.0.0.0/24
   hetznerSecretRef:
-    name: hetzner
     key:
       hcloudToken: hcloud-token
+    name: hetzner
