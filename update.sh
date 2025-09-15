@@ -7,7 +7,7 @@ set -o pipefail
 
 # Update gitignore
 gitnr create \
-   repo:github/gitignore/refs/heads/main/Nix.gitignore \
+  repo:github/gitignore/refs/heads/main/Nix.gitignore \
   repo:shikanime/gitignore/refs/heads/main/Devenv.gitignore \
   tt:jetbrains+all \
   tt:linux \
