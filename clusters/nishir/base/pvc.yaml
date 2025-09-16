@@ -16,6 +16,36 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: movies-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 512Gi
+  storageClassName: nishir-ephemeral
+  volumeMode: Filesystem
+  volumeName: movies-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shows-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 512Gi
+  storageClassName: nishir-ephemeral
+  volumeMode: Filesystem
+  volumeName: shows-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: sukebe-data
   namespace: shikanime
 spec:
@@ -39,36 +69,21 @@ spec:
   resources:
     requests:
       storage: 2Ti
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: sync-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: shows-data
+  name: timeline-data
   namespace: shikanime
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 512Gi
-  storageClassName: nishir-ephemeral
+      storage: 1Ti
+  storageClassName: nishir-standard
   volumeMode: Filesystem
-  volumeName: shows-data
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: movies-data
-  namespace: shikanime
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 512Gi
-  storageClassName: nishir-ephemeral
-  volumeMode: Filesystem
-  volumeName: movies-data
+  volumeName: timeline-data
