@@ -9,17 +9,6 @@ output "drive" {
   sensitive = true
 }
 
-output "etcd_snapshot" {
-  value = {
-    access_key_id     = var.etcd_snapshot.access_key_id
-    bucket            = aws_s3_bucket.etcd_backups.bucket
-    endpoint          = replace(var.endpoints.s3, "/http[s|]?:\\/\\//", "")
-    region            = var.regions.aws_s3_bucket
-    secret_access_key = var.etcd_snapshot.secret_access_key
-  }
-  sensitive = true
-}
-
 output "longhorn_backupstore" {
   value = {
     access_key_id     = var.longhorn_backupstore.access_key_id
