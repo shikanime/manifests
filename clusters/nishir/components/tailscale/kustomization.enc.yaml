@@ -4,20 +4,20 @@ secretGenerator:
   - name: oauth-client
     namespace: tailscale
     literals:
-      - ENC[AES256_GCM,data:FS9/PdcVpQeZdjl7zNUaCXAh4cKa5DLcWp8k,iv:THD3TjzypdvEf25omYr2c09SY27mc3NGuwN199qQYE8=,tag:nRdgt1o1NhlmutpotEp6SQ==,type:str]
-      - ENC[AES256_GCM,data:/Tb2BpCavHJBul4hTBcMZSh+GSQze9vbGy9tTKCQKZbkF1sJ0pan9K3zkvU43zIj6syjsd3u1EUSOWGzOspmclrXSOgTImtXHMzJhbRZ,iv:2bkLeBW2t5+G1NARmPkxDMRHGiikENyoU3VQjnSM/nY=,tag:6CqWjqpw0BCtt2UXVpDq0A==,type:str]
+      - ENC[AES256_GCM,data:JYflVriN/tpYgfZ38S4OL/y7v8rXTVqJdqWd,iv:lSaAZPVTCtqVkiTRUMN6ZY/7nuPTTejisatF39awQvs=,tag:Hk6l/jB8c/BkIqSOYRvjxg==,type:str]
+      - ENC[AES256_GCM,data:ax8mqGOW7dJgtGnVDzArA1a1IymKgBwE9mn4Y4IS2k7jIkWzqEos1J6g2L9xLkJRypKbaJSRHzt2CKxHvTkFXQd+vY8zvc5uGSCetnPl,iv:JEIw5/Ag4b0z9fswcPs7LTzD4PACZfvjyTghiiravC8=,tag:kQEOkQJoznIne1o4FIFIVQ==,type:str]
 sops:
   age:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwYkcxakNoUnRXWVBNcXFR
-        MUZIa0UzR0VlaUVPYkhjblZTTXBlcWIyclJRCjRGQlRsZThoZkJPeVRZa3A0L0sr
-        bXdHRkhVZy9jSDlxZ1FIOURVNHRaNWcKLS0tIDNsMXlhcjF0aTBNUXFuM2ZkMEVt
-        SUtDNFJZVmxMV3lmbUhnY2xJejdySDQK8GBVphm2iBTfs0nlhdq2CDfE98nXD1dc
-        rxW15irYFgqJFDi9pxIkEmI8G2mcQ+wKUZM+hUlypwrx3c3amkGoKQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCTjFLai9xTjlobjFuNFVE
+        RkpxRUJLS1Rqc3c3UUFLRXR3cnhkM05QblU0CjZMZVNteENTVW1PSXgyS1gybVJO
+        ano4QUZmZm5kZ3BsSE4vWkFJTm5EcmsKLS0tIGczL2RiZzViT2d6Y0oxTUkwSldp
+        cW0vK0pZN0VqeTVGVVVGdUFXQXdtZU0KWf9K34Ri1p5oWOYmeQMjJn7vjh7ZRobQ
+        sJwXDjO6nvNm506B4gEPDjjGphKFGSqERugFvIwLkyoDEfSmZwk3jw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-09T16:35:48Z"
-  mac: ENC[AES256_GCM,data:WsTU0RHUMHZ2CPNp3FKToecRjuKXYbRT30RjVTadwCNILLMAPFWUU4gC9MMG8EtLj/pY5Q+ipVvTOfbbOmaCWjNvw7V91KG6cE0qtfYODb4pusaXiHJ+mSxxaVqlR+3ikWlLcJCUi0ZrC2HP8jU9g5qvOowoGequRTOzkeK5p74=,iv:F8e+F6fPWCJ/AxEhYECh7jth3saDir3PFQnHZoxKyP0=,tag:AvdBIGZ2M/ONHBWnb+SKOA==,type:str]
+  lastmodified: "2025-09-16T16:17:09Z"
+  mac: ENC[AES256_GCM,data:BPr+841+e7hdgVn6uOke/uVLdTTTHV2BQ/dLG4RviTNBggq4l+PQoa03Lkcp0Mb/SYqoXOHDFO5XjaB94BGtHK19IMrjwjnP21xm8GQHH5QP7BIuGAnkarjj3zRW5wa+h6f7YsZM5jlc2P1SM0shVcYg0D6Lq9+WDtBEWI1DQuA=,iv:jOFGqpleeY36PtzdEU76xzr2XekisVUISGPZgOQdz+k=,tag:MzkOPUJiaLC6SQhZkh8l2Q==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
