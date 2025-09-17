@@ -15,7 +15,7 @@ spec:
     pkcs12:
       create: true
       passwordSecretRef:
-        name: gitea-tls-password
+        name: gitea-pkcs12-password
         key: password
       profile: Modern2023
   usages:

@@ -14,47 +14,6 @@ spec:
         app.kubernetes.io/name: rclone
     spec:
       containers:
-        - name: rclone-webdav
-          image: rclone
-          args:
-            - serve
-            - webdav
-            - /data
-          env:
-            - name: RCLONE_ADDR
-              value: 0.0.0.0:8080
-            - name: RCLONE_CACHE_DIR
-              value: /cache
-            - name: RCLONE_HTPASSWD
-              value: /config/rclone/htpasswd
-            - name: RCLONE_LOG_LEVEL
-              value: INFO
-            - name: RCLONE_VFS_CACHE_MODE
-              value: full
-          ports:
-            - containerPort: 8080
-              name: webdav
-          readinessProbe:
-            tcpSocket:
-              port: webdav
-          livenessProbe:
-            tcpSocket:
-              port: webdav
-          startupProbe:
-            tcpSocket:
-              port: webdav
-            failureThreshold: 30
-          volumeMounts:
-            - name: config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
-            - name: htpasswd
-              mountPath: /config/rclone/htpasswd
-              subPath: htpasswd
-              readOnly: true
-            - name: cache
-              mountPath: /cache
         - name: rclone-ftp
           image: rclone
           args:
@@ -155,6 +114,47 @@ spec:
             - name: config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
+              readOnly: true
+            - name: cache
+              mountPath: /cache
+        - name: rclone-webdav
+          image: rclone
+          args:
+            - serve
+            - webdav
+            - /data
+          env:
+            - name: RCLONE_ADDR
+              value: 0.0.0.0:8080
+            - name: RCLONE_CACHE_DIR
+              value: /cache
+            - name: RCLONE_HTPASSWD
+              value: /config/rclone/htpasswd
+            - name: RCLONE_LOG_LEVEL
+              value: INFO
+            - name: RCLONE_VFS_CACHE_MODE
+              value: full
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+          livenessProbe:
+            tcpSocket:
+              port: http
+          startupProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 30
+          volumeMounts:
+            - name: config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: htpasswd
+              mountPath: /config/rclone/htpasswd
+              subPath: htpasswd
               readOnly: true
             - name: cache
               mountPath: /cache

@@ -6,13 +6,51 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: update-ca-certificates
+          image: qbittorrent
+          command:
+            - update-ca-certificates
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
       containers:
         - name: qbittorrent
+          ports:
+            - containerPort: 8080
+              name: https
+          readinessProbe:
+            tcpSocket:
+              port: https
+          livenessProbe:
+            tcpSocket:
+              port: https
+          startupProbe:
+            tcpSocket:
+              port: https
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: tls
-              mountPath: /tls
+              mountPath: /etc/ssl/private/tls.key
+              subPath: tls.key
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
               readOnly: true
       volumes:
+        - name: certs
+          emptyDir: {}
         - name: tls
           secret:
             secretName: qbittorrent-tls

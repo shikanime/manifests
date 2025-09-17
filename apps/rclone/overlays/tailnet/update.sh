@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix
+#! nix develop --impure --command bash
 
 set -o errexit
 set -o nounset

@@ -1,10 +1,10 @@
-apiVersion: longhorn.io/v1beta1
+apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
   name: daily-backup
   namespace: longhorn-system
 spec:
-  concurrency: 1
+  concurrency: 3
   cron: "0 4 * * *"
   groups:
     - standard
@@ -13,13 +13,13 @@ spec:
   retain: 14
   task: backup
 ---
-apiVersion: longhorn.io/v1beta1
+apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
   name: monthly-backup
   namespace: longhorn-system
 spec:
-  concurrency: 1
+  concurrency: 3
   cron: "0 4 * * *"
   groups:
     - large
@@ -28,52 +28,68 @@ spec:
   retain: 14
   task: backup
 ---
-apiVersion: longhorn.io/v1beta1
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: monthly-system-backup
+  namespace: longhorn-system
+spec:
+  concurrency: 0
+  cron: 0 4 * * *
+  groups: []
+  labels: {}
+  name: monthly-system-backup
+  parameters:
+    volume-backup-policy: if-not-present
+  retain: 12
+  task: system-backup
+---
+apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
   name: weekly-filesystem-trim
   namespace: longhorn-system
 spec:
-  concurrency: 1
+  concurrency: 3
   cron: "0 4 */7 * *"
   groups:
     - default
   retain: 0
   task: filesystem-trim
 ---
-apiVersion: longhorn.io/v1beta1
+apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
   name: hourly-snapshot
   namespace: longhorn-system
 spec:
-  concurrency: 1
+  concurrency: 3
   cron: "0 * * * *"
   groups:
     - default
   retain: 48
   task: snapshot
 ---
-apiVersion: longhorn.io/v1beta1
+apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
   name: weekly-snapshot-cleanup
   namespace: longhorn-system
 spec:
-  concurrency: 1
+  concurrency: 3
   cron: "0 4 */7 * 0"
   groups:
     - default
   retain: 0
   task: snapshot-cleanup
 ---
-apiVersion: longhorn.io/v1beta1
+apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
   name: weekly-snapshot-delete
   namespace: longhorn-system
 spec:
-  concurrency: 1
+  concurrency: 3
   cron: "0 4 */7 * 0"
   groups:
     - default

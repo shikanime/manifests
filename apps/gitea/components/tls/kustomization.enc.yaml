@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+configurations:
+  - namereference.yaml
+images:
+  - name: gitea
+    newName: docker.io/gitea/gitea
+    newTag: 1.24.6
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - literals:
+      - ENC[AES256_GCM,data:WjkJZaHn96dLD8KqbhRHRhCp0mqPs7Q=,iv:s0wBi3DZbi0l2dNBFNvISU9CRzFvh2XmzIND9CKmYXs=,tag:UDhZgej1Q8fQBE7VLCQKOQ==,type:str]
+    name: gitea-pkcs12-password
+    namespace: shikanime
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2NDloamVCTm5NZlplc3RC
+        dVl1bzR5cW95RlhoK0F0bURleWc3b0RYdjNZCnhORE5jL3VHL1JYR3ladDNBTy9E
+        bVhueUhEWUsvRmJ4NThsVjMyRWxJWWMKLS0tIEEzQnF5cjFOVTFhUXFwTXV2YUtX
+        ZjlHVmJ3T1JRYzB5Zk50a1RrelUyb3cKYOdc5DmHsQuu1sPhQzKrIoVqKmgLyRTu
+        sFg2CeAqoOoRURIgEr6uWuUaE5FMF5Uyf/JIQYrjYXOMZQdTR3Z4Pg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-09-16T16:16:53Z"
+  mac: ENC[AES256_GCM,data:1iexdp+pYtVDjzgvUoKbEc9lL6wT3UxBAY5ClloYj5YHQ/TKCdyWtdoh+jR1skbb1hDY+MoL+ZCSk4Rka4YG6UJNAd+KtwVt77Mkv+7BvaToLp7QjiURYKe+mabn5dFHxE5gKnNIOGTxfe/MO9YlG+HKfDai6uSjWPV1Lk5jxDk=,iv:vThFdKT3gBy/E3ONPbcsIqINO4xwYzRwsJi4g0UBUGc=,tag:Skf/nrIE3PHv/Rad9G5Ang==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

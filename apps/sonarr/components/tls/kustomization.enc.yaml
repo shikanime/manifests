@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+configurations:
+  - namereference.yaml
+images:
+  - name: sonarr
+    newName: lscr.io/linuxserver/sonarr
+    newTag: 4.0.15
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - literals:
+      - ENC[AES256_GCM,data:GKyDTICyuuVVnvWd9FttMur7gg7xUbA=,iv:oW7c6YShhsqrFYTcJAPdrkCH2GvKRVC5Vt/Ql4HvCqM=,tag:TA7VIyCgqoM3zRfxNfSAdg==,type:str]
+    name: sonarr-pkcs12-password
+    namespace: shikanime
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAzbm9OK1QvMnAraE91dXly
+        QlpFUTY5WFMzRjI0L29LN09BVVZCWkFvWVdRCmZ0c01QNDQ4ZmhIVXpvZE9wZzdj
+        d21uRE83UkFEMDZYd2dFankxU3JIRjAKLS0tIGlPV3dRZmd0T0FtcWRvbXltSGhJ
+        dndFNmhjcFBaMmtXQzNNL2kvbW1NZzgKlNN7z8M8IMl/LPexy4Ui/fydM92Q9xNV
+        g064A5bEPT4FqYRBHUcz4afgn31gmhCxkwAbkuY51TKtm4DBS93Q+Q==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-09-16T16:18:14Z"
+  mac: ENC[AES256_GCM,data:6Gr7YRQY79H26FudakQP7iO88n5e8phQE7y7eov4R4HZDP9b6qKs8eQ4qCgYgNqnBH+sxvJm7LBjTxyIjgJrHYNtgK6F++G62bL16EDBpVgh9hMkRkASjDfJz1JTW6RymYHkL3LFqOn/EtoU3W7bCgEeZMRv9x1dKFbsQyJnOl4=,iv:kBlJOXFO5ZSsSCUAFosmnvALx/nZpAGXiTNIKTExqN0=,tag:GGRa2sVlwAz3EmRlfCv/Nw==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2
