@@ -2,6 +2,11 @@ apiVersion: skaffold/v4beta9
 kind: Config
 metadata:
   name: shikanime
+build:
+  artifacts:
+    - image: ghcr.io/shikanime/manifests/syncthing
+      custom:
+        buildCommand: ./build.sh
 profiles:
   - name: nishir-tailnet
     manifests:

@@ -84,39 +84,65 @@
               self'.packages.longhornctl
             ];
           };
-          packages.longhornctl = pkgs.buildGoModule rec {
-            pname = "longhornctl";
-            version = "1.9.1";
+          packages = {
+            longhornctl = pkgs.buildGoModule rec {
+              pname = "longhornctl";
+              version = "1.9.1";
 
-            src = pkgs.fetchFromGitHub {
-              owner = "longhorn";
-              repo = "cli";
-              rev = "v${version}";
-              hash = "sha256-OIXCWAd0HydmggZC2ezWqCKCElkhlrSaa5plZJMxNxk=";
+              src = pkgs.fetchFromGitHub {
+                owner = "longhorn";
+                repo = "cli";
+                rev = "v${version}";
+                hash = "sha256-OIXCWAd0HydmggZC2ezWqCKCElkhlrSaa5plZJMxNxk=";
+              };
+
+              vendorHash = null;
+
+              subPackages = [ "cmd/remote" ];
+
+              ldflags = [
+                "-s"
+                "-w"
+                "-X github.com/longhorn/cli/meta.Version=v${version}"
+                "-X github.com/longhorn/cli/meta.GitCommit=${src.rev}"
+                "-X github.com/longhorn/cli/meta.BuildDate=1970-01-01T00:00:00+00:00"
+              ];
+
+              postInstall = ''
+                mv $out/bin/remote $out/bin/longhornctl
+              '';
+
+              meta = with pkgs.lib; {
+                description = "Longhorn command line tool";
+                homepage = "https://github.com/longhorn/cli";
+                license = licenses.asl20;
+                maintainers = with maintainers; [ shikanime ];
+                mainProgram = "longhornctl";
+              };
             };
+            syncthing-linux-arm64 = pkgs.dockerTools.buildLayeredImage {
+              name = "syncthing";
+              tag = "latest";
 
-            vendorHash = null;
+              config = {
+                Cmd = [
+                  "${pkgs.pkgsCross.aarch64-multiplatform.syncthing}/bin/syncthing"
+                  "--config"
+                  "/config"
+                  "--data"
+                  "/data"
+                ];
+                ExposedPorts = {
+                  "8384/tcp" = { }; # Web UI
+                  "22000/tcp" = { }; # Sync
+                  "22000/udp" = { }; # Sync
+                  "21027/udp" = { }; # Discovery broadcasts
+                };
+              };
 
-            subPackages = [ "cmd/remote" ];
-
-            ldflags = [
-              "-s"
-              "-w"
-              "-X github.com/longhorn/cli/meta.Version=v${version}"
-              "-X github.com/longhorn/cli/meta.GitCommit=${src.rev}"
-              "-X github.com/longhorn/cli/meta.BuildDate=1970-01-01T00:00:00+00:00"
-            ];
-
-            postInstall = ''
-              mv $out/bin/remote $out/bin/longhornctl
-            '';
-
-            meta = with pkgs.lib; {
-              description = "Longhorn command line tool";
-              homepage = "https://github.com/longhorn/cli";
-              license = licenses.asl20;
-              maintainers = with maintainers; [ shikanime ];
-              mainProgram = "longhornctl";
+              contents = [
+                pkgs.pkgsCross.aarch64-multiplatform.dockerTools.caCertificates
+              ];
             };
           };
         };
