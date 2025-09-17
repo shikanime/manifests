@@ -1,17 +1,10 @@
-output "hetzner" {
+output "drive" {
   value = {
-    hcloud_token = var.hetzner.hcloud_token
-  }
-  sensitive = true
-}
-
-output "etcd_snapshot" {
-  value = {
-    access_key_id     = var.etcd_snapshot.access_key_id
-    bucket            = aws_s3_bucket.etcd_backups.bucket
+    access_key_id     = var.drive.access_key_id
+    bucket            = aws_s3_bucket.drive.bucket
     endpoint          = replace(var.endpoints.s3, "/http[s|]?:\\/\\//", "")
     region            = var.regions.aws_s3_bucket
-    secret_access_key = var.etcd_snapshot.secret_access_key
+    secret_access_key = var.drive.secret_access_key
   }
   sensitive = true
 }
@@ -23,6 +16,14 @@ output "longhorn_backupstore" {
     endpoint          = var.endpoints.s3
     region            = var.regions.aws_s3_bucket
     secret_access_key = var.longhorn_backupstore.secret_access_key
+  }
+  sensitive = true
+}
+
+output "tailscale_operator" {
+  value = {
+    client_id     = var.tailscale_operator.client_id
+    client_secret = var.tailscale_operator.client_secret
   }
   sensitive = true
 }
@@ -47,14 +48,6 @@ output "prometheus" {
   value = {
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
     username = data.grafana_data_source.prometheus.basic_auth_username
-  }
-  sensitive = true
-}
-
-output "tailscale_operator" {
-  value = {
-    client_id     = var.tailscale_operator.client_id
-    client_secret = var.tailscale_operator.client_secret
   }
   sensitive = true
 }

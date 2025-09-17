@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+configurations:
+  - namereference.yaml
+images:
+  - name: prowlarr
+    newName: lscr.io/linuxserver/prowlarr
+    newTag: 2.0.5
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - literals:
+      - ENC[AES256_GCM,data:OUfeZQdA8S96QWKuUtLhws9IebrOaJQ=,iv:u+aJg2E0DGRnVrWYD2iBzMnqOEyMaidrKPQ1TorlxZg=,tag:BRz5vG993Ktunnv0q4I04g==,type:str]
+    name: prowlarr-pkcs12-password
+    namespace: shikanime
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLWS9nNENselRubkZaZ1Fx
+        YUVOODBBMHh1U1pqcGtHN0o3djBJOTFra2gwCmszTDd4SE5waGU0VW9QQjFYOStu
+        R0ovbEY1NVVRL0dvYmVPQ29NWk1YYzQKLS0tIG04d3JvUWI2dzNmbXE5a05KK0VP
+        RWduRHJaZlJWS1ZJQ3VEREdqQVFIL2cKpbhpeePY5JYOJyjlsX6pcTR0/xTi9ati
+        EvZ6/41eV3KNFsqDO1iCLzKcWLb8c3wdav38yyEEodO4QMBO2B/Mjw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-09-16T16:20:21Z"
+  mac: ENC[AES256_GCM,data:23sCcJnP8S8dMls9OORvInKIS4wh8rGVLdw/YUjWtj0mryjIC8Wrj/dfb/gfkC1vVaju0G3qP/jktEC4vm8/xI9AGL9kQ5tBtgX03qmwukdJH5dsP1dBa0upl8k3xIU+VpxzlwpUZI5MR2zUZn9ya2t+8/b3Odc0yWGhjTfpOuI=,iv:EbPSQAJx24VAM+BP++bE7/afBS5w+pnclwyU+BZ96f4=,tag:psefNdWfYGGZD78JezUMpA==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

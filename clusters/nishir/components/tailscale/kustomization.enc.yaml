@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+secretGenerator:
+  - name: oauth-client
+    namespace: tailscale
+    literals:
+      - ENC[AES256_GCM,data:JYflVriN/tpYgfZ38S4OL/y7v8rXTVqJdqWd,iv:lSaAZPVTCtqVkiTRUMN6ZY/7nuPTTejisatF39awQvs=,tag:Hk6l/jB8c/BkIqSOYRvjxg==,type:str]
+      - ENC[AES256_GCM,data:ax8mqGOW7dJgtGnVDzArA1a1IymKgBwE9mn4Y4IS2k7jIkWzqEos1J6g2L9xLkJRypKbaJSRHzt2CKxHvTkFXQd+vY8zvc5uGSCetnPl,iv:JEIw5/Ag4b0z9fswcPs7LTzD4PACZfvjyTghiiravC8=,tag:kQEOkQJoznIne1o4FIFIVQ==,type:str]
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCTjFLai9xTjlobjFuNFVE
+        RkpxRUJLS1Rqc3c3UUFLRXR3cnhkM05QblU0CjZMZVNteENTVW1PSXgyS1gybVJO
+        ano4QUZmZm5kZ3BsSE4vWkFJTm5EcmsKLS0tIGczL2RiZzViT2d6Y0oxTUkwSldp
+        cW0vK0pZN0VqeTVGVVVGdUFXQXdtZU0KWf9K34Ri1p5oWOYmeQMjJn7vjh7ZRobQ
+        sJwXDjO6nvNm506B4gEPDjjGphKFGSqERugFvIwLkyoDEfSmZwk3jw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-09-16T16:17:09Z"
+  mac: ENC[AES256_GCM,data:BPr+841+e7hdgVn6uOke/uVLdTTTHV2BQ/dLG4RviTNBggq4l+PQoa03Lkcp0Mb/SYqoXOHDFO5XjaB94BGtHK19IMrjwjnP21xm8GQHH5QP7BIuGAnkarjj3zRW5wa+h6f7YsZM5jlc2P1SM0shVcYg0D6Lq9+WDtBEWI1DQuA=,iv:jOFGqpleeY36PtzdEU76xzr2XekisVUISGPZgOQdz+k=,tag:MzkOPUJiaLC6SQhZkh8l2Q==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

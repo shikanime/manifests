@@ -4,8 +4,18 @@ metadata:
   name: matrix
   namespace: shikanime
   annotations:
-    tailscale.com/tags: tag:web
-  labels:
     tailscale.com/proxy-class: nishir-matrix
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-slack
+  namespace: shikanime
+  annotations:
+    tailscale.com/proxy-class: nishir-matrix-slack
+    tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

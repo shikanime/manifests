@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+images:
+  - name: vaultwarden
+    newName: docker.io/vaultwarden/server
+    newTag: 1.34.3
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - literals:
+      - ENC[AES256_GCM,data:aQtzpa4oIIn9q1MmrRh1E1R4vhUOzvx6LbuPgbpuZzpS5h9qYYVSBgL8lWe8VZiTq3Czc+EkBWRunpdKTlOe/xy/hLuL7RliDRNo5B7mL2/sw2/XRCOluz25Lhv0U0Mq1jV3DIbO2nZOBzUAYkVQC8uoGcyZO9AN0IT4ywpFM+ouuQ==,iv:4MjtD9qcRRCF/iDHjsL6iDS0UllUFvDrMUJaBbtLcAc=,tag:UzcJ1cwbFNRG01gC0g0rgQ==,type:str]
+    name: vaultwarden
+    namespace: shikanime
+labels: []
+sops:
+  age:
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTM2tYaUp6b05ESS82N3FW
+        OXp4b29vd0xQazViYmNOTWViaFlaaWJrdkZZCnpwdVVydWxCeWtKT204RloxSE9z
+        VmpzbG9IbllwSDZiZkZrd1J6UkJOaVkKLS0tIDAwbFA4VDRybmlUdXU3K0FaL09n
+        VGdmTHVObGZxREZXQ2d6OEMwREZhWmMKfgevhNbKS1e0pRJJd3Kutzl5KtmlRWva
+        VYlNGEF2Fj/UGnr+vLa4fQK+mXYH+AwBIPU+2Z+e0xhgGbHBDvxpAA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-09-16T16:16:52Z"
+  mac: ENC[AES256_GCM,data:4URlFY/JYJU+M+1zXBndOYtlxk3wy5TLW5p3jj35VF9jTRZ8dVTxCYzF2YfDOa0WKHp/lMVkxIV026L3x3TH2hZhDjrhjX1Dfs32toLfzJMS/SwMdN8LO+3u7O5i39BtNmnxhPU2Hd8mljEouim08lSLg4+lLVFiJOQl4kyN8no=,iv:aJbF4gRz4s4uqQV6tmhz5OgZ1FeHhV9OLKhZLN2nHyI=,tag:IAfpERDDWLmgFMsTnDn3og==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

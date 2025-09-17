@@ -34,6 +34,8 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: STHOMEDIR
+              value: /config
           ports:
             - containerPort: 8384
               name: http
@@ -65,7 +67,7 @@ spec:
             failureThreshold: 30
           volumeMounts:
             - name: config
-              mountPath: /var/syncthing/config
+              mountPath: /config
       securityContext:
         fsGroup: 1000
       volumes:
