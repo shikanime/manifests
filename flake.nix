@@ -120,21 +120,29 @@
                 mainProgram = "longhornctl";
               };
             };
-            syncthing-aarch64 = pkgs.dockerTools.buildLayeredImage {
-              name = "ghcr.io/shikanime/shikanime/syncthing";
+            syncthing-linux-arm64 = pkgs.dockerTools.buildLayeredImage {
+              name = "syncthing";
               tag = "latest";
 
               config = {
-                Cmd = [ "${pkgs.pkgsCross.aarch64-multiplatform.syncthing}/bin/syncthing" ];
-                Env.STHOMEDIR = "/var/lib/syncthing";
+                Cmd = [
+                  "${pkgs.pkgsCross.aarch64-multiplatform.syncthing}/bin/syncthing"
+                  "--config"
+                  "/config"
+                  "--data"
+                  "/data"
+                ];
                 ExposedPorts = {
                   "8384/tcp" = { }; # Web UI
                   "22000/tcp" = { }; # Sync
                   "22000/udp" = { }; # Sync
                   "21027/udp" = { }; # Discovery broadcasts
                 };
-                User = "1000:1000";
               };
+
+              contents = [
+                pkgs.pkgsCross.aarch64-multiplatform.dockerTools.caCertificates
+              ];
             };
           };
         };

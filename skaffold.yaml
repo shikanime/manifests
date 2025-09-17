@@ -4,11 +4,9 @@ metadata:
   name: shikanime
 build:
   artifacts:
-  - image: ghcr.io/shikanime/shikanime/syncthing
-    custom:
-      buildCommand: |
-        docker load -i <(nix build $BUILD_CONTEXT#syncthing- --paths)
-        if $PUSH_IMAGE; then docker push $IMAGE; fi
+    - image: ghcr.io/shikanime/manifests/syncthing
+      custom:
+        buildCommand: ./build.sh
 profiles:
   - name: nishir-tailnet
     manifests:
