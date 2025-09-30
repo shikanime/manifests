@@ -69,7 +69,7 @@ spec:
   resources:
     requests:
       storage: 2Ti
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: sync-data
 ---
