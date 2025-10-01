@@ -183,7 +183,7 @@ spec:
     spec:
       initContainers:
         - name: config-copier
-          image: busybox:1.37.0
+          image: busybox
           command:
             - sh
             - -c
