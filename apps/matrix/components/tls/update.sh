@@ -7,6 +7,8 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
+  ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
+  ["mautrix-slack"]="dock.mau.dev/mautrix/slack"
   ["synapse"]="docker.io/matrixdotorg/synapse"
 )
 

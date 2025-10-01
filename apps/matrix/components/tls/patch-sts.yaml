@@ -119,7 +119,7 @@ spec:
           emptyDir: {}
         - name: tls
           secret:
-            secretName: matrix-tls
+            secretName: matrix-googlechat-tls
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -182,4 +182,4 @@ spec:
           emptyDir: {}
         - name: tls
           secret:
-            secretName: matrix-tls
+            secretName: matrix-slack-tls
