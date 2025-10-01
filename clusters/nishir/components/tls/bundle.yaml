@@ -1,0 +1,10 @@
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: nishir
+spec:
+  sources:
+    - secret:
+        name: nishir-ca
+        key: tls.crt
+    - useDefaultCAs: true

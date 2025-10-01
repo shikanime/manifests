@@ -8,7 +8,7 @@ spec:
   dnsNames:
     - gitea
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: nishir
   secretName: gitea-tls
   keystores:

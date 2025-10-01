@@ -55,6 +55,14 @@ spec:
                 values: |
                   crds:
                     enabled: true
+              - name: trust-manager
+                chartname: jetstack/trust-manager
+                version: "v0.14.0"
+                namespace: cert-manager-system
+                values: |
+                  app:
+                    trust:
+                      namespace: cert-manager-system
               - name: cluster-api-operator
                 chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
                 version: "0.21.0"

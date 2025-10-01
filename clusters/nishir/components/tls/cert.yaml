@@ -7,6 +7,6 @@ spec:
   commonName: cluster.local
   isCA: true
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: nishir-selfsigned
   secretName: nishir-ca
