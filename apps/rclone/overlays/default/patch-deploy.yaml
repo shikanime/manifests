@@ -17,6 +17,10 @@ spec:
               mountPath: /data/sync
             - name: data-timeline
               mountPath: /data/timeline
+            - name: data-movies
+              mountPath: /data/movies
+            - name: data-shows
+              mountPath: /data/shows
         - name: rclone-ftp
           volumeMounts:
             - name: data-downloads
@@ -27,6 +31,10 @@ spec:
               mountPath: /data/sync
             - name: data-timeline
               mountPath: /data/timeline
+            - name: data-movies
+              mountPath: /data/movies
+            - name: data-shows
+              mountPath: /data/shows
       volumes:
         - name: data-downloads
           persistentVolumeClaim:
@@ -40,3 +48,9 @@ spec:
         - name: data-timeline
           persistentVolumeClaim:
             claimName: timeline-data
+        - name: data-movies
+          persistentVolumeClaim:
+            claimName: movies-data
+        - name: data-shows
+          persistentVolumeClaim:
+            claimName: shows-data
