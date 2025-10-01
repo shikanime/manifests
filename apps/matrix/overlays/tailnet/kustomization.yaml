@@ -3,7 +3,7 @@ kind: Kustomization
 components:
   - ../../components/tailscale
 resources:
-  - ../../base
+  - ../default
 secretGenerator:
   - files:
       - configs/synapse/homeserver.yaml
