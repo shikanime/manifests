@@ -9,6 +9,7 @@ set -o pipefail
 declare -A IMAGES=(
   ["busybox"]="docker.io/library/busybox"
   ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
+  ["mautrix-slack"]="dock.mau.dev/mautrix/slack"
   ["synapse"]="docker.io/matrixdotorg/synapse"
 )
 
