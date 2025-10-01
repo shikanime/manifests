@@ -1,7 +1,7 @@
 network:
-  displayname_template: "{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}"
-  channel_name_template: "{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}"
-  team_name_template: "{{ .Name }}"
+  displayname_template: '{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}'
+  channel_name_template: '{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}'
+  team_name_template: '{{ .Name }}'
   custom_emoji_reactions: true
   workspace_avatar_in_rooms: false
   participant_sync_count: 5
@@ -10,7 +10,7 @@ network:
   backfill:
     conversation_count: -1
 bridge:
-  command_prefix: "!slack"
+  command_prefix: '!slack'
   personal_filtering_spaces: true
   private_chat_portal_meta: true
   async_events: false
@@ -45,19 +45,19 @@ bridge:
     admin_only: true
     default_relays: []
     message_formats:
-      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
-      m.file: "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.image: "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.audio: "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.video: "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.location: "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}"
-    displayname_format: "{{ .DisambiguatedName }}"
+      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
+      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
+    displayname_format: '{{ .DisambiguatedName }}'
   permissions:
-    "*": relay
+    '*': relay
     matrix.taila659a.ts.net: user
-    "@admin:matrix.taila659a.ts.net": admin
+    '@admin:matrix.taila659a.ts.net': admin
 database:
   type: sqlite3-fk-wal
   uri: file:/data/googlechat.db?_txlock=immediate
@@ -85,10 +85,10 @@ appservice:
     displayname: Slack bridge bot
   ephemeral_events: true
   async_transactions: false
-  as_token: ENC[AES256_GCM,data:eLB18qX9sN+Q1tBPTTY/3lXnRIhhB63UVwbA1SOh9Xh/RFBB+86uZZHzYuEULXkB3J2mv6dmGkPZDTuC/P+CPQ==,iv:pv5sIKSw3GQ4cvXRYvmVNaC9Mf6NVbz9vTcVqjDlll8=,tag:5pyGVezDEXDcdPdcmeT5zw==,type:str]
-  hs_token: ENC[AES256_GCM,data:JXMxmZYWsEh7/IwlZ7+0tSn75tt3k+g4vDPB46PIhpmiQ7TFDulh2/LRFKcagpLpAWTzUzGKSeZCMYkf69d65w==,iv:8DmIFpQSKdglB3WeGT3Zq9q5lK+LZEuQavaHUlSt/sU=,tag:nEQLgEJ+ilWekJoKCq0J4g==,type:str]
+  as_token: ENC[AES256_GCM,data:g4pMfsVCpgoAtixqEUhWo5y2u/YCb3mX2q5+yqFTKJf/Yt+mrJH1/KyceiKutBH21OgkaFRbIwZHqIgEgHN/+A==,iv:qZQDaxqAAOjTLftcQDKVvlSSBPBNrTtdpxfcCjYkAOs=,tag:h+WcZ0wLfZkaciMf+b2YQg==,type:str]
+  hs_token: ENC[AES256_GCM,data:RHoGDkJt4yLvXpvVePjNWqBTpEvaQBWOyXDgN+W8lj6IQcelaP2bF2+V5HoPflU+iUB56GNfsY+akZlGpLCqwA==,iv:V6XBaWciimWXNvsFsEMHOEuIQthHDPLJ2sun/MdK8TI=,tag:yEqn2nOJE3ItYApPyLVjvA==,type:str]
   username_template: slack_{{.}}
-  tls_cert: /etc/ssl/certs/tls.crt
+  tls_cert: /etc/ssl/private/tls.crt
   tls_key: /etc/ssl/private/tls.key
 matrix:
   message_status_events: false
@@ -103,7 +103,7 @@ analytics:
   user_id: null
 provisioning:
   prefix: /_matrix/provision
-  shared_secret: ENC[AES256_GCM,data:qLDVj2Ft9teiiE7X358ZT/z2sRJJsl/6grCW4M28emHDJoZMqs4YR8+zMGZUylEScJm5PH6+BoUABk/SZsm+Kg==,iv:HjEOStABajWRLM9AcJSadXKqTWqevAk4UAUISuZAwkI=,tag:5zmvNlzd58LZKVOYn/UdiQ==,type:str]
+  shared_secret: ENC[AES256_GCM,data:lV7EOJ6pC5i5SOnzVr3wplvtOuoux9JA/BgNChBzs6cWqcnOwv9Sagp5bgtF1i/pA1qTUfvrjrH0UVO6XkZBgg==,iv:t1brpK/ZyfszAPzbSnLvX39G3Nfw+lNsVN9cOMxMD08=,tag:t35ZBI2QIDbXmFYf3fEupw==,type:str]
   allow_matrix_auth: true
   debug_endpoints: false
   enable_session_transfers: false
@@ -180,31 +180,31 @@ sops:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6YTFGSFA4cUtKZk5XVGpL
-        OWpRcDNXN3l2T2ovQWZPWkR1ZGwwOXp0TGl3ClNKMkVwN01KVlF3emlidW9JN05i
-        d0VUSlMwT2tpQVhPMzFqL3FTZkV0U2sKLS0tIEQza09lOFJLWUNVRmVOOEFBQ0ZC
-        L2lsL0xLVGZWd2FXVjBlWk81YWNoNUEKG2n+l8YR3O+CVi3Wt27hJXihB9Fi3fSd
-        7odHpWiypkEiWuEEOE31NfUl7o/0qg6qIJkGrJciaHH7XnPdNGwBcA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwemY5U3BPZ01aQjdiMEF2
+        Y0VTYmRlTjVjVUEvUWhDcDlJS1o4Nmk0eVJvCkRPOGVoMHNtM1JqTVpKc1QrdGhC
+        dkZtQW14RGZ0dlM1YUxTUmlEcEZpL2cKLS0tIGdZbVBNOTZrMzdzMnA0dlBsT0Ru
+        STZYRWdxUE5KSkN5dXZmVTI0cW1acWMKSZmhrD9d/WaWHztqXPPHi/D9SJbcd3H+
+        kLMK2eXTj5LSH61iEjs2x/J+MvO/aXuPG58WngRLsuEH4S4nu2BH4A==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1STBjbW5yMlZIQWRZbU12
-        L1JWM3ZOMkx4RDlaa1lseFF6ekVXcW1oaW1JCjZ1OXcyMDh4RmMyNTZpeWNKNXll
-        dDl1OVB5RCt0NGFSdmxvS0svcFFnQVUKLS0tIEpiV21VQ2lkeXNDRE8rNytRY2hB
-        SXdneU5veEYyRERMRnpuVDZnK3lBNWsKr5m6ljGKIAU5hATCxlUObCik/E4P7i9l
-        1VJ/MYWQcSVHi7DX0mEi/YSu6GYd/5SJomZoSbH15QdfOe0fbpDvfQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvQ0Q5STJxaU1tTjJpVVQy
+        aFFjZ1IwVjNOY05NaWtwbGtWOURzWjJaTnhZCm9jaUpobkM2VVlwakRhWFhuRzFv
+        VW14N21IbkNJbG50TXFOYVhsc3REWkEKLS0tIEs2alR6SnlTZzA3VEJ0N1l2ZmNh
+        V0phNmtkQ291b1pXcmNQRi9rNWV2alUKTSXmEai/A8H9UFkBv+VMeA2CzNP10EMB
+        4pXO1nZxhaaVAUiJtHjCoF4NDvLplpiuVP0i/WVDh6PZEyIjyCIh8Q==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3M3FzZDZvdVlxZGtwU0xO
-        WnpFbEUvTmtsbVJ0NEFSL29CbUVqV1A0VnhVCmhWQy9kbjYzTncvWE0xZ1RKMHpy
-        TWF4VWJUaXNwOTlocFJnOGljV1JLUmsKLS0tIHRkdnlQTlgrV3l2bEI4MWJHS2xt
-        TSthZDFVblFWWTJmVlVxN3puazg5SHMK1/b5meDiAk9m1VMkIPtgbDU5ASzM4Ml6
-        8Xn7JD/o5zlzxpMeM29wYXeq933rLI78cjdjFfgIlp2t1hx17wfJ6w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCZ0RqK3J0eEQ2UGZWTG9F
+        bXB0bmhRdTEvam5Fb3hyUGI5MS9aNFk1eEgwCmZyb1NIRVFwbDdaOVF3NUxROVgy
+        alZWaVVsRFk4SHpYYzNXbFphZ0paTncKLS0tIHF0ZmVucmFZeHR4RUFYd0tmSXJ3
+        UFNiT2NNbXU5TVZQTWllMGRBZ1VlUzQKjPkz4EzunDT/6H0XKFNMJ5rH1w7XKTY+
+        hMpiCX2jSM8nuWrV7VcfzX17TOk7jlTQpt3v85G28Q48XebR/XqmTg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-01T19:57:51Z"
-  mac: ENC[AES256_GCM,data:Vw7CpuK99M/h16pj9KgB2THREVny8miM1SqznKJ6yk5VKyUNXGlY8NxWcW+sWUUBDoTb0AVEgmRWggXZrXgCobBWXpelxf5Ull9B61t7xwDA22svTDtSWpkywQsPmJcjIOjDlI60564IlC1UnVNcpWwz1MJhZTeHw2bVEp3woR0=,iv:8Y5Fu2S78f727iW7dftrjNlFodDESifFH0mQG3jcFoA=,tag:OR8RzqVAvK+MRERibdRdJQ==,type:str]
+  lastmodified: "2025-10-01T20:10:58Z"
+  mac: ENC[AES256_GCM,data:JNa1jiR5m28BKYPzRAoyXBEstUO4QpXxGeaEbkIKods/DkdeuLrXhNt5MAS2PkMjv6TAYNkRuemzHg2026zvpqXQj9s+OqcwFa/XooenvmXQP2BzY09Numq/fhhHKff2pykSQVTrJSNaMG53XJDfSQ8hoHNbjbC9+gQdnnCTHH8=,iv:sRQWhHq3XpyGMsTf7qqlUZfIUBmyLedK3Xi4Qv9vQYo=,tag:7W3KvPaTTqOmDAVmvnzbUg==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
