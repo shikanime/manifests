@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: nishir-selfsigned
-  namespace: shikanime
 spec:
   selfSigned: {}
 ---
@@ -10,7 +9,6 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: nishir
-  namespace: shikanime
 spec:
   ca:
     secretName: nishir-ca
