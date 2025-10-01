@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+configurations:
+  - namereference.yaml
+images:
+  - name: synapse
+    newName: docker.io/matrixdotorg/synapse
+    newTag: v1.99.0
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml

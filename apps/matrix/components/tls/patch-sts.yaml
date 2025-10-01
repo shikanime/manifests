@@ -57,3 +57,129 @@ spec:
         - name: tls
           secret:
             secretName: matrix-tls
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-googlechat
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: update-ca-certificates
+          image: mautrix-googlechat
+          command:
+            - update-ca-certificates
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
+      containers:
+        - name: mautrix-googlechat
+          ports:
+            - containerPort: 29320
+              name: https
+          readinessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          livenessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+              path: /_matrix/mau/live
+          startupProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.key
+              subPath: tls.key
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
+      volumes:
+        - name: certs
+          emptyDir: {}
+        - name: tls
+          secret:
+            secretName: matrix-tls
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-slack
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: update-ca-certificates
+          image: mautrix-slack
+          command:
+            - update-ca-certificates
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
+      containers:
+        - name: mautrix-slack
+          ports:
+            - containerPort: 29335
+              name: https
+          readinessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          livenessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+              path: /_matrix/mau/live
+          startupProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.key
+              subPath: tls.key
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private/tls.crt
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
+              subPath: ca.crt
+              readOnly: true
+      volumes:
+        - name: certs
+          emptyDir: {}
+        - name: tls
+          secret:
+            secretName: matrix-tls

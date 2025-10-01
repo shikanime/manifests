@@ -11,13 +11,42 @@ spec:
     kind: Issuer
     name: nishir
   secretName: matrix-tls
-  keystores:
-    pkcs12:
-      create: true
-      passwordSecretRef:
-        name: matrix-pkcs12-password
-        key: password
-      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: matrix-googlechat-tls
+  namespace: shikanime
+spec:
+  commonName: matrix-googlechat
+  dnsNames:
+    - matrix-googlechat
+  issuerRef:
+    kind: Issuer
+    name: nishir
+  secretName: matrix-googlechat-tls
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: matrix-slack-tls
+  namespace: shikanime
+spec:
+  commonName: matrix-slack
+  dnsNames:
+    - matrix-slack
+  issuerRef:
+    kind: Issuer
+    name: nishir
+  secretName: matrix-slack-tls
   usages:
     - digital signature
     - key encipherment
