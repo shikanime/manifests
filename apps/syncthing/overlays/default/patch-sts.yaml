@@ -14,7 +14,7 @@ spec:
             - name: data-sync
               mountPath: /var/syncthing/Sync
             - name: data-timeline
-              mountPath: /var/syncthing/TimeLine
+              mountPath: /var/syncthing/Timeline
       volumes:
         - name: data-sukebe
           persistentVolumeClaim:
