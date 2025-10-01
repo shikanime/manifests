@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix
+#! nix develop --impure --command bash
 
 set -o errexit
 set -o nounset
@@ -6,7 +7,7 @@ set -o pipefail
 
 # Update gitignore
 gitnr create \
-  ghc:Nix \
+  repo:github/gitignore/refs/heads/main/Nix.gitignore \
   repo:shikanime/gitignore/refs/heads/main/Devenv.gitignore \
   tt:jetbrains+all \
   tt:linux \
@@ -72,8 +73,8 @@ GIT_PREFETCH=$(nix-prefetch-url --unpack https://github.com/longhorn/cli/archive
 GIT_HASH=$(nix hash convert --hash-algo sha256 --to sri ${GIT_PREFETCH})
 
 sed -i \
-  -e "s|version = \".*\"|version = \"${LATEST_VERSION:-}\"|" \
-  -e "s|hash = \".*\"|hash = \"${GIT_HASH}\"|" \
+  -e "s|version = \".*\"|version = \"${LATEST_VERSION:-}\"|g" \
+  -e "s|hash = \".*\"|hash = \"${GIT_HASH}\"|g" \
   "$(dirname "$0")/flake.nix"
 
 wait
