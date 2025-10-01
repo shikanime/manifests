@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
-    newTag: v3-3.0.1.1264
+    newTag: v3-3.0.1.1304
 resources:
   - ingress.yaml
   - pvc.yaml
