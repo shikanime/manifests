@@ -6,18 +6,6 @@ metadata:
 spec:
   template:
     spec:
-      initContainers:
-        - name: update-ca-certificates
-          image: radarr
-          command:
-            - update-ca-certificates
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-            - name: tls
-              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
-              subPath: ca.crt
-              readOnly: true
       containers:
         - name: radarr
           ports:
@@ -40,16 +28,12 @@ spec:
               mountPath: /etc/ssl/certs
               readOnly: true
             - name: tls
-              mountPath: /etc/ssl/private/keystore.p12
-              subPath: keystore.p12
-              readOnly: true
-            - name: tls
-              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
-              subPath: ca.crt
+              mountPath: /etc/ssl/private
               readOnly: true
       volumes:
         - name: certs
-          emptyDir: {}
+          configMap:
+            name: nishir-ca-certificates.crt
         - name: tls
           secret:
             secretName: radarr-tls
