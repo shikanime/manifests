@@ -51,7 +51,7 @@ spec:
               - name: cert-manager
                 chartname: jetstack/cert-manager
                 version: "v1.18.2"
-                namespace: cert-manager
+                namespace: cert-manager-system
                 values: |
                   crds:
                     enabled: true
