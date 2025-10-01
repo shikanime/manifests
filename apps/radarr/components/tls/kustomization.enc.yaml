@@ -5,7 +5,7 @@ configurations:
 images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
-    newTag: 5.26.2
+    newTag: 5.27.5
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -14,21 +14,39 @@ resources:
   - cert.yaml
 secretGenerator:
   - literals:
-      - ENC[AES256_GCM,data:m4hbO/4d3zujg5jT2wuiOGZRw0AaZUU=,iv:+yOwOPARHnPZXE5b/mIp2mVWE49rdm0BfqCic/HeooY=,tag:coAc6pKC3LFtb+X2g49WSg==,type:str]
+      - ENC[AES256_GCM,data:yIXAIQX+Ph2vwAFGKtW/OIdxRPDv9sw=,iv:1RJBROifMjba3wBZY3O4Kd8aMMjZjgujdK//BqrALCs=,tag:5J8HShPEVO+8swad60pRJA==,type:str]
     name: radarr-pkcs12-password
     namespace: shikanime
 sops:
   age:
+    - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMOU9rcEQ4b2Z2VWJCQzc5
+        ZzJQQW9XeUg0M01RMzdjbVpNektwVm1HVFJNClZMQnVVZmZ2TmpaM3VzR1F1aVo4
+        QzlGTXJYOW9PdkdyUi9zMUw3MFRTNWsKLS0tIFVlZUd1RWpCUjRlTTJGQ3JZZXkx
+        YzNkeitCcm9FZlhXaVJYS1Q0SVQ4WEEK98Fokbdk+WKJCO9ZVDVVAg06kPOg3P0r
+        yeMPirAH0aCXCvPTB+5NHJhCE5Hjme2t28NbbMJsc9S1I4l13C4nMQ==
+        -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3MUtNaVZuVnVGWmdvRzZG
-        Z2RCcDIySFdsby9Rbm9rajFISWw5bERxYTJJClhIb0hIUEc5S1JOaTJJeHFwYTZm
-        SVhPVVN0NkJHaWZTUi9qVW1SKy9WSm8KLS0tIFNEcFNuVWFNTnZrUjI1V2hZcVNW
-        aXBBeThoRGM0WXRBdWdJeG1JditnU3cKadwk00B8bN3CRJ4Ch8wkYNfN9y4hs2q9
-        CDrEto7aJu2S2riGidq5hsgbZoCrwMqboIbZZ7Cu5Y9GHTxbYMYXHA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNZHAybTdiYThvYlJBUUNB
+        OUl4ZDByN0FlQkIwUTBsZFNTeEFFM1k3NEZVCmJsc0VMZXA5U05mYmVKRnl4MXJR
+        QlFyWGk4T2JTNm1NNjVlZ3RYRVhWekkKLS0tIHpxU2hWdFpFSzc4bFEzYWJsaDFI
+        YUx5RjZHaHV4elM3aitCbXRPc29CK3MKcByaVsbAbeePvmvLQ05UbPubDq8OBE/Q
+        MXwaFBF4ah5zKDEmHP9kuk4RuS4ADALeO6isVva9QJcjBAVCIu59SA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-08T15:54:35Z"
-  mac: ENC[AES256_GCM,data:ovQr0IcQhT5Z6dgh7x8bMCfsgoCiwLjhZ7MEP8rx3XaMkojs/m07Uk6tpus31+02s53fld869e/ePUZelBvNWpBr0DRpkCfSEpJVWAnu3IX7dQiYhzVm7T/v/2mc9gDJehOzJd1c5euqI3nWgm1G31lZAO/ChF+P2IbKJVjBXGM=,iv:7isDtQVdb9IdbuWH/A3voPf+obfsOSAZ94zpCsEyrDc=,tag:UYjQbXG/3OdFCeDuJfmcAw==,type:str]
+    - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKZjdtSWh5ZFByWDZmNTkw
+        QTFYK3ZPMkhyVjFWbTFPZFZ3c2Nkdmp1elIwCmtDbWZmeERyVzVOQmFURSszRjVy
+        Q1A2Zm9CVHdjaVNubHI3WmF4Zk5Ja0EKLS0tIDA4Z2hod2QzSVpmTjVhMTljV3hu
+        RjArVWF4QnpRRDRPMGNlOUwvRmcrUjQKO+e0kyZsMUDi5e9pe1GCXDi7Q2dgV9VG
+        3FbH+eEXxkPL+7IANEqYL9MP9vOEx9yO7pgF0xtt8CObXCj64gS8/w==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-01T12:33:36Z"
+  mac: ENC[AES256_GCM,data:WhTnOZ+bmdX9WTu6Ov0Igt6EPtCxJAIc0D123dqtZNAWeqpLKi4eGTXh1Ha+RlXe2GrEoHGSaPbEUedNQ46B4cC0etvD5HUhRsOfRzn23qTZD1z4EoxlyFnnUtizdwAubUSexqRodKMLhadktOeOBr0Hvbv2E87T4b1uCpnOaes=,iv:qlhJR7kw+gS9W5wzlGHPNGOvhSgTaGF8MA+LIQlBZNE=,tag:EE3CeUZUWtVnkCiJcQgXug==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

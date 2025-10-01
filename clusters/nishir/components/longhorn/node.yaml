@@ -1,0 +1,49 @@
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: nishir
+  namespace: longhorn-system
+spec:
+  allowScheduling: true
+  disks:
+    nishir:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/nishir/longhorn/
+      tags:
+        - fast
+  name: nishir
+  tags:
+    - control-plane
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: fushi
+  namespace: longhorn-system
+spec:
+  allowScheduling: true
+  disks:
+    nishir:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/nishir/longhorn/
+      tags:
+        - balanced
+  name: nishir
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: minish
+  namespace: longhorn-system
+spec:
+  allowScheduling: true
+  disks:
+    nishir:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/nishir/longhorn/
+      tags:
+        - balanced
+  name: nishir
