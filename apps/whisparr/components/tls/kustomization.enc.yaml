@@ -5,7 +5,7 @@ configurations:
 images:
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
-    newTag: "null"
+    newTag: v3-3.0.1.1304
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
@@ -14,7 +14,7 @@ resources:
   - cert.yaml
 secretGenerator:
   - literals:
-      - ENC[AES256_GCM,data:47JCag+7LOA4LaT8CAjjKp/+1/A2ukYrtuwl/nHdU0BIvauHun5Wugl960wVNHS1Pa3LhDs=,iv:rpMkMzCBEexpPUrSe4qzyujXmP1ff6oYDsH72IKzjgw=,tag:77NQN9hdR+GDNvR120kZtA==,type:str]
+      - ENC[AES256_GCM,data:bMB4MfNJQV4pEV1ytIWAVJ4CVGPKz/VD+9QOCCOk6Ns5ZB8CaLBbnG0R/TN3PZHS7mAuXy0=,iv:FsC/gBN/N6Q4NWRTeP3ob4g7su+m9OEwW6XHTnXfpTo=,tag:z7rjd8LpuEVgp1bkQOBMFQ==,type:str]
     name: whisparr-pkcs12-password
     namespace: shikanime
 sops:
@@ -22,13 +22,13 @@ sops:
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwZ1FYRkkrMXk5c2xTVmh6
-        TS9POWd3MlVEYVdkRHFiUkkyNXFzSmtvbEN3ClBRWHJUTkxmVHorYkl5TzlRc3Vn
-        Ym1NZk9ZYURYNGVQZzNhS3pqOUpDQUkKLS0tIE1NRWdRTHVhemx2RC8vRmJic25M
-        NmlLSjdTbEhsd3pBNEdCQitabU9vemcKpeg3sZx9tMZy7tqBYFq0WxEO7JWaYYeI
-        NvuUVKQ2mMRLPVVcDtYoacbW7LrCIlxyOMuOQ+p9FhgfFpo7laJRYQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkeDVRbDV3NnBCZDNENEtz
+        V0hGUHh3QVc0RENyVUpadzlFRnhXK3Z2MW5nCnN1d0NQdDRmN1VvTmcvVkQ2dnlq
+        RkVmQkd5Q0pERXNXSWhlYWM4WnJTVnMKLS0tIE5UUXRzbis3aHk1bTJWU25LYXFo
+        c1ZVdDRRcFgwSG1CZm9IZERBdTlxZlUKV51CZs3eRlclOh3tT3DG4HXJKWKK/NeQ
+        who8dsuBaC6i/Hc5ZEjM3gewokmVRNrIiMAR7RyATV2v5+b9dJux4A==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-09-16T16:17:02Z"
-  mac: ENC[AES256_GCM,data:ndb4vEFfsSqPZ+Uhrabk4l625P2oprqRf1dD2pAaziIpnanMViy4ROAwIpt6m4jWSFMwP3mswo5e6LJvynOuP/3svqSNxTCo+DqgdGiEJKtBkNnMgnVf1pWKJrKDL+g4wU3T07d3xXgPlCQOGukdzh2qE9uvyLBWA+mbhYmreMs=,iv:aPQXSPXGC8q1jMslPVJVhYOZyokTrV2EurbtiejZmO0=,tag:ZO6mPp8Mz2chzzGWyPOJfQ==,type:str]
+  lastmodified: "2025-10-01T10:23:18Z"
+  mac: ENC[AES256_GCM,data:E/B48GEVjevudNDP9MSQsRP55EhoQgw8nwWiASggB+KW5QqlMRqfUWUASXf+kELUdQnQ7NIBdH0ewiSpSO55wqN2BTGTUAkI9A2nN18huN5l5m8maxVNacsdNe7aV5GuF25IqvRAHMeUhcwoiLLgFem8jySbaU2wfp4T00ybNX8=,iv:mRoa92pHelj/ycM3f9DCpvXboGFYs1U457mSqlP7Fvc=,tag:RrB38LrJVycOOycVqbDzvg==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
