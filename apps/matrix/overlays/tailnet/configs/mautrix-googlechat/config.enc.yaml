@@ -8,7 +8,7 @@ homeserver:
   message_send_checkpoint_endpoint: null
   async_media: false
 appservice:
-  address: http://matrix-googlechat:29320
+  address: https://localhost:29320
   hostname: 0.0.0.0
   port: 29320
   max_body_size: 1
