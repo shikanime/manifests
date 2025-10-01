@@ -17,6 +17,8 @@ spec:
               mountPath: /data/sukebe
             - name: data-sync
               mountPath: /data/sync
+            - name: data-timeline
+              mountPath: /data/timeline
       volumes:
         - name: data-movies
           persistentVolumeClaim:
@@ -30,3 +32,6 @@ spec:
         - name: data-sync
           persistentVolumeClaim:
             claimName: sync-data
+        - name: data-timeline
+          persistentVolumeClaim:
+            claimName: timeline-data

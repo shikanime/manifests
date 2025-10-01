@@ -11,13 +11,6 @@ spec:
     kind: Issuer
     name: nishir
   secretName: qbittorrent-tls
-  keystores:
-    pkcs12:
-      create: true
-      passwordSecretRef:
-        name: qbittorrent-pkcs12-password
-        key: password
-      profile: Modern2023
   usages:
     - digital signature
     - key encipherment
