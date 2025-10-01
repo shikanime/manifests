@@ -1,10 +1,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: matrix
+  name: matrix-googlechat
   namespace: shikanime
 spec:
   ports:
     - name: https
-      port: 8000
+      port: 29320
+      targetPort: https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-slack
+  namespace: shikanime
+spec:
+  ports:
+    - name: https
+      port: 29335
       targetPort: https
