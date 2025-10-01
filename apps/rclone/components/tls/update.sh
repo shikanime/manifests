@@ -29,7 +29,7 @@ CURRENT_PASSWORD=$(yq '.secretGenerator[] | select(.name == "rclone-ftp") | .lit
 
 # Generate new password only if current password is empty
 if [ -z "$CURRENT_PASSWORD" ]; then
-  PASSWORD=$(openssl rand -base64 32)
+  PASSWORD=$(openssl rand -base64 14)
 else
   PASSWORD="$CURRENT_PASSWORD"
 fi
