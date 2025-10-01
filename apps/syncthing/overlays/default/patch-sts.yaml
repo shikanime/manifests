@@ -13,6 +13,8 @@ spec:
               mountPath: /var/syncthing/Sync
             - name: data-sukebe
               mountPath: /var/syncthing/Sukebe
+            - name: data-timeline
+              mountPath: /var/syncthing/Timeline
       volumes:
         - name: data-sync
           persistentVolumeClaim:
@@ -20,3 +22,6 @@ spec:
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe-data
+        - name: data-timeline
+          persistentVolumeClaim:
+            claimName: timeline-data
