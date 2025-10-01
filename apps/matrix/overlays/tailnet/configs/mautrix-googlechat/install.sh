@@ -6,13 +6,11 @@ set -o nounset
 set -o pipefail
 
 sops \
-  --encrypt \
-  --encrypted-regex "^(as_token|hs_token|shared_secret)$" \
+  --decrypt \
   "$(dirname "$0")"/config.enc.yaml > \
   "$(dirname "$0")"/config.yaml
 
 sops \
-  --encrypt \
-  --encrypted-regex "^(as_token|hs_token)$" \
+  --decrypt \
   "$(dirname "$0")"/registration.enc.yaml > \
   "$(dirname "$0")"/registration.yaml
