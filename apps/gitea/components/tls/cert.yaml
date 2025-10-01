@@ -11,13 +11,6 @@ spec:
     kind: ClusterIssuer
     name: nishir
   secretName: gitea-tls
-  keystores:
-    pkcs12:
-      create: true
-      passwordSecretRef:
-        name: gitea-pkcs12-password
-        key: password
-      profile: Modern2023
   usages:
     - digital signature
     - key encipherment
