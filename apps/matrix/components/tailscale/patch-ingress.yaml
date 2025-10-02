@@ -12,6 +12,17 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-googlechat
+  namespace: shikanime
+  annotations:
+    tailscale.com/proxy-class: nishir-matrix-googlechat
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-slack
   namespace: shikanime
   annotations:
