@@ -9,7 +9,7 @@ spec:
       containers:
         - name: synapse
           ports:
-            - containerPort: 8448
+            - containerPort: 8443
               name: https
           readinessProbe:
             httpGet:
