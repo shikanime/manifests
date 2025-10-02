@@ -7,43 +7,43 @@ resources:
   - hcloud-machine-template.yaml
   - hetzner-cluster.yaml
   - k0s-control-plane.yaml
-  - k0s-worker-config.yaml
+  - k0s-worker-config-template.yaml
   - machine-deployment.yaml
 secretGenerator:
   - name: hetzner
     namespace: nishir
     literals:
-      - ENC[AES256_GCM,data:dGr+Wf5gWffr415z5VBdlbVRNL2dbECTvpQ/5Rs4NkC8/Z89TZYlXeIoC6sjgwOVZ0f3zmDZXxSPI+JpR6h7QbCU/Mki6sw=,iv:6EPt9BiH/bL1WapBKG2ZPZnwFTLnYNOeL+YnnuQSc/U=,tag:cgYj7xSS91ixmER2dZyIsA==,type:str]
+      - ENC[AES256_GCM,data:7xty9Mm/+gnwmyGTOoNvyRboIVqvpbXbPFtyyBHgSyXa/rsWqdHxGV0S0ZTlYFslPBLb2cea0vBvCPrSyrLfEho2V5RS1vU=,iv:i/3udOIFm8252+3n2w2vHhAUB4jEwbzU9PWCPRI4Fis=,tag:sknVFdZ4r3eOUAPdqFANDg==,type:str]
 sops:
   age:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjd0dWb2V5SEhXaFNnamww
-        TncwcXNSS2VYUjVKOWhFd3VGTHZlZk1ENVcwCnB6RktPRlFlbDBBMlY4VFZLZldm
-        clI3S3I5eDEvY1F4THV3b3F1bytHS2cKLS0tIER1Mm1RZS9xSHNOVWVMWFhKSlNh
-        R2pEUlg2czhiSGxIUkNrRkI1cEZKVVUKSkxzZskUAnnZGgROqFEt0zDwv7WCtFCI
-        JFPSsqUn7H+pQ3L+2g43OxnH/TVxHeh6CfoT9ERFRL88eqxtcT+dag==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6QW9DcnhBRUVUTVI3ZFBy
+        eWlpeXI1MTNuQUptbGJIN0RaVzhEQXZveDJFCk04dUNMZUJoTGhuaGtBaUxuQ25E
+        a2UyblRpR2FUVkk1WlVDeW1kYnR6VUEKLS0tIFZEb1JhUkVlTlUybFl4bUpjbUdq
+        SzZlVXNvZUNTZHJHSFNBWGRXZkZGZUkKlhmsncn5e2uV8W4E0IKL1o8pIqB4suX+
+        NC5woRx7/0ZHwiKjoYeiHBKUCELTyENNfiF/WpqNHPtubBHda95OUw==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHVGdnYk1QcDRSZktid2ZV
-        OGd6bVJUcXZUbnpVaFE3cjJ4emZCNUhNc0RBCmozMzNQaUJBYnd3MDlhUTRCekhj
-        TVBXVDNRRGtpb01nb29uS0VPSnhtU2MKLS0tIG1hWmdOc1kwc2EzZ1pFRzFudEtI
-        TWhlRVNpdHVhRU15d3pOQ1RRTXpuUTgK/Nr3LKdAn86Y+bK5G/877MAQa7BTqB4C
-        4tPxDR1AOPh97dA0aHinlzEMFX4IIANsnACR4OrA4NeeNWsn3dqJuA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZbWhycmx2L1RVS2Q0Uktj
+        NVZ5aUJPYVhhNnZTZ0x3SEVhdEV2bjNZcGtvCnE5UklMb1RjWk56VkxLdEZXaEpm
+        eFF4SWNiN3kweExwT096RzRZbitMSlkKLS0tIENuQjZFTEtmbkpVMWZ3MCtUeGpB
+        VEtSQU10YXRIR1lsbHhPUlNpR0UrZHMKUHkYGwnV16CUUa7l0ZmJBvsiZy9qBB1F
+        Eqj9aQ3K68fDC9kMbLvsJhs02DaASBvzNoa316YBgLLtX3lOXEY3Hg==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJRVd4anhpcDhtRFpUNm1J
-        K3J0L3JuV1Q5enJxOUpkTWM1bXVPaDFPS3dZClVHNFFvQmNnNFR4ZnZ3U0RFRElG
-        bEVWdUZuR3VOVXp6UDdmQncyWXJLeUEKLS0tIDY0OW1xd3RFSCtONWVpRnNrYXlB
-        NHVDQi9BdTNoaXJsQ0lNYW81NVhvcDQKgJcL342U7fuzplJDTabIk1oswhMzxB+q
-        7mzog8WIRxlq0niyafdPrCqomQ3dVPRAildV7Rk/R6gbHe4JSThLpQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4VWhDak43R09UZVZBdlhI
+        Tk5LY2NiOHJUcW5jcUVLY1NRcExVMzdUVkhvCkFNTitOQUNRUkRNVHpuVWlHZW5W
+        RTBXU3RCc3pTNmJaeXpWQk8vTFErTzgKLS0tIEhteWR6NXJVVkZmTklYUlhZZE8v
+        MkdJSWM3RE94MTU4SFhrWGdGbmp2U0UK+csuY4kldkwFBbrVMh7g5Z09ySucTBIz
+        mhKgK0E3dEeyHn8UwFvRo68kDjizPtquABVPb6HedkC8a7lGOFTRKw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-02T15:37:05Z"
-  mac: ENC[AES256_GCM,data:UaUQvshgWoaswFe1u5hO5MjbHNhxPstbnH1xVxfmya36hmLDDohna3zFzPk6Suqz53aIwZpZbV2TDaUCQRf2Anb9CyCnqcYvEeX/HfbboYJgEV6fiA+5Guzen5mDv2/Qt5PL2zdZFJHw6OMiynbOj7+9sijACL/oAtgotqlp0as=,iv:617RZookgaTBLTGtubY6/8ZXAgJNM19boOVOAXvXmbE=,tag:VFAQV+kKZAIXISD4wwL29Q==,type:str]
+  lastmodified: "2025-10-02T16:17:19Z"
+  mac: ENC[AES256_GCM,data:XDfCapodrEjv17XZvWxx5KAKYNU5y82pn3G4KVSaTb75yVmgpcjiJhT35ShGpUk6oJJxLagmsqXzBVvegUIYvM19BRQGkcJM1i6y2PmWudmhgNYQE0q0Baa26ofM9rKmKc3EV2DcxIrygn6fqmiIe+F1RA8BeM706bXBw23O8xw=,iv:TOBnYRwXtdoaO0jSoIdy09LY4GcRFQEZ15DwYrWDtmM=,tag:Ft8lgPk3c4CGkaYUBvz2pw==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2
