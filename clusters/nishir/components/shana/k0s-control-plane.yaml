@@ -1,35 +1,25 @@
-apiVersion: k0sctl.k0sproject.io/v1beta1
-kind: Cluster
+apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+kind: K0sControlPlane
 metadata:
-  name: nishir
+  name: shana
+  namespace: nishir
 spec:
-  hosts:
-    - installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
-      noTaints: true
-      role: controller+worker
-      ssh:
-        address: 100.117.159.56
-        user: root
-    - role: worker
-      installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
-      ssh:
-        address: 100.78.148.86
-        user: root
-    - role: worker
-      installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
-      ssh:
-        address: 100.92.12.65
-        user: root
-  k0s:
-    config:
+  machineTemplate:
+    infrastructureRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+      kind: HCloudMachineTemplate
+      name: shana-control-plane
+  k0sConfigSpec:
+    k0s:
       apiVersion: k0s.k0sproject.io/v1beta1
       kind: ClusterConfig
       metadata:
-        name: nishir
+        name: k0s
       spec:
+        api:
+          port: 6443
+          extraArgs:
+            anonymous-auth: "true"
         extensions:
           helm:
             repositories:
@@ -181,4 +171,5 @@ spec:
               advertise-cluster-ip: "true"
               advertise-external-ip: "true"
               advertise-loadbalancer-ip: "true"
-    version: v1.33.3+k0s.0
+  replicas: 1
+  version: v1.33.3+k0s.0
