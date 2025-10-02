@@ -4,7 +4,11 @@ metadata:
   name: shana
   namespace: nishir
 spec:
-  version: v1.33.3+k0s.0
+  machineTemplate:
+    infrastructureRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+      kind: HCloudMachineTemplate
+      name: shana-control-plane
   k0sConfigSpec:
     k0s:
       apiVersion: k0s.k0sproject.io/v1beta1
@@ -167,3 +171,4 @@ spec:
               advertise-cluster-ip: "true"
               advertise-external-ip: "true"
               advertise-loadbalancer-ip: "true"
+  version: v1.33.3+k0s.0
