@@ -6,18 +6,6 @@ metadata:
 spec:
   template:
     spec:
-      initContainers:
-        - name: update-ca-certificates
-          image: rclone
-          command:
-            - update-ca-certificates
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-            - name: tls
-              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
-              subPath: ca.crt
-              readOnly: true
       containers:
         - name: rclone-ftp
           volumeMounts:
@@ -39,20 +27,12 @@ spec:
               mountPath: /etc/ssl/certs
               readOnly: true
             - name: tls
-              mountPath: /etc/ssl/private/tls.key
-              subPath: tls.key
-              readOnly: true
-            - name: tls
-              mountPath: /etc/ssl/private/tls.crt
-              subPath: tls.crt
-              readOnly: true
-            - name: tls
-              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
-              subPath: ca.crt
+              mountPath: /etc/ssl/private
               readOnly: true
       volumes:
         - name: certs
-          emptyDir: {}
+          configMap:
+            name: nishir-ca-certificates.crt
         - name: tls
           secret:
             secretName: rclone-tls
