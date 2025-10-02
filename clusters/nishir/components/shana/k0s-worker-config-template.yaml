@@ -1,7 +1,7 @@
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: K0sWorkerConfigTemplate
 metadata:
-  name: shana
+  name: hetzner-fsn1
   namespace: nishir
 spec:
   template:
