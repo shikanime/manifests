@@ -95,7 +95,7 @@ spec:
         - name: mautrix-googlechat
           image: mautrix-googlechat
           ports:
-            - name: googlechat-bridge
+            - name: gchat-bridge
               containerPort: 29320
           readinessProbe:
             httpGet:
