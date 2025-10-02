@@ -61,8 +61,9 @@ declare -A CHART_REPOS=(
   ["https://kubernetes-sigs.github.io/descheduler"]="descheduler"
   ["https://charts.longhorn.io"]="longhorn"
   ["https://kubernetes-sigs.github.io/node-feature-discovery/charts"]="node-feature-discovery"
-  ["https://charts.fairwinds.com/stable"]="vpa"
   ["https://pkgs.tailscale.com/helmcharts"]="tailscale-operator"
+  ["https://charts.jetstack.io"]="trust-manager"
+  ["https://charts.fairwinds.com/stable"]="vpa"
 )
 
 # Update each chart version
@@ -78,25 +79,28 @@ for repo_url in "${!CHART_REPOS[@]}"; do
     # Update the version in cluster.yaml based on chart name
     case "$chart_name" in
     "cert-manager")
-      yq eval ".spec.k0s.config.spec.extensions.helm.charts[] | select(.name == \"cert-manager\") | .version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[0].version = \"$latest_version\"" -i "$CLUSTER_YAML"
       ;;
     "cluster-api-operator")
-      yq eval ".spec.k0s.config.spec.extensions.helm.charts[] | select(.name == \"cluster-api-operator\") | .version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[1].version = \"$latest_version\"" -i "$CLUSTER_YAML"
       ;;
     "descheduler")
-      yq eval ".spec.k0s.config.spec.extensions.helm.charts[] | select(.name == \"descheduler\") | .version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[2].version = \"$latest_version\"" -i "$CLUSTER_YAML"
       ;;
     "longhorn")
-      yq eval ".spec.k0s.config.spec.extensions.helm.charts[] | select(.name == \"longhorn\") | .version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[3].version = \"$latest_version\"" -i "$CLUSTER_YAML"
       ;;
     "node-feature-discovery")
-      yq eval ".spec.k0s.config.spec.extensions.helm.charts[] | select(.name == \"node-feature-discovery\") | .version = \"$latest_version\"" -i "$CLUSTER_YAML"
-      ;;
-    "vpa")
-      yq eval ".spec.k0s.config.spec.extensions.helm.charts[] | select(.name == \"vpa\") | .version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[4].version = \"$latest_version\"" -i "$CLUSTER_YAML"
       ;;
     "tailscale-operator")
-      yq eval ".spec.k0s.config.spec.extensions.helm.charts[] | select(.name == \"tailscale-operator\") | .version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[5].version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      ;;
+    "trust-manager")
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[6].version = \"$latest_version\"" -i "$CLUSTER_YAML"
+      ;;
+    "vpa")
+      yq eval ".spec.k0s.config.spec.extensions.helm.charts[7].version = \"$latest_version\"" -i "$CLUSTER_YAML"
       ;;
     esac
   else

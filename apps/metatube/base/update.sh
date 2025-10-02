@@ -32,7 +32,7 @@ CURRENT_TOKEN=$(yq '.secretGenerator[0].literals[0]' "$(dirname "$0")"/kustomiza
 
 # Generate new token only if current token is empty
 if [ -z "$CURRENT_TOKEN" ]; then
-  TOKEN=$(openssl rand -base64 32)
+  TOKEN=$(openssl rand -base64 14)
 else
   TOKEN="$CURRENT_TOKEN"
 fi
