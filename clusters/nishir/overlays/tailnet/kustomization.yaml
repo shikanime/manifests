@@ -4,15 +4,15 @@ components:
   - ../../components/shana
 resources:
   - ../default
-  # - ../../../../apps/gitea/overlays/tailnet
-  # - ../../../../apps/jellyfin/overlays/tailnet
-  # - ../../../../apps/matrix/overlays/tailnet
-  # - ../../../../apps/metatube/overlays/default
-  # - ../../../../apps/prowlarr/overlays/tailnet
-  # - ../../../../apps/qbittorrent/overlays/tailnet
-  # - ../../../../apps/radarr/overlays/tailnet
-  # - ../../../../apps/rclone/overlays/tailnet
-  # - ../../../../apps/sonarr/overlays/tailnet
-  # - ../../../../apps/syncthing/overlays/tailnet
-  # - ../../../../apps/vaultwarden/overlays/tailnet
-  # - ../../../../apps/whisparr/overlays/tailnet
+  - ../../../../apps/gitea/overlays/tailnet
+  - ../../../../apps/jellyfin/overlays/tailnet
+  - ../../../../apps/matrix/overlays/tailnet
+  - ../../../../apps/metatube/overlays/default
+  - ../../../../apps/prowlarr/overlays/tailnet
+  - ../../../../apps/qbittorrent/overlays/tailnet
+  - ../../../../apps/radarr/overlays/tailnet
+  - ../../../../apps/rclone/overlays/tailnet
+  - ../../../../apps/sonarr/overlays/tailnet
+  - ../../../../apps/syncthing/overlays/tailnet
+  - ../../../../apps/vaultwarden/overlays/tailnet
+  - ../../../../apps/whisparr/overlays/tailnet
