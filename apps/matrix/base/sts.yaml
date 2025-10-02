@@ -57,13 +57,11 @@ spec:
             - name: synapse-data
               mountPath: /data
       containers:
-        - name: synapse
-          image: synapse
+        - name: caddy
+          image: caddy
           ports:
             - name: http
-              containerPort: 8080
-            - name: metrics
-              containerPort: 9090
+              containerPort: 80
           readinessProbe:
             httpGet:
               path: /_matrix/client/versions
@@ -81,11 +79,23 @@ spec:
             initialDelaySeconds: 5
             failureThreshold: 30
           volumeMounts:
+            - name: caddy-config
+              mountPath: /etc/caddy
+              readOnly: true
+        - name: synapse
+          image: synapse
+          ports:
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
             - name: synapse-data
               mountPath: /data
       securityContext:
         fsGroup: 991
       volumes:
+        - name: caddy-config
+          configMap:
+            name: caddy
         - name: mautrix-googlechat-config
           secret:
             secretName: mautrix-googlechat

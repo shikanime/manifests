@@ -7,9 +7,9 @@ spec:
   template:
     spec:
       containers:
-        - name: synapse
+        - name: caddy
           ports:
-            - containerPort: 8443
+            - containerPort: 443
               name: https
           readinessProbe:
             httpGet:
@@ -23,6 +23,14 @@ spec:
             httpGet:
               port: https
               scheme: HTTPS
+          volumeMounts:
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+        - name: synapse
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs
