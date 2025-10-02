@@ -8,6 +8,15 @@ spec:
     spec:
       containers:
         - name: synapse
+          readinessProbe:
+            httpGet:
+              scheme: HTTPS
+          livenessProbe:
+            httpGet:
+              scheme: HTTPS
+          startupProbe:
+            httpGet:
+              scheme: HTTPS
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs
@@ -35,19 +44,13 @@ spec:
         - name: mautrix-googlechat
           readinessProbe:
             httpGet:
-              port: http
               scheme: HTTPS
-              path: /_matrix/mau/ready
           livenessProbe:
             httpGet:
-              port: http
               scheme: HTTPS
-              path: /_matrix/mau/live
           startupProbe:
             httpGet:
-              port: http
               scheme: HTTPS
-              path: /_matrix/mau/ready
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs
@@ -75,19 +78,13 @@ spec:
         - name: mautrix-slack
           readinessProbe:
             httpGet:
-              port: http
               scheme: HTTPS
-              path: /_matrix/mau/ready
           livenessProbe:
             httpGet:
-              port: http
               scheme: HTTPS
-              path: /_matrix/mau/live
           startupProbe:
             httpGet:
-              port: http
               scheme: HTTPS
-              path: /_matrix/mau/ready
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs
