@@ -1,0 +1,23 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: shana
+  namespace: nishir
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks:
+        - 10.244.0.0/16
+    services:
+      cidrBlocks:
+        - 10.96.0.0/12
+  topology:
+    class: hetzner-fsn1
+    version: v1.33.3+k0s.0
+    controlPlane:
+      replicas: 3
+    workers:
+      machineDeployments:
+      - class: default
+        name: workers
+        replicas: 1

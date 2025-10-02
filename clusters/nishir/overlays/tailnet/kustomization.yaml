@@ -4,6 +4,7 @@ components:
   - ../../components/shana
 resources:
   - ../default
+  - cluster.yaml
   # - ../../../../apps/gitea/overlays/tailnet
   # - ../../../../apps/jellyfin/overlays/tailnet
   # - ../../../../apps/matrix/overlays/tailnet
