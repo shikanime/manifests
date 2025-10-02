@@ -1,7 +1,7 @@
 id: slack
 url: http://matrix-slack:29335
-as_token: ENC[AES256_GCM,data:zR5zqcmeRxd/6cGpV7yrpszPQD6Z0MOURYCUEj2GJx73tmz6B0QlbgsmJPpJ+bm4SxitNoF21XvtKuRquK81pw==,iv:Jr9DNj+OulEyEs8Bvvg8EoqmdEOT130HSQ2r0JeuiHY=,tag:NoPRWZxSuuphw4M6w/XBPg==,type:str]
-hs_token: ENC[AES256_GCM,data:d1rB2zBSV/HN+V2BRrPzxyzlzNMNDJdiVbpCahY1Ov4Bd2UYM405puYO9M2jWYnSeFEtJmXwaRerWNaVehUCNg==,iv:hshJNmeL/A69Dv1/rqhEMIRxQBa8CYLgLlvQ/pCZXlY=,tag:ujv0wbVK6GdY4GYnSJwv6w==,type:str]
+as_token: ENC[AES256_GCM,data:RWCV0dHMPjSaDE8gnPLqq3QpnKtGyeeuvo1suAM6lONY41UuleM8j5r4B+Qy2LbZnMaa/PJSwFWiRJXp2tKyGw==,iv:LZIYqKXfQkikmvigSgFEZyGnAHZcCpsESK5BxHqhpoE=,tag:omuI6HbAhHE+jzPwLMMV7w==,type:str]
+hs_token: ENC[AES256_GCM,data:tVvkRkcUfhe2taVpEtiA/+YpoaajC0ce8BFJ9BR7U2bJ4o2J9DcUvfk/snjJ9VLA+CUV0oiKkRY21/lOhLgX1A==,iv:Ml5hsPX0xMeXOdFmxnRC3zi3+mSWTqqvQ5zTUP7aeCk=,tag:7UDdovM6yT7xmDdCmZFezQ==,type:str]
 sender_localpart: OoonQgifIvOdLgA4wRCCk757goDNkJfn
 rate_limited: false
 namespaces:
@@ -17,31 +17,31 @@ sops:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtRExXT2d6MXROT3RuQzhC
-        aERXVVhJZFlMK3hXT3lXQld5NkI3OEZ6Um1ZCjQ3VDhEUjFNS2wrcm1YSFZ2VUJz
-        bFhyWGY3cm5Jb0RjakdCdCsvbnpDa3MKLS0tIFJZZWQ4Y2NNVmlXSmhPN0VTWXVo
-        cndzZ3lZN0dxNEpuYUFtVmJFYjkxQlUKQMhR44gCuXmnZQ22rWXHXiS7KBA/F5Jw
-        YP7tVSSZB+cnfobzvaDfy4pcuLe++qZFsm5EUHWouL6AJzr6yWhshw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaMG0wa285eHRhRHArbjVB
+        L3pOdm8rNWc2SDZsOHV6SkpjcUJiNnlPa1JBCjJqbS80Zk5YYjRIVWtxVHQ1VHJ1
+        S2N5Q2N2dTRBOE05SHExejBxWUE0cjAKLS0tIFJublZIdjR3dkdiQTlvSld4Kzlq
+        NTZnOUdrVVAxQ2YvNkhaOG5OK3B0M3cKAa14GLPFdEi7AS5KjVI5wNpXKSW/++kg
+        laqcWNndKLRJgBU3O+Sa7dfxCFOaNXLWsYi1vmOD3P93qXkr7CKxlw==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBheGZJOHo1NWY5WnN5S00r
-        d3NSbHFCYnJrMktaV2M5djlxS3AweFVUdW1jCkdDcmVBUWs2VXZpUEg0MWFOTlBW
-        YnR6M2tIVHpsREEwNTFod29FWEY5SEEKLS0tIDBiWHVzMkZTZ3ZJSk5hcDhUckFC
-        ZlUyaVY0dXpoRXpFeFJuek01dTdXbU0KJVcXFX8y6hI/RlMdwjQWQjSKyUr9vw+X
-        fM2NRHJTebCn/RGTRWqqhWi0Fx384RQ+B5KDjNuHTFctM48ldyc2hQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5YW5qWHV6ZUljRlVmaC9I
+        VEQwMjRuWUNJalJBTWlDU0thZEk3aCtaMFZVCldpRHlzZ3lIMk1rYzB0U2JnMld5
+        aHNBRXBqYU0zUVRrMzVtVVlyS3JXQWMKLS0tIEJ3TWN2bWgwdG1XaTFLdUZXWFZi
+        am5STk9BVWloOWxaWmlyVGYzaWN1djAKLTSezHXesyPBOFHYUAb0XpzRwMLoW906
+        YKA4pZuiDwhnxJ0usFN0LNHuZ8KQKI8aMDinhKsiB3rCMijvMX0/5A==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBORDFWbEkxTXJjamVuL3hF
-        cXdpNVFaUDc4bWFXTE1UMDIvblI5UUpweUR3CmRNT0REQVMxdHFWQzFrN0dqQkt4
-        Ykp2Vm45VzBQazRsb3lhU3BtWFZIRVUKLS0tIDA0L0Q2YTZzSG9DK24xUTcyVDRE
-        cjcrYWFkeitzMkc1MEI0Vld6c3VaODAKPHsLdCF2v7D1YvrvGRVnkbQ/7UxVmft8
-        boE2SUuM/lEhRiUz7OAaTr1HFd0ss1W1ZA3dbGe03l9+qjQorN7hCQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuQ0lYVE15RHIyeHY1S28y
+        cGF5ZHlaS0lhZnZvbE1TK2JYSkRucnhHdGpnCk5kcnpGNVUwTnhqRnc3dWtWL3Uy
+        TDdBLzQvSjk1QlNDZlNvRXZOOXllVHcKLS0tIEZQTWlMMUxRWmFKOG1CNXRCc2lX
+        SFdBTnlUd2U4UTV1QW5RM3d2VGJxeTQKq7I0F3EAOD+hqrzz43uLTaZYJUtrbD/S
+        L4/RqN6jGe6i1A/Kr1j2D2blfzuGCfecJOukhyc/g7aHQVS3UFtNsA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-01T12:32:48Z"
-  mac: ENC[AES256_GCM,data:nbbJfyWHbXpJv9/vKMp+15kM7N7ztF0JUI7xTsyQXRL7totybDRwlxYJnmKcbplSVcTuyn6qyiTMtGzIW65yvRRrs7cYQYZhbUecaVHuDFhX/mHj5kqOae7k2M1TPa0U/FaxEoiU3AFxHYvQnS6WicmvW3h8amiYZdjkqQQDkLQ=,iv:n1/CKPdISWS2umFxhbdfYzYeXPz6NclO1JNn3IJGHqw=,tag:PzdQXfgreactqm1nAMT9Cw==,type:str]
+  lastmodified: "2025-10-01T21:48:39Z"
+  mac: ENC[AES256_GCM,data:1tpvGMynpl9ElZRZA5J4gA8cle0MoM6491fofzFLw34XvPZWFSckfVqlM4AgfNtBzw07M0jgJYD0epMiSvr9cN8cYeCstxR/hOzo/7plXu2iqUukGa3SMjMk58iWwnjH4XfROCxi+OPEomuB2XCjYjjNZ5xxAIZz/SG+7xeHtxE=,iv:HWQNiDG1URWmL+Lyf6zwbmJsTarDMLNKhtdn0aeKbOg=,tag:uMUdRwxk5xsyT0a9m/fKCw==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
   version: 3.10.2

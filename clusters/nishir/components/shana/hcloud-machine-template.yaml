@@ -1,0 +1,23 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HCloudMachineTemplate
+metadata:
+  name: shana-control-plane
+  namespace: nishir
+spec:
+  template:
+    spec:
+      imageName: fedora-42
+      placementGroupName: control-plane
+      type: cax11
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HCloudMachineTemplate
+metadata:
+  name: shana-workers
+  namespace: nishir
+spec:
+  template:
+    spec:
+      imageName: fedora-42
+      placementGroupName: workers
+      type: cax11
