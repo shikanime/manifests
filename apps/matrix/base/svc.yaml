@@ -17,6 +17,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: matrix-discord
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 29334
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: matrix-discord
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: matrix-googlechat
   namespace: shikanime
 spec:

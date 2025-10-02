@@ -11,9 +11,9 @@ resources:
   - ../default
 secretGenerator:
   - files:
-      - configs/synapse/homeserver.yaml
-      - configs/synapse/log.config
-    name: synapse
+      - configs/mautrix-discord/config.yaml
+      - configs/mautrix-discord/registration.yaml
+    name: mautrix-discord
     namespace: shikanime
   - files:
       - configs/mautrix-googlechat/config.yaml
@@ -24,4 +24,9 @@ secretGenerator:
       - configs/mautrix-slack/config.yaml
       - configs/mautrix-slack/registration.yaml
     name: mautrix-slack
+    namespace: shikanime
+  - files:
+      - configs/synapse/homeserver.yaml
+      - configs/synapse/log.config
+    name: synapse
     namespace: shikanime

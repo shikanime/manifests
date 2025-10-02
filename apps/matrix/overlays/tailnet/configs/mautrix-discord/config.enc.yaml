@@ -1,0 +1,162 @@
+homeserver:
+  address: https://matrix
+  domain: matrix.taila659a.ts.net
+  verify_ssl: true
+  software: standard
+  http_retry_count: 4
+  status_endpoint: null
+  message_send_checkpoint_endpoint: null
+  async_media: false
+appservice:
+  address: http://matrix-discord:29334
+  hostname: 0.0.0.0
+  port: 29334
+  max_body_size: 1
+  database:
+    type: sqlite3-fk-wal
+    uri: file:/data/discord.db?_txlock=immediate
+    max_open_conns: 5
+    max_idle_conns: 1
+    max_conn_idle_time: null
+    max_conn_lifetime: null
+  database_opts:
+    max_open_conns: 20
+    max_idle_conns: 2
+    max_conn_idle_time: null
+    max_conn_lifetime: null
+  id: discord
+  bot_username: discordbot
+  bot_displayname: Discord bridge bot
+  bot_avatar: mxc://maunium.net/ygtkteZsXnGJLJHRchUwYWak
+  ephemeral_events: true
+  as_token: ENC[AES256_GCM,data:0+a2dIoaJR3a4YU4ai+EdqzzmS5B7Vbdvrm7NDahjqMLROamuae6dItmrqRky3+s+4J2WfrgUWXRQ2x5kt27nQ==,iv:SNWW6ynPMMGkKYxhyI6pS9M+r1/w5KnKgFvS/oQ+KGY=,tag:JhmSYIW2jdQJaYXuz1ZbpA==,type:str]
+  hs_token: ENC[AES256_GCM,data:HJKAMGYy/qxluZeX8a4U6LKWRuMUEM1S61+UlONJbbm5rgwwQ7xu7M8KlXYsczBSYvsK7aotw1IqpKWUrDbG7Q==,iv:Tn2TK1s+/1Z4hUb3C/HW0SkL8skRHGUqcHOdnhLUrbo=,tag:57o/WOuwy8Dglaz8pOnmzw==,type:str]
+metrics:
+  enabled: false
+  listen_port: 8000
+manhole:
+  enabled: false
+  path: /var/tmp/mautrix-discord.manhole
+  whitelist:
+    - 0
+bridge:
+  username_template: discord_{{.}}
+  displayname_template: "{displayname}#{discriminator}"
+  displayname_preference:
+    - displayname
+    - username
+  command_prefix: "!discord"
+  initial_chat_sync: 10
+  invite_own_puppet_to_pm: false
+  sync_with_custom_puppets: true
+  sync_direct_chat_list: false
+  double_puppet_server_map:
+    matrix.taila659a.ts.net: https://matrix
+  double_puppet_allow_discovery: false
+  login_shared_secret_map:
+    matrix.taila659a.ts.net: shikanime
+  presence: true
+  update_avatar_initial_sync: true
+  encryption:
+    allow: false
+    default: false
+    appservice: false
+    require: false
+    allow_key_sharing: false
+    delete_keys:
+      delete_outbound_on_ack: false
+      dont_store_outbound: false
+      ratchet_on_decrypt: false
+      delete_fully_used_on_decrypt: false
+      delete_prev_on_new_session: false
+      delete_on_device_delete: false
+      periodically_delete_expired: false
+      delete_outdated_inbound: false
+    verification_levels:
+      receive: unverified
+      send: unverified
+      share: cross-signed-tofu
+    rotation:
+      enable_custom: false
+      milliseconds: 604800000
+      messages: 100
+      disable_device_change_key_rotation: false
+  provisioning:
+    prefix: /_matrix/provision
+    shared_secret: ENC[AES256_GCM,data:kb6myHyWY58=,iv:RYnKYh7t4Dy5AIu0r3DkPVzSQ1hFxP1Kj++tEZn8zys=,tag:moONptjfstnPHIjq8M3WNw==,type:str]
+    debug_endpoints: false
+  permissions:
+    matrix.taila659a.ts.net: user
+    "@admin:matrix.taila659a.ts.net": admin
+  relay:
+    enabled: false
+    bot_token: null
+    admin_only: true
+    default_relays: []
+  backfill:
+    disable_notifications: false
+    initial_limit: 50
+    missed_limit: 1000
+logging:
+  version: 1
+  formatters:
+    colored:
+      (): mautrix_discord.util.ColorFormatter
+      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
+    normal:
+      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
+  handlers:
+    file:
+      class: logging.handlers.RotatingFileHandler
+      formatter: colored
+      filename: ./logs/mautrix-discord.log
+      maxBytes: 104857600
+      backupCount: 10
+    console:
+      class: logging.StreamHandler
+      formatter: colored
+  loggers:
+    mau:
+      level: DEBUG
+    mautrix_discord:
+      level: DEBUG
+    aiohttp:
+      level: INFO
+  root:
+    level: DEBUG
+    handlers:
+      - file
+      - console
+sops:
+  age:
+    - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLWDFZRjIydjZJWkZZa2da
+        Q25MMGlMZ0FDVS9aU2k4cndZUGpXRkoyVFVvCnZJaTd0Ykc0RVA5ZVBMbE41UUxh
+        K0pxNDZmUW5xd3FZekpQdDc1dUovN3cKLS0tIGNReXpWYkFPeG94clZyWFk1ekNi
+        VUowY2xOVkFTZktZR05ZcEF3dTdtTHcK8Ye6n+BJfxWSQj3Expe+sgtMF3srW2cv
+        GMb27afh5aUhm+P7EqUvvvX7n3l6uKwddZyyzNEC8ce8xudxPGP5XQ==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVcjJnTWJWRXI2MTRvem0r
+        Vzk4SHpqc0p0RHhuOE9Sa01aekl6Y01uZFRNCmlCaDJ4NXQ3NVgwQmNiUGM0ZXVD
+        Mm01eDRDemd1TmFsRUxXRW1meGJ3V0UKLS0tIG1icFVPby8wNnd6NVM3QnRsOHpj
+        MnFaSjUvMXhjblU0c0M1T2hIem1FbW8K2uEhrVgkBYuVGU4f/1v9n0G+yV4tzKXh
+        7jYAkES10sv2l7W8U+r+b8Z6fVD/aX7jVDDKRKvACVHrpIed4h7viw==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYRDhxbW5XdmwvbEdqRTFR
+        bWpiNDBNckxLUkFtWXBzSkY2RmRiR1h1MUhRCnk3M0c5UGJtdzIrN3FhRTArVkJT
+        ano1VmE4aC96Y2crRmFrVEFRK0FxODQKLS0tIGNuL1pCOFBCTVZjTm9QMVFtRmxn
+        ZENYeTBOV1Z0Rkd1dkZFdlFIbmpMaHcK1jEiXxH0148DHa4+2QOKXr1rLLwl8D4H
+        zHlp1t18npyNcQqbWj0QS4AakashZ7FmsKgI7UWIeIFH3wCYt+XZcg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-02T21:24:02Z"
+  mac: ENC[AES256_GCM,data:diW7ZA5puT5hnnRFniuCKtnYqgSIKYomX31KnU4IgMQaLg6d94Ox+mk6FNzX8cOtcaE89zspTmA0CTBcq/u+1z5TMTPXLSunVevA/VBqo6xED9tJd5GFXqLTa2i8wqGPqXCpQMd9h6VltiqGzCujCelHQwaF75jjXIncSLQVG2E=,iv:pO6pvHUCZoshhnnKoD/PST7AWplGejmjOLBLGTpT2Xg=,tag:WHjyiinTHbN5RDBXHH37Og==,type:str]
+  encrypted_regex: ^(as_token|hs_token|shared_secret)$
+  version: 3.10.2
