@@ -34,16 +34,21 @@ spec:
             - -c
             - |
               # Create necessary directories
-              mkdir -p /data/logs
-              mkdir -p /data/appservices
+              mkdir -p /data/synapse/appservices
 
               # Copy synapse config
-              cp /config/synapse/homeserver.yaml /data/homeserver.yaml
-              cp /config/synapse/log.config /data/log.config
+              cp /config/synapse/homeserver.yaml /data/synapse/homeserver.yaml
+              cp /config/synapse/log.config /data/synapse/log.config
 
               # Copy registration to synapse appservices
-              cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
-              cp /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
+              cp /config/mautrix-googlechat/registration.yaml /data/synapse/appservices/mautrix-googlechat.yaml
+              cp /config/mautrix-slack/registration.yaml /data/synapse/appservices/mautrix-slack.yaml
+
+              # Copy bridge configs
+              cp /config/mautrix-googlechat/config.yaml /data/googlechat/config.yaml
+              cp /config/mautrix-googlechat/registration.yaml /data/googlechat/registration.yaml
+              cp /config/mautrix-slack/config.yaml /data/slack/config.yaml
+              cp /config/mautrix-slack/registration.yaml /data/slack/registration.yaml
           volumeMounts:
             - name: mautrix-googlechat-config
               mountPath: /config/mautrix-googlechat
@@ -54,14 +59,18 @@ spec:
             - name: synapse-config
               mountPath: /config/synapse
               readOnly: true
+            - name: mautrix-googlechat-data
+              mountPath: /data/googlechat
+            - name: mautrix-slack-data
+              mountPath: /data/slack
             - name: synapse-data
-              mountPath: /data
+              mountPath: /data/synapse
       containers:
         - name: synapse
           image: synapse
           ports:
             - name: http
-              containerPort: 8008
+              containerPort: 8080
             - name: metrics
               containerPort: 9090
           readinessProbe:
@@ -83,6 +92,52 @@ spec:
           volumeMounts:
             - name: synapse-data
               mountPath: /data
+        - name: mautrix-googlechat
+          image: mautrix-googlechat
+          ports:
+            - name: googlechat-bridge
+              containerPort: 29320
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: googlechat-bridge
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: googlechat-bridge
+            initialDelaySeconds: 30
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: googlechat-bridge
+            failureThreshold: 12
+          volumeMounts:
+            - name: mautrix-googlechat-data
+              mountPath: /data
+        - name: mautrix-slack
+          image: mautrix-slack
+          ports:
+            - name: slack-bridge
+              containerPort: 29335
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: slack-bridge
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: slack-bridge
+            initialDelaySeconds: 30
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: slack-bridge
+            failureThreshold: 12
+          volumeMounts:
+            - name: mautrix-slack-data
+              mountPath: /data
       securityContext:
         fsGroup: 991
       volumes:
@@ -95,136 +150,12 @@ spec:
         - name: synapse-config
           secret:
             secretName: synapse
-        - name: synapse-data
-          persistentVolumeClaim:
-            claimName: synapse-data
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-googlechat
-  namespace: shikanime
-spec:
-  replicas: 1
-  serviceName: matrix-googlechat
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: matrix-googlechat
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: matrix-googlechat
-    spec:
-      initContainers:
-        - name: config-copier
-          image: busybox
-          command:
-            - sh
-            - -c
-            - |
-              # Copy mautrix-googlechat config
-              cp /config/config.yaml /data/config.yaml
-              cp /config/registration.yaml /data/registration.yaml
-          volumeMounts:
-            - name: mautrix-googlechat-config
-              mountPath: /config
-              readOnly: true
-            - name: mautrix-googlechat-data
-              mountPath: /data
-      containers:
-        - name: mautrix-googlechat
-          image: mautrix-googlechat
-          ports:
-            - name: http
-              containerPort: 29320
-          readinessProbe:
-            httpGet:
-              path: /_matrix/mau/ready
-              port: http
-            initialDelaySeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /_matrix/mau/live
-              port: http
-            initialDelaySeconds: 30
-          startupProbe:
-            httpGet:
-              path: /_matrix/mau/ready
-              port: http
-            failureThreshold: 12
-          volumeMounts:
-            - name: mautrix-googlechat-data
-              mountPath: /data
-      securityContext:
-        fsGroup: 1337
-      volumes:
-        - name: mautrix-googlechat-config
-          secret:
-            secretName: mautrix-googlechat
         - name: mautrix-googlechat-data
           persistentVolumeClaim:
             claimName: mautrix-googlechat-data
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-slack
-  namespace: shikanime
-spec:
-  replicas: 1
-  serviceName: matrix-slack
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: matrix-slack
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: matrix-slack
-    spec:
-      initContainers:
-        - name: config-copier
-          image: busybox
-          command:
-            - sh
-            - -c
-            - |
-              # Copy mautrix-slack config
-              cp /config/mautrix-slack/config.yaml /data/config.yaml
-              cp /config/mautrix-slack/registration.yaml /data/registration.yaml
-          volumeMounts:
-            - name: mautrix-slack-config
-              mountPath: /config/mautrix-slack
-              readOnly: true
-            - name: mautrix-slack-data
-              mountPath: /data
-      containers:
-        - name: mautrix-slack
-          image: mautrix-slack
-          ports:
-            - name: http
-              containerPort: 29335
-          readinessProbe:
-            httpGet:
-              path: /_matrix/mau/ready
-              port: http
-            initialDelaySeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /_matrix/mau/live
-              port: http
-            initialDelaySeconds: 30
-          startupProbe:
-            httpGet:
-              path: /_matrix/mau/ready
-              port: http
-            failureThreshold: 12
-          volumeMounts:
-            - name: mautrix-slack-data
-              mountPath: /data
-      volumes:
-        - name: mautrix-slack-config
-          secret:
-            secretName: mautrix-slack
         - name: mautrix-slack-data
           persistentVolumeClaim:
             claimName: mautrix-slack-data
+        - name: synapse-data
+          persistentVolumeClaim:
+            claimName: synapse-data
