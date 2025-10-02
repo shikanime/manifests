@@ -8,7 +8,7 @@ spec:
   dnsNames:
     - matrix
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: nishir
   secretName: matrix-tls
   usages:
@@ -26,7 +26,7 @@ spec:
   dnsNames:
     - matrix-googlechat
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: nishir
   secretName: matrix-googlechat-tls
   usages:
@@ -44,7 +44,7 @@ spec:
   dnsNames:
     - matrix-slack
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: nishir
   secretName: matrix-slack-tls
   usages:

@@ -7,7 +7,7 @@ spec:
   ports:
     - name: https
       port: 29320
-      targetPort: https
+      targetPort: http
 ---
 apiVersion: v1
 kind: Service
@@ -18,4 +18,4 @@ spec:
   ports:
     - name: https
       port: 29335
-      targetPort: https
+      targetPort: http

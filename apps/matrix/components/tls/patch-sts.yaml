@@ -12,7 +12,93 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
       volumes:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: matrix-tls
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-googlechat
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: mautrix-googlechat
+          readinessProbe:
+            httpGet:
+              port: http
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          livenessProbe:
+            httpGet:
+              port: http
+              scheme: HTTPS
+              path: /_matrix/mau/live
+          startupProbe:
+            httpGet:
+              port: http
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: matrix-googlechat-tls
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-slack
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: mautrix-slack
+          readinessProbe:
+            httpGet:
+              port: http
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          livenessProbe:
+            httpGet:
+              port: http
+              scheme: HTTPS
+              path: /_matrix/mau/live
+          startupProbe:
+            httpGet:
+              port: http
+              scheme: HTTPS
+              path: /_matrix/mau/ready
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: matrix-slack-tls
