@@ -1,0 +1,28 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HetznerCluster
+metadata:
+  name: shana
+  namespace: nishir
+spec:
+  controlPlaneEndpoint:
+    host: "0.0.0.0"
+    port: 443
+  controlPlaneLoadBalancer:
+    region: fsn1
+  controlPlaneRegions:
+    - fsn1
+  hcloudNetwork:
+    enabled: true
+  hcloudPlacementGroups:
+    - name: control-plane
+      type: spread
+    - name: workers
+      type: spread
+  hetznerSecretRef:
+    key:
+      hcloudToken: hcloud
+    name: hetzner
+  sshKeys:
+    hcloud:
+      - fingerprint: 13:83:0f:dc:cb:f9:79:3e:94:ba:55:27:dd:d2:a0:3a
+        name: shikanimedeva@telsha

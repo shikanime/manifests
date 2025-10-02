@@ -24,7 +24,4 @@ spec:
             claimName: sync-data
         - name: data-timeline
           persistentVolumeClaim:
-            claimName: sukebe-data
-        - name: data-timeline
-          persistentVolumeClaim:
             claimName: timeline-data
