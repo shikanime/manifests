@@ -10,15 +10,16 @@ spec:
     host: 0.0.0.0
     port: 6443
   controlPlaneLoadBalancer:
-    enabled: false
+    region: fsn1
   controlPlaneRegions:
     - fsn1
   hcloudNetwork:
-    cidrBlock: 10.0.0.0/16
     enabled: true
-    networkZone: eu-central
-    subnetCidrBlock: 10.0.0.0/24
   hetznerSecretRef:
     key:
-      hcloudToken: hcloud-token
+      hcloudToken: hcloud
     name: hetzner
+  sshKeys:
+    hcloud:
+      - fingerprint: 13:83:0f:dc:cb:f9:79:3e:94:ba:55:27:dd:d2:a0:3a
+        name: shikanimedeva@telsha

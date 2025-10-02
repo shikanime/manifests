@@ -6,7 +6,7 @@ resources:
   - cluster.yaml
   - hcloud-machine-template.yaml
   - hetzner-cluster.yaml
-  - k0s-control-plane.yaml
+  - k0s-control-plane
   - k0s-worker-config.yaml
   - machine-deployment.yaml
   - ns.yaml
@@ -15,19 +15,37 @@ secretGenerator:
   - name: hetzner
     namespace: nishir
     literals:
-      - ENC[AES256_GCM,data:XZ2caP3ino/6aXndq5qvs9HV+Cb6pymVp4LNvXgZtAByj4KStz/cI7L6CA4MtPK9nABvHcVziDpJludVsGsCgbrxSU+C3sXC8JNwQ6A=,iv:S5BCt5tmrmUxGH6uEcusCWA55lR5wMo8ahSM5Xxyexk=,tag:GOHJGItSw8MiuwFTB6Vjrw==,type:str]
+      - ENC[AES256_GCM,data:Ab0XhEPQRewcGsKRjax2F7ylcleSaCefGS710HW6DrpgTf4HGevaVihBqlRQufTNkYzefoL+9F2a+I2QDl82vvOSy4tMbdPYgHj8gco=,iv:4jIH+tkSUKLtN3Mwmi8reFJWUExZx6KKH7xxGpBGO34=,tag:LT/gUewnzM3u2Ap6kBuGNA==,type:str]
 sops:
   age:
+    - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxVmVINERnRWRoV2hZRFdm
+        Z1hxYmRRNXdLSWt0b3l2ZDNsN002Q2k4VUYwCnFxRU45L3ZZNlhsV2cyV2pKdFln
+        WkxmcUYrbGJQODVXeGpldnpXS0MzY3MKLS0tIDRnRXMwUkVhUlEzZzVTbWM2bUc4
+        YmVraWoxNzR6ZVVKZkxMMEJBamFmdkEKVzhNA5OoEn8VECM1AVmVx6XpeG4+fELU
+        xN8IKZiwURcuSpUHWQFk56tnnnPmgwjr0EEUB3ClrX82F8XS1Vkzeg==
+        -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiSzI1YjdQQkdpbDlLSUpQ
-        d1dVbTFxS2pXN0FLYUJ1LzhNOGtod1NQbEEwCm5lbnFIU0IvTHVpdFR2aUZrNEtZ
-        YXJ3eDRHWlZTeUpjNlpPN2cvaWdpY3cKLS0tIEl0L2p0N2FFNXUvSkM5cXhoaGpS
-        QnZ5M2xWNHB2c3VIQ2hLOTExcGFrZ2MKNaTcmoUfbIkZMCgGVjo65CnHbQ/f1SP3
-        oVmJIdO21DvmnkZpOPYzuki9U+h+a7DMnpWgcOdo0deYu6/98cR9fQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaS05GVzQ3akFaWWU4WXd5
+        ZDRMQlVNNCtsanQrS1YybGd2bzZNVjdWOHpFCnFiUURhYlFmYWhiM0s1dzRuZjFj
+        RlRvQXl1a2FnZ04xeHAwTjdWTUM2UWsKLS0tIDhIRjBSOFd2S0RnNDFwdjhwc3hS
+        bXRUcEtxMXd3U3FWY3hLaFFDSXQxd1EKL/0vcBmM0HbANNiHHScsuPPN7yn4QZPj
+        iEbdyeXMbx383ht15UW+gXcwy1vVCDJ43dtMQm47k3EY5nGEc0D3gg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-22T13:28:29Z"
-  mac: ENC[AES256_GCM,data:Q1oluBQvX9WSuNQeRl4y6e6CEG8Sf1lASXby5EQg8aX38pbcNq+tL3/bSfji2Gb19J/goqjCKZ13X28N+q46zQBUXKn9QZ7zeQ/bgcjoJ9+KXJl/C51PHwTmFhKmYPaC4P9OEbDtIJwqKqMVfDWTnL7PreMjL4CM8j3ADgEQs1E=,iv:puldc0ajIA3dKoVJ8vl7vEgd92B04LyI6VDwDmo8B3Q=,tag:6Wfjpxuc7STcdPzoOsRd4w==,type:str]
+    - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAvMFk1RUYwbDBwbnpURkg5
+        bm95VzNaK2tXQXF2Nk82NEZsVzNndHFoWkZFCll2cDNtQlAyWlcvczRJalV4N1FY
+        cXpKNWpwa2J1OXU5WVhEMkRHQzArTDgKLS0tIFFPcTBPNXo2VnBGSml1TERkRzNC
+        Qit3MFZ3VjllcisyMkZ0SXBiUDhCSlUKlURmam3bi06J/UbIRuSkGhiwaTZOkIR7
+        WCol8JNLaru+delKPWqwiBKK6H/wxLnhPPDUIj6kvB8F4O3CZs4h0w==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-02T14:24:44Z"
+  mac: ENC[AES256_GCM,data:rmhupiH+RQETPO/wbFMAaEPKpNyAH9J7svCV+jAAWqvTn3ppq1QTujmaj1iQ+884zdyqLGvD8nwCfQt11KTb7QrL7TwsDIQtVB+yAXnWJHN3r8BrVQK2VT2YTUvbMCiRGsfKnCzNvDOvSblpdT/Ent/CT/pwm95NyMWfA7ehYW4=,iv:qDSqNuouuqaJf5YLg01gpFFPOPhSseskMyoQJI8qFPk=,tag:Ap9+Z3du9k/pOoP3R6iysg==,type:str]
   encrypted_regex: ^(literals)$
   version: 3.10.2

@@ -63,11 +63,12 @@ spec:
                 values: |
                   bootstrap:
                     k0sproject-k0smotron: {}
+                    kubeadm: {}
                   controlPlane:
                     k0sproject-k0smotron: {}
+                    kubeadm: {}
                   infrastructure:
                     hetzner: {}
-                    k0sproject-k0smotron: {}
                   cert-manager:
                     enabled: true
               - name: descheduler

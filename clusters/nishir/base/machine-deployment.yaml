@@ -5,7 +5,7 @@ metadata:
   namespace: nishir
 spec:
   clusterName: shana
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       cluster.x-k8s.io/cluster-name: shana
@@ -19,7 +19,6 @@ spec:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: K0sWorkerConfigTemplate
           name: shana
-      clusterName: shana
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: HCloudMachineTemplate
