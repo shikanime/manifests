@@ -53,9 +53,9 @@ spec:
                 version: "v1.18.2"
                 namespace: cert-manager-system
                 values: |
+                  clusterResourceNamespace: cert-manager-trust
                   crds:
                     enabled: true
-                  clusterResourceNamespace: cert-manager-trust
               - name: cluster-api-operator
                 chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
                 version: "0.23.0"
@@ -137,7 +137,7 @@ spec:
                     allowCollectingLonghornUsageMetrics: false
                     allowRecurringJobWhileVolumeDetached: true
                     backupstorePollInterval: 6000
-                    defaultReplicaCount: 1
+                    defaultReplicaCount: "1"
                     replicaAutoBalance: best-effort
                     snapshotDataIntegrityCronjob: "0 4 */7 * *"
                   defaultBackupStore:
@@ -150,7 +150,6 @@ spec:
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
                 version: "0.17.4"
                 namespace: kube-system
-                values: ""
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
                 version: "1.88.3"
@@ -163,21 +162,9 @@ spec:
                       secretName: oauth-client
                   operatorConfig:
                     hostname: nishir-k8s-operator
-              - name: tailscale-operator
-                chartname: tailscale/tailscale-operator
-                version: "v0.19.0"
-                namespace: tailscale-system
-                values: |
-                  apiServerProxyConfig:
-                    mode: "true"
-                  oauthSecretVolume:
-                    secret:
-                      secretName: oauth-client
-                  operatorConfig:
-                    hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: "4.9.0"
+                version: "v0.19.0"
                 namespace: cert-manager-system
                 values: |
                   app:
@@ -185,7 +172,7 @@ spec:
                       namespace: cert-manager-trust
               - name: vpa
                 chartname: fairwinds-stable/vpa
-                version: "0.17.4"
+                version: "4.9.0"
                 namespace: kube-system
         network:
           kuberouter:
