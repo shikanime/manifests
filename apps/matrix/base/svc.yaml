@@ -8,6 +8,12 @@ spec:
     - name: http
       port: 80
       targetPort: http
+    - name: googlechat-bridge
+      port: 29320
+      targetPort: googlechat-bridge
+    - name: slack-bridge
+      port: 29335
+      targetPort: slack-bridge
     - name: metrics
       port: 9090
       targetPort: metrics
