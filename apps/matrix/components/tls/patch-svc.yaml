@@ -8,25 +8,3 @@ spec:
     - name: https
       port: 8008
       targetPort: http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: matrix-googlechat
-  namespace: shikanime
-spec:
-  ports:
-    - name: https
-      port: 29320
-      targetPort: http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: matrix-slack
-  namespace: shikanime
-spec:
-  ports:
-    - name: https
-      port: 29335
-      targetPort: http
