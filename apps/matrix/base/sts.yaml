@@ -42,9 +42,13 @@ spec:
               cp /config/synapse/log.config /data/log.config
 
               # Copy registration to synapse appservices
+              cp /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
               cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
               cp /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
           volumeMounts:
+            - name: mautrix-discord-config
+              mountPath: /config/mautrix-discord
+              readOnly: true
             - name: mautrix-googlechat-config
               mountPath: /config/mautrix-googlechat
               readOnly: true
@@ -96,6 +100,9 @@ spec:
         - name: caddy-config
           configMap:
             name: caddy
+        - name: mautrix-discord-config
+          secret:
+            secretName: mautrix-discord
         - name: mautrix-googlechat-config
           secret:
             secretName: mautrix-googlechat
@@ -108,6 +115,72 @@ spec:
         - name: synapse-data
           persistentVolumeClaim:
             claimName: synapse-data
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-discord
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: matrix-discord
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-discord
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-discord
+    spec:
+      initContainers:
+        - name: config-copier
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              # Copy mautrix-discord config
+              cp /config/config.yaml /data/config.yaml
+              cp /config/registration.yaml /data/registration.yaml
+          volumeMounts:
+            - name: mautrix-discord-config
+              mountPath: /config
+              readOnly: true
+            - name: mautrix-discord-data
+              mountPath: /data
+      containers:
+        - name: mautrix-discord
+          image: mautrix-discord
+          ports:
+            - name: http
+              containerPort: 29334
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            failureThreshold: 12
+          volumeMounts:
+            - name: mautrix-discord-data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: mautrix-discord-config
+          secret:
+            secretName: mautrix-discord
+        - name: mautrix-discord-data
+          persistentVolumeClaim:
+            claimName: mautrix-discord-data
 ---
 apiVersion: apps/v1
 kind: StatefulSet
