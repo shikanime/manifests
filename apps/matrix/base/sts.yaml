@@ -100,17 +100,17 @@ spec:
           readinessProbe:
             httpGet:
               path: /_matrix/mau/ready
-              port: googlechat-bridge
+              port: gchat-bridge
             initialDelaySeconds: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
-              port: googlechat-bridge
+              port: gchat-bridge
             initialDelaySeconds: 30
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
-              port: googlechat-bridge
+              port: gchat-bridge
             failureThreshold: 12
           volumeMounts:
             - name: mautrix-googlechat-data
