@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+sapiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix
@@ -9,7 +9,7 @@ spec:
       containers:
         - name: synapse
           ports:
-            - containerPort: 8448
+            - containerPort: 8443
               name: https
           readinessProbe:
             httpGet:
