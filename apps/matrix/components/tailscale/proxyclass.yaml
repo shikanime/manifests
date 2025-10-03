@@ -8,12 +8,12 @@ spec:
       affinity:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: matrix
-                topologyKey: kubernetes.io/hostname
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: matrix
+              namespaceSelector:
+                - shikanime
+              topologyKey: kubernetes.io/hostname
 ---
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
@@ -25,12 +25,12 @@ spec:
       affinity:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: matrix-googlechat
-                topologyKey: kubernetes.io/hostname
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: matrix-googlechat
+              namespaceSelector:
+                - shikanime
+              topologyKey: kubernetes.io/hostname
 ---
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
@@ -42,9 +42,9 @@ spec:
       affinity:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: matrix-slack
-                topologyKey: kubernetes.io/hostname
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: matrix-slack
+              namespaceSelector:
+                - shikanime
+              topologyKey: kubernetes.io/hostname
