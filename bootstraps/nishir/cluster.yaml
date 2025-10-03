@@ -113,6 +113,7 @@ spec:
                           - name: RemovePodsViolatingNodeAffinity
                             args:
                               nodeAffinityType:
+                                - preferredDuringSchedulingIgnoredDuringExecution
                                 - requiredDuringSchedulingIgnoredDuringExecution
                           - name: RemovePodsViolatingNodeTaints
                           - name: RemovePodsViolatingTopologySpreadConstraint
