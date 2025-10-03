@@ -11,6 +11,6 @@ spec:
             - labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: whisparr
-              namespaceSelector:
+              namespaces:
                 - shikanime
               topologyKey: kubernetes.io/hostname
