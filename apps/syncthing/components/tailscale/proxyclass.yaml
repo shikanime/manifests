@@ -13,4 +13,6 @@ spec:
                 labelSelector:
                   matchLabels:
                     app.kubernetes.io/name: syncthing
+                namespaces:
+                  - shikanime
                 topologyKey: kubernetes.io/hostname
