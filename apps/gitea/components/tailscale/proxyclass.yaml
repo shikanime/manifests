@@ -11,6 +11,6 @@ spec:
             - labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: gitea
-              namespaceSelector:
+              namespaces:
                 - shikanime
               topologyKey: kubernetes.io/hostname
