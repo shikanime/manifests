@@ -27,10 +27,16 @@ spec:
     nishir:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/nishir/longhorn/
+      path: /mnt/flandre/longhorn/
       tags:
         - balanced
-  name: nishir
+    nishir-fast:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/marisa/longhorn/
+      tags:
+        - fast
+  name: fushi
 ---
 apiVersion: longhorn.io/v1beta2
 kind: Node
@@ -43,7 +49,13 @@ spec:
     nishir:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/nishir/longhorn/
+      path: /mnt/remilia/longhorn/
       tags:
         - balanced
-  name: nishir
+    nishir-fast:
+      allowScheduling: true
+      diskType: filesystem
+      path: /dev/disk/by-labels/reimu
+      tags:
+        - fast
+  name: minish
