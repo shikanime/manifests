@@ -8,9 +8,9 @@ spec:
       affinity:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: gitea
-                topologyKey: kubernetes.io/hostname
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: gitea
+              namespaceSelector:
+                - shikanime
+              topologyKey: kubernetes.io/hostname

@@ -8,9 +8,9 @@ spec:
       affinity:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: sonarr
-                topologyKey: kubernetes.io/hostname
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: sonarr
+              namespaceSelector:
+                - shikanime
+              topologyKey: kubernetes.io/hostname
