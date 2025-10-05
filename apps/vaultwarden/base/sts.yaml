@@ -28,6 +28,9 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: vaultwarden
+          envFrom:
+            - secretRef:
+                name: vaultwarden
           image: vaultwarden
           ports:
             - containerPort: 80

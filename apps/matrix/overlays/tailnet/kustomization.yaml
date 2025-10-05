@@ -4,29 +4,29 @@ components:
   - ../../components/tailscale
 configMapGenerator:
   - files:
-      - configs/caddy/Caddyfile
+      - caddy/Caddyfile
     name: caddy
     namespace: shikanime
 resources:
   - ../nishir
 secretGenerator:
   - files:
-      - configs/mautrix-discord/config.yaml
-      - configs/mautrix-discord/registration.yaml
+      - mautrix-discord/config.yaml
+      - mautrix-discord/registration.yaml
     name: mautrix-discord
     namespace: shikanime
   - files:
-      - configs/mautrix-googlechat/config.yaml
-      - configs/mautrix-googlechat/registration.yaml
+      - mautrix-googlechat/config.yaml
+      - mautrix-googlechat/registration.yaml
     name: mautrix-googlechat
     namespace: shikanime
   - files:
-      - configs/mautrix-slack/config.yaml
-      - configs/mautrix-slack/registration.yaml
+      - mautrix-slack/config.yaml
+      - mautrix-slack/registration.yaml
     name: mautrix-slack
     namespace: shikanime
   - files:
-      - configs/synapse/homeserver.yaml
-      - configs/synapse/log.config
+      - synapse/homeserver.yaml
+      - synapse/log.config
     name: synapse
     namespace: shikanime
