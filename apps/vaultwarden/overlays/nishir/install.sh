@@ -7,5 +7,5 @@ set -o pipefail
 
 sops \
   --decrypt \
-  "$(dirname "$0")"/kustomization.enc.yaml > \
-  "$(dirname "$0")"/kustomization.yaml
+  "$(dirname "$0")"/vaultwarden/.enc.env > \
+  "$(dirname "$0")"/vaultwarden/.env

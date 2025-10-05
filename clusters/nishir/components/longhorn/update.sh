@@ -28,4 +28,7 @@ sed -i \
   "$(dirname "$0")"/configs/longhorn-hetzner-backups.env
 
 # Re-encrypt with SOPS
-sops encrypt "$(dirname "$0")"/configs/longhorn-hetzner-backups.env >"$(dirname "$0")"/configs/longhorn-hetzner-backups.enc.env
+sops \
+  --encrypt \
+  "$(dirname "$0")"/longhorn-hetzner-backups/.env > \
+  "$(dirname "$0")"/longhorn-hetzner-backups/.enc.env
