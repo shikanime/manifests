@@ -7,5 +7,5 @@ set -o pipefail
 
 sops \
   --decrypt \
-  "$(dirname "$0")"/configs/longhorn-hetzner-backups.enc.env > \
-  "$(dirname "$0")"/configs/longhorn-hetzner-backups.env
+  "$(dirname "$0")"/longhorn-hetzner-backups/.enc.env > \
+  "$(dirname "$0")"/longhorn-hetzner-backups/.env

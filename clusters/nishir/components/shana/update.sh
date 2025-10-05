@@ -7,6 +7,5 @@ set -o pipefail
 
 sops \
   --encrypt \
-  --encrypted-regex "^(literals)$" \
-  "$(dirname "$0")"/kustomization.yaml > \
-  "$(dirname "$0")"/kustomization.enc.yaml
+  "$(dirname "$0")"/hetzner/.env > \
+  "$(dirname "$0")"/hetzner/.enc.env
