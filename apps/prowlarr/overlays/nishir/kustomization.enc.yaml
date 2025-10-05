@@ -1,0 +1,48 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configurations:
+  - namereference.yaml
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
+resources:
+  - cert.yaml
+secretGenerator:
+  - literals:
+      - ENC[AES256_GCM,data:rls7oqFkGRC3raiz8qHY8IzM30Qzpac=,iv:zEe0I82R3q8hWvoUmbqUSHlUmwy/+hEF44i9E68u978=,tag:3sLTfwKW+0MqyW2gY5lGZg==,type:str]
+    name: prowlarr-pkcs12-password
+    namespace: shikanime
+sops:
+  age:
+    - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjMk53WG0rSmJ6QkhDbHp2
+        RmtrU0ordmprWktFWG9mVTRpSGV4andIZjJBCmROQ1J0T3ZzYlpuODlkWGVTZVJW
+        eU9UYlo2K1p2R09Vb0ZiMExVdi8raHcKLS0tIHFBbVM5RVQvTUh3UXlTUzJjd3JQ
+        YjNMUEtwbkswNVFkQityN3BHQXhRVUEKFz05fM0zRfTPEJIt3vq4xeL9hpcVQP58
+        MNnYr7rDAWXusAH7UALYSQAaWujqOMw13BvbPhhEfPhFm7idjWha0Q==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnRXNRVERzQVczWVpTVTNt
+        L21TSm95c3p6aWtjd0REVlY5MEZJWktyazNzCjlzV2RKR1RTUU1oMXFzVEZLaTd3
+        ODFqeHZxY0wzbXZCb1JlYkNZai9WamsKLS0tIDA4L0o2V3Z6ZVlUZVJXc2RFZStG
+        cWMzVTV5RXcrV0hUdHFZVUd1VnN0QlkKxQbQyn8Vaglr9MWshlVDUgm5G5eZKUoD
+        Q0YwR7dqfI+ovdLwKVR6BWhROdzRjwAjQD8BNzyiVTaDK/tILSOfiQ==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBseVJqL3lNN2VXcmJmVkIx
+        dU1YVWVGRGVMVDkxdjh1eloyR0JnZmtBT2tNCk1UUDNLQ2JFQUtjMHA5amExWWU4
+        ZHR2VUZialZsM3kxTkVuOHZBV3lhaXcKLS0tIHB4aWZyWW5mS3VhU2xkUGdoZjlI
+        YWRNTVlROUloaXU1OFh0YUEwUkRZZzgK9sMJBhKUtOe98WYeLe++Mo4kFLx8dxo9
+        BQaM7/Fkkn7XfTKM5XIFbAMhgkz7gzjpC5F/zYzCHTTbr3P25cL8kg==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-05T21:44:50Z"
+  mac: ENC[AES256_GCM,data:2/Z56ZqiJ6sDzedgHpiIg/quk+5fhjVdQM35VHB0014eV9cPFtRyPDbcaCDd7tTAd4QVAFsRZvZT98QZMRBTAKhlyEMZJMyFUfc5OPpO1oyi+I0t/T9XxfPOleTYjRSXTbBc0/LhBAokQRTXX5RAZA+/ohB2tKgYG9/+aRo5HBc=,iv:t7ttKdXNedaUVoaNH9qglT24Y6ug1P9Rg33+z8Jw8pI=,tag:JVglObTcM9a2xfdOWlg4eg==,type:str]
+  encrypted_regex: ^(literals)$
+  version: 3.10.2

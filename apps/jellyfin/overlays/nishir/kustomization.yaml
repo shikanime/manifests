@@ -1,8 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+configurations:
+  - namereference.yaml
 components:
   - ../../components/v4l
 patches:
   - path: patch-sts.yaml
 resources:
   - ../default
+secretGenerator:
+  - literals:
+      - password=r?jUIKg8@in@sT
+    name: jellyfin-pkcs12-password
+    namespace: shikanime

@@ -4,5 +4,3 @@ patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
   - path: patch-svc.yaml
-resources:
-  - cert.yaml
