@@ -8,7 +8,7 @@ configMapGenerator:
     name: caddy
     namespace: shikanime
 resources:
-  - ../default
+  - ../nishir
 secretGenerator:
   - files:
       - configs/mautrix-discord/config.yaml
