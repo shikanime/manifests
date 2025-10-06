@@ -58,7 +58,7 @@ spec:
                     enabled: true
               - name: cluster-api-operator
                 chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
-                version: "0.23.0"
+                version: "0.24.0"
                 namespace: capi-operator-system
                 values: |
                   bootstrap:
@@ -150,7 +150,7 @@ spec:
                     defaultFsType: xfs
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
-                version: "0.17.4"
+                version: "0.18.0"
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
