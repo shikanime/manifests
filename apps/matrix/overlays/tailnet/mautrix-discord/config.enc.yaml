@@ -29,8 +29,8 @@ appservice:
   bot_displayname: Discord bridge bot
   bot_avatar: mxc://maunium.net/ygtkteZsXnGJLJHRchUwYWak
   ephemeral_events: true
-  as_token: ENC[AES256_GCM,data:C0fWI3+JmPCUBncpMotCt1lyrwvhAHjLTK5L+Gu+xYqJ3RJGfRgbpzpL7UQ6A9JSwZWEpIZFmGsjlCJqcmltjQ==,iv:lSxoZrAOIQ1MNP/ZjR/vRID2BxaoYy3sZLI7gpE6ZWc=,tag:Gdt6tTZmu7wdFobTY0qVKg==,type:str]
-  hs_token: ENC[AES256_GCM,data:10qTTvMGHb8NxB+jE1o2l28A6fELDcuRCQT3yrETOAoOX0b/nsReoUZDv7oZLM8sDMJANXfJmjJR8tusxV8WQg==,iv:p0G3W0d0ThvW6vLTv6jzSyFRytoYzZLIh6V7UQG2Th0=,tag:+CIbkljHKWvPWBOLmLmVtA==,type:str]
+  as_token: ENC[AES256_GCM,data:fKHElq7GTSqsDwcVs4eifV3jGp72tb54qGrp1KGmSO9/W1iZlAjKbhVhaYp9EMPYlivOJCi3QkTBpYALsaCyDA==,iv:T6pMR40jm+d0xYrBcds3mXpDS7OkIt0Um9jfHeUP50E=,tag:ZdyO3yqvKvpxGrCusxYmjg==,type:str]
+  hs_token: ENC[AES256_GCM,data:5znd83JpeyCXeM4GsHmBFxqu5G+3urpw3wVBKbbN2ofZ7/sVhj0mH/gU6Awq9XtidUOHfn2Q5gnUlnQ9E2yW4w==,iv:PmvJT1RuOGWvXwe1RsLwsGKS44F3+sTWUhApKoOrE9s=,tag:zbwXSlab2eenkHQObkrekQ==,type:str]
 metrics:
   enabled: false
   listen_port: 8000
@@ -41,8 +41,8 @@ manhole:
     - 0
 bridge:
   username_template: discord_{{.}}
-  displayname_template: "{{.Username}}#{{.Discriminator}}{{if .Bot}} (bot){{end}}"
-  command_prefix: "!discord"
+  displayname_template: '{{.Username}}#{{.Discriminator}}{{if .Bot}} (bot){{end}}'
+  command_prefix: '!discord'
   initial_chat_sync: 10
   invite_own_puppet_to_pm: false
   sync_with_custom_puppets: true
@@ -80,11 +80,11 @@ bridge:
       disable_device_change_key_rotation: false
   provisioning:
     prefix: /_matrix/provision
-    shared_secret: ENC[AES256_GCM,data:UQ8JXjiGLD0=,iv:OzJ8OrzFT9MZp0CmAoH6XxaZBQVmG1zYiypUgP3/wtM=,tag:JTLbVBXgwBI6DY9SbAbitw==,type:str]
+    shared_secret: ENC[AES256_GCM,data:NSQT9epForw=,iv:R494OIAdCeekFltM8pzKbsysZCyAruaoUrvc0GWzb1U=,tag:GAGho77hXIoFuaDMSRvWXg==,type:str]
     debug_endpoints: false
   permissions:
     matrix.taila659a.ts.net: user
-    "@admin:matrix.taila659a.ts.net": admin
+    '@admin:matrix.taila659a.ts.net': admin
   relay:
     enabled: false
     bot_token: null
@@ -99,9 +99,9 @@ logging:
   formatters:
     colored:
       (): mautrix_discord.util.ColorFormatter
-      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
+      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
     normal:
-      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
+      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
   handlers:
     file:
       class: logging.handlers.RotatingFileHandler
@@ -129,31 +129,31 @@ sops:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB4MENUSGc0YXhPdEZTV3p3
-        dVVDVjN3WXcrT0hNdFpFWURDTThsclhpMGhFCi9DVFBNbkplbkFmUUhlZ2FRZ3FK
-        dURFalVtYXdYc084Z3NCbHdSTytGTWMKLS0tIE5zN1hpU09obDNCN0pQN3h3d2xZ
-        Ti9IbmVjNEltY1NwRFh4MTlsQTVlV1EKL+iuaYjbMd8kqcCZGoaussc5TavvJkKR
-        /z0KGlTQur6XQEsDBzAcDB1hSE5MNoB1UE84D2o20DJi693uYwNgQQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBoMmhDbndZU08zOVZDYVpM
+        UjllQ0pZMWl2ZU9KM203MFlNQkxNZGdaUVZVCnVyMlJxcmIzbFRjaW1DWkkxVnJl
+        VDM0dGM3T1hCV0o4Y0luM0JGMUNQb3cKLS0tIEpMSEh1alFXWjZIRUh2WHBLZnhZ
+        Y0piTnJtbnJaNkRESnlEOTlDdVUwZUEKW1AYnq6NNQJnN4AWowhXelGrpC73c5BB
+        iUsTn5LSp5NHEgZ7vtTAADyvi302qQNaEKu9SpHlDA94N74lFY4XeQ==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtK1cxSzBzektaQ0xhT0VS
-        SmF2S01nSTFXM0R5eEIzUVZKdlM0b2NJWjFZCjZBRHVzdVNYNkN0RzN4UUpleTZu
-        TkZidjJxZUt3dG96RVIwOWVDMTZXSXMKLS0tIHlmY2Q3QUxVODN6dFRaSTYyaFRY
-        WktlVTU3dmVWcTdrRHpTUlh6UlliNVEKj8IbPRcDTxhUPklpz1CvYm3Z3b4ddsGd
-        /we/ajxGw8R+U3sVkug5+P2baa4TEeMwQfOc7E1AVGLpP7VrKOgnkQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiY3RVNkdnQWJJM1FmZU82
+        UjB3UUZiREFxOTB6eTl5R2ZNQ3FrL3RBRWdjCmlIVFppbVpRYkxVd0liZ1l6Tmdp
+        L294WlVMYWQ3M1RMK2dqOWs5N1hnN1EKLS0tIEdQNXlSQU54OGdQajN0eHRESG5O
+        OGFOUGJkSW5hdnBVYlZYSXBNNGhET2MKzKPgDjnkvnSQK0zQdbC8XtoZ+MuY36go
+        0HOoxLHBsHr7yO74at9pOZ3jSoLgxLRRLCjFXbr2ltfFAqqvhBw9Tg==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWVkw5RjFEUXNCWDFRdEh1
-        Y3pMWXVGc0hxb3lKRTE5TXR4TlV1Q2VNRUM4ClZkclFkTklzeGZtOTE2YU9vVnVS
-        NWxydHpXYmQyVkcweE5XZW9UVC9yeDQKLS0tIHlkSjhiSGJrQ0FCQ3RndVVLMlU1
-        YkNKNnpBaFEvYXdmM1VmVythZjVCYWcKD+xnqrlpy9xqh+YHiAdUc2YQqMPrgNsG
-        JGSAFU8ZEuCdlSGn9BmAJSFaCYIYTh6s7RPlhdOalVXlZVvtdzgAoQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0NGt4cy94c3NBdC9Ra1dn
+        c2VMZFZvT1p0RUU0Y2FJbWZRTGxQOFJhekhvCkl1cTYrSjFWc3BhTEdxTGlLc1U3
+        TDNHaEJaTEZ6MVRmNDRqTjFjS0JXckEKLS0tIGhBNmtCNGVMVGhIZ29zRXNSWGVT
+        NUpuMHdxTUhlMERwcGxRL00zRjRpb28KxzFYnYPJP9ZD7klSLmV5BcFphYKC7fWc
+        wohnTJXr5Kq0LaIIg/9VtAo+EdyBSi+Im5Z4x5U1qgTbXXitNHnn9g==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-02T21:44:12Z"
-  mac: ENC[AES256_GCM,data:ZdXraUN20rwBMSTVnPM5ROhG3h8P4DEAVlpQPvkyjKSGCgArZywxuNRMDDNpulxx+TxVDjGYkJ/zvVuLHymtVMhytbcWhqqrgKPln11j/oWpfHyBWhhVT4TLPX0+e7fBirBpgfi91mhPtFKCW9Il6aW861hUgX7KaEu9SKkWmuo=,iv:+P35HRe9dyogqyvZCaIpq5DfqGTclxs1phJHXG6G0v4=,tag:xrEVVp2HeMVfTX5YdHIOGw==,type:str]
+  lastmodified: "2025-10-06T08:46:39Z"
+  mac: ENC[AES256_GCM,data:btSqRPPEZbumF6GGZFC6rr618L2jqrUMLlhljXVt9VceOgO8NUGKnm4xS21DxDUENlVtRQyzRhHYhE6/RBqT8q6KeDquJEr/64o9TfVeO/GfVKKb/zmi+4i5Dcf6x5V5LW5PTDZn3GhHK1Bb6xVJXgDn0hcvd+mfZ76+DGakk2o=,iv:rRR1y4jJSZMs186XUnv0jX9mm/m9jQqDWkuasjOTKZ8=,tag:we5XYlja56x7dgGtwogCNw==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
