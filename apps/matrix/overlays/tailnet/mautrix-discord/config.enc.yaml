@@ -41,8 +41,8 @@ manhole:
     - 0
 bridge:
   username_template: discord_{{.}}
-  displayname_template: '{{.Username}}#{{.Discriminator}}{{if .Bot}} (bot){{end}}'
-  command_prefix: '!discord'
+  displayname_template: "{{.Username}}#{{.Discriminator}}{{if .Bot}} (bot){{end}}"
+  command_prefix: "!discord"
   initial_chat_sync: 10
   invite_own_puppet_to_pm: false
   sync_with_custom_puppets: true
@@ -84,7 +84,7 @@ bridge:
     debug_endpoints: false
   permissions:
     matrix.taila659a.ts.net: user
-    '@admin:matrix.taila659a.ts.net': admin
+    "@admin:matrix.taila659a.ts.net": admin
   relay:
     enabled: false
     bot_token: null
@@ -99,9 +99,9 @@ logging:
   formatters:
     colored:
       (): mautrix_discord.util.ColorFormatter
-      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
+      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
     normal:
-      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
+      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
   handlers:
     file:
       class: logging.handlers.RotatingFileHandler
