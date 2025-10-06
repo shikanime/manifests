@@ -143,10 +143,10 @@ spec:
               cp /config/config.yaml /data/config.yaml
               cp /config/registration.yaml /data/registration.yaml
           volumeMounts:
-            - name: mautrix-discord-config
+            - name: config
               mountPath: /config
               readOnly: true
-            - name: mautrix-discord-data
+            - name: data
               mountPath: /data
       containers:
         - name: mautrix-discord
@@ -170,15 +170,15 @@ spec:
               port: http
             failureThreshold: 12
           volumeMounts:
-            - name: mautrix-discord-data
+            - name: data
               mountPath: /data
       securityContext:
         fsGroup: 1337
       volumes:
-        - name: mautrix-discord-config
+        - name: config
           secret:
             secretName: mautrix-discord
-        - name: mautrix-discord-data
+        - name: data
           persistentVolumeClaim:
             claimName: mautrix-discord-data
 ---
@@ -209,10 +209,10 @@ spec:
               cp /config/config.yaml /data/config.yaml
               cp /config/registration.yaml /data/registration.yaml
           volumeMounts:
-            - name: mautrix-googlechat-config
+            - name: config
               mountPath: /config
               readOnly: true
-            - name: mautrix-googlechat-data
+            - name: data
               mountPath: /data
       containers:
         - name: mautrix-googlechat
@@ -236,15 +236,15 @@ spec:
               port: http
             failureThreshold: 12
           volumeMounts:
-            - name: mautrix-googlechat-data
+            - name: data
               mountPath: /data
       securityContext:
         fsGroup: 1337
       volumes:
-        - name: mautrix-googlechat-config
+        - name: config
           secret:
             secretName: mautrix-googlechat
-        - name: mautrix-googlechat-data
+        - name: data
           persistentVolumeClaim:
             claimName: mautrix-googlechat-data
 ---
@@ -272,13 +272,13 @@ spec:
             - -c
             - |
               # Copy mautrix-slack config
-              cp /config/mautrix-slack/config.yaml /data/config.yaml
-              cp /config/mautrix-slack/registration.yaml /data/registration.yaml
+              cp /config/config.yaml /data/config.yaml
+              cp /config/registration.yaml /data/registration.yaml
           volumeMounts:
-            - name: mautrix-slack-config
-              mountPath: /config/mautrix-slack
+            - name: config
+              mountPath: /config
               readOnly: true
-            - name: mautrix-slack-data
+            - name: data
               mountPath: /data
       containers:
         - name: mautrix-slack
@@ -302,12 +302,12 @@ spec:
               port: http
             failureThreshold: 12
           volumeMounts:
-            - name: mautrix-slack-data
+            - name: data
               mountPath: /data
       volumes:
-        - name: mautrix-slack-config
+        - name: config
           secret:
             secretName: mautrix-slack
-        - name: mautrix-slack-data
+        - name: data
           persistentVolumeClaim:
             claimName: mautrix-slack-data
