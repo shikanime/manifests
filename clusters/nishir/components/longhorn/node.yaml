@@ -27,7 +27,7 @@ spec:
     nishir:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/flandre/longhorn/
+      path: /mnt/remilia/longhorn/
       tags:
         - balanced
     nishir-fast:
@@ -49,13 +49,13 @@ spec:
     nishir:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/remilia/longhorn/
+      path: /mnt/flandre/longhorn/
       tags:
         - balanced
     nishir-fast:
       allowScheduling: true
       diskType: filesystem
-      path: /dev/disk/by-labels/reimu
+      path: /mnt/marisa/longhorn/
       tags:
         - fast
   name: minish
