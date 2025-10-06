@@ -31,21 +31,6 @@ spec:
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
-  name: monthly-system-backup
-  namespace: longhorn-system
-spec:
-  concurrency: 0
-  cron: 0 4 * * *
-  groups: []
-  name: monthly-system-backup
-  parameters:
-    volume-backup-policy: if-not-present
-  retain: 12
-  task: system-backup
----
-apiVersion: longhorn.io/v1beta2
-kind: RecurringJob
-metadata:
   name: weekly-filesystem-trim
   namespace: longhorn-system
 spec:
