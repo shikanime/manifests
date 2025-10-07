@@ -4,9 +4,6 @@ images:
   - name: busybox
     newName: docker.io/library/busybox
     newTag: 1.37.0
-  - name: caddy
-    newName: docker.io/library/caddy
-    newTag: 2.9.1
   - name: mautrix-discord
     newName: dock.mau.dev/mautrix/discord
     newTag: v0.7.5

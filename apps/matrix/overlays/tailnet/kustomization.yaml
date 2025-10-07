@@ -4,8 +4,8 @@ components:
   - ../../components/tailscale
 configMapGenerator:
   - files:
-      - caddy/Caddyfile
-    name: caddy
+      - synapse/mautrix_request_handler.py
+    name: synapse
     namespace: shikanime
 resources:
   - ../nishir

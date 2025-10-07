@@ -19,7 +19,7 @@ network:
   #  .Profile.Pronouns - The pronouns of the user
   #  .Profile.Email - The email address of the user
   #  .Profile.Phone - The formatted phone number of the user
-  displayname_template: "{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}"
+  displayname_template: '{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}'
   # Channel name template for Slack channels (all types). Available variables:
   #  .Name - The name of the channel
   #  .Team.Name - The name of the team the channel is in
@@ -34,12 +34,12 @@ network:
   #  .IsShared - Whether the channel is shared with another workspace.
   #  .IsExtShared - Whether the channel is shared with an external organization.
   #  .IsOrgShared - Whether the channel is shared with an organization in the same enterprise grid.
-  channel_name_template: "{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}"
+  channel_name_template: '{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}'
   # Displayname template for Slack workspaces. Available variables:
   #  .Name - The name of the team
   #  .Domain - The Slack subdomain of the team
   #  .ID - The internal ID of the team
-  team_name_template: "{{ .Name }}"
+  team_name_template: '{{ .Name }}'
   # Should incoming custom emoji reactions be bridged as mxc:// URIs?
   # If set to false, custom emoji reactions will be bridged as the shortcode instead, and the image won't be available.
   custom_emoji_reactions: true
@@ -61,7 +61,7 @@ network:
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: "!slack"
+  command_prefix: '!slack'
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -155,18 +155,18 @@ bridge:
     #   .Caption - The `formatted_body` field of the message, if it's a caption. Otherwise an empty string.
     #   .FileName - The name of the file being sent.
     message_formats:
-      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
-      m.file: "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.image: "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.audio: "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.video: "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.location: "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}"
+      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
+      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
     # For networks that support per-message displaynames (i.e. Slack and Discord), the template for those names.
     # This has all the Sender variables available under message_formats (but without the .Sender prefix).
     # Note that you need to manually remove the displayname from message_formats above.
-    displayname_format: "{{ .DisambiguatedName }}"
+    displayname_format: '{{ .DisambiguatedName }}'
   # Permissions for using the bridge.
   # Permitted values:
   #    relay - Talk through the relaybot (if enabled), no access otherwise
@@ -178,9 +178,9 @@ bridge:
   #   domain - All users on that homeserver
   #     mxid - Specific user
   permissions:
-    "*": relay
+    '*': relay
     matrix.taila659a.ts.net: user
-    "@admin:matrix.taila659a.ts.net": admin
+    '@admin:matrix.taila659a.ts.net': admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -203,7 +203,7 @@ homeserver:
   # The address that this appservice can use to connect to the homeserver.
   # Local addresses without HTTPS are generally recommended when the bridge is running on the same machine,
   # but https also works if they run on different machines.
-  address: https://matrix
+  address: https://matrix:8448
   # The domain of the homeserver (also known as server_name, used for MXIDs, etc).
   domain: matrix.taila659a.ts.net
   # What software is the homeserver running?
@@ -238,7 +238,7 @@ appservice:
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
-  public_address: https://matrix-slack-bridge.taila659a.ts.net
+  public_address: https://matrix:8448-slack-bridge.taila659a.ts.net
   # The hostname and port where this appservice should listen.
   # For Docker, you generally have to change the hostname to 0.0.0.0.
   hostname: 0.0.0.0
@@ -261,8 +261,8 @@ appservice:
   # This value doesn't affect the registration file.
   async_transactions: false
   # Authentication tokens for AS <-> HS communication. Autogenerated; do not modify.
-  as_token: ENC[AES256_GCM,data:vSm+4AJuwpPDiCpxnW8lK3RVJOWuptEaf0A0xUHcFUhG4sqkNr619gf00WyMXq78JPIeKZ+LkthOKXdIljP5iQ==,iv:ZlRMhYsbSJfiDGm+uR86lUDfhvJ/1WRINovMyDJld20=,tag:ZRBlcyBkntc5H92YWypPnw==,type:str]
-  hs_token: ENC[AES256_GCM,data:fu93Nthzp4ErB/ySt99mxh5v/pnE4+6/RsUsLhdTZM5zmc7FLh1ygUz3+xCeq0mdD4jwylaAaOKuQyQBP6zFYQ==,iv:XlQa0WGIbCgo1wG1RNtureg9Ls1FVItdiTrZ9x9c/Ts=,tag:uHqT3Ybxd9FIxxhOrDrbFQ==,type:str]
+  as_token: ENC[AES256_GCM,data:sAB/4aE82XiZqyEBRonXjh3KEtcTHi1wpm8fx0JkjbjzKe0G42N3Hemir2IDsCzQvV8H0oNsGMtzqKB6/aDbIw==,iv:GdtE6wuZNVPjyYfccyVLSD3FaegSUCTEC7taaORQVt0=,tag:KvugXG5b39QxTKMKL3lPjw==,type:str]
+  hs_token: ENC[AES256_GCM,data:YFRTv+57Y4qSwQLMCJYaI2EYHEZhAmEPcMLr4Nr9+wuih9tgAneAL5qcIHIa/+Jf902w08tGC0tpcX1+qZRyrw==,iv:T+SCEqiQHm6uG1tAScjCbI0sC2RrQXtLVeikRnX7WII=,tag:TtEbr6rDDCS253kVE1phzg==,type:str]
   # Localpart template of MXIDs for remote users.
   # {{.}} is replaced with the internal ID of the user.
   username_template: slack_{{.}}
@@ -296,7 +296,7 @@ provisioning:
   prefix: /_matrix/provision
   # Shared secret for authentication. If set to "generate" or null, a random secret will be generated,
   # or if set to "disable", the provisioning API will be disabled.
-  shared_secret: ENC[AES256_GCM,data:BAQ8gF5Ie1PFoYPPQ6Mipg+wVpWh5SSek7m9R5jcVwdrMg4jvct9I2KCcfCOJcalY0ANJIEouIMzMa5S73SQ/w==,iv:2vbEdfuRYm6g8BR6T/WlIRXAsQuPzsy3JlxOi6VDDa8=,tag:9WON3+GS7gkD6nWF2aRRNQ==,type:str]
+  shared_secret: ENC[AES256_GCM,data:wKZgGmGcBhWimadMpFL/PlFbKQqwEVJJ3VlkqAwE/RL1DG3F5TRvrsubvseK8kyNX3xrSwAJR+bARuwMNEqeEQ==,iv:QCjzJ+c3OMO60PCMCh/9sSlQCw4Cwo1QLYWu2Kq/sMg=,tag:Tp44D77kf67hA/DNFudfFw==,type:str]
   # Whether to allow provisioning API requests to be authed using Matrix access tokens.
   # This follows the same rules as double puppeting to determine which server to contact to check the token,
   # which means that by default, it only works for users on the same server as the bridge.
@@ -324,7 +324,7 @@ public_media:
 # More details can be found at https://docs.mau.fi/bridges/go/discord/direct-media.html
 direct_media:
   # Should custom mxc:// URIs be used instead of reuploading media?
-  enabled: true
+  enabled: false
   # The server name to use for the custom mxc:// URIs.
   # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
   # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
@@ -378,7 +378,7 @@ double_puppet:
   # Servers to always allow double puppeting from.
   # This is only for other servers and should NOT contain the server the bridge is on.
   servers:
-    matrix.taila659a.ts.net: https://matrix
+    matrix.taila659a.ts.net: https://matrix:8448
   # Whether to allow client API URL discovery for other servers. When using this option,
   # users on other servers can use double puppeting even if their server URLs aren't
   # explicitly added to the servers map above.
@@ -484,31 +484,31 @@ sops:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkcGVVOXRCa3NGTjJKL2Y1
-        V2E1aTZ4alZMUExkV0hGMXhGZm1uWmhMaEZFCmxXZ0NSV243RklyNGo3UEtLRXEx
-        eXZFOVhFek44UWkwb0FXMGVlUTUybzgKLS0tIGxRNHo0cFV2R2l6K2EvdXQzZmhi
-        SE54RUI5dkdFN1U0d1luKzN6d0h5NUUKmyK/joNkHeCg5wzOlS8sl7FI/Km0ksqn
-        UAzaJ9Rz5jaD+NPudJFeUa5PxMfbK5a8qone/Vcb37WFvix61wDIFA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRd01qZEFnbkZVTW9RSWdr
+        cGtxV1RKOGdCaktQTHBtcGVoOHhTeEFRdm5VCjUyOE1FQXNXeWxuV0ZVUEFxbnVC
+        MWRjb0ZxWGpaa1dueEJ1Z2ovK1o5azAKLS0tIFJNc3FYTFl6dHpKb0JLWU16S0tn
+        TFE3ZFhsZXN4cFdCVDRYeThsdHU5eVkKO5zQLWXXwTXCnr7QUO3ymZNPve8pRZOU
+        bpnhJANUBAT94mnUdFZeVizs/XY87pYrCgGzAhb7eUMiiC6ex53DBQ==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArOHpYRWoyV2FBMlRxaEth
-        NzNMd3lkZmFvYitKQ04yUWNqWkpWdTJWN1hFCk41RFZkT2FLbmdVVmFDbi9YSm43
-        NTVZdFRueFlaZDBqTUUzMTJmcEViTGsKLS0tIGxCU2dhSktVRUNmOVNsU3RGR0Ju
-        Q2J2TEphODJ3bnlVekZEUjYyYXBNcVEK4E6e82yq3oGY/gVFK2283QOJpzwuXl3p
-        E0ASxjqsDje7V2XTuKMXNqg/pYPpIn2npewIDDLQIhEK7mstmAcsHw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBPeTBDc281TEhxbkhzT3ZE
+        L3VHQmhDS0dRZjVXZlhPMWlFb1U3NmJoZEM0Cmk0R3pMdjdaZjBweVJibjJaVmJ4
+        TG1COXBQVUxvUitzdGdwbEZ0U0p4bFEKLS0tIGJEWFpvNzVsRSt2aVZiclZDendW
+        aStNWVFESURyeEhWTCs2cGF0OWx2aGcKy3AlOZ4/TENCOOiMVsi+b3lUrx8rdSwL
+        l3W6uPD7+SS7RWL69nf47GRPJmNFqxeakR7u1s9A/b6jgpySWqmBkQ==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwaVJ6cEJYbEduYTlxREpp
-        ZkovZUFxTEU5elNBYnFocnpRRnlkaHR0RkhVCnB2WTN1T1lEWHh1djZ1eEY1ZzdX
-        cXE2akRkOXJGYVEwa2VBOXAzQStrQk0KLS0tIElCSlFhTVVWbElyK3dUWm5tWmpN
-        MVFYUFcwSU5oUFVrOFdicERxZk5UUW8KqpH4JENaslq3WErJPjDOqIO/llaF2zEk
-        v0N8fPWy/lZEXeN1LZ9yj6FhertU5DGKbYwL4xoM/sXhuKCVAJfBtQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmNUptU0MwZEEwRXBBWjgw
+        OVZFM3pYSlg3LzVTbDhNZVhlV3dhZjJNcURnCkpUSytBbHNTTGJSRlFtU3BOQjN2
+        Tmg3WFFBMnpjUjJkR3ZENWNiWTF0WmsKLS0tIHJjM3RBK2NKTTN0TWhDUUxiNk9K
+        ejJFRlVSS0hFMUoxTllGblRhV2d4VDQKDEdhxqvLsgd+GJMF7uPe4MFAhX+8IgBO
+        lZl2L1kTFt9k1fmo2EP5tRLnkeTNetbSHBZOheX3GIvorzxTU2KL7g==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-07T10:20:55Z"
-  mac: ENC[AES256_GCM,data:C/9kZqoy2SludWas/0pvOiL+1VfPsv/KP/CL7wjxIJtxFXwjZCIdDlF3FdNcLh1wd0d3aieXVteTA8YoDNv6cqfC4b5y9EjGGBJfu8TUexY805VQ59vOjhc3Ih04BgiSvvDEv5Lwqkt6ImOOBqAThArKhyVfIHH/stAsGx3Xmw4=,iv:4C2mdHaZzuFoURh1H13aG1SP6D7lohnWr32JQmzcdT4=,tag:gwzL4RmJ8rNTiN9UIm4Omw==,type:str]
+  lastmodified: "2025-10-07T11:03:40Z"
+  mac: ENC[AES256_GCM,data:KUo1hi+1KmFFWsVZfQyUq8CU6clXCAnPiSRyE4oJB+CxrU3Kj0TdLxWGmU/VSeBbIQz+bGAmd1guo7u+U2xKWaTV+D4C3QOvVUU09UAwjHhiw2r7ArRy03n0sc1dy8lEGydkAveLKiKWYCq7JxM/VjFrE2t9t8Rj6wwpXIJPmUk=,iv:L1K/gXFiCjZO5U8X2ZkGxWH25yVmxSprSbun+PDvcaU=,tag:qOWCuJBUDG2jgUH4su+FFw==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2

@@ -7,9 +7,9 @@ spec:
   template:
     spec:
       containers:
-        - name: caddy
+        - name: synapse
           ports:
-            - containerPort: 443
+            - containerPort: 8448
               name: https
           readinessProbe:
             httpGet:

@@ -40,6 +40,7 @@ spec:
               # Copy synapse config
               cp /config/synapse/homeserver.yaml /data/homeserver.yaml
               cp /config/synapse/log.config /data/log.config
+              cp /config/synapse/mautrix_request_handler.py /data/additional_resources/mautrix_request_handler.py
 
               # Copy registration to synapse appservices
               cp /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
@@ -61,34 +62,11 @@ spec:
             - name: synapse-data
               mountPath: /data
       containers:
-        - name: caddy
-          image: caddy
-          ports:
-            - name: http
-              containerPort: 80
-          readinessProbe:
-            httpGet:
-              path: /_matrix/client/versions
-              port: http
-            initialDelaySeconds: 30
-          livenessProbe:
-            httpGet:
-              path: /_matrix/client/versions
-              port: http
-            initialDelaySeconds: 60
-          startupProbe:
-            httpGet:
-              path: /_matrix/client/versions
-              port: http
-            initialDelaySeconds: 5
-            failureThreshold: 30
-          volumeMounts:
-            - name: caddy-config
-              mountPath: /etc/caddy
-              readOnly: true
         - name: synapse
           image: synapse
           ports:
+            - name: http
+              containerPort: 8008
             - name: metrics
               containerPort: 9090
           volumeMounts:
@@ -97,9 +75,6 @@ spec:
       securityContext:
         fsGroup: 991
       volumes:
-        - name: caddy-config
-          configMap:
-            name: caddy
         - name: mautrix-discord-config
           secret:
             secretName: mautrix-discord
