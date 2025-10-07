@@ -34,8 +34,8 @@ spec:
             - -c
             - |
               # Create necessary directories
-              mkdir -p /data/logs
               mkdir -p /data/appservices
+              mkdir -p /data/additional_resources
 
               # Copy synapse config
               cp /config/synapse/homeserver.yaml /data/homeserver.yaml
@@ -130,7 +130,6 @@ spec:
             - sh
             - -c
             - |
-              # Copy mautrix-discord config
               cp /config/config.yaml /data/config.yaml
               cp /config/registration.yaml /data/registration.yaml
           volumeMounts:
@@ -196,7 +195,6 @@ spec:
             - sh
             - -c
             - |
-              # Copy mautrix-googlechat config
               cp /config/config.yaml /data/config.yaml
               cp /config/registration.yaml /data/registration.yaml
           volumeMounts:
@@ -262,7 +260,6 @@ spec:
             - sh
             - -c
             - |
-              # Copy mautrix-slack config
               cp /config/config.yaml /data/config.yaml
               cp /config/registration.yaml /data/registration.yaml
           volumeMounts:
