@@ -39,7 +39,6 @@
               hclfmt.enable = true;
               nixfmt.enable = true;
               prettier.enable = true;
-              ruff-format.enable = true;
               shfmt.enable = true;
               statix.enable = true;
               terraform.enable = true;

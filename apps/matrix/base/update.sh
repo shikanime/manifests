@@ -7,6 +7,7 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
+  ["caddy"]="docker.io/library/caddy"
   ["busybox"]="docker.io/library/busybox"
   ["mautrix-discord"]="dock.mau.dev/mautrix/discord"
   ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
