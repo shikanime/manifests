@@ -33,17 +33,16 @@ spec:
             - sh
             - -c
             - |
-              # Create necessary directories
-              mkdir -p /data/appservices
-
               # Copy synapse config
-              cp /config/synapse/homeserver.yaml /data/homeserver.yaml
-              cp /config/synapse/log.config /data/log.config
+              mkdir -p /data
+              cp /config/synapse/homeserver.yaml /data
+              cp /config/synapse/*.log.config /data
 
               # Copy registration to synapse appservices
-              cp /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
-              cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
-              cp /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
+              mkdir -p /data/appservices
+              cp /config/mautrix-discord/registration.yaml /data/appservices
+              cp /config/mautrix-googlechat/registration.yaml /data/appservices
+              cp /config/mautrix-slack/registration.yaml /data/appservices
           volumeMounts:
             - name: mautrix-discord-config
               mountPath: /config/mautrix-discord
@@ -138,8 +137,9 @@ spec:
             - sh
             - -c
             - |
-              cp /config/config.yaml /data/config.yaml
-              cp /config/registration.yaml /data/registration.yaml
+              mkdir -p /data
+              cp /config/config.yaml /data
+              cp /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
@@ -203,8 +203,9 @@ spec:
             - sh
             - -c
             - |
-              cp /config/config.yaml /data/config.yaml
-              cp /config/registration.yaml /data/registration.yaml
+              mkdir -p /data
+              cp /config/config.yaml /data
+              cp /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
@@ -268,8 +269,9 @@ spec:
             - sh
             - -c
             - |
-              cp /config/config.yaml /data/config.yaml
-              cp /config/registration.yaml /data/registration.yaml
+              mkdir -p /data
+              cp /config/config.yaml /data
+              cp /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
