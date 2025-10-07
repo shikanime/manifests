@@ -1,42 +1,52 @@
+# Configuration file for Synapse.
+#
+# This is a YAML file: see [1] for a quick introduction. Note in particular
+# that *indentation is important*: all the elements of a list or dictionary
+# should have the same indentation.
+#
+# [1] https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html
+#
+# For more information on how to configure Synapse, including a complete accounting of
+# each option, go to docs/usage/configuration/config_documentation.md or
+# https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html
+server_name: matrix.taila659a.ts.net
+pid_file: /data/homeserver.pid
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    resources:
+      - compress: false
+        names:
+          - client
+          - federation
+  - port: 8448
+    tls: true
+    type: http
+    x_forwarded: true
+    resources:
+      - compress: false
+        names:
+          - client
+          - federation
+database:
+  name: sqlite3
+  args:
+    database: /data/homeserver.db
+log_config: /data/matrix.taila659a.ts.net.log.config
+media_store_path: /data/media_store
+registration_shared_secret: ENC[AES256_GCM,data:LSsS8wIYZLFwPeRTkOCheDWK5O3ckxX9wNtkKtj9uXa7bOhqFRVTsvU8/QyrIcle/qw=,iv:AMVQ6SztKWrbZQA4b0Gd99i1bl7Naq53vZu8MkXsD9k=,tag:3CjlXr3uFmWcMfeMJZsXWQ==,type:str]
+report_stats: false
+macaroon_secret_key: ENC[AES256_GCM,data:HhAXViDE+BAOwG11rfdnM22d4v9pcNCo871hB6aqN2b8JH1F1Sd65G8KpWfgTKzeYgE=,iv:nWcB8mnjYmgijNsWNwN/uEhi8YthqPCxFVOgzvNkE+8=,tag:NzO2fPgIguIUqM1c5R8M9A==,type:str]
+form_secret: ENC[AES256_GCM,data:B6jPO19gPZkQSMSWyo3P2Rju5Q4TZ9V3D1WL9dgtSOSP1tDMlSutpYDfQjQw2TBhXEc=,iv:JPPkb68TU6N/tmFcqek4TggJxj2UJzZTx5x9R4NKdn4=,tag:KGL5ayHZU0e6CRULM/Tq3Q==,type:str]
+signing_key_path: /data/matrix.taila659a.ts.net.signing.key
+trusted_key_servers:
+  - server_name: matrix.org
 app_service_config_files:
   - /data/appservices/mautrix-discord.yaml
   - /data/appservices/mautrix-googlechat.yaml
   - /data/appservices/mautrix-slack.yaml
-database:
-  args:
-    database: /data/homeserver.db
-  name: sqlite3
-enable_authenticated_media: true
-form_secret: ENC[AES256_GCM,data:Y+tPRqxg2/ZG29hYrAHa560XFkK84jBNnFAasa419gwSM8Jm1y3VZc1GvwhIJbgXHrE=,iv:azWDCBhhXZ+pldU36KN6zpwtlBXu6Q23oA+KOpRfzu4=,tag:Jr7krGoFcdrTAY0tRbyn9Q==,type:str]
-listeners:
-  - port: 8080
-    resources:
-      - compress: false
-        names:
-          - client
-          - federation
-    tls: false
-    type: http
-    x_forwarded: true
-  - port: 8443
-    resources:
-      - compress: false
-        names:
-          - client
-          - federation
-    tls: true
-    type: http
-    x_forwarded: true
-log_config: /data/log.config
-macaroon_secret_key: ENC[AES256_GCM,data:SdPgCMxXlqSrIJF3ShY1iUoa/1vJYedFvrx+eBVT2ji1Asx8uZce4vueTTAlrFmjq5M=,iv:MKtMnGexmxJttueuuajEtQl2Cn7xyj7wemmTCsQMFYs=,tag:X9mjO3vThqfmZqsRiGdvuQ==,type:str]
-media_store_path: /data/media_store
-pid_file: /data/homeserver.pid
-registration_shared_secret: ENC[AES256_GCM,data:7WBjARIcZWdgZSeWfzhdF3q5BNTcXp3jWRCk103RsAYmOlpd+ad/XMLpgi3aDvrOZj4=,iv:/cZPiMzW7bqLR65KvL9y1cYWMxadRzZiLy7hFG3ST8Y=,tag:zMtmfdjIrNU+9JQ0GcrpHw==,type:str]
-report_stats: false
-server_name: matrix.taila659a.ts.net
-signing_key_path: /data/matrix.taila659a.ts.net.signing.key
-trusted_key_servers:
-  - server_name: matrix.org
 tls_certificate_path: /etc/ssl/private/tls.crt
 tls_private_key_path: /etc/ssl/private/tls.key
 sops:
@@ -44,31 +54,31 @@ sops:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMVm5OeWhDRU5GeW1yK2JZ
-        UzB0UG5ucjlaVFdVald0elZlVCtZbWRMRVh3ClVUNHJLeC9uUENWeTVPZnZLdm96
-        SGY5Q3pMT1BVQzRMY2lLOWhWMGg4OWcKLS0tIEQyc1I3anB5QlVlTW5SZEdRR0o0
-        V3o0Z04zNk1WRFFJMVhlcTVydHlXNUUK6SM+QC5UOZBYwCGOwIpVbo4KGsAZSTYB
-        uQfH1ks+jLkoEjbnTC+azQa8Aw4uImJ9yGWOrCzuvoBjBCxUg7hs5w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAreHdqUUJ2dUhIK2FqN3Yw
+        SmZvVjE0ZEk2bDU2ejRhQTNjbVZ5c3BCNDBzClllMlpuQnh4eVVhOVNGdmVlZisy
+        ZXE5WmlLY2NibS9SQ3BNc2J5VjZVNDAKLS0tIElpN1VSaEtFQWdxbCtWY0h2b2M1
+        WmR0SGZNQTlrbnh3bjFrMlprSGdoYmsKqhXOrXIc7EXoYLUtWWiQ4sMx1OPWCHqH
+        mKXxh6zAdUFHbfBuv+Zkzz8liei6g1d+Qppbn9m29bfIAy5H0IQNxw==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWaVZmN0ROLzNuYmsxZ0Zo
-        YTZOT1k5M1AvWmhNYU12MWsrMmZyVmMxZ25zCkRqb0lvQi9LR0F4MXkyeUxpNm1X
-        OENkZjJmRGVYZVJSUW9UekNNdG9IL1UKLS0tIFZLUGptdWUvczh5Z2gzMDU1QlMx
-        Q2VhbTNyc3JFVHhrQUVBSEtLR21vSTgK6GKqbhcGcHi2VqbWMy0XmQxo1i9S3kuZ
-        iDaYcGlBUMOiHxniG+zn1T8zAdbDJRuMOab5kCiJqKLG45mg86pOMw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjeFBiZm5NVDczcFF5aFdC
+        U0hSdGhYNG5WRWNHVlh3blRyQ05GZGlucXpFCk1jZDdoUTBXY2tnMkdoNzR5dzI2
+        SzcxVXJrTVlKNkpXa2VDRXZuZVNGWmcKLS0tIFJaSE51b1lscWlUVXJweUdSVnBs
+        SHV0dVRPbnY5M3Z3b0hTdGtBZG5PM00KSRYgiHK4NzAaB8OU7m0At1GyveUwg63a
+        oSqtTSQcqCZR2mrDt0D3rQNfn717weY+JJrbaI11qEmSR2qLiFTxvA==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrOVJiYlVvQ2szc0hTeTl1
-        bDd6RVMwYTRqQ0Q1dXplMEhsYjBndmYvYVNjCmYzREFmcEdvSWRDK0RKN2d1NG5k
-        WkwxUXNwSS9EREhoeEp0UHVXRW1laTQKLS0tIFUxdDVkbjJyNnNPQ0w2RWdrb3Az
-        OXB2cjJRWWd5S3BWNmQzbnQ4QWRrRzQKNuiMGdtxqwxyGFUNe5FeicDX/7Ek1UxN
-        Ks+oXlrH3Nm5Rr1kdOYmWnyoAP+1igikdT+tl1rvYviUuVkEdX9oMg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEN1VnSitRSU1xaW40TkNi
+        THpRNUVodVc3bWdUK29UbnVweWNDRWtJVEY0CmwxUWZOQlgvR0M2NVNWSEp1OS9X
+        WG1USlhJUVhLeFcrMWtpOFhQamdKc2sKLS0tIGlZMmNxblQzWE5sL05FVWY3ejRN
+        T3NXUEJsRHAwUW9YdHRjelFiMFFCY1kKjgBON8pRNVa3/34MaYl3s4u7TY1IumgY
+        Dlo9LuDywccHAuu4vhv2wBXB3aKNHV19zm6EZPB4R9/nsfkRFsXQ3w==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-06T08:56:50Z"
-  mac: ENC[AES256_GCM,data:puND7LJ1JBsFUSl/FwYdIEcmGDzr63JUHQotai9J19B8jpr+fM2/cXLAYP4QmAGJv2bCtnoY0aeekx/o85iTwrZlJ8D1ZD8cgyuVyUyKdQA0pG9MeHYs4hEWYWy4rxGGzl0SE95b7q+mczBJImbJvvN2Wvdy2NsSQ5z1Kxe990o=,iv:67P5ExmUruNgwnZMKRs2PmeoR97QYFjh0eLSp1iB7Uw=,tag:v86iDXExYmyG3Yzl2+vKbA==,type:str]
+  lastmodified: "2025-10-07T12:40:05Z"
+  mac: ENC[AES256_GCM,data:DGMWqjQ1S+m4bmrLwrOZeWTdvXMfhpzC0oTcDCOVrYIeKQ/l5irslL1QZv2Btck/6zK1BiHt5E06Kj6NpYry+gzb0MSND6+e9OEprFrRoHGziN55Zvm3GiyGRjis5xbwcUnAIZ71w+rZeu9wW8Qh56pyp5vvHtthRj9oEsDStEE=,iv:4/tpb5wk8CoL5R+ipR/EJSkLyysluVJYQ2DZxpCY70Q=,tag:vW8q1Y02anfc03B4OavH8A==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   version: 3.10.2

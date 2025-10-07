@@ -9,7 +9,7 @@ spec:
       containers:
         - name: caddy
           ports:
-            - containerPort: 443
+            - containerPort: 8448
               name: https
           readinessProbe:
             httpGet:

@@ -27,6 +27,6 @@ secretGenerator:
     namespace: shikanime
   - files:
       - synapse/homeserver.yaml
-      - synapse/log.config
+      - synapse/matrix.taila659a.ts.net.log.config
     name: synapse
     namespace: shikanime

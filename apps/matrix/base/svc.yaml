@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 80
+      port: 8008
       targetPort: http
     - name: metrics
       port: 9090
