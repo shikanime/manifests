@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matrix-manager
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: caddy
+          ports:
+            - containerPort: 443
+              name: https
+          readinessProbe:
+            tcpSocket:
+              port: https
+          livenessProbe:
+            tcpSocket:
+              port: https
+          startupProbe:
+            tcpSocket:
+              port: https
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: matrix-manager-tls

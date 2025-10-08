@@ -79,46 +79,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-manager
-  namespace: shikanime
-spec:
-  template:
-    spec:
-      containers:
-        - name: matrix-manager
-          ports:
-            - containerPort: 443
-              name: https
-          readinessProbe:
-            httpGet:
-              port: https
-              scheme: HTTPS
-          livenessProbe:
-            httpGet:
-              port: https
-              scheme: HTTPS
-          startupProbe:
-            httpGet:
-              port: https
-              scheme: HTTPS
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
-            - name: tls
-              mountPath: /etc/ssl/private
-              readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: matrix-manager-tls
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
   name: matrix-slack
   namespace: shikanime
 spec:

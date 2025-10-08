@@ -19,7 +19,7 @@ network:
   #  .Profile.Pronouns - The pronouns of the user
   #  .Profile.Email - The email address of the user
   #  .Profile.Phone - The formatted phone number of the user
-  displayname_template: '{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}'
+  displayname_template: "{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}"
   # Channel name template for Slack channels (all types). Available variables:
   #  .Name - The name of the channel
   #  .Team.Name - The name of the team the channel is in
@@ -34,12 +34,12 @@ network:
   #  .IsShared - Whether the channel is shared with another workspace.
   #  .IsExtShared - Whether the channel is shared with an external organization.
   #  .IsOrgShared - Whether the channel is shared with an organization in the same enterprise grid.
-  channel_name_template: '{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}'
+  channel_name_template: "{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}"
   # Displayname template for Slack workspaces. Available variables:
   #  .Name - The name of the team
   #  .Domain - The Slack subdomain of the team
   #  .ID - The internal ID of the team
-  team_name_template: '{{ .Name }}'
+  team_name_template: "{{ .Name }}"
   # Should incoming custom emoji reactions be bridged as mxc:// URIs?
   # If set to false, custom emoji reactions will be bridged as the shortcode instead, and the image won't be available.
   custom_emoji_reactions: true
@@ -61,7 +61,7 @@ network:
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: '!slack'
+  command_prefix: "!slack"
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -155,18 +155,18 @@ bridge:
     #   .Caption - The `formatted_body` field of the message, if it's a caption. Otherwise an empty string.
     #   .FileName - The name of the file being sent.
     message_formats:
-      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
-      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
+      m.file: "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}"
+      m.image: "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}"
+      m.audio: "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}"
+      m.video: "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}"
+      m.location: "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}"
     # For networks that support per-message displaynames (i.e. Slack and Discord), the template for those names.
     # This has all the Sender variables available under message_formats (but without the .Sender prefix).
     # Note that you need to manually remove the displayname from message_formats above.
-    displayname_format: '{{ .DisambiguatedName }}'
+    displayname_format: "{{ .DisambiguatedName }}"
   # Permissions for using the bridge.
   # Permitted values:
   #    relay - Talk through the relaybot (if enabled), no access otherwise
@@ -178,9 +178,9 @@ bridge:
   #   domain - All users on that homeserver
   #     mxid - Specific user
   permissions:
-    '*': relay
+    "*": relay
     matrix.taila659a.ts.net: user
-    '@admin:matrix.taila659a.ts.net': admin
+    "@admin:matrix.taila659a.ts.net": admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
