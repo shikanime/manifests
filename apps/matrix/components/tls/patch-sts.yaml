@@ -7,9 +7,9 @@ spec:
   template:
     spec:
       containers:
-        - name: caddy
+        - name: synapse
           ports:
-            - containerPort: 443
+            - containerPort: 8448
               name: https
           readinessProbe:
             httpGet:
@@ -30,14 +30,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-        - name: synapse
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
-            - name: tls
-              mountPath: /etc/ssl/private
-              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -45,6 +37,25 @@ spec:
         - name: tls
           secret:
             secretName: matrix-tls
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-discord
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: mautrix-discord
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -75,25 +86,6 @@ spec:
     spec:
       containers:
         - name: mautrix-slack
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-discord
-  namespace: shikanime
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-discord
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs

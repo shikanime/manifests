@@ -59,11 +59,13 @@ spec:
             - name: synapse-data
               mountPath: /data
       containers:
-        - name: caddy
-          image: caddy
+        - name: synapse
+          image: synapse
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8008
+            - name: metrics
+              containerPort: 9090
           readinessProbe:
             httpGet:
               path: /_matrix/client/versions
@@ -80,15 +82,6 @@ spec:
               port: http
             initialDelaySeconds: 5
             failureThreshold: 30
-          volumeMounts:
-            - name: caddy-config
-              mountPath: /etc/caddy
-              readOnly: true
-        - name: synapse
-          image: synapse
-          ports:
-            - name: metrics
-              containerPort: 9090
           volumeMounts:
             - name: synapse-data
               mountPath: /data

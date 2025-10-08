@@ -20,6 +20,7 @@ images:
     newName: docker.io/matrixdotorg/synapse
     newTag: v1.99.0
 resources:
+  - deploy.yaml
   - ingress.yaml
   - pvc.yaml
   - sts.yaml
