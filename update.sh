@@ -56,6 +56,10 @@ for dir in "$(dirname "$0")"/bootstraps/*; do
   fi
 done
 
+# Update workflows
+bash "$(dirname "$0")"/.github/workflows/update.sh 2>&1 |
+  sed 's/^/['workflows'] /'
+
 # Update Longhorn package
 LATEST_VERSION=$(
   curl --silent \
