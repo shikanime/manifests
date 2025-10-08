@@ -9,6 +9,17 @@ spec:
       name: matrix
       port:
         name: http
+  rules:
+    - host: matrix
+      http:
+        paths:
+          - path: /.well-known/matrix/mautrix
+            pathType: Prefix
+            backend:
+              service:
+                name: matrix-manager
+                port:
+                  name: http
   tls:
     - hosts:
         - matrix

@@ -59,11 +59,13 @@ spec:
             - name: synapse-data
               mountPath: /data
       containers:
-        - name: caddy
-          image: caddy
+        - name: synapse
+          image: synapse
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8008
+            - name: metrics
+              containerPort: 9090
           readinessProbe:
             httpGet:
               path: /_matrix/client/versions
@@ -80,15 +82,6 @@ spec:
               port: http
             initialDelaySeconds: 5
             failureThreshold: 30
-          volumeMounts:
-            - name: caddy-config
-              mountPath: /etc/caddy
-              readOnly: true
-        - name: synapse
-          image: synapse
-          ports:
-            - name: metrics
-              containerPort: 9090
           volumeMounts:
             - name: synapse-data
               mountPath: /data
@@ -245,6 +238,62 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-googlechat-data
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-manager
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: matrix-manager
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-manager
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-manager
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/part-of
+                      operator: NotIn
+                      values:
+                        - nishir-office
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: caddy
+          image: caddy
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 60
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            failureThreshold: 30
+          volumeMounts:
+            - name: mautrix-manager
+              mountPath: /etc/caddy
+              readOnly: true
+      volumes:
+        - name: mautrix-manager
+          configMap:
+            name: caddy
 ---
 apiVersion: apps/v1
 kind: StatefulSet

@@ -4,8 +4,8 @@ components:
   - ../../components/tailscale
 configMapGenerator:
   - files:
-      - caddy/Caddyfile
-    name: caddy
+      - mautrix-manager/Caddyfile
+    name: mautrix-manager
     namespace: shikanime
 resources:
   - ../nishir
