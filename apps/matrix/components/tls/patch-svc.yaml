@@ -6,5 +6,16 @@ metadata:
 spec:
   ports:
     - name: https
+      port: 8448
+      targetPort: https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-manager
+  namespace: shikanime
+spec:
+  ports:
+    - name: https
       port: 443
       targetPort: https

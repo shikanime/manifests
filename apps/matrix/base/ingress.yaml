@@ -13,13 +13,13 @@ spec:
     - host: matrix
       http:
         paths:
-          - path: /.well-known/matrix/mautrix
-            pathType: Prefix
-            backend:
+          - backend:
               service:
                 name: matrix-manager
                 port:
                   name: http
+            path: /.well-known/matrix/mautrix
+            pathType: Prefix
   tls:
     - hosts:
         - matrix
