@@ -51,4 +51,4 @@ spec:
       volumes:
         - name: mautrix-manager
           configMap:
-            name: caddy
+            name: mautrix-manager
