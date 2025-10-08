@@ -8,19 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: createGithubAppToken
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: DeterminateSystems/nix-installer-action@v13
+      - uses: DeterminateSystems/nix-installer-action@v20
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v8
-      - uses: shikanime/ghstack-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+      - uses: shikanime-studio/sapling-action@v2
         with:
           token: ${{ steps.createGithubAppToken.outputs.token }}
           sign-commits: true
