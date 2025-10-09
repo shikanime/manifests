@@ -4,7 +4,7 @@ metadata:
   name: daily-backup
   namespace: longhorn-system
 spec:
-  concurrency: 3
+  concurrency: 5
   cron: "0 4 * * *"
   groups:
     - standard
@@ -19,7 +19,7 @@ metadata:
   name: monthly-backup
   namespace: longhorn-system
 spec:
-  concurrency: 3
+  concurrency: 5
   cron: "0 4 * * *"
   groups:
     - large
@@ -34,7 +34,7 @@ metadata:
   name: weekly-filesystem-trim
   namespace: longhorn-system
 spec:
-  concurrency: 3
+  concurrency: 5
   cron: "0 4 */7 * *"
   groups:
     - default
@@ -47,7 +47,7 @@ metadata:
   name: hourly-snapshot
   namespace: longhorn-system
 spec:
-  concurrency: 3
+  concurrency: 5
   cron: "0 * * * *"
   groups:
     - default
@@ -60,7 +60,7 @@ metadata:
   name: weekly-snapshot-cleanup
   namespace: longhorn-system
 spec:
-  concurrency: 3
+  concurrency: 5
   cron: "0 4 */7 * 0"
   groups:
     - default
@@ -73,7 +73,7 @@ metadata:
   name: weekly-snapshot-delete
   namespace: longhorn-system
 spec:
-  concurrency: 3
+  concurrency: 5
   cron: "0 4 */7 * 0"
   groups:
     - default
