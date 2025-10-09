@@ -52,6 +52,9 @@ spec:
             - name: mautrix-googlechat-config
               mountPath: /config/mautrix-googlechat
               readOnly: true
+            - name: mautrix-signal-config
+              mountPath: /config/mautrix-signal
+              readOnly: true
             - name: mautrix-slack-config
               mountPath: /config/mautrix-slack
               readOnly: true
@@ -102,6 +105,9 @@ spec:
         - name: mautrix-googlechat-config
           secret:
             secretName: mautrix-googlechat
+        - name: mautrix-signal-config
+          secret:
+            secretName: mautrix-signal
         - name: mautrix-slack-config
           secret:
             secretName: mautrix-slack
