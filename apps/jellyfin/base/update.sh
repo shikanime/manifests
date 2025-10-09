@@ -8,6 +8,7 @@ set -o pipefail
 # Define container images to check
 declare -A IMAGES=(
   ["jellyfin"]="docker.io/jellyfin/jellyfin"
+  ["metatube"]="ghcr.io/metatube-community/metatube-server"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do

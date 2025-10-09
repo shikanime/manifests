@@ -85,3 +85,63 @@ spec:
           hostPath:
             path: /dev/dri
             type: Directory
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: metatube
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: metatube
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: metatube
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: metatube
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - jellyfin
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: metatube
+          image: metatube
+          args:
+            - -dsn
+            - /data/metatube.db
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 60
+          startupProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 30
+          envFrom:
+            - secretRef:
+                name: metatube
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: metatube-data
