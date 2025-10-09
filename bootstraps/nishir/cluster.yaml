@@ -195,7 +195,7 @@ spec:
                         exporter:
                           defaultClusterId: nishir
                         prometheus:
-                          existingSecretName: grafana-cloud-metrics
+                          existingSecretName: grafana-cloud-metrics-k8s-monitoring
                           external:
                             url: https://prometheus-prod-01-eu-west-0.grafana.net./api/prom
                     kepler:
@@ -243,14 +243,8 @@ spec:
                       url: https://fleet-management-prod-003.grafana.net
                       auth:
                         type: basic
-                        usernameFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: username
-                        passwordFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: password
+                        usernameFrom: grafana-cloud-otlp
+                        passwordFrom: grafana-cloud-otlp
                   alloy-singleton:
                     enabled: true
                     alloy:
@@ -277,14 +271,8 @@ spec:
                       url: https://fleet-management-prod-003.grafana.net
                       auth:
                         type: basic
-                        usernameFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: username
-                        passwordFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: password
+                        usernameFrom: grafana-cloud-otlp
+                        passwordFrom: grafana-cloud-otlp
                   alloy-logs:
                     enabled: true
                     alloy:
@@ -315,14 +303,8 @@ spec:
                       url: https://fleet-management-prod-003.grafana.net
                       auth:
                         type: basic
-                        usernameFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: username
-                        passwordFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: password
+                        usernameFrom: grafana-cloud-otlp
+                        passwordFrom: grafana-cloud-otlp
                   alloy-receiver:
                     enabled: true
                     alloy:
@@ -366,14 +348,8 @@ spec:
                       url: https://fleet-management-prod-003.grafana.net
                       auth:
                         type: basic
-                        usernameFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: username
-                        passwordFrom:
-                          secretKeyRef:
-                            name: grafana-cloud-otlp
-                            key: password
+                        usernameFrom: grafana-cloud-otlp
+                        passwordFrom: grafana-cloud-otlp
               - name: longhorn
                 chartname: longhorn/longhorn
                 version: "1.10.0"
