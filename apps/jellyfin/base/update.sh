@@ -8,6 +8,7 @@ set -o pipefail
 # Define container images to check
 declare -A IMAGES=(
   ["jellyfin"]="docker.io/jellyfin/jellyfin"
+  ["metatube"]="ghcr.io/metatube-community/metatube-server"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
@@ -21,8 +22,10 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
   else
     (cd "$(dirname "$0")" &&
       kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
-    yq -i \
-      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION}\"" \
-      "$(dirname "$0")"/kustomization.yaml
+    if [[ $IMAGE_NAME == "jellyfin" ]]; then
+      yq -i \
+        ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION}\"" \
+        "$(dirname "$0")"/kustomization.yaml
+    fi
   fi
 done
