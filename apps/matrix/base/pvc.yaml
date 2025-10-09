@@ -11,6 +11,7 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
+  volumeName: mautrix-discord-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -25,6 +26,7 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
+  volumeName: mautrix-googlechat-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -39,6 +41,7 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
+  volumeName: mautrix-slack-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -53,6 +56,7 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
+  volumeName: mautrix-whatsapp-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -67,6 +71,7 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
+  volumeName: mautrix-signal-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -81,6 +86,7 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
+  volumeName: mautrix-meta-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -95,3 +101,4 @@ spec:
       storage: 4Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
+  volumeName: synapse-data
