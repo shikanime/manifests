@@ -16,6 +16,6 @@ sops \
   "$(dirname "$0")"/grafana-cloud-metrics/.env
 
 sops \
-  --encrypt \
-  "$(dirname "$0")"/grafana-cloud-otlp/.env > \
-  "$(dirname "$0")"/grafana-cloud-otlp/.enc.env
+  --decrypt \
+  "$(dirname "$0")"/grafana-cloud-otlp/.enc.env > \
+  "$(dirname "$0")"/grafana-cloud-otlp/.env
