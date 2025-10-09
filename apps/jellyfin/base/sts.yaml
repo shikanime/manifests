@@ -120,6 +120,9 @@ spec:
           args:
             - -dsn
             - /data/metatube.db
+          envFrom:
+            - secretRef:
+                name: metatube
           ports:
             - containerPort: 8080
               name: http
@@ -135,9 +138,6 @@ spec:
             tcpSocket:
               port: http
             failureThreshold: 30
-          envFrom:
-            - secretRef:
-                name: metatube
           volumeMounts:
             - name: data
               mountPath: /data
