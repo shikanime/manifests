@@ -14,6 +14,19 @@ spec:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
+  name: mautrix-discord
+  namespace: shikanime
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: mautrix-discord
+  updatePolicy:
+    updateMode: Auto
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
   name: mautrix-googlechat
   namespace: shikanime
 spec:
@@ -21,6 +34,19 @@ spec:
     apiVersion: apps/v1
     kind: StatefulSet
     name: mautrix-googlechat
+  updatePolicy:
+    updateMode: Auto
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: mautrix-manager
+  namespace: shikanime
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: mautrix-manager
   updatePolicy:
     updateMode: Auto
 ---

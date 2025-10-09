@@ -43,6 +43,7 @@ spec:
               cp /config/mautrix-discord/registration.yaml /data/appservices
               cp /config/mautrix-googlechat/registration.yaml /data/appservices
               cp /config/mautrix-slack/registration.yaml /data/appservices
+              cp /config/mautrix-whatsapp/registration.yaml /data/appservices
           volumeMounts:
             - name: mautrix-discord-config
               mountPath: /config/mautrix-discord
@@ -302,3 +303,69 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-slack-data
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-whatsapp
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: matrix-whatsapp
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-whatsapp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-whatsapp
+    spec:
+      initContainers:
+        - name: config-copier
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /data
+              cp /config/config.yaml /data
+              cp /config/registration.yaml /data
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: data
+              mountPath: /data
+      containers:
+        - name: mautrix-whatsapp
+          image: mautrix-whatsapp
+          ports:
+            - name: http
+              containerPort: 29318
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            failureThreshold: 12
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-whatsapp
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-whatsapp-data
