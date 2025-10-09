@@ -41,3 +41,14 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-whatsapp
+  namespace: shikanime
+  annotations:
+    tailscale.com/proxy-class: nishir-matrix-whatsapp
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale

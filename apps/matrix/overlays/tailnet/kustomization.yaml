@@ -26,6 +26,11 @@ secretGenerator:
     name: mautrix-slack
     namespace: shikanime
   - files:
+      - mautrix-whatsapp/config.yaml
+      - mautrix-whatsapp/registration.yaml
+    name: mautrix-whatsapp
+    namespace: shikanime
+  - files:
       - synapse/homeserver.yaml
       - synapse/matrix.taila659a.ts.net.log.config
     name: synapse
