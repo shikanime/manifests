@@ -28,8 +28,10 @@ for IMAGE_NAME in "${!IMAGES[@]}"; do
   else
     (cd "$(dirname "$0")" &&
       kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
-    yq -i \
-      ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION#v}\"" \
-      "$(dirname "$0")"/kustomization.yaml
+    if [[ $IMAGE_NAME == "synapse" ]]; then
+      yq -i \
+        ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION#v}\"" \
+        "$(dirname "$0")"/kustomization.yaml
+    fi
   fi
 done
