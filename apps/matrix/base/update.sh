@@ -12,6 +12,7 @@ declare -A IMAGES=(
   ["mautrix-discord"]="dock.mau.dev/mautrix/discord"
   ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
   ["mautrix-slack"]="dock.mau.dev/mautrix/slack"
+  ["mautrix-whatsapp"]="dock.mau.dev/mautrix/whatsapp"
   ["synapse"]="docker.io/matrixdotorg/synapse"
 )
 

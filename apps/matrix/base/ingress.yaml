@@ -68,3 +68,18 @@ spec:
   tls:
     - hosts:
         - matrix-slack
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-whatsapp
+  namespace: shikanime
+spec:
+  defaultBackend:
+    service:
+      name: matrix-whatsapp
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-whatsapp

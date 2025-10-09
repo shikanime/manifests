@@ -54,6 +54,9 @@ spec:
             - name: mautrix-slack-config
               mountPath: /config/mautrix-slack
               readOnly: true
+            - name: mautrix-whatsapp-config
+              mountPath: /config/mautrix-whatsapp
+              readOnly: true
             - name: synapse-config
               mountPath: /config/synapse
               readOnly: true
@@ -101,6 +104,9 @@ spec:
         - name: mautrix-slack-config
           secret:
             secretName: mautrix-slack
+        - name: mautrix-whatsapp-config
+          secret:
+            secretName: mautrix-whatsapp
         - name: synapse-config
           secret:
             secretName: synapse
