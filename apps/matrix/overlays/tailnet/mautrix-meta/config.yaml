@@ -235,7 +235,7 @@ appservice:
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
-  public_address: https://matrix-meta.taila659a.ts.net
+  public_address: https://matrix\.taila659a\.ts\.net$
 
   # The hostname and port where this appservice should listen.
   # For Docker, you generally have to change the hostname to 0.0.0.0.
