@@ -385,7 +385,7 @@ double_puppet:
   # Servers to always allow double puppeting from.
   # This is only for other servers and should NOT contain the server the bridge is on.
   servers:
-    matrix-meta.taila659a.ts.net: https://matrix-meta.taila659a.ts.net
+    matrix.taila659a.ts.net: https://matrix:8448
   # Whether to allow client API URL discovery for other servers. When using this option,
   # users on other servers can use double puppeting even if their server URLs aren't
   # explicitly added to the servers map above.
@@ -393,7 +393,7 @@ double_puppet:
   # Shared secrets for automatic double puppeting.
   # See https://docs.mau.fi/bridges/general/double-puppeting.html for instructions.
   secrets:
-    matrix-meta.taila659a.ts.net: as_token:foobar
+    matrix.taila659a.ts.net: as_token:foobar
 
 # End-to-bridge encryption support options.
 #
