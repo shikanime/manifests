@@ -29,8 +29,8 @@ spec:
         - name: caddy
           image: caddy
           ports:
-            - containerPort: http
-              name: 80
+            - containerPort: 80
+              name: http
           readinessProbe:
             tcpSocket:
               port: http
