@@ -14,17 +14,17 @@ spec:
         app.kubernetes.io/name: matrix-manager
     spec:
       affinity:
-        podAntiAffinity:
+        podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
+            - podAffinityTerm:
                 labelSelector:
                   matchExpressions:
-                    - key: app.kubernetes.io/part-of
-                      operator: NotIn
+                    - key: app.kubernetes.io/name
+                      operator: In
                       values:
-                        - nishir-office
+                        - matrix
                 topologyKey: kubernetes.io/hostname
+              weight: 100
       containers:
         - name: caddy
           image: caddy

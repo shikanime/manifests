@@ -137,6 +137,18 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-discord
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - matrix
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       initContainers:
         - name: config-copier
           image: busybox
@@ -203,6 +215,18 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-googlechat
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - matrix
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       initContainers:
         - name: config-copier
           image: busybox
@@ -269,6 +293,18 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-signal
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - matrix
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       initContainers:
         - name: config-copier
           image: busybox
@@ -335,6 +371,18 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-slack
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - matrix
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       initContainers:
         - name: config-copier
           image: busybox
@@ -399,6 +447,18 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-whatsapp
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - matrix
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       initContainers:
         - name: config-copier
           image: busybox
