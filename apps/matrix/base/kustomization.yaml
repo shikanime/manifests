@@ -24,7 +24,7 @@ images:
     newTag: v0.2.3
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
-    newTag: v0.9.0
+    newTag: v0.12.5
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
     newTag: v1.99.0
