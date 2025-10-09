@@ -132,7 +132,7 @@ spec:
                               - RemovePodsViolatingInterPodAntiAffinity
                               - RemovePodsViolatingNodeAffinity
                               - RemovePodsViolatingNodeTaints
-              - name: grafana-k8s-monitoring
+              - name: k8s-monitoring
                 chartname: grafana/k8s-monitoring
                 version: "3.5.2"
                 namespace: grafana-system
