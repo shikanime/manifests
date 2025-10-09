@@ -40,10 +40,10 @@ spec:
 
               # Copy registration to synapse appservices
               mkdir -p /data/appservices
-              cp /config/mautrix-discord/registration.yaml /data/appservices
-              cp /config/mautrix-googlechat/registration.yaml /data/appservices
-              cp /config/mautrix-slack/registration.yaml /data/appservices
-              cp /config/mautrix-whatsapp/registration.yaml /data/appservices
+              cp /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
+              cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
+              cp /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
+              cp /config/mautrix-whatsapp/registration.yaml /data/appservices/mautrix-whatsapp.yaml
           volumeMounts:
             - name: mautrix-discord-config
               mountPath: /config/mautrix-discord
