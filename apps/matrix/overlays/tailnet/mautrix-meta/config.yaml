@@ -333,7 +333,7 @@ direct_media:
   # The server name to use for the custom mxc:// URIs.
   # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
   # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
-  server_name: discord-media.matrix-meta.taila659a.ts.net
+  server_name: matrix-discord.taila659a.ts.net
   # Optionally a custom .well-known response. This defaults to `server_name:443`
   well_known_response:
   # Optionally specify a custom prefix for the media ID part of the MXC URI.
