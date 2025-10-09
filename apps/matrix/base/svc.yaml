@@ -68,3 +68,17 @@ spec:
   publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/name: matrix-slack
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-whatsapp
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 29318
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: matrix-whatsapp
