@@ -1,67 +1,35 @@
 # Network-specific config options
 network:
-  # Displayname template for Slack users. Available variables:
-  #  .Name - The username of the user
-  #  .Team.Name - The name of the team the channel is in
-  #  .Team.Domain - The Slack subdomain of the team the channel is in
-  #  .ID - The internal ID of the user
-  #  .IsBot - Whether the user is a bot
-  #  .Profile.DisplayName - The username or real name of the user (depending on settings)
-  # Variables only available for users (not bots):
-  #  .TeamID - The internal ID of the workspace the user is in
-  #  .TZ - The timezone region of the user (e.g. Europe/London)
-  #  .TZLabel - The label of the timezone of the user (e.g. Greenwich Mean Time)
-  #  .TZOffset - The UTC offset of the timezone of the user (e.g. 0)
-  #  .Profile.RealName - The real name of the user
-  #  .Profile.FirstName - The first name of the user
-  #  .Profile.LastName - The last name of the user
-  #  .Profile.Title - The job title of the user
-  #  .Profile.Pronouns - The pronouns of the user
-  #  .Profile.Email - The email address of the user
-  #  .Profile.Phone - The formatted phone number of the user
-  displayname_template: "{{or .Profile.DisplayName .Profile.RealName .Name}}{{if .IsBot}} (bot){{end}}"
-  # Channel name template for Slack channels (all types). Available variables:
-  #  .Name - The name of the channel
-  #  .Team.Name - The name of the team the channel is in
-  #  .Team.Domain - The Slack subdomain of the team the channel is in
-  #  .ID - The internal ID of the channel
-  #  .IsNoteToSelf - Whether the channel is a DM with yourself
-  #  .IsGeneral - Whether the channel is the #general channel
-  #  .IsChannel - Whether the channel is a channel (rather than a DM)
-  #  .IsPrivate - Whether the channel is private
-  #  .IsIM - Whether the channel is a one-to-one DM
-  #  .IsMpIM - Whether the channel is a group DM
-  #  .IsShared - Whether the channel is shared with another workspace.
-  #  .IsExtShared - Whether the channel is shared with an external organization.
-  #  .IsOrgShared - Whether the channel is shared with an organization in the same enterprise grid.
-  channel_name_template: "{{if and .IsChannel (not .IsPrivate)}}#{{end}}{{.Name}}{{if .IsNoteToSelf}} (you){{end}}"
-  # Displayname template for Slack workspaces. Available variables:
-  #  .Name - The name of the team
-  #  .Domain - The Slack subdomain of the team
-  #  .ID - The internal ID of the team
-  team_name_template: "{{ .Name }}"
-  # Should incoming custom emoji reactions be bridged as mxc:// URIs?
-  # If set to false, custom emoji reactions will be bridged as the shortcode instead, and the image won't be available.
-  custom_emoji_reactions: true
-  # Should channels and group DMs have the workspace icon as the Matrix room avatar?
-  workspace_avatar_in_rooms: false
-  # Number of participants to sync in channels (doesn't affect group DMs)
-  participant_sync_count: 5
-  # Should channel participants only be synced when creating the room?
-  # If you want participants to always be accurately synced, set participant_sync_count to a high value and this to false.
-  participant_sync_only_on_create: true
-  # Should channel portals be muted by default?
-  mute_channels_by_default: false
-  # Options for backfilling messages from Slack.
-  backfill:
-    # Number of conversations to fetch from Slack when syncing workspace.
-    # This option applies even if message backfill is disabled below.
-    # If set to -1, all chats in the client.boot response will be bridged, and nothing will be fetched separately.
-    conversation_count: -1
+  # Displayname template for Signal users.
+  # {{.ProfileName}} - The Signal profile name set by the user.
+  # {{.ContactName}} - The name for the user from your phone's contact list. This is not safe on multi-user instances.
+  # {{.Nickname}} - The nickname set for the user in the native Signal app. This is not safe on multi-user instances.
+  # {{.PhoneNumber}} - The phone number of the user.
+  # {{.UUID}} - The UUID of the Signal user.
+  # {{.AboutEmoji}} - The emoji set by the user in their profile.
+  displayname_template: '{{or .ProfileName .PhoneNumber "Unknown user"}}'
+  # Should avatars from the user's contact list be used? This is not safe on multi-user instances.
+  use_contact_avatars: false
+  # Should the bridge request the user's contact list from the phone on startup?
+  sync_contacts_on_startup: true
+  # Should the bridge sync ghost user info even if profile fetching fails? This is not safe on multi-user instances.
+  use_outdated_profiles: false
+  # Should the Signal user's phone number be included in the room topic in private chat portal rooms?
+  number_in_topic: true
+  # Default device name that shows up in the Signal app.
+  device_name: mautrix-signal
+  # Avatar image for the Note to Self room.
+  note_to_self_avatar: mxc://maunium.net/REBIVrqjZwmaWpssCZpBlmlL
+  # Format for generating URLs from location messages for sending to Signal.
+  # Google Maps: 'https://www.google.com/maps/place/%[1]s,%[2]s'
+  # OpenStreetMap: 'https://www.openstreetmap.org/?mlat=%[1]s&mlon=%[2]s'
+  location_format: https://www.google.com/maps/place/%[1]s,%[2]s
+  # Should view-once messages disappear shortly after sending a read receipt on Matrix?
+  disappear_view_once: false
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: "!slack"
+  command_prefix: "!signal"
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -75,6 +43,7 @@ bridge:
   # By default, users who are in the same group on the remote network will be
   # in the same Matrix room bridged to that group. If this is set to true,
   # every user will get their own Matrix room instead.
+  # SETTING THIS IS IRREVERSIBLE AND POTENTIALLY DESTRUCTIVE IF PORTALS ALREADY EXIST.
   split_portals: false
   # Should the bridge resend `m.bridge` events to all portals on startup?
   resend_bridge_info: false
@@ -190,7 +159,7 @@ database:
   #           https://github.com/mattn/go-sqlite3#connection-string
   #   Postgres: Connection string. For example, postgres://user:password@host/database?sslmode=disable
   #             To connect via Unix socket, use something like postgres:///dbname?host=/var/run/postgresql
-  uri: file:/data/slack.db?_txlock=immediate
+  uri: file:/data/mautrix-signal.db?_txlock=immediate
   # Maximum number of connections.
   max_open_conns: 5
   max_idle_conns: 1
@@ -234,25 +203,25 @@ appservice:
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
   # If you want to use https, you need to use a reverse proxy. The bridge does not have TLS support built in.
-  address: http://matrix-slack:29335
+  address: http://matrix-signal:29328
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
-  public_address: https://matrix:8448-slack-bridge.taila659a.ts.net
+  public_address: https://matrix-signal.taila659a.ts.net
   # The hostname and port where this appservice should listen.
   # For Docker, you generally have to change the hostname to 0.0.0.0.
   hostname: 0.0.0.0
-  port: 29335
+  port: 29328
   # The unique ID of this appservice.
-  id: slack
+  id: signal
   # Appservice bot details.
   bot:
     # Username of the appservice bot.
-    username: slackbot
+    username: signalbot
     # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
     # to leave display name/avatar as-is.
-    displayname: Slack bridge bot
-    avatar: mxc://maunium.net/pVtzLmChZejGxLqmXtQjFxem
+    displayname: Signal bridge bot
+    avatar: mxc://maunium.net/wPJgTQbZOtpBFmDNkiNEMDUp
   # Whether to receive ephemeral events via appservice transactions.
   ephemeral_events: true
   # Should incoming events be handled asynchronously?
@@ -261,11 +230,11 @@ appservice:
   # This value doesn't affect the registration file.
   async_transactions: false
   # Authentication tokens for AS <-> HS communication. Autogenerated; do not modify.
-  as_token: ENC[AES256_GCM,data:nCvLFNgZlBX2nwyK73d3yMIFoHatWlLfEs3ZB71SeiGUrelpmUIiIgd2zKfVPbC+kMXmLrMjJdVxmaNjXXul7Q==,iv:FNJxWOuXGyfVnY2FELwStuYUSJIBL8c9z6z/pETRt+I=,tag:BUZQBzWY5iP7KV99r28zuA==,type:str]
-  hs_token: ENC[AES256_GCM,data:ygI/14fAsfeUz1qMgsapuFa4jYMhFMSnmbtU39l+ao27lfg3hY4t8LAY8J2i02Aa5gzA0QdmhbxS9qeld/x2cA==,iv:fg3S3ar75CqvxeYqqijJRW4/IM5bjdAbEbKNzd1A/sQ=,tag:6NkU5SIjtyOqXr6/LFwGGw==,type:str]
+  as_token: ENC[AES256_GCM,data:huYDLoOeaO06A8waj4fvRrlrryceCnjNUs5EJLx4Tm6EBQdn3a1cDj1mIRbNp6tD1LetFzHNiCAlleUjvA6vVw==,iv:E7IAs/P6i8eaNtz/EmKcDdC5gsZVnRzsJGngAkqKnmA=,tag:mVp+nFmgxciijuqlliCuCA==,type:str]
+  hs_token: ENC[AES256_GCM,data:YnmOxqN463PRTpLBwxIv6e+36q7mbK+wd8m9dOBZ8fXsGziYyEp+ZeScp8tDqmH3M3+35pgznLygTgWrcMiwjw==,iv:XsBu90JOR8vyXIuCpyOLB6j7hQeVKIYvafZwmPTOeKc=,tag:Sz870+ywMrSWYQ/afC7rTA==,type:str]
   # Localpart template of MXIDs for remote users.
   # {{.}} is replaced with the internal ID of the user.
-  username_template: slack_{{.}}
+  username_template: signal_{{.}}
 # Config options that affect the Matrix connector of the bridge.
 matrix:
   # Whether the bridge should send the message status as a custom com.beeper.message_send_status event.
@@ -292,11 +261,9 @@ analytics:
   user_id: null
 # Settings for provisioning API
 provisioning:
-  # Prefix for the provisioning API paths.
-  prefix: /_matrix/provision
   # Shared secret for authentication. If set to "generate" or null, a random secret will be generated,
-  # or if set to "disable", the provisioning API will be disabled.
-  shared_secret: ENC[AES256_GCM,data:tjOIDKxj7zoxElYdEkxv8ykMNM2b5VM3cE5T6d0PkR3PZ1ssHQLx/nPwW9wGU2iDZud3Q7rXt5EV8r/p/Lz86g==,iv:WP6kFVvzUyxJqQ/mKRtsH9+FnylgJYM3gppBV8X9sbg=,tag:6D2WNeFP2br9oRhf8uDd0w==,type:str]
+  # or if set to "disable", the provisioning API will be disabled. Must be at least 16 characters.
+  shared_secret: ENC[AES256_GCM,data:DiN385oXPZA0VexmfnGyDFMEAiLm4+K50X+aIToHvuSbUI0mFHrsGLDiJPpd1aLPOmdsPtUi6ft8TZd91r70nA==,iv:vc6ui9fGHLXGiJ5jaM46DjbHNlMDDxaSpfU7mQNM1ds=,tag:tdb+aBbP1L0jucnbkiEYBg==,type:str]
   # Whether to allow provisioning API requests to be authed using Matrix access tokens.
   # This follows the same rules as double puppeting to determine which server to contact to check the token,
   # which means that by default, it only works for users on the same server as the bridge.
@@ -314,7 +281,7 @@ public_media:
   enabled: false
   # A key for signing public media URLs.
   # If set to "generate", a random key will be generated.
-  signing_key: b0j2Nv9L3I0jboMvyDQISsXo6O2jOvaibM8GkNOug1IdmMdQAV2Ey6FYrufh5aBX
+  signing_key: l5o6TlQiy8jHpGwBirycL72ibpRmr8IQ7McCYaufMhuz8eibxzAi0KzU06zgqHnK
   # Number of seconds that public media URLs are valid for.
   # If set to 0, URLs will never expire.
   expiry: 0
@@ -328,7 +295,7 @@ direct_media:
   # The server name to use for the custom mxc:// URIs.
   # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
   # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
-  server_name: matrix-discord.taila659a.ts.net
+  server_name: discord-media.matrix.taila659a.ts.net
   # Optionally a custom .well-known response. This defaults to `server_name:443`
   well_known_response: null
   # Optionally specify a custom prefix for the media ID part of the MXC URI.
@@ -340,7 +307,7 @@ direct_media:
   allow_proxy: true
   # Matrix server signing key to make the federation tester pass, same format as synapse's .signing.key file.
   # This key is also used to sign the mxc:// URIs to ensure only the bridge can generate them.
-  server_key: ed25519 009kXg EWPs3k6DJ9Kw/xs7pzwcAlLYVIGPw/UY3bb7mqXPgpg
+  server_key: ed25519 bit6ng +4Otc/bS00kR6uqrEZg1ccwm43sb2Qs594Zu/vPc8Gw
 # Settings for backfilling messages.
 # Note that the exact way settings are applied depends on the network connector.
 # See https://docs.mau.fi/bridges/general/backfill.html for more details.
@@ -386,7 +353,7 @@ double_puppet:
   # Shared secrets for automatic double puppeting.
   # See https://docs.mau.fi/bridges/general/double-puppeting.html for instructions.
   secrets:
-    matrix.taila659a.ts.net: as_token:shikanime
+    matrix.taila659a.ts.net: as_token:foobar
 # End-to-bridge encryption support options.
 #
 # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
@@ -406,12 +373,16 @@ encryption:
   # Only relevant when using end-to-bridge encryption, required when using encryption with next-gen auth (MSC3861).
   # Changing this option requires updating the appservice registration file.
   msc4190: false
+  # Should the bridge bot generate a recovery key and cross-signing keys and verify itself?
+  # Note that without the latest version of MSC4190, this will fail if you reset the bridge database.
+  # The generated recovery key will be saved in the kv_store table under `recovery_key`.
+  self_sign: false
   # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
   # You must use a client that supports requesting keys from other users to use this feature.
   allow_key_sharing: true
   # Pickle key for encrypting encryption keys in the bridge database.
   # If set to generate, a random key will be generated.
-  pickle_key: 7VRbRsqZVpNkK2pyNGJptQWPE1wOy9xi49h7R4mP8arjgC5FpQah00YGldAM0n8y
+  pickle_key: tv1MFa6eKFppisIVhSqWu7rcMcWeTAHLC92c61jNVz6UFGQ94cCacddRrt9Bv2RW
   # Options for deleting megolm sessions from the bridge.
   delete_keys:
     # Beeper-specific: delete outbound sessions when hungryserv confirms
@@ -484,31 +455,31 @@ sops:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB3bW9SZ3lqUFhWaERDSllB
-        SVlCM3Y4NzZweG1YZVZVeC93VTJjbW9KZjJVCkpROUNLd3pEWlRGdmY4Mno1eTR5
-        Q0RUaUNCYmw0dW95d3FFK3lHQ0d3R3MKLS0tIDVDWmFaMittNllrQVJyVitQS2J1
-        RWlRMDZWR2FXeXdrQjI3ZDU2M2kxSkkK5VuEGLozUqWB5A3GEW4+A8q+EFrtQHSe
-        i287kG+e412rDpvd5SILWfsZ6z+L22v7OC0C2RN8jjryznn6B86oGw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVUTdLSk9FWEV5NjRMeHBD
+        eENuYXQzSWtOOWQ4TExjNWsvYlBCc1Ardm1rCkZLeUFCbzRzUUd3dGxEYlgrZXpm
+        d1BuS09rYi83UE8zeFFpT1Vvc2J4dEUKLS0tIHdZblhQZFduM2FIRnhMWWdrR1E0
+        NGt2dVVWUHRyMVBYYVMyY2IyREFtWkUKQ6scEPLo003ZIGlMqBiEQrIvynEDIHnm
+        iQM4urL98J+VKjulbBPQu7rQMY1rG42etfwg9F3BCeYRAhibEaJp1Q==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRR2MzekxCdUd3TWpWb0wz
-        WkYrWHJxQldXelpRWHNtVDlqeWZlbUUveFJvClNpWDh0Z1Y3b0Nnend2cDVkbWs0
-        UVFGaTZOMVdMVjNVeVcvbXlXaUJEcEUKLS0tIEdVMW1INDhGUWJVb2QrZ25oVUg5
-        dFdtRXFTZGovaUIxN01SUFhOc0xSeWsKTlxvE2RdUcgoAnBfbXFm7UCY+vA8W1yB
-        b+90Rb8hgvwQPv0aAu1xLhP7foQsczLL4oIfWwZLEWbgvDmWkr8Jvw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZcEw3ZW9XMjBpUWdTc01M
+        MGlNZXdDVXkwM3VQWGI4LzJBaXd1dGFtcERvCjVGWkF4ZmN4K002RzhNakRteDh5
+        QjB3VmgzYlR2ZnkyN1NESlQvWGVvR2MKLS0tIER2a21vQ2Y5N09xSGZDRnFlci96
+        aTNnVnVhRGF2NGZRMjhJZlB0OGk1SEEK7CmrDSIXYCA1QXndBD4/1EUrmD7vO1+9
+        wM5H2Za9sPF/0+O5qiGzXXbVNXmRULtbJF+HqIDJ/kIhI7TuEwxHDg==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0c2Nyd2lsWDY2TWxsbThP
-        YXU5ajVKSm13anpJQUcxZDE4WjhYR2x4UmlNCmZRMTN2Nlc3S2U1RUF2WDUxRy9V
-        TWMwMmhLUkZ1bU16cmJaSHZqTkNIbnMKLS0tIDRKU2kvV010bkI2QjJjZWFFQVda
-        Z1lGNDQ4dWFvem91cmlDcDV6Yk03V1EKlWc9slUucVatimPtKja6nP5RToUhSyA3
-        9BUzn0zmOpOht2ddT1N5Pe6n56QTbSG1/+4CQ0jzEmuRoBi5tL8rUQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3a1lPOWsxWGgvV3FXVU90
+        NDBaenN5ZFdqaFplQjRKUzRjWlVlemlWa1RrCjdERTM2dXdzNUJ1b09LS2djRTNm
+        SS9OL3lkbllxQysyYVJXdDJTTENINGcKLS0tIE5MdEFhdU1pSTVZNDVxVjdQeWho
+        UGUwR1hoa2ZoKy9za1ZWVGtPTXFKNTQKCglNFQTwdAgNyJNc8p1joXS+8Bq/RXZL
+        MOeJgYH42dA9y2hjFYsKxT9g2UzPLrzCl/O/RLsh1PQR+1yNgxkWtw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-09T13:31:55Z"
-  mac: ENC[AES256_GCM,data:yXKR19AYvEpEtAYq0YliW+fWlEnsIr4/ZIul5lXPPxRlUpRVqNPc/zYIo74vtYqe889X13JRy4bjq2SYVoCL8VXh5EB9R8LGOXd3avvWIHORyy6sUBUcKRfQEdYG5I9+40zgfJ8oC/mCEuVxseFGdasHHaNbMByVNpeULGXxegA=,iv:FZL4aPNGUaMDHRcdkvoPeu/svQq094/GZHuQr7npYJs=,tag:ojVv55SA8U0Yy9vKpAawug==,type:str]
+  lastmodified: "2025-10-09T13:47:51Z"
+  mac: ENC[AES256_GCM,data:sfEhFDNnoYf+WXoa7XnQSOjjpTb2EtWxSa6DNaHLADMrEmAkexbTKkBpN/zU7yWVyIOZGsPs0uMy3KcHXeBJ9kT3OOAqNFtW+jm8ygqxOcgyzZOuZFLE7GT9zSlxnHs3mPDfu9Hh4T9yR9LeLCt8HQppvpkTBZKYBhzQpCj1zlo=,iv:v8XdQjQk+U4cFKG4Sj5NdS84gTtSufnM4VoIGgjBvTA=,tag:Aovc9husH/UOK6YsCeUrwQ==,type:str]
   encrypted_regex: ^(as_token|hs_token|shared_secret)$
   version: 3.10.2
