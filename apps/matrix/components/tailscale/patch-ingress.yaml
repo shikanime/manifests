@@ -34,6 +34,17 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-signal
+  namespace: shikanime
+  annotations:
+    tailscale.com/proxy-class: nishir-matrix-signal
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-slack
   namespace: shikanime
   annotations:
@@ -49,17 +60,6 @@ metadata:
   namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix-whatsapp
-    tailscale.com/tags: tag:web
-spec:
-  ingressClassName: tailscale
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-signal
-  namespace: shikanime
-  annotations:
-    tailscale.com/proxy-class: nishir-matrix-signal
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
