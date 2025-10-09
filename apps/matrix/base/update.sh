@@ -11,6 +11,7 @@ declare -A IMAGES=(
   ["busybox"]="docker.io/library/busybox"
   ["mautrix-discord"]="dock.mau.dev/mautrix/discord"
   ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
+  ["mautrix-signal"]="dock.mau.dev/mautrix/signal"
   ["mautrix-slack"]="dock.mau.dev/mautrix/slack"
   ["mautrix-whatsapp"]="dock.mau.dev/mautrix/whatsapp"
   ["synapse"]="docker.io/matrixdotorg/synapse"

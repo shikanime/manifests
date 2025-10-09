@@ -98,6 +98,25 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  name: matrix-signal
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: mautrix-signal
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
   name: matrix-whatsapp
   namespace: shikanime
 spec:

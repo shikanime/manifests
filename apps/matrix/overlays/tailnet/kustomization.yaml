@@ -21,6 +21,11 @@ secretGenerator:
     name: mautrix-googlechat
     namespace: shikanime
   - files:
+      - mautrix-signal/config.yaml
+      - mautrix-signal/registration.yaml
+    name: mautrix-signal
+    namespace: shikanime
+  - files:
       - mautrix-slack/config.yaml
       - mautrix-slack/registration.yaml
     name: mautrix-slack
