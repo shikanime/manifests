@@ -42,6 +42,7 @@ spec:
               mkdir -p /data/appservices
               cp /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
               cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
+              cp /config/mautrix-meta/registration.yaml /data/appservices/mautrix-meta.yaml
               cp /config/mautrix-signal/registration.yaml /data/appservices/mautrix-signal.yaml
               cp /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
               cp /config/mautrix-whatsapp/registration.yaml /data/appservices/mautrix-whatsapp.yaml
@@ -51,6 +52,9 @@ spec:
               readOnly: true
             - name: mautrix-googlechat-config
               mountPath: /config/mautrix-googlechat
+              readOnly: true
+            - name: mautrix-meta-config
+              mountPath: /config/mautrix-meta
               readOnly: true
             - name: mautrix-signal-config
               mountPath: /config/mautrix-signal
@@ -105,6 +109,9 @@ spec:
         - name: mautrix-googlechat-config
           secret:
             secretName: mautrix-googlechat
+        - name: mautrix-meta-config
+          secret:
+            secretName: mautrix-meta
         - name: mautrix-signal-config
           secret:
             secretName: mautrix-signal
@@ -276,6 +283,84 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-googlechat-data
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-meta
+  namespace: shikanime
+spec:
+  replicas: 1
+  serviceName: matrix-meta
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-meta
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-meta
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - matrix
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+      initContainers:
+        - name: config-copier
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /data
+              cp /config/config.yaml /data
+              cp /config/registration.yaml /data
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: data
+              mountPath: /data
+      containers:
+        - name: mautrix-meta
+          image: mautrix-meta
+          ports:
+            - containerPort: 29319
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            failureThreshold: 12
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-meta
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-meta-data
 ---
 apiVersion: apps/v1
 kind: StatefulSet

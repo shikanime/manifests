@@ -58,6 +58,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: matrix-meta
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 29319
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: matrix-meta
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: matrix-signal
   namespace: shikanime
 spec:
