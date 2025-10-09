@@ -13,6 +13,9 @@ images:
   - name: mautrix-googlechat
     newName: dock.mau.dev/mautrix/googlechat
     newTag: v0.5.2
+  - name: mautrix-meta
+    newName: dock.mau.dev/mautrix/meta
+    newTag: v0.5.3
   - name: mautrix-signal
     newName: dock.mau.dev/mautrix/signal
     newTag: v0.8.7
@@ -21,7 +24,7 @@ images:
     newTag: v0.2.3
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
-    newTag: v0.12.5
+    newTag: v0.9.0
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
     newTag: v1.99.0
@@ -37,4 +40,4 @@ labels:
       app.kubernetes.io/component: communication
       app.kubernetes.io/name: matrix
       app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 2.9.1
+      app.kubernetes.io/version: 1.99.0
