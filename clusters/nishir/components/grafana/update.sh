@@ -7,15 +7,15 @@ set -o pipefail
 
 sops \
   --encrypt \
-  "$(dirname "$0")"/grafana-cloud-logs/.env > \
-  "$(dirname "$0")"/grafana-cloud-logs/.enc.env
+  "$(dirname "$0")"/grafana-cloud-logs-k8s-monitoring/.env > \
+  "$(dirname "$0")"/grafana-cloud-logs-k8s-monitoring/.enc.env
 
 sops \
   --encrypt \
-  "$(dirname "$0")"/grafana-cloud-metrics/.env > \
-  "$(dirname "$0")"/grafana-cloud-metrics/.enc.env
+  "$(dirname "$0")"/grafana-cloud-metrics-k8s-monitoring/.env > \
+  "$(dirname "$0")"/grafana-cloud-metrics-k8s-monitoring/.enc.env
 
 sops \
   --encrypt \
-  "$(dirname "$0")"/grafana-cloud-otlp/.env > \
-  "$(dirname "$0")"/grafana-cloud-otlp/.enc.env
+  "$(dirname "$0")"/grafana-cloud-otlp-k8s-monitoring/.env > \
+  "$(dirname "$0")"/grafana-cloud-otlp-k8s-monitoring/.enc.env
