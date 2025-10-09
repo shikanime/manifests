@@ -283,8 +283,8 @@ spec:
         - name: mautrix-signal
           image: mautrix-signal
           ports:
-            - containerPort: http
-              name: 29328
+            - containerPort: 29328
+              name: http
           readinessProbe:
             httpGet:
               path: /_matrix/mau/ready
