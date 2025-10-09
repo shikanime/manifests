@@ -66,10 +66,10 @@ spec:
         - name: synapse
           image: synapse
           ports:
-            - containerPort: http
-              name: 8008
-            - containerPort: metrics
-              name: 9090
+            - containerPort: 8008
+              name: http
+            - containerPort: 9090
+              name: metrics
           readinessProbe:
             httpGet:
               path: /_matrix/client/versions
@@ -150,8 +150,8 @@ spec:
         - name: mautrix-discord
           image: mautrix-discord
           ports:
-            - containerPort: http
-              name: 29334
+            - containerPort: 29334
+              name: http
           readinessProbe:
             httpGet:
               path: /_matrix/mau/ready
@@ -216,8 +216,8 @@ spec:
         - name: mautrix-googlechat
           image: mautrix-googlechat
           ports:
-            - containerPort: http
-              name: 29320
+            - containerPort: 29320
+              name: http
           readinessProbe:
             httpGet:
               path: /_matrix/mau/ready
@@ -282,8 +282,8 @@ spec:
         - name: mautrix-slack
           image: mautrix-slack
           ports:
-            - containerPort: http
-              name: 29335
+            - containerPort: 29335
+              name: http
           readinessProbe:
             httpGet:
               path: /_matrix/mau/ready
@@ -346,8 +346,8 @@ spec:
         - name: mautrix-whatsapp
           image: mautrix-whatsapp
           ports:
-            - containerPort: http
-              name: 29318
+            - containerPort: 29318
+              name: http
           readinessProbe:
             httpGet:
               path: /_matrix/mau/ready
