@@ -32,15 +32,18 @@ spec:
             - migrate
             - sql
             - --config
-            - /config/kratos.yaml
+            - /etc/kratos/kratos.yaml
             - --read-from-env
             - --yes
+        envFrom:
+         - secretRef:
+             name: kratos
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /etc/kratos
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /var/lib/sqlite
       containers:
         - name: kratos
           image: kratos
@@ -48,7 +51,10 @@ spec:
             - serve
             - all
             - --config
-            - /config/kratos.yaml
+            - /etc/kratos/kratos.yaml
+        envFrom:
+         - secretRef:
+             name: kratos
           ports:
             - containerPort: 4433
               name: http
@@ -72,10 +78,10 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /etc/kratos
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /var/lib/sqlite
       volumes:
         - name: config
           configMap:

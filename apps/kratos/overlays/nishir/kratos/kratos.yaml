@@ -1,7 +1,5 @@
 version: v1.3.1
 
-dsn: sqlite:///data/db.sqlite?_fk=true&mode=rwc
-
 serve:
   public:
     base_url: http://kratos.taila659a.ts.net/
@@ -72,7 +70,7 @@ identity:
   default_schema_id: default
   schemas:
     - id: default
-      url: file:///config/identity.schema.json
+      url: file:///etc/config/kratos/identity.schema.json
 
 courier:
   smtp:
