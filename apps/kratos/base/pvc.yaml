@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kratos-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: kratos-data

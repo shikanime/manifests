@@ -1,0 +1,56 @@
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: nishir-kratos
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: kratos
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: nishir-kratos-admin
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: kratos
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: nishir-kratos-selftservice
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: kratos
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname

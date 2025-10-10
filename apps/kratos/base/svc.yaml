@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kratos-public
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: kratos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kratos-admin
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: http-admin
+  selector:
+    app.kubernetes.io/name: kratos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kratos-selftservice
+  namespace: shikanime
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: selftservice
+  selector:
+    app.kubernetes.io/name: kratos

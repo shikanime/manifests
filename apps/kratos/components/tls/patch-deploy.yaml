@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kratos
+  namespace: shikanime
+spec:
+  template:
+    spec:
+      containers:
+        - name: kratos
+          ports:
+            - containerPort: 4433
+              name: https
+            - containerPort: 4434
+              name: https-admin
+          readinessProbe:
+            httpGet:
+              port: https-admin
+              scheme: HTTPS
+          livenessProbe:
+            httpGet:
+              port: https-admin
+              scheme: HTTPS
+          startupProbe:
+            httpGet:
+              port: https-admin
+              scheme: HTTPS
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: kratos-tls

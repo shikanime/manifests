@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kratos
+  namespace: shikanime
+spec:
+  tls:
+    - secretName: kratos-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kratos-admin
+  namespace: shikanime
+spec:
+  tls:
+    - secretName: kratos-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kratos-selftservice
+  namespace: shikanime
+spec:
+  tls:
+    - secretName: kratos-tls
