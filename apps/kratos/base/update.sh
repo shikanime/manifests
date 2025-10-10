@@ -7,7 +7,7 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-    ["kratos"]="docker.io/ory/kratos"
+  ["kratos"]="docker.io/ory/kratos"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do

@@ -75,4 +75,3 @@ identity:
 courier:
   smtp:
     connection_uri: smtps://test:test@smtp.taila659a.ts.net:1025/?skip_ssl_verify=true
-

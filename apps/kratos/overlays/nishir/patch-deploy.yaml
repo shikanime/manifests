@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - name: kratos
-        envFrom:
-         - secretRef:
-             name: kratos
+        - name: kratos
+          envFrom:
+            - secretRef:
+                name: kratos
