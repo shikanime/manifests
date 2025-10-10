@@ -33,6 +33,7 @@ spec:
             - sql
             - --config
             - /config/kratos.yaml
+            - --read-from-env
             - --yes
           volumeMounts:
             - name: config
