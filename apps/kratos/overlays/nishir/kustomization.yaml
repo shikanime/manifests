@@ -6,8 +6,6 @@ configMapGenerator:
       - kratos/kratos.yaml
     name: kratos
     namespace: shikanime
-patches:
-  - path: patch-deploy.yaml
 resources:
   - ../default
   - cert.yaml
