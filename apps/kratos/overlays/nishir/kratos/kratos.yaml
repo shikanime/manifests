@@ -1,6 +1,6 @@
 version: v1.3.1
 
-dsn: sqlite:///data/kratos.sqlite?_fk=true
+dsn: sqlite:///data/db.sqlite?_fk=true&mode=rwc
 
 serve:
   public:

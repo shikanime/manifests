@@ -39,6 +39,8 @@ spec:
             - name: config
               mountPath: /config
               readOnly: true
+            - name: data
+              mountPath: /data
       containers:
         - name: kratos
           image: kratos
