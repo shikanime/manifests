@@ -1,10 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: kratos
   namespace: shikanime
 spec:
   replicas: 1
+  serviceName: kratos
   selector:
     matchLabels:
       app.kubernetes.io/name: kratos
@@ -42,8 +43,6 @@ spec:
             - name: config
               mountPath: /etc/kratos
               readOnly: true
-            - name: data
-              mountPath: /var/lib/sqlite
       containers:
         - name: kratos
           image: kratos
@@ -80,12 +79,47 @@ spec:
             - name: config
               mountPath: /etc/kratos
               readOnly: true
-            - name: data
-              mountPath: /var/lib/sqlite
       volumes:
         - name: config
           configMap:
             name: kratos
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kratos-postgres
+  namespace: shikanime
+spec:
+  serviceName: kratos-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kratos-postgres
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kratos-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          env:
+            - name: POSTGRES_DB
+              value: kratos
+            - name: POSTGRES_USER
+              value: kratos
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kratos
+                  key: POSTGRES_PASSWORD
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+      volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: kratos-data
+            claimName: kratos-postgres-data

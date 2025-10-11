@@ -27,6 +27,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: kratos-postgres
+  namespace: shikanime
+spec:
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: postgres
+  selector:
+    app.kubernetes.io/name: kratos-postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: kratos-selftservice
   namespace: shikanime
 spec:

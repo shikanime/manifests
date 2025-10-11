@@ -7,14 +7,15 @@ set -o pipefail
 
 # Define container images to check
 declare -A IMAGES=(
-  ["kratos"]="docker.io/ory/kratos"
+  ["kratos"]="docker.io/oryd/kratos"
+  ["kratos-postgres"]="docker.io/library/postgres"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
   FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
   LATEST_VERSION=$(
     skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
+      jq -r '.Tags | map(select(test("^v?[0-9]+(\\.[0-9]+)?(\\.[0-9]+)?$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
   )
   if [[ -z $LATEST_VERSION ]]; then
     echo "Image '$FULL_IMAGE' not found in registry."
