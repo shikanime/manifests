@@ -12,6 +12,6 @@ secretGenerator:
     name: rclone-ftp
     namespace: shikanime
   - literals:
-      - htpasswd=rclone:$2y$10$mAUpgid7E0NTdRs/r1c/RuySiZch4NDBEGgOuqekDg5tHXOCPtZKO
+      - htpasswd=rclone:$2y$10$fzc5WZGY6Wk/j.J.IB3k5e8cpcoSYC49TwQ24TttW5yP3pXsi7A12
     name: rclone-htpasswd
     namespace: shikanime
