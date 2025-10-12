@@ -7,5 +7,11 @@ set -o pipefail
 
 sops \
   --decrypt \
-  "$(dirname "$0")"/kustomization.enc.yaml > \
-  "$(dirname "$0")"/kustomization.yaml
+  "$(dirname "$0")"/rclone-ftp/.enc.env > \
+  "$(dirname "$0")"/rclone-ftp/.env
+
+sops \
+  --decrypt \
+  "$(dirname "$0")"/rclone-htpasswd/.enc.env > \
+  "$(dirname "$0")"/rclone-htpasswd/.env
+

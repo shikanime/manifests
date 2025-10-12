@@ -18,16 +18,23 @@ fi
 # Generate bcrypt hash for htpasswd (using cost 10)
 BCRYPT_HASH=$(htpasswd -bnBC 10 "" "$PASSWORD" | tr -d ':')
 
-# Update both secrets in the kustomization file
-yq -i \
-  ".secretGenerator[0].literals[1] = \"password=$PASSWORD\"" \
-  "$(dirname "$0")"/kustomization.yaml
-yq -i \
-  ".secretGenerator[1].literals[0] = \"htpasswd=rclone:$BCRYPT_HASH\"" \
-  "$(dirname "$0")"/kustomization.yaml
+# Update password in secrets
+cat > "$(dirname "$0")"/rclone-ftp/.env <<EOF
+password=$PASSWORD
+EOF
+
+# Update rclone-htpasswd/.env
+cat > "$(dirname "$0")"/rclone-htpasswd/.env <<EOF
+htpasswd=rclone:$BCRYPT_HASH
+EOF
 
 sops \
   --encrypt \
-  --encrypted-regex "^(literals)$" \
-  "$(dirname "$0")"/kustomization.yaml > \
-  "$(dirname "$0")"/kustomization.enc.yaml
+  "$(dirname "$0")"/rclone-ftp/.env > \
+  "$(dirname "$0")"/rclone-ftp/.enc.env
+
+sops \
+  --encrypt \
+  "$(dirname "$0")"/rclone-htpasswd/.env > \
+  "$(dirname "$0")"/rclone-htpasswd/.enc.env
+
