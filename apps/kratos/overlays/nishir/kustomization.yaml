@@ -8,6 +8,7 @@ configMapGenerator:
     namespace: shikanime
   - files:
       - kratos-postgres/postgresql.conf
+      - kratos-postgres/pg_hba.conf
     name: kratos-postgres
     namespace: shikanime
 resources:

@@ -99,9 +99,9 @@ spec:
           image: postgres
           args:
             - -c
-            - config_file=/etc/postgresql/18.0/main/postgresql.conf
+            - config_file=/etc/postgresql/postgresql.conf
             - -c
-            - hba_file=/etc/postgresql/18.0/main/pg_hba.conf
+            - hba_file=/etc/postgresql/pg_hba.conf
           env:
             - name: POSTGRES_DB
               value: kratos
@@ -113,14 +113,39 @@ spec:
           ports:
             - containerPort: 5432
               name: postgres
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - kratos
+                - -d
+                - kratos
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - kratos
+                - -d
+                - kratos
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          startupProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - kratos
+                - -d
+                - kratos
+            failureThreshold: 30
+            periodSeconds: 10
           volumeMounts:
             - name: config
-              mountPath: /etc/postgresql/18.0/main/postgresql.conf
-              subPath: postgresql.conf
-              readOnly: true
-            - name: config
-              mountPath: /etc/postgresql/18.0/main/pg_hba.conf
-              subPath: pg_hba.conf
+              mountPath: /etc/postgresql
               readOnly: true
             - name: data
               mountPath: /var/lib/postgresql
