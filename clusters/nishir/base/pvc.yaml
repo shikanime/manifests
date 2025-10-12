@@ -2,7 +2,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: downloads-data
-  namespace: shikanime
 spec:
   accessModes:
     - ReadWriteMany
@@ -17,7 +16,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: movies-data
-  namespace: shikanime
 spec:
   accessModes:
     - ReadWriteMany
@@ -32,7 +30,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: shows-data
-  namespace: shikanime
 spec:
   accessModes:
     - ReadWriteMany
@@ -47,7 +44,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sukebe-data
-  namespace: shikanime
 spec:
   accessModes:
     - ReadWriteMany
@@ -62,7 +58,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sync-data
-  namespace: shikanime
 spec:
   accessModes:
     - ReadWriteMany
@@ -77,7 +72,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: timeline-data
-  namespace: shikanime
 spec:
   accessModes:
     - ReadWriteMany
