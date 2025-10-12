@@ -19,14 +19,14 @@ fi
 BCRYPT_HASH=$(htpasswd -bnBC 10 "" "$PASSWORD" | tr -d ':')
 
 # Update password in secrets
-cat >"$(dirname "$0")"/rclone-ftp/.env <<EOF
-password=$PASSWORD
-EOF
+sed -i \
+  -e "s|^password=.*|password=$PASSWORD|" \
+  "$(dirname "$0")"/rclone-ftp/.env
 
 # Update rclone-htpasswd/.env
-cat >"$(dirname "$0")"/rclone-htpasswd/.env <<EOF
-htpasswd=rclone:$BCRYPT_HASH
-EOF
+sed -i \
+  -e "s|^htpasswd=.*|htpasswd=rclone:$BCRYPT_HASH|" \
+  "$(dirname "$0")"/rclone-htpasswd/.env
 
 sops \
   --encrypt \
