@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: kratos-tls
-  namespace: shikanime
 spec:
   commonName: kratos
   dnsNames:
@@ -20,7 +19,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: kratos-postgres-tls
-  namespace: shikanime
 spec:
   commonName: kratos-postgres
   dnsNames:
@@ -38,7 +36,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: kratos-postgres-client
-  namespace: shikanime
 spec:
   commonName: kratos
   dnsNames:

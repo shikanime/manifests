@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: prowlarr-tls
-  namespace: shikanime
 spec:
   commonName: prowlarr
   dnsNames:

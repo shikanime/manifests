@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: jellyfin
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -48,7 +47,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: metatube
-  namespace: shikanime
 spec:
   template:
     spec:

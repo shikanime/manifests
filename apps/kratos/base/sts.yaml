@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: kratos
-  namespace: shikanime
 spec:
   replicas: 1
   serviceName: kratos
@@ -82,7 +81,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: kratos-postgres
-  namespace: shikanime
 spec:
   serviceName: kratos-postgres
   replicas: 1

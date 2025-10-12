@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kratos
-  namespace: shikanime
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -16,7 +15,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kratos-admin
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
@@ -28,7 +26,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kratos-selftservice
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
