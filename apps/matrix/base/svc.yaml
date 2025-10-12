@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix
-  namespace: shikanime
 spec:
   ports:
     - name: http
@@ -18,7 +17,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix-discord
-  namespace: shikanime
 spec:
   ports:
     - name: http
@@ -32,7 +30,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix-googlechat
-  namespace: shikanime
 spec:
   ports:
     - name: http
@@ -46,7 +43,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix-manager
-  namespace: shikanime
 spec:
   ports:
     - name: http
@@ -59,7 +55,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix-meta
-  namespace: shikanime
 spec:
   ports:
     - name: http
@@ -73,7 +68,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix-signal
-  namespace: shikanime
 spec:
   ports:
     - name: http
@@ -87,7 +81,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix-slack
-  namespace: shikanime
 spec:
   ports:
     - name: http
@@ -101,7 +94,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: matrix-whatsapp
-  namespace: shikanime
 spec:
   ports:
     - name: http

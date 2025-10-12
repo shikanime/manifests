@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -48,7 +47,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-discord
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -67,7 +65,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-googlechat
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -86,7 +83,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-meta
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -105,7 +101,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-slack
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -124,7 +119,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-signal
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -143,7 +137,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-whatsapp
-  namespace: shikanime
 spec:
   template:
     spec:
