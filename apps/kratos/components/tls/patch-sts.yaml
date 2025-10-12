@@ -45,33 +45,33 @@ spec:
         - name: certs
           projected:
             sources:
-            - configMap:
-                name: nishir-ca-certificates.crt
-                items:
-                - key: ca-certificates.crt
-                  path: ca-certificates.crt
-            - secret:
-                name: kratos-postgres-client
-                items:
-                - key: ca.crt
-                  path: ca.crt
+              - configMap:
+                  name: nishir-ca-certificates.crt
+                  items:
+                    - key: ca-certificates.crt
+                      path: ca-certificates.crt
+              - secret:
+                  name: kratos-postgres-client
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
         - name: tls
           projected:
             sources:
-            - secret:
-                name: kratos-tls
-                items:
-                - key: tls.crt
-                  path: tls.crt
-                - key: tls.key
-                  path: tls.key
-            - secret:
-                name: kratos-postgres-client
-                items:
-                - key: tls.crt
-                  path: postgres-client.crt
-                - key: tls.key
-                  path: postgres-client.key
+              - secret:
+                  name: kratos-tls
+                  items:
+                    - key: tls.crt
+                      path: tls.crt
+                    - key: tls.key
+                      path: tls.key
+              - secret:
+                  name: kratos-postgres-client
+                  items:
+                    - key: tls.crt
+                      path: postgres-client.crt
+                    - key: tls.key
+                      path: postgres-client.key
 ---
 apiVersion: apps/v1
 kind: StatefulSet
