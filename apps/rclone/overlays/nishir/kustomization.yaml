@@ -6,12 +6,9 @@ resources:
   - ../default
   - cert.yaml
 secretGenerator:
-  - literals:
-      - username=rclone
-      - password=)#v%QL0a[+}Fs{
+  - envs:
+      - rclone-ftp/.env
     name: rclone-ftp
-    namespace: shikanime
-  - literals:
-      - htpasswd=rclone:$2y$10$fzc5WZGY6Wk/j.J.IB3k5e8cpcoSYC49TwQ24TttW5yP3pXsi7A12
+  - files:
+      - rclone-htpasswd/.env
     name: rclone-htpasswd
-    namespace: shikanime

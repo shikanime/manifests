@@ -4,7 +4,6 @@ configMapGenerator:
   - literals:
       - rclone.conf=""
     name: rclone
-    namespace: shikanime
 images:
   - name: rclone
     newName: docker.io/rclone/rclone

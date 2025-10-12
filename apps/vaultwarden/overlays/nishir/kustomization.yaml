@@ -7,4 +7,3 @@ secretGenerator:
   - envs:
       - vaultwarden/.env
     name: vaultwarden
-    namespace: shikanime
