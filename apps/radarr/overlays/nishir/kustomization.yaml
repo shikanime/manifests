@@ -9,4 +9,3 @@ secretGenerator:
   - envs:
       - radarr/.env
     name: radarr-pkcs12-password
-    namespace: shikanime

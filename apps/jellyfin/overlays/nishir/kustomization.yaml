@@ -12,8 +12,6 @@ secretGenerator:
   - envs:
       - jellyfin/.env
     name: jellyfin-pkcs12-password
-    namespace: shikanime
   - envs:
       - metatube/.env
     name: metatube
-    namespace: shikanime

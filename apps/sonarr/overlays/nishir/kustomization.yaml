@@ -13,4 +13,3 @@ secretGenerator:
   - envs:
       - sonarr/.env
     name: sonarr-pkcs12-password
-    namespace: shikanime

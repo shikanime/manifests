@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sonarr
-  namespace: shikanime
 spec:
   replicas: 1
   serviceName: sonarr

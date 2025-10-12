@@ -9,4 +9,3 @@ secretGenerator:
   - envs:
       - whisparr/.env
     name: whisparr-pkcs12-password
-    namespace: shikanime

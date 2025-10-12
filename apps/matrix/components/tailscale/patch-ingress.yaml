@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix
-  namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix
     tailscale.com/tags: tag:web
@@ -13,7 +12,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-discord
-  namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix-discord
     tailscale.com/tags: tag:web
@@ -24,7 +22,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-googlechat
-  namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix-googlechat
     tailscale.com/tags: tag:web
@@ -35,7 +32,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-meta
-  namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix-meta
     tailscale.com/tags: tag:web
@@ -46,7 +42,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-signal
-  namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix-signal
     tailscale.com/tags: tag:web
@@ -57,7 +52,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-slack
-  namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix-slack
     tailscale.com/tags: tag:web
@@ -68,7 +62,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-whatsapp
-  namespace: shikanime
   annotations:
     tailscale.com/proxy-class: nishir-matrix-whatsapp
     tailscale.com/tags: tag:web

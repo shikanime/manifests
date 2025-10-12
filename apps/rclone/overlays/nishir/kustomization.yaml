@@ -10,8 +10,6 @@ secretGenerator:
       - username=rclone
       - password=)#v%QL0a[+}Fs{
     name: rclone-ftp
-    namespace: shikanime
   - literals:
       - htpasswd=rclone:$2y$10$fzc5WZGY6Wk/j.J.IB3k5e8cpcoSYC49TwQ24TttW5yP3pXsi7A12
     name: rclone-htpasswd
-    namespace: shikanime

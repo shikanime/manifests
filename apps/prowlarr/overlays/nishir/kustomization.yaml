@@ -9,4 +9,3 @@ secretGenerator:
   - envs:
       - prowlarr/.env
     name: prowlarr-pkcs12-password
-    namespace: shikanime
