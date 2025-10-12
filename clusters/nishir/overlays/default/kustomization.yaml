@@ -3,6 +3,7 @@ kind: Kustomization
 components:
   - ../../components/longhorn
   - ../../components/node-feature
+  - ../../components/shikanime
   - ../../components/tls
 resources:
   - ../../base
