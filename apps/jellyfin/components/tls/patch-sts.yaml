@@ -37,10 +37,8 @@ spec:
           secret:
             secretName: jellyfin-tls
             items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
+              - key: keystore.p12
+                path: keystore.p12
                 mode: 0640
 ---
 apiVersion: apps/v1
