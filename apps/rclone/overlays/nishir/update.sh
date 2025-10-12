@@ -6,8 +6,7 @@ set -o nounset
 set -o pipefail
 
 # Get current password if it exists
-CURRENT_PASSWORD=$(yq '.secretGenerator[] | select(.name == "rclone-ftp") | .literals[1]' "$(dirname "$0")"/kustomization.yaml | sed 's/^password=//' 2>/dev/null || echo "")
-
+CURRENT_PASSWORD=$(grep -m1 '^password=' "$(dirname "$0")"/rclone-ftp/.env 2>/dev/null | cut -d= -f2 || echo "")
 # Generate new password only if current password is empty
 if [ -z "$CURRENT_PASSWORD" ]; then
   PASSWORD=$(openssl rand -base64 14)
