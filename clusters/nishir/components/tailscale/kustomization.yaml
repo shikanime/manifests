@@ -4,4 +4,4 @@ secretGenerator:
   - envs:
       - oauth-client/.env
     name: oauth-client
-    namespace: tailscale
+    namespace: tailscale-system
