@@ -14,4 +14,3 @@ sops \
   --decrypt \
   "$(dirname "$0")"/rclone-htpasswd/.enc.env > \
   "$(dirname "$0")"/rclone-htpasswd/.env
-
