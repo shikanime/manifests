@@ -37,3 +37,7 @@ spec:
         - name: tls
           secret:
             secretName: radarr-tls
+            items:
+              - key: keystore.p12
+                path: keystore.p12
+                mode: 0640
