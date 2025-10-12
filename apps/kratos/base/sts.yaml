@@ -26,23 +26,6 @@ spec:
                       values:
                         - nishir-security
                 topologyKey: kubernetes.io/hostname
-      initContainers:
-        - name: kratos-migrate
-          image: kratos
-          args:
-            - migrate
-            - sql
-            - --config
-            - /etc/kratos/kratos.yaml
-            - --read-from-env
-            - --yes
-          envFrom:
-            - secretRef:
-                name: kratos
-          volumeMounts:
-            - name: config
-              mountPath: /etc/kratos
-              readOnly: true
       containers:
         - name: kratos
           image: kratos
@@ -79,6 +62,17 @@ spec:
             - name: config
               mountPath: /etc/kratos
               readOnly: true
+      initContainers:
+        - name: migrate
+          image: kratos
+          args:
+            - migrate
+            - sql
+            - --read-from-env
+            - --yes
+          envFrom:
+            - secretRef:
+                name: kratos
       volumes:
         - name: config
           configMap:
@@ -103,23 +97,39 @@ spec:
       containers:
         - name: postgres
           image: postgres
+          args:
+            - -c
+            - config_file=/etc/postgresql/18.0/main/postgresql.conf
+            - -c
+            - hba_file=/etc/postgresql/18.0/main/pg_hba.conf
           env:
             - name: POSTGRES_DB
               value: kratos
             - name: POSTGRES_USER
               value: kratos
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: kratos
-                  key: POSTGRES_PASSWORD
+          envFrom:
+            - secretRef:
+                name: kratos-postgres
           ports:
             - containerPort: 5432
               name: postgres
           volumeMounts:
+            - name: config
+              mountPath: /etc/postgresql/18.0/main/postgresql.conf
+              subPath: postgresql.conf
+              readOnly: true
+            - name: config
+              mountPath: /etc/postgresql/18.0/main/pg_hba.conf
+              subPath: pg_hba.conf
+              readOnly: true
             - name: data
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
+      securityContext:
+        fsGroup: 999
       volumes:
+        - name: config
+          configMap:
+            name: kratos-postgres
         - name: data
           persistentVolumeClaim:
             claimName: kratos-postgres-data

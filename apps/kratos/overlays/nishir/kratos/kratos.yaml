@@ -5,6 +5,11 @@ serve:
     base_url: http://kratos.taila659a.ts.net
     cors:
       enabled: true
+    tls:
+      key:
+        path: /etc/ssl/private/tls.key
+      cert:
+        path: /etc/ssl/certs/tls.crt
   admin:
     base_url: http://kratos-admin.taila659a.ts.net
 
@@ -91,4 +96,4 @@ hashers:
 identity:
   schemas:
     - id: default
-      url: file://etc/kratos/identity.schema.json
+      url: file:///etc/kratos/identity.schema.json

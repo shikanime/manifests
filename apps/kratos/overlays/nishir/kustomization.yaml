@@ -6,6 +6,10 @@ configMapGenerator:
       - kratos/kratos.yaml
     name: kratos
     namespace: shikanime
+  - files:
+      - kratos-postgres/postgresql.conf
+    name: kratos-postgres
+    namespace: shikanime
 resources:
   - ../default
   - cert.yaml
@@ -13,4 +17,8 @@ secretGenerator:
   - envs:
       - kratos/.env
     name: kratos
+    namespace: shikanime
+  - envs:
+      - kratos-postgres/.env
+    name: kratos-postgres
     namespace: shikanime

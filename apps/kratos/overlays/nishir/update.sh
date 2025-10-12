@@ -9,3 +9,8 @@ sops \
   --encrypt \
   "$(dirname "$0")"/kratos/.env > \
   "$(dirname "$0")"/kratos/.enc.env
+
+sops \
+  --encrypt \
+  "$(dirname "$0")"/kratos-postgres/.env > \
+  "$(dirname "$0")"/kratos-postgres/.enc.env
