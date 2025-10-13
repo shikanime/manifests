@@ -7,6 +7,9 @@ images:
   - name: kratos-postgres
     newName: docker.io/library/postgres
     newTag: "18.0"
+  - name: kratos-selfservice-ui-node
+    newName: docker.io/oryd/kratos-selfservice-ui-node
+    newTag: v1.3.1
 resources:
   - deploy.yaml
   - ingress.yaml

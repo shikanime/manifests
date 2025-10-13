@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts
+  labels:
+    app.kubernetes.io/name: accounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: accounts
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: accounts
+    spec:
+      containers:
+        - name: kratos-selfservice-ui-node
+          image: kratos-selfservice-ui-node
+          env:
+            - name: KRATOS_PUBLIC_URL
+              value: https://kratos:4433
+            - name: KRATOS_BROWSER_URL
+              value: https://accounts.taila659a.ts.net
+            - name: COOKIE_SECRET
+              value: changeme
+            - name: CSRF_COOKIE_NAME
+              value: accounts.taila659a.ts.net-x-csrf-token
+            - name: CSRF_COOKIE_SECRET
+              value: changeme
+          ports:
+            - name: http
+              containerPort: 4455
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
