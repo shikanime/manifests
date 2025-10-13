@@ -11,6 +11,6 @@
         header Access-Control-Allow-Methods "GET, OPTIONS"
         header Access-Control-Allow-Headers "Origin, Content-Type, Accept"
         header Access-Control-Max-Age "86400"
-        respond `{"fi.mau.bridges":["https://matrix-slack.taila659a.ts.net"]}` 200
+        respond `{"fi.mau.bridges":["https://matrix-meta.taila659a.ts.net", "https://matrix-slack.taila659a.ts.net"]}` 200
     }
 }
