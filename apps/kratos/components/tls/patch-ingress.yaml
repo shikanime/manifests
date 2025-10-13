@@ -5,6 +5,6 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: jellyfin
+      name: kratos
       port:
         name: https
