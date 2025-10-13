@@ -18,4 +18,4 @@ spec:
     service:
       name: kratos
       port:
-        name: http
+        name: http-admin
