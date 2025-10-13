@@ -7,4 +7,4 @@ spec:
     service:
       name: kratos
       port:
-        name: https
+        name: https-admin
