@@ -32,14 +32,11 @@ spec:
             - name: http
               containerPort: 4455
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
           startupProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
