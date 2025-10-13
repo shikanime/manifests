@@ -7,22 +7,14 @@ spec:
     spec:
       containers:
         - name: kratos
-          ports:
-            - containerPort: 4433
-              name: https
-            - containerPort: 4434
-              name: https-admin
           readinessProbe:
             httpGet:
-              port: https-admin
               scheme: HTTPS
           livenessProbe:
             httpGet:
-              port: https-admin
               scheme: HTTPS
           startupProbe:
             httpGet:
-              port: https-admin
               scheme: HTTPS
           volumeMounts:
             - name: certs

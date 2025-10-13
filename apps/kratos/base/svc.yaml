@@ -5,19 +5,10 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 80
+      port: 4433
       targetPort: http
-  selector:
-    app.kubernetes.io/name: kratos
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: kratos-admin
-spec:
-  ports:
-    - name: http
-      port: 80
+    - name: http-admin
+      port: 4434
       targetPort: http-admin
   selector:
     app.kubernetes.io/name: kratos

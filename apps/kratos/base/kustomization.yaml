@@ -8,6 +8,7 @@ images:
     newName: docker.io/library/postgres
     newTag: "18.0"
 resources:
+  - deploy.yaml
   - ingress.yaml
   - pvc.yaml
   - sts.yaml
