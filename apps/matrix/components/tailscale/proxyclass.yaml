@@ -58,6 +58,25 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
+  name: nishir-matrix-meta
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: matrix-meta
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
   name: nishir-matrix-slack
 spec:
   statefulSet:
@@ -70,6 +89,44 @@ spec:
                 labelSelector:
                   matchLabels:
                     app.kubernetes.io/name: matrix-slack
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: nishir-matrix-signal
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: matrix-signal
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: nishir-matrix-whatsapp
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: matrix-whatsapp
                 namespaces:
                   - shikanime
                 topologyKey: kubernetes.io/hostname
