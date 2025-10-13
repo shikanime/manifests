@@ -5,6 +5,8 @@ metadata:
 spec:
   ports:
     - name: https
+      port: 4433
       targetPort: http
-    - name: https
+    - name: https-admin
+      port: 4434
       targetPort: http-admin
