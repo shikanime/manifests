@@ -92,6 +92,18 @@ spec:
       labels:
         app.kubernetes.io/name: kratos-postgres
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - kratos
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       containers:
         - name: postgres
           image: postgres
