@@ -9,6 +9,7 @@ set -o pipefail
 declare -A IMAGES=(
   ["kratos"]="docker.io/oryd/kratos"
   ["kratos-postgres"]="docker.io/library/postgres"
+  ["kratos-selfservice-ui-node"]="docker.io/oryd/kratos-selfservice-ui-node"
 )
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
