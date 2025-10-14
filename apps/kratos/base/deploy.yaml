@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts
+  labels:
+    app.kubernetes.io/name: accounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: accounts
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: accounts
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/part-of
+                      operator: NotIn
+                      values:
+                        - nishir-security
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: kratos-selfservice-ui-node
+          image: kratos-selfservice-ui-node
+          env:
+            - name: KRATOS_ADMIN_URL
+              value: https://kratos:4434
+            - name: KRATOS_PUBLIC_URL
+              value: https://kratos:4433
+            - name: KRATOS_BROWSER_URL
+              value: https://accounts.taila659a.ts.net/.ory/kratos/public
+            - name: COOKIE_SECRET
+              value: changeme
+            - name: CSRF_COOKIE_NAME
+              value: __Host-accounts.taila659a.ts.net-x-csrf-token
+            - name: CSRF_COOKIE_SECRET
+              value: changeme
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health/alive
+              port: http
+          startupProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+      securityContext:
+        fsGroup: 10000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts-ory
+  labels:
+    app.kubernetes.io/name: accounts-ory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: accounts-ory
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: accounts-ory
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - kratos
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+      containers:
+        - name: caddy
+          image: caddy
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            failureThreshold: 30
+          volumeMounts:
+            - name: config
+              mountPath: /etc/caddy
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: accounts-ory
