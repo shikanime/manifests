@@ -30,11 +30,8 @@
           }
         }
       },
-      "required": [
-        "email"
-      ],
+      "required": ["email"],
       "additionalProperties": false
     }
   }
 }
- No newline at end of file
