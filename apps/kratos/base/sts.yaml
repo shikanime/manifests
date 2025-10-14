@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kratos
+spec:
+  replicas: 1
+  serviceName: kratos
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kratos
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kratos
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/part-of
+                      operator: NotIn
+                      values:
+                        - nishir-security
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: kratos
+          image: kratos
+          args:
+            - serve
+            - all
+            - --config
+            - /etc/kratos/kratos.yaml
+          envFrom:
+            - secretRef:
+                name: kratos
+          ports:
+            - containerPort: 4433
+              name: http
+            - containerPort: 4434
+              name: http-admin
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http-admin
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /health/alive
+              port: http-admin
+            initialDelaySeconds: 60
+          startupProbe:
+            httpGet:
+              path: /health/ready
+              port: http-admin
+            failureThreshold: 30
+            periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /etc/kratos
+              readOnly: true
+      initContainers:
+        - name: migrate
+          image: kratos
+          args:
+            - migrate
+            - sql
+            - --read-from-env
+            - --yes
+          envFrom:
+            - secretRef:
+                name: kratos
+      volumes:
+        - name: config
+          configMap:
+            name: kratos
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kratos-postgres
+spec:
+  serviceName: kratos-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kratos-postgres
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kratos-postgres
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - kratos
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+      containers:
+        - name: postgres
+          image: postgres
+          args:
+            - -c
+            - config_file=/etc/postgresql/postgresql.conf
+            - -c
+            - hba_file=/etc/postgresql/pg_hba.conf
+          env:
+            - name: POSTGRES_DB
+              value: kratos
+            - name: POSTGRES_USER
+              value: kratos
+          envFrom:
+            - secretRef:
+                name: kratos-postgres
+          ports:
+            - containerPort: 5432
+              name: postgres
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - kratos
+                - -d
+                - kratos
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - kratos
+                - -d
+                - kratos
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          startupProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - kratos
+                - -d
+                - kratos
+            failureThreshold: 30
+            periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /etc/postgresql
+              readOnly: true
+            - name: data
+              mountPath: /var/lib/postgresql
+      securityContext:
+        fsGroup: 999
+      volumes:
+        - name: config
+          configMap:
+            name: kratos-postgres
+        - name: data
+          persistentVolumeClaim:
+            claimName: kratos-postgres-data
