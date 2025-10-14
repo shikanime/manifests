@@ -7,7 +7,7 @@ resources:
   # - ../../../../apps/gitea/overlays/tailnet
   # - ../../../../apps/jellyfin/overlays/tailnet
   - ../../../../apps/kratos/overlays/tailnet
-  - ../../../../apps/matrix/overlays/tailnet
+  # - ../../../../apps/matrix/overlays/tailnet
   # - ../../../../apps/prowlarr/overlays/tailnet
   # - ../../../../apps/qbittorrent/overlays/tailnet
   # - ../../../../apps/radarr/overlays/tailnet

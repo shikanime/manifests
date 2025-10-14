@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
+  - name: caddy
+    newName: docker.io/library/caddy
+    newTag: 2.7.6
   - name: kratos
     newName: docker.io/oryd/kratos
     newTag: v1.3.1

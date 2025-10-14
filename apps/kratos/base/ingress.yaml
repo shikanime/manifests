@@ -8,6 +8,16 @@ spec:
       name: accounts
       port:
         name: http
+  rules:
+    - http:
+        paths:
+          - path: /.ory/kratos/public
+            pathType: Prefix
+            backend:
+              service:
+                name: accounts-ory
+                port:
+                  name: http
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

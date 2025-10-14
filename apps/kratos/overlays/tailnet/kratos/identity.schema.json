@@ -23,12 +23,18 @@
               "passkey": {
                 "display_name": true
               }
+            },
+            "verification": {
+              "via": "email"
             }
           }
         }
       },
-      "required": ["email"],
+      "required": [
+        "email"
+      ],
       "additionalProperties": false
     }
   }
 }
+ No newline at end of file
