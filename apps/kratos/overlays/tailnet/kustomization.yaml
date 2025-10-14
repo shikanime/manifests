@@ -1,8 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: shikanime
-namespace: shikanime
-components:
-  - ../../components/tailscale
+configMapGenerator:
+  - files:
+      - kratos/identity.schema.json
+      - kratos/kratos.yaml
+    name: kratos
+  - files:
+      - kratos-postgres/postgresql.conf
+      - kratos-postgres/pg_hba.conf
+    name: kratos-postgres
 resources:
   - ../nishir
+secretGenerator:
+  - envs:
+      - kratos/.env
+    name: kratos
+  - envs:
+      - kratos-postgres/.env
+    name: kratos-postgres
