@@ -3,7 +3,7 @@ kind: Kustomization
 images:
   - name: caddy
     newName: docker.io/library/caddy
-    newTag: 2.7.6
+    newTag: 2.9.1
   - name: kratos
     newName: docker.io/oryd/kratos
     newTag: v1.3.1

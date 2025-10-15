@@ -154,7 +154,7 @@ spec:
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
-                version: "1.88.3"
+                version: "1.88.4"
                 namespace: tailscale-system
                 values: |
                   apiServerProxyConfig:
