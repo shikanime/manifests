@@ -11,6 +11,7 @@ TAILSCALE_CONFIG=$(tofu -chdir="$(dirname "$0")"/../../../../infra/nishir-servic
 # Extract client_id and client_secret
 CLIENT_ID=$(echo "$TAILSCALE_CONFIG" | jq -r '.client_id')
 CLIENT_SECRET=$(echo "$TAILSCALE_CONFIG" | jq -r '.client_secret')
+
 # Update the decrypted content
 sed -i \
   -e "s|client_id=.*|client_id=$CLIENT_ID|g" \
