@@ -13,12 +13,10 @@ CLIENT_ID=$(echo "$TAILSCALE_CONFIG" | jq -r '.client_id')
 CLIENT_SECRET=$(echo "$TAILSCALE_CONFIG" | jq -r '.client_secret')
 
 # Update the decrypted content
-yq -i \
-  ".secretGenerator[0].literals[0] = \"client_id=$CLIENT_ID\"" \
-  "$(dirname "$0")"/kustomization.yaml
-yq -i \
-  ".secretGenerator[0].literals[1] = \"client_secret=$CLIENT_SECRET\"" \
-  "$(dirname "$0")"/kustomization.yaml
+sed -i \
+  -e "s|client_id=.*|client_id=$CLIENT_ID|g" \
+  -e "s|client_secret=.*|client_secret=$CLIENT_SECRET|g" \
+  "$(dirname "$0")"/oauth-client/.env
 
 # Re-encrypt with SOPS
 sops \
