@@ -16,11 +16,11 @@ spec:
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
-  name: monthly-backup
+  name: weekly-backup
   namespace: longhorn-system
 spec:
   concurrency: 5
-  cron: "0 4 * * *"
+  cron: "0 4 * * 0"
   groups:
     - large
   parameters:
