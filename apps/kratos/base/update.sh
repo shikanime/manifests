@@ -15,10 +15,17 @@ declare -A IMAGES=(
 
 for IMAGE_NAME in "${!IMAGES[@]}"; do
   FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
-  LATEST_VERSION=$(
-    skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^v?[0-9]+(\\.[0-9]+)?(\\.[0-9]+)?$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
-  )
+  if [[ $IMAGE_NAME == "kratos-postgres" ]]; then
+    LATEST_VERSION=$(
+      skopeo list-tags "docker://${FULL_IMAGE}" |
+        jq -r '.Tags | map(select(test("^[0-9]+(\\.[0-9]+)?(\\.[0-9]+)?$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
+    )
+  else
+    LATEST_VERSION=$(
+      skopeo list-tags "docker://${FULL_IMAGE}" |
+        jq -r '.Tags | map(select(test("^v?[0-9]+[.-].*[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
+    )
+  fi
   if [[ -z $LATEST_VERSION ]]; then
     echo "Image '$FULL_IMAGE' not found in registry."
   else
