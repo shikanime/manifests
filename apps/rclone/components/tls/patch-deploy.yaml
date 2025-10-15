@@ -11,10 +11,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-            - name: tls
-              mountPath: /usr/local/share/ca-certificates/Nishir_Root_CA.crt
-              subPath: ca.crt
-              readOnly: true
         - name: rclone-webdav
           env:
             - name: RCLONE_CERT
