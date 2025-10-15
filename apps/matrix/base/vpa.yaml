@@ -13,36 +13,36 @@ spec:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: mautrix-discord
+  name: matrix-discord
 spec:
   targetRef:
     apiVersion: apps/v1
     kind: StatefulSet
-    name: mautrix-discord
+    name: matrix-discord
   updatePolicy:
     updateMode: Auto
 ---
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: mautrix-googlechat
+  name: matrix-googlechat
 spec:
   targetRef:
     apiVersion: apps/v1
     kind: StatefulSet
-    name: mautrix-googlechat
+    name: matrix-googlechat
   updatePolicy:
     updateMode: Auto
 ---
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: mautrix-manager
+  name: matrix-manager
 spec:
   targetRef:
     apiVersion: apps/v1
-    kind: StatefulSet
-    name: mautrix-manager
+    kind: Deployment
+    name: matrix-manager
   updatePolicy:
     updateMode: Auto
 ---
@@ -61,12 +61,12 @@ spec:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: mautrix-slack
+  name: matrix-slack
 spec:
   targetRef:
     apiVersion: apps/v1
     kind: StatefulSet
-    name: mautrix-slack
+    name: matrix-slack
   updatePolicy:
     updateMode: Auto
 ---
