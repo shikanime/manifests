@@ -63,10 +63,8 @@ spec:
                 values: |
                   bootstrap:
                     k0sproject-k0smotron: {}
-                    kubeadm: {}
                   controlPlane:
                     k0sproject-k0smotron: {}
-                    kubeadm: {}
                   infrastructure:
                     hetzner: {}
                   cert-manager:
