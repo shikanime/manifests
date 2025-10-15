@@ -165,4 +165,5 @@ spec:
           secret:
             secretName: rclone-htpasswd
         - name: cache
-          emptyDir: {}
+          emptyDir:
+            medium: Memory
