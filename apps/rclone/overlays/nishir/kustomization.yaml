@@ -9,6 +9,6 @@ secretGenerator:
   - envs:
       - rclone-ftp/.env
     name: rclone-ftp
-  - files:
+  - envs:
       - rclone-htpasswd/.env
     name: rclone-htpasswd
