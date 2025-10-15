@@ -5,6 +5,3 @@ secretGenerator:
       - oauth-client/.env
     name: oauth-client
     namespace: tailscale-system
-    literals:
-      - client_id=kncY6XnAi311CNTRL
-      - client_secret=tskey-client-kncY6XnAi311CNTRL-zFg4pAstCARaFssa7sBhARPctWCdWgg44
