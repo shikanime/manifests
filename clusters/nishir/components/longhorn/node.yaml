@@ -33,7 +33,7 @@ spec:
     nishir-fast:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/marisa/longhorn/
+      path: /mnt/reimu/longhorn/
       tags:
         - fast
   name: fushi
