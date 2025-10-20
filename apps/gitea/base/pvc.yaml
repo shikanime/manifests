@@ -8,6 +8,6 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: gitea-data
