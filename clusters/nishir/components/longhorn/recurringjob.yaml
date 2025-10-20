@@ -61,7 +61,7 @@ metadata:
   namespace: longhorn-system
 spec:
   concurrency: 5
-  cron: "0 4 */7 * 0"
+  cron: "0 4 */7 * *"
   groups:
     - default
   retain: 0
@@ -74,7 +74,7 @@ metadata:
   namespace: longhorn-system
 spec:
   concurrency: 5
-  cron: "0 4 */7 * 0"
+  cron: "0 4 */7 * *"
   groups:
     - default
   retain: 90
