@@ -21,7 +21,7 @@ images:
     newTag: v0.8.7
   - name: mautrix-slack
     newName: dock.mau.dev/mautrix/slack
-    newTag: v0.2.3
+    newTag: v0.2510.0
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
     newTag: v0.9.0

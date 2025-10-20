@@ -6,7 +6,7 @@ images:
     newTag: 2.9.1
   - name: kratos
     newName: docker.io/oryd/kratos
-    newTag: v1.3.1
+    newTag: v25.4.0
   - name: kratos-postgres
     newName: docker.io/library/postgres
     newTag: "18.0"
