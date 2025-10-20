@@ -7,7 +7,7 @@ configMapGenerator:
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
-    newTag: 1.71.1
+    newTag: 1.71.2
 resources:
   - deploy.yaml
   - ingress.yaml
@@ -18,4 +18,4 @@ labels:
       app.kubernetes.io/component: file-manager
       app.kubernetes.io/name: rclone
       app.kubernetes.io/part-of: nishir-operation
-      app.kubernetes.io/version: 1.71.1
+      app.kubernetes.io/version: 1.71.2

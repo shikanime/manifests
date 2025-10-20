@@ -20,7 +20,7 @@ jobs:
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
       - uses: DeterminateSystems/magic-nix-cache-action@v13
-      - uses: shikanime-studio/sapling-action@v2
+      - uses: shikanime-studio/sapling-action@v3
         with:
           token: ${{ steps.createGithubAppToken.outputs.token }}
           sign-commits: true

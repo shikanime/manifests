@@ -148,7 +148,7 @@ spec:
                     defaultFsType: xfs
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
-                version: "0.18.1"
+                version: "0.18.2"
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
@@ -164,7 +164,7 @@ spec:
                     hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: "v0.20.1"
+                version: "v0.20.2"
                 namespace: cert-manager-system
                 values: |
                   app:
