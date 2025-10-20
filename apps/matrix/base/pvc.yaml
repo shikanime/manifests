@@ -8,7 +8,7 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-discord-data
 ---
@@ -22,7 +22,7 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-googlechat-data
 ---
@@ -36,7 +36,7 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-slack-data
 ---
@@ -50,7 +50,7 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-whatsapp-data
 ---
@@ -64,7 +64,7 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-signal-data
 ---
@@ -78,7 +78,7 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-meta-data
 ---
@@ -92,6 +92,6 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: synapse-data
