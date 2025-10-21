@@ -22,6 +22,7 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
       - uses: shikanime-studio/sapling-action@v3
         with:
+          extra-args: --impure
           token: ${{ steps.createGithubAppToken.outputs.token }}
           sign-commits: true
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}}
