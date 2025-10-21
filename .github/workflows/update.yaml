@@ -23,9 +23,9 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
       - run: |
           nix flake update
-          nix develop . --impure -c sl config \
+          nix run nixpkgs#sapling -- config \
             --local ui.username "github-actions[bot]" \
             --local ui.email "github-actions[bot]@users.noreply.github.com"
-          nix develop . --impure -c sl ci \
+          nix run nixpkgs#sapling -- ci \
             -m "Update Flake"
-          nix develop . --impure -c sl ghstack
+          nix run nixpkgs#sapling ghstack
