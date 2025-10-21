@@ -1,8 +1,8 @@
 name: Update
 on:
   schedule:
-    - cron: "0 0 * * 0"
-  workflow_dispatch:
+    - cron: 0 0 * * 0
+  workflow_dispatch: null
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -15,17 +15,17 @@ jobs:
           owner: ${{ github.repository_owner }}
       - uses: actions/checkout@v5
         with:
+          fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token }}
       - uses: DeterminateSystems/nix-installer-action@v20
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: DeterminateSystems/update-flake-lock@v27
-        with:
-          branch: github/update_flake
-          commit-msg: Update Flake
-          pr-title: Update Flake
-          pr-labels: dependencies
-          pr-assignees: shikanime
-          sign-commits: true
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
+      - run: |
+          nix flake update
+          nix develop . --impure -c sl config \
+            --local ui.username "github-actions[bot]" \
+            --local ui.email "github-actions[bot]@users.noreply.github.com"
+          nix develop . --impure -c sl ci \
+            -m "Update Flake"
+          nix develop . --impure -c sl ghstack
