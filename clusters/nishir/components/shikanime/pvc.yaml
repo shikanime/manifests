@@ -46,6 +46,21 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: staging-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: staging-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: sukebe-data
   namespace: shikanime
 spec:
