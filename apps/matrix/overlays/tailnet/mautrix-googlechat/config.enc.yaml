@@ -1,7 +1,7 @@
 # Homeserver details
 homeserver:
   # The address that this appservice can use to connect to the homeserver.
-  address: https://matrix.taila659a.ts.net
+  address: https://matrix:8448
   # The domain of the homeserver (for MXIDs, etc).
   domain: matrix.taila659a.ts.net
   # Whether or not to verify the SSL certificate of the homeserver.
