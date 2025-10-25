@@ -1,6 +1,7 @@
 {
   inputs = {
     devenv.url = "github:cachix/devenv";
+    devlib.url = "github:shikanime-studio/devlib";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -20,6 +21,7 @@
   outputs =
     inputs@{
       devenv,
+      devlib,
       flake-parts,
       treefmt-nix,
       ...
@@ -50,39 +52,45 @@
               "LICENSE"
             ];
           };
-          devenv.shells.default = {
-            containers = pkgs.lib.mkForce { };
-            languages = {
-              opentofu.enable = true;
-              nix.enable = true;
-            };
-            cachix = {
-              enable = true;
-              push = "shikanime";
-            };
-            git-hooks.hooks = {
-              actionlint.enable = true;
-              deadnix.enable = true;
-              flake-checker.enable = true;
-              shellcheck.enable = true;
-              tflint.enable = true;
-            };
-            packages = [
-              pkgs.clusterctl
-              pkgs.gh
-              pkgs.gitnr
-              pkgs.gnugrep
-              pkgs.gnused
-              pkgs.k0sctl
-              pkgs.kubectl
-              pkgs.kubernetes-helm
-              pkgs.kustomize
-              pkgs.skaffold
-              pkgs.skopeo
-              pkgs.sops
-              pkgs.yq-go
-              self'.packages.longhornctl
+          devenv = {
+            modules = [
+              devlib.devenvModule
             ];
+            shells.default = {
+              containers = pkgs.lib.mkForce { };
+              languages = {
+                go.enable = true;
+                opentofu.enable = true;
+                nix.enable = true;
+              };
+              cachix = {
+                enable = true;
+                push = "shikanime";
+              };
+              git-hooks.hooks = {
+                actionlint.enable = true;
+                deadnix.enable = true;
+                flake-checker.enable = true;
+                shellcheck.enable = true;
+                tflint.enable = true;
+              };
+              packages = [
+                pkgs.clusterctl
+                pkgs.gh
+                pkgs.gitnr
+                pkgs.gnugrep
+                pkgs.gnused
+                pkgs.k0sctl
+                pkgs.kubectl
+                pkgs.kubernetes-helm
+                pkgs.kustomize
+                pkgs.skaffold
+                pkgs.skopeo
+                pkgs.sops
+                pkgs.yq-go
+                self'.packages.longhornctl
+              ];
+            };
           };
           packages.longhornctl = pkgs.buildGoModule rec {
             pname = "longhornctl";
