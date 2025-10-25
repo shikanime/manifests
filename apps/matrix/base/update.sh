@@ -5,34 +5,58 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Define container images to check
-declare -A IMAGES=(
-  ["caddy"]="docker.io/library/caddy"
-  ["busybox"]="docker.io/library/busybox"
-  ["mautrix-discord"]="dock.mau.dev/mautrix/discord"
-  ["mautrix-googlechat"]="dock.mau.dev/mautrix/googlechat"
-  ["mautrix-meta"]="dock.mau.dev/mautrix/meta"
-  ["mautrix-signal"]="dock.mau.dev/mautrix/signal"
-  ["mautrix-slack"]="dock.mau.dev/mautrix/slack"
-  ["mautrix-whatsapp"]="dock.mau.dev/mautrix/whatsapp"
-  ["synapse"]="docker.io/matrixdotorg/synapse"
-)
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "docker.io/library/caddy" \
+  --name "caddy" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^\d+\.\d+\.\d+$'
 
-for IMAGE_NAME in "${!IMAGES[@]}"; do
-  FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
-  LATEST_VERSION=$(
-    skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^v?[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
-  )
-  if [[ -z $LATEST_VERSION ]]; then
-    echo "Image '$FULL_IMAGE' not found in registry."
-  else
-    (cd "$(dirname "$0")" &&
-      kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
-    if [[ $IMAGE_NAME == "synapse" ]]; then
-      yq -i \
-        ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION#v}\"" \
-        "$(dirname "$0")"/kustomization.yaml
-    fi
-  fi
-done
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "docker.io/library/busybox" \
+  --name "busybox" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^\d+\.\d+\.\d+$'
+
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "dock.mau.dev/mautrix/discord" \
+  --name "mautrix-discord" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^v?\d+\.\d+\.\d+$'
+
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "dock.mau.dev/mautrix/googlechat" \
+  --name "mautrix-googlechat" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^v?\d+\.\d+\.\d+$'
+
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "dock.mau.dev/mautrix/meta" \
+  --name "mautrix-meta" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^v?\d+\.\d+\.\d+$'
+
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "dock.mau.dev/mautrix/signal" \
+  --name "mautrix-signal" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^v?\d+\.\d+\.\d+$'
+
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "dock.mau.dev/mautrix/slack" \
+  --name "mautrix-slack" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^v?\d+\.\d+\.\d+$'
+
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "dock.mau.dev/mautrix/whatsapp" \
+  --name "mautrix-whatsapp" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^v?\d+\.\d+\.\d+$'
+
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "docker.io/matrixdotorg/synapse" \
+  --name "synapse" \
+  --dir "$(dirname "$0")" \
+  --label-key "app.kubernetes.io/version" \
+  --tag-regex '^v?\d+\.\d+\.\d+$' \
+  --label-trim-prefix 'v'

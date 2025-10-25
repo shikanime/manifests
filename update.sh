@@ -19,9 +19,8 @@ gitnr create \
 
 for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
   # Update base directory
-  base_dir="$app_dir/base"
-  if [ -f "$base_dir/update.sh" ]; then
-    bash "$base_dir/update.sh" 2>&1 |
+  if [ -f "$app_dir/base/update.sh" ]; then
+    bash "$app_dir/base/update.sh" 2>&1 |
       sed 's/^/['"$(basename "$app_dir")"'] /' &
   fi
 

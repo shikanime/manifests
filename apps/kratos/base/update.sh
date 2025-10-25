@@ -5,36 +5,30 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Define container images to check
-declare -A IMAGES=(
-  ["caddy"]="docker.io/library/caddy"
-  ["kratos"]="docker.io/oryd/kratos"
-  ["kratos-postgres"]="docker.io/library/postgres"
-  ["kratos-selfservice-ui-node"]="docker.io/oryd/kratos-selfservice-ui-node"
-)
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "docker.io/library/caddy" \
+  --name "caddy" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^\d+\.\d+\.\d+$'
 
-for IMAGE_NAME in "${!IMAGES[@]}"; do
-  FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
-  if [[ $IMAGE_NAME == "kratos-postgres" ]]; then
-    LATEST_VERSION=$(
-      skopeo list-tags "docker://${FULL_IMAGE}" |
-        jq -r '.Tags | map(select(test("^[0-9]+(\\.[0-9]+)?(\\.[0-9]+)?$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
-    )
-  else
-    LATEST_VERSION=$(
-      skopeo list-tags "docker://${FULL_IMAGE}" |
-        jq -r '.Tags | map(select(test("^v?[0-9]+[.-].*[0-9]+\\.[0-9]+$"))) | sort_by(. | split("[.-]") | map(tonumber? // 0)) | last'
-    )
-  fi
-  if [[ -z $LATEST_VERSION ]]; then
-    echo "Image '$FULL_IMAGE' not found in registry."
-  else
-    (cd "$(dirname "$0")" &&
-      kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
-    if [[ $IMAGE_NAME == "synapse" ]]; then
-      yq -i \
-        ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION#v}\"" \
-        "$(dirname "$0")"/kustomization.yaml
-    fi
-  fi
-done
+# kratos: v-prefixed and pre-release (main app label kept)
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "docker.io/oryd/kratos" \
+  --name "kratos" \
+  --dir "$(dirname "$0")" \
+  --label-key "app.kubernetes.io/version" \
+  --tag-regex '^v?[0-9]+[.\-].*[0-9]+\.[0-9]+$'
+
+# postgres: allow 15, 15.6, 15.6.1 (no label)
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "docker.io/library/postgres" \
+  --name "kratos-postgres" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^\d+(\.\d+)?(\.\d+)?$'
+
+# ui: allow v-prefixed and pre-release (no label)
+go run "$(dirname "$0")"/../../../cmd/automata update \
+  --image "docker.io/oryd/kratos-selfservice-ui-node" \
+  --name "kratos-selfservice-ui-node" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '^v?[0-9]+[.\-].*[0-9]+\.[0-9]+$'
