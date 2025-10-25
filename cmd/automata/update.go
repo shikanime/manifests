@@ -143,6 +143,10 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 		chunks := splitRe.Split(t, -1)
 		ints := make([]int, len(chunks))
 		for i, c := range chunks {
+			// Strip leading 'v'/'V' from the major version chunk
+			if i == 0 && (strings.HasPrefix(c, "v") || strings.HasPrefix(c, "V")) {
+				c = c[1:]
+			}
 			v, err := strconv.Atoi(c)
 			if err != nil {
 				v = 0
