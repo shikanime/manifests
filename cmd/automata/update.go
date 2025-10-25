@@ -27,7 +27,7 @@ func NewUpdateKustomizationCmd() *cobra.Command {
 		image           = "docker.io/gitea/gitea"
 		name            = "gitea"
 		dir             = "apps/gitea/base"
-		labelKey        = ""                       // omit to skip label updates
+		labelKey        = "" // omit to skip label updates
 		tagRegex        = `^\d+\.\d+\.\d+$`
 		excludeTagsCSV  = ""
 		labelTrimPrefix = ""
@@ -154,26 +154,33 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 	if len(vals) == 0 {
 		return "", nil
 	}
+	// Sort by major, minor, patch in descending order (highest version first)
 	sort.Slice(vals, func(i, j int) bool {
 		a, b := vals[i].parts, vals[j].parts
-		n := len(a)
-		if len(b) > n {
-			n = len(b)
+
+		// Compare major, minor, patch parts in order
+		maxLen := len(a)
+		if len(b) > maxLen {
+			maxLen = len(b)
 		}
-		for k := 0; k < n; k++ {
-			av := 0
-			bv := 0
+
+		for k := 0; k < maxLen; k++ {
+			// Get version part (default to 0 if not present)
+			aPart := 0
+			bPart := 0
 			if k < len(a) {
-				av = a[k]
+				aPart = a[k]
 			}
 			if k < len(b) {
-				bv = b[k]
+				bPart = b[k]
 			}
-			if av != bv {
-				return av < bv
+
+			// If parts are different, sort in descending order (higher version first)
+			if aPart != bPart {
+				return aPart > bPart
 			}
 		}
 		return false
 	})
-	return vals[len(vals)-1].tag, nil
+	return vals[0].tag, nil
 }
