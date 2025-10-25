@@ -5,7 +5,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-go run "$(dirname "$0")"/../../../cmd/automata update \
+go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
   --image "lscr.io/linuxserver/prowlarr" \
   --name "prowlarr" \
   --dir "$(dirname "$0")" \

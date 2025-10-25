@@ -13,21 +13,28 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// NewUpdateCmd creates the 'update' subcommand for updating kustomize image tags
-// and optionally setting a version label.
 func NewUpdateCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "update",
+		Short: "Update resources",
+	}
+	cmd.AddCommand(NewUpdateKustomizationCmd())
+	return cmd
+}
+
+func NewUpdateKustomizationCmd() *cobra.Command {
 	var (
 		image           = "docker.io/gitea/gitea"
 		name            = "gitea"
 		dir             = "apps/gitea/base"
-		labelKey        = ""
+		labelKey        = ""                       // omit to skip label updates
 		tagRegex        = `^\d+\.\d+\.\d+$`
 		excludeTagsCSV  = ""
 		labelTrimPrefix = ""
 	)
 
 	cmd := &cobra.Command{
-		Use:   "update",
+		Use:   "kustomization",
 		Short: "Update kustomize image tag and labels",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			var exclude []string
@@ -104,33 +111,27 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 		Repository string   `json:"Repository"`
 		Tags       []string `json:"Tags"`
 	}
-
 	out, err := exec.Command("skopeo", "list-tags", "docker://"+image).Output()
 	if err != nil {
 		return "", err
 	}
-
 	var tags skopeoTags
 	if err = json.Unmarshal(out, &tags); err != nil {
 		return "", err
 	}
-
 	excl := make(map[string]struct{}, len(exclude))
 	for _, e := range exclude {
 		excl[e] = struct{}{}
 	}
-
 	re, err := regexp.Compile(tagRegex)
 	if err != nil {
 		return "", fmt.Errorf("compile tag regex: %w", err)
 	}
-
 	type sortable struct {
 		tag   string
 		parts []int
 	}
 	vals := make([]sortable, 0, len(tags.Tags))
-
 	splitRe := regexp.MustCompile(`[.\-]`)
 	for _, t := range tags.Tags {
 		if _, skip := excl[t]; skip {
@@ -150,11 +151,9 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 		}
 		vals = append(vals, sortable{tag: t, parts: ints})
 	}
-
 	if len(vals) == 0 {
 		return "", nil
 	}
-
 	sort.Slice(vals, func(i, j int) bool {
 		a, b := vals[i].parts, vals[j].parts
 		n := len(a)
@@ -176,6 +175,5 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 		}
 		return false
 	})
-
 	return vals[len(vals)-1].tag, nil
 }

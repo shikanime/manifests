@@ -5,18 +5,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Update gitignore
-gitnr create \
-  repo:github/gitignore/refs/heads/main/Nix.gitignore \
-  repo:shikanime/gitignore/refs/heads/main/Devenv.gitignore \
-  tt:jetbrains+all \
-  tt:linux \
-  tt:macos \
-  tt:terraform \
-  tt:vim \
-  tt:visualstudiocode \
-  tt:windows >.gitignore
-
 for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
   # Update base directory
   if [ -f "$app_dir/base/update.sh" ]; then
