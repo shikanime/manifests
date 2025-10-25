@@ -74,7 +74,6 @@
               };
               packages = [
                 pkgs.clusterctl
-                pkgs.gitnr
                 pkgs.gnugrep
                 pkgs.gnused
                 pkgs.k0sctl

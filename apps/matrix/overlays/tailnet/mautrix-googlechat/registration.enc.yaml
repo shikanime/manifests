@@ -1,6 +1,6 @@
 id: googlechat
-as_token: ENC[AES256_GCM,data:ybMO+NR72cCQScVvW/R2e3/ZnpcOcCasF34YJzaWkJnfnQWKR4Rz1AupqIYq7j5LXV3SqfVGsOwOU/G8EzdA3A==,iv:nVjbQ5dtV8v8FxYTgFYmgZr9oKqE2UKQ8MiB3D0cz7Q=,tag:iJ9ZyzxIXgwcywZLsvS+8A==,type:str]
-hs_token: ENC[AES256_GCM,data:irUimu0LXpjlMJzFRE8JWW1M93ooshFVttwu1pQd+uWZig2SfQGhZRDTST2vDsdrQOTeocSwUOTpFH+2GjVEUA==,iv:6s61xuvzFIdx9+B3WDkyY3Su9+8s+YslEt/rX972d+I=,tag:h1gCfpDLRPo7L5wNkcQMsA==,type:str]
+as_token: ENC[AES256_GCM,data:CfKd+MOYZS06jl+L6bRAuN5D8KRDk9tEbakRNLp5b07WvE27B7lZz43TuFdlKwcioV8NzB1jghd35jjApQVQKw==,iv:bX2JeX8qq+IxkZdsr8JoLJGIfNquipssoZRcDGBPn94=,tag:HkrMNFIodQEorZbcuCAH5Q==,type:str]
+hs_token: ENC[AES256_GCM,data:4x4Oin+kwlL1vjc/frQbcH8+2GsA0We8vra1kVku3Ju2PnuKFD5W3z+VEn78vfdI06NF4YCtBVUWWe6Cnn+UHg==,iv:pX4pCNs9wWuYFrPrn15Gqdk/xUtZga0/uzWnD6hSBaE=,tag:9izxRdZclQ4BzWl6l0GYvQ==,type:str]
 namespaces:
   users:
     - exclusive: true
@@ -18,31 +18,31 @@ sops:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxMFBlajk1SGJnUmpMTHFU
-        WXBvN1FwTEovRC9OdExqckt0VnFwTjI5TEZ3CjZlVVZwTmFQRGtRZFh0bmhINkdN
-        UGVMdFFmaGdLOElwZHQ0bmhmemt6SncKLS0tIFFJOE1XdTVLTTNNQklUNC9iRUpa
-        R3hoVGJ4RGV4R1FLdG9OamVaczUvTzQKMpRU94lDMcQM6jYmNBJDBlNld+HR0N2D
-        8x6JMnwEn9MCjVkJ6zKEAQGHH+eHNmUq9nFBB4IIaDLd9aHdzKV+Xg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMNlVhUmtuZFdISE5xSGtK
+        akF1KzJrV1VkZit6a2lzL1VFMmIwcHhNa0ZNCnJSUGlBOFlhc21qcnBuTmZuT0ll
+        bzZvT2NZVGwxQ041OU1ZOGMrMFB1VjAKLS0tIDJCY3U1TUk4UzcvdnVob2xHTDVs
+        SFh2RHRCWFVVOEhmbHAxeDJnZmFGMzQKGtOb6HxCK2zRBnktwv9xL4C5n/q24BT+
+        4HFsrioe77RJ6eDCZ7cVfBwsm+K3J9C/vsAb+ixC7syv8iX/meNbRg==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByQ0NFQ3lJMGVpVE5sRXdE
-        Q1IwdG1udE45eFJFUmNyVC9rQ0RudVk5UmtzCmNockhNcnc4Z0VVU2lFc25EV3NF
-        amR1ZWFuVVlhaEdYUGFESkIzcVB0NlUKLS0tIGxveSt2TXFJS3B3Y0JhdWs4TXZI
-        V2JQS281K0d3YzRHWjA4SzFDY2dRRVUKjLtvRUMts41scPtgFFABqHrOxsW8MDGc
-        QvcLexdAYRa+zDVXB4RxLwI9X/GMuaZ12zGcbJOC77Hy/cU2xKMmHg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRT2RLUkhldmRVNXQvK3NQ
+        dUx2MlZhd0o1b3BDeTlXZXBDUHZHTE51V1Y0CmpOQUxkUUtVMUxQWVRqTnpFMEUr
+        RUVkMVZMVWtrQTgzWTEwZExkdXVFLzAKLS0tIEJGTk1haWRCemRGYUd3MWdmQUR4
+        ejBoQ1BqY1BXYjQyTjlEd1RadElMUlkK2RQzGYHECak6t3FAs8Q0ZU8qU97FBF4Z
+        1nQgNLtBKc+Q4ddM8BgP260ioNfdQlMTK9LzkVB0qHLSHHbeZhSdFg==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBIYjJpYUtEWjl2Q3luQWdO
-        b1A1dHNwZ3huM1ZFWDZtcHFSRlcxVVorYUJjCndMRXh1U1lYcUR2bnJ5dWZrcURs
-        MG1ueTBjdzcrQnQ3L3dGOVNvV3VkeXcKLS0tIEdHL0E1dHZjT3JDZmNMNmJheUJi
-        aFlkMExIZHdvMTh3NVZiaFpVTFJSWUkKnOOnGatsLd1qHK295qLXJodCuWKrt0cX
-        MO60XfkaNT7Efnt02ARgp1RyA0D2l6dMl4v+R5JL9voiljYkLD4O8g==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjbG00YkpqUHpVT21vTTZn
+        cUpkaDZzMDdDcFIzOWdPUEhIYXZrVEliV0M0CmVSOHZFYkkwQkVNTTR4MzgxWUJO
+        TE5lTzArLzFjVGF5QUphUWRBalF1bDAKLS0tIHdHcGNXR2V6djBsSHNLM0QybW9k
+        OEV3b1EzQ1lmcmRENkF1RzlhTXVBRFEKJ/w7MkC461fZUDf0Pak9JFnYfvwcAnwv
+        Y2AuRc/KJa1l9QbfaMQc5irTQILti3maX9HzZmHC/b1MafhsvPJ84A==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-25T21:18:22Z"
-  mac: ENC[AES256_GCM,data:5D4Vcl6HsyQwthCR/JdcjdiIU/FkMEUbPXGKNH0g5HJA/ht6gjDjAWKLkuQOG9yGP4M6po5BrD7HkDHhuF1j2U/5E0mSEJIrIs2jZsKKvSoXdXDEr1RUeId0Z2NXyWK8yYaswx7SjLK6JOlYbh7C8PYE9Gv4UdSbTy/ebqS7CIo=,iv:b6/6k5S3zVtSwXzM9i9AdNLgtdXBIuZT43Mxt8fAa80=,tag:wNZDnu9gqlBoAS0TlpoV2w==,type:str]
+  lastmodified: "2025-10-25T22:47:51Z"
+  mac: ENC[AES256_GCM,data:WIvf3IpqduukQr8BsMRfFmz++ZfdboTKj0TWdRhBCok+MhFqpNMDkfp+r0WXdgAGorTdgOwFlnXIZByG5cXibwmfbldi2u1bB6gpZn7L3/kjEIucwm4ggpC3o8E9rXqrjOjZNPd9nYyo05ZawUGmsbyC6yhvyTMKGmXRLgzPMuA=,iv:dLSHgd+qXguYU/Qv+2zGtcaGOjhHR+zE3U3nqtEzsCU=,tag:5ZyXtJirR5YjFIyktnwRjw==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
   version: 3.10.2
