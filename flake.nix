@@ -57,26 +57,23 @@
               devlib.devenvModule
             ];
             shells.default = {
-              containers = pkgs.lib.mkForce { };
-              languages = {
-                go.enable = true;
-                opentofu.enable = true;
-                nix.enable = true;
-              };
               cachix = {
                 enable = true;
                 push = "shikanime";
               };
-              git-hooks.hooks = {
-                actionlint.enable = true;
-                deadnix.enable = true;
-                flake-checker.enable = true;
-                shellcheck.enable = true;
-                tflint.enable = true;
+              containers = pkgs.lib.mkForce { };
+              gitignore = {
+                enable = true;
+                enableDefaultTemplates = true;
+              };
+              github.enable = true;
+              languages = {
+                go.enable = true;
+                nix.enable = true;
+                opentofu.enable = true;
               };
               packages = [
                 pkgs.clusterctl
-                pkgs.gh
                 pkgs.gitnr
                 pkgs.gnugrep
                 pkgs.gnused
