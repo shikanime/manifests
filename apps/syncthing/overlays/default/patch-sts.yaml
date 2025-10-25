@@ -8,6 +8,8 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
+            - name: data-staging
+              mountPath: /var/syncthing/Staging
             - name: data-sukebe
               mountPath: /var/syncthing/Sukebe
             - name: data-sync
@@ -15,6 +17,9 @@ spec:
             - name: data-timeline
               mountPath: /var/syncthing/Timeline
       volumes:
+        - name: data-staging
+          persistentVolumeClaim:
+            claimName: staging-data
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe-data
