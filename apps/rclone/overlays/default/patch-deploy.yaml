@@ -10,34 +10,47 @@ spec:
           volumeMounts:
             - name: data-downloads
               mountPath: /data/downloads
+            - name: data-movies
+              mountPath: /data/movies
+            - name: data-shows
+              mountPath: /data/shows
+            - name: data-staging
+              mountPath: /data/staging
             - name: data-sukebe
               mountPath: /data/sukebe
             - name: data-sync
               mountPath: /data/sync
             - name: data-timeline
               mountPath: /data/timeline
-            - name: data-movies
-              mountPath: /data/movies
-            - name: data-shows
-              mountPath: /data/shows
         - name: rclone-ftp
           volumeMounts:
             - name: data-downloads
               mountPath: /data/downloads
+            - name: data-movies
+              mountPath: /data/movies
+            - name: data-shows
+              mountPath: /data/shows
+            - name: data-staging
+              mountPath: /data/staging
             - name: data-sukebe
               mountPath: /data/sukebe
             - name: data-sync
               mountPath: /data/sync
             - name: data-timeline
               mountPath: /data/timeline
-            - name: data-movies
-              mountPath: /data/movies
-            - name: data-shows
-              mountPath: /data/shows
       volumes:
         - name: data-downloads
           persistentVolumeClaim:
             claimName: downloads-data
+        - name: data-movies
+          persistentVolumeClaim:
+            claimName: movies-data
+        - name: data-shows
+          persistentVolumeClaim:
+            claimName: shows-data
+        - name: data-staging
+          persistentVolumeClaim:
+            claimName: staging-data
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe-data
@@ -47,9 +60,3 @@ spec:
         - name: data-timeline
           persistentVolumeClaim:
             claimName: timeline-data
-        - name: data-movies
-          persistentVolumeClaim:
-            claimName: movies-data
-        - name: data-shows
-          persistentVolumeClaim:
-            claimName: shows-data
