@@ -298,7 +298,7 @@ appservice:
   public_address: https://bridge.matrix.taila659a.ts.net
   # The hostname and port where this appservice should listen.
   # For Docker, you generally have to change the hostname to 0.0.0.0.
-  hostname: 127.0.0.1
+  hostname: 0.0.0.0
   port: 29318
   # The unique ID of this appservice.
   id: whatsapp
