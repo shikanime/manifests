@@ -37,6 +37,13 @@ func (su *SopsUpdater) Update() error {
 		if err != nil {
 			return err
 		}
+		// Respect .gitignore: skip ignored files/dirs
+		if isGitIgnored(path, su.Dir) {
+			if d.IsDir() {
+				return fs.SkipDir
+			}
+			return nil
+		}
 		if d.IsDir() {
 			return nil
 		}

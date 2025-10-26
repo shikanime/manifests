@@ -33,6 +33,13 @@ var UpdateKustomizationCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
+			// Respect .gitignore: skip ignored files/dirs
+			if isGitIgnored(path, root) {
+				if d.IsDir() {
+					return fs.SkipDir
+				}
+				return nil
+			}
 			if d.IsDir() {
 				return nil
 			}
@@ -235,7 +242,7 @@ func loadKustomizationAndConfigs(dir string) (*Kustomization, []ImageConfig, err
 	return &k, cfg, nil
 }
 
-func updateKustomizationForDir(d string) error {
+func updateKustomizationForDir(d string) (err error) {
 	k, configs, err := loadKustomizationAndConfigs(d)
 	if err != nil {
 		return err
