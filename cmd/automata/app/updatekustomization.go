@@ -1,12 +1,9 @@
 package app
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/fs"
-	"log"
-	"os"
-	"os/exec"
+	"log/slog"
 	"path/filepath"
 	"regexp"
 	"sort"
@@ -17,7 +14,7 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/mod/semver"
 	"golang.org/x/sync/errgroup"
-	"gopkg.in/yaml.v3"
+	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
 
 var UpdateKustomizationCmd = &cobra.Command{
@@ -28,61 +25,38 @@ var UpdateKustomizationCmd = &cobra.Command{
 		if len(args) > 0 && strings.TrimSpace(args[0]) != "" {
 			root = args[0]
 		}
-		var dirs []string
-		if err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
+
+		g := new(errgroup.Group)
+		if err := WalkDirWithGitignore(root, func(path string, d fs.DirEntry, err error) error {
 			if err != nil {
 				return err
-			}
-			// Respect .gitignore: skip ignored files/dirs
-			if isGitIgnored(path, root) {
-				if d.IsDir() {
-					return fs.SkipDir
-				}
-				return nil
 			}
 			if d.IsDir() {
 				return nil
 			}
-			if filepath.Base(path) != "kustomization.yaml" {
+			if !isKustomizationFile(path) {
 				return nil
 			}
-			dirs = append(dirs, filepath.Dir(path))
+			g.Go(func(dir string) func() error {
+				return func() error {
+					if err := updateKustomizationForDir(dir); err != nil {
+						slog.Warn("skip kustomization update", "dir", dir, "err", err)
+						return err
+					}
+					return nil
+				}
+			}(filepath.Dir(path)))
 			return nil
 		}); err != nil {
 			return err
-		}
-		g := new(errgroup.Group)
-		for _, d := range dirs {
-			d := d
-			g.Go(func() error {
-				if err := updateKustomizationForDir(d); err != nil {
-					log.Printf("Skip %s: %v\n", d, err)
-					return err
-				}
-				return nil
-			})
 		}
 		return g.Wait()
 	},
 }
 
-// run kustomize edit set image "<name>=<image>:<tag>" in <dir>
-func runKustomizeSetImage(dir, name, image, tag string) error {
-	cmd := exec.Command("kustomize", "edit", "set", "image", fmt.Sprintf("%s=%s:%s", name, image, tag))
-	cmd.Dir = dir
-	cmd.Stdout = log.Writer()
-	cmd.Stderr = log.Writer()
-	return cmd.Run()
-}
-
-// run YQ to set version label inside kustomization.yaml in <dir>
-func runYQSetLabel(dir, labelKey, tag string) error {
-	expr := fmt.Sprintf(`.labels.[].pairs.["%s"] = "%s"`, labelKey, tag)
-	cmd := exec.Command("yq", "-i", expr, "kustomization.yaml")
-	cmd.Dir = dir
-	cmd.Stdout = log.Writer()
-	cmd.Stderr = log.Writer()
-	return cmd.Run()
+// isKustomizationFile reports whether the given path is a kustomization file.
+func isKustomizationFile(path string) bool {
+	return filepath.Base(path) == "kustomization.yaml"
 }
 
 // listTags lists tags for an image using the local keychain, falling back to anonymous.
@@ -196,160 +170,95 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 	return vals[0].tag, nil
 }
 
-const annotationKey = "automata.shikanime.studio/images"
-
-type Kustomization struct {
-	Metadata struct {
-		Annotations map[string]string `yaml:"annotations"`
-	} `yaml:"metadata"`
-	Labels []struct {
-		Pairs map[string]string `yaml:"pairs"`
-	} `yaml:"labels"`
-	Images []struct {
-		Name    string `yaml:"name"`
-		NewName string `yaml:"newName"`
-		NewTag  string `yaml:"newTag"`
-	} `yaml:"images"`
-}
-
-type ImageConfig struct {
-	Name     string   `json:"name"`
-	TagRegex string   `json:"tag-regex"`
-	Exclude  []string `json:"exclude-tags,omitempty"`
-}
-
-func loadKustomizationAndConfigs(dir string) (*Kustomization, []ImageConfig, error) {
-	path := filepath.Join(dir, "kustomization.yaml")
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return nil, nil, fmt.Errorf("read kustomization.yaml: %w", err)
-	}
-	var k Kustomization
-	if err := yaml.Unmarshal(data, &k); err != nil {
-		return nil, nil, fmt.Errorf("parse kustomization.yaml: %w", err)
-	}
-	raw := ""
-	if k.Metadata.Annotations != nil {
-		raw = k.Metadata.Annotations[annotationKey]
-	}
-	if strings.TrimSpace(raw) == "" {
-		return &k, nil, nil
-	}
-	var cfg []ImageConfig
-	if err := json.Unmarshal([]byte(raw), &cfg); err != nil {
-		return &k, nil, fmt.Errorf("parse annotation %s: %w", annotationKey, err)
-	}
-	return &k, cfg, nil
-}
-
 func updateKustomizationForDir(d string) error {
-	k, configs, err := loadKustomizationAndConfigs(d)
+	root, err := yaml.ReadFile(filepath.Join(d, "kustomization.yaml"))
 	if err != nil {
-		return err
+		return fmt.Errorf("read kustomization.yaml: %w", err)
 	}
 
-	// Build config lookup by image name
-	cfgByName := make(map[string]ImageConfig, len(configs))
-	for _, c := range configs {
-		cfgByName[c.Name] = c
+	imageAnnotationNode, err := root.Pipe(GetImagesAnnotation())
+	if err != nil {
+		return fmt.Errorf("get images annotation: %w", err)
+	}
+	imageConfigs, err := GetImageConfig(imageAnnotationNode)
+	if err != nil {
+		return fmt.Errorf("get image config: %w", err)
+	}
+	imageConfigsByName := CreateImageConfigsByName(imageConfigs)
+
+	labelsNode, err := root.Pipe(yaml.Lookup("labels"))
+	if err != nil {
+		return fmt.Errorf("lookup labels: %w", err)
+	}
+	labelNodes, err := labelsNode.Elements()
+	if err != nil {
+		return fmt.Errorf("get labels pairs: %w", err)
+	}
+	var recoLabelName string
+	for _, labelNode := range labelNodes {
+		var valNode *yaml.RNode
+		valNode, err = labelNode.Pipe(
+			yaml.Lookup("pairs"),
+			yaml.Get(KubernetesNameLabel),
+		)
+		if err != nil {
+			return fmt.Errorf("get %s: %w", KubernetesNameLabel, err)
+		}
+		recoLabelName = yaml.GetValue(valNode)
 	}
 
-	// Update images based on registry tags and annotation regex
-	latestTagForApp := ""
-	for _, img := range k.Images {
-		cfg, ok := cfgByName[img.Name]
-		if !ok || img.NewName == "" {
+	imagesNode, err := root.Pipe(yaml.Lookup("images"))
+	if err != nil {
+		return fmt.Errorf("lookup images: %w", err)
+	}
+	imageNodes, err := imagesNode.Elements()
+	if err != nil {
+		return fmt.Errorf("get images elements: %w", err)
+	}
+
+	// Update image tags based on annotation configs
+	for _, img := range imageNodes {
+		nameNode, err := img.Pipe(yaml.Get("name"))
+		if err != nil {
+			slog.Warn("missing name in images entry", "dir", d, "err", err)
 			continue
 		}
-		var latest string
-		latest, err = getLatestTag(img.NewName, cfg.TagRegex, cfg.Exclude)
+		name := yaml.GetValue(nameNode)
+		cfg, ok := imageConfigsByName[name]
+		if !ok || cfg.TagRegex == "" {
+			continue
+		}
+		newNameNode, err := img.Pipe(yaml.Get("newName"))
 		if err != nil {
-			return fmt.Errorf("fetch latest tag for %s: %w", img.NewName, err)
+			return fmt.Errorf("get newName for %s: %w", name, err)
+		}
+		latest, err := getLatestTag(yaml.GetValue(newNameNode), cfg.TagRegex, cfg.ExcludeTags)
+		if err != nil {
+			return fmt.Errorf("fetch latest tag for %s: %w", name, err)
 		}
 		if latest == "" {
-			log.Printf("[%s] No matching tag found for %s with regex %q, skipping\n", d, img.NewName, cfg.TagRegex)
+			slog.Info("no matching tag found", "dir", d, "image", name, "regex", cfg.TagRegex)
 			continue
 		}
-
-		if err = runKustomizeSetImage(d, img.Name, img.NewName, latest); err != nil {
-			return fmt.Errorf("kustomize set image for %s: %w", img.Name, err)
+		if err = img.PipeE(yaml.SetField("newTag", yaml.NewStringRNode(latest))); err != nil {
+			return fmt.Errorf("set newTag for %s: %w", name, err)
 		}
-		log.Printf("[%s] Updated %s to %s:%s\n", d, img.Name, img.NewName, latest)
-
-		// Track the tag for the app's own image (to sync version label later)
-		appName := ""
-		for _, l := range k.Labels {
-			if val, ok := l.Pairs["app.kubernetes.io/name"]; ok && val != "" {
-				appName = val
-				break
+		slog.Info("updated image tag", "dir", d, "name", name, "image", name, "tag", latest)
+		if recoLabelName == name {
+			vers, err := parseSemver(regexp.MustCompile(cfg.TagRegex), latest)
+			if err != nil {
+				return fmt.Errorf("parse semver for %s: %w", latest, err)
 			}
-		}
-		if appName != "" && img.Name == appName {
-			latestTagForApp = latest
-		}
-	}
-
-	// Sync app.kubernetes.io/version from the app image tag, normalized via regex
-	appName := ""
-	for _, l := range k.Labels {
-		if val, ok := l.Pairs["app.kubernetes.io/name"]; ok && val != "" {
-			appName = val
-			break
-		}
-	}
-	if appName == "" {
-		// No app name label, nothing to sync
-		return nil
-	}
-
-	// If the app's image wasn't updated above, use current newTag
-	if latestTagForApp == "" {
-		for _, img := range k.Images {
-			if img.Name == appName && strings.TrimSpace(img.NewTag) != "" {
-				latestTagForApp = img.NewTag
-				break
+			if err = root.PipeE(SetRecommandedLabels(name, vers)); err != nil {
+				return fmt.Errorf("set %s: %w", KubernetesVersionLabel, err)
 			}
+			slog.Info("updated recommended labels", "dir", d, "name", name, "image", name, "tag", latest)
 		}
 	}
-	if latestTagForApp == "" {
-		log.Printf("[%s] No tag available to derive version for app=%s\n", d, appName)
-		return nil
-	}
 
-	cfg, ok := cfgByName[appName]
-	if !ok || strings.TrimSpace(cfg.TagRegex) == "" {
-		log.Printf("[%s] No tag-regex in annotation for image %q; skipping version sync\n", d, appName)
-		return nil
+	if err := yaml.WriteFile(root, filepath.Join(d, "kustomization.yaml")); err != nil {
+		return fmt.Errorf("write kustomization.yaml: %w", err)
 	}
-	re, err := regexp.Compile(cfg.TagRegex)
-	if err != nil {
-		return fmt.Errorf("invalid tag-regex %q: %w", cfg.TagRegex, err)
-	}
-	sem, err := parseSemver(re, latestTagForApp)
-	if err != nil {
-		return fmt.Errorf("normalize version from tag %q: %w", latestTagForApp, err)
-	}
-	normalized := strings.TrimPrefix(sem, "v")
-	if idx := strings.IndexAny(normalized, "-+"); idx >= 0 {
-		normalized = normalized[:idx]
-	}
-
-	currentVersion := ""
-	for _, l := range k.Labels {
-		if val, ok := l.Pairs["app.kubernetes.io/version"]; ok {
-			currentVersion = val
-			break
-		}
-	}
-	if currentVersion == normalized {
-		log.Printf("[%s] Version already up to date: %s\n", d, normalized)
-		return nil
-	}
-
-	if err := runYQSetLabel(d, "app.kubernetes.io/version", normalized); err != nil {
-		return fmt.Errorf("yq set label: %w", err)
-	}
-	log.Printf("[%s] Synced app.kubernetes.io/version to %s (app=%s, tag=%s)\n", d, normalized, appName, latestTagForApp)
 
 	return nil
 }

@@ -2,9 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "sonarr", "tag-regex": "(?i)^v?(?P<version>\\d+\\.\\d+\\.\\d+)$"
-      } ]'
+    automata.shikanime.studio/images: '[ { "name": "sonarr", "tag-regex": "(?i)^v?(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: sonarr
     newName: lscr.io/linuxserver/sonarr
@@ -20,4 +18,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: sonarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 4.0.15
+      app.kubernetes.io/version: v4.0.15

@@ -3,13 +3,15 @@ package app
 import (
 	"fmt"
 	"io/fs"
-	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 
+	"log/slog"
+
 	"github.com/spf13/cobra"
+	"golang.org/x/sync/errgroup"
 )
 
 var UpdateSopsCmd = &cobra.Command{
@@ -33,54 +35,45 @@ func (su *SopsUpdater) Update() error {
 	if su.Dir == "" {
 		return fmt.Errorf("dir is required")
 	}
-	return filepath.WalkDir(su.Dir, func(path string, d fs.DirEntry, err error) error {
+	g := new(errgroup.Group)
+	err := WalkDirWithGitignore(su.Dir, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
-		}
-		// Respect .gitignore: skip ignored files/dirs
-		if isGitIgnored(path, su.Dir) {
-			if d.IsDir() {
-				return fs.SkipDir
-			}
-			return nil
 		}
 		if d.IsDir() {
 			return nil
 		}
 
-		base := filepath.Base(path)
-		if !strings.Contains(base, ".enc.") {
+		if !isEncryptedFile(path) {
 			return nil
 		}
-
+		base := filepath.Base(path)
 		plainBase := strings.Replace(base, ".enc.", ".", 1)
 		plainPath := filepath.Join(filepath.Dir(path), plainBase)
 
-		plainInfo, err := os.Stat(plainPath)
+		shouldEncrypt, err := isEncryptNeeded(plainPath, path)
 		if err != nil {
-			return nil
-		}
-
-		encInfo, err := os.Stat(path)
-		needsEncrypt := false
-		if err != nil && os.IsNotExist(err) {
-			needsEncrypt = true
-		} else if err != nil {
 			return err
-		} else if encInfo.ModTime().Before(plainInfo.ModTime()) {
-			needsEncrypt = true
 		}
-
-		if !needsEncrypt {
+		if !shouldEncrypt {
 			return nil
 		}
 
-		if err := runSopsEncrypt(plainPath, path); err != nil {
-			return fmt.Errorf("sops encrypt %s -> %s: %w", plainPath, path, err)
-		}
-		log.Printf("Encrypted %s to %s\n", plainPath, path)
+		g.Go(func(plainPath, encPath string) func() error {
+			return func() error {
+				if err := runSopsEncrypt(plainPath, encPath); err != nil {
+					return fmt.Errorf("sops encrypt %s -> %s: %w", plainPath, encPath, err)
+				}
+				slog.Info("sops encrypted file", "plain", plainPath, "enc", encPath)
+				return nil
+			}
+		}(plainPath, path))
 		return nil
 	})
+	if err != nil {
+		return err
+	}
+	return g.Wait()
 }
 
 func runSopsEncrypt(plainPath, encPath string) error {
@@ -92,6 +85,34 @@ func runSopsEncrypt(plainPath, encPath string) error {
 
 	cmd := exec.Command("sops", "--encrypt", plainPath)
 	cmd.Stdout = out
-	cmd.Stderr = log.Writer()
+	cmd.Stderr = os.Stderr
 	return cmd.Run()
+}
+
+func isEncryptNeeded(plainPath, encPath string) (bool, error) {
+	plainInfo, err := os.Stat(plainPath)
+	if err != nil {
+		// If plaintext doesn't exist or can't be stat'ed, skip encryption
+		if os.IsNotExist(err) {
+			return false, nil
+		}
+		return false, nil
+	}
+
+	encInfo, err := os.Stat(encPath)
+	if err != nil && os.IsNotExist(err) {
+		// Encrypted file missing: needs encryption
+		return true, nil
+	} else if err != nil {
+		// Unexpected stat error: propagate
+		return false, err
+	}
+
+	// Encrypt when encrypted file is older than plaintext
+	return encInfo.ModTime().Before(plainInfo.ModTime()), nil
+}
+
+func isEncryptedFile(path string) bool {
+	base := filepath.Base(path)
+	return strings.Contains(base, ".enc.")
 }
