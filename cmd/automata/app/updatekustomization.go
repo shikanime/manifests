@@ -124,7 +124,7 @@ func parseSemver(re *regexp.Regexp, tag string) (string, error) {
 }
 
 // helper to fetch latest tag with regex and exclusions
-func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
+func getLatestTag(image string, re *regexp.Regexp, exclude []string) (string, error) {
 	tags, err := listTags(image)
 	if err != nil {
 		return "", err
@@ -133,10 +133,6 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 	excl := make(map[string]struct{}, len(exclude))
 	for _, e := range exclude {
 		excl[e] = struct{}{}
-	}
-	re, err := regexp.Compile(tagRegex)
-	if err != nil {
-		return "", fmt.Errorf("invalid tag-regex %q: %w", tagRegex, err)
 	}
 
 	type candidate struct {
@@ -167,7 +163,6 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 	sort.Slice(vals, func(i, j int) bool {
 		return semver.Compare(vals[i].sem, vals[j].sem) > 0
 	})
-
 	return vals[0].tag, nil
 }
 
@@ -233,7 +228,14 @@ func updateKustomizationForDir(d string) error {
 		if err != nil {
 			return fmt.Errorf("get newName for %s: %w", name, err)
 		}
-		latest, err := getLatestTag(yaml.GetValue(newNameNode), cfg.TagRegex, cfg.ExcludeTags)
+
+		// Compile once and pass the compiled regex to getLatestTag
+		re, err := regexp.Compile(cfg.TagRegex)
+		if err != nil {
+			return fmt.Errorf("invalid tag-regex %q: %w", cfg.TagRegex, err)
+		}
+
+		latest, err := getLatestTag(yaml.GetValue(newNameNode), re, cfg.ExcludeTags)
 		if err != nil {
 			return fmt.Errorf("fetch latest tag for %s: %w", name, err)
 		}
@@ -245,8 +247,9 @@ func updateKustomizationForDir(d string) error {
 			return fmt.Errorf("set newTag for %s: %w", name, err)
 		}
 		slog.Info("updated image tag", "dir", d, "name", name, "image", name, "tag", latest)
+
 		if recoLabelName == name {
-			vers, err := parseSemver(regexp.MustCompile(cfg.TagRegex), latest)
+			vers, err := parseSemver(re, latest)
 			if err != nil {
 				return fmt.Errorf("parse semver for %s: %w", latest, err)
 			}
