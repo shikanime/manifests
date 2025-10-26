@@ -229,7 +229,6 @@ func updateKustomizationForDir(d string) error {
 			return fmt.Errorf("get newName for %s: %w", name, err)
 		}
 
-		// Compile once and pass the compiled regex to getLatestTag
 		re, err := regexp.Compile(cfg.TagRegex)
 		if err != nil {
 			return fmt.Errorf("invalid tag-regex %q: %w", cfg.TagRegex, err)
