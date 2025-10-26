@@ -3,6 +3,7 @@ package app
 import (
 	"encoding/json"
 	"fmt"
+	"regexp"
 
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
@@ -96,25 +97,64 @@ func SetRecommandedLabels(name, version string) RecommandedLabelsSetter {
 	return RecommandedLabelsSetter{Name: name, Version: version}
 }
 
-type ImageConfig struct {
-	Name        string   `json:"name"`
-	TagRegex    string   `json:"tag-regex"`
-	ExcludeTags []string `json:"exclude-tags,omitempty"`
+type Config struct {
+	Images map[string]ImagesConfig
 }
 
-func GetImageConfig(node *yaml.RNode) ([]ImageConfig, error) {
+type ImagesConfig struct {
+	Name        string
+	TagRegex    *regexp.Regexp
+	ExcludeTags map[string]struct{}
+}
+
+func (c *ImagesConfig) UnmarshalJSON(data []byte) error {
+	var raw struct {
+		Name        string   `json:"name"`
+		TagRegex    string   `json:"tag-regex"`
+		ExcludeTags []string `json:"exclude-tags"`
+	}
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return err
+	}
+
+	c.Name = raw.Name
+
+	if raw.TagRegex != "" {
+		re, err := regexp.Compile(raw.TagRegex)
+		if err != nil {
+			return fmt.Errorf("invalid tag-regex %q: %w", raw.TagRegex, err)
+		}
+		c.TagRegex = re
+	} else {
+		c.TagRegex = nil
+	}
+
+	if len(raw.ExcludeTags) > 0 {
+		m := make(map[string]struct{}, len(raw.ExcludeTags))
+		for _, e := range raw.ExcludeTags {
+			m[e] = struct{}{}
+		}
+		c.ExcludeTags = m
+	} else {
+		c.ExcludeTags = nil
+	}
+
+	return nil
+}
+
+func GetImagesConfig(node *yaml.RNode) ([]ImagesConfig, error) {
 	if yaml.IsMissingOrNull(node) {
 		return nil, nil
 	}
-	var imageConfigs []ImageConfig
+	var imageConfigs []ImagesConfig
 	if err := json.Unmarshal([]byte(node.YNode().Value), &imageConfigs); err != nil {
 		return nil, fmt.Errorf("unmarshal ImageConfig from annotation: %w", err)
 	}
 	return imageConfigs, nil
 }
 
-func CreateImageConfigsByName(imageConfigs []ImageConfig) map[string]ImageConfig {
-	cfgByName := make(map[string]ImageConfig, len(imageConfigs))
+func CreateImageConfigsByName(imageConfigs []ImagesConfig) map[string]ImagesConfig {
+	cfgByName := make(map[string]ImagesConfig, len(imageConfigs))
 	for _, c := range imageConfigs {
 		cfgByName[c.Name] = c
 	}

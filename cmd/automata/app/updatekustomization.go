@@ -5,12 +5,8 @@ import (
 	"io/fs"
 	"log/slog"
 	"path/filepath"
-	"regexp"
-	"sort"
 	"strings"
 
-	"github.com/google/go-containerregistry/pkg/authn"
-	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/spf13/cobra"
 	"golang.org/x/mod/semver"
 	"golang.org/x/sync/errgroup"
@@ -59,113 +55,6 @@ func isKustomizationFile(path string) bool {
 	return filepath.Base(path) == "kustomization.yaml"
 }
 
-// listTags lists tags for an image using the local keychain, falling back to anonymous.
-func listTags(image string) ([]string, error) {
-	tags, err := crane.ListTags(
-		image,
-		crane.WithAuthFromKeychain(authn.DefaultKeychain),
-	)
-	if err == nil {
-		return tags, nil
-	}
-	tags, err = crane.ListTags(
-		image,
-		crane.WithAuth(authn.Anonymous),
-	)
-	if err != nil {
-		return nil, fmt.Errorf("list tags: %w", err)
-	}
-	return tags, nil
-}
-
-// parseSemver extracts and validates a semver string from tag using named groups.
-// It returns the canonical semver (with leading 'v') or an error if parsing fails.
-func parseSemver(re *regexp.Regexp, tag string) (string, error) {
-	m := re.FindStringSubmatch(tag)
-	if m == nil {
-		return "", fmt.Errorf("no semver match in tag %q", tag)
-	}
-
-	versionIdx := re.SubexpIndex("version")
-	majorIdx := re.SubexpIndex("major")
-	minorIdx := re.SubexpIndex("minor")
-	patchIdx := re.SubexpIndex("patch")
-	prereleaseIdx := re.SubexpIndex("prerelease")
-	buildIdx := re.SubexpIndex("build")
-
-	vers := ""
-	if versionIdx >= 0 && versionIdx < len(m) && m[versionIdx] != "" {
-		vers = m[versionIdx]
-	} else if majorIdx >= 0 && minorIdx >= 0 && patchIdx >= 0 &&
-		majorIdx < len(m) && minorIdx < len(m) && patchIdx < len(m) &&
-		m[majorIdx] != "" && m[minorIdx] != "" && m[patchIdx] != "" {
-		vers = m[majorIdx] + "." + m[minorIdx] + "." + m[patchIdx]
-		if prereleaseIdx >= 0 && prereleaseIdx < len(m) && m[prereleaseIdx] != "" {
-			vers += "-" + m[prereleaseIdx]
-		}
-		if buildIdx >= 0 && buildIdx < len(m) && m[buildIdx] != "" {
-			vers += "+" + m[buildIdx]
-		}
-	} else {
-		return "", fmt.Errorf("no version groups matched in tag %q", tag)
-	}
-
-	// Normalize to semver with leading 'v' (required by golang.org/x/mod/semver)
-	if strings.HasPrefix(vers, "V") {
-		vers = "v" + vers[1:]
-	} else if !strings.HasPrefix(vers, "v") {
-		vers = "v" + vers
-	}
-
-	if !semver.IsValid(vers) {
-		return "", fmt.Errorf("invalid semver %q", vers)
-	}
-	return semver.Canonical(vers), nil
-}
-
-// helper to fetch latest tag with regex and exclusions
-func getLatestTag(image string, re *regexp.Regexp, exclude []string) (string, error) {
-	tags, err := listTags(image)
-	if err != nil {
-		return "", err
-	}
-
-	excl := make(map[string]struct{}, len(exclude))
-	for _, e := range exclude {
-		excl[e] = struct{}{}
-	}
-
-	type candidate struct {
-		tag string
-		sem string
-	}
-
-	vals := make([]candidate, 0, 64)
-	for _, t := range tags {
-		if _, skip := excl[t]; skip {
-			continue
-		}
-		sem, err := parseSemver(re, t)
-		if err != nil {
-			// Skip non-matching or invalid semver tags
-			continue
-		}
-		vals = append(vals, candidate{
-			tag: t,
-			sem: sem,
-		})
-	}
-
-	if len(vals) == 0 {
-		return "", nil
-	}
-
-	sort.Slice(vals, func(i, j int) bool {
-		return semver.Compare(vals[i].sem, vals[j].sem) > 0
-	})
-	return vals[0].tag, nil
-}
-
 func updateKustomizationForDir(d string) error {
 	root, err := yaml.ReadFile(filepath.Join(d, "kustomization.yaml"))
 	if err != nil {
@@ -176,7 +65,7 @@ func updateKustomizationForDir(d string) error {
 	if err != nil {
 		return fmt.Errorf("get images annotation: %w", err)
 	}
-	imageConfigs, err := GetImageConfig(imageAnnotationNode)
+	imageConfigs, err := GetImagesConfig(imageAnnotationNode)
 	if err != nil {
 		return fmt.Errorf("get image config: %w", err)
 	}
@@ -221,7 +110,7 @@ func updateKustomizationForDir(d string) error {
 		}
 		name := yaml.GetValue(nameNode)
 		cfg, ok := imageConfigsByName[name]
-		if !ok || cfg.TagRegex == "" {
+		if !ok {
 			continue
 		}
 		newNameNode, err := img.Pipe(yaml.Get("newName"))
@@ -229,18 +118,39 @@ func updateKustomizationForDir(d string) error {
 			return fmt.Errorf("get newName for %s: %w", name, err)
 		}
 
-		re, err := regexp.Compile(cfg.TagRegex)
-		if err != nil {
-			return fmt.Errorf("invalid tag-regex %q: %w", cfg.TagRegex, err)
+		options := []FindLatestOption{}
+
+		if len(cfg.ExcludeTags) > 0 {
+			options = append(options, WithExclude(cfg.ExcludeTags))
 		}
 
-		latest, err := getLatestTag(yaml.GetValue(newNameNode), re, cfg.ExcludeTags)
+		if cfg.TagRegex != nil {
+			options = append(options, WithTransform(cfg.TagRegex))
+		}
+
+		// Fetch raw tags
+		tags, err := listTags(yaml.GetValue(newNameNode))
+		if err != nil {
+			return fmt.Errorf("list tags for %s: %w", name, err)
+		}
+
+		// Set base version if current newTag is a valid semver
+		currentTagNode, err := img.Pipe(yaml.Get("newTag"))
+		if err != nil {
+			return fmt.Errorf("get current newTag for %s: %w", name, err)
+		}
+		currentTag := yaml.GetValue(currentTagNode)
+		if currentTag != "" && semver.IsValid(currentTag) {
+			options = append(options, WithBaseline(currentTag))
+		}
+
+		latest, err := findLatestTag(tags, options...)
 		if err != nil {
 			return fmt.Errorf("fetch latest tag for %s: %w", name, err)
 		}
 		if latest == "" {
-			slog.Info("no matching tag found", "dir", d, "image", name, "regex", cfg.TagRegex)
-			continue
+			slog.Info("no matching tag found", "dir", d, "image", name)
+			return nil
 		}
 		if err = img.PipeE(yaml.SetField("newTag", yaml.NewStringRNode(latest))); err != nil {
 			return fmt.Errorf("set newTag for %s: %w", name, err)
@@ -248,9 +158,14 @@ func updateKustomizationForDir(d string) error {
 		slog.Info("updated image tag", "dir", d, "name", name, "image", name, "tag", latest)
 
 		if recoLabelName == name {
-			vers, err := parseSemver(re, latest)
-			if err != nil {
-				return fmt.Errorf("parse semver for %s: %w", latest, err)
+			var vers string
+			if cfg.TagRegex != nil {
+				vers, err = parseSemver(cfg.TagRegex, latest)
+				if err != nil {
+					return fmt.Errorf("parse semver for %s: %w", latest, err)
+				}
+			} else {
+				vers = latest
 			}
 			if err = root.PipeE(SetRecommandedLabels(name, vers)); err != nil {
 				return fmt.Errorf("set %s: %w", KubernetesVersionLabel, err)
