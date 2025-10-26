@@ -196,7 +196,7 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 	return vals[0].tag, nil
 }
 
-const annotationKey = "automata.config.shikanime.studio/images"
+const annotationKey = "automata.shikanime.studio/images"
 
 type Kustomization struct {
 	Metadata struct {

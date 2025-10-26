@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.config.shikanime.studio/images:
+    automata.shikanime.studio/images:
       '[ { "name": "caddy", "tag-regex": "(?i)^v?(?P<version>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?)$"
       }, { "name": "busybox", "tag-regex": "(?i)^v?(?P<version>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?)$"
       }, { "name": "mautrix-discord", "tag-regex": "(?i)^v?(?P<version>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?)$"
