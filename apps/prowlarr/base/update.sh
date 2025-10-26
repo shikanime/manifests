@@ -10,4 +10,4 @@ go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
   --name "prowlarr" \
   --dir "$(dirname "$0")" \
   --label-key "app.kubernetes.io/version" \
-  --tag-regex '^\d+\.\d+\.\d+$'
+  --tag-regex '(?i)^v?(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)$'

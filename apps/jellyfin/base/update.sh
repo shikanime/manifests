@@ -5,27 +5,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Define container images to check
-declare -A IMAGES=(
-  ["jellyfin"]="docker.io/jellyfin/jellyfin"
-  ["metatube"]="ghcr.io/metatube-community/metatube-server"
-)
+# jellyfin: update image and set version label
+go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
+  --image "docker.io/jellyfin/jellyfin" \
+  --name "jellyfin" \
+  --dir "$(dirname "$0")" \
+  --label-key "app.kubernetes.io/version" \
+  --tag-regex '(?i)^v?(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)$'
 
-for IMAGE_NAME in "${!IMAGES[@]}"; do
-  FULL_IMAGE="${IMAGES[$IMAGE_NAME]}"
-  LATEST_VERSION=$(
-    skopeo list-tags "docker://${FULL_IMAGE}" |
-      jq -r '.Tags | map(select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | sort_by(split(".") | map(tonumber)) | last'
-  )
-  if [[ -z $LATEST_VERSION ]]; then
-    echo "Image '$FULL_IMAGE' not found in registry."
-  else
-    (cd "$(dirname "$0")" &&
-      kustomize edit set image "${IMAGE_NAME}=${FULL_IMAGE}:${LATEST_VERSION}")
-    if [[ $IMAGE_NAME == "jellyfin" ]]; then
-      yq -i \
-        ".labels.[].pairs.[\"app.kubernetes.io/version\"] = \"${LATEST_VERSION}\"" \
-        "$(dirname "$0")"/kustomization.yaml
-    fi
-  fi
-done
+# metatube: update image (no label)
+go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
+  --image "ghcr.io/metatube-community/metatube-server" \
+  --name "metatube" \
+  --dir "$(dirname "$0")" \
+  --tag-regex '(?i)^v?(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)$'

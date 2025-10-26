@@ -9,26 +9,26 @@ go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
   --image "docker.io/library/caddy" \
   --name "caddy" \
   --dir "$(dirname "$0")" \
-  --tag-regex '^\d+\.\d+\.\d+$'
+  --tag-regex '(?i)^v?(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)$'
 
-# kratos: v-prefixed and pre-release (main app label kept)
+// kratos: v-prefixed and may contain prerelease/build; extract embedded semver
 go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
   --image "docker.io/oryd/kratos" \
   --name "kratos" \
   --dir "$(dirname "$0")" \
   --label-key "app.kubernetes.io/version" \
-  --tag-regex '^v?[0-9]+[.\-].*[0-9]+\.[0-9]+$'
+  --tag-regex '(?i).*?(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)'
 
-# postgres: allow 15, 15.6, 15.6.1 (no label)
+// postgres: allow 15, 15.6, 15.6.1 (no label)
 go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
   --image "docker.io/library/postgres" \
   --name "kratos-postgres" \
   --dir "$(dirname "$0")" \
-  --tag-regex '^\d+(\.\d+)?(\.\d+)?$'
+  --tag-regex '(?i)^v?(?P<version>\d+(?:\.\d+){0,2})$'
 
-# ui: allow v-prefixed and pre-release (no label)
+// ui: extract embedded semver (no label)
 go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
   --image "docker.io/oryd/kratos-selfservice-ui-node" \
   --name "kratos-selfservice-ui-node" \
   --dir "$(dirname "$0")" \
-  --tag-regex '^v?[0-9]+[.\-].*[0-9]+\.[0-9]+$'
+  --tag-regex '(?i).*?(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)'

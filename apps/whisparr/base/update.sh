@@ -10,5 +10,4 @@ go run "$(dirname "$0")"/../../../cmd/automata update kustomization \
   --name "whisparr" \
   --dir "$(dirname "$0")" \
   --label-key "app.kubernetes.io/version" \
-  --tag-regex '^v[0-9]+[.\-].*[0-9]+\.[0-9]+$' \
-  --label-trim-prefix 'v3-'
+  --tag-regex '(?i).*?(?P<version>\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)'
