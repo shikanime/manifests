@@ -167,6 +167,7 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 	sort.Slice(vals, func(i, j int) bool {
 		return semver.Compare(vals[i].sem, vals[j].sem) > 0
 	})
+
 	return vals[0].tag, nil
 }
 
