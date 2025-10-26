@@ -16,11 +16,8 @@ import (
 	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/spf13/cobra"
 	"golang.org/x/mod/semver"
+	"golang.org/x/sync/errgroup"
 	"gopkg.in/yaml.v3"
-)
-
-var (
-	labelKey = ""
 )
 
 var UpdateKustomizationCmd = &cobra.Command{
@@ -31,8 +28,8 @@ var UpdateKustomizationCmd = &cobra.Command{
 		if len(args) > 0 && strings.TrimSpace(args[0]) != "" {
 			root = args[0]
 		}
-
-		return filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
+		var dirs []string
+		if err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 			if err != nil {
 				return err
 			}
@@ -42,12 +39,23 @@ var UpdateKustomizationCmd = &cobra.Command{
 			if filepath.Base(path) != "kustomization.yaml" {
 				return nil
 			}
-			subdir := filepath.Dir(path)
-			if err := updateKustomization(subdir); err != nil {
-				log.Printf("Skip %s: %v\n", subdir, err)
-			}
+			dirs = append(dirs, filepath.Dir(path))
 			return nil
-		})
+		}); err != nil {
+			return err
+		}
+		g := new(errgroup.Group)
+		for _, d := range dirs {
+			d := d
+			g.Go(func() error {
+				if err := updateKustomizationForDir(d); err != nil {
+					log.Printf("Skip %s: %v\n", d, err)
+					return err
+				}
+				return nil
+			})
+		}
+		return g.Wait()
 	},
 }
 
@@ -227,20 +235,23 @@ func loadKustomizationAndConfigs(dir string) (*Kustomization, []ImageConfig, err
 	return &k, cfg, nil
 }
 
-func updateKustomization(d string) error {
+func updateKustomizationForDir(d string) error {
 	k, configs, err := loadKustomizationAndConfigs(d)
 	if err != nil {
 		return err
 	}
+
+	// Build config lookup by image name
 	cfgByName := make(map[string]ImageConfig, len(configs))
 	for _, c := range configs {
 		cfgByName[c.Name] = c
 	}
 
+	// Update images based on registry tags and annotation regex
+	latestTagForApp := ""
 	for _, img := range k.Images {
 		cfg, ok := cfgByName[img.Name]
 		if !ok || img.NewName == "" {
-			// skip images without config or missing newName
 			continue
 		}
 		latest, err := getLatestTag(img.NewName, cfg.TagRegex, cfg.Exclude)
@@ -248,7 +259,7 @@ func updateKustomization(d string) error {
 			return fmt.Errorf("fetch latest tag for %s: %w", img.NewName, err)
 		}
 		if latest == "" {
-			log.Printf("No matching tag found for %s with regex %q, skipping\n", img.NewName, cfg.TagRegex)
+			log.Printf("[%s] No matching tag found for %s with regex %q, skipping\n", d, img.NewName, cfg.TagRegex)
 			continue
 		}
 
@@ -256,6 +267,81 @@ func updateKustomization(d string) error {
 			return fmt.Errorf("kustomize set image for %s: %w", img.Name, err)
 		}
 		log.Printf("[%s] Updated %s to %s:%s\n", d, img.Name, img.NewName, latest)
+
+		// Track the tag for the app's own image (to sync version label later)
+		appName := ""
+		for _, l := range k.Labels {
+			if val, ok := l.Pairs["app.kubernetes.io/name"]; ok && val != "" {
+				appName = val
+				break
+			}
+		}
+		if appName != "" && img.Name == appName {
+			latestTagForApp = latest
+		}
 	}
+
+	// Sync app.kubernetes.io/version from the app image tag, normalized via regex
+	appName := ""
+	for _, l := range k.Labels {
+		if val, ok := l.Pairs["app.kubernetes.io/name"]; ok && val != "" {
+			appName = val
+			break
+		}
+	}
+	if appName == "" {
+		// No app name label, nothing to sync
+		return nil
+	}
+
+	// If the app's image wasn't updated above, use current newTag
+	if latestTagForApp == "" {
+		for _, img := range k.Images {
+			if img.Name == appName && strings.TrimSpace(img.NewTag) != "" {
+				latestTagForApp = img.NewTag
+				break
+			}
+		}
+	}
+	if latestTagForApp == "" {
+		log.Printf("[%s] No tag available to derive version for app=%s\n", d, appName)
+		return nil
+	}
+
+	cfg, ok := cfgByName[appName]
+	if !ok || strings.TrimSpace(cfg.TagRegex) == "" {
+		log.Printf("[%s] No tag-regex in annotation for image %q; skipping version sync\n", d, appName)
+		return nil
+	}
+	re, err := regexp.Compile(cfg.TagRegex)
+	if err != nil {
+		return fmt.Errorf("invalid tag-regex %q: %w", cfg.TagRegex, err)
+	}
+	sem, err := parseSemver(re, latestTagForApp)
+	if err != nil {
+		return fmt.Errorf("normalize version from tag %q: %w", latestTagForApp, err)
+	}
+	normalized := strings.TrimPrefix(sem, "v")
+	if idx := strings.IndexAny(normalized, "-+"); idx >= 0 {
+		normalized = normalized[:idx]
+	}
+
+	currentVersion := ""
+	for _, l := range k.Labels {
+		if val, ok := l.Pairs["app.kubernetes.io/version"]; ok {
+			currentVersion = val
+			break
+		}
+	}
+	if currentVersion == normalized {
+		log.Printf("[%s] Version already up to date: %s\n", d, normalized)
+		return nil
+	}
+
+	if err := runYQSetLabel(d, "app.kubernetes.io/version", normalized); err != nil {
+		return fmt.Errorf("yq set label: %w", err)
+	}
+	log.Printf("[%s] Synced app.kubernetes.io/version to %s (app=%s, tag=%s)\n", d, normalized, appName, latestTagForApp)
+
 	return nil
 }

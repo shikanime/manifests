@@ -20,4 +20,4 @@ labels:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/name: gitea
       app.kubernetes.io/part-of: nishir-platform
-      app.kubernetes.io/version: 1.25.0-rc0-rootless
+      app.kubernetes.io/version: 1.24.7

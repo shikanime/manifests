@@ -33,4 +33,4 @@ labels:
       app.kubernetes.io/component: identity-manager
       app.kubernetes.io/name: kratos
       app.kubernetes.io/part-of: nishir-security
-      app.kubernetes.io/version: v1.3.1
+      app.kubernetes.io/version: 1.3.1

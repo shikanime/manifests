@@ -7,17 +7,7 @@ var UpdateCmd = &cobra.Command{
 	Short: "Update resources",
 }
 
-var dir = "."
-
 func init() {
-	UpdateCmd.PersistentFlags().StringVar(
-		&dir,
-		"dir",
-		dir,
-		"Root directory for update operations",
-	)
-
 	UpdateCmd.AddCommand(UpdateKustomizationCmd)
 	UpdateCmd.AddCommand(UpdateSopsCmd)
-	UpdateCmd.AddCommand(UpdateKustomizationVersionCmd)
 }
