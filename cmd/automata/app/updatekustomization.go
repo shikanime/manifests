@@ -242,7 +242,7 @@ func loadKustomizationAndConfigs(dir string) (*Kustomization, []ImageConfig, err
 	return &k, cfg, nil
 }
 
-func updateKustomizationForDir(d string) (err error) {
+func updateKustomizationForDir(d string) error {
 	k, configs, err := loadKustomizationAndConfigs(d)
 	if err != nil {
 		return err
@@ -261,7 +261,8 @@ func updateKustomizationForDir(d string) (err error) {
 		if !ok || img.NewName == "" {
 			continue
 		}
-		latest, err := getLatestTag(img.NewName, cfg.TagRegex, cfg.Exclude)
+		var latest string
+		latest, err = getLatestTag(img.NewName, cfg.TagRegex, cfg.Exclude)
 		if err != nil {
 			return fmt.Errorf("fetch latest tag for %s: %w", img.NewName, err)
 		}
@@ -270,7 +271,7 @@ func updateKustomizationForDir(d string) (err error) {
 			continue
 		}
 
-		if err := runKustomizeSetImage(d, img.Name, img.NewName, latest); err != nil {
+		if err = runKustomizeSetImage(d, img.Name, img.NewName, latest); err != nil {
 			return fmt.Errorf("kustomize set image for %s: %w", img.Name, err)
 		}
 		log.Printf("[%s] Updated %s to %s:%s\n", d, img.Name, img.NewName, latest)
