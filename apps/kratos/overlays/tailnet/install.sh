@@ -12,5 +12,5 @@ sops \
 
 sops \
   --decrypt \
-  "$(dirname "$0")"/kratos-postgres/kratos.enc.yaml > \
-  "$(dirname "$0")"/kratos-postgres/kratos.yaml
+  "$(dirname "$0")"/kratos-postgres/.enc.env > \
+  "$(dirname "$0")"/kratos-postgres/.env

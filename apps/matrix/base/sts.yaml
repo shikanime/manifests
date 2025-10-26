@@ -502,6 +502,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+      securityContext:
+        fsGroup: 1337
       volumes:
         - name: config
           secret:
