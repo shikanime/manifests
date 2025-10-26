@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"golang.org/x/mod/semver"
 	"golang.org/x/sync/errgroup"
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
@@ -140,13 +139,18 @@ func updateKustomizationForDir(d string) error {
 			return fmt.Errorf("get current newTag for %s: %w", name, err)
 		}
 		currentTag := yaml.GetValue(currentTagNode)
-		if currentTag != "" && semver.IsValid(currentTag) {
-			options = append(options, WithBaseline(currentTag))
+		if currentTag != "" {
+			var version string
+			version, err = parseSemver(cfg.TagRegex, currentTag)
+			if err != nil {
+				return fmt.Errorf("parse semver for %s: %w", currentTag, err)
+			}
+			options = append(options, WithBaseline(version))
 		}
 
 		latest, err := findLatestTag(tags, options...)
 		if err != nil {
-			return fmt.Errorf("fetch latest tag for %s: %w", name, err)
+			continue
 		}
 		if latest == "" {
 			slog.Info("no matching tag found", "dir", d, "image", name)

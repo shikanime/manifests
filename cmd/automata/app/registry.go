@@ -126,10 +126,14 @@ func findLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 		case UpdateMinor:
 			if semver.Major(c.sem) == semver.Major(o.baseline) {
 				tagsWithBaseline = append(tagsWithBaseline, c)
+			} else {
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", o.baseline)
 			}
 		case UpdatePatch:
 			if semver.MajorMinor(c.sem) == semver.MajorMinor(o.baseline) {
 				tagsWithBaseline = append(tagsWithBaseline, c)
+			} else {
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", o.baseline)
 			}
 		default:
 			tagsWithBaseline = append(tagsWithBaseline, c)
