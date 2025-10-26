@@ -79,9 +79,9 @@ bridge:
   username_template: googlechat_{userid}
   # Displayname template for Google Chat users.
   # {full_name}, {first_name}, {last_name} and {email} are replaced with names.
-  displayname_template: '{full_name} (Google Chat)'
+  displayname_template: "{full_name} (Google Chat)"
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: '!gc'
+  command_prefix: "!gc"
   # Number of chats to sync (and create portals for) on startup/login.
   # Set 0 to disable automatic syncing.
   initial_chat_sync: 10
@@ -242,15 +242,15 @@ bridge:
   #     mxid - Specific user
   permissions:
     matrix.taila659a.ts.net: user
-    '@admin:matrix.taila659a.ts.net': admin
+    "@admin:matrix.taila659a.ts.net": admin
 logging:
   version: 1
   formatters:
     colored:
       (): mautrix_googlechat.util.ColorFormatter
-      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
+      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
     normal:
-      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
+      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
   handlers:
     console:
       class: logging.StreamHandler

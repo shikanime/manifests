@@ -1,9 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    automata.config.shikanime.studio/images:
+      '[ { "name": "prowlarr", "tag-regex":
+      "(?i)^v?(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: prowlarr
     newName: lscr.io/linuxserver/prowlarr
-    newTag: 2.2.0-nightly
+    newTag: 2.0.5
 resources:
   - ingress.yaml
   - pvc.yaml

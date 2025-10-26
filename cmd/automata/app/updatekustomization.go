@@ -1,9 +1,13 @@
-package main
+package app
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/fs"
 	"log"
+	"os"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
@@ -12,82 +16,39 @@ import (
 	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/spf13/cobra"
 	"golang.org/x/mod/semver"
+	"gopkg.in/yaml.v3"
 )
 
-func NewUpdateCmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "update",
-		Short: "Update resources",
-	}
-	cmd.AddCommand(NewUpdateKustomizationCmd())
-	return cmd
-}
+var (
+	labelKey = ""
+)
 
-func NewUpdateKustomizationCmd() *cobra.Command {
-	var (
-		image          = "docker.io/gitea/gitea"
-		name           = "gitea"
-		dir            = "apps/gitea/base"
-		labelKey       = ""
-		tagRegex       = `(?i)(?:v)?(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(?:-(?P<prerelease>[0-9A-Za-z.-]+))?(?:\+(?P<build>[0-9A-Za-z.-]+))?`
-		excludeTagsCSV = ""
-	)
+var UpdateKustomizationCmd = &cobra.Command{
+	Use:   "kustomization [DIR]",
+	Short: "Update kustomize image tags",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		root := "."
+		if len(args) > 0 && strings.TrimSpace(args[0]) != "" {
+			root = args[0]
+		}
 
-	cmd := &cobra.Command{
-		Use:   "kustomization",
-		Short: "Update kustomize image tag and labels",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			var exclude []string
-			if excludeTagsCSV != "" {
-				exclude = strings.Split(excludeTagsCSV, ",")
-				for i := range exclude {
-					exclude[i] = strings.TrimSpace(exclude[i])
-				}
-			}
-
-			latest, err := getLatestTag(image, tagRegex, exclude)
+		return filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 			if err != nil {
-				return fmt.Errorf("fetch latest tag: %w", err)
+				return err
 			}
-			if latest == "" {
-				return fmt.Errorf("no matching tag found for %s", image)
+			if d.IsDir() {
+				return nil
 			}
-
-			if err := runKustomizeSetImage(dir, name, image, latest); err != nil {
-				return fmt.Errorf("kustomize set image: %w", err)
+			if filepath.Base(path) != "kustomization.yaml" {
+				return nil
 			}
-
-			if labelKey != "" {
-				re, err := regexp.Compile(tagRegex)
-				if err != nil {
-					return fmt.Errorf("invalid tag-regex %q: %w", tagRegex, err)
-				}
-				sem, err := parseSemver(re, latest)
-				if err != nil {
-					return fmt.Errorf("parse label from tag %q: %w", latest, err)
-				}
-				labelVal := strings.TrimPrefix(sem, "v")
-
-				if err := runYQSetLabel(dir, labelKey, labelVal); err != nil {
-					return fmt.Errorf("yq set label: %w", err)
-				}
-				log.Printf("Updated %s to %s:%s and label %s=%s\n", name, image, latest, labelKey, labelVal)
-			} else {
-				log.Printf("Updated %s to %s:%s\n", name, image, latest)
+			subdir := filepath.Dir(path)
+			if err := updateKustomization(subdir); err != nil {
+				log.Printf("Skip %s: %v\n", subdir, err)
 			}
-
 			return nil
-		},
-	}
-
-	cmd.Flags().StringVar(&image, "image", image, "Full image reference (e.g. docker.io/org/name)")
-	cmd.Flags().StringVar(&name, "name", name, "Kustomize image name")
-	cmd.Flags().StringVar(&dir, "dir", dir, "Target directory containing kustomization.yaml")
-	cmd.Flags().StringVar(&labelKey, "label-key", labelKey, "Label key to set to the image version (omit to skip)")
-	cmd.Flags().StringVar(&tagRegex, "tag-regex", tagRegex, "Regex with named capture 'version' to select tags (SemVer core with optional prerelease/build)")
-	cmd.Flags().StringVar(&excludeTagsCSV, "exclude-tags", excludeTagsCSV, "Comma-separated list of tags to exclude")
-
-	return cmd
+		})
+	},
 }
 
 // run kustomize edit set image "<name>=<image>:<tag>" in <dir>
@@ -217,52 +178,84 @@ func getLatestTag(image, tagRegex string, exclude []string) (string, error) {
 	sort.Slice(vals, func(i, j int) bool {
 		return semver.Compare(vals[i].sem, vals[j].sem) > 0
 	})
-
 	return vals[0].tag, nil
 }
 
-// KustomizeUpdater encapsulates updating image tags and labels for a kustomization.
-type KustomizeUpdater struct {
-	Image    string
-	Name     string
-	Dir      string
-	LabelKey string
-	TagRegex string
-	Exclude  []string
+const annotationKey = "automata.config.shikanime.studio/images"
+
+type Kustomization struct {
+	Metadata struct {
+		Annotations map[string]string `yaml:"annotations"`
+	} `yaml:"metadata"`
+	Labels []struct {
+		Pairs map[string]string `yaml:"pairs"`
+	} `yaml:"labels"`
+	Images []struct {
+		Name    string `yaml:"name"`
+		NewName string `yaml:"newName"`
+		NewTag  string `yaml:"newTag"`
+	} `yaml:"images"`
 }
 
-// Update fetches the latest valid semver tag, updates kustomization image and optional label.
-func (ku *KustomizeUpdater) Update() error {
-	latest, err := getLatestTag(ku.Image, ku.TagRegex, ku.Exclude)
+type ImageConfig struct {
+	Name     string   `json:"name"`
+	TagRegex string   `json:"tag-regex"`
+	Exclude  []string `json:"exclude-tags,omitempty"`
+}
+
+func loadKustomizationAndConfigs(dir string) (*Kustomization, []ImageConfig, error) {
+	path := filepath.Join(dir, "kustomization.yaml")
+	data, err := os.ReadFile(path)
 	if err != nil {
-		return fmt.Errorf("fetch latest tag: %w", err)
+		return nil, nil, fmt.Errorf("read kustomization.yaml: %w", err)
 	}
-	if latest == "" {
-		return fmt.Errorf("no matching tag found for %s", ku.Image)
+	var k Kustomization
+	if err := yaml.Unmarshal(data, &k); err != nil {
+		return nil, nil, fmt.Errorf("parse kustomization.yaml: %w", err)
+	}
+	raw := ""
+	if k.Metadata.Annotations != nil {
+		raw = k.Metadata.Annotations[annotationKey]
+	}
+	if strings.TrimSpace(raw) == "" {
+		return &k, nil, nil
+	}
+	var cfg []ImageConfig
+	if err := json.Unmarshal([]byte(raw), &cfg); err != nil {
+		return &k, nil, fmt.Errorf("parse annotation %s: %w", annotationKey, err)
+	}
+	return &k, cfg, nil
+}
+
+func updateKustomization(d string) error {
+	k, configs, err := loadKustomizationAndConfigs(d)
+	if err != nil {
+		return err
+	}
+	cfgByName := make(map[string]ImageConfig, len(configs))
+	for _, c := range configs {
+		cfgByName[c.Name] = c
 	}
 
-	if err := runKustomizeSetImage(ku.Dir, ku.Name, ku.Image, latest); err != nil {
-		return fmt.Errorf("kustomize set image: %w", err)
-	}
-
-	if ku.LabelKey != "" {
-		re, err := regexp.Compile(ku.TagRegex)
+	for _, img := range k.Images {
+		cfg, ok := cfgByName[img.Name]
+		if !ok || img.NewName == "" {
+			// skip images without config or missing newName
+			continue
+		}
+		latest, err := getLatestTag(img.NewName, cfg.TagRegex, cfg.Exclude)
 		if err != nil {
-			return fmt.Errorf("invalid tag-regex %q: %w", ku.TagRegex, err)
+			return fmt.Errorf("fetch latest tag for %s: %w", img.NewName, err)
 		}
-		sem, err := parseSemver(re, latest)
-		if err != nil {
-			return fmt.Errorf("parse label from tag %q: %w", latest, err)
+		if latest == "" {
+			log.Printf("No matching tag found for %s with regex %q, skipping\n", img.NewName, cfg.TagRegex)
+			continue
 		}
-		labelVal := strings.TrimPrefix(sem, "v")
 
-		if err := runYQSetLabel(ku.Dir, ku.LabelKey, labelVal); err != nil {
-			return fmt.Errorf("yq set label: %w", err)
+		if err := runKustomizeSetImage(d, img.Name, img.NewName, latest); err != nil {
+			return fmt.Errorf("kustomize set image for %s: %w", img.Name, err)
 		}
-		log.Printf("Updated %s to %s:%s and label %s=%s\n", ku.Name, ku.Image, latest, ku.LabelKey, labelVal)
-	} else {
-		log.Printf("Updated %s to %s:%s\n", ku.Name, ku.Image, latest)
+		log.Printf("[%s] Updated %s to %s:%s\n", d, img.Name, img.NewName, latest)
 	}
-
 	return nil
 }
