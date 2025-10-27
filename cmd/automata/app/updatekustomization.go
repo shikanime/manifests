@@ -34,7 +34,7 @@ var UpdateKustomizationCmd = &cobra.Command{
 			if !isKustomizationFile(path) {
 				return nil
 			}
-			g.Go(runUpdateKustomization(filepath.Dir(path)))
+			g.Go(createRunUpdateKustomization(filepath.Dir(path)))
 			return nil
 		}); err != nil {
 			return err
@@ -43,7 +43,7 @@ var UpdateKustomizationCmd = &cobra.Command{
 	},
 }
 
-func runUpdateKustomization(path string) func() error {
+func createRunUpdateKustomization(path string) func() error {
 	return func() error {
 		if err := updateKustomizationForDir(path); err != nil {
 			slog.Warn("skip kustomization update", "dir", path, "err", err)
@@ -51,11 +51,6 @@ func runUpdateKustomization(path string) func() error {
 		}
 		return nil
 	}
-}
-
-// isKustomizationFile reports whether the given path is a kustomization file.
-func isKustomizationFile(path string) bool {
-	return filepath.Base(path) == "kustomization.yaml"
 }
 
 func updateKustomizationForDir(d string) error {
@@ -187,4 +182,8 @@ func updateKustomizationForDir(d string) error {
 	}
 
 	return nil
+}
+
+func isKustomizationFile(path string) bool {
+	return filepath.Base(path) == "kustomization.yaml"
 }

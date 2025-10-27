@@ -44,14 +44,12 @@ func (su *SopsUpdater) Update() error {
 		if d.IsDir() {
 			return nil
 		}
-
 		if !isEncryptedFile(path) {
 			return nil
 		}
 		base := filepath.Base(path)
 		plainBase := strings.Replace(base, ".enc.", ".", 1)
 		plainPath := filepath.Join(filepath.Dir(path), plainBase)
-
 		shouldEncrypt, err := isEncryptNeeded(plainPath, path)
 		if err != nil {
 			return err
@@ -59,7 +57,6 @@ func (su *SopsUpdater) Update() error {
 		if !shouldEncrypt {
 			return nil
 		}
-
 		g.Go(createRunSopsEncrypt(plainPath, path))
 		return nil
 	})

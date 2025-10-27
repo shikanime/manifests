@@ -7,13 +7,13 @@ import (
 
 func GetLogLevel() slog.Level {
 	switch os.Getenv("LOG_LEVEL") {
-	case "DEBUG":
+	case "debug":
 		return slog.LevelDebug
-	case "INFO":
+	case "info":
 		return slog.LevelInfo
-	case "WARN":
+	case "warn":
 		return slog.LevelWarn
-	case "ERROR":
+	case "error":
 		return slog.LevelError
 	default:
 		return slog.LevelInfo
