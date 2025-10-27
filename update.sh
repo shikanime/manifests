@@ -5,8 +5,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Run centralized SOPS encryption (updates all .enc.* if plaintext is newer)
-go run "$(dirname "$0")"/cmd/automata update sops --dir "$(dirname "$0")"
+go run "$(dirname "$0")"/cmd/automata update --all "$(dirname "$0")"
 
 for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
   # Update base directory
