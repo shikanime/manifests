@@ -11,9 +11,13 @@ import (
 	"github.com/shikanime/manifests/internal/utils"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
+	"sigs.k8s.io/kustomize/kyaml/kio"
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
 
+// UpdateKustomizationCmd updates kustomize image tags across a directory tree.
+// It scans for kustomization.yaml files and updates image tags based on
+// the images annotation configuration and chosen registry strategy.
 // UpdateKustomizationCmd updates kustomize image tags across a directory tree.
 // It scans for kustomization.yaml files and updates image tags based on
 // the images annotation configuration and chosen registry strategy.
@@ -48,9 +52,11 @@ var UpdateKustomizationCmd = &cobra.Command{
 
 // createRunUpdateKustomization returns a task function that updates image tags
 // for a specific kustomization directory, suitable for use with errgroup.
+// createRunUpdateKustomization returns a task function that updates image tags
+// for a specific kustomization directory, suitable for use with errgroup.
 func createRunUpdateKustomization(path string) func() error {
 	return func() error {
-		if err := updateKustomizationForDir(path); err != nil {
+		if err := updateKustomization(path); err != nil {
 			slog.Warn("skip kustomization update", "dir", path, "err", err)
 			return err
 		}
@@ -96,80 +102,185 @@ func updateKustomizationForDir(d string) error {
 		}
 		recoLabelName = yaml.GetValue(valNode)
 	}
+// updateKustomization updates tags and recommended labels for images
+// defined in the kustomization.yaml at the given directory.
+func updateKustomization(d string) error {
+	return createUpdateKustomizationPipeline(d).Execute()
+}
 
-	imagesNode, err := root.Pipe(yaml.Lookup("images"))
-	if err != nil {
-		return fmt.Errorf("lookup images: %w", err)
+// createUpdateKustomizationPipeline creates a kustomize pipeline to update image tags
+// and recommended labels for images defined in the kustomization.yaml at the given directory.
+func createUpdateKustomizationPipeline(d string) kio.Pipeline {
+	return kio.Pipeline{
+		Inputs: []kio.Reader{
+			kio.LocalPackageReader{
+				PackagePath:    d,
+				MatchFilesGlob: []string{"kustomization.yaml"},
+			},
+		},
+		Filters: []kio.Filter{
+			createUpdateImagesFilter(),
+			createUpdateLabelsFilter(),
+		},
+		Outputs: []kio.Writer{
+			kio.LocalPackageWriter{
+				PackagePath: d,
+			},
+		},
 	}
-	imageNodes, err := imagesNode.Elements()
-	if err != nil {
-		return fmt.Errorf("get images elements: %w", err)
-	}
+}
 
-	// Update image tags based on annotation configs
-	for _, img := range imageNodes {
-		nameNode, err := img.Pipe(yaml.Get("name"))
-		if err != nil {
-			slog.Warn("missing name in images entry", "dir", d, "err", err)
-			continue
-		}
-		name := yaml.GetValue(nameNode)
-		cfg, ok := imageConfigsByName[name]
-		if !ok {
-			continue
-		}
-		newNameNode, err := img.Pipe(yaml.Get("newName"))
-		if err != nil {
-			return fmt.Errorf("get newName for %s: %w", name, err)
-		}
-
-		options := []registry.FindLatestOption{}
-
-		if cfg.StrategyType != utils.FullUpdate {
-			options = append(options, registry.WithStrategyType(cfg.StrategyType))
-		}
-
-		if len(cfg.ExcludeTags) > 0 {
-			options = append(options, registry.WithExclude(cfg.ExcludeTags))
-		}
-
-		if cfg.TagRegex != nil {
-			options = append(options, registry.WithTransform(cfg.TagRegex))
-		}
-
-		// Fetch raw tags
-		tags, err := registry.ListTags(yaml.GetValue(newNameNode))
-		if err != nil {
-			return fmt.Errorf("list tags for %s: %w", name, err)
-		}
-
-		// Set base version if current newTag is a valid semver
-		currentTagNode, err := img.Pipe(yaml.Get("newTag"))
-		if err != nil {
-			return fmt.Errorf("get current newTag for %s: %w", name, err)
-		}
-		currentTag := yaml.GetValue(currentTagNode)
-		if currentTag != "" {
-			var version string
-			version, err = utils.ParseSemver(cfg.TagRegex, currentTag)
+// createUpdateImagesFilter creates a kustomize filter to update image tags
+// for images defined in the kustomization.yaml.
+func createUpdateImagesFilter() kio.Filter {
+	return kio.FilterFunc(func(nodes []*yaml.RNode) ([]*yaml.RNode, error) {
+		for _, root := range nodes {
+			imageAnnotationNode, err := root.Pipe(utils.GetImagesAnnotation())
 			if err != nil {
-				return fmt.Errorf("parse semver for %s: %w", currentTag, err)
+				return nil, fmt.Errorf("get images annotation: %w", err)
 			}
-			options = append(options, registry.WithBaseline(version))
-		}
+			imageConfigs, err := utils.GetImagesConfig(imageAnnotationNode)
+			if err != nil {
+				return nil, fmt.Errorf("get image config: %w", err)
+			}
+			imageConfigsByName := utils.CreateImageConfigsByName(imageConfigs)
 
-		latest, err := registry.FindLatestTag(tags, options...)
-		if err != nil {
-			latest = currentTag
+			imagesNode, err := root.Pipe(yaml.Lookup("images"))
+			if err != nil {
+				return nil, fmt.Errorf("lookup images: %w", err)
+			}
+			imageNodes, err := imagesNode.Elements()
+			if err != nil {
+				return nil, fmt.Errorf("get images elements: %w", err)
+			}
+
+			// Update image tags based on annotation configs
+			for _, img := range imageNodes {
+				nameNode, err := img.Pipe(yaml.Get("name"))
+				if err != nil {
+					slog.Warn("missing name in images entry", "err", err)
+					continue
+				}
+				name := yaml.GetValue(nameNode)
+				cfg, ok := imageConfigsByName[name]
+				if !ok {
+					continue
+				}
+				newNameNode, err := img.Pipe(yaml.Get("newName"))
+				if err != nil {
+					return nil, fmt.Errorf("get newName for %s: %w", name, err)
+				}
+
+				options := []registry.FindLatestOption{}
+
+				if cfg.StrategyType != utils.FullUpdate {
+					options = append(options, registry.WithStrategyType(cfg.StrategyType))
+				}
+
+				if len(cfg.ExcludeTags) > 0 {
+					options = append(options, registry.WithExclude(cfg.ExcludeTags))
+				}
+
+				if cfg.TagRegex != nil {
+					options = append(options, registry.WithTransform(cfg.TagRegex))
+				}
+
+				// Fetch raw tags
+				tags, err := registry.ListTags(yaml.GetValue(newNameNode))
+				if err != nil {
+					return nil, fmt.Errorf("list tags for %s: %w", name, err)
+				}
+
+				// Set base version if current newTag is a valid semver
+				currentTagNode, err := img.Pipe(yaml.Get("newTag"))
+				if err != nil {
+					return nil, fmt.Errorf("get current newTag for %s: %w", name, err)
+				}
+				currentTag := yaml.GetValue(currentTagNode)
+				if currentTag != "" {
+					var version string
+					version, err = utils.ParseSemver(cfg.TagRegex, currentTag)
+					if err != nil {
+						return nil, fmt.Errorf("parse semver for %s: %w", currentTag, err)
+					}
+					options = append(options, registry.WithBaseline(version))
+				}
+
+				latest, err := registry.FindLatestTag(tags, options...)
+				if err != nil {
+					latest = currentTag
+				}
+				if latest == "" {
+					slog.Info("no matching tag found", "image", name)
+					continue
+				}
+				if err = img.PipeE(yaml.SetField("newTag", yaml.NewStringRNode(latest))); err != nil {
+					return nil, fmt.Errorf("set newTag for %s: %w", name, err)
+				}
+				slog.Info("updated image tag", "name", name, "image", name, "tag", latest)
+			}
 		}
-		if latest == "" {
-			slog.Info("no matching tag found", "dir", d, "image", name)
-			return nil
-		}
-		if err = img.PipeE(yaml.SetField("newTag", yaml.NewStringRNode(latest))); err != nil {
-			return fmt.Errorf("set newTag for %s: %w", name, err)
-		}
-		slog.Info("updated image tag", "dir", d, "name", name, "image", name, "tag", latest)
+		return nodes, nil
+	})
+}
+
+// createUpdateLabelsFilter creates a kustomize filter to update recommended labels
+// for images defined in the kustomization.yaml.
+func createUpdateLabelsFilter() kio.Filter {
+	return kio.FilterFunc(func(nodes []*yaml.RNode) ([]*yaml.RNode, error) {
+		for _, root := range nodes {
+			imageAnnotationNode, err := root.Pipe(utils.GetImagesAnnotation())
+			if err != nil {
+				return nil, fmt.Errorf("get images annotation: %w", err)
+			}
+			imageConfigs, err := utils.GetImagesConfig(imageAnnotationNode)
+			if err != nil {
+				return nil, fmt.Errorf("get image config: %w", err)
+			}
+			imageConfigsByName := utils.CreateImageConfigsByName(imageConfigs)
+
+			labelsNode, err := root.Pipe(yaml.Lookup("labels"))
+			if err != nil {
+				return nil, fmt.Errorf("lookup labels: %w", err)
+			}
+			labelNodes, err := labelsNode.Elements()
+			if err != nil {
+				return nil, fmt.Errorf("get labels pairs: %w", err)
+			}
+			var recoLabelName string
+			for _, labelNode := range labelNodes {
+				var valNode *yaml.RNode
+				valNode, err = labelNode.Pipe(
+					yaml.Lookup("pairs"),
+					yaml.Get(utils.KubernetesNameLabel),
+				)
+				if err != nil {
+					return nil, fmt.Errorf("get %s: %w", utils.KubernetesNameLabel, err)
+				}
+				recoLabelName = yaml.GetValue(valNode)
+			}
+
+			imagesNode, err := root.Pipe(yaml.Lookup("images"))
+			if err != nil {
+				return nil, fmt.Errorf("lookup images: %w", err)
+			}
+			imageNodes, err := imagesNode.Elements()
+			if err != nil {
+				return nil, fmt.Errorf("get images elements: %w", err)
+			}
+
+			// Update recommended labels based on updated image tags
+			for _, img := range imageNodes {
+				nameNode, err := img.Pipe(yaml.Get("name"))
+				if err != nil {
+					slog.Warn("missing name in images entry", "err", err)
+					continue
+				}
+				name := yaml.GetValue(nameNode)
+				cfg, ok := imageConfigsByName[name]
+				if !ok {
+					continue
+				}
 
 		if recoLabelName == name {
 			var vers string
@@ -193,6 +304,38 @@ func updateKustomizationForDir(d string) error {
 	}
 
 	return nil
+}
+
+// isKustomizationFile reports whether the path is a kustomization.yaml.
+				if recoLabelName == name {
+					// Get the current newTag (which should have been updated by the images filter)
+					currentTagNode, err := img.Pipe(yaml.Get("newTag"))
+					if err != nil {
+						return nil, fmt.Errorf("get current newTag for %s: %w", name, err)
+					}
+					latest := yaml.GetValue(currentTagNode)
+					if latest == "" {
+						continue
+					}
+
+					var vers string
+					if cfg.TagRegex != nil {
+						vers, err = utils.ParseSemver(cfg.TagRegex, latest)
+						if err != nil {
+							return nil, fmt.Errorf("parse semver for %s: %w", latest, err)
+						}
+					} else {
+						vers = latest
+					}
+					if err = root.PipeE(utils.SetRecommandedLabels(name, vers)); err != nil {
+						return nil, fmt.Errorf("set %s: %w", utils.KubernetesVersionLabel, err)
+					}
+					slog.Info("updated recommended labels", "name", name, "image", name, "tag", latest)
+				}
+			}
+		}
+		return nodes, nil
+	})
 }
 
 // isKustomizationFile reports whether the path is a kustomization.yaml.
