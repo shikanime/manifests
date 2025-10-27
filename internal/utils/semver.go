@@ -1,4 +1,4 @@
-package app
+package utils
 
 import (
 	"fmt"
@@ -8,9 +8,9 @@ import (
 	"golang.org/x/mod/semver"
 )
 
-// parseSemver extracts and validates a semver string from tag using named groups.
+// ParseSemver extracts and validates a semver string from tag using named groups.
 // It returns the canonical semver (with leading 'v') or an error if parsing fails.
-func parseSemver(re *regexp.Regexp, tag string) (string, error) {
+func ParseSemver(re *regexp.Regexp, tag string) (string, error) {
 	m := re.FindStringSubmatch(tag)
 	if m == nil {
 		return "", fmt.Errorf("no semver match in tag %q", tag)

@@ -1,4 +1,4 @@
-package app
+package registry
 
 import (
 	"fmt"
@@ -8,11 +8,12 @@ import (
 
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/crane"
+	"github.com/shikanime/manifests/internal/utils"
 	"golang.org/x/mod/semver"
 )
 
-// listTags fetches tags for the given image.
-func listTags(image string) ([]string, error) {
+// ListTags fetches tags for the given image.
+func ListTags(image string) ([]string, error) {
 	// Try with keychain, then fallback to anonymous; forward any provided crane options.
 	tags, err := crane.ListTags(
 		image,
@@ -76,7 +77,7 @@ func WithBaseline(version string) FindLatestOption {
 // helper to fetch latest tag; applies transform (regex), sorts tags by semver (desc),
 // applies update strategy relative to the optional baseline from WithCurrentVersion,
 // then returns the first non-excluded tag.
-func findLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
+func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 	o := &findLatestOptions{updateStrategy: UpdateAll, baseline: "v0.1.0"}
 	for _, opt := range opts {
 		opt(o)
@@ -92,7 +93,7 @@ func findLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 	for _, t := range tags {
 		var sem string
 		if o.transformRegex != nil {
-			v, err := parseSemver(o.transformRegex, t)
+			v, err := utils.ParseSemver(o.transformRegex, t)
 			if err != nil {
 				slog.Debug("non-semver tag ignored", "tag", t, "err", err)
 				continue

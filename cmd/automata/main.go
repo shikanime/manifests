@@ -3,16 +3,20 @@ package main
 import (
 	"log/slog"
 	"os"
-	"strings"
 
 	"github.com/shikanime/manifests/cmd/automata/app"
+	"github.com/shikanime/manifests/internal/config"
 	"github.com/spf13/cobra"
 )
 
-func main() {
-	// Configure slog level based on environment variable
-	setupLogging()
+func init() {
+	slog.SetDefault(slog.New(slog.NewJSONHandler(
+		os.Stderr,
+		&slog.HandlerOptions{Level: config.GetLogLevel()},
+	)))
+}
 
+func main() {
 	rootCmd := &cobra.Command{
 		Use:   "automata",
 		Short: "Automata CLI",
@@ -22,29 +26,4 @@ func main() {
 		slog.Error("command execution failed", "error", err)
 		os.Exit(1)
 	}
-}
-
-func setupLogging() {
-	level := slog.LevelInfo
-
-	if envLevel := os.Getenv("LOG_LEVEL"); envLevel != "" {
-		switch strings.ToUpper(envLevel) {
-		case "DEBUG":
-			level = slog.LevelDebug
-		case "INFO":
-			level = slog.LevelInfo
-		case "WARN", "WARNING":
-			level = slog.LevelWarn
-		case "ERROR":
-			level = slog.LevelError
-		}
-	}
-
-	opts := &slog.HandlerOptions{
-		Level: level,
-	}
-
-	handler := slog.NewTextHandler(os.Stderr, opts)
-	logger := slog.New(handler)
-	slog.SetDefault(logger)
 }

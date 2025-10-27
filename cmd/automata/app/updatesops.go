@@ -10,6 +10,7 @@ import (
 
 	"log/slog"
 
+	"github.com/shikanime/manifests/internal/utils"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
 )
@@ -36,7 +37,7 @@ func (su *SopsUpdater) Update() error {
 		return fmt.Errorf("dir is required")
 	}
 	g := new(errgroup.Group)
-	err := WalkDirWithGitignore(su.Dir, func(path string, d fs.DirEntry, err error) error {
+	err := utils.WalkDirWithGitignore(su.Dir, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -59,21 +60,23 @@ func (su *SopsUpdater) Update() error {
 			return nil
 		}
 
-		g.Go(func(plainPath, encPath string) func() error {
-			return func() error {
-				if err := runSopsEncrypt(plainPath, encPath); err != nil {
-					return fmt.Errorf("sops encrypt %s -> %s: %w", plainPath, encPath, err)
-				}
-				slog.Info("sops encrypted file", "plain", plainPath, "enc", encPath)
-				return nil
-			}
-		}(plainPath, path))
+		g.Go(createRunSopsEncrypt(plainPath, path))
 		return nil
 	})
 	if err != nil {
 		return err
 	}
 	return g.Wait()
+}
+
+func createRunSopsEncrypt(plainPath, encPath string) func() error {
+	return func() error {
+		if err := runSopsEncrypt(plainPath, encPath); err != nil {
+			return fmt.Errorf("sops encrypt %s -> %s: %w", plainPath, encPath, err)
+		}
+		slog.Info("sops encrypted file", "plain", plainPath, "enc", encPath)
+		return nil
+	}
 }
 
 func runSopsEncrypt(plainPath, encPath string) error {
