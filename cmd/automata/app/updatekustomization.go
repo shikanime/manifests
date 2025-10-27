@@ -14,6 +14,9 @@ import (
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
 
+// UpdateKustomizationCmd updates kustomize image tags across a directory tree.
+// It scans for kustomization.yaml files and updates image tags based on
+// the images annotation configuration and chosen registry strategy.
 var UpdateKustomizationCmd = &cobra.Command{
 	Use:   "kustomization [DIR]",
 	Short: "Update kustomize image tags",
@@ -43,6 +46,8 @@ var UpdateKustomizationCmd = &cobra.Command{
 	},
 }
 
+// createRunUpdateKustomization returns a task function that updates image tags
+// for a specific kustomization directory, suitable for use with errgroup.
 func createRunUpdateKustomization(path string) func() error {
 	return func() error {
 		if err := updateKustomizationForDir(path); err != nil {
@@ -53,6 +58,8 @@ func createRunUpdateKustomization(path string) func() error {
 	}
 }
 
+// updateKustomizationForDir updates tags and recommended labels for images
+// defined in the kustomization.yaml at the given directory.
 func updateKustomizationForDir(d string) error {
 	root, err := yaml.ReadFile(filepath.Join(d, "kustomization.yaml"))
 	if err != nil {
@@ -188,6 +195,7 @@ func updateKustomizationForDir(d string) error {
 	return nil
 }
 
+// isKustomizationFile reports whether the path is a kustomization.yaml.
 func isKustomizationFile(path string) bool {
 	return filepath.Base(path) == "kustomization.yaml"
 }

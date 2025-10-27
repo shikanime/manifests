@@ -1,3 +1,5 @@
+// Package main is the entrypoint for the Automata CLI, wiring commands and
+// global configuration such as logging.
 package main
 
 import (
