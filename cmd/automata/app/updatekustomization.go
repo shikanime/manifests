@@ -149,7 +149,7 @@ func updateKustomizationForDir(d string) error {
 
 		latest, err := registry.FindLatestTag(tags, options...)
 		if err != nil {
-			continue
+			latest = currentTag
 		}
 		if latest == "" {
 			slog.Info("no matching tag found", "dir", d, "image", name)

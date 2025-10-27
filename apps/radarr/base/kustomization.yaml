@@ -18,4 +18,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: radarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v6.0.4-nightly
+      app.kubernetes.io/version: v5.28.0
