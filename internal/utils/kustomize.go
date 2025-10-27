@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"regexp"
+	"strings"
 
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
@@ -97,21 +98,27 @@ func SetRecommandedLabels(name, version string) RecommandedLabelsSetter {
 	return RecommandedLabelsSetter{Name: name, Version: version}
 }
 
-type Config struct {
-	Images map[string]ImagesConfig
-}
+type StrategyType int
+
+const (
+	FullUpdate StrategyType = iota
+	MinorUpdate
+	PatchUpdate
+)
 
 type ImagesConfig struct {
-	Name        string
-	TagRegex    *regexp.Regexp
-	ExcludeTags map[string]struct{}
+	Name         string
+	TagRegex     *regexp.Regexp
+	ExcludeTags  map[string]struct{}
+	StrategyType StrategyType
 }
 
 func (c *ImagesConfig) UnmarshalJSON(data []byte) error {
 	var raw struct {
-		Name        string   `json:"name"`
-		TagRegex    string   `json:"tag-regex"`
-		ExcludeTags []string `json:"exclude-tags"`
+		Name         string   `json:"name"`
+		TagRegex     string   `json:"tag-regex"`
+		ExcludeTags  []string `json:"exclude-tags"`
+		StrategyType string   `json:"update-strategy"`
 	}
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return err
@@ -137,6 +144,20 @@ func (c *ImagesConfig) UnmarshalJSON(data []byte) error {
 		c.ExcludeTags = m
 	} else {
 		c.ExcludeTags = nil
+	}
+
+	// Parse update strategy
+	if raw.StrategyType != "" {
+		switch strings.ToLower(raw.StrategyType) {
+		case "FullUpdate":
+			c.StrategyType = FullUpdate
+		case "MinorUpdate":
+			c.StrategyType = MinorUpdate
+		case "PatchUpdate":
+			c.StrategyType = PatchUpdate
+		default:
+			return fmt.Errorf("invalid update-strategy %q: must be one of 'Full', 'Minor', 'Patch'", raw.StrategyType)
+		}
 	}
 
 	return nil

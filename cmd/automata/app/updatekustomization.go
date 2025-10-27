@@ -118,6 +118,10 @@ func updateKustomizationForDir(d string) error {
 
 		options := []registry.FindLatestOption{}
 
+		if cfg.StrategyType != utils.FullUpdate {
+			options = append(options, registry.WithStrategyType(cfg.StrategyType))
+		}
+
 		if len(cfg.ExcludeTags) > 0 {
 			options = append(options, registry.WithExclude(cfg.ExcludeTags))
 		}

@@ -35,17 +35,9 @@ func ListTags(image string) ([]string, error) {
 
 type FindLatestOption func(*findLatestOptions)
 
-type UpdateStrategy int
-
-const (
-	UpdateAll UpdateStrategy = iota
-	UpdateMinor
-	UpdatePatch
-)
-
 type findLatestOptions struct {
 	exclude        map[string]struct{}
-	updateStrategy UpdateStrategy
+	updateStrategy utils.StrategyType
 	transformRegex *regexp.Regexp
 	baseline       string
 }
@@ -56,7 +48,7 @@ func WithExclude(exclude map[string]struct{}) FindLatestOption {
 	}
 }
 
-func WithUpdateStrategy(strategy UpdateStrategy) FindLatestOption {
+func WithStrategyType(strategy utils.StrategyType) FindLatestOption {
 	return func(o *findLatestOptions) {
 		o.updateStrategy = strategy
 	}
@@ -78,7 +70,7 @@ func WithBaseline(version string) FindLatestOption {
 // applies update strategy relative to the optional baseline from WithCurrentVersion,
 // then returns the first non-excluded tag.
 func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
-	o := &findLatestOptions{updateStrategy: UpdateAll, baseline: "v0.1.0"}
+	o := &findLatestOptions{updateStrategy: utils.FullUpdate, baseline: "v0.1.0"}
 	for _, opt := range opts {
 		opt(o)
 	}
@@ -124,13 +116,13 @@ func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 			continue
 		}
 		switch o.updateStrategy {
-		case UpdateMinor:
+		case utils.MinorUpdate:
 			if semver.Major(c.sem) == semver.Major(o.baseline) {
 				tagsWithBaseline = append(tagsWithBaseline, c)
 			} else {
 				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", o.baseline)
 			}
-		case UpdatePatch:
+		case utils.PatchUpdate:
 			if semver.MajorMinor(c.sem) == semver.MajorMinor(o.baseline) {
 				tagsWithBaseline = append(tagsWithBaseline, c)
 			} else {
