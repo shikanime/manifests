@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "radarr", "tag-regex": "(?i)^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "radarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
