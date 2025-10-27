@@ -1,47 +1,47 @@
-id: meta
-url: http://matrix-meta:29319
-as_token: ENC[AES256_GCM,data:6X7x7wgrcAjOOpDKYbRzrQrwQ/+HTKXtnypPqnCBo9rJflWs6Tii2W2uaWX8kPxHTuoFRxytU5w86g8jBVXWLQ==,iv:Ys+b4RcXi5+f+7pPgWmo27d+MiCO2hoOcEMKgxwxulo=,tag:JCes5+3Wx8ADE9uLyCiSLw==,type:str]
-hs_token: ENC[AES256_GCM,data:xrj7YrXWCamXpSapjDVadZUHKtfFQ+rlYpgH0qcbgHwKKJ1KTHIo8GONzOgMEgFva5jAMVAVoIFsqbf7AU+rbw==,iv:d7RGJlkPer9Xog02/AF/5MXtcRgNSRUEvxia8SSA8Ro=,tag:t4o3cz2hU1h7+aBhCQOPNA==,type:str]
-sender_localpart: QTeuedOyoZPUV95SkRMd6d9kGpE9OjoC
-rate_limited: false
+id: ENC[AES256_GCM,data:ZRz5xA==,iv:PHAyuMhTAIeI++mPBx1KGxBDR7FK2BwrD9MGB+a1DAk=,tag:GO1qZvLTvSd7oKSUpr7COg==,type:str]
+url: ENC[AES256_GCM,data:d8uAkQWDnNRLtbZ49OvXuKam5roj33/o,iv:yuEz7xcznGw9BvtmkZplb3oelYo1gkJGNZ0jNjOrudI=,tag:QSKty7usPAH3+OorDhmbCg==,type:str]
+as_token: ENC[AES256_GCM,data:NQF8giAZW5Gu+BhLT7orhxNw493AQGAhMRqKmXHnKtLwn0VX0wmNZNLmsGECEN4fNxaoZN1t4oTkO2d971v9RA==,iv:59p21gzdSJkP8EqEWDe0WQCs47Uw3UR9gKn3fXIA0dw=,tag:go6L2rE+scuXTRuVI5FH8Q==,type:str]
+hs_token: ENC[AES256_GCM,data:Pufak2bU/DkCprExkPHBTsgm0AyeekUsFWbHN4Goid/y7JwFc1dHui/Lz/shVvE1aSlR4bnwuQUGGym8aBHgng==,iv:2vzn/4BLVjsMnqyeIHwCDNRYGElchykjf2lu/kaYJXg=,tag:Odm6jCmevj9zta7Cyyt9/w==,type:str]
+sender_localpart: ENC[AES256_GCM,data:0AabPjBAKzFLmAezxqDncjuf+e6NCxEHwC34LWhxW1c=,iv:JeH5UuVQ34LdJZI0+IidnLMI4OMl1pZmeZOOxU+pVlY=,tag:qXZiCJsQo6B9exTBcg/E3w==,type:str]
+rate_limited: ENC[AES256_GCM,data:HoXQW7E=,iv:XrKPPvV07QE3YDHlqLb7vMQEDXTrZHcf9vvleZ7jEJo=,tag:cbwQjfgs6VgdcacKxaEZew==,type:bool]
 namespaces:
   users:
-    - regex: ^@metabot:matrix\.taila659a\.ts\.net$
-      exclusive: true
-    - regex: ^@meta_.*:matrix\.taila659a\.ts\.net$
-      exclusive: true
-de.sorunome.msc2409.push_ephemeral: true
-receive_ephemeral: true
+    - regex: ENC[AES256_GCM,data:KFf9VvPGwCi3AAvlovwsmYXqlCmYBQLI5o2gDzkV+A1OYs/xlQ==,iv:WkZ2HdT9mJjy9qlwMPzJuTooLyp6JgjQp2FIy/+59fo=,tag:iwZJ3XmOFThl05pGVsPURA==,type:str]
+      exclusive: ENC[AES256_GCM,data:ArFIgw==,iv:WAq/bbzGizTOgmMCNcW/jeCBcav91DhygrbfrZ6FOVY=,tag:4LgKmRLMYWL66cDp+3Gdzg==,type:bool]
+    - regex: ENC[AES256_GCM,data:dDeYP/admoHIW4f7RLJTXyrThRLencOF8f4HsS6YlmMa3kpKIQ==,iv:oigaw6Bww1V+QhG+IiSxQ6HkwETUpMwchi/0ZpGvdxs=,tag:JDIXw+dwHPO3kaGwVu9R/A==,type:str]
+      exclusive: ENC[AES256_GCM,data:w+DdWg==,iv:wwbDb/akarfTm4mkmFlmv0xSlA/lblZtRu4j5Vii2pE=,tag:6xfsBVu+NKrM/+f1cGzNcw==,type:bool]
+de.sorunome.msc2409.push_ephemeral: ENC[AES256_GCM,data:JUZZKg==,iv:gx4Z1WmYyfUFQmJoNeVu2bvO4NjIyPP3F8QrBJHxhco=,tag:W5HYZr/1KLdKXcaSAe1txA==,type:bool]
+receive_ephemeral: ENC[AES256_GCM,data:s1tC4w==,iv:xZU4YOw2OkwHpEmBlDzNJDzDyZargJ93yIzmle8VVqI=,tag:vYPFBvxa9WIHyl4+tzlIdA==,type:bool]
 sops:
   age:
     - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKV3d6Z1BDYWlIRDFnL3Za
-        OG9CYXF6S0NuOGJsVUZXTEtKcXFXZVFFSVNZCmRnekdoWFFyRHdvaVo5UTVjMUtx
-        RVB6WEZMOHZsUFhlL1NoT08zbE5LUmsKLS0tIFJSb2pqWmFGNmFNTksyakxITmtW
-        UjFpV2NrSWk3MXNxM1VtUWJqSkU3blUKvJq+GxnQkfrLVpNLU9xe3iTwec7kjDsQ
-        ob8Qd7bCtfzLC5waU7i++grpOXYnrn59xiI2uO+Dmp6kbRZDz76hiA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2RElMY1VST0tVUDB6ejZF
+        K2V2VHA5V3hjTXRzQmpxSHRzbzM0a3ZxeEJ3CkhWSCtDUVRaY2s0ZUZJaUU0RnlJ
+        SldDL2prQkZveHQzUElVcFFDY01vRjQKLS0tIHZQWGwxRmZUbzE1WGdaTXd4dU9u
+        MVoxSTZ6RGRLMkdTbHgwT2ZwV2ZuWkEK6IpTQVeC4dvOWISg4huTqkY7FuWQ3htQ
+        XJq11wskiia4pjPivDOzRa1Rob3cAzVCOMPYoyHfgfQj8/7EJUEhYw==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAydkxJcnFmTUZZUEZnMjUw
-        VzhhYWlDOUZFS1JkZGhCT3lnUUNySlY2dEc0CjBMWTdzQm9sWXJBWFZ3NForbHBS
-        bXlJanBNdkROSGx4OVR1dGFPQndxbm8KLS0tIExoSlVFbk9pazRWNWNKb3E5VzNQ
-        Q2I0RXh0VDhaaXVJdVAwb2JIcmdZNG8KxlEkjOIzD3OV9nNenCKAA1NJ7RZB6Jcx
-        h6FIZGYh7nPV9QSWBvqO4sieaLi6WtokXMuiVgZp/Vz8OsqE6vfOyw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0a0dQdklPZitHUWVibnNE
+        ZCtlYWUvV2xESTI4c0o5VEVTM1ZLT0dXMFhZCjQxTXhNQTZvbHFuWjJGN090T3Zj
+        TUlaYXB1L09VU3JEdVZOQldPbzBBRzAKLS0tIHFaT1c2dzBhaEJ3UVp6czA1czBu
+        T2ZGaGVUcUZpMFA2KzI1SHhDdXNHQm8K3T8FT8mCstqFwYN8aVH3wmqbLiT1MsWe
+        FLVM0MEVkcOAaW2uHPYE+0t9MAh29SBig8JetDMOoJl0O/Tno27/hg==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBS2JjVmZKdG0ySkg1MndM
-        YlZaY1dISHZ4M3N6dnRpcC9YUThYVk1Tbm5rCnlpRG5RVmN3Vy9McWhTa2pVZjRw
-        VGJ6dkdOTW85N3FwWWZVbTBNYklTeWMKLS0tIEUvRG9YSDlvZ0hoSWdxVHZYK283
-        WHhrTzlVRmRrYk9oMk00VWo5U2VHeW8K/hi50CAGrZtJ1Te1dg0LOplgS7yxPtZo
-        kcacHgCBGfFaXWt71+cNmKJEK2SFSMrez3hlTDy9DnRA8C+lifc+Kw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkODEwckptZ0lRVUNJME1S
+        SXBLVGY5bGJKamVmaURJVnhyMWpkcWJNOXl3CmZSc1IzY1ZVd2k4aGZ3WjVPLzQr
+        ZWI4SWJ6R2JxQUp1R1J4U25YQmg1RUUKLS0tIFFjaHdNOUVCMnZObkYyWVBPMnFG
+        TERBK0Y3Sk01dFdkMkN3OE1SS1B5YzQKYhVfj0Ew1WO8GnMJqe1/hKkNTtFO6Nue
+        SjJ0QIAncQuDi4DL+xEmyaaTupqIFFaC4VRMb/Q25c7TU1IhR2Nfkg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-25T23:49:32Z"
-  mac: ENC[AES256_GCM,data:IAGu7DFxTglK++mUNewxNMaYPGNjI9Wxw7fgQ0p7dRnKILX7lIeQ7JZ38QnaPCg/NjaKFBeX2tMa2JfGxXkJh24mEIX6HM/gcKgsHgLKrd1cUxo7AQ6aTwqpWe+/wztkFtqB4l64RSVo7Hjv+twJv1/IqG6wK1acjujSnC4M42s=,iv:rnHNAoH757DXDUmojv4zg4VnfrKgIV+e/ZWfuB+gMlg=,tag:Pld0+pIbT25NWZgdBmYIHQ==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
+  lastmodified: "2025-10-26T00:57:07Z"
+  mac: ENC[AES256_GCM,data:aCJaUWZSrA5tqXkOnn6dNiqZ55b+UZloSE7/aL5GoYuQUK5tMc+A6IOPNgM0CwAx1lb7Tgqt4ly7ID543cSCoZ9u85PCVtf4MakYaxlYxDWZjxWOKek3y2x+piuY8v5cxrzxlAjkAggaFOx+pnlmyylv4QdUp/ZVjqLSUQiziQM=,iv:RyIuoG33iSIUpqQxBIFB1L4jFP7d+vTZeSVM+/H/1oA=,tag:uBsRSU4UhRsxSxDUnW0RnA==,type:str]
+  unencrypted_suffix: _unencrypted
   version: 3.10.2

@@ -38,6 +38,7 @@
             projectRootFile = "flake.nix";
             enableDefaultExcludes = true;
             programs = {
+              gofmt.enable = true;
               hclfmt.enable = true;
               nixfmt.enable = true;
               prettier.enable = true;
