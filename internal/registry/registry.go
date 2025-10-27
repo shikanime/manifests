@@ -12,7 +12,7 @@ import (
 	"golang.org/x/mod/semver"
 )
 
-// ListTags fetches tags for the given image.
+// ListTags fetches tags for the given image (auth keychain, fallback anonymous).
 func ListTags(image string) ([]string, error) {
 	// Try with keychain, then fallback to anonymous; forward any provided crane options.
 	tags, err := crane.ListTags(
@@ -33,6 +33,8 @@ func ListTags(image string) ([]string, error) {
 	return tags, nil
 }
 
+// FindLatestOption configures how FindLatestTag filters and selects a tag,
+// including exclusions, update strategy, transforms, and baseline.
 type FindLatestOption func(*findLatestOptions)
 
 type findLatestOptions struct {
@@ -42,24 +44,32 @@ type findLatestOptions struct {
 	baseline       string
 }
 
+// WithExclude sets the exclusion list for tags. Any tag present in the map
+// will be ignored when selecting the latest tag.
 func WithExclude(exclude map[string]struct{}) FindLatestOption {
 	return func(o *findLatestOptions) {
 		o.exclude = exclude
 	}
 }
 
+// WithStrategyType sets the tag update strategy (full, minor-only, patch-only)
+// used by FindLatestTag relative to the baseline.
 func WithStrategyType(strategy utils.StrategyType) FindLatestOption {
 	return func(o *findLatestOptions) {
 		o.updateStrategy = strategy
 	}
 }
 
+// WithTransform sets a regular expression used to extract and normalize the
+// semver from raw tags when computing the latest tag.
 func WithTransform(re *regexp.Regexp) FindLatestOption {
 	return func(o *findLatestOptions) {
 		o.transformRegex = re
 	}
 }
 
+// WithBaseline sets the baseline version for update strategy comparisons.
+// Only tags greater than this baseline are considered.
 func WithBaseline(version string) FindLatestOption {
 	return func(o *findLatestOptions) {
 		o.baseline = version
@@ -69,6 +79,10 @@ func WithBaseline(version string) FindLatestOption {
 // helper to fetch latest tag; applies transform (regex), sorts tags by semver (desc),
 // applies update strategy relative to the optional baseline from WithCurrentVersion,
 // then returns the first non-excluded tag.
+// FindLatestTag returns the latest suitable tag after applying the optional
+// transform, exclusions, baseline, and update strategy.
+// Tags are normalized to canonical semver for comparison and sorted descending.
+// Returns an error when no suitable tag is found.
 func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 	o := &findLatestOptions{updateStrategy: utils.FullUpdate, baseline: "v0.1.0"}
 	for _, opt := range opts {

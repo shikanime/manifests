@@ -15,6 +15,7 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
+// UpdateSopsCmd encrypts plaintext files to `.enc.` when missing or outdated.
 var UpdateSopsCmd = &cobra.Command{
 	Use:   "sops [DIR]",
 	Short: "Encrypt plaintext files to .enc.* when outdated",
@@ -28,10 +29,12 @@ var UpdateSopsCmd = &cobra.Command{
 	},
 }
 
+// SopsUpdater walks a directory and encrypts files with `sops` as needed.
 type SopsUpdater struct {
 	Dir string
 }
 
+// Update scans for outdated `.enc.` files and runs encryption concurrently.
 func (su *SopsUpdater) Update() error {
 	if su.Dir == "" {
 		return fmt.Errorf("dir is required")
@@ -66,6 +69,7 @@ func (su *SopsUpdater) Update() error {
 	return g.Wait()
 }
 
+// createRunSopsEncrypt creates a task to encrypt one file pair.
 func createRunSopsEncrypt(plainPath, encPath string) func() error {
 	return func() error {
 		if err := runSopsEncrypt(plainPath, encPath); err != nil {
@@ -76,6 +80,7 @@ func createRunSopsEncrypt(plainPath, encPath string) func() error {
 	}
 }
 
+// runSopsEncrypt writes `sops --encrypt` output from `plainPath` to `encPath`.
 func runSopsEncrypt(plainPath, encPath string) error {
 	out, err := os.Create(encPath)
 	if err != nil {
@@ -89,6 +94,7 @@ func runSopsEncrypt(plainPath, encPath string) error {
 	return cmd.Run()
 }
 
+// isEncryptNeeded returns true when encrypted file is missing or older.
 func isEncryptNeeded(plainPath, encPath string) (bool, error) {
 	plainInfo, err := os.Stat(plainPath)
 	if err != nil {
@@ -112,6 +118,7 @@ func isEncryptNeeded(plainPath, encPath string) (bool, error) {
 	return encInfo.ModTime().Before(plainInfo.ModTime()), nil
 }
 
+// isEncryptedFile checks for ".enc." in the base filename.
 func isEncryptedFile(path string) bool {
 	base := filepath.Base(path)
 	return strings.Contains(base, ".enc.")

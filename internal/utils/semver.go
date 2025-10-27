@@ -8,8 +8,8 @@ import (
 	"golang.org/x/mod/semver"
 )
 
-// ParseSemver extracts and validates a semver string from tag using named groups.
-// It returns the canonical semver (with leading 'v') or an error if parsing fails.
+// ParseSemver extracts a canonical semver (with leading 'v') from tag using
+// named capture groups in the provided regex.
 func ParseSemver(re *regexp.Regexp, tag string) (string, error) {
 	m := re.FindStringSubmatch(tag)
 	if m == nil {
