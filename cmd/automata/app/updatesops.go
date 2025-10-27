@@ -3,12 +3,11 @@ package app
 import (
 	"fmt"
 	"io/fs"
+	"log/slog"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
-
-	"log/slog"
 
 	"github.com/shikanime/manifests/internal/utils"
 	"github.com/spf13/cobra"
