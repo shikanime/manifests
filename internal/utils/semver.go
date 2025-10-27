@@ -47,8 +47,10 @@ func ParseSemver(re *regexp.Regexp, tag string) (string, error) {
 		vers = "v" + vers
 	}
 
-	if !semver.IsValid(vers) {
+	semvers := semver.Canonical(vers)
+	if semvers == "" {
 		return "", fmt.Errorf("invalid semver %q", vers)
 	}
-	return semver.Canonical(vers), nil
+
+	return semvers, nil
 }
