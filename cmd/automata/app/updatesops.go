@@ -23,49 +23,36 @@ var UpdateSopsCmd = &cobra.Command{
 		if len(args) > 0 && strings.TrimSpace(args[0]) != "" {
 			root = args[0]
 		}
-		up := &SopsUpdater{Dir: root}
-		return up.Update()
+
+		g := new(errgroup.Group)
+		err := utils.WalkDirWithGitignore(root, func(path string, d fs.DirEntry, err error) error {
+			if err != nil {
+				return err
+			}
+			if d.IsDir() {
+				return nil
+			}
+			if !isEncryptedFile(path) {
+				return nil
+			}
+			base := filepath.Base(path)
+			plainBase := strings.Replace(base, ".enc.", ".", 1)
+			plainPath := filepath.Join(filepath.Dir(path), plainBase)
+			shouldEncrypt, err := isEncryptNeeded(plainPath, path)
+			if err != nil {
+				return err
+			}
+			if !shouldEncrypt {
+				return nil
+			}
+			g.Go(createRunSopsEncrypt(plainPath, path))
+			return nil
+		})
+		if err != nil {
+			return err
+		}
+		return g.Wait()
 	},
-}
-
-// SopsUpdater walks a directory and encrypts files with `sops` as needed.
-type SopsUpdater struct {
-	Dir string
-}
-
-// Update scans for outdated `.enc.` files and runs encryption concurrently.
-func (su *SopsUpdater) Update() error {
-	if su.Dir == "" {
-		return fmt.Errorf("dir is required")
-	}
-	g := new(errgroup.Group)
-	err := utils.WalkDirWithGitignore(su.Dir, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-		if d.IsDir() {
-			return nil
-		}
-		if !isEncryptedFile(path) {
-			return nil
-		}
-		base := filepath.Base(path)
-		plainBase := strings.Replace(base, ".enc.", ".", 1)
-		plainPath := filepath.Join(filepath.Dir(path), plainBase)
-		shouldEncrypt, err := isEncryptNeeded(plainPath, path)
-		if err != nil {
-			return err
-		}
-		if !shouldEncrypt {
-			return nil
-		}
-		g.Go(createRunSopsEncrypt(plainPath, path))
-		return nil
-	})
-	if err != nil {
-		return err
-	}
-	return g.Wait()
 }
 
 // createRunSopsEncrypt creates a task to encrypt one file pair.
