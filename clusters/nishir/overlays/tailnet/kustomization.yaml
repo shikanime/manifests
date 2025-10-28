@@ -11,7 +11,7 @@ resources:
   - ../../../../apps/prowlarr/overlays/tailnet
   - ../../../../apps/qbittorrent/overlays/tailnet
   - ../../../../apps/radarr/overlays/tailnet
-  # - ../../../../apps/rclone/overlays/tailnet
+  - ../../../../apps/rclone/overlays/tailnet
   - ../../../../apps/sonarr/overlays/tailnet
   - ../../../../apps/syncthing/overlays/tailnet
   - ../../../../apps/vaultwarden/overlays/tailnet
