@@ -23,7 +23,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 128Gi
+      storage: 512Gi
   storageClassName: nishir-ephemeral
   volumeMode: Filesystem
   volumeName: movies-data
