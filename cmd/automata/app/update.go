@@ -23,10 +23,10 @@ var UpdateCmd = &cobra.Command{
 
 		g := new(errgroup.Group)
 		g.Go(func() error {
-			return UpdateKustomizationCmd.RunE(UpdateKustomizationCmd, []string{root})
+			return runUpdateKustomization(root)
 		})
 		g.Go(func() error {
-			return UpdateSopsCmd.RunE(UpdateSopsCmd, []string{root})
+			return runUpdateSops(root)
 		})
 		return g.Wait()
 	},

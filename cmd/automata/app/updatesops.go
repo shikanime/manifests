@@ -23,40 +23,44 @@ var UpdateSopsCmd = &cobra.Command{
 		if len(args) > 0 && strings.TrimSpace(args[0]) != "" {
 			root = args[0]
 		}
-
-		g := new(errgroup.Group)
-		err := utils.WalkDirWithGitignore(root, func(path string, d fs.DirEntry, err error) error {
-			if err != nil {
-				return err
-			}
-			if d.IsDir() {
-				return nil
-			}
-			if !isEncryptedFile(path) {
-				return nil
-			}
-			base := filepath.Base(path)
-			plainBase := strings.Replace(base, ".enc.", ".", 1)
-			plainPath := filepath.Join(filepath.Dir(path), plainBase)
-			shouldEncrypt, err := isEncryptNeeded(plainPath, path)
-			if err != nil {
-				return err
-			}
-			if !shouldEncrypt {
-				return nil
-			}
-			g.Go(createRunSopsEncrypt(plainPath, path))
-			return nil
-		})
-		if err != nil {
-			return err
-		}
-		return g.Wait()
+		return runUpdateSops(root)
 	},
 }
 
-// createRunSopsEncrypt creates a task to encrypt one file pair.
-func createRunSopsEncrypt(plainPath, encPath string) func() error {
+// runUpdateSops executes sops encryption updates across the directory tree.
+func runUpdateSops(root string) error {
+	g := new(errgroup.Group)
+	err := utils.WalkDirWithGitignore(root, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if d.IsDir() {
+			return nil
+		}
+		if !isEncryptedFile(path) {
+			return nil
+		}
+		base := filepath.Base(path)
+		plainBase := strings.Replace(base, ".enc.", ".", 1)
+		plainPath := filepath.Join(filepath.Dir(path), plainBase)
+		shouldEncrypt, err := isEncryptNeeded(plainPath, path)
+		if err != nil {
+			return err
+		}
+		if !shouldEncrypt {
+			return nil
+		}
+		g.Go(createSopsEncryptJob(plainPath, path))
+		return nil
+	})
+	if err != nil {
+		return err
+	}
+	return g.Wait()
+}
+
+// createSopsEncryptJob creates a task to encrypt one file pair.
+func createSopsEncryptJob(plainPath, encPath string) func() error {
 	return func() error {
 		if err := runSopsEncrypt(plainPath, encPath); err != nil {
 			return fmt.Errorf("sops encrypt %s -> %s: %w", plainPath, encPath, err)

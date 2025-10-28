@@ -18,9 +18,6 @@ import (
 // UpdateKustomizationCmd updates kustomize image tags across a directory tree.
 // It scans for kustomization.yaml files and updates image tags based on
 // the images annotation configuration and chosen registry strategy.
-// UpdateKustomizationCmd updates kustomize image tags across a directory tree.
-// It scans for kustomization.yaml files and updates image tags based on
-// the images annotation configuration and chosen registry strategy.
 var UpdateKustomizationCmd = &cobra.Command{
 	Use:   "kustomization [DIR]",
 	Short: "Update kustomize image tags",
@@ -29,43 +26,41 @@ var UpdateKustomizationCmd = &cobra.Command{
 		if len(args) > 0 && strings.TrimSpace(args[0]) != "" {
 			root = args[0]
 		}
-
-		g := new(errgroup.Group)
-		if err := utils.WalkDirWithGitignore(root, func(path string, d fs.DirEntry, err error) error {
-			if err != nil {
-				return err
-			}
-			if d.IsDir() {
-				return nil
-			}
-			if !isKustomizationFile(path) {
-				return nil
-			}
-			g.Go(createRunUpdateKustomization(filepath.Dir(path)))
-			return nil
-		}); err != nil {
-			return err
-		}
-		return g.Wait()
+		return runUpdateKustomization(root)
 	},
 }
 
-// createRunUpdateKustomization returns a task function that updates image tags
+// runUpdateKustomization executes the kustomization update across the directory tree.
+func runUpdateKustomization(root string) error {
+	g := new(errgroup.Group)
+	if err := utils.WalkDirWithGitignore(root, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if d.IsDir() {
+			return nil
+		}
+		if !isKustomizationFile(path) {
+			return nil
+		}
+		g.Go(createUpdateKustomizationJob(filepath.Dir(path)))
+		return nil
+	}); err != nil {
+		return err
+	}
+	return g.Wait()
+}
+
+// createUpdateKustomizationJob returns a task function that updates image tags
 // for a specific kustomization directory, suitable for use with errgroup.
-func createRunUpdateKustomization(path string) func() error {
+func createUpdateKustomizationJob(path string) func() error {
 	return func() error {
-		if err := updateKustomization(path); err != nil {
+		if err := createUpdateKustomizationPipeline(path).Execute(); err != nil {
 			slog.Warn("skip kustomization update", "dir", path, "err", err)
 			return err
 		}
 		return nil
 	}
-}
-
-// updateKustomization updates tags and recommended labels for images
-// defined in the kustomization.yaml at the given directory.
-func updateKustomization(d string) error {
-	return createUpdateKustomizationPipeline(d).Execute()
 }
 
 // createUpdateKustomizationPipeline creates a kustomize pipeline to update image tags
