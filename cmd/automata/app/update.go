@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"golang.org/x/sync/errgroup"
 )
 
 var all bool
@@ -20,13 +21,14 @@ var UpdateCmd = &cobra.Command{
 			root = args[0]
 		}
 
-		if err := UpdateKustomizationCmd.RunE(UpdateKustomizationCmd, []string{root}); err != nil {
-			return err
-		}
-		if err := UpdateSopsCmd.RunE(UpdateSopsCmd, []string{root}); err != nil {
-			return err
-		}
-		return nil
+		g := new(errgroup.Group)
+		g.Go(func() error {
+			return UpdateKustomizationCmd.RunE(UpdateKustomizationCmd, []string{root})
+		})
+		g.Go(func() error {
+			return UpdateSopsCmd.RunE(UpdateSopsCmd, []string{root})
+		})
+		return g.Wait()
 	},
 }
 
