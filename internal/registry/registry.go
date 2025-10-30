@@ -4,29 +4,27 @@ import (
 	"fmt"
 	"log/slog"
 	"regexp"
-	"sort"
 
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/shikanime/manifests/internal/utils"
-	"golang.org/x/mod/semver"
 )
 
 // ListTags fetches tags for the given image (auth keychain, fallback anonymous).
-func ListTags(image string) ([]string, error) {
+func ListTags(imageRef *ImageRef) ([]string, error) {
 	// Try with keychain, then fallback to anonymous; forward any provided crane options.
 	tags, err := crane.ListTags(
-		image,
+		imageRef.String(),
 		crane.WithAuthFromKeychain(authn.DefaultKeychain),
 	)
 	if err != nil {
-		slog.Debug("list tags with keychain failed, falling back to anonymous", "image", image, "err", err)
+		slog.Debug("list tags with keychain failed, falling back to anonymous", "image", imageRef.String(), "err", err)
 		tags, err = crane.ListTags(
-			image,
+			imageRef.Name,
 			crane.WithAuth(authn.Anonymous),
 		)
 		if err != nil {
-			slog.Error("list tags failed", "image", image, "err", err)
+			slog.Error("list tags failed", "image", imageRef.String(), "err", err)
 			return nil, err
 		}
 	}
@@ -38,10 +36,10 @@ func ListTags(image string) ([]string, error) {
 type FindLatestOption func(*findLatestOptions)
 
 type findLatestOptions struct {
-	exclude        map[string]struct{}
-	updateStrategy utils.StrategyType
-	transformRegex *regexp.Regexp
-	baseline       string
+	exclude           map[string]struct{}
+	updateStrategy    utils.StrategyType
+	transformRegex    *regexp.Regexp
+	includePreRelease bool
 }
 
 // WithExclude sets the exclusion list for tags. Any tag present in the map
@@ -68,93 +66,98 @@ func WithTransform(re *regexp.Regexp) FindLatestOption {
 	}
 }
 
-// WithBaseline sets the baseline version for update strategy comparisons.
-// Only tags greater than this baseline are considered.
-func WithBaseline(version string) FindLatestOption {
+// WithPreRelease enables inclusion of prerelease and build metadata tags
+// in the tag selection process.
+func WithPreRelease(include bool) FindLatestOption {
 	return func(o *findLatestOptions) {
-		o.baseline = version
+		o.includePreRelease = include
 	}
 }
 
-// helper to fetch latest tag; applies transform (regex), sorts tags by semver (desc),
-// applies update strategy relative to the optional baseline from WithCurrentVersion,
-// then returns the first non-excluded tag.
-// FindLatestTag returns the latest suitable tag after applying the optional
-// transform, exclusions, baseline, and update strategy.
-// Tags are normalized to canonical semver for comparison and sorted descending.
-// Returns an error when no suitable tag is found.
-func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
-	o := &findLatestOptions{updateStrategy: utils.FullUpdate, baseline: "v0.1.0"}
+// FindLatestTag returns the latest tag for the given image based on the provided options.
+func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error) {
+	o := &findLatestOptions{updateStrategy: utils.FullUpdate}
 	for _, opt := range opts {
 		opt(o)
 	}
 
-	type candidate struct {
-		tag string
-		sem string
+	// Baseline from the current action version
+	baselineSem, err := utils.ParseSemver(imageRef.Tag)
+	if err != nil {
+		return "", fmt.Errorf("invalid baseline %q: %w", imageRef.Tag, err)
 	}
 
-	// Build candidates; skip any non-valid semver
-	validTags := make([]candidate, 0, len(tags))
+	// Determine baseline according to update strategy
+	var baseline string
+	switch o.updateStrategy {
+	case utils.FullUpdate:
+		baseline = baselineSem
+	case utils.MinorUpdate:
+		baseline = utils.Major(baselineSem)
+	case utils.PatchUpdate:
+		baseline = utils.MajorMinor(baselineSem)
+	default:
+		baseline = baselineSem
+	}
+
+	tags, err := ListTags(imageRef)
+	if err != nil {
+		return "", fmt.Errorf("list tags: %w", err)
+	}
+
+	bestTag := ""
 	for _, t := range tags {
+		// Skip any non-valid semver
 		var sem string
 		if o.transformRegex != nil {
-			v, err := utils.ParseSemver(o.transformRegex, t)
+			sem, err = utils.ParseSemverWithRegex(o.transformRegex, t)
 			if err != nil {
 				slog.Debug("non-semver tag ignored", "tag", t, "err", err)
 				continue
 			}
-			sem = v
 		} else {
-			sem = semver.Canonical(t)
-			if !semver.IsValid(sem) {
-				slog.Debug("non-semver tag ignored", "tag", t, "sem", sem)
+			sem, err = utils.ParseSemver(t)
+			if err != nil {
+				slog.Debug("non-semver tag ignored", "tag", t, "err", err)
 				continue
 			}
 		}
-		validTags = append(validTags, candidate{tag: t, sem: sem})
-	}
 
-	// Apply exclusion filter
-	tagsWithExclude := make([]candidate, 0, len(validTags))
-	for _, c := range validTags {
-		if _, ok := o.exclude[c.tag]; !ok {
-			tagsWithExclude = append(tagsWithExclude, c)
+		// Prerelease tags are skipped if not explicitly included
+		if !o.includePreRelease {
+			if utils.PreRelease(sem) != "" {
+				slog.Debug("prerelease tag ignored", "tag", t, "sem", sem)
+				continue
+			}
 		}
-	}
 
-	// Apply update strategy filtering when baseline is set via WithCurrentVersion
-	tagsWithBaseline := make([]candidate, 0, len(tagsWithExclude))
-	for _, c := range tagsWithExclude {
-		if semver.Compare(c.sem, o.baseline) <= 0 {
+		// Apply exclusion filter
+		if _, ok := o.exclude[t]; ok {
+			slog.Debug("tag excluded by exclude filter", "tag", t, "sem", sem)
+			continue
+		}
+
+		// Apply update strategy filtering when baseline is set via WithCurrentVersion
+		if utils.Compare(sem, baseline) <= 0 {
 			continue
 		}
 		switch o.updateStrategy {
 		case utils.MinorUpdate:
-			if semver.Major(c.sem) == semver.Major(o.baseline) {
-				tagsWithBaseline = append(tagsWithBaseline, c)
+			if utils.Major(sem) == baseline {
+				bestTag = t
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", o.baseline)
+				slog.Debug("tag excluded by update strategy", "tag", t, "sem", sem, "baseline", baseline)
 			}
 		case utils.PatchUpdate:
-			if semver.MajorMinor(c.sem) == semver.MajorMinor(o.baseline) {
-				tagsWithBaseline = append(tagsWithBaseline, c)
+			if utils.MajorMinor(sem) == baseline {
+				bestTag = t
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", o.baseline)
+				slog.Debug("tag excluded by update strategy", "tag", t, "sem", sem, "baseline", baseline)
 			}
 		default:
-			tagsWithBaseline = append(tagsWithBaseline, c)
+			bestTag = t
 		}
 	}
 
-	// Sort descending by semver
-	sort.Slice(tagsWithBaseline, func(i, j int) bool {
-		return semver.Compare(tagsWithBaseline[i].sem, tagsWithBaseline[j].sem) > 0
-	})
-
-	// Return the first non-excluded tag after all filtering
-	if len(tagsWithBaseline) > 0 {
-		return tagsWithBaseline[0].tag, nil
-	}
-	return "", fmt.Errorf("no suitable tag found")
+	return bestTag, nil
 }

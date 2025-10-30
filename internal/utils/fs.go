@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 )
 
-func isGitIgnored(path, repoDir string) bool {
+func IsGitIgnored(root, path string) bool {
 	cmd := exec.Command("git", "check-ignore", "-q", "--", path)
-	cmd.Dir = repoDir
+	cmd.Dir = root
 	if err := cmd.Run(); err == nil {
 		return true
 	}
@@ -22,7 +22,7 @@ func WalkDirWithGitignore(root string, fn fs.WalkDirFunc) error {
 		if err != nil {
 			return err
 		}
-		if isGitIgnored(path, root) {
+		if IsGitIgnored(root, path) {
 			if d.IsDir() {
 				return fs.SkipDir
 			}
