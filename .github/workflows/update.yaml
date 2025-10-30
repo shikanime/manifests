@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: createGithubAppToken
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v2.1.4
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
@@ -20,7 +20,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v20
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v1
+      - uses: DeterminateSystems/magic-nix-cache-action@v13
       - run: |
           nix flake update
           nix run nixpkgs#sapling -- config \

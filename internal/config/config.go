@@ -21,3 +21,9 @@ func GetLogLevel() slog.Level {
 		return slog.LevelInfo
 	}
 }
+
+// GetGithubToken returns the GitHub personal access token from GITHUB_TOKEN.
+// It returns an empty string if the variable is not set.
+func GetGithubToken() string {
+	return os.Getenv("GITHUB_TOKEN")
+}
