@@ -132,7 +132,7 @@ func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error)
 		}
 
 		// Apply exclusion filter
-		if _, ok := o.exclude[t]; !ok {
+		if _, ok := o.exclude[t]; ok {
 			slog.Debug("tag excluded by exclude filter", "tag", t, "sem", sem)
 			continue
 		}
