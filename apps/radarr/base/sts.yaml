@@ -25,6 +25,25 @@ spec:
                         - media-server
                 topologyKey: kubernetes.io/hostname
               weight: 100
+      initContainers:
+        - name: rsync
+          image: rclone
+          command:
+            - rclone
+            - copy
+            - --update
+            - /mnt/bootstrap-config
+            - /mnt/config
+          volumeMounts:
+            - name: config
+              mountPath: /data/config
+            - name: bootstrap-config
+              mountPath: /data/bootstrap-config
+              readOnly: true
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: radarr
           image: radarr
@@ -59,6 +78,12 @@ spec:
       securityContext:
         fsGroup: 1000
       volumes:
+        - name: rclone-config
+          configMap:
+            name: radarr-rclone
         - name: config
           persistentVolumeClaim:
-            claimName: radarr-config
+            claimName: lidarr-config
+        - name: bootstrap-config
+          secret:
+            secretName: radarr
