@@ -9,7 +9,7 @@ configMapGenerator:
     name: lidarr-rclone
 images:
   - name: rclone
-    newname: docker.io/rclone/rclone
+    newName: docker.io/rclone/rclone
     newTag: 1.71.2
   - name: lidarr
     newName: lscr.io/linuxserver/lidarr
