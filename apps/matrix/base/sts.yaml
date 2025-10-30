@@ -187,8 +187,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: rsync
-          image: config-sync
+        - name: config-sync
+          image: rclone
           command:
             - rclone
           args:
@@ -275,8 +275,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: rsync
-          image: config-sync
+        - name: config-sync
+          image: rclone
           command:
             - rclone
           args:
@@ -363,8 +363,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: rsync
-          image: config-sync
+        - name: config-sync
+          image: rclone
           command:
             - rclone
           args:
@@ -451,8 +451,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: rsync
-          image: config-sync
+        - name: config-sync
+          image: rclone
           command:
             - rclone
           args:
@@ -539,8 +539,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: rsync
-          image: config-sync
+        - name: config-sync
+          image: rclone
           command:
             - rclone
           args:
@@ -627,8 +627,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: rsync
-          image: config-sync
+        - name: config-sync
+          image: rclone
           command:
             - rclone
           args:
