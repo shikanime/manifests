@@ -11,4 +11,4 @@ secretGenerator:
     name: lidarr-pkcs12-password
   - files:
       - lidarr/config.xml
-    name: lidarr-pre-config
+    name: lidarr

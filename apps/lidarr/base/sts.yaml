@@ -35,15 +35,15 @@ spec:
             - /mnt/pre-config
             - /mnt/config
           volumeMounts:
+            - name: config
+              mountPath: /data/config
+            - name: pre-config
+              mountPath: /data/pre-config
+              readOnly: true
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
-            - name: pre-config
-              mountPath: /data/pre-config
-              readOnly: true
-            - name: config
-              mountPath: /data/config
       containers:
         - name: lidarr
           image: lidarr
@@ -86,4 +86,4 @@ spec:
             claimName: lidarr-config
         - name: pre-config
           configMap:
-            name: lidarr-pre-config
+            name: lidarr
