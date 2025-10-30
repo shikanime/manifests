@@ -13,7 +13,16 @@ type ImageRef struct {
 }
 
 func (i ImageRef) String() string {
-	return fmt.Sprintf("%s:%s", i.Name, i.Tag)
+	if i.Digest != "" {
+		if i.Tag != "" {
+			return fmt.Sprintf("%s:%s@%s", i.Name, i.Tag, i.Digest)
+		}
+		return fmt.Sprintf("%s@%s", i.Name, i.Digest)
+	}
+	if i.Tag != "" {
+		return fmt.Sprintf("%s:%s", i.Name, i.Tag)
+	}
+	return i.Name
 }
 
 // ParseImageRef parses a Docker-style image reference string into ImageRef.
