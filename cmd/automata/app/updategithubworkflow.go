@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/shikanime/manifests/internal/config"
+	"github.com/shikanime/manifests/internal/utils"
 	"github.com/shikanime/manifests/internal/vsc"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
@@ -51,12 +52,7 @@ func runGitHubUpdateWorkflow(ctx context.Context, client *vsc.GitHubClient, root
 		if e.IsDir() {
 			continue
 		}
-		name := e.Name()
-		if !strings.HasSuffix(name, ".yml") && !strings.HasSuffix(name, ".yaml") {
-			continue
-		}
-		path := filepath.Join(workflowsDir, name)
-		g.Go(createUpdateGitHubWorkflowJob(ctx, client, path))
+		g.Go(createUpdateGitHubWorkflowJob(ctx, client, filepath.Join(workflowsDir, e.Name())))
 	}
 	return g.Wait()
 }
@@ -76,6 +72,9 @@ func createUpdateGitHubWorkflowPipeline(ctx context.Context, client *vsc.GitHubC
 		Inputs: []kio.Reader{
 			kio.LocalPackageReader{
 				PackagePath: path,
+				FileSkipFunc: func(relPath string) bool {
+					return utils.IsGitIgnored(path, relPath)
+				},
 			},
 		},
 		Filters: []kio.Filter{
