@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log/slog"
 	"regexp"
-	"sort"
 
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/crane"
@@ -82,25 +81,33 @@ func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error)
 		opt(o)
 	}
 
-	tags, err := ListTags(imageRef)
-	if err != nil {
-		return "", fmt.Errorf("list tags: %w", err)
-	}
-
+	// Baseline from the current action version
 	baselineSem, err := utils.ParseSemver(imageRef.Tag)
 	if err != nil {
 		return "", fmt.Errorf("invalid baseline %q: %w", imageRef.Tag, err)
 	}
 
-	type candidate struct {
-		tag string
-		sem string
+	// Determine baseline according to update strategy
+	var baseline string
+	switch o.updateStrategy {
+	case utils.FullUpdate:
+		baseline = baselineSem
+	case utils.MinorUpdate:
+		baseline = utils.Major(baselineSem)
+	case utils.PatchUpdate:
+		baseline = utils.MajorMinor(baselineSem)
+	default:
+		baseline = baselineSem
 	}
 
-	// Build candidates; skip any non-valid semver
-	validTags := make([]candidate, 0, len(tags))
+	tags, err := ListTags(imageRef)
+	if err != nil {
+		return "", fmt.Errorf("list tags: %w", err)
+	}
+
+	bestTag := ""
 	for _, t := range tags {
-		// Parse semver; skip any non-valid semver
+		// Skip any non-valid semver
 		var sem string
 		if o.transformRegex != nil {
 			sem, err = utils.ParseSemverWithRegex(o.transformRegex, t)
@@ -130,53 +137,27 @@ func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error)
 			continue
 		}
 
-		validTags = append(validTags, candidate{tag: t, sem: sem})
-	}
-
-	var baseline string
-	switch o.updateStrategy {
-	case utils.FullUpdate:
-		baseline = baselineSem
-	case utils.MinorUpdate:
-		baseline = utils.Major(baselineSem)
-	case utils.PatchUpdate:
-		baseline = utils.MajorMinor(baselineSem)
-	default:
-		baseline = baselineSem
-	}
-
-	// Apply update strategy filtering when baseline is set via WithCurrentVersion
-	tagsWithUpdateStrategy := make([]candidate, 0, len(validTags))
-	for _, c := range validTags {
-		if utils.Compare(c.sem, baseline) <= 0 {
+		// Apply update strategy filtering when baseline is set via WithCurrentVersion
+		if utils.Compare(sem, baseline) <= 0 {
 			continue
 		}
 		switch o.updateStrategy {
 		case utils.MinorUpdate:
-			if utils.Major(c.sem) == baseline {
-				tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
+			if utils.Major(sem) == baseline {
+				bestTag = t
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baseline)
+				slog.Debug("tag excluded by update strategy", "tag", t, "sem", sem, "baseline", baseline)
 			}
 		case utils.PatchUpdate:
-			if utils.MajorMinor(c.sem) == baseline {
-				tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
+			if utils.MajorMinor(sem) == baseline {
+				bestTag = t
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baseline)
+				slog.Debug("tag excluded by update strategy", "tag", t, "sem", sem, "baseline", baseline)
 			}
 		default:
-			tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
+			bestTag = t
 		}
 	}
 
-	// Sort descending by semver
-	sort.Slice(tagsWithUpdateStrategy, func(i, j int) bool {
-		return utils.Compare(tagsWithUpdateStrategy[i].sem, tagsWithUpdateStrategy[j].sem) > 0
-	})
-
-	// Return the first non-excluded tag after all filtering
-	if len(tagsWithUpdateStrategy) > 0 {
-		return tagsWithUpdateStrategy[0].tag, nil
-	}
-	return "", fmt.Errorf("no suitable tag found")
+	return bestTag, nil
 }
