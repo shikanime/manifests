@@ -3,6 +3,7 @@ package app
 import (
 	"strings"
 
+	"github.com/shikanime/manifests/internal/config"
 	"github.com/shikanime/manifests/internal/vsc"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
@@ -30,8 +31,14 @@ var UpdateCmd = &cobra.Command{
 			return runUpdateSops(root)
 		})
 		g.Go(func() error {
-
-			return runGitHubUpdateWorkflow(cmd.Context(), vsc.NewGitHubClient(), root)
+			options := []vsc.GitHubClientOption{
+				vsc.WithAuthToken(config.GetGithubToken()),
+			}
+			token := config.GetGithubToken()
+			if token != "" {
+				options = append(options, vsc.WithAuthToken(token))
+			}
+			return runGitHubUpdateWorkflow(cmd.Context(), vsc.NewGitHubClient(options...), root)
 		})
 		return g.Wait()
 	},
