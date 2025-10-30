@@ -3,6 +3,10 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - literals:
+      - rclone.conf=""
+    name: matrix-rclone
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
