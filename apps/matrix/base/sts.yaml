@@ -45,26 +45,32 @@ spec:
               # Copy registration to synapse appservices
               rclone copyto \
                 --copy-links \
+                --update \
                 /mnt/mautrix-discord-config/registration.yaml \
                 /mnt/data/appservices/mautrix-discord.yaml
               rclone copyto \
                 --copy-links \
+                --update \
                 /mnt/mautrix-googlechat-config/registration.yaml \
                 /mnt/data/appservices/mautrix-googlechat.yaml
               rclone copyto \
                 --copy-links \
+                --update \
                 /mnt/mautrix-meta-config/registration.yaml \
                 /mnt/data/appservices/mautrix-meta.yaml
               rclone copyto \
                 --copy-links \
+                --update \
                 /mnt/mautrix-signal-config/registration.yaml \
                 /mnt/data/appservices/mautrix-signal.yaml
               rclone copyto \
                 --copy-links \
+                --update \
                 /mnt/mautrix-slack-config/registration.yaml \
                 /mnt/data/appservices/mautrix-slack.yaml
               rclone copyto \
                 --copy-links \
+                --update \
                 /mnt/mautrix-whatsapp-config/registration.yaml \
                 /mnt/data/appservices/mautrix-whatsapp.yaml
           volumeMounts:
