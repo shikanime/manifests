@@ -5,3 +5,5 @@ secretGenerator:
       - oauth-client/.env
     name: oauth-client
     namespace: tailscale-system
+    options:
+      disableNameSuffixHash: true

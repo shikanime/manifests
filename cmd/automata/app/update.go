@@ -40,6 +40,10 @@ var UpdateCmd = &cobra.Command{
 			}
 			return runGitHubUpdateWorkflow(cmd.Context(), vsc.NewGitHubClient(options...), root)
 		})
+		// Add update script runner
+		g.Go(func() error {
+			return runUpdateScript(root)
+		})
 		return g.Wait()
 	},
 }
@@ -49,4 +53,5 @@ func init() {
 	UpdateCmd.AddCommand(UpdateKustomizationCmd)
 	UpdateCmd.AddCommand(UpdateSopsCmd)
 	UpdateCmd.AddCommand(UpdateGitHubWorkflowCmd)
+	UpdateCmd.AddCommand(UpdateScriptCmd)
 }
