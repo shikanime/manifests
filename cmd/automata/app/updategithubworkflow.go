@@ -138,14 +138,13 @@ func processJob(ctx context.Context, client *vsc.GitHubClient, jobsNode *yaml.RN
 		slog.Warn("failed to get steps", "job", jobName, "error", err)
 		return fmt.Errorf("get steps: %w", err)
 	}
-
-	// Process steps sequentially to avoid YAML data races
+	wg := new(errgroup.Group)
 	for idx, step := range stepElems {
-		if err := processStep(ctx, client, step, jobName, idx); err != nil {
-			slog.Warn("step processing error", "job", jobName, "step_index", idx, "error", err)
-		}
+		wg.Go(func() error {
+			return processStep(ctx, client, step, jobName, idx)
+		})
 	}
-	return nil
+	return wg.Wait()
 }
 
 func processStep(ctx context.Context, client *vsc.GitHubClient, step *yaml.RNode, jobName string, idx int) error {

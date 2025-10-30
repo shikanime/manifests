@@ -5,50 +5,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-go run "$(dirname "$0")"/cmd/automata update --all "$(dirname "$0")"
-
-for app_dir in "$(dirname "$0")"/apps/* "$(dirname "$0")"/clusters/*; do
-  # Update base directory
-  if [ -f "$app_dir/base/update.sh" ]; then
-    bash "$app_dir/base/update.sh" 2>&1 |
-      sed 's/^/['"$(basename "$app_dir")"'] /' &
-  fi
-
-  # Update component directories
-  for component_dir in "$app_dir"/components/*; do
-    if [ -f "$component_dir/update.sh" ]; then
-      bash "$component_dir/update.sh" 2>&1 |
-        sed 's/^/['"$(basename "$app_dir")"'\/'"$(basename "$component_dir")"'] /' &
-    fi
-  done
-
-  # Update overlay directories
-  for overlay_dir in "$app_dir"/overlays/*; do
-    if [ -f "$overlay_dir/update.sh" ]; then
-      bash "$overlay_dir/update.sh" 2>&1 |
-        sed 's/^/['"$(basename "$app_dir")"'\/'"$(basename "$overlay_dir")"'] /' &
-    fi
-  done
-done
-
-for dir in "$(dirname "$0")"/infra/*; do
-  if [ -f "$dir/update.sh" ]; then
-    bash "$dir/update.sh" 2>&1 |
-      sed 's/^/['"$(basename "$dir")"'] /' &
-  fi
-done
-
-for dir in "$(dirname "$0")"/bootstraps/*; do
-  if [ -f "$dir/update.sh" ]; then
-    bash "$dir/update.sh" 2>&1 |
-      sed 's/^/['"$(basename "$dir")"'] /' &
-  fi
-done
-
-# Update workflows
-bash "$(dirname "$0")"/.github/workflows/update.sh 2>&1 |
-  sed 's/^/['workflows'] /'
-
 # Update Longhorn package
 LATEST_VERSION=$(
   curl --silent \
