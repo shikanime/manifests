@@ -32,6 +32,7 @@ spec:
             - rclone
           args:
             - copy
+            - --copy-links
             - --update
             - /mnt/startup-config
             - /mnt/config
