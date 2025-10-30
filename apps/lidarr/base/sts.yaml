@@ -27,7 +27,7 @@ spec:
               weight: 100
       initContainers:
         - name: rsync
-          image: config-sync
+          image: rclone
           command:
             - rclone
           args:
