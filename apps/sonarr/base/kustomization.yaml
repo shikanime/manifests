@@ -3,6 +3,10 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "sonarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - literals:
+      - rclone.conf=""
+    name: sonarr-rclone
 images:
   - name: sonarr
     newName: lscr.io/linuxserver/sonarr

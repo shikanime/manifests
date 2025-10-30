@@ -3,6 +3,10 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "radarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - literals:
+      - rclone.conf=""
+    name: radarr-rclone
 images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr

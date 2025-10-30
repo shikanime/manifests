@@ -9,24 +9,23 @@ import (
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/shikanime/manifests/internal/utils"
-	"golang.org/x/mod/semver"
 )
 
 // ListTags fetches tags for the given image (auth keychain, fallback anonymous).
-func ListTags(image string) ([]string, error) {
+func ListTags(imageRef *ImageRef) ([]string, error) {
 	// Try with keychain, then fallback to anonymous; forward any provided crane options.
 	tags, err := crane.ListTags(
-		image,
+		imageRef.String(),
 		crane.WithAuthFromKeychain(authn.DefaultKeychain),
 	)
 	if err != nil {
-		slog.Debug("list tags with keychain failed, falling back to anonymous", "image", image, "err", err)
+		slog.Debug("list tags with keychain failed, falling back to anonymous", "image", imageRef.String(), "err", err)
 		tags, err = crane.ListTags(
-			image,
+			imageRef.String(),
 			crane.WithAuth(authn.Anonymous),
 		)
 		if err != nil {
-			slog.Error("list tags failed", "image", image, "err", err)
+			slog.Error("list tags failed", "image", imageRef.String(), "err", err)
 			return nil, err
 		}
 	}
@@ -41,7 +40,6 @@ type findLatestOptions struct {
 	exclude        map[string]struct{}
 	updateStrategy utils.StrategyType
 	transformRegex *regexp.Regexp
-	baseline       string
 }
 
 // WithExclude sets the exclusion list for tags. Any tag present in the map
@@ -68,25 +66,21 @@ func WithTransform(re *regexp.Regexp) FindLatestOption {
 	}
 }
 
-// WithBaseline sets the baseline version for update strategy comparisons.
-// Only tags greater than this baseline are considered.
-func WithBaseline(version string) FindLatestOption {
-	return func(o *findLatestOptions) {
-		o.baseline = version
-	}
-}
-
-// helper to fetch latest tag; applies transform (regex), sorts tags by semver (desc),
-// applies update strategy relative to the optional baseline from WithCurrentVersion,
-// then returns the first non-excluded tag.
-// FindLatestTag returns the latest suitable tag after applying the optional
-// transform, exclusions, baseline, and update strategy.
-// Tags are normalized to canonical semver for comparison and sorted descending.
-// Returns an error when no suitable tag is found.
-func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
-	o := &findLatestOptions{updateStrategy: utils.FullUpdate, baseline: "v0.1.0"}
+// FindLatestTag returns the latest tag for the given image based on the provided options.
+func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error) {
+	o := &findLatestOptions{updateStrategy: utils.FullUpdate}
 	for _, opt := range opts {
 		opt(o)
+	}
+
+	tags, err := ListTags(imageRef)
+	if err != nil {
+		return "", fmt.Errorf("list tags: %w", err)
+	}
+
+	baselineSem, err := utils.ParseSemver(imageRef.Tag)
+	if err != nil {
+		return "", fmt.Errorf("invalid baseline %q: %w", imageRef.Tag, err)
 	}
 
 	type candidate struct {
@@ -99,18 +93,19 @@ func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 	for _, t := range tags {
 		var sem string
 		if o.transformRegex != nil {
-			v, err := utils.ParseSemver(o.transformRegex, t)
+			v, err := utils.ParseSemverWithRegex(o.transformRegex, t)
 			if err != nil {
 				slog.Debug("non-semver tag ignored", "tag", t, "err", err)
 				continue
 			}
 			sem = v
 		} else {
-			sem = semver.Canonical(t)
-			if !semver.IsValid(sem) {
-				slog.Debug("non-semver tag ignored", "tag", t, "sem", sem)
+			v, err := utils.ParseSemver(t)
+			if err != nil {
+				slog.Debug("non-semver tag ignored", "tag", t, "err", err)
 				continue
 			}
+			sem = v
 		}
 		validTags = append(validTags, candidate{tag: t, sem: sem})
 	}
@@ -126,21 +121,41 @@ func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 	// Apply update strategy filtering when baseline is set via WithCurrentVersion
 	tagsWithBaseline := make([]candidate, 0, len(tagsWithExclude))
 	for _, c := range tagsWithExclude {
-		if semver.Compare(c.sem, o.baseline) <= 0 {
+		if utils.Compare(c.sem, baselineSem) <= 0 {
 			continue
 		}
 		switch o.updateStrategy {
 		case utils.MinorUpdate:
-			if semver.Major(c.sem) == semver.Major(o.baseline) {
+			major, err := utils.Major(c.sem)
+			if err != nil {
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
+				continue
+			}
+			baselineMajor, err := utils.Major(baselineSem)
+			if err != nil {
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
+				continue
+			}
+			if major == baselineMajor {
 				tagsWithBaseline = append(tagsWithBaseline, c)
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", o.baseline)
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem)
 			}
 		case utils.PatchUpdate:
-			if semver.MajorMinor(c.sem) == semver.MajorMinor(o.baseline) {
+			majorMinor, err := utils.MajorMinor(c.sem)
+			if err != nil {
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
+				continue
+			}
+			baselineMajorMinor, err := utils.MajorMinor(baselineSem)
+			if err != nil {
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
+				continue
+			}
+			if majorMinor == baselineMajorMinor {
 				tagsWithBaseline = append(tagsWithBaseline, c)
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", o.baseline)
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem)
 			}
 		default:
 			tagsWithBaseline = append(tagsWithBaseline, c)
@@ -149,7 +164,7 @@ func FindLatestTag(tags []string, opts ...FindLatestOption) (string, error) {
 
 	// Sort descending by semver
 	sort.Slice(tagsWithBaseline, func(i, j int) bool {
-		return semver.Compare(tagsWithBaseline[i].sem, tagsWithBaseline[j].sem) > 0
+		return utils.Compare(tagsWithBaseline[i].sem, tagsWithBaseline[j].sem) > 0
 	})
 
 	// Return the first non-excluded tag after all filtering
