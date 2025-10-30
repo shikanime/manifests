@@ -201,15 +201,15 @@ spec:
             - /mnt/config
             - /mnt/data
           volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
             - name: config
               mountPath: /mnt/config
               readOnly: true
             - name: data
               mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-discord
           image: mautrix-discord
@@ -289,15 +289,15 @@ spec:
             - /mnt/config
             - /mnt/data
           volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
             - name: config
               mountPath: /mnt/config
               readOnly: true
             - name: data
               mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-googlechat
           image: mautrix-googlechat
@@ -377,15 +377,15 @@ spec:
             - /mnt/config
             - /mnt/data
           volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
             - name: config
               mountPath: /mnt/config
               readOnly: true
             - name: data
               mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-meta
           image: mautrix-meta
@@ -465,15 +465,15 @@ spec:
             - /mnt/config
             - /mnt/data
           volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
             - name: config
               mountPath: /mnt/config
               readOnly: true
             - name: data
               mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-signal
           image: mautrix-signal
@@ -553,15 +553,15 @@ spec:
             - /mnt/config
             - /mnt/data
           volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
             - name: config
               mountPath: /mnt/config
               readOnly: true
             - name: data
               mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-slack
           image: mautrix-slack
@@ -641,15 +641,15 @@ spec:
             - /mnt/config
             - /mnt/data
           volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
             - name: config
               mountPath: /mnt/config
               readOnly: true
             - name: data
               mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-whatsapp
           image: mautrix-whatsapp
