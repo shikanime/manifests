@@ -45,22 +45,28 @@ spec:
               # Copy registration to synapse appservices
               rclone copyto \
                 --copy-links \
-                /mnt/mautrix-discord-config/registration.yaml /mnt/data/appservices/mautrix-discord.yaml
+                /mnt/mautrix-discord-config/registration.yaml \
+                /mnt/data/appservices/mautrix-discord.yaml
               rclone copyto \
                 --copy-links \
-                /mnt/mautrix-googlechat-config/registration.yaml /mnt/data/appservices/mautrix-googlechat.yaml
+                /mnt/mautrix-googlechat-config/registration.yaml \
+                /mnt/data/appservices/mautrix-googlechat.yaml
               rclone copyto \
                 --copy-links \
-                /mnt/mautrix-meta-config/registration.yaml /mnt/data/appservices/mautrix-meta.yaml
+                /mnt/mautrix-meta-config/registration.yaml \
+                /mnt/data/appservices/mautrix-meta.yaml
               rclone copyto \
                 --copy-links \
-                /mnt/mautrix-signal-config/registration.yaml /mnt/data/appservices/mautrix-signal.yaml
+                /mnt/mautrix-signal-config/registration.yaml \
+                /mnt/data/appservices/mautrix-signal.yaml
               rclone copyto \
                 --copy-links \
-                /mnt/mautrix-slack-config/registration.yaml /mnt/data/appservices/mautrix-slack.yaml
+                /mnt/mautrix-slack-config/registration.yaml \
+                /mnt/data/appservices/mautrix-slack.yaml
               rclone copyto \
                 --copy-links \
-                /mnt/mautrix-whatsapp-config/registration.yaml /mnt/data/appservices/mautrix-whatsapp.yaml
+                /mnt/mautrix-whatsapp-config/registration.yaml \
+                /mnt/data/appservices/mautrix-whatsapp.yaml
           volumeMounts:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
