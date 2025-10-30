@@ -66,6 +66,9 @@
               gitignore = {
                 enable = true;
                 enableDefaultTemplates = true;
+                content = [
+                  "config.xml"
+                ];
               };
               github.enable = true;
               languages = {
