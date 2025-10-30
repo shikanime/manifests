@@ -6,7 +6,7 @@ metadata:
 images:
   - name: gitea
     newName: docker.io/gitea/gitea
-    newTag: 1.25.0
+    newTag: 1.24.7
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -18,4 +18,4 @@ labels:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/name: gitea
       app.kubernetes.io/part-of: nishir-platform
-      app.kubernetes.io/version: v1.25.0
+      app.kubernetes.io/version: v1.24.7
