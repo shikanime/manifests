@@ -9,3 +9,6 @@ secretGenerator:
   - envs:
       - whisparr/.env
     name: whisparr-pkcs12-password
+  - files:
+      - whisparr/config.xml
+    name: whisparr

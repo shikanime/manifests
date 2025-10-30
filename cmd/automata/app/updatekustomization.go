@@ -140,10 +140,8 @@ func createUpdateImagesFilter() kio.Filter {
 					options = append(options, registry.WithTransform(cfg.TagRegex))
 				}
 
-				// Fetch raw tags
-				tags, err := registry.ListTags(yaml.GetValue(newNameNode))
-				if err != nil {
-					return nil, fmt.Errorf("list tags for %s: %w", name, err)
+				imageRef := registry.ImageRef{
+					Name: yaml.GetValue(newNameNode),
 				}
 
 				// Set base version if current newTag is a valid semver
@@ -154,14 +152,14 @@ func createUpdateImagesFilter() kio.Filter {
 				currentTag := yaml.GetValue(currentTagNode)
 				if currentTag != "" {
 					var version string
-					version, err = utils.ParseSemver(cfg.TagRegex, currentTag)
+					version, err = utils.ParseSemverWithRegex(cfg.TagRegex, currentTag)
 					if err != nil {
 						return nil, fmt.Errorf("parse semver for %s: %w", currentTag, err)
 					}
-					options = append(options, registry.WithBaseline(version))
+					imageRef.Tag = version
 				}
 
-				latest, err := registry.FindLatestTag(tags, options...)
+				latest, err := registry.FindLatestTag(&imageRef, options...)
 				if err != nil {
 					latest = currentTag
 				}
@@ -172,7 +170,7 @@ func createUpdateImagesFilter() kio.Filter {
 				if err = img.PipeE(yaml.SetField("newTag", yaml.NewStringRNode(latest))); err != nil {
 					return nil, fmt.Errorf("set newTag for %s: %w", name, err)
 				}
-				slog.Info("updated image tag", "name", name, "image", name, "tag", latest)
+				slog.Info("updated image tag", "name", name, "image", imageRef.String(), "tag", latest)
 			}
 		}
 		return nodes, nil
@@ -250,7 +248,7 @@ func createUpdateLabelsFilter() kio.Filter {
 
 					var vers string
 					if cfg.TagRegex != nil {
-						vers, err = utils.ParseSemver(cfg.TagRegex, latest)
+						vers, err = utils.ParseSemverWithRegex(cfg.TagRegex, latest)
 						if err != nil {
 							return nil, fmt.Errorf("parse semver for %s: %w", latest, err)
 						}
