@@ -26,8 +26,8 @@ spec:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
       initContainers:
-        - name: rsync
-          image: config-sync
+        - name: config-sync
+          image: rclone
           command:
             - sh
             - -c
