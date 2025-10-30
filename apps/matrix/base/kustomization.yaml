@@ -2,11 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "busybox", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
-  - name: busybox
-    newName: docker.io/library/busybox
-    newTag: 1.37.0
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.71.2
   - name: caddy
     newName: docker.io/library/caddy
     newTag: 2.10.2

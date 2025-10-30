@@ -26,25 +26,23 @@ spec:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
               # Copy synapse config
-              mkdir -p /data
-              cp /config/synapse/homeserver.yaml /data
-              cp /config/synapse/*.log.config /data
+              rclone copy --update /config/synapse/homeserver.yaml /data
+              rclone copy --update /config/synapse/*.log.config /data
 
               # Copy registration to synapse appservices
-              mkdir -p /data/appservices
-              cp /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
-              cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
-              cp /config/mautrix-meta/registration.yaml /data/appservices/mautrix-meta.yaml
-              cp /config/mautrix-signal/registration.yaml /data/appservices/mautrix-signal.yaml
-              cp /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
-              cp /config/mautrix-whatsapp/registration.yaml /data/appservices/mautrix-whatsapp.yaml
+              rclone copy --update /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
+              rclone copy --update /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
+              rclone copy --update /config/mautrix-meta/registration.yaml /data/appservices/mautrix-meta.yaml
+              rclone copy --update /config/mautrix-signal/registration.yaml /data/appservices/mautrix-signal.yaml
+              rclone copy --update /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
+              rclone copy --update /config/mautrix-whatsapp/registration.yaml /data/appservices/mautrix-whatsapp.yaml
           volumeMounts:
             - name: mautrix-discord-config
               mountPath: /config/mautrix-discord
@@ -155,15 +153,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+              rclone copy --update /config/config.yaml /data
+              rclone copy --update /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
@@ -232,15 +229,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+              rclone copy --update /config/config.yaml /data
+              rclone copy --update /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
@@ -309,15 +305,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+              rclone copy --update /config/config.yaml /data
+              rclone copy --update /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
@@ -386,15 +381,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+              rclone copy --update /config/config.yaml /data
+              rclone copy --update /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
@@ -463,15 +457,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+              rclone copy --update /config/config.yaml /data
+              rclone copy --update /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
@@ -540,15 +533,14 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+              rclone copy --update /config/config.yaml /data
+              rclone copy --update /config/registration.yaml /data
           volumeMounts:
             - name: config
               mountPath: /config
