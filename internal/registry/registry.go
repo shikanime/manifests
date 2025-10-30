@@ -124,15 +124,13 @@ func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error)
 			}
 		}
 
-		validTags = append(validTags, candidate{tag: t, sem: sem})
-	}
-
-	// Apply exclusion filter
-	tagsWithExclude := make([]candidate, 0, len(validTags))
-	for _, c := range validTags {
-		if _, ok := o.exclude[c.tag]; !ok {
-			tagsWithExclude = append(tagsWithExclude, c)
+		// Apply exclusion filter
+		if _, ok := o.exclude[t]; !ok {
+			slog.Debug("tag excluded by exclude filter", "tag", t, "sem", sem)
+			continue
 		}
+
+		validTags = append(validTags, candidate{tag: t, sem: sem})
 	}
 
 	var baseline string
@@ -148,8 +146,8 @@ func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error)
 	}
 
 	// Apply update strategy filtering when baseline is set via WithCurrentVersion
-	tagsWithUpdateStrategy := make([]candidate, 0, len(tagsWithExclude))
-	for _, c := range tagsWithExclude {
+	tagsWithUpdateStrategy := make([]candidate, 0, len(validTags))
+	for _, c := range validTags {
 		if utils.Compare(c.sem, baseline) <= 0 {
 			continue
 		}
