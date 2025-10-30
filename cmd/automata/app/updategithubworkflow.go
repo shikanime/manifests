@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/shikanime/manifests/internal/config"
 	"github.com/shikanime/manifests/internal/vsc"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/errgroup"
@@ -23,7 +24,14 @@ var UpdateGitHubWorkflowCmd = &cobra.Command{
 		if len(args) > 0 && strings.TrimSpace(args[0]) != "" {
 			root = args[0]
 		}
-		return runGitHubUpdateWorkflow(cmd.Context(), vsc.NewGitHubClient(), root)
+		options := []vsc.GitHubClientOption{
+			vsc.WithAuthToken(config.GetGithubToken()),
+		}
+		token := config.GetGithubToken()
+		if token != "" {
+			options = append(options, vsc.WithAuthToken(token))
+		}
+		return runGitHubUpdateWorkflow(cmd.Context(), vsc.NewGitHubClient(options...), root)
 	},
 }
 
@@ -167,13 +175,13 @@ func processStep(ctx context.Context, client *vsc.GitHubClient, step *yaml.RNode
 		return nil
 	}
 
-	latest, err := client.FindLatestMajorTag(ctx, actionRef)
+	latest, err := client.FindLatestActionTag(ctx, actionRef)
 	if err != nil {
-		slog.Warn("failed to fetch latest major", "action", actionRef.String(), "error", err)
+		slog.Warn("failed to fetch latest tag with strategy", "action", actionRef.String(), "error", err)
 		return nil
 	}
 	if latest == "" {
-		slog.Info("no major tag found", "action", actionRef.String())
+		slog.Info("no suitable tag found", "action", actionRef.String())
 		return nil
 	}
 
