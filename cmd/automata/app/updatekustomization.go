@@ -45,7 +45,7 @@ func createUpdateKustomizationPipeline(path string) kio.Pipeline {
 			kio.LocalPackageReader{
 				PackagePath: path,
 				FileSkipFunc: func(relPath string) bool {
-					return utils.IsGitIgnored(relPath, path)
+					return utils.IsGitIgnored(path, relPath)
 				},
 				MatchFilesGlob: []string{"kustomization.yaml"},
 			},
