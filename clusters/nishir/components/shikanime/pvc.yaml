@@ -31,6 +31,21 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: music-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: nishir-ephemeral
+  volumeMode: Filesystem
+  volumeName: music-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: shows-data
   namespace: shikanime
 spec:

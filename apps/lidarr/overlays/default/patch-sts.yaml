@@ -10,12 +10,12 @@ spec:
           volumeMounts:
             - name: downloads-data
               mountPath: /downloads
-            - name: data-movies
-              mountPath: /data/movies
+            - name: data-music
+              mountPath: /data/music
       volumes:
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
-        - name: data-movies
+        - name: data-music
           persistentVolumeClaim:
-            claimName: movies-data
+            claimName: music-data
