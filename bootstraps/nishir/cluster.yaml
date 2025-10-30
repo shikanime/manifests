@@ -71,7 +71,7 @@ spec:
                     enabled: true
               - name: descheduler
                 chartname: kubernetes-sigs-descheduler/descheduler
-                version: "0.33.0"
+                version: "0.34.0"
                 namespace: kube-system
                 values: |
                   deschedulerPolicy:
@@ -152,7 +152,7 @@ spec:
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
-                version: "1.88.4"
+                version: "1.90.5"
                 namespace: tailscale-system
                 values: |
                   apiServerProxyConfig:
