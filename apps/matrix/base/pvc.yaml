@@ -85,7 +85,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: synapse-data
+  name: data
 spec:
   accessModes:
     - ReadWriteOnce
@@ -94,4 +94,4 @@ spec:
       storage: 4Gi
   storageClassName: nishir-fast
   volumeMode: Filesystem
-  volumeName: synapse-data
+  volumeName: data

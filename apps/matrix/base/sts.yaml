@@ -26,49 +26,81 @@ spec:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
             - sh
             - -c
             - |
               # Copy synapse config
-              mkdir -p /data
-              cp /config/synapse/homeserver.yaml /data
-              cp /config/synapse/*.log.config /data
+              rclone copy \
+                --copy-links \
+                --include "*.log.config" \
+                --include "*.signing.key" \
+                --include "homeserver.yaml" \
+                --update \
+                /mnt/config \
+                /mnt/data
 
               # Copy registration to synapse appservices
-              mkdir -p /data/appservices
-              cp /config/mautrix-discord/registration.yaml /data/appservices/mautrix-discord.yaml
-              cp /config/mautrix-googlechat/registration.yaml /data/appservices/mautrix-googlechat.yaml
-              cp /config/mautrix-meta/registration.yaml /data/appservices/mautrix-meta.yaml
-              cp /config/mautrix-signal/registration.yaml /data/appservices/mautrix-signal.yaml
-              cp /config/mautrix-slack/registration.yaml /data/appservices/mautrix-slack.yaml
-              cp /config/mautrix-whatsapp/registration.yaml /data/appservices/mautrix-whatsapp.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-discord-config/registration.yaml \
+                /mnt/data/appservices/mautrix-discord.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-googlechat-config/registration.yaml \
+                /mnt/data/appservices/mautrix-googlechat.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-meta-config/registration.yaml \
+                /mnt/data/appservices/mautrix-meta.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-signal-config/registration.yaml \
+                /mnt/data/appservices/mautrix-signal.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-slack-config/registration.yaml \
+                /mnt/data/appservices/mautrix-slack.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-whatsapp-config/registration.yaml \
+                /mnt/data/appservices/mautrix-whatsapp.yaml
           volumeMounts:
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
             - name: mautrix-discord-config
-              mountPath: /config/mautrix-discord
+              mountPath: /mnt/mautrix-discord-config
               readOnly: true
             - name: mautrix-googlechat-config
-              mountPath: /config/mautrix-googlechat
+              mountPath: /mnt/mautrix-googlechat-config
               readOnly: true
             - name: mautrix-meta-config
-              mountPath: /config/mautrix-meta
+              mountPath: /mnt/mautrix-meta-config
               readOnly: true
             - name: mautrix-signal-config
-              mountPath: /config/mautrix-signal
+              mountPath: /mnt/mautrix-signal-config
               readOnly: true
             - name: mautrix-slack-config
-              mountPath: /config/mautrix-slack
+              mountPath: /mnt/mautrix-slack-config
               readOnly: true
             - name: mautrix-whatsapp-config
-              mountPath: /config/mautrix-whatsapp
+              mountPath: /mnt/mautrix-whatsapp-config
               readOnly: true
-            - name: synapse-config
-              mountPath: /config/synapse
+            - name: config
+              mountPath: /mnt/config
               readOnly: true
-            - name: synapse-data
-              mountPath: /data
+            - name: data
+              mountPath: /mnt/data
       containers:
         - name: synapse
           image: synapse
@@ -94,14 +126,11 @@ spec:
             initialDelaySeconds: 5
             failureThreshold: 30
           volumeMounts:
-            - name: synapse-data
+            - name: data
               mountPath: /data
       securityContext:
         fsGroup: 991
       volumes:
-        - name: caddy-config
-          configMap:
-            name: caddy
         - name: mautrix-discord-config
           secret:
             secretName: mautrix-discord
@@ -120,10 +149,13 @@ spec:
         - name: mautrix-whatsapp-config
           secret:
             secretName: mautrix-whatsapp
-        - name: synapse-config
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+        - name: config
           secret:
             secretName: synapse
-        - name: synapse-data
+        - name: data
           persistentVolumeClaim:
             claimName: synapse-data
 ---
@@ -155,21 +187,29 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
-            - sh
-            - -c
-            - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+            - rclone
+          args:
+            - copy
+            - --update
+            - --include
+            - "config.yaml"
+            - --include
+            - "registration.yaml"
+            - /mnt/config
+            - /mnt/data
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /mnt/config
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-discord
           image: mautrix-discord
@@ -203,6 +243,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-discord-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -232,21 +275,29 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
-            - sh
-            - -c
-            - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+            - rclone
+          args:
+            - copy
+            - --update
+            - --include
+            - "config.yaml"
+            - --include
+            - "registration.yaml"
+            - /mnt/config
+            - /mnt/data
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /mnt/config
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-googlechat
           image: mautrix-googlechat
@@ -280,6 +331,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-googlechat-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -309,21 +363,29 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
-            - sh
-            - -c
-            - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+            - rclone
+          args:
+            - copy
+            - --update
+            - --include
+            - "config.yaml"
+            - --include
+            - "registration.yaml"
+            - /mnt/config
+            - /mnt/data
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /mnt/config
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-meta
           image: mautrix-meta
@@ -357,6 +419,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-meta-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -386,21 +451,29 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
-            - sh
-            - -c
-            - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+            - rclone
+          args:
+            - copy
+            - --update
+            - --include
+            - "config.yaml"
+            - --include
+            - "registration.yaml"
+            - /mnt/config
+            - /mnt/data
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /mnt/config
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-signal
           image: mautrix-signal
@@ -434,6 +507,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-signal-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -463,21 +539,29 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
-            - sh
-            - -c
-            - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+            - rclone
+          args:
+            - copy
+            - --update
+            - --include
+            - "config.yaml"
+            - --include
+            - "registration.yaml"
+            - /mnt/config
+            - /mnt/data
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /mnt/config
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-slack
           image: mautrix-slack
@@ -511,6 +595,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-slack-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -540,21 +627,29 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
-        - name: config-copier
-          image: busybox
+        - name: rsync
+          image: rclone
           command:
-            - sh
-            - -c
-            - |
-              mkdir -p /data
-              cp /config/config.yaml /data
-              cp /config/registration.yaml /data
+            - rclone
+          args:
+            - copy
+            - --update
+            - --include
+            - "config.yaml"
+            - --include
+            - "registration.yaml"
+            - /mnt/config
+            - /mnt/data
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /mnt/config
               readOnly: true
             - name: data
-              mountPath: /data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: mautrix-whatsapp
           image: mautrix-whatsapp
@@ -588,3 +683,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-whatsapp-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
