@@ -2,8 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "radarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "whisparr", "tag-regex": "^v(?P<channel>\\d+)-(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:\\.(?P<build>\\d+))?$" }, { "name": "radarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - literals:
+      - rclone.conf=""
+    name: radarr-rclone
 images:
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.71.2
   - name: radarr
     newName: lscr.io/linuxserver/radarr
     newTag: 5.28.0
