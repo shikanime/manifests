@@ -13,3 +13,6 @@ secretGenerator:
   - envs:
       - sonarr/.env
     name: sonarr-pkcs12-password
+  - files:
+      - sonarr/config.xml
+    name: sonarr
