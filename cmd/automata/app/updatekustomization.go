@@ -2,7 +2,6 @@ package app
 
 import (
 	"fmt"
-	"io/fs"
 	"log/slog"
 	"path/filepath"
 	"strings"
@@ -10,7 +9,6 @@ import (
 	"github.com/shikanime/manifests/internal/registry"
 	"github.com/shikanime/manifests/internal/utils"
 	"github.com/spf13/cobra"
-	"golang.org/x/sync/errgroup"
 	"sigs.k8s.io/kustomize/kyaml/kio"
 	"sigs.k8s.io/kustomize/kyaml/yaml"
 )
@@ -32,44 +30,23 @@ var UpdateKustomizationCmd = &cobra.Command{
 
 // runUpdateKustomization executes the kustomization update across the directory tree.
 func runUpdateKustomization(root string) error {
-	g := new(errgroup.Group)
-	if err := utils.WalkDirWithGitignore(root, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-		if d.IsDir() {
-			return nil
-		}
-		if !isKustomizationFile(path) {
-			return nil
-		}
-		g.Go(createUpdateKustomizationJob(filepath.Dir(path)))
-		return nil
-	}); err != nil {
+	if err := createUpdateKustomizationPipeline(root).Execute(); err != nil {
+		slog.Warn("skip kustomization update", "dir", root, "err", err)
 		return err
 	}
-	return g.Wait()
-}
-
-// createUpdateKustomizationJob returns a task function that updates image tags
-// for a specific kustomization directory, suitable for use with errgroup.
-func createUpdateKustomizationJob(path string) func() error {
-	return func() error {
-		if err := createUpdateKustomizationPipeline(path).Execute(); err != nil {
-			slog.Warn("skip kustomization update", "dir", path, "err", err)
-			return err
-		}
-		return nil
-	}
+	return nil
 }
 
 // createUpdateKustomizationPipeline creates a kustomize pipeline to update image tags
 // and recommended labels for images defined in the kustomization.yaml at the given directory.
-func createUpdateKustomizationPipeline(d string) kio.Pipeline {
+func createUpdateKustomizationPipeline(path string) kio.Pipeline {
 	return kio.Pipeline{
 		Inputs: []kio.Reader{
 			kio.LocalPackageReader{
-				PackagePath:    d,
+				PackagePath: path,
+				FileSkipFunc: func(relPath string) bool {
+					return utils.IsGitIgnored(relPath, path)
+				},
 				MatchFilesGlob: []string{"kustomization.yaml"},
 			},
 		},
@@ -79,7 +56,7 @@ func createUpdateKustomizationPipeline(d string) kio.Pipeline {
 		},
 		Outputs: []kio.Writer{
 			kio.LocalPackageWriter{
-				PackagePath: d,
+				PackagePath: path,
 			},
 		},
 	}

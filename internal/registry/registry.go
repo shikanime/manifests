@@ -37,9 +37,10 @@ func ListTags(imageRef *ImageRef) ([]string, error) {
 type FindLatestOption func(*findLatestOptions)
 
 type findLatestOptions struct {
-	exclude        map[string]struct{}
-	updateStrategy utils.StrategyType
-	transformRegex *regexp.Regexp
+	exclude           map[string]struct{}
+	updateStrategy    utils.StrategyType
+	transformRegex    *regexp.Regexp
+	includePreRelease bool
 }
 
 // WithExclude sets the exclusion list for tags. Any tag present in the map
@@ -63,6 +64,14 @@ func WithStrategyType(strategy utils.StrategyType) FindLatestOption {
 func WithTransform(re *regexp.Regexp) FindLatestOption {
 	return func(o *findLatestOptions) {
 		o.transformRegex = re
+	}
+}
+
+// WithPreRelease enables inclusion of prerelease and build metadata tags
+// in the tag selection process.
+func WithPreRelease(include bool) FindLatestOption {
+	return func(o *findLatestOptions) {
+		o.includePreRelease = include
 	}
 }
 
@@ -91,22 +100,30 @@ func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error)
 	// Build candidates; skip any non-valid semver
 	validTags := make([]candidate, 0, len(tags))
 	for _, t := range tags {
+		// Parse semver; skip any non-valid semver
 		var sem string
 		if o.transformRegex != nil {
-			v, err := utils.ParseSemverWithRegex(o.transformRegex, t)
+			sem, err = utils.ParseSemverWithRegex(o.transformRegex, t)
 			if err != nil {
 				slog.Debug("non-semver tag ignored", "tag", t, "err", err)
 				continue
 			}
-			sem = v
 		} else {
-			v, err := utils.ParseSemver(t)
+			sem, err = utils.ParseSemver(t)
 			if err != nil {
 				slog.Debug("non-semver tag ignored", "tag", t, "err", err)
 				continue
 			}
-			sem = v
 		}
+
+		// Prerelease tags are skipped if not explicitly included
+		if !o.includePreRelease {
+			if utils.PreRelease(sem) != "" {
+				slog.Debug("prerelease tag ignored", "tag", t, "sem", sem)
+				continue
+			}
+		}
+
 		validTags = append(validTags, candidate{tag: t, sem: sem})
 	}
 
@@ -118,58 +135,50 @@ func FindLatestTag(imageRef *ImageRef, opts ...FindLatestOption) (string, error)
 		}
 	}
 
+	var baseline string
+	switch o.updateStrategy {
+	case utils.FullUpdate:
+		baseline = baselineSem
+	case utils.MinorUpdate:
+		baseline = utils.Major(baselineSem)
+	case utils.PatchUpdate:
+		baseline = utils.MajorMinor(baselineSem)
+	default:
+		baseline = baselineSem
+	}
+
 	// Apply update strategy filtering when baseline is set via WithCurrentVersion
-	tagsWithBaseline := make([]candidate, 0, len(tagsWithExclude))
+	tagsWithUpdateStrategy := make([]candidate, 0, len(tagsWithExclude))
 	for _, c := range tagsWithExclude {
-		if utils.Compare(c.sem, baselineSem) <= 0 {
+		if utils.Compare(c.sem, baseline) <= 0 {
 			continue
 		}
 		switch o.updateStrategy {
 		case utils.MinorUpdate:
-			major, err := utils.Major(c.sem)
-			if err != nil {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
-				continue
-			}
-			baselineMajor, err := utils.Major(baselineSem)
-			if err != nil {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
-				continue
-			}
-			if major == baselineMajor {
-				tagsWithBaseline = append(tagsWithBaseline, c)
+			if utils.Major(c.sem) == baseline {
+				tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem)
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baseline)
 			}
 		case utils.PatchUpdate:
-			majorMinor, err := utils.MajorMinor(c.sem)
-			if err != nil {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
-				continue
-			}
-			baselineMajorMinor, err := utils.MajorMinor(baselineSem)
-			if err != nil {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem, "err", err)
-				continue
-			}
-			if majorMinor == baselineMajorMinor {
-				tagsWithBaseline = append(tagsWithBaseline, c)
+			if utils.MajorMinor(c.sem) == baseline {
+				tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baselineSem)
+				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baseline)
 			}
 		default:
-			tagsWithBaseline = append(tagsWithBaseline, c)
+			tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
 		}
 	}
 
 	// Sort descending by semver
-	sort.Slice(tagsWithBaseline, func(i, j int) bool {
-		return utils.Compare(tagsWithBaseline[i].sem, tagsWithBaseline[j].sem) > 0
+	sort.Slice(tagsWithUpdateStrategy, func(i, j int) bool {
+		return utils.Compare(tagsWithUpdateStrategy[i].sem, tagsWithUpdateStrategy[j].sem) > 0
 	})
 
 	// Return the first non-excluded tag after all filtering
-	if len(tagsWithBaseline) > 0 {
-		return tagsWithBaseline[0].tag, nil
+	if len(tagsWithUpdateStrategy) > 0 {
+		return tagsWithUpdateStrategy[0].tag, nil
 	}
 	return "", fmt.Errorf("no suitable tag found")
 }

@@ -18,26 +18,23 @@ func ParseSemver(v string) (string, error) {
 }
 
 // Major returns the major version of a semver string.
-func Major(tag string) (string, error) {
-	c, err := ParseSemver(tag)
-	if err != nil || c == "" {
-		return "", err
-	}
-	return semver.Major(c), nil
+func Major(v string) string {
+	return semver.Major(NormalizeSemverPrefix(v))
 }
 
 // MajorMinor returns the major.minor version of a semver string.
-func MajorMinor(tag string) (string, error) {
-	c, err := ParseSemver(tag)
-	if err != nil || c == "" {
-		return "", err
-	}
-	return semver.MajorMinor(c), nil
+func MajorMinor(v string) string {
+	return semver.MajorMinor(NormalizeSemverPrefix(v))
+}
+
+// PreRelease returns true if the semver string is a prerelease.
+func PreRelease(v string) string {
+	return semver.Prerelease(NormalizeSemverPrefix(v))
 }
 
 // Compare compares two semver strings.
 func Compare(a, b string) int {
-	return semver.Compare(a, b)
+	return semver.Compare(NormalizeSemverPrefix(a), NormalizeSemverPrefix(b))
 }
 
 // ParseSemverWithRegex extracts a semver from tag using named capture groups,
@@ -80,12 +77,12 @@ func ParseSemverWithRegex(re *regexp.Regexp, v string) (string, error) {
 }
 
 // NormalizeSemverPrefix normalizes a tag to have a leading 'v' and no 'V' prefix.
-func NormalizeSemverPrefix(tag string) string {
-	if strings.HasPrefix(tag, "V") {
-		return "v" + tag[1:]
+func NormalizeSemverPrefix(v string) string {
+	if strings.HasPrefix(v, "V") {
+		return "v" + v[1:]
 	}
-	if !strings.HasPrefix(tag, "v") {
-		return "v" + tag
+	if !strings.HasPrefix(v, "v") {
+		return "v" + v
 	}
-	return tag
+	return v
 }
