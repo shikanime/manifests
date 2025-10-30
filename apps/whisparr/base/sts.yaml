@@ -30,6 +30,7 @@ spec:
           image: rclone
           command:
             - rclone
+          args:
             - copy
             - --update
             - /mnt/startup-config
