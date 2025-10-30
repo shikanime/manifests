@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
-	"sort"
 
 	"github.com/google/go-github/v55/github"
 	"github.com/shikanime/manifests/internal/utils"
@@ -106,46 +105,10 @@ func (gc *GitHubClient) FindLatestActionTag(ctx context.Context, action *GitHubA
 		return "", fmt.Errorf("rate limiter: %w", err)
 	}
 
-	tags, _, err := gc.c.Repositories.ListTags(ctx, action.Owner, action.Repo, nil)
-	if err != nil {
-		return "", fmt.Errorf("github list tags: %w", err)
-	}
-
 	// Baseline from the current action version
 	baselineSem, err := utils.ParseSemver(action.Version)
 	if err != nil {
 		return "", fmt.Errorf("invalid baseline %q: %w", action.Version, err)
-	}
-
-	type candidate struct {
-		tag string
-		sem string
-	}
-
-	// Build candidates; skip any non-valid semver
-	validTags := make([]candidate, 0, len(tags))
-	for _, t := range tags {
-		if t.Name == nil {
-			continue
-		}
-
-		// Parse semver; skip any non-valid semver
-		var sem string
-		sem, err = utils.ParseSemver(*t.Name)
-		if err != nil {
-			slog.Debug("non-semver tag ignored", "tag", *t.Name, "err", err)
-			continue
-		}
-
-		// Prerelease tags are skipped if not explicitly included
-		if !o.includePreRelease {
-			if utils.PreRelease(sem) != "" {
-				slog.Debug("prerelease tag ignored", "tag", *t.Name, "sem", sem)
-				continue
-			}
-		}
-
-		validTags = append(validTags, candidate{tag: *t.Name, sem: sem})
 	}
 
 	// Determine baseline according to update strategy
@@ -161,39 +124,50 @@ func (gc *GitHubClient) FindLatestActionTag(ctx context.Context, action *GitHubA
 		baseline = baselineSem
 	}
 
-	// Apply update strategy filtering relative to baseline
-	tagsWithUpdateStrategy := make([]candidate, 0, len(validTags))
-	for _, c := range validTags {
+	tags, _, err := gc.c.Repositories.ListTags(ctx, action.Owner, action.Repo, nil)
+	if err != nil {
+		return "", fmt.Errorf("github list tags: %w", err)
+	}
+
+	bestTag := ""
+	for _, t := range tags {
+		// Skip any non-valid semver
+		var sem string
+		sem, err = utils.ParseSemver(*t.Name)
+		if err != nil {
+			slog.Debug("non-semver tag ignored", "tag", *t.Name, "err", err)
+			continue
+		}
+
+		// Prerelease tags are skipped if not explicitly included
+		if !o.includePreRelease {
+			if utils.PreRelease(sem) != "" {
+				slog.Debug("prerelease tag ignored", "tag", *t.Name, "sem", sem)
+				continue
+			}
+		}
+
 		// Only consider tags strictly greater than baseline
-		if utils.Compare(c.sem, baseline) <= 0 {
+		if utils.Compare(sem, baseline) <= 0 {
 			continue
 		}
 		switch o.updateStrategy {
 		case utils.MinorUpdate:
-			if utils.Major(c.sem) == baseline {
-				tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
+			if utils.Major(sem) == baseline {
+				bestTag = sem
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baseline)
+				slog.Debug("tag excluded by update strategy", "tag", *t.Name, "sem", sem, "baseline", baseline)
 			}
 		case utils.PatchUpdate:
-			if utils.MajorMinor(c.sem) == baseline {
-				tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
+			if utils.MajorMinor(sem) == baseline {
+				bestTag = sem
 			} else {
-				slog.Debug("tag excluded by update strategy", "tag", c.tag, "sem", c.sem, "baseline", baseline)
+				slog.Debug("tag excluded by update strategy", "tag", *t.Name, "sem", sem, "baseline", baseline)
 			}
 		default:
-			tagsWithUpdateStrategy = append(tagsWithUpdateStrategy, c)
+			bestTag = sem
 		}
 	}
 
-	// Sort descending by semver
-	sort.Slice(tagsWithUpdateStrategy, func(i, j int) bool {
-		return utils.Compare(tagsWithUpdateStrategy[i].sem, tagsWithUpdateStrategy[j].sem) > 0
-	})
-
-	// Return the first candidate after filtering
-	if len(tagsWithUpdateStrategy) > 0 {
-		return tagsWithUpdateStrategy[0].tag, nil
-	}
-	return "", fmt.Errorf("no suitable tag found")
+	return bestTag, nil
 }
