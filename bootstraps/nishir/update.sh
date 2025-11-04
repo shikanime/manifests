@@ -19,6 +19,11 @@ yq eval ".spec.hosts[0].ssh.address = \"$NISHIR_IP\"" -i "$CLUSTER_YAML"
 yq eval ".spec.hosts[1].ssh.address = \"$FUSHI_IP\"" -i "$CLUSTER_YAML"
 yq eval ".spec.hosts[2].ssh.address = \"$MINISH_IP\"" -i "$CLUSTER_YAML"
 
+# Update privateAddress for each host to match Tailscale IPs
+yq eval ".spec.hosts[0].privateAddress = \"$NISHIR_IP\"" -i "$CLUSTER_YAML"
+yq eval ".spec.hosts[1].privateAddress = \"$FUSHI_IP\"" -i "$CLUSTER_YAML"
+yq eval ".spec.hosts[2].privateAddress = \"$MINISH_IP\"" -i "$CLUSTER_YAML"
+
 # Set k0s API server bind address to Tailscale IP of controller host
 yq eval ".spec.k0s.config.spec.api.address = \"$NISHIR_IP\"" -i "$CLUSTER_YAML"
 
