@@ -176,9 +176,8 @@ spec:
                 namespace: kube-system
         network:
           calico:
-            envVars:
-              IP_AUTODETECTION_METHOD: interface=tailscale0
-              IP6_AUTODETECTION_METHOD: interface=tailscale0
+            ipAutodetectionMethod: interface=tailscale0
+            ipV6AutodetectionMethod: interface=tailscale0
             mode: bird
           dualStack:
             enabled: true
