@@ -166,6 +166,10 @@ spec:
                 version: "4.9.0"
                 namespace: kube-system
         network:
+          dualStack:
+            enabled: true
+            IPv6podCIDR: fd00::/108
+            IPv6serviceCIDR: fd01::/108
           kuberouter:
             extraArgs:
               advertise-cluster-ip: "true"
