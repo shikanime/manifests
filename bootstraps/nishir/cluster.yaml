@@ -175,6 +175,10 @@ spec:
                 version: "4.9.0"
                 namespace: kube-system
         network:
+          calico:
+            envVars:
+              IP_AUTODETECTION_METHOD: interface=tailscale0
+            mode: bird
           dualStack:
             enabled: true
             IPv6podCIDR: fd00::/108
