@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: qbittorrent-allow-media
+  namespace: shikanime
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: qbittorrent
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: shikanime
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: nishir-media
+      ports:
+        - protocol: TCP
+          port: 8080
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tailscale-system
+      ports:
+        - protocol: TCP
+          port: 8080
+        - protocol: TCP
+          port: 6881
+        - protocol: UDP
+          port: 6881
+  policyTypes:
+    - Ingress
