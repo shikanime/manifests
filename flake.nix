@@ -57,7 +57,8 @@
             modules = [
               devlib.devenvModule
             ];
-            shells.default = {
+            shells = {
+              default = {
               cachix = {
                 enable = true;
                 push = "shikanime";
@@ -78,18 +79,28 @@
               };
               packages = [
                 pkgs.clusterctl
+                pkgs.gh
                 pkgs.gnugrep
                 pkgs.gnused
                 pkgs.k0sctl
                 pkgs.kubectl
                 pkgs.kubernetes-helm
                 pkgs.kustomize
+                pkgs.sapling
                 pkgs.skaffold
                 pkgs.skopeo
                 pkgs.sops
                 pkgs.yq-go
                 self'.packages.longhornctl
               ];
+            };
+            update = {
+              containers = pkgs.lib.mkForce { };
+              packages = [
+                pkgs.gh
+                pkgs.sapling
+              ];
+            };
             };
           };
           packages.longhornctl = pkgs.buildGoModule rec {
