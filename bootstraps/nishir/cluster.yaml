@@ -185,11 +185,5 @@ spec:
         network:
           calico:
             ipAutodetectionMethod: interface=tailscale0
-            ipV6AutodetectionMethod: interface=tailscale0
-            mode: bird
-          dualStack:
-            enabled: true
-            IPv6podCIDR: fd00::/108
-            IPv6serviceCIDR: fd01::/108
           provider: calico
     version: v1.34.1+k0s.0
