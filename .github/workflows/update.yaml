@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: createGithubAppToken
-        uses: actions/create-github-app-token@v2.1.4
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
@@ -23,9 +23,12 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v13
       - run: |
           nix flake update
-          nix run nixpkgs#sapling -- config \
-            --local ui.username "github-actions[bot]" \
-            --local ui.email "github-actions[bot]@users.noreply.github.com"
-          nix run nixpkgs#sapling -- ci \
-            -m "Update Flake"
-          nix run nixpkgs#sapling ghstack
+          nix develop --accept-flake-config --impure .#update --command sl \
+            config \
+            --local ui.username=github-actions[bot] \
+            --local ui.email=github-actions[bot]@users.noreply.github.com
+          nix develop --accept-flake-config --impure .#update --command sl \
+            ci \
+            --message "Update Flake"
+          nix develop --accept-flake-config --impure .#update --command sl \
+            ghstack

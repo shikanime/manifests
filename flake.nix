@@ -57,39 +57,50 @@
             modules = [
               devlib.devenvModule
             ];
-            shells.default = {
-              cachix = {
-                enable = true;
-                push = "shikanime";
-              };
-              containers = pkgs.lib.mkForce { };
-              gitignore = {
-                enable = true;
-                enableDefaultTemplates = true;
-                content = [
-                  "config.xml"
+            shells = {
+              default = {
+                cachix = {
+                  enable = true;
+                  push = "shikanime";
+                };
+                containers = pkgs.lib.mkForce { };
+                gitignore = {
+                  enable = true;
+                  enableDefaultTemplates = true;
+                  content = [
+                    "config.xml"
+                  ];
+                };
+                github.enable = true;
+                languages = {
+                  go.enable = true;
+                  nix.enable = true;
+                  opentofu.enable = true;
+                };
+                packages = [
+                  pkgs.clusterctl
+                  pkgs.gh
+                  pkgs.gnugrep
+                  pkgs.gnused
+                  pkgs.k0sctl
+                  pkgs.kubectl
+                  pkgs.kubernetes-helm
+                  pkgs.kustomize
+                  pkgs.sapling
+                  pkgs.skaffold
+                  pkgs.skopeo
+                  pkgs.sops
+                  pkgs.yq-go
+                  self'.packages.longhornctl
                 ];
               };
-              github.enable = true;
-              languages = {
-                go.enable = true;
-                nix.enable = true;
-                opentofu.enable = true;
+              update = {
+                containers = pkgs.lib.mkForce { };
+                packages = [
+                  pkgs.gh
+                  pkgs.sapling
+                ];
               };
-              packages = [
-                pkgs.clusterctl
-                pkgs.gnugrep
-                pkgs.gnused
-                pkgs.k0sctl
-                pkgs.kubectl
-                pkgs.kubernetes-helm
-                pkgs.kustomize
-                pkgs.skaffold
-                pkgs.skopeo
-                pkgs.sops
-                pkgs.yq-go
-                self'.packages.longhornctl
-              ];
             };
           };
           packages.longhornctl = pkgs.buildGoModule rec {
