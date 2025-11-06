@@ -4,4 +4,4 @@ namespace: shikanime
 components:
   - ../../components/tailscale
 resources:
-  - ../nishir
+  - ../default
