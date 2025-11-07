@@ -7,7 +7,7 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
- nixConfig = {
+  nixConfig = {
     extra-substituters = [
       "https://cachix.cachix.org"
       "https://devenv.cachix.org"
