@@ -143,16 +143,14 @@ spec:
                 values: |
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
-                    allowRecurringJobWhileVolumeDetached: true
-                    backupstorePollInterval: 6000
-                    defaultReplicaCount: "1"
+                    defaultReplicaCount: "2"
                     replicaAutoBalance: best-effort
                     snapshotDataIntegrityCronjob: "0 4 */7 * *"
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
                     backupTargetCredentialSecret: longhorn-hetzner-backups
                   persistence:
-                    defaultClassReplicaCount: 1
+                    defaultClassReplicaCount: 2
                     defaultFsType: xfs
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
