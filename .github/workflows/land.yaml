@@ -21,7 +21,6 @@ jobs:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
       - uses: shikanime-studio/sapling-action@v4
         with:
-          ghstack-username: operator60
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
