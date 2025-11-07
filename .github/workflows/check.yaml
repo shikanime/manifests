@@ -11,14 +11,24 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: DeterminateSystems/nix-installer-action@v20
+      - id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
         with:
-          github-token: ${{ secrets.NIX_GITHUB_TOKEN }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          owner: shikanime
+          permission-contents: read
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+          repositories: identities
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token }}
+      - uses: shikanime-studio/setup-nix-action@v1
+        with:
+          github-token: ${{ steps.createGithubAppToken.outputs.token }}
       - name: Check Nix Flake
         run: |
           nix flake check \
+            --accept-flake-config \
             --all-systems \
-            --no-pure-eval \
-            --accept-flake-config
+            --no-pure-eval

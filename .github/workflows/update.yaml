@@ -17,16 +17,25 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: DeterminateSystems/nix-installer-action@v20
+      - uses: shikanime-studio/setup-nix-action@v1
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: DeterminateSystems/magic-nix-cache-action@v13
-      - run: |
-          nix flake update
+      - id: importGPG
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - env:
+          GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
+        run: |
+          nix flake update \
+            --accept-flake-config
           nix develop --accept-flake-config --impure .#update --command sl \
             config \
-            --local ui.username=github-actions[bot] \
-            --local ui.email=github-actions[bot]@users.noreply.github.com
+            --local commit.gpgsign true \
+            --local ghstack.github_username=operator60 \
+            --local gpg.key "${{ steps.importGPG.outputs.keyid }}" \
+            --local ui.username="Operator 6O <operator60@shikanime.studio>"
           nix develop --accept-flake-config --impure .#update --command sl \
             ci \
             --message "Update Flake"
