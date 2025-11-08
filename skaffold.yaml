@@ -8,3 +8,8 @@ profiles:
       kustomize:
         paths:
           - clusters/nishir/overlays/tailnet
+  - name: telsha
+    manifests:
+      kustomize:
+        paths:
+          - clusters/telsha/overlays/default
