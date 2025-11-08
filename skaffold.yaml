@@ -13,3 +13,6 @@ profiles:
       kustomize:
         paths:
           - clusters/telsha/overlays/default
+requires:
+  - git:
+      repo: https://github.com/shikanime/shikanime.git
