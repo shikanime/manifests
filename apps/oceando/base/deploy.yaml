@@ -16,10 +16,6 @@ spec:
         fsGroup: 100
       containers:
         - image: oceando
-          livenessProbe:
-            initialDelaySeconds: 30
-            tcpSocket:
-              port: ssh
           name: oceando
           ports:
             - containerPort: 22
@@ -27,17 +23,21 @@ spec:
             - containerPort: 5353
               name: mdns
               protocol: UDP
+          livenessProbe:
+            initialDelaySeconds: 30
+            tcpSocket:
+              port: ssh
           readinessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: ssh
-          securityContext:
-            privileged: true
           startupProbe:
             failureThreshold: 30
             initialDelaySeconds: 3
             tcpSocket:
               port: ssh
+          securityContext:
+            privileged: true
           stdin: true
           tty: true
           volumeMounts:
@@ -45,8 +45,6 @@ spec:
               name: sys-kernel-debug
             - mountPath: /sys/kernel/tracing
               name: sys-kernel-tracing
-            - mountPath: /home/shika/.config/sops
-              name: sops-config
       hostname: oceando
       volumes:
         - hostPath:
@@ -57,7 +55,3 @@ spec:
             path: /sys/kernel/tracing
             type: Directory
           name: sys-kernel-tracing
-        - hostPath:
-            path: /Users/shikanimedeva/.config/sops
-            type: Directory
-          name: sops-config
