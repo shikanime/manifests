@@ -15,10 +15,7 @@ jobs:
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
-          owner: shikanime
-          permission-contents: read
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-          repositories: identities
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
