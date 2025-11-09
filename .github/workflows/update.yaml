@@ -12,7 +12,6 @@ jobs:
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
