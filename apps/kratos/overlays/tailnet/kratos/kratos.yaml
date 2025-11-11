@@ -1,5 +1,4 @@
 version: v1.3.1
-
 serve:
   public:
     base_url: https://accounts.taila659a.ts.net/.ory/kratos/public
@@ -17,11 +16,9 @@ serve:
         path: /etc/ssl/private/tls.crt
       key:
         path: /etc/ssl/private/tls.key
-
 session:
   whoami:
     required_aal: aal1
-
 selfservice:
   default_browser_return_url: https://accounts.taila659a.ts.net/welcome
   allowed_return_urls:
@@ -84,20 +81,16 @@ selfservice:
       ui_url: https://accounts.taila659a.ts.net/verify
     recovery:
       ui_url: https://accounts.taila659a.ts.net/recovery
-
 log:
   level: debug
   format: text
   leak_sensitive_values: true
-
 ciphers:
   algorithm: xchacha20-poly1305
-
 hashers:
   algorithm: bcrypt
   bcrypt:
     cost: 8
-
 identity:
   schemas:
     - id: default
