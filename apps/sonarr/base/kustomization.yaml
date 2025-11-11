@@ -13,7 +13,7 @@ images:
     newTag: 1.71.2
   - name: sonarr
     newName: lscr.io/linuxserver/sonarr
-    newTag: 4.0.15
+    newTag: 4.0.16
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -25,4 +25,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: sonarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v4.0.15
+      app.kubernetes.io/version: v4.0.16

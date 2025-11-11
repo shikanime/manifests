@@ -9,7 +9,7 @@ images:
     newTag: 1.71.2
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
-    newTag: v3-3.0.1.1264
+    newTag: v3-3.0.2.1354
 resources:
   - ingress.yaml
   - pvc.yaml
@@ -21,4 +21,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: whisparr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v3.0.1
+      app.kubernetes.io/version: v3.0.2

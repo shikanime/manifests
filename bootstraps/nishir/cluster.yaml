@@ -201,7 +201,7 @@ spec:
                     defaultFsType: xfs
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
-                version: "0.18.2"
+                version: "0.18.3"
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
@@ -225,7 +225,7 @@ spec:
                       namespace: cert-manager-trust
               - name: vpa
                 chartname: fairwinds-stable/vpa
-                version: "4.9.0"
+                version: "4.10.0"
                 namespace: kube-system
         network:
           calico:

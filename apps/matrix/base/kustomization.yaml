@@ -34,7 +34,7 @@ images:
     newTag: v0.2510.0
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
-    newTag: v1.141.0
+    newTag: v1.142.0
 resources:
   - deploy.yaml
   - ingress.yaml
