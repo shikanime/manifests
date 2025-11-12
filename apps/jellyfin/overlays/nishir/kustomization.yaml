@@ -8,6 +8,7 @@ patches:
   - path: patch-sts.yaml
 resources:
   - ../default
+  - cert.yaml
 secretGenerator:
   - envs:
       - jellyfin/.env
