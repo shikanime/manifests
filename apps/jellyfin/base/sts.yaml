@@ -76,7 +76,8 @@ spec:
         fsGroup: 1000
       volumes:
         - name: cache
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: jellyfin-cache
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
