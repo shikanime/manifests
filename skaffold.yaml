@@ -15,6 +15,6 @@ profiles:
           - clusters/telsha/overlays/default
 requires:
   - activeProfiles:
-      - telsha
+      - name: telsha
     git:
       repo: https://github.com/shikanime/shikanime.git
