@@ -61,7 +61,7 @@ spec:
             httpGet:
               path: /health
               port: http
-            failureThreshold: 240
+            failureThreshold: 480
             periodSeconds: 15
           securityContext:
             privileged: true
