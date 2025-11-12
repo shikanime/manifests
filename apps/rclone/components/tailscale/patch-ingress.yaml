@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: rclone
   annotations:
-    tailscale.com/proxy-class: nishir-rclone
+    tailscale.com/proxy-class: rclone
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

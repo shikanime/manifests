@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: gitea
   annotations:
-    tailscale.com/proxy-class: nishir-gitea
+    tailscale.com/proxy-class: gitea
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: jellyfin
   annotations:
-    tailscale.com/proxy-class: nishir-jellyfin
+    tailscale.com/proxy-class: jellyfin
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

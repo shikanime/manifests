@@ -4,7 +4,7 @@ metadata:
   name: git
   annotations:
     tailscale.com/hostname: git
-    tailscale.com/proxy-class: nishir-gitea
+    tailscale.com/proxy-class: gitea
     tailscale.com/tags: tag:git
 spec:
   loadBalancerClass: tailscale

@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: sonarr
   annotations:
-    tailscale.com/proxy-class: nishir-sonarr
+    tailscale.com/proxy-class: sonarr
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

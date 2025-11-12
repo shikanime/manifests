@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: vaultwarden
   annotations:
-    tailscale.com/proxy-class: nishir-vaultwarden
+    tailscale.com/proxy-class: vaultwarden
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

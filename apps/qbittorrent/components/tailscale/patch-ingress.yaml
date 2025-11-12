@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: qbittorrent
   annotations:
-    tailscale.com/proxy-class: nishir-qbittorrent
+    tailscale.com/proxy-class: qbittorrent
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

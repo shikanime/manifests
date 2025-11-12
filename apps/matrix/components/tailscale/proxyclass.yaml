@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: nishir-matrix
+  name: matrix
 spec:
   statefulSet:
     pod:
@@ -20,7 +20,7 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: nishir-matrix-discord
+  name: matrix-discord
 spec:
   statefulSet:
     pod:
@@ -39,7 +39,7 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: nishir-matrix-googlechat
+  name: matrix-googlechat
 spec:
   statefulSet:
     pod:
@@ -58,7 +58,7 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: nishir-matrix-meta
+  name: matrix-meta
 spec:
   statefulSet:
     pod:
@@ -77,7 +77,7 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: nishir-matrix-slack
+  name: matrix-slack
 spec:
   statefulSet:
     pod:
@@ -96,7 +96,7 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: nishir-matrix-signal
+  name: matrix-signal
 spec:
   statefulSet:
     pod:
@@ -115,7 +115,7 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: nishir-matrix-whatsapp
+  name: matrix-whatsapp
 spec:
   statefulSet:
     pod:

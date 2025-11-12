@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: accounts
   annotations:
-    tailscale.com/proxy-class: nishir-accounts
+    tailscale.com/proxy-class: accounts
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
@@ -13,7 +13,7 @@ kind: Ingress
 metadata:
   name: kratos
   annotations:
-    tailscale.com/proxy-class: nishir-kratos
+    tailscale.com/proxy-class: kratos
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

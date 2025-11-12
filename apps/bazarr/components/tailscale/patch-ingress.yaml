@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: bazarr
   annotations:
-    tailscale.com/proxy-class: nishir-bazarr
+    tailscale.com/proxy-class: bazarr
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

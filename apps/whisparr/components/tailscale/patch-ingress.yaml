@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: whisparr
   annotations:
-    tailscale.com/proxy-class: nishir-whisparr
+    tailscale.com/proxy-class: whisparr
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

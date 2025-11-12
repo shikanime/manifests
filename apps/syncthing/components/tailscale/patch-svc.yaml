@@ -4,7 +4,7 @@ metadata:
   name: syncthing-replication
   annotations:
     tailscale.com/hostname: syncthing-replication
-    tailscale.com/proxy-class: nishir-syncthing
+    tailscale.com/proxy-class: syncthing
     tailscale.com/tags: tag:syncthing
 spec:
   loadBalancerClass: tailscale
