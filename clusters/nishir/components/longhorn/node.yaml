@@ -1,36 +1,6 @@
 apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
-  name: nishir
-  namespace: longhorn-system
-spec:
-  allowScheduling: true
-  disks:
-    flandre:
-      allowScheduling: true
-      diskType: filesystem
-      path: /mnt/flandre/longhorn/
-      tags:
-        - balanced
-    nishir:
-      allowScheduling: true
-      diskType: filesystem
-      path: /mnt/nishir/longhorn/
-      tags:
-        - fast
-    remilia:
-      allowScheduling: true
-      diskType: filesystem
-      path: /mnt/remilia/longhorn/
-      tags:
-        - balanced
-  name: nishir
-  tags:
-    - control-plane
----
-apiVersion: longhorn.io/v1beta2
-kind: Node
-metadata:
   name: fushi
   namespace: longhorn-system
 spec:
@@ -40,6 +10,7 @@ spec:
       allowScheduling: true
       diskType: filesystem
       path: /mnt/reimu/longhorn/
+      storageReserved: 287919575138
       tags:
         - fast
   name: fushi
@@ -56,6 +27,40 @@ spec:
       allowScheduling: true
       diskType: filesystem
       path: /mnt/marisa/longhorn/
+      storageReserved: 287919575138
       tags:
         - fast
   name: minish
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: nishir
+  namespace: longhorn-system
+spec:
+  allowScheduling: true
+  disks:
+    flandre:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/flandre/longhorn/
+      storageReserved: 2399829082767
+      tags:
+        - balanced
+    nishir:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/nishir/longhorn/
+      storageReserved: 76772540416
+      tags:
+        - fast
+    remilia:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/remilia/longhorn/
+      storageReserved: 2399829082767
+      tags:
+        - balanced
+  name: nishir
+  tags:
+    - control-plane
