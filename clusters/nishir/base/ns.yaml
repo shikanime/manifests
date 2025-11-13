@@ -31,4 +31,9 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: shikanime-studio
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: tailscale-system
