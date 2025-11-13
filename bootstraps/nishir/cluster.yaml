@@ -31,7 +31,6 @@ spec:
             - systemd-tmpfiles --create
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
-      noTaints: true
       privateAddress: 100.117.159.56
       privateInterface: tailscale0
       role: controller+worker
