@@ -83,6 +83,7 @@
               automata.packages.${system}.default
             ];
             treefmt = {
+              enable = true;
               config = {
                 enableDefaultExcludes = true;
                 programs.prettier.enable = true;
