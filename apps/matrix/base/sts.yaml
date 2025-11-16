@@ -193,11 +193,12 @@ spec:
             - rclone
           args:
             - copy
+            - --copy-links
             - --update
             - --include
-            - "config.yaml"
+            - config.yaml
             - --include
-            - "registration.yaml"
+            - registration.yaml
             - /mnt/config
             - /mnt/data
           volumeMounts:
@@ -281,11 +282,12 @@ spec:
             - rclone
           args:
             - copy
+            - --copy-links
             - --update
             - --include
-            - "config.yaml"
+            - config.yaml
             - --include
-            - "registration.yaml"
+            - registration.yaml
             - /mnt/config
             - /mnt/data
           volumeMounts:
@@ -369,11 +371,12 @@ spec:
             - rclone
           args:
             - copy
+            - --copy-links
             - --update
             - --include
-            - "config.yaml"
+            - config.yaml
             - --include
-            - "registration.yaml"
+            - registration.yaml
             - /mnt/config
             - /mnt/data
           volumeMounts:
@@ -457,11 +460,12 @@ spec:
             - rclone
           args:
             - copy
+            - --copy-links
             - --update
             - --include
-            - "config.yaml"
+            - config.yaml
             - --include
-            - "registration.yaml"
+            - registration.yaml
             - /mnt/config
             - /mnt/data
           volumeMounts:
@@ -545,11 +549,12 @@ spec:
             - rclone
           args:
             - copy
+            - --copy-links
             - --update
             - --include
-            - "config.yaml"
+            - config.yaml
             - --include
-            - "registration.yaml"
+            - registration.yaml
             - /mnt/config
             - /mnt/data
           volumeMounts:
@@ -633,11 +638,12 @@ spec:
             - rclone
           args:
             - copy
+            - --copy-links
             - --update
             - --include
-            - "config.yaml"
+            - config.yaml
             - --include
-            - "registration.yaml"
+            - registration.yaml
             - /mnt/config
             - /mnt/data
           volumeMounts:
