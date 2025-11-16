@@ -81,3 +81,17 @@ spec:
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-meta-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synapse-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nishir-fast
+  volumeMode: Filesystem
+  volumeName: synapse-data
