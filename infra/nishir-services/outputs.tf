@@ -9,13 +9,6 @@ output "longhorn_backupstore" {
   sensitive = true
 }
 
-output "tailscale_operator" {
-  value = {
-    client_id     = var.tailscale_operator.client_id
-    client_secret = var.tailscale_operator.client_secret
-  }
-  sensitive = true
-}
 
 output "loki" {
   value = {
@@ -45,13 +38,6 @@ output "tempo" {
   value = {
     password = resource.grafana_cloud_access_policy_token.kubernetes.token
     username = data.grafana_data_source.tempo.basic_auth_username
-  }
-  sensitive = true
-}
-
-output "vaultwarden" {
-  value = {
-    admin_token = var.vaultwarden.admin_token
   }
   sensitive = true
 }
