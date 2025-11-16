@@ -3,7 +3,7 @@ kind: ProxyClass
 metadata:
   name: oceando
 spec:
-  deployment:
+  statefulSet:
     pod:
       affinity:
         podAffinity:
