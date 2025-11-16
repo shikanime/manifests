@@ -2,17 +2,17 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "oceando", "tag-regex": "^(?P<major>\\d+).*$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "oceando", "tag-regex": "^(?P<build>[a-zA-Z0-9]+)$" } ]'
 images:
-  - name: oceando
-    newName: ghcr.io/shikanime/shikanime/oceando
-    newTag: "0973110"
+- name: oceando
+  newName: ghcr.io/shikanime/shikanime/oceando
+  newTag: "0973110"
 resources:
-  - deploy.yaml
-  - svc.yaml
+- deploy.yaml
+- svc.yaml
 labels:
-  - pairs:
-      app.kubernetes.io/component: backend-service
-      app.kubernetes.io/name: oceando
-      app.kubernetes.io/part-of: nishir-services
-      app.kubernetes.io/version: v0.17.1
+- pairs:
+    app.kubernetes.io/component: backend-service
+    app.kubernetes.io/name: oceando
+    app.kubernetes.io/part-of: nishir-services
+    app.kubernetes.io/version: "v0.0.0+0973110"
