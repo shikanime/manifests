@@ -52,14 +52,6 @@ variable "tailscale_operator" {
   sensitive = true
 }
 
-variable "drive" {
-  type = object({
-    access_key_id     = string
-    secret_access_key = string
-  })
-  sensitive = true
-}
-
 variable "longhorn_backupstore" {
   type = object({
     access_key_id     = string
