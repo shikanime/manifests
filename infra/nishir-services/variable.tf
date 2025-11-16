@@ -44,13 +44,6 @@ variable "endpoints" {
   }
 }
 
-variable "tailscale_operator" {
-  type = object({
-    client_id     = string
-    client_secret = string
-  })
-  sensitive = true
-}
 
 variable "longhorn_backupstore" {
   type = object({
