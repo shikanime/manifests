@@ -1,0 +1,56 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: cert-manager
+  namespace: kube-system
+spec:
+  repo: https://charts.jetstack.io
+  chart: cert-manager
+  targetNamespace: cert-manager
+  valuesContent: |
+    crds:
+      enabled: true
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: cluster-api-operator
+  namespace: kube-system
+spec:
+  repo: https://kubernetes-sigs.github.io/cluster-api-operator
+  chart: cluster-api-operator
+  targetNamespace: capi-operator-system
+  valuesContent: |
+    cert-manager:
+      enabled: true
+    bootstrap:
+      k0sproject-k0smotron: {}
+    controlPlane:
+      k0sproject-k0smotron: {}
+    infrastructure:
+      hetzner: {}
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: longhorn
+  namespace: kube-system
+spec:
+  repo: https://charts.longhorn.io
+  chart: longhorn
+  version: "1.10.1"
+  targetNamespace: longhorn-system
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: tailscale-operator
+  namespace: kube-system
+spec:
+  repo: https://pkgs.tailscale.com/helmcharts
+  chart: tailscale-operator
+  version: "1.90.6"
+  targetNamespace: tailscale-system
+  valuesContent: |
+    operatorConfig:
+      hostname: telsha-k8s-operator
