@@ -8,11 +8,3 @@ output "longhorn_backupstore" {
   }
   sensitive = true
 }
-
-output "tailscale_operator" {
-  value = {
-    client_id     = var.tailscale_operator.client_id
-    client_secret = var.tailscale_operator.client_secret
-  }
-  sensitive = true
-}
