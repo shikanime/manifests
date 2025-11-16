@@ -3,4 +3,5 @@ kind: Kustomization
 components:
   - ../../components/tailscale
 resources:
-  - ../default
+  - ../../base
+  - ../../../../apps/oceando/overlays/tailnet
