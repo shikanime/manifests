@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: bazarr-config
