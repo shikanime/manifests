@@ -7,7 +7,6 @@ spec:
   repo: https://charts.jetstack.io
   chart: cert-manager
   targetNamespace: cert-manager
-  createNamespace: true
   valuesContent: |
     crds:
       enabled: true
@@ -21,7 +20,6 @@ spec:
   repo: https://kubernetes-sigs.github.io/cluster-api-operator
   chart: cluster-api-operator
   targetNamespace: capi-operator-system
-  createNamespace: true
   valuesContent: |
     cert-manager:
       enabled: true
@@ -35,6 +33,17 @@ spec:
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
+  name: longhorn
+  namespace: kube-system
+spec:
+  repo: https://charts.longhorn.io
+  chart: longhorn
+  version: "1.10.1"
+  targetNamespace: longhorn-system
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
   name: tailscale-operator
   namespace: kube-system
 spec:
@@ -42,7 +51,6 @@ spec:
   chart: tailscale-operator
   version: "1.90.6"
   targetNamespace: tailscale-system
-  createNamespace: true
   valuesContent: |
     operatorConfig:
       hostname: telsha-k8s-operator
