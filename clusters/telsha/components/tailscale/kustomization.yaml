@@ -4,8 +4,8 @@ resources:
   - svc.yaml
 secretGenerator:
   - envs:
-      - oauth-client/.env
-    name: oauth-client
+      - operator-oauth/.env
+    name: operator-oauth
     namespace: tailscale-system
     options:
       disableNameSuffixHash: true

@@ -7,5 +7,5 @@ set -o pipefail
 
 sops \
   --decrypt \
-  "$(dirname "$0")"/oauth-client/.enc.env > \
-  "$(dirname "$0")"/oauth-client/.env
+  "$(dirname "$0")"/operator-oauth/.enc.env > \
+  "$(dirname "$0")"/operator-oauth/.env
