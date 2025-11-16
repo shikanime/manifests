@@ -10,27 +10,13 @@ variable "name" {
   default     = "nishir"
 }
 
-variable "display_name" {
-  type        = string
-  description = "Display name of the cluster"
-  default     = "Nishir"
-}
-
-variable "stack" {
-  type        = string
-  description = "Grafana stack ID"
-  default     = "370431"
-}
-
 variable "regions" {
   type = object({
-    grafana_cloud_access_policy = string
-    aws_s3_bucket               = string
+    aws_s3_bucket = string
   })
   description = "Resource regions"
   default = {
-    grafana_cloud_access_policy = "eu"
-    aws_s3_bucket               = "fsn1"
+    aws_s3_bucket = "fsn1"
   }
 }
 
