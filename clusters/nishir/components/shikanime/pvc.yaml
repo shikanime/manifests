@@ -23,7 +23,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 128Gi
+      storage: 64Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: movies-data
@@ -53,7 +53,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 512Gi
+      storage: 256Gi
   storageClassName: nishir-standard
   volumeMode: Filesystem
   volumeName: shows-data
