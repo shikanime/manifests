@@ -10,4 +10,4 @@ FTP_IP=$(tailscale status -json | jq -r '({("\(.Self.PublicKey)"): .Self} + .Pee
 
 # Update the StatefulSet YAML with the new IP
 yq -i ".spec.template.spec.containers[0].env[0].value = \"${FTP_IP}\"" \
-  "$(dirname "$0")/patch-deploy.yaml"
+  "$(dirname "$0")/patch-sts.yaml"
