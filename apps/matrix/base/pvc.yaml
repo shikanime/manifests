@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-discord-data
@@ -21,7 +21,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-googlechat-data
@@ -35,7 +35,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-slack-data
@@ -49,7 +49,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-whatsapp-data
@@ -63,7 +63,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-signal-data
@@ -77,7 +77,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: mautrix-meta-data

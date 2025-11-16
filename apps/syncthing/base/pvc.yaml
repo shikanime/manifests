@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 8Gi
+      storage: 4Gi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: syncthing-config
