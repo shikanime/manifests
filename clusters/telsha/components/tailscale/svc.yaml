@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nishir
+  namespace: shikanime
+spec:
+  type: ExternalName
+  externalName: nishir.taila659a.ts.net
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fushi
+  namespace: shikanime
+spec:
+  type: ExternalName
+  externalName: fushi.taila659a.ts.net
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minish
+  namespace: shikanime
+spec:
+  type: ExternalName
+  externalName: minish.taila659a.ts.net
