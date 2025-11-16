@@ -59,10 +59,3 @@ variable "longhorn_backupstore" {
   })
   sensitive = true
 }
-
-variable "vaultwarden" {
-  type = object({
-    admin_token = string
-  })
-  sensitive = true
-}

@@ -48,10 +48,3 @@ output "tempo" {
   }
   sensitive = true
 }
-
-output "vaultwarden" {
-  value = {
-    admin_token = var.vaultwarden.admin_token
-  }
-  sensitive = true
-}
