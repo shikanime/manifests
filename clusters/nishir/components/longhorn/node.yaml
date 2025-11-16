@@ -12,6 +12,7 @@ spec:
       path: /mnt/reimu/longhorn/
       storageReserved: 287919575138
       tags:
+        - balanced
         - fast
   name: fushi
 ---
@@ -29,6 +30,7 @@ spec:
       path: /mnt/marisa/longhorn/
       storageReserved: 287919575138
       tags:
+        - balanced
         - fast
   name: minish
 ---
@@ -53,6 +55,7 @@ spec:
       path: /mnt/nishir/longhorn/
       storageReserved: 76772540416
       tags:
+        - balanced
         - fast
     remilia:
       allowScheduling: true
