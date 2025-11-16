@@ -5,6 +5,6 @@ metadata:
   annotations:
     tailscale.com/hostname: oceando
     tailscale.com/proxy-class: oceando
-    tailscale.com/tags: tag:infra
+    tailscale.com/tags: tag:ssh
 spec:
   loadBalancerClass: tailscale
