@@ -191,7 +191,7 @@ spec:
                               - RemovePodsViolatingNodeTaints
               - name: longhorn
                 chartname: longhorn/longhorn
-                version: "1.10.0"
+                version: "1.10.1"
                 namespace: longhorn-system
                 values: |
                   image:

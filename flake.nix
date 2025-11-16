@@ -95,13 +95,13 @@
           };
           packages.longhornctl = pkgs.buildGoModule rec {
             pname = "longhornctl";
-            version = "1.10.0";
+            version = "1.10.1";
 
             src = pkgs.fetchFromGitHub {
               owner = "longhorn";
               repo = "cli";
               rev = "v${version}";
-              hash = "sha256-5wvdVgc6YlzxNEyLckyg6h+gwxGGLMhseT1o3tuvC6s=";
+              hash = "sha256-ETbUOnR+beIDL8T3JR9kzmzp+WejmslooqyLwIPX1rI=";
             };
 
             vendorHash = null;
