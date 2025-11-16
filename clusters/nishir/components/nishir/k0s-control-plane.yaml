@@ -150,7 +150,7 @@ spec:
                     mode: "true"
                   oauthSecretVolume:
                     secret:
-                      secretName: oauth-client
+                      secretName: operator-oauth
                   operatorConfig:
                     hostname: nishir-k8s-operator
               - name: trust-manager
