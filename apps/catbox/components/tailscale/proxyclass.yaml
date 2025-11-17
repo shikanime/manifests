@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: oceando
+  name: catbox
 spec:
   statefulSet:
     pod:
@@ -12,7 +12,7 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: oceando
+                    app.kubernetes.io/name: catbox
                 namespaces:
                   - shikanime
                 topologyKey: kubernetes.io/hostname

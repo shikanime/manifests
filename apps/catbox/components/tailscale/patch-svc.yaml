@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: oceando
+  name: catbox
   annotations:
-    tailscale.com/hostname: oceando
-    tailscale.com/proxy-class: oceando
+    tailscale.com/hostname: catbox
+    tailscale.com/proxy-class: catbox
     tailscale.com/tags: tag:ssh
 spec:
   loadBalancerClass: tailscale

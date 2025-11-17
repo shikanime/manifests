@@ -4,4 +4,4 @@ components:
   - ../../components/tailscale
 resources:
   - ../../base
-  - ../../../../apps/oceando/overlays/tailnet
+  - ../../../../apps/catbox/overlays/tailnet
