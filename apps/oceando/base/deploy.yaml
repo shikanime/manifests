@@ -45,6 +45,8 @@ spec:
               name: sys-kernel-debug
             - mountPath: /sys/kernel/tracing
               name: sys-kernel-tracing
+            - mountPath: /workspaces
+              name: oceando-workspaces-data
       hostname: oceando
       volumes:
         - hostPath:
@@ -55,3 +57,6 @@ spec:
             path: /sys/kernel/tracing
             type: Directory
           name: sys-kernel-tracing
+        - name: oceando-workspaces-data
+          persistentVolumeClaim:
+            claimName: oceando-workspaces-data
