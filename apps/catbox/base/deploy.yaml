@@ -46,7 +46,7 @@ spec:
             - mountPath: /sys/kernel/tracing
               name: sys-kernel-tracing
             - mountPath: /workspaces
-              name: catbox-workspaces-data
+              name: catbox-workspaces
       hostname: catbox
       volumes:
         - hostPath:
@@ -57,6 +57,6 @@ spec:
             path: /sys/kernel/tracing
             type: Directory
           name: sys-kernel-tracing
-        - name: catbox-workspaces-data
+        - name: catbox-workspaces
           persistentVolumeClaim:
-            claimName: catbox-workspaces-data
+            claimName: catbox-workspaces
