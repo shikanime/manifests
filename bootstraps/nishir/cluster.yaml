@@ -31,7 +31,7 @@ spec:
             - systemd-tmpfiles --create
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
-      noTaint: true
+      noTaints: true
       privateAddress: 100.117.159.56
       privateInterface: tailscale0
       role: controller+worker
@@ -198,7 +198,7 @@ spec:
                     longhorn:
                       engine:
                         repository: ghcr.io/shikanime/longhorn-engine
-                        tag: v1.10.x-head-arm64
+                        tag: v1.10.x-head
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: "best-effort"
