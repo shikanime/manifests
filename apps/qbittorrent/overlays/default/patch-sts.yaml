@@ -10,7 +10,12 @@ spec:
           volumeMounts:
             - name: downloads-data
               mountPath: /downloads
+            - name: staging-data
+              mountPath: /staging
       volumes:
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
+        - name: staging-data
+          persistentVolumeClaim:
+            claimName: staging-data
