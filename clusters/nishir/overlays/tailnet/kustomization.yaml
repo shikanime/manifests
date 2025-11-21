@@ -4,17 +4,17 @@ components:
   - ../../components/tailscale
 resources:
   - ../default
-  # - ../../../../apps/bazarr/overlays/tailnet
-  # - ../../../../apps/gitea/overlays/tailnet
-  # - ../../../../apps/jellyfin/overlays/tailnet
-  # - ../../../../apps/kratos/overlays/tailnet
-  # - ../../../../apps/lidarr/overlays/tailnet
-  # - ../../../../apps/matrix/overlays/tailnet
-  # - ../../../../apps/prowlarr/overlays/tailnet
+  - ../../../../apps/bazarr/overlays/tailnet
+  - ../../../../apps/gitea/overlays/tailnet
+  - ../../../../apps/jellyfin/overlays/tailnet
+  - ../../../../apps/kratos/overlays/tailnet
+  - ../../../../apps/lidarr/overlays/tailnet
+  - ../../../../apps/matrix/overlays/tailnet
+  - ../../../../apps/prowlarr/overlays/tailnet
   - ../../../../apps/qbittorrent/overlays/tailnet
-  # - ../../../../apps/radarr/overlays/tailnet
-  # - ../../../../apps/rclone/overlays/tailnet
-  # - ../../../../apps/sonarr/overlays/tailnet
-  # - ../../../../apps/syncthing/overlays/tailnet
-  # - ../../../../apps/vaultwarden/overlays/tailnet
-  # - ../../../../apps/whisparr/overlays/tailnet
+  - ../../../../apps/radarr/overlays/tailnet
+  - ../../../../apps/rclone/overlays/tailnet
+  - ../../../../apps/sonarr/overlays/tailnet
+  - ../../../../apps/syncthing/overlays/tailnet
+  - ../../../../apps/vaultwarden/overlays/tailnet
+  - ../../../../apps/whisparr/overlays/tailnet
