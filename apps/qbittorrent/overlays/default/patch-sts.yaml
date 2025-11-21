@@ -12,9 +12,6 @@ spec:
               mountPath: /downloads
             - name: staging-data
               mountPath: /staging
-            - name: qbittorrent-scripts
-              mountPath: /usr/bin/qbittorrent-torrent-finished-handler.sh
-              subPath: qbittorrent-torrent-finished-handler.sh
       volumes:
         - name: downloads-data
           persistentVolumeClaim:
@@ -22,7 +19,3 @@ spec:
         - name: staging-data
           persistentVolumeClaim:
             claimName: staging-data
-        - name: qbittorrent-scripts
-          secret:
-            secretName: qbittorrent-scripts
-            defaultMode: 0700
