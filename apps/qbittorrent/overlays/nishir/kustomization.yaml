@@ -3,3 +3,7 @@ kind: Kustomization
 resources:
   - ../default
   - cert.yaml
+secretGenerator:
+  - name: qbittorrent-scripts
+    files:
+      - qbittorrent-scripts/qbittorrent-torrent-finished-handler.sh
