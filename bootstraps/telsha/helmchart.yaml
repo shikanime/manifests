@@ -4,9 +4,10 @@ metadata:
   name: cert-manager
   namespace: kube-system
 spec:
-  repo: https://charts.jetstack.io
   chart: cert-manager
-  targetNamespace: cert-manager
+  createNamespace: true
+  repo: https://charts.jetstack.io
+  targetNamespace: cert-manager-system
   valuesContent: |
     crds:
       enabled: true
@@ -17,8 +18,9 @@ metadata:
   name: cluster-api-operator
   namespace: kube-system
 spec:
-  repo: https://kubernetes-sigs.github.io/cluster-api-operator
   chart: cluster-api-operator
+  createNamespace: true
+  repo: https://kubernetes-sigs.github.io/cluster-api-operator
   targetNamespace: capi-operator-system
   valuesContent: |
     cert-manager:
@@ -28,7 +30,7 @@ spec:
     controlPlane:
       k0sproject-k0smotron: {}
     infrastructure:
-      hetzner: {}
+      k0sproject-k0smotron: {}
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -36,9 +38,9 @@ metadata:
   name: tailscale-operator
   namespace: kube-system
 spec:
-  repo: https://pkgs.tailscale.com/helmcharts
   chart: tailscale-operator
-  version: "1.90.6"
+  createNamespace: true
+  repo: https://pkgs.tailscale.com/helmcharts
   targetNamespace: tailscale-system
   valuesContent: |
     operatorConfig:
