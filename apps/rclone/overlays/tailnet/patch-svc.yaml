@@ -3,4 +3,4 @@ kind: Service
 metadata:
   name: ftp
   labels:
-    tailscale.com/tailnet-ip: "100.125.233.122"
+    tailscale.com/tailnet-ip: "100.102.246.5"
