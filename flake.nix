@@ -66,6 +66,7 @@
               opentofu.enable = true;
             };
             packages = [
+              automata.packages.${system}.default
               pkgs.clusterctl
               pkgs.gh
               pkgs.gnugrep
@@ -79,8 +80,6 @@
               pkgs.skopeo
               pkgs.sops
               pkgs.yq-go
-              self'.packages.longhornctl
-              automata.packages.${system}.default
             ];
             treefmt = {
               enable = true;
@@ -91,41 +90,6 @@
                   "*.excalidraw"
                 ];
               };
-            };
-          };
-          packages.longhornctl = pkgs.buildGoModule rec {
-            pname = "longhornctl";
-            version = "1.10.1";
-
-            src = pkgs.fetchFromGitHub {
-              owner = "longhorn";
-              repo = "cli";
-              rev = "v${version}";
-              hash = "sha256-ETbUOnR+beIDL8T3JR9kzmzp+WejmslooqyLwIPX1rI=";
-            };
-
-            vendorHash = null;
-
-            subPackages = [ "cmd/remote" ];
-
-            ldflags = [
-              "-s"
-              "-w"
-              "-X github.com/longhorn/cli/meta.Version=v${version}"
-              "-X github.com/longhorn/cli/meta.GitCommit=${src.rev}"
-              "-X github.com/longhorn/cli/meta.BuildDate=1970-01-01T00:00:00+00:00"
-            ];
-
-            postInstall = ''
-              mv $out/bin/remote $out/bin/longhornctl
-            '';
-
-            meta = with pkgs.lib; {
-              description = "Longhorn command line tool";
-              homepage = "https://github.com/longhorn/cli";
-              license = licenses.asl20;
-              maintainers = with maintainers; [ shikanime ];
-              mainProgram = "longhornctl";
             };
           };
         };
