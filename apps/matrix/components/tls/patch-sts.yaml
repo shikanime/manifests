@@ -23,11 +23,11 @@ spec:
               port: https
               scheme: HTTPS
           volumeMounts:
-            - name: tls
-              mountPath: /etc/ssl/private
-              readOnly: true
             - name: certs
               mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: tls
+              mountPath: /etc/ssl/private
               readOnly: true
       volumes:
         - name: certs

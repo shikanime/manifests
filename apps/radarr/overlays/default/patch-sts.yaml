@@ -8,14 +8,14 @@ spec:
       containers:
         - name: radarr
           volumeMounts:
-            - name: downloads-data
-              mountPath: /downloads
             - name: data-movies
               mountPath: /data/movies
+            - name: downloads-data
+              mountPath: /downloads
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
         - name: data-movies
           persistentVolumeClaim:
             claimName: movies-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data

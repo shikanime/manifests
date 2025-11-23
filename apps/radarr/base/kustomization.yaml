@@ -14,6 +14,9 @@ images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
     newTag: 5.28.0
+  - name: sops
+    newName: cgr.dev/chainguard/sops
+    newTag: latest
 resources:
   - ingress.yaml
   - pvc.yaml

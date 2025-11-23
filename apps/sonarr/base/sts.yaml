@@ -26,6 +26,24 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       initContainers:
+        - name: sops-decrypt
+          image: sops
+          command:
+            - sops
+          args:
+            - --output
+            - /mnt/config/config.xml
+            - --decrypt
+            - /mnt/startup-config/config.enc.xml
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+            - name: sops-age
+              mountPath: /root/.config/sops/age
+              readOnly: true
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
         - name: config-sync
           image: rclone
           command:
@@ -88,6 +106,9 @@ spec:
         - name: rclone-config
           configMap:
             name: sonarr-rclone
-        - name: startup-config
+        - name: sops-age
           secret:
-            secretName: sonarr
+            secretName: sops-age
+        - name: startup-config
+          configMap:
+            name: sonarr-startup

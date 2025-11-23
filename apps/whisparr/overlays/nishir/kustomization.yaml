@@ -5,10 +5,11 @@ configurations:
 resources:
   - ../default
   - cert.yaml
+configMapGenerator:
+  - files:
+      - whisparr/config.enc.xml
+    name: whisparr-startup
 secretGenerator:
   - envs:
       - whisparr/.env
     name: whisparr-pkcs12-password
-  - files:
-      - whisparr/config.xml
-    name: whisparr

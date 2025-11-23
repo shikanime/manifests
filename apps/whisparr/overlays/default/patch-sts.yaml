@@ -8,14 +8,14 @@ spec:
       containers:
         - name: whisparr
           volumeMounts:
-            - name: downloads-data
-              mountPath: /downloads
             - name: data-sukebe
               mountPath: /data/sukebe
+            - name: downloads-data
+              mountPath: /downloads
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
         - name: data-sukebe
           persistentVolumeClaim:
             claimName: sukebe-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
