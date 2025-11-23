@@ -40,7 +40,7 @@
         treefmt-nix.flakeModule
       ];
       perSystem =
-        {          pkgs, system,...}:
+        { pkgs, system, ... }:
         {
           devenv.shells.default = {
             imports = [
@@ -48,8 +48,8 @@
             ];
             cachix.push = "shikanime";
             gitignore.content = [
-                "config.xml"
-              ];
+              "config.xml"
+            ];
             languages.opentofu.enable = true;
             packages = [
               automata.packages.${system}.default
@@ -64,8 +64,8 @@
               pkgs.yq-go
             ];
             treefmt.config.settings.global.excludes = [
-                  "*.excalidraw"
-                ];
+              "*.excalidraw"
+            ];
           };
         };
       systems = [

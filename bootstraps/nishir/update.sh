@@ -1,5 +1,6 @@
 #!/usr/bin/env nix
 #! nix develop --impure --command bash
+# shellcheck shell=bash
 
 set -o errexit
 set -o nounset
@@ -43,9 +44,9 @@ sed -i \
 get_latest_chart_version() {
   local repo_url="$1"
   local chart_name="$2"
+  local repo_name="temp-${repo_url//[![:alnum:]]/-}"
 
   # Add the helm repository temporarily
-  local repo_name="temp-$(echo "$repo_url" | sed 's|[^a-zA-Z0-9]|-|g')"
   helm repo add "$repo_name" "$repo_url" --force-update >/dev/null 2>&1
   helm repo update >/dev/null 2>&1
 

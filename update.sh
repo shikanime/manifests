@@ -1,5 +1,6 @@
 #!/usr/bin/env nix
 #! nix develop --impure --command bash
+# shellcheck shell=bash
 
 set -o errexit
 set -o nounset
@@ -18,8 +19,8 @@ COMMIT=$(
     jq -r "map(select(.name == \"v${LATEST_VERSION}\")) | .[0] | .commit.sha"
 )
 
-GIT_PREFETCH=$(nix-prefetch-url --unpack https://github.com/longhorn/cli/archive/${COMMIT}.tar.gz)
-GIT_HASH=$(nix hash convert --hash-algo sha256 --to sri ${GIT_PREFETCH})
+GIT_PREFETCH=$(nix-prefetch-url --unpack https://github.com/longhorn/cli/archive/"${COMMIT}".tar.gz)
+GIT_HASH=$(nix hash convert --hash-algo sha256 --to sri "${GIT_PREFETCH}")
 
 sed -i \
   -e "s|version = \".*\"|version = \"${LATEST_VERSION:-}\"|g" \
