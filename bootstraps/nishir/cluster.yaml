@@ -23,10 +23,14 @@ spec:
       dst: /etc/sysctl.d/99-k0s.conf
       name: sysctl
     hooks:
-      upgrade:
+      apply:
         before:
         - systemd-tmpfiles --create
-      apply:
+      install:
+        before:
+        - apt-get update
+        - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+      upgrade:
         before:
         - systemd-tmpfiles --create
     installFlags:
