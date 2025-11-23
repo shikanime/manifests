@@ -4,84 +4,99 @@ metadata:
   name: nishir
 spec:
   hosts:
-  - files:
-    - data: |
-        L /var/lib/k0s - - - - /mnt/nishir/k0s
-      dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
-      name: tmpfiles
-    - data: |
-        fs.file-max=131072
-        fs.inotify.max_user_instances=8192
-        fs.inotify.max_user_watches=524288
-        fs.inotify.max_queued_events=16384
-        kernel.panic=10
-        kernel.panic_on_oops=1
-        net.core.rmem_default=7340032
-        user.max_inotify_instances=8192
-        user.max_inotify_watches=524288
-        vm.overcommit_memory=1
-      dst: /etc/sysctl.d/99-k0s.conf
-      name: sysctl
-    hooks:
-      upgrade:
-        before:
-        - systemd-tmpfiles --create
-      apply:
-        before:
-        - systemd-tmpfiles --create
-    installFlags:
-    - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
-    noTaints: true
-    privateAddress: 100.117.159.56
-    privateInterface: tailscale0
-    role: controller+worker
-    ssh:
-      address: 100.117.159.56
-      user: root
-  - files:
-    - data: |
-        fs.file-max=131072
-        fs.inotify.max_user_instances=8192
-        fs.inotify.max_user_watches=524288
-        fs.inotify.max_queued_events=16384
-        kernel.panic=10
-        kernel.panic_on_oops=1
-        net.core.rmem_default=7340032
-        user.max_inotify_instances=8192
-        user.max_inotify_watches=524288
-        vm.overcommit_memory=1
-      dst: /etc/sysctl.d/99-k0s.conf
-      name: sysctl
-    installFlags:
-    - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
-    privateAddress: 100.78.148.86
-    privateInterface: tailscale0
-    role: worker
-    ssh:
-      address: 100.78.148.86
-      user: root
-  - files:
-    - data: |
-        fs.file-max=131072
-        fs.inotify.max_user_instances=8192
-        fs.inotify.max_user_watches=524288
-        fs.inotify.max_queued_events=16384
-        kernel.panic=10
-        kernel.panic_on_oops=1
-        net.core.rmem_default=7340032
-        user.max_inotify_instances=8192
-        user.max_inotify_watches=524288
-        vm.overcommit_memory=1
-      dst: /etc/sysctl.d/99-k0s.conf
-      name: sysctl
-    installFlags:
-    - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
-    privateAddress: 100.92.12.65
-    privateInterface: tailscale0
-    role: worker
-    ssh:
-      address: 100.92.12.65
-      user: root
+    - files:
+        - data: |
+            L /var/lib/k0s - - - - /mnt/nishir/k0s
+          dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
+          name: tmpfiles
+        - data: |
+            fs.file-max=131072
+            fs.inotify.max_user_instances=8192
+            fs.inotify.max_user_watches=524288
+            fs.inotify.max_queued_events=16384
+            kernel.panic=10
+            kernel.panic_on_oops=1
+            net.core.rmem_default=7340032
+            user.max_inotify_instances=8192
+            user.max_inotify_watches=524288
+            vm.overcommit_memory=1
+          dst: /etc/sysctl.d/99-k0s.conf
+          name: sysctl
+      hooks:
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+          after:
+            - systemd-tmpfiles --create
+            - sysctl --system
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
+      noTaints: true
+      privateAddress: 100.117.159.56
+      privateInterface: tailscale0
+      role: controller+worker
+      ssh:
+        address: 100.117.159.56
+        user: root
+    - files:
+        - data: |
+            fs.file-max=131072
+            fs.inotify.max_user_instances=8192
+            fs.inotify.max_user_watches=524288
+            fs.inotify.max_queued_events=16384
+            kernel.panic=10
+            kernel.panic_on_oops=1
+            net.core.rmem_default=7340032
+            user.max_inotify_instances=8192
+            user.max_inotify_watches=524288
+            vm.overcommit_memory=1
+          dst: /etc/sysctl.d/99-k0s.conf
+          name: sysctl
+      hooks:
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+          after:
+            - sysctl --system
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
+      privateAddress: 100.78.148.86
+      privateInterface: tailscale0
+      role: worker
+      ssh:
+        address: 100.78.148.86
+        user: root
+    - files:
+        - data: |
+            fs.file-max=131072
+            fs.inotify.max_user_instances=8192
+            fs.inotify.max_user_watches=524288
+            fs.inotify.max_queued_events=16384
+            kernel.panic=10
+            kernel.panic_on_oops=1
+            net.core.rmem_default=7340032
+            user.max_inotify_instances=8192
+            user.max_inotify_watches=524288
+            vm.overcommit_memory=1
+          dst: /etc/sysctl.d/99-k0s.conf
+          name: sysctl
+      hooks:
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+          after:
+            - sysctl --system
+      installFlags:
+        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
+      privateAddress: 100.92.12.65
+      privateInterface: tailscale0
+      role: worker
+      ssh:
+        address: 100.92.12.65
+        user: root
   k0s:
     config:
       apiVersion: k0s.k0sproject.io/v1beta1
@@ -94,149 +109,149 @@ spec:
         extensions:
           helm:
             repositories:
-            - name: fairwinds-stable
-              url: https://charts.fairwinds.com/stable
-            - name: jetstack
-              url: https://charts.jetstack.io
-            - name: kubernetes-sigs-cluster-api-operator
-              url: https://kubernetes-sigs.github.io/cluster-api-operator
-            - name: kubernetes-sigs-descheduler
-              url: https://kubernetes-sigs.github.io/descheduler
-            - name: kubernetes-sigs-nfd
-              url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
-            - name: longhorn
-              url: https://charts.longhorn.io
-            - name: tailscale
-              url: https://pkgs.tailscale.com/helmcharts
+              - name: fairwinds-stable
+                url: https://charts.fairwinds.com/stable
+              - name: jetstack
+                url: https://charts.jetstack.io
+              - name: kubernetes-sigs-cluster-api-operator
+                url: https://kubernetes-sigs.github.io/cluster-api-operator
+              - name: kubernetes-sigs-descheduler
+                url: https://kubernetes-sigs.github.io/descheduler
+              - name: kubernetes-sigs-nfd
+                url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+              - name: longhorn
+                url: https://charts.longhorn.io
+              - name: tailscale
+                url: https://pkgs.tailscale.com/helmcharts
             charts:
-            - name: cert-manager
-              chartname: jetstack/cert-manager
-              version: v1.19.1
-              namespace: cert-manager-system
-              values: |
-                clusterResourceNamespace: cert-manager-trust
-                crds:
-                  enabled: true
-            - name: cluster-api-operator
-              chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
-              version: 0.24.0
-              namespace: capi-operator-system
-              values: |
-                bootstrap:
-                  k0sproject-k0smotron: {}
-                controlPlane:
-                  k0sproject-k0smotron: {}
-                infrastructure:
-                  hetzner: {}
-                cert-manager:
-                  enabled: true
-            - name: descheduler
-              chartname: kubernetes-sigs-descheduler/descheduler
-              version: 0.34.0
-              namespace: kube-system
-              values: |
-                deschedulerPolicy:
-                  metricsProviders:
-                    - name: KubernetesMetrics
-                  profiles:
-                    - name: default
-                      pluginConfig:
-                        - name: DefaultEvictor
-                          args:
-                            ignorePvcPods: true
-                            evictLocalStoragePods: false
-                        - name: HighNodeUtilization
-                          args:
-                            thresholds:
-                              cpu: 20
-                              memory: 20
-                              pods: 20
-                        - name: LowNodeUtilization
-                          args:
-                            thresholds:
-                              cpu: 60
-                              memory: 60
-                              pods: 60
-                            targetThresholds:
-                              cpu: 80
-                              memory: 80
-                              pods: 80
-                            metricsUtilization:
-                              source: KubernetesMetrics
-                        - name: RemoveDuplicates
-                        - name: RemovePodsHavingTooManyRestarts
-                          args:
-                            podRestartThreshold: 50
-                            includingInitContainers: true
-                        - name: RemovePodsViolatingInterPodAntiAffinity
-                        - name: RemovePodsViolatingNodeAffinity
-                          args:
-                            nodeAffinityType:
-                              - preferredDuringSchedulingIgnoredDuringExecution
-                              - requiredDuringSchedulingIgnoredDuringExecution
-                        - name: RemovePodsViolatingNodeTaints
-                        - name: RemovePodsViolatingTopologySpreadConstraint
-                      plugins:
-                        balance:
-                          enabled:
-                            - HighNodeUtilization
-                            - LowNodeUtilization
-                            - RemoveDuplicates
-                            - RemovePodsViolatingTopologySpreadConstraint
-                        deschedule:
-                          enabled:
-                            - RemovePodsHavingTooManyRestarts
-                            - RemovePodsViolatingInterPodAntiAffinity
-                            - RemovePodsViolatingNodeAffinity
-                            - RemovePodsViolatingNodeTaints
-            - name: longhorn
-              chartname: longhorn/longhorn
-              version: 1.10.1
-              namespace: longhorn-system
-              values: |
-                image:
-                  longhorn:
-                    engine:
-                      repository: ghcr.io/shikanime/longhorn-engine/longhorn-engine
-                      tag: v1.10.x-head-arm64
-                defaultSettings:
-                  allowCollectingLonghornUsageMetrics: false
-                  defaultDataLocality: best-effort
-                  defaultReplicaCount: '2'
-                  offlineReplicaRebuilding: true
-                  replicaAutoBalance: best-effort
-                  rwxVolumeFastFailover: true
-                defaultBackupStore:
-                  backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
-                  backupTargetCredentialSecret: longhorn-hetzner-backups
-                persistence:
-                  defaultClassReplicaCount: 2
-                  defaultFsType: xfs
-            - name: node-feature-discovery
-              chartname: kubernetes-sigs-nfd/node-feature-discovery
-              version: 0.18.3
-              namespace: kube-system
-            - name: tailscale-operator
-              chartname: tailscale/tailscale-operator
-              version: 1.90.8
-              namespace: tailscale-system
-              values: |
-                apiServerProxyConfig:
-                  mode: "true"
-                operatorConfig:
-                  hostname: nishir-k8s-operator
-            - name: trust-manager
-              chartname: jetstack/trust-manager
-              version: v0.20.2
-              namespace: cert-manager-system
-              values: |
-                app:
-                  trust:
-                    namespace: cert-manager-trust
-            - name: vpa
-              chartname: fairwinds-stable/vpa
-              version: 4.10.0
-              namespace: kube-system
+              - name: cert-manager
+                chartname: jetstack/cert-manager
+                version: v1.19.1
+                namespace: cert-manager-system
+                values: |
+                  clusterResourceNamespace: cert-manager-trust
+                  crds:
+                    enabled: true
+              - name: cluster-api-operator
+                chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
+                version: 0.24.0
+                namespace: capi-operator-system
+                values: |
+                  bootstrap:
+                    k0sproject-k0smotron: {}
+                  controlPlane:
+                    k0sproject-k0smotron: {}
+                  infrastructure:
+                    hetzner: {}
+                  cert-manager:
+                    enabled: true
+              - name: descheduler
+                chartname: kubernetes-sigs-descheduler/descheduler
+                version: 0.34.0
+                namespace: kube-system
+                values: |
+                  deschedulerPolicy:
+                    metricsProviders:
+                      - name: KubernetesMetrics
+                    profiles:
+                      - name: default
+                        pluginConfig:
+                          - name: DefaultEvictor
+                            args:
+                              ignorePvcPods: true
+                              evictLocalStoragePods: false
+                          - name: HighNodeUtilization
+                            args:
+                              thresholds:
+                                cpu: 20
+                                memory: 20
+                                pods: 20
+                          - name: LowNodeUtilization
+                            args:
+                              thresholds:
+                                cpu: 60
+                                memory: 60
+                                pods: 60
+                              targetThresholds:
+                                cpu: 80
+                                memory: 80
+                                pods: 80
+                              metricsUtilization:
+                                source: KubernetesMetrics
+                          - name: RemoveDuplicates
+                          - name: RemovePodsHavingTooManyRestarts
+                            args:
+                              podRestartThreshold: 50
+                              includingInitContainers: true
+                          - name: RemovePodsViolatingInterPodAntiAffinity
+                          - name: RemovePodsViolatingNodeAffinity
+                            args:
+                              nodeAffinityType:
+                                - preferredDuringSchedulingIgnoredDuringExecution
+                                - requiredDuringSchedulingIgnoredDuringExecution
+                          - name: RemovePodsViolatingNodeTaints
+                          - name: RemovePodsViolatingTopologySpreadConstraint
+                        plugins:
+                          balance:
+                            enabled:
+                              - HighNodeUtilization
+                              - LowNodeUtilization
+                              - RemoveDuplicates
+                              - RemovePodsViolatingTopologySpreadConstraint
+                          deschedule:
+                            enabled:
+                              - RemovePodsHavingTooManyRestarts
+                              - RemovePodsViolatingInterPodAntiAffinity
+                              - RemovePodsViolatingNodeAffinity
+                              - RemovePodsViolatingNodeTaints
+              - name: longhorn
+                chartname: longhorn/longhorn
+                version: 1.10.1
+                namespace: longhorn-system
+                values: |
+                  image:
+                    longhorn:
+                      engine:
+                        repository: ghcr.io/shikanime/longhorn-engine/longhorn-engine
+                        tag: v1.10.x-head-arm64
+                  defaultSettings:
+                    allowCollectingLonghornUsageMetrics: false
+                    defaultDataLocality: best-effort
+                    defaultReplicaCount: '2'
+                    offlineReplicaRebuilding: true
+                    replicaAutoBalance: best-effort
+                    rwxVolumeFastFailover: true
+                  defaultBackupStore:
+                    backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
+                    backupTargetCredentialSecret: longhorn-hetzner-backups
+                  persistence:
+                    defaultClassReplicaCount: 2
+                    defaultFsType: xfs
+              - name: node-feature-discovery
+                chartname: kubernetes-sigs-nfd/node-feature-discovery
+                version: 0.18.3
+                namespace: kube-system
+              - name: tailscale-operator
+                chartname: tailscale/tailscale-operator
+                version: 1.90.8
+                namespace: tailscale-system
+                values: |
+                  apiServerProxyConfig:
+                    mode: "true"
+                  operatorConfig:
+                    hostname: nishir-k8s-operator
+              - name: trust-manager
+                chartname: jetstack/trust-manager
+                version: v0.20.2
+                namespace: cert-manager-system
+                values: |
+                  app:
+                    trust:
+                      namespace: cert-manager-trust
+              - name: vpa
+                chartname: fairwinds-stable/vpa
+                version: 4.10.0
+                namespace: kube-system
         network:
           calico:
             ipAutodetectionMethod: interface=tailscale0
