@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - literals:
+      - rclone.conf=""
+    name: ftp-rclone
+images:
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.71.2
+resources:
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/component: file-manager
+      app.kubernetes.io/name: ftp
+      app.kubernetes.io/part-of: nishir-operation
+      app.kubernetes.io/version: v1.71.2
