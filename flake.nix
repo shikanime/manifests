@@ -54,14 +54,13 @@
             packages = [
               automata.packages.${system}.default
               pkgs.clusterctl
-              pkgs.gnused
               pkgs.k0sctl
               pkgs.kubectl
               pkgs.kubernetes-helm
               pkgs.kustomize
+              pkgs.nushell
               pkgs.skaffold
               pkgs.sops
-              pkgs.yq-go
             ];
             treefmt.config.settings.global.excludes = [
               "*.excalidraw"
