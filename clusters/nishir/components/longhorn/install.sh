@@ -1,5 +1,6 @@
 #!/usr/bin/env nix
 #! nix develop --impure --command bash
+# shellcheck shell=bash
 
 set -o errexit
 set -o nounset

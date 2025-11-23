@@ -40,57 +40,32 @@
         treefmt-nix.flakeModule
       ];
       perSystem =
-        {
-          self',
-          pkgs,
-          system,
-          ...
-        }:
+        { pkgs, system, ... }:
         {
           devenv.shells.default = {
-            cachix = {
-              enable = true;
-              push = "shikanime";
-            };
-            containers = pkgs.lib.mkForce { };
-            gitignore = {
-              enable = true;
-              enableDefaultTemplates = true;
-              content = [
-                "config.xml"
-              ];
-            };
-            github.enable = true;
-            languages = {
-              nix.enable = true;
-              opentofu.enable = true;
-            };
+            imports = [
+              devlib.devenvModules.shikanime-studio
+            ];
+            cachix.push = "shikanime";
+            gitignore.content = [
+              "config.xml"
+            ];
+            languages.opentofu.enable = true;
             packages = [
               automata.packages.${system}.default
               pkgs.clusterctl
-              pkgs.gh
-              pkgs.gnugrep
               pkgs.gnused
               pkgs.k0sctl
               pkgs.kubectl
               pkgs.kubernetes-helm
               pkgs.kustomize
-              pkgs.sapling
               pkgs.skaffold
-              pkgs.skopeo
               pkgs.sops
               pkgs.yq-go
             ];
-            treefmt = {
-              enable = true;
-              config = {
-                enableDefaultExcludes = true;
-                programs.prettier.enable = true;
-                settings.global.excludes = [
-                  "*.excalidraw"
-                ];
-              };
-            };
+            treefmt.config.settings.global.excludes = [
+              "*.excalidraw"
+            ];
           };
         };
       systems = [
