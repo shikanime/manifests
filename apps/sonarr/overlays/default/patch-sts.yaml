@@ -8,14 +8,14 @@ spec:
       containers:
         - name: sonarr
           volumeMounts:
-            - name: downloads-data
-              mountPath: /downloads
             - name: data-shows
               mountPath: /data/shows
+            - name: downloads-data
+              mountPath: /downloads
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
         - name: data-shows
           persistentVolumeClaim:
             claimName: shows-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data

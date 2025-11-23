@@ -13,6 +13,25 @@ spec:
       labels:
         app.kubernetes.io/name: prowlarr
     spec:
+      initContainers:
+        - name: config-sync
+          image: sops
+          command:
+            - sops
+          args:
+            - --output
+            - /mnt/config/config.xml
+            - --decrypt
+            - /mnt/startup-config/config.enc.xml
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
+            - name: sops-age
+              mountPath: /root/.config/sops/age
+              readOnly: true
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -63,3 +82,9 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: prowlarr-config
+        - name: startup-config
+          configMap:
+            name: prowlarr-startup
+        - name: sops-age
+          secret:
+            secretName: sops-age

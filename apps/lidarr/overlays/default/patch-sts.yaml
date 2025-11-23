@@ -8,14 +8,14 @@ spec:
       containers:
         - name: lidarr
           volumeMounts:
-            - name: downloads-data
-              mountPath: /downloads
             - name: data-music
               mountPath: /data/music
+            - name: downloads-data
+              mountPath: /downloads
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
         - name: data-music
           persistentVolumeClaim:
             claimName: music-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data

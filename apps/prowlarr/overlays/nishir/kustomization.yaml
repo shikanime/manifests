@@ -5,6 +5,10 @@ configurations:
 resources:
   - ../default
   - cert.yaml
+configMapGenerator:
+  - files:
+      - prowlarr/config.enc.xml
+    name: prowlarr-startup
 secretGenerator:
   - envs:
       - prowlarr/.env

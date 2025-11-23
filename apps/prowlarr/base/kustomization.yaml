@@ -7,6 +7,9 @@ images:
   - name: prowlarr
     newName: lscr.io/linuxserver/prowlarr
     newTag: 2.1.5
+  - name: sops
+    newName: cgr.dev/chainguard/sops
+    newTag: latest
 resources:
   - ingress.yaml
   - pvc.yaml
