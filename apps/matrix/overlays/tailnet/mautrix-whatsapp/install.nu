@@ -1,0 +1,5 @@
+#!/usr/bin/env nix
+#! nix develop --impure --command nu
+
+^sops --decrypt $"($env.FILE_PWD)/config.enc.yaml" | save --force $"($env.FILE_PWD)/config.yaml"
+^sops --decrypt $"($env.FILE_PWD)/registration.enc.yaml" | save --force $"($env.FILE_PWD)/registration.yaml"

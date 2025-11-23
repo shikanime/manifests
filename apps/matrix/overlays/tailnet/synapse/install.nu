@@ -1,0 +1,4 @@
+#!/usr/bin/env nix
+#! nix develop --impure --command nu
+
+^sops --decrypt $"($env.FILE_PWD)/homeserver.enc.yaml" | save --force $"($env.FILE_PWD)/homeserver.yaml"
