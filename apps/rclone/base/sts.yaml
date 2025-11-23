@@ -111,12 +111,12 @@ spec:
               port: ftp-control
             failureThreshold: 30
           volumeMounts:
+            - name: cache
+              mountPath: /cache
             - name: config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
-            - name: cache
-              mountPath: /cache
         - name: rclone-webdav
           image: rclone
           args:
@@ -148,6 +148,8 @@ spec:
               port: http
             failureThreshold: 30
           volumeMounts:
+            - name: cache
+              mountPath: /cache
             - name: config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
@@ -156,15 +158,13 @@ spec:
               mountPath: /config/rclone/htpasswd
               subPath: htpasswd
               readOnly: true
-            - name: cache
-              mountPath: /cache
       volumes:
+        - name: cache
+          persistentVolumeClaim:
+            claimName: rclone-cache
         - name: config
           configMap:
             name: rclone
         - name: htpasswd
           secret:
             secretName: rclone-htpasswd
-        - name: cache
-          persistentVolumeClaim:
-            claimName: rclone-cache

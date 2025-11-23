@@ -5,10 +5,11 @@ configurations:
 resources:
   - ../default
   - cert.yaml
+configMapGenerator:
+  - files:
+      - sonarr/config.enc.xml
+    name: sonarr-startup
 secretGenerator:
   - envs:
       - sonarr/.env
     name: sonarr-pkcs12-password
-  - files:
-      - sonarr/config.xml
-    name: sonarr

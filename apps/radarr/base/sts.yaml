@@ -27,21 +27,19 @@ spec:
               weight: 100
       initContainers:
         - name: config-sync
-          image: rclone
+          image: sops
           command:
-            - rclone
+            - sops
           args:
-            - copy
-            - --copy-links
-            - --update
-            - /mnt/startup-config
-            - /mnt/config
+            - --output
+            - /mnt/config/config.xml
+            - --decrypt
+            - /mnt/startup-config/config.enc.xml
           volumeMounts:
             - name: config
               mountPath: /mnt/config
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
+            - name: sops-age
+              mountPath: /root/.config/sops/age
               readOnly: true
             - name: startup-config
               mountPath: /mnt/startup-config
@@ -86,6 +84,9 @@ spec:
         - name: rclone-config
           configMap:
             name: radarr-rclone
-        - name: startup-config
+        - name: sops-age
           secret:
-            secretName: radarr
+            secretName: sops-age
+        - name: startup-config
+          configMap:
+            name: radarr-startup
