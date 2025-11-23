@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rclone-tls
+spec:
+  secretName: rclone-tls
+  issuerRef:
+    name: nishir-cluster-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - webdav.tail6e8f.ts.net
