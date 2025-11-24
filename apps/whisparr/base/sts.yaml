@@ -88,7 +88,7 @@ spec:
             claimName: whisparr-config
         - name: rclone-config
           configMap:
-            name: whisparr-rclone
+            name: rclone-config
         - name: startup-config
           secret:
             secretName: whisparr
