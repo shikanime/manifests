@@ -1,5 +1,5 @@
 #!/usr/bin/env nix
-#! nix develop --impure --command nu
+#! nix shell nixpkgs#nushell --command nu
 
 def get_tailscale_ips [] {
  print "Fetching Tailscale IPs..."
