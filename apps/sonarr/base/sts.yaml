@@ -87,7 +87,7 @@ spec:
             claimName: sonarr-config
         - name: rclone-config
           configMap:
-            name: sonarr-rclone
+            name: rclone-config
         - name: startup-config
           secret:
             secretName: sonarr

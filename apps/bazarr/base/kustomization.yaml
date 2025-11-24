@@ -3,10 +3,6 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)$" }, { "name": "bazarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
-configMapGenerator:
-  - literals:
-      - rclone.conf=""
-    name: bazarr-rclone
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
