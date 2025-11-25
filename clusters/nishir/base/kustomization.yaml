@@ -6,3 +6,4 @@ configMapGenerator:
     name: rclone
 resources:
   - ns.yaml
+  - pvc.yaml
