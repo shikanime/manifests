@@ -12,7 +12,6 @@ images:
     newTag: 5.28.0
 resources:
   - ingress.yaml
-  - pvc.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml

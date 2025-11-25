@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: prowlarr
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: prowlarr-tls
+            items:
+              - key: keystore.p12
+                path: keystore.p12
+                mode: 0640

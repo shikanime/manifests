@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: matrix-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-discord
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-googlechat
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-meta
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-slack
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-signal
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-whatsapp
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matrix-manager
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: matrix-manager-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640

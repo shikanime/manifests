@@ -60,3 +60,15 @@ spec:
         - name: data-timeline
           persistentVolumeClaim:
             claimName: timeline-data
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: rclone-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640

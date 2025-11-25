@@ -12,7 +12,6 @@ images:
     newTag: v3-3.0.2.1354
 resources:
   - ingress.yaml
-  - pvc.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml

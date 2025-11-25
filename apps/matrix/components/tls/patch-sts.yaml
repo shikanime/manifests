@@ -29,19 +29,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: matrix-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -56,10 +43,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -74,10 +57,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -92,10 +71,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -110,10 +85,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -128,10 +99,6 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
