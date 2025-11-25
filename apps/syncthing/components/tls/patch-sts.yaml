@@ -20,7 +20,3 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt

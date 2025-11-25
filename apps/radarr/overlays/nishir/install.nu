@@ -2,3 +2,4 @@
 #! nix shell nixpkgs#nushell --command nu
 
 ^sops --decrypt $"($env.FILE_PWD)/radarr/.enc.env" | save --force $"($env.FILE_PWD)/radarr/.env"
+^sops --decrypt $"($env.FILE_PWD)/radarr/config.enc.xml" | save --force $"($env.FILE_PWD)/radarr/config.xml"

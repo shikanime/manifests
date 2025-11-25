@@ -29,14 +29,3 @@ spec:
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: sonarr-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640

@@ -10,7 +10,6 @@ images:
 resources:
   - deploy.yaml
   - svc.yaml
-  - pvc.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: backend-service

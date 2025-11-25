@@ -10,7 +10,7 @@ profiles:
       kustomize:
         paths:
           - clusters/nishir/overlays/tailnet
-  - name: telsha-telnet
+  - name: telsha-tailnet
     activation:
       - kubeContext: rancher-desktop
     manifests:

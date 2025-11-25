@@ -15,3 +15,30 @@ spec:
                     values:
                       - rpi5-large
                       - rpi4-large
+      containers:
+        - name: syncthing
+          volumeMounts:
+            - name: data-staging
+              mountPath: /var/syncthing/Staging
+            - name: data-sukebe
+              mountPath: /var/syncthing/Sukebe
+            - name: data-sync
+              mountPath: /var/syncthing/Sync
+            - name: data-timeline
+              mountPath: /var/syncthing/Timeline
+      volumes:
+        - name: data-staging
+          persistentVolumeClaim:
+            claimName: staging-data
+        - name: data-sukebe
+          persistentVolumeClaim:
+            claimName: sukebe-data
+        - name: data-sync
+          persistentVolumeClaim:
+            claimName: sync-data
+        - name: data-timeline
+          persistentVolumeClaim:
+            claimName: timeline-data
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt

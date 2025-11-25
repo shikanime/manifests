@@ -29,17 +29,6 @@ spec:
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: jellyfin-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -54,7 +43,3 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
