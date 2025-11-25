@@ -4,10 +4,11 @@ configurations:
   - namereference.yaml
 components:
   - ../../components/v4l
+  - ../../components/tls
 patches:
   - path: patch-sts.yaml
 resources:
-  - ../default
+  - ../../base
   - cert.yaml
 secretGenerator:
   - envs:
