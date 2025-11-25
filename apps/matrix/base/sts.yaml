@@ -151,7 +151,7 @@ spec:
             secretName: mautrix-whatsapp
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
         - name: config
           secret:
             secretName: synapse
@@ -246,7 +246,7 @@ spec:
             claimName: mautrix-discord-data
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -335,7 +335,7 @@ spec:
             claimName: mautrix-googlechat-data
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -424,7 +424,7 @@ spec:
             claimName: mautrix-meta-data
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -513,7 +513,7 @@ spec:
             claimName: mautrix-signal-data
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -602,7 +602,7 @@ spec:
             claimName: mautrix-slack-data
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -691,4 +691,4 @@ spec:
             claimName: mautrix-whatsapp-data
         - name: rclone-config
           configMap:
-            name: rclone-config
+            name: rclone
