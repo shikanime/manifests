@@ -3,6 +3,7 @@ kind: Kustomization
 configMapGenerator:
   - files:
       - rclone/rclone.conf
+    namespace: shikanime
     name: rclone-config
 resources:
   - ns.yaml
