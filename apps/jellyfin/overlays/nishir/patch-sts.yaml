@@ -14,7 +14,6 @@ spec:
                     operator: In
                     values:
                       - rpi4-large
-    spec:
       containers:
         - name: jellyfin
           volumeMounts:
