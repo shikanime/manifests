@@ -37,6 +37,10 @@ spec:
                 secretKeyRef:
                   name: rclone-ftp
                   key: password
+            - name: RCLONE_CACHE_DIR
+              value: /cache
+            - name: RCLONE_VFS_CACHE_MODE
+              value: full
           ports:
             - containerPort: 2121
               name: ftp-control
