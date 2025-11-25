@@ -1,7 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: shikanime
 components:
   - ../../components/tailscale
+patches:
+  - path: patch-sts.yaml
+  - path: patch-svc.yaml
 resources:
-  - ../../base
-  - ../../../../apps/catbox/overlays/telsha-tailnet
+  - ../nishir

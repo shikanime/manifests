@@ -1,0 +1,16 @@
+:80 {
+    redir https://{host}{uri} permanent
+}
+
+:443 {
+    tls /etc/ssl/private/tls.crt /etc/ssl/private/tls.key
+
+    handle /.well-known/matrix/mautrix {
+        header Content-Type application/json
+        header Access-Control-Allow-Origin "*"
+        header Access-Control-Allow-Methods "GET, OPTIONS"
+        header Access-Control-Allow-Headers "Origin, Content-Type, Accept"
+        header Access-Control-Max-Age "86400"
+        respond `{"fi.mau.bridges":["https://matrix-slack.taila659a.ts.net"]}` 200
+    }
+}

@@ -1,0 +1,155 @@
+# Homeserver details.
+homeserver:
+  address: https://matrix:8448
+  domain: matrix.taila659a.ts.net
+  software: standard
+  status_endpoint: null
+  message_send_checkpoint_endpoint: null
+  async_media: false
+  websocket: false
+  ping_interval_seconds: 0
+appservice:
+  address: http://matrix-discord:29334
+  hostname: 0.0.0.0
+  port: 29334
+  database:
+    type: sqlite3-fk-wal
+    uri: file:/data/discord.db?_txlock=immediate
+    max_open_conns: 20
+    max_idle_conns: 2
+    max_conn_idle_time: null
+    max_conn_lifetime: null
+  id: discord
+  bot:
+    username: discordbot
+    displayname: Discord bridge bot
+    avatar: mxc://maunium.net/nIdEykemnwdisvHbpxflpDlC
+  ephemeral_events: true
+  async_transactions: false
+  as_token: ENC[AES256_GCM,data:B2Ot61r5DZrIaeqo/btEoXGtvzjbyW+IKInGmG1Y5zxTXbLo7McdMIlB3s4fe4XL7nHkMj1YY1BQo8KjeVjuIQ==,iv:0UHIboI+R8kSNfomYJ6toSUj0Lj4HEouXAp6fnIu5wg=,tag:3XeniGoZukIR6Uc1VUQeGQ==,type:str]
+  hs_token: ENC[AES256_GCM,data:cM35UiqWDJz9BYcYqUbm4GxCtvidxIAntGq0Xq89NYRoBDH09eacYjDdc8k0CR0/iGowV3yzIqXuUjRE3rGAHw==,iv:RcMJkZB69VYq0ziq2/l1114VskvVuH08Exb/rgAmtaI=,tag:XS9tGwUEBU8mpbpNpEV2Eg==,type:str]
+bridge:
+  username_template: discord_{{.}}
+  displayname_template: "{{if .Webhook}}Webhook{{else}}{{or .GlobalName .Username}}{{if .Bot}} (bot){{end}}{{end}}"
+  channel_name_template: "{{if or (eq .Type 3) (eq .Type 4)}}{{.Name}}{{else}}#{{.Name}}{{end}}"
+  guild_name_template: "{{.Name}}"
+  private_chat_portal_meta: default
+  public_address: https://matrix-discord.taila659a.ts.net
+  avatar_proxy_key: ENC[AES256_GCM,data:RKZezcEU97Xg0ozCLzwJRcljyn2nVERhndIvEnW0OhA=,iv:MZpq3arA9w5qykClavbvEq8Q2PWTeD/DuHkze3HV5Ek=,tag:MkkZa35ovJWnYgIv82MBSw==,type:str]
+  portal_message_buffer: 128
+  startup_private_channel_create_limit: 5
+  delivery_receipts: false
+  message_status_events: false
+  message_error_notices: true
+  custom_emoji_reactions: true
+  delete_portal_on_channel_delete: false
+  delete_guild_on_leave: true
+  federate_rooms: true
+  prefix_webhook_messages: true
+  enable_webhook_avatars: false
+  use_discord_cdn_upload: true
+  proxy: null
+  cache_media: unencrypted
+  direct_media:
+    enabled: false
+    server_name: matrix-discord.taila659a.ts.net
+    well_known_response: null
+    allow_proxy: true
+    server_key: ENC[AES256_GCM,data:Su41eadMDOEi2FqKNhXWmGO8kt3c31Nxc96hlq2f4F4OWyivD3s6ah8ruCikCr/o+6Rnia4UBm6eyA==,iv:5pi8Y2QfJyPKthMu32NGSij3oVaZ5pdeLpGbhQCg/gw=,tag:Arn+N5UcIZ8QiXxVE4QdQg==,type:str]
+  animated_sticker:
+    target: webp
+    args:
+      width: 320
+      height: 320
+      fps: 25
+  double_puppet_server_map:
+    matrix.taila659a.ts.net: https://matrix:8448
+  double_puppet_allow_discovery: false
+  login_shared_secret_map:
+    matrix.taila659a.ts.net: foobar
+  command_prefix: "!discord"
+  management_room_text:
+    welcome: Hello, I'm a Discord bridge bot.
+    welcome_connected: Use `help` for help.
+    welcome_unconnected: Use `help` for help or `login` to log in.
+    additional_help: ""
+  backfill:
+    forward_limits:
+      initial:
+        dm: 0
+        channel: 0
+        thread: 0
+      missed:
+        dm: 0
+        channel: 0
+        thread: 0
+    max_guild_members: -1
+  encryption:
+    allow: false
+    default: false
+    appservice: false
+    msc4190: false
+    require: false
+    allow_key_sharing: false
+    delete_keys:
+      delete_outbound_on_ack: false
+      dont_store_outbound: false
+      ratchet_on_decrypt: false
+      delete_fully_used_on_decrypt: false
+      delete_prev_on_new_session: false
+      delete_on_device_delete: false
+      periodically_delete_expired: false
+      delete_outdated_inbound: false
+    verification_levels:
+      receive: unverified
+      send: unverified
+      share: cross-signed-tofu
+    rotation:
+      enable_custom: false
+      milliseconds: 604800000
+      messages: 100
+      disable_device_change_key_rotation: false
+logging:
+  min_level: debug
+  writers:
+    - type: stdout
+      format: pretty-colored
+    - type: file
+      format: json
+      filename: ./logs/mautrix-discord.log
+      max_size: 100
+      max_backups: 10
+      compress: true
+sops:
+  age:
+    - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBob3lOdW5tMWFtZFRkTnI4
+        K0ZNSFlWdnhPanNhYVFFVXRuekdqRnJaQnlBCkNad0Vwa3ZhZm5CNWxpODhLbVpp
+        V1VKblo1UDh0TTdBby94aU5ORDB6azQKLS0tIDRZS1NXRmw3aEtQeG5sbG10MlZ3
+        QW5WSy9mS1V5OXlIMVJRTERkdElLUDQKaiCB41w5WtKf9tn0/9Pur23M3TUrYRoN
+        U6L2LEU28OOMS15U5/oKeOmmgyaFEpXHuFYMUNgLP60JnTcF76DsDw==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0SXUrMVlBWWlBTGJ6K29I
+        dEZ4RDU4TUd4eDEzMVROVTNVUHFlVlIydW5FCkdOT0F3eEFvWVlFMmZ4UWxDamE2
+        K3BuSW5GZXVpK1ZBSlc3OTY5MkhmaEEKLS0tIEFxL0Q2WVYwYUk4eTczMVBGdVdT
+        akRKMzJxVkJ2L1hFcHdlalh5UlAxaDQKIK7uVcQXTxswdg7EJ1FP95q0BWEjhVx7
+        LthCfZt1fST8Al9a3ognFV2D9AfkAgGvzkOPST59tWRV5s6lgd4sXw==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhQmlJakpobENMRHloM1ho
+        SnZtdTI0cFFJdk9Yb2tJQ3FXSUFoT1lBcVdVClAvOEpGU3ExVDdjWmxNTS80NUVk
+        bXhEWjFiZ1NMQWZPNFJLczlKamJSVFEKLS0tIFhtUXFQZHN5ZUVEUFBBSmR3RWJr
+        Q1pnQkFkYTQ0YVpvbTJqaEpIbk1OL2cKUVc63Lc1Cdkts03Z7xV6TMiSrNsQyvli
+        6OqzuFI4R1rqntxTbEqP2k373Tur/s4fwTumaWWf8HSCbeosK14lJA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-26T00:36:13Z"
+  mac: ENC[AES256_GCM,data:QyRQRdigDpuw4BLciQdBs3Zz4sIe5KmTUgr9yYSv98uuJj/for9N459yqtrHxd8yI6WRf67R/4HkmdqYyXzs5EY6fuPvnom7RC9V+GRYcgFOj8EFAhz8TQRezdK/AKsuyODA8H+SjkYfcKmkvpodZyircYFROrUMmLwsLrqeDH8=,iv:DXQ99gbyEDE4Ud+iHS7UkBqJz1xFykoGdZP1Lo6bg9M=,tag:ZjjyaLYMPOKJ4hMeOoqARA==,type:str]
+  encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
+  version: 3.10.2
