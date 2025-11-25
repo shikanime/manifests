@@ -4,6 +4,7 @@ configMapGenerator:
   - files:
       - rclone/rclone.conf
     name: rclone
+    namespace: shikanime
 resources:
   - ns.yaml
   - pvc.yaml
