@@ -73,6 +73,7 @@ spec:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
           after:
+            - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
@@ -111,6 +112,7 @@ spec:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
           after:
+            - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
