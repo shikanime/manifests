@@ -6,9 +6,9 @@ spec:
   hosts:
     - files:
         - data: |
-            L /var/lib/containerd - - - - /mnt/nishir/k0s/containerd
+            L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/nishir/k0s
-            L /var/lib/kubelet - - - - /mnt/nishir/k0s/kubelet
+            L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
             L /var/logs/longhorn - - - - /mnt/nishir/longhorn
             L /var/logs/calico - - - - /mnt/nishir/logs/calico
             L /var/logs/pods - - - - /mnt/nishir/logs/pods
@@ -46,9 +46,9 @@ spec:
         user: root
     - files:
         - data: |
-            L /var/lib/containerd - - - - /mnt/reimu/k0s/containerd
+            L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/reimu/k0s
-            L /var/lib/kubelet - - - - /mnt/reimu/k0s/kubelet
+            L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
             L /var/logs/longhorn - - - - /mnt/reimu/longhorn
             L /var/logs/calico - - - - /mnt/reimu/logs/calico
             L /var/logs/pods - - - - /mnt/reimu/logs/pods
@@ -84,9 +84,9 @@ spec:
         user: root
     - files:
         - data: |
-            L /var/lib/containerd - - - - /mnt/flandre/k0s/containerd
+            L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/flandre/k0s
-            L /var/lib/kubelet - - - - /mnt/flandre/k0s/kubelet
+            L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
             L /var/logs/longhorn - - - - /mnt/flandre/longhorn
             L /var/logs/calico - - - - /mnt/flandre/logs/calico
             L /var/logs/pods - - - - /mnt/flandre/logs/pods
