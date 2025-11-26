@@ -5,7 +5,20 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: lidarr
+          volumeMounts:
+            - name: downloads-data
+              mountPath: /downloads
+            - name: data-music
+              mountPath: /data/music
       volumes:
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: data-music
+          persistentVolumeClaim:
+            claimName: music-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt

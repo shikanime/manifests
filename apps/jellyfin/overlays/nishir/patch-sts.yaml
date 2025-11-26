@@ -19,6 +19,8 @@ spec:
           volumeMounts:
             - name: data-movies
               mountPath: /data/movies
+            - name: data-music
+              mountPath: /data/music
             - name: data-shows
               mountPath: /data/shows
             - name: data-sukebe
@@ -29,6 +31,9 @@ spec:
         - name: data-movies
           persistentVolumeClaim:
             claimName: movies-data
+        - name: data-music
+          persistentVolumeClaim:
+            claimName: music-data
         - name: data-shows
           persistentVolumeClaim:
             claimName: shows-data
