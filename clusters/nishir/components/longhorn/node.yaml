@@ -9,7 +9,7 @@ spec:
     fushi:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/fushi/longhorn/
+      path: /var/lib/longhorn/
       storageReserved: 287919575138
       tags:
         - balanced
