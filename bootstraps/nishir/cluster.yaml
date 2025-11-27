@@ -9,9 +9,9 @@ spec:
             L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/nishir/k0s
             L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
-            L /var/logs/longhorn - - - - /mnt/nishir/longhorn
-            L /var/logs/calico - - - - /mnt/nishir/logs/calico
-            L /var/logs/pods - - - - /mnt/nishir/logs/pods
+            L /var/log/longhorn - - - - /mnt/nishir/longhorn
+            L /var/log/calico - - - - /mnt/nishir/log/calico
+            L /var/log/pods - - - - /mnt/nishir/log/pods
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
           name: tmpfiles
         - data: |
@@ -49,9 +49,9 @@ spec:
             L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/reimu/k0s
             L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
-            L /var/logs/longhorn - - - - /mnt/reimu/longhorn
-            L /var/logs/calico - - - - /mnt/reimu/logs/calico
-            L /var/logs/pods - - - - /mnt/reimu/logs/pods
+            L /var/log/longhorn - - - - /mnt/reimu/longhorn
+            L /var/log/calico - - - - /mnt/reimu/log/calico
+            L /var/log/pods - - - - /mnt/reimu/log/pods
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
           name: tmpfiles
         - data: |
@@ -88,9 +88,9 @@ spec:
             L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/flandre/k0s
             L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
-            L /var/logs/longhorn - - - - /mnt/flandre/longhorn
-            L /var/logs/calico - - - - /mnt/flandre/logs/calico
-            L /var/logs/pods - - - - /mnt/flandre/logs/pods
+            L /var/log/longhorn - - - - /mnt/flandre/longhorn
+            L /var/log/calico - - - - /mnt/flandre/log/calico
+            L /var/log/pods - - - - /mnt/flandre/log/pods
           dst: /etc/tmpfiles.d/mnt-flandre-k0s.conf
           name: tmpfiles
         - data: |
@@ -267,7 +267,7 @@ spec:
                     hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: v0.20.2
+                version: v0.21.0
                 namespace: cert-manager-system
                 values: |
                   app:
@@ -275,7 +275,7 @@ spec:
                       namespace: cert-manager-trust
               - name: vpa
                 chartname: fairwinds-stable/vpa
-                version: 4.10.0
+                version: 5.0.0
                 namespace: kube-system
         network:
           calico:
