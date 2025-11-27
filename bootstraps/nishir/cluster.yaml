@@ -9,7 +9,6 @@ spec:
             L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/nishir/k0s
             L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
-            L /var/lib/longhorn - - - - /mnt/nishir/longhorn
             L /var/log/calico - - - - /mnt/nishir/log/calico
             L /var/log/pods - - - - /mnt/nishir/log/pods
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
@@ -48,7 +47,6 @@ spec:
             L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/reimu/k0s
             L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
-            L /var/lib/longhorn - - - - /mnt/reimu/longhorn
             L /var/log/calico - - - - /mnt/reimu/log/calico
             L /var/log/pods - - - - /mnt/reimu/log/pods
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
@@ -86,7 +84,6 @@ spec:
             L /var/lib/containerd - - - - /var/lib/k0s/containerd
             L /var/lib/k0s - - - - /mnt/marisa/k0s
             L /var/lib/kubelet - - - - /var/lib/k0s/kubelet
-            L /var/lib/longhorn - - - - /mnt/marisa/longhorn
             L /var/log/calico - - - - /mnt/marisa/log/calico
             L /var/log/pods - - - - /mnt/marisa/log/pods
           dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
