@@ -6,10 +6,10 @@ metadata:
 spec:
   allowScheduling: true
   disks:
-    reimu:
+    fushi:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/reimu/longhorn/
+      path: /mnt/fushi/longhorn/
       storageReserved: 287919575138
       tags:
         - balanced
@@ -24,10 +24,10 @@ metadata:
 spec:
   allowScheduling: true
   disks:
-    marisa:
+    minish:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/marisa/longhorn/
+      path: /var/lib/longhorn/
       storageReserved: 287919575138
       tags:
         - balanced
@@ -52,7 +52,7 @@ spec:
     nishir:
       allowScheduling: true
       diskType: filesystem
-      path: /mnt/nishir/longhorn/
+      path: /var/lib/longhorn/
       storageReserved: 76772540416
       tags:
         - balanced

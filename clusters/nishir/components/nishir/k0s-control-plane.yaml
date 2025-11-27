@@ -155,7 +155,7 @@ spec:
                     hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: "v0.19.0"
+                version: "0.19.0"
                 namespace: cert-manager-system
                 values: |
                   app:
