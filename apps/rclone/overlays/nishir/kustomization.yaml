@@ -4,7 +4,7 @@ namespace: shikanime
 components:
   - ../../components/tls
 patches:
-  - path: patch-sts.yaml
+  - path: patch-deploy.yaml
 resources:
   - ../../base
   - cert.yaml

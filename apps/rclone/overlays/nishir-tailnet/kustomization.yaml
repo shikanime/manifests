@@ -4,7 +4,7 @@ namespace: shikanime
 components:
   - ../../components/tailscale
 patches:
-  - path: patch-sts.yaml
+  - path: patch-deploy.yaml
   - path: patch-svc.yaml
 resources:
   - ../nishir

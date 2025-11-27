@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: rclone
 spec:
   replicas: 1
-  serviceName: rclone
   selector:
     matchLabels:
       app.kubernetes.io/name: rclone
@@ -170,5 +169,4 @@ spec:
           secret:
             secretName: rclone-htpasswd
         - name: cache
-          persistentVolumeClaim:
-            claimName: rclone-cache
+          emptyDir: {}
