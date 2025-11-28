@@ -7,7 +7,7 @@ jobs:
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/stale@v4
+      - uses: actions/stale@v10
         with:
           days-before-close: 14
           days-before-stale: 30
