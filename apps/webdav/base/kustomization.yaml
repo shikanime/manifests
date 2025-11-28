@@ -6,7 +6,7 @@ metadata:
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
-    newTag: 1.71.2
+    newTag: 1.72.0
 resources:
   - deploy.yaml
   - ingress.yaml
