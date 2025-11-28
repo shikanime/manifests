@@ -1,18 +1,9 @@
-name: Check
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-      - gh/*/*/base
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - id: createGithubAppToken
-        uses: actions/create-github-app-token@v2.0.1
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
@@ -23,9 +14,15 @@ jobs:
       - uses: shikanime-studio/setup-nix-action@v1
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
-      - name: Check Nix Flake
-        run: |
-          nix flake check \
-            --accept-flake-config \
-            --all-systems \
-            --no-pure-eval
+      - uses: shikanime-studio/direnv-action@v2
+      - run: nix flake check --accept-flake-config --all-systems --no-pure-eval
+name: Main
+"on":
+  pull_request:
+    branches:
+      - main
+      - gh/*/*/base
+  push:
+    branches:
+      - main
+      - release-*
