@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-        - name: webdav
+        - name: rclone
           env:
             - name: RCLONE_CERT
               value: /etc/ssl/private/tls.crt
