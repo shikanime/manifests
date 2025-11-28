@@ -4,8 +4,11 @@ metadata:
   name: copyparty
 spec:
   ports:
+    - name: ftp
+      port: 3921
+      targetPort: ftp
     - name: http
-      port: 80
+      port: 3923
       targetPort: http
   selector:
     app.kubernetes.io/name: copyparty
