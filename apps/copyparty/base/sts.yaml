@@ -13,6 +13,23 @@ spec:
       labels:
         app.kubernetes.io/name: copyparty
     spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/startup-config
+            - /mnt/cfg
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/cfg
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
       containers:
         - name: copyparty
           image: copyparty
@@ -31,7 +48,13 @@ spec:
             tcpSocket:
               port: http
             failureThreshold: 30
+          volumeMounts:
+            - name: config
+              mountPath: /cfg
       volumes:
-        - name: data
+        - name: config
           persistentVolumeClaim:
             claimName: copyparty-config
+        - name: startup-config
+          configMap:
+            name: copyparty

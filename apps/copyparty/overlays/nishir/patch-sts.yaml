@@ -5,31 +5,12 @@ metadata:
 spec:
   template:
     spec:
-      initContainers:
-        - name: config-sync
-          image: rclone
-          command:
-            - rclone
-          args:
-            - copy
-            - --copy-links
-            - --update
-            - /mnt/startup-config
-            - /mnt/cfg
-          volumeMounts:
-            - name: config
-              mountPath: /mnt/cfg
-            - name: config
-              mountPath: /mnt/startup-config
-              readOnly: true
       containers:
         - name: copyparty
           ports:
             - containerPort: 3923
               name: http
           volumeMounts:
-            - name: config
-              mountPath: /cfg
             - name: downloads-data
               mountPath: /data/downloads
             - name: movies-data
@@ -54,7 +35,7 @@ spec:
         - name: tls
           secret:
             secretName: copyparty-tls
-        - name: config
+        - name: startup-config
           configMap:
             name: copyparty
         - name: downloads-data
