@@ -51,7 +51,6 @@
             ];
             languages.opentofu.enable = true;
             packages = [
-              automata.packages.${system}.default
               pkgs.clusterctl
               pkgs.k0sctl
               pkgs.kubectl
