@@ -12,11 +12,8 @@ spec:
               name: http
           volumeMounts:
             - name: config
-              mountPath: /config/config.conf
-              subPath: config.conf
+              mountPath: /cfg
               readOnly: true
-            - name: data
-              mountPath: /config
             - name: downloads-data
               mountPath: /data/downloads
             - name: movies-data

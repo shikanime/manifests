@@ -16,9 +16,6 @@ spec:
       containers:
         - name: copyparty
           image: copyparty
-          args:
-            - --no-auth
-            - /media
           env:
             - name: TZ
               value: Europe/Paris
