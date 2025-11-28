@@ -8,7 +8,7 @@ spec:
       containers:
         - name: sonarr
           volumeMounts:
-            - name: data-shows
+            - name: shows-data
               mountPath: /data/shows
             - name: downloads-data
               mountPath: /downloads
@@ -16,7 +16,7 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: data-shows
+        - name: shows-data
           persistentVolumeClaim:
             claimName: shows-data
         - name: downloads-data

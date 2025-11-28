@@ -8,7 +8,7 @@ spec:
       containers:
         - name: radarr
           volumeMounts:
-            - name: data-movies
+            - name: movies-data
               mountPath: /data/movies
             - name: downloads-data
               mountPath: /downloads
@@ -16,7 +16,7 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: data-movies
+        - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
         - name: downloads-data

@@ -8,43 +8,43 @@ spec:
       containers:
         - name: rclone
           volumeMounts:
-            - name: data-downloads
+            - name: downloads-data
               mountPath: /data/downloads
-            - name: data-movies
+            - name: movies-data
               mountPath: /data/movies
-            - name: data-shows
+            - name: shows-data
               mountPath: /data/shows
-            - name: data-staging
+            - name: staging-data
               mountPath: /data/staging
-            - name: data-sukebe
+            - name: sukebe-data
               mountPath: /data/sukebe
-            - name: data-sync
+            - name: sync-data
               mountPath: /data/sync
-            - name: data-timeline
+            - name: timeline-data
               mountPath: /data/timeline
       volumes:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: data-downloads
+        - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
-        - name: data-movies
+        - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
-        - name: data-shows
+        - name: shows-data
           persistentVolumeClaim:
             claimName: shows-data
-        - name: data-staging
+        - name: staging-data
           persistentVolumeClaim:
             claimName: staging-data
-        - name: data-sukebe
+        - name: sukebe-data
           persistentVolumeClaim:
             claimName: sukebe-data
-        - name: data-sync
+        - name: sync-data
           persistentVolumeClaim:
             claimName: sync-data
-        - name: data-timeline
+        - name: timeline-data
           persistentVolumeClaim:
             claimName: timeline-data
         - name: tls

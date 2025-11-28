@@ -8,7 +8,7 @@ spec:
       containers:
         - name: lidarr
           volumeMounts:
-            - name: data-music
+            - name: music-data
               mountPath: /data/music
             - name: downloads-data
               mountPath: /downloads
@@ -16,7 +16,7 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: data-music
+        - name: music-data
           persistentVolumeClaim:
             claimName: music-data
         - name: downloads-data
