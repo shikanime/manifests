@@ -27,6 +27,10 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /mnt/cfg
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
