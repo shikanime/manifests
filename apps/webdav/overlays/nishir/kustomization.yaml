@@ -10,5 +10,5 @@ resources:
   - cert.yaml
 secretGenerator:
   - envs:
-      - ./webdav-htpasswd/.env
-    name: webdav-htpasswd
+      - ./webdav/.env
+    name: webdav

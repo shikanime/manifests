@@ -20,9 +20,9 @@
 
 ^sops --decrypt "apps/vaultwarden/overlays/nishir/vaultwarden/.enc.env" | save --force "apps/vaultwarden/overlays/nishir/vaultwarden/.env"
 
-^sops --decrypt "apps/ftp/overlays/nishir/ftp-basic-auth/.enc.env" | save --force "apps/ftp/overlays/nishir/ftp-basic-auth/.env"
+^sops --decrypt "apps/ftp/overlays/nishir/ftp/.enc.env" | save --force "apps/ftp/overlays/nishir/ftp/.env"
 
-^sops --decrypt "apps/webdav/overlays/nishir/webdav-htpasswd/.enc.env" | save --force "apps/webdav/overlays/nishir/webdav-htpasswd/.env"
+^sops --decrypt "apps/webdav/overlays/nishir/webdav/.enc.env" | save --force "apps/webdav/overlays/nishir/webdav/.env"
 
 ^sops --decrypt "apps/kratos/overlays/nishir-tailnet/kratos/.enc.env" | save --force "apps/kratos/overlays/nishir-tailnet/kratos/.env"
 ^sops --decrypt "apps/kratos/overlays/nishir-tailnet/kratos-postgres/.enc.env" | save --force "apps/kratos/overlays/nishir-tailnet/kratos-postgres/.env"
