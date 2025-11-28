@@ -39,7 +39,7 @@
         treefmt-nix.flakeModule
       ];
       perSystem =
-        { pkgs, system, ... }:
+        { pkgs, ... }:
         {
           devenv.shells.default = {
             imports = [
