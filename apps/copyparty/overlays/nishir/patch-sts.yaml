@@ -5,6 +5,23 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/startup-config
+            - /mnt/cfg
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/cfg
+            - name: config
+              mountPath: /mnt/startup-config
+              readOnly: true
       containers:
         - name: copyparty
           ports:
@@ -13,7 +30,6 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /cfg
-              readOnly: true
             - name: downloads-data
               mountPath: /data/downloads
             - name: movies-data
@@ -29,9 +45,9 @@ spec:
             - name: timeline-data
               mountPath: /data/timeline
       volumes:
-        - name: data
+        - name: config
           persistentVolumeClaim:
-            claimName: copyparty-data
+            claimName: copyparty-config
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
