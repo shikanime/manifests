@@ -5,7 +5,7 @@ metadata:
     automata.shikanime.studio/images: '[ { "name": "copyparty", "tag-regex": "^(?P<version>.+)$" } ]'
 images:
   - name: copyparty
-    newName: docker.io/copyparty/ac
+    newName: docker.io/copyparty/dj
     newTag: 1.9.31
 resources:
   - ingress.yaml
