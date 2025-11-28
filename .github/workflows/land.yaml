@@ -1,14 +1,9 @@
-name: Land
-on:
-  issue_comment:
-    types:
-      - created
 jobs:
   land:
     runs-on: ubuntu-latest
     steps:
       - id: createGithubAppToken
-        uses: actions/create-github-app-token@v2.0.2
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
@@ -19,10 +14,15 @@ jobs:
       - uses: shikanime-studio/setup-nix-action@v1
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: shikanime-studio/sapling-action@v4
+      - uses: shikanime-studio/sapling-action@v5
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           sign-commits: true
           username: Operator 6O <operator6o@shikanime.studio>
+name: Land
+"on":
+  issue_comment:
+    types:
+      - created
