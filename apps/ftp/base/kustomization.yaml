@@ -10,6 +10,7 @@ images:
 resources:
   - deploy.yaml
   - svc.yaml
+  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: file-manager
