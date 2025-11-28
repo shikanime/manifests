@@ -12,7 +12,7 @@ images:
     newTag: v25.4.0
   - name: kratos-postgres
     newName: docker.io/library/postgres
-    newTag: "18.0"
+    newTag: "18.1"
   - name: kratos-selfservice-ui-node
     newName: docker.io/oryd/kratos-selfservice-ui-node
     newTag: v25.4.0
