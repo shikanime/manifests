@@ -8,24 +8,24 @@ spec:
       containers:
         - name: radarr
           volumeMounts:
+            - name: movies-data
+              mountPath: /data/movies
             - name: downloads-data
               mountPath: /downloads
-            - name: data-movies
-              mountPath: /data/movies
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
-        - name: data-movies
-          persistentVolumeClaim:
-            claimName: movies-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: movies-data
+          persistentVolumeClaim:
+            claimName: movies-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
         - name: tls
           secret:
             secretName: radarr-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640
+          items:
+            - key: keystore.p12
+              path: keystore.p12
+              mode: 0640

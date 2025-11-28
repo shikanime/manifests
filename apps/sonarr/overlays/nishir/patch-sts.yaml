@@ -8,24 +8,24 @@ spec:
       containers:
         - name: sonarr
           volumeMounts:
+            - name: shows-data
+              mountPath: /data/shows
             - name: downloads-data
               mountPath: /downloads
-            - name: data-shows
-              mountPath: /data/shows
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
-        - name: data-shows
-          persistentVolumeClaim:
-            claimName: shows-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: shows-data
+          persistentVolumeClaim:
+            claimName: shows-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
         - name: tls
           secret:
             secretName: sonarr-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640
+          items:
+            - key: keystore.p12
+              path: keystore.p12
+              mode: 0640

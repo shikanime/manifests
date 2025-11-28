@@ -10,31 +10,31 @@ spec:
           volumeMounts:
             - name: downloads-data
               mountPath: /downloads
-            - name: staging-data
-              mountPath: /staging
             - name: qbittorrent-scripts
               mountPath: /usr/bin/qbittorrent-torrent-finished-handler.sh
               subPath: qbittorrent-torrent-finished-handler.sh
+            - name: staging-data
+              mountPath: /staging
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
-        - name: staging-data
-          persistentVolumeClaim:
-            claimName: staging-data
-        - name: qbittorrent-scripts
-          secret:
-            secretName: qbittorrent-scripts
-            defaultMode: 0700
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: qbittorrent-scripts
+          secret:
+            secretName: qbittorrent-scripts
+          defaultMode: 0700
+        - name: staging-data
+          persistentVolumeClaim:
+            claimName: staging-data
         - name: tls
           secret:
             secretName: qbittorrent-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640
+          items:
+            - key: tls.crt
+              path: tls.crt
+            - key: tls.key
+              path: tls.key
+              mode: 0640

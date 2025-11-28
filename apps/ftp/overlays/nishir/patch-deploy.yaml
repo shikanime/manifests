@@ -8,45 +8,45 @@ spec:
       containers:
         - name: rclone
           volumeMounts:
-            - name: data-downloads
+            - name: downloads-data
               mountPath: /data/downloads
-            - name: data-movies
+            - name: movies-data
               mountPath: /data/movies
-            - name: data-shows
+            - name: shows-data
               mountPath: /data/shows
-            - name: data-staging
+            - name: staging-data
               mountPath: /data/staging
-            - name: data-sukebe
+            - name: sukebe-data
               mountPath: /data/sukebe
-            - name: data-sync
+            - name: sync-data
               mountPath: /data/sync
-            - name: data-timeline
+            - name: timeline-data
               mountPath: /data/timeline
       volumes:
-        - name: data-downloads
-          persistentVolumeClaim:
-            claimName: downloads-data
-        - name: data-movies
-          persistentVolumeClaim:
-            claimName: movies-data
-        - name: data-shows
-          persistentVolumeClaim:
-            claimName: shows-data
-        - name: data-staging
-          persistentVolumeClaim:
-            claimName: staging-data
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe-data
-        - name: data-sync
-          persistentVolumeClaim:
-            claimName: sync-data
-        - name: data-timeline
-          persistentVolumeClaim:
-            claimName: timeline-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: movies-data
+          persistentVolumeClaim:
+            claimName: movies-data
+        - name: shows-data
+          persistentVolumeClaim:
+            claimName: shows-data
+        - name: staging-data
+          persistentVolumeClaim:
+            claimName: staging-data
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data
+        - name: sync-data
+          persistentVolumeClaim:
+            claimName: sync-data
+        - name: timeline-data
+          persistentVolumeClaim:
+            claimName: timeline-data
         - name: tls
           secret:
             secretName: rclone-tls

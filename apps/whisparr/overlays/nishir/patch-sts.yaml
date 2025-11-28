@@ -8,24 +8,24 @@ spec:
       containers:
         - name: whisparr
           volumeMounts:
+            - name: sukebe-data
+              mountPath: /data/sukebe
             - name: downloads-data
               mountPath: /downloads
-            - name: data-sukebe
-              mountPath: /data/sukebe
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
         - name: tls
           secret:
             secretName: whisparr-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640
+          items:
+            - key: keystore.p12
+              path: keystore.p12
+              mode: 0640

@@ -17,35 +17,35 @@ spec:
       containers:
         - name: jellyfin
           volumeMounts:
-            - name: data-movies
+            - name: movies-data
               mountPath: /data/movies
-            - name: data-music
+            - name: music-data
               mountPath: /data/music
-            - name: data-shows
+            - name: shows-data
               mountPath: /data/shows
-            - name: data-sukebe
+            - name: sukebe-data
               mountPath: /data/sukebe
-            - name: data-timeline
+            - name: timeline-data
               mountPath: /data/timeline
       volumes:
-        - name: data-movies
-          persistentVolumeClaim:
-            claimName: movies-data
-        - name: data-music
-          persistentVolumeClaim:
-            claimName: music-data
-        - name: data-shows
-          persistentVolumeClaim:
-            claimName: shows-data
-        - name: data-sukebe
-          persistentVolumeClaim:
-            claimName: sukebe-data
-        - name: data-timeline
-          persistentVolumeClaim:
-            claimName: timeline-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: movies-data
+          persistentVolumeClaim:
+            claimName: movies-data
+        - name: music-data
+          persistentVolumeClaim:
+            claimName: music-data
+        - name: shows-data
+          persistentVolumeClaim:
+            claimName: shows-data
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data
+        - name: timeline-data
+          persistentVolumeClaim:
+            claimName: timeline-data
         - name: tls
           secret:
             secretName: jellyfin-tls
