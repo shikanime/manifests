@@ -20,4 +20,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: whisparr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v3.0.2+1472
+      app.kubernetes.io/version: v3.0.2
