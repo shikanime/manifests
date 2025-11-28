@@ -5,6 +5,19 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: copyparty
+          volumeMounts:
+            - name: config
+              mountPath: /cfg/config.conf
+              subPath: config.conf
+              readOnly: true
+            - name: data
+              mountPath: /cfg/hists
+              subPath: hists
+            - name: data
+              mountPath: /cfg/shr
+              subPath: shr
       volumes:
         - name: certs
           configMap:
@@ -12,3 +25,6 @@ spec:
         - name: tls
           secret:
             secretName: copyparty-tls
+        - name: config
+          configMap:
+            name: copyparty

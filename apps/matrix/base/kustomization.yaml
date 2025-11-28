@@ -6,7 +6,7 @@ metadata:
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
-    newTag: 1.71.2
+    newTag: 1.72.0
   - name: caddy
     newName: docker.io/library/caddy
     newTag: 2.10.2
@@ -18,19 +18,19 @@ images:
     newTag: v0.5.2
   - name: mautrix-meta
     newName: dock.mau.dev/mautrix/meta
-    newTag: v0.2510.0
+    newTag: v0.2511.0
   - name: mautrix-signal
     newName: dock.mau.dev/mautrix/signal
-    newTag: v0.2510.0
+    newTag: v0.2511.0
   - name: mautrix-slack
     newName: dock.mau.dev/mautrix/slack
-    newTag: v0.2510.0
+    newTag: v0.2511.0
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
-    newTag: v0.2510.0
+    newTag: v0.2511.0
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
-    newTag: v1.142.0
+    newTag: v1.143.0
 resources:
   - deploy.yaml
   - ingress.yaml
