@@ -8,24 +8,24 @@ spec:
       containers:
         - name: lidarr
           volumeMounts:
-            - name: downloads-data
-              mountPath: /downloads
             - name: data-music
               mountPath: /data/music
+            - name: downloads-data
+              mountPath: /downloads
       volumes:
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
-        - name: data-music
-          persistentVolumeClaim:
-            claimName: music-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: data-music
+          persistentVolumeClaim:
+            claimName: music-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
         - name: tls
           secret:
             secretName: lidarr-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640
+          items:
+            - key: keystore.p12
+              path: keystore.p12
+              mode: 0640

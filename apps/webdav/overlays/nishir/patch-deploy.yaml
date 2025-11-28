@@ -23,6 +23,9 @@ spec:
             - name: data-timeline
               mountPath: /data/timeline
       volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
         - name: data-downloads
           persistentVolumeClaim:
             claimName: downloads-data
@@ -44,9 +47,6 @@ spec:
         - name: data-timeline
           persistentVolumeClaim:
             claimName: timeline-data
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
         - name: tls
           secret:
             secretName: rclone-tls

@@ -28,6 +28,9 @@ spec:
             - name: data-timeline
               mountPath: /data/timeline
       volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
         - name: data-movies
           persistentVolumeClaim:
             claimName: movies-data
@@ -43,9 +46,6 @@ spec:
         - name: data-timeline
           persistentVolumeClaim:
             claimName: timeline-data
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
         - name: tls
           secret:
             secretName: jellyfin-tls

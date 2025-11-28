@@ -27,6 +27,9 @@ spec:
             - name: data-timeline
               mountPath: /var/syncthing/Timeline
       volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
         - name: data-staging
           persistentVolumeClaim:
             claimName: staging-data
@@ -39,6 +42,3 @@ spec:
         - name: data-timeline
           persistentVolumeClaim:
             claimName: timeline-data
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt

@@ -74,10 +74,11 @@ spec:
                 /mnt/mautrix-whatsapp-config/registration.yaml \
                 /mnt/data/appservices/mautrix-whatsapp.yaml
           volumeMounts:
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
+            - name: config
+              mountPath: /mnt/config
               readOnly: true
+            - name: data
+              mountPath: /mnt/data
             - name: mautrix-discord-config
               mountPath: /mnt/mautrix-discord-config
               readOnly: true
@@ -96,11 +97,10 @@ spec:
             - name: mautrix-whatsapp-config
               mountPath: /mnt/mautrix-whatsapp-config
               readOnly: true
-            - name: config
-              mountPath: /mnt/config
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
               readOnly: true
-            - name: data
-              mountPath: /mnt/data
       containers:
         - name: synapse
           image: synapse
@@ -131,6 +131,12 @@ spec:
       securityContext:
         fsGroup: 991
       volumes:
+        - name: config
+          secret:
+            secretName: synapse
+        - name: data
+          persistentVolumeClaim:
+            claimName: synapse-data
         - name: mautrix-discord-config
           secret:
             secretName: mautrix-discord
@@ -152,12 +158,6 @@ spec:
         - name: rclone-config
           configMap:
             name: rclone
-        - name: config
-          secret:
-            secretName: synapse
-        - name: data
-          persistentVolumeClaim:
-            claimName: synapse-data
 ---
 apiVersion: apps/v1
 kind: StatefulSet
