@@ -6,7 +6,7 @@ metadata:
 images:
   - name: copyparty
     newName: docker.io/copyparty/dj
-    newTag: 1.9.31
+    newTag: 1.19.20
 resources:
   - ingress.yaml
   - sts.yaml
@@ -17,4 +17,4 @@ labels:
       app.kubernetes.io/component: file-server
       app.kubernetes.io/name: copyparty
       app.kubernetes.io/part-of: nishir-operation
-      app.kubernetes.io/version: v1.9.31
+      app.kubernetes.io/version: v1.19.20
