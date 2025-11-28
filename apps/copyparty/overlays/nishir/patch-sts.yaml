@@ -11,8 +11,6 @@ spec:
             - containerPort: 3923
               name: http
           volumeMounts:
-            - name: downloads-data
-              mountPath: /data/downloads
             - name: movies-data
               mountPath: /data/movies
             - name: shows-data
@@ -32,9 +30,6 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
