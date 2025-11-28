@@ -32,15 +32,6 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: copyparty-tls
-            items:
-              - key: tls-combined.pem
-                path: tls-combined.pem
-        - name: startup-config
-          configMap:
-            name: copyparty
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
@@ -62,3 +53,12 @@ spec:
         - name: timeline-data
           persistentVolumeClaim:
             claimName: timeline-data
+        - name: tls
+          secret:
+            secretName: copyparty-tls
+            items:
+              - key: tls-combined.pem
+                path: cert.pem
+        - name: startup-config
+          configMap:
+            name: copyparty

@@ -11,6 +11,24 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
+      initContainers:
+        - name: tls-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/tls
+            - /mnt/cfg/copyparty
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/cfg
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
             - name: tls
-              mountPath: /etc/ssl/private
+              mountPath: /mnt/tls
               readOnly: true
