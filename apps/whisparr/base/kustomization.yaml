@@ -6,10 +6,10 @@ metadata:
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
-    newTag: 1.71.2
+    newTag: 1.72.0
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
-    newTag: v3-3.0.2.1354
+    newTag: v3-3.0.2.1472
 resources:
   - ingress.yaml
   - sts.yaml
@@ -20,4 +20,4 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: whisparr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v3.0.2
+      app.kubernetes.io/version: v3.0.2+1472

@@ -6,7 +6,7 @@ metadata:
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
-    newTag: 1.71.2
+    newTag: 1.72.0
   - name: bazarr
     newName: lscr.io/linuxserver/bazarr
     newTag: 1.5.3
