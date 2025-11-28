@@ -3,6 +3,8 @@ kind: Certificate
 metadata:
   name: copyparty-tls
 spec:
+  additionalOutputFormats:
+    - type: CombinedPEM
   commonName: copyparty
   dnsNames:
     - copyparty

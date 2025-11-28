@@ -59,6 +59,9 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: copyparty-config
+        - name: rclone-config
+          configMap:
+            name: rclone
         - name: startup-config
           configMap:
             name: copyparty

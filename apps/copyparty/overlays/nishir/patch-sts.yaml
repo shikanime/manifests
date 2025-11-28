@@ -35,6 +35,9 @@ spec:
         - name: tls
           secret:
             secretName: copyparty-tls
+            items:
+              - key: tls-combined.pem
+                path: tls-combined.pem
         - name: startup-config
           configMap:
             name: copyparty
