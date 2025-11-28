@@ -24,7 +24,6 @@
 
   outputs =
     inputs@{
-      automata,
       devenv,
       devlib,
       flake-parts,
