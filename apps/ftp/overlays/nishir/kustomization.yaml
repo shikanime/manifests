@@ -7,5 +7,5 @@ resources:
   - ../../base
 secretGenerator:
   - envs:
-      - ./ftp-basic-auth/.env
-    name: ftp-basic-auth
+      - ./ftp/.env
+    name: ftp

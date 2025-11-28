@@ -62,4 +62,4 @@ spec:
             name: rclone
         - name: htpasswd
           secret:
-            secretName: rclone-htpasswd
+            secretName: rclone

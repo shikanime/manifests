@@ -29,12 +29,12 @@ spec:
             - name: RCLONE_USER
               valueFrom:
                 secretKeyRef:
-                  name: ftp-basic-auth
+                  name: ftp
                   key: username
             - name: RCLONE_PASS
               valueFrom:
                 secretKeyRef:
-                  name: ftp-basic-auth
+                  name: ftp
                   key: password
             - name: RCLONE_CACHE_DIR
               value: /cache
