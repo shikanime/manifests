@@ -41,14 +41,17 @@ spec:
           stdin: true
           tty: true
           volumeMounts:
+            - mountPath: /workspaces
+              name: catbox-workspaces
             - mountPath: /sys/kernel/debug
               name: sys-kernel-debug
             - mountPath: /sys/kernel/tracing
               name: sys-kernel-tracing
-            - mountPath: /workspaces
-              name: catbox-workspaces
       hostname: catbox
       volumes:
+        - name: catbox-workspaces
+          persistentVolumeClaim:
+            claimName: catbox-workspaces
         - hostPath:
             path: /sys/kernel/debug
             type: Directory
@@ -57,6 +60,3 @@ spec:
             path: /sys/kernel/tracing
             type: Directory
           name: sys-kernel-tracing
-        - name: catbox-workspaces
-          persistentVolumeClaim:
-            claimName: catbox-workspaces
