@@ -16,9 +16,6 @@ spec:
       containers:
         - name: copyparty
           image: copyparty
-          env:
-            - name: TZ
-              value: Europe/Paris
           ports:
             - containerPort: 3923
               name: http
@@ -34,9 +31,6 @@ spec:
             tcpSocket:
               port: http
             failureThreshold: 30
-          volumeMounts:
-            - name: data
-              mountPath: /media
       volumes:
         - name: data
           persistentVolumeClaim:
