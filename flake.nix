@@ -48,6 +48,7 @@
             cachix.push = "shikanime";
             gitignore.content = [
               "config.xml"
+              "config.conf"
             ];
             languages.opentofu.enable = true;
             packages = [

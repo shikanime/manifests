@@ -52,3 +52,5 @@
 ^sops --decrypt "clusters/nishir/components/longhorn/longhorn-hetzner-backups/.enc.env" | save --force "clusters/nishir/components/longhorn/longhorn-hetzner-backups/.env"
 
 ^sops --decrypt "clusters/telsha/components/tailscale/operator-oauth/.enc.env" | save --force "clusters/telsha/components/tailscale/operator-oauth/.env"
+
+^sops --decrypt "apps/copyparty/overlays/nishir-tailnet/copyparty/config.enc.conf" | save --force "apps/copyparty/overlays/nishir-tailnet/copyparty/config.conf"

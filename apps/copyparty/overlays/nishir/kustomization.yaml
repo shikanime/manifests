@@ -8,7 +8,4 @@ patches:
 resources:
   - ../../base
   - cert.yaml
-configMapGenerator:
-  - files:
-      - ./copyparty/config.conf
-    name: copyparty
+  - pvc.yaml

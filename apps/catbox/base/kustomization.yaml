@@ -15,4 +15,4 @@ labels:
       app.kubernetes.io/component: backend-service
       app.kubernetes.io/name: catbox
       app.kubernetes.io/part-of: nishir-services
-      app.kubernetes.io/version: "v0.17.1+427"
+      app.kubernetes.io/version: "v0.17.1"

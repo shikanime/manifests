@@ -5,3 +5,7 @@ components:
   - ../../components/tailscale
 resources:
   - ../nishir
+configMapGenerator:
+  - files:
+      - ./copyparty/config.conf
+    name: copyparty

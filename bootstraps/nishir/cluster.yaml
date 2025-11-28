@@ -156,7 +156,7 @@ spec:
                     enabled: true
               - name: cluster-api-operator
                 chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
-                version: 0.24.0
+                version: 0.24.1
                 namespace: capi-operator-system
                 values: |
                   bootstrap:
@@ -255,7 +255,7 @@ spec:
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
-                version: 1.90.8
+                version: 1.90.9
                 namespace: tailscale-system
                 values: |
                   apiServerProxyConfig:
@@ -264,7 +264,7 @@ spec:
                     hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: v0.21.0
+                version: v1.19.1
                 namespace: cert-manager-system
                 values: |
                   app:
@@ -272,7 +272,7 @@ spec:
                       namespace: cert-manager-trust
               - name: vpa
                 chartname: fairwinds-stable/vpa
-                version: 5.0.0
+                version: 4.10.0
                 namespace: kube-system
         network:
           calico:
