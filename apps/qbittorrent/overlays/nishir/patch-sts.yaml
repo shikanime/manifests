@@ -25,16 +25,16 @@ spec:
         - name: qbittorrent-scripts
           secret:
             secretName: qbittorrent-scripts
-          defaultMode: 0700
+            defaultMode: 0700
         - name: staging-data
           persistentVolumeClaim:
             claimName: staging-data
         - name: tls
           secret:
             secretName: qbittorrent-tls
-          items:
-            - key: tls.crt
-              path: tls.crt
-            - key: tls.key
-              path: tls.key
-              mode: 0640
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640

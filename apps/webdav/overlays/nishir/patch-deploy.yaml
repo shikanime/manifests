@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-        - name: webdav
+        - name: rclone
           volumeMounts:
             - name: downloads-data
               mountPath: /data/downloads

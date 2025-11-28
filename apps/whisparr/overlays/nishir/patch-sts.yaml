@@ -25,7 +25,7 @@ spec:
         - name: tls
           secret:
             secretName: whisparr-tls
-          items:
-            - key: keystore.p12
-              path: keystore.p12
-              mode: 0640
+            items:
+              - key: keystore.p12
+                path: keystore.p12
+                mode: 0640
