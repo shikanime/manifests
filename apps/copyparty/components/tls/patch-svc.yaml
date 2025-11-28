@@ -5,5 +5,5 @@ metadata:
 spec:
   ports:
     - name: https
-      port: 443
-      targetPort: https
+      port: 3923
+      targetPort: http
