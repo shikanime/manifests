@@ -11,9 +11,9 @@ resources:
   - ../../base
   - cert.yaml
 secretGenerator:
-  - envs:
-      - lidarr/.env
-    name: lidarr-pkcs12-password
   - files:
       - lidarr/config.xml
     name: lidarr
+  - envs:
+      - lidarr/.env
+    name: lidarr-pkcs12-password

@@ -11,9 +11,9 @@ resources:
   - ../../base
   - cert.yaml
 secretGenerator:
-  - envs:
-      - whisparr/.env
-    name: whisparr-pkcs12-password
   - files:
       - whisparr/config.xml
     name: whisparr
+  - envs:
+      - whisparr/.env
+    name: whisparr-pkcs12-password

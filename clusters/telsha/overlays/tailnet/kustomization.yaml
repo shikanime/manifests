@@ -3,5 +3,5 @@ kind: Kustomization
 components:
   - ../../components/tailscale
 resources:
-  - ../../base
   - ../../../../apps/catbox/overlays/telsha-tailnet
+  - ../../base

@@ -11,9 +11,9 @@ resources:
   - ../../base
   - cert.yaml
 secretGenerator:
-  - envs:
-      - radarr/.env
-    name: radarr-pkcs12-password
   - files:
       - radarr/config.xml
     name: radarr
+  - envs:
+      - radarr/.env
+    name: radarr-pkcs12-password

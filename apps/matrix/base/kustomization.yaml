@@ -4,9 +4,6 @@ metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
-  - name: rclone
-    newName: docker.io/rclone/rclone
-    newTag: 1.72.0
   - name: caddy
     newName: docker.io/library/caddy
     newTag: 2.10.2
@@ -28,6 +25,9 @@ images:
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
     newTag: v0.2511.0
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.72.0
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
     newTag: v1.143.0
