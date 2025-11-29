@@ -31,15 +31,15 @@ images:
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
     newTag: v1.143.0
-resources:
-  - deploy.yaml
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: communication
       app.kubernetes.io/name: matrix
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.140.0
+resources:
+  - deploy.yaml
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

@@ -7,12 +7,12 @@ images:
   - name: catbox
     newName: ghcr.io/shikanime/shikanime/catbox
     newTag: "v0.17.1-427-gd26feab"
-resources:
-  - deploy.yaml
-  - svc.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: backend-service
       app.kubernetes.io/name: catbox
       app.kubernetes.io/part-of: nishir-services
       app.kubernetes.io/version: "v0.17.1"
+resources:
+  - deploy.yaml
+  - svc.yaml

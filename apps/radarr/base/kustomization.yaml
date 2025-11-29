@@ -10,14 +10,14 @@ images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
     newTag: 6.0.4
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: radarr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: v6.0.4
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

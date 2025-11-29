@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: shikanime-studio
 components:
   - ../../components/tls
+namespace: shikanime-studio
 patches:
   - path: patch-sts.yaml
 resources:

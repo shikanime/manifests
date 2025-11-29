@@ -7,14 +7,14 @@ images:
   - name: syncthing
     newName: docker.io/syncthing/syncthing
     newTag: 2.0.11
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: file-synchronizer
       app.kubernetes.io/name: syncthing
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: v2.0.11
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

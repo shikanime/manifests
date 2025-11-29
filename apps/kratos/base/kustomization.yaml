@@ -16,15 +16,15 @@ images:
   - name: kratos-selfservice-ui-node
     newName: docker.io/oryd/kratos-selfservice-ui-node
     newTag: v25.4.0
-resources:
-  - deploy.yaml
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: identity-manager
       app.kubernetes.io/name: kratos
       app.kubernetes.io/part-of: nishir-security
       app.kubernetes.io/version: v25.4.0
+resources:
+  - deploy.yaml
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

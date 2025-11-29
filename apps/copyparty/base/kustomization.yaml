@@ -10,14 +10,14 @@ images:
   - name: rclone
     newName: docker.io/rclone/rclone
     newTag: 1.72.0
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: file-server
       app.kubernetes.io/name: copyparty
       app.kubernetes.io/part-of: nishir-operation
       app.kubernetes.io/version: v1.19.20
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

@@ -10,14 +10,14 @@ images:
   - name: bazarr
     newName: lscr.io/linuxserver/bazarr
     newTag: 1.5.3
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: bazarr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: v1.5.3
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
