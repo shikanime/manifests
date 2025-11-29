@@ -14,7 +14,7 @@ spec:
               mountPath: /usr/bin/qbittorrent-torrent-finished-handler.sh
               subPath: qbittorrent-torrent-finished-handler.sh
             - name: staging-data
-              mountPath: /staging
+              mountPath: /data/staging
       volumes:
         - name: certs
           configMap:
