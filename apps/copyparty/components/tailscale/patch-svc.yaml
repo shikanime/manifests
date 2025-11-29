@@ -4,7 +4,7 @@ metadata:
   name: ftp
   annotations:
     tailscale.com/hostname: ftp
-    tailscale.com/proxy-class: ftp
+    tailscale.com/proxy-class: copyparty
     tailscale.com/tags: tag:ftp
 spec:
   loadBalancerClass: tailscale
@@ -15,7 +15,7 @@ metadata:
   name: ftps
   annotations:
     tailscale.com/hostname: ftps
-    tailscale.com/proxy-class: ftps
+    tailscale.com/proxy-class: copyparty
     tailscale.com/tags: tag:ftps
 spec:
   loadBalancerClass: tailscale
