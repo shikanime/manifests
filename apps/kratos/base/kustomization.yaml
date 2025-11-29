@@ -1,8 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  annotations:
-    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "kratos", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "kratos-postgres", "tag-regex": "^(?P<version>\\d+(?:\\.\\d+){0,2})$" }, { "name": "kratos-selfservice-ui-node", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: caddy
     newName: docker.io/library/caddy
@@ -16,15 +13,18 @@ images:
   - name: kratos-selfservice-ui-node
     newName: docker.io/oryd/kratos-selfservice-ui-node
     newTag: v25.4.0
-resources:
-  - deploy.yaml
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: identity-manager
       app.kubernetes.io/name: kratos
       app.kubernetes.io/part-of: nishir-security
       app.kubernetes.io/version: v25.4.0
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "kratos", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "kratos-postgres", "tag-regex": "^(?P<version>\\d+(?:\\.\\d+){0,2})$" }, { "name": "kratos-selfservice-ui-node", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+resources:
+  - deploy.yaml
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

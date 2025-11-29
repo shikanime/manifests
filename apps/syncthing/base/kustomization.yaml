@@ -1,20 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  annotations:
-    automata.shikanime.studio/images: '[ { "name": "syncthing", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: syncthing
     newName: docker.io/syncthing/syncthing
     newTag: 2.0.11
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: file-synchronizer
       app.kubernetes.io/name: syncthing
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: v2.0.11
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "syncthing", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

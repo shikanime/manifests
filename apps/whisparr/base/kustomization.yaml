@@ -1,8 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  annotations:
-    automata.shikanime.studio/images: '[ { "name": "whisparr", "tag-regex": "^v(?P<channel>\\d+)-(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:\\.(?P<build>\\d+))?$" }, { "name": "rclone", "tag-regex": "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)$" } ]'
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
@@ -10,14 +7,17 @@ images:
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
     newTag: v3-3.0.2.1472
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: whisparr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: v3.0.2
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "whisparr", "tag-regex": "^v(?P<channel>\\d+)-(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:\\.(?P<build>\\d+))?$" }, { "name": "rclone", "tag-regex": "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)$" } ]'
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

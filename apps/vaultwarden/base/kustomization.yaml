@@ -1,20 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  annotations:
-    automata.shikanime.studio/images: '[ { "name": "vaultwarden", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$", "exclude-tags": ["1.34.3"] } ]'
 images:
   - name: vaultwarden
     newName: docker.io/vaultwarden/server
     newTag: 1.34.2
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: secret-manager
       app.kubernetes.io/name: vaultwarden
       app.kubernetes.io/part-of: nishir-security
       app.kubernetes.io/version: v1.34.2
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "vaultwarden", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$", "exclude-tags": ["1.34.3"] } ]'
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

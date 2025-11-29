@@ -1,8 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  annotations:
-    automata.shikanime.studio/images: '[ { "name": "jellyfin", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "metatube", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: jellyfin
     newName: docker.io/jellyfin/jellyfin
@@ -10,14 +7,17 @@ images:
   - name: metatube
     newName: ghcr.io/metatube-community/metatube-server
     newTag: 1.3.2
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 labels:
   - pairs:
       app.kubernetes.io/component: media-server
       app.kubernetes.io/name: jellyfin
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: v10.11.3
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "jellyfin", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "metatube", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
