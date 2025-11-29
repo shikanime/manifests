@@ -45,3 +45,14 @@ spec:
   valuesContent: |
     operatorConfig:
       hostname: telsha-k8s-operator
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: vpa
+  namespace: kube-system
+spec:
+  chart: vpa
+  createNamespace: true
+  repo: https://charts.fairwinds.com/stable
+  targetNamespace: vpa-system
