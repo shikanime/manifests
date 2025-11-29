@@ -4,9 +4,6 @@ metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)$" }, { "name": "bazarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
-  - name: rclone
-    newName: docker.io/rclone/rclone
-    newTag: 1.72.0
   - name: bazarr
     newName: lscr.io/linuxserver/bazarr
     newTag: 1.5.3

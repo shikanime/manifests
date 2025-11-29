@@ -16,3 +16,4 @@ labels:
 resources:
   - deploy.yaml
   - svc.yaml
+  - vpa.yaml

@@ -4,12 +4,12 @@ metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "whisparr", "tag-regex": "^v(?P<channel>\\d+)-(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:\\.(?P<build>\\d+))?$" }, { "name": "radarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
-  - name: rclone
-    newName: docker.io/rclone/rclone
-    newTag: 1.71.2
   - name: radarr
     newName: lscr.io/linuxserver/radarr
     newTag: 6.0.4
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.71.2
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager

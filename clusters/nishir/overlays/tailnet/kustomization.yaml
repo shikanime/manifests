@@ -6,7 +6,6 @@ components:
   - ../../components/tailscale
   - ../../components/tls
 resources:
-  - ../../base
   - ../../../../apps/bazarr/overlays/nishir-tailnet
   - ../../../../apps/copyparty/overlays/nishir-tailnet
   - ../../../../apps/gitea/overlays/nishir-tailnet
@@ -21,3 +20,4 @@ resources:
   - ../../../../apps/syncthing/overlays/nishir-tailnet
   - ../../../../apps/vaultwarden/overlays/nishir-tailnet
   - ../../../../apps/whisparr/overlays/nishir-tailnet
+  - ../../base

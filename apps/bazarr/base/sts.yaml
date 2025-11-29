@@ -64,9 +64,3 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: bazarr-config
-        - name: rclone-config
-          configMap:
-            name: rclone
-        - name: startup-config
-          secret:
-            secretName: bazarr

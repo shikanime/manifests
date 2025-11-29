@@ -8,6 +8,6 @@ images:
     newName: docker.io/rclone/rclone
     newTag: 1.72.0
 patches:
-  - path: patch-sts.yaml
   - path: patch-ingress.yaml
+  - path: patch-sts.yaml
   - path: patch-svc.yaml
