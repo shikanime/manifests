@@ -7,8 +7,6 @@ configurations:
   - namereference.yaml
 patches:
   - path: patch-sts.yaml
-patchesStrategicMerge:
-  - patch-sts.yaml
 resources:
   - ../../base
   - cert.yaml

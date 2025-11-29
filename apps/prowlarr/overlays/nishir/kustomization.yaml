@@ -5,8 +5,8 @@ configurations:
   - namereference.yaml
 components:
   - ../../components/tls
-patchesStrategicMerge:
-  - patch-sts.yaml
+patches:
+  - path: patch-sts.yaml
 resources:
   - ../../base
   - cert.yaml
