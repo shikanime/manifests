@@ -5,7 +5,9 @@ configMapGenerator:
   - files:
       - ./copyparty/config.conf
     name: copyparty
-components:
-  - ../../components/tailscale
 resources:
   - ../nishir
+  - proxyclass.yaml
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-svc.yaml
