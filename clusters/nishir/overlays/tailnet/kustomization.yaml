@@ -7,4 +7,19 @@ components:
   - ../../components/tls
 resources:
   - ../../base
+  - ../../../../apps/bazarr/overlays/nishir-tailnet
+  - ../../../../apps/gitea/overlays/nishir-tailnet
+  - ../../../../apps/jellyfin/overlays/nishir-tailnet
+  - ../../../../apps/kratos/overlays/nishir-tailnet
+  - ../../../../apps/lidarr/overlays/nishir-tailnet
+  - ../../../../apps/matrix/overlays/nishir-tailnet
+  - ../../../../apps/prowlarr/overlays/nishir-tailnet
+  - ../../../../apps/qbittorrent/overlays/nishir-tailnet
+  - ../../../../apps/radarr/overlays/nishir-tailnet
+  - ../../../../apps/ftp/overlays/nishir-tailnet
+  - ../../../../apps/webdav/overlays/nishir-tailnet
+  - ../../../../apps/sonarr/overlays/nishir-tailnet
+  - ../../../../apps/syncthing/overlays/nishir-tailnet
+  - ../../../../apps/vaultwarden/overlays/nishir-tailnet
+  - ../../../../apps/whisparr/overlays/nishir-tailnet
   - ../../../../apps/copyparty/overlays/nishir-tailnet
