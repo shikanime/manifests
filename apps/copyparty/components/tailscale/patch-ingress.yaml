@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: copyparty
   annotations:
-    tailscale.com/proxy.requestOrigin: "true"
+    tailscale.com/proxy-class: copyparty
+    tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
