@@ -5,7 +5,7 @@ metadata:
 spec:
   ports:
     - name: ftps
-      port: 3990
+      port: 990
       targetPort: ftps
   selector:
     app.kubernetes.io/name: copyparty
