@@ -1,5 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "lidarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$", "exclude-tags": ["8.1.2135"] } ]'
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
@@ -13,9 +16,6 @@ labels:
       app.kubernetes.io/name: lidarr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: v3.1.0
-metadata:
-  annotations:
-    automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "lidarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$", "exclude-tags": ["8.1.2135"] } ]'
 resources:
   - ingress.yaml
   - sts.yaml

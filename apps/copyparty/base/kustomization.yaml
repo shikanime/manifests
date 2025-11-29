@@ -1,5 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "copyparty", "tag-regex": "^(?P<version>.+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: copyparty
     newName: docker.io/copyparty/dj
@@ -13,9 +16,6 @@ labels:
       app.kubernetes.io/name: copyparty
       app.kubernetes.io/part-of: nishir-operation
       app.kubernetes.io/version: v1.19.20
-metadata:
-  annotations:
-    automata.shikanime.studio/images: '[ { "name": "copyparty", "tag-regex": "^(?P<version>.+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 resources:
   - ingress.yaml
   - sts.yaml
