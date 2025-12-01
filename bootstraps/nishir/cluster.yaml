@@ -20,6 +20,8 @@ spec:
             fs.inotify.max_user_instances=8192
             # Allow many watched paths for large libraries (Syncthing/copyparty)
             fs.inotify.max_user_watches=524288
+            # Raise system-wide open files to prevent global exhaustion
+            fs.file-max=2097152
             # Auto-reboot 10s after panic to restore availability
             kernel.panic=10
             # Panic on kernel oops for fast node recovery
@@ -116,6 +118,8 @@ spec:
             fs.inotify.max_user_instances=8192
             # Allow many watched paths for large libraries (Syncthing/copyparty)
             fs.inotify.max_user_watches=524288
+            # Raise system-wide open files to prevent global exhaustion
+            fs.file-max=2097152
             # Auto-reboot 10s after panic to restore availability
             kernel.panic=10
             # Panic on kernel oops for fast node recovery
@@ -211,6 +215,8 @@ spec:
             fs.inotify.max_user_instances=8192
             # Allow many watched paths for large libraries (Syncthing/copyparty)
             fs.inotify.max_user_watches=524288
+            # Raise system-wide open files to prevent global exhaustion
+            fs.file-max=2097152
             # Auto-reboot 10s after panic to restore availability
             kernel.panic=10
             # Panic on kernel oops for fast node recovery
