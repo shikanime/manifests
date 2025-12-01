@@ -87,7 +87,7 @@ spec:
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
       hooks:
-        apply:
+        install:
           before:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
@@ -185,7 +185,7 @@ spec:
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
       hooks:
-        apply:
+        install:
           before:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
@@ -282,7 +282,7 @@ spec:
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
       hooks:
-        apply:
+        install:
           before:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
