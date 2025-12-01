@@ -1,0 +1,69 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix
+  annotations:
+    tailscale.com/proxy-class: matrix
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-discord
+  annotations:
+    tailscale.com/proxy-class: matrix-discord
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-googlechat
+  annotations:
+    tailscale.com/proxy-class: matrix-googlechat
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-meta
+  annotations:
+    tailscale.com/proxy-class: matrix-meta
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-signal
+  annotations:
+    tailscale.com/proxy-class: matrix-signal
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-slack
+  annotations:
+    tailscale.com/proxy-class: matrix-slack
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-whatsapp
+  annotations:
+    tailscale.com/proxy-class: matrix-whatsapp
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale

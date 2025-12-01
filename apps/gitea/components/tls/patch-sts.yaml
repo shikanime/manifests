@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: gitea
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -24,10 +23,3 @@ spec:
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: gitea-tls

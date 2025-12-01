@@ -1,18 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "whisparr", "tag-regex": "^v(?P<channel>\\d+)-(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:\\.(?P<build>\\d+))?$" }, { "name": "rclone", "tag-regex": "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)$" } ]'
 images:
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.72.0
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
-    newTag: v3-3.0.1.1307
-resources:
-  - ingress.yaml
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
+    newTag: v3-3.0.2.1472
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: whisparr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 3.0.1.1307
+      app.kubernetes.io/version: v3.0.2
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

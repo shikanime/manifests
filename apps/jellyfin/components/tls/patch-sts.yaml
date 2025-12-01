@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: jellyfin
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -30,19 +29,11 @@ spec:
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: jellyfin-tls
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: metatube
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -52,7 +43,3 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt

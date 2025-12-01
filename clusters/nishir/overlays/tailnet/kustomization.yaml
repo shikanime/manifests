@@ -1,15 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+components:
+  - ../../components/longhorn
+  - ../../components/node-feature
+  - ../../components/tailscale
+  - ../../components/tls
 resources:
-  - ../default
-  - ../../../../apps/gitea/overlays/tailnet
-  - ../../../../apps/jellyfin/overlays/tailnet
-  - ../../../../apps/matrix/overlays/tailnet
-  - ../../../../apps/prowlarr/overlays/tailnet
-  - ../../../../apps/qbittorrent/overlays/tailnet
-  - ../../../../apps/radarr/overlays/tailnet
-  - ../../../../apps/rclone/overlays/tailnet
-  - ../../../../apps/sonarr/overlays/tailnet
-  - ../../../../apps/syncthing/overlays/tailnet
-  - ../../../../apps/vaultwarden/overlays/tailnet
-  - ../../../../apps/whisparr/overlays/tailnet
+  - ../../../../apps/bazarr/overlays/nishir-tailnet
+  - ../../../../apps/copyparty/overlays/nishir-tailnet
+  - ../../../../apps/gitea/overlays/nishir-tailnet
+  - ../../../../apps/jellyfin/overlays/nishir-tailnet
+  - ../../../../apps/kratos/overlays/nishir-tailnet
+  - ../../../../apps/lidarr/overlays/nishir-tailnet
+  - ../../../../apps/matrix/overlays/nishir-tailnet
+  - ../../../../apps/prowlarr/overlays/nishir-tailnet
+  - ../../../../apps/qbittorrent/overlays/nishir-tailnet
+  - ../../../../apps/radarr/overlays/nishir-tailnet
+  - ../../../../apps/sonarr/overlays/nishir-tailnet
+  - ../../../../apps/syncthing/overlays/nishir-tailnet
+  - ../../../../apps/vaultwarden/overlays/nishir-tailnet
+  - ../../../../apps/whisparr/overlays/nishir-tailnet
+  - ../../base

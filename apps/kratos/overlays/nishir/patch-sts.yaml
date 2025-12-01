@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kratos
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          projected:
+            sources:
+              - configMap:
+                  name: nishir-ca-certificates.crt
+                  items:
+                    - key: ca-certificates.crt
+                      path: ca-certificates.crt
+              - secret:
+                  name: kratos-postgres-client
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+        - name: tls
+          projected:
+            sources:
+              - secret:
+                  name: kratos-tls
+                  items:
+                    - key: tls.crt
+                      path: tls.crt
+                    - key: tls.key
+                      path: tls.key
+              - secret:
+                  name: kratos-postgres-client
+                  items:
+                    - key: tls.crt
+                      path: postgres-client.crt
+                    - key: tls.key
+                      path: postgres-client.key
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kratos-postgres
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: kratos-postgres-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: accounts-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts-ory
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: accounts-ory-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640

@@ -1,12 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
-  - name: busybox
-    newName: docker.io/library/busybox
-    newTag: 1.37.0
   - name: caddy
     newName: docker.io/library/caddy
-    newTag: 2.9.1
+    newTag: 2.10.2
   - name: mautrix-discord
     newName: dock.mau.dev/mautrix/discord
     newTag: v0.7.5
@@ -15,29 +15,31 @@ images:
     newTag: v0.5.2
   - name: mautrix-meta
     newName: dock.mau.dev/mautrix/meta
-    newTag: v0.5.3
+    newTag: v0.2511.0
   - name: mautrix-signal
     newName: dock.mau.dev/mautrix/signal
-    newTag: v0.8.7
+    newTag: v0.2511.0
   - name: mautrix-slack
     newName: dock.mau.dev/mautrix/slack
-    newTag: v0.2.3
+    newTag: v0.2511.0
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
-    newTag: v0.9.0
+    newTag: v0.2511.0
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.72.0
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
-    newTag: v1.99.0
-resources:
-  - deploy.yaml
-  - ingress.yaml
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
+    newTag: v1.143.0
 labels:
   - pairs:
       app.kubernetes.io/component: communication
       app.kubernetes.io/name: matrix
       app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 1.99.0
+      app.kubernetes.io/version: 1.140.0
+resources:
+  - deploy.yaml
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

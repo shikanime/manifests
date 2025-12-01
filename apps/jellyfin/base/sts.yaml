@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: jellyfin
-  namespace: shikanime
 spec:
   replicas: 1
   serviceName: jellyfin
@@ -54,15 +53,15 @@ spec:
             httpGet:
               path: /health
               port: http
-            initialDelaySeconds: 120
-            periodSeconds: 60
-            timeoutSeconds: 15
-            failureThreshold: 4
+            initialDelaySeconds: 600
+            periodSeconds: 120
+            timeoutSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /health
               port: http
-            failureThreshold: 60
+            failureThreshold: 480
             periodSeconds: 15
           securityContext:
             privileged: true
@@ -90,7 +89,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: metatube
-  namespace: shikanime
 spec:
   replicas: 1
   serviceName: metatube

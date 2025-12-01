@@ -1,19 +1,21 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+components:
+  - ../../components/dlna
+  - ../../components/tls
+  - ../../components/v4l
 configurations:
   - namereference.yaml
-components:
-  - ../../components/v4l
+namespace: shikanime
 patches:
   - path: patch-sts.yaml
 resources:
-  - ../default
+  - ../../base
+  - cert.yaml
 secretGenerator:
   - envs:
       - jellyfin/.env
     name: jellyfin-pkcs12-password
-    namespace: shikanime
   - envs:
       - metatube/.env
     name: metatube
-    namespace: shikanime

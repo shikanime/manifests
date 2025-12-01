@@ -4,22 +4,295 @@ metadata:
   name: nishir
 spec:
   hosts:
-    - installFlags:
+    - files:
+        - data: |
+            L /var/lib/containerd - - - - ./k0s/containerd
+            L /var/lib/k0s - - - - ../../mnt/nishir/k0s
+            L /var/lib/kubelet - - - - ./k0s/kubelet
+            L /var/lib/longhorn - - - - ../../mnt/nishir/longhorn
+            L /var/log/calico - - - - ../../mnt/nishir/log/calico
+            L /var/log/pods - - - - ../../mnt/nishir/log/pods
+            L /var/swap - - - - ../../mnt/nishir/swap
+          dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
+          name: tmpfiles
+        - data: |
+            # Allow many inotify instances for controllers and Syncthing
+            fs.inotify.max_user_instances=8192
+            # Allow many watched paths for large libraries (Syncthing/copyparty)
+            fs.inotify.max_user_watches=524288
+            # Raise system-wide open files to prevent global exhaustion
+            fs.file-max=2097152
+            # Auto-reboot 10s after panic to restore availability
+            kernel.panic=10
+            # Panic on kernel oops for fast node recovery
+            kernel.panic_on_oops=1
+            # Increase conntrack capacity for Kubernetes NAT
+            net.netfilter.nf_conntrack_max=262144
+          dst: /etc/sysctl.d/10-k8s.conf
+          name: systctl-k8s
+        - data: |
+            # Fair queuing qdisc; synergizes with BBR
+            net.core.default_qdisc=fq
+            # Increase ingress backlog for bursty overlay traffic (Calico/Tailscale)
+            net.core.netdev_max_backlog=16384
+            # Raise default socket receive buffer for large transfers
+            net.core.rmem_default=7340032
+            # Allow larger autotuned receive buffers
+            net.core.rmem_max=16777216
+            # Increase accept backlog for busy services (Jellyfin/copyparty)
+            net.core.somaxconn=65535
+            # Raise default socket send buffer
+            net.core.wmem_default=7340032
+            # Allow larger autotuned send buffers
+            net.core.wmem_max=16777216
+            # Enable IPv4 forwarding for Kubernetes/overlay networking
+            net.ipv4.ip_forward=1
+            # Relax rp_filter for asymmetric routing via Tailscale subnet router
+            net.ipv4.conf.all.rp_filter=0
+            net.ipv4.conf.default.rp_filter=0
+            net.ipv4.conf.tailscale0.rp_filter=0
+            # Widen ephemeral port range to avoid exhaustion
+            net.ipv4.ip_local_port_range=1024 65535
+            # BBR congestion control for better throughput/latency
+            net.ipv4.tcp_congestion_control=bbr
+            # Free sockets sooner under load
+            net.ipv4.tcp_fin_timeout=30
+            # Maintain long-lived connections without frequent probes
+            net.ipv4.tcp_keepalive_time=600
+            # Enable PMTU probing for overlays/Tailnet
+            net.ipv4.tcp_mtu_probing=1
+            # Expand TCP autotuning bounds (recv)
+            net.ipv4.tcp_rmem=4096 87380 16777216
+            # Expand TCP autotuning bounds (send)
+            net.ipv4.tcp_wmem=4096 65536 16777216
+          dst: /etc/sysctl.d/20-network.conf
+          name: systctl-network
+        - data: |
+            # NVMe: increase background writeback for higher throughput
+            vm.dirty_background_ratio=10
+            # NVMe: delay expiration to allow larger merges (20s)
+            vm.dirty_expire_centisecs=2000
+            # NVMe: allow more dirty pages to utilize fast storage
+            vm.dirty_ratio=20
+            # NVMe: schedule writeback frequency (5s)
+            vm.dirty_writeback_centisecs=500
+            # Support many mmap/large indices/filesystems
+            vm.max_map_count=262144
+            # Allow moderate memory overcommit for containers
+            vm.overcommit_memory=1
+            # Lower swappiness to keep memory for cache (NVMe)
+            vm.swappiness=5
+            # Favor inode/dentry caching for large media libraries
+            vm.vfs_cache_pressure=50
+          dst: /etc/sysctl.d/40-vm.conf
+          name: systctl-vm
+      hooks:
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+            - systemd-tmpfiles --create
+            - sysctl --system
+      installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
       noTaints: true
+      privateAddress: 100.117.159.56
+      privateInterface: tailscale0
       role: controller+worker
       ssh:
         address: 100.117.159.56
         user: root
-    - role: worker
+    - files:
+        - data: |
+            L /var/lib/containerd - - - - ./k0s/containerd
+            L /var/lib/k0s - - - - ../../mnt/reimu/k0s
+            L /var/lib/kubelet - - - - ./k0s/kubelet
+            L /var/lib/longhorn - - - - ../../mnt/reimu/longhorn
+            L /var/log/calico - - - - ../../mnt/reimu/log/calico
+            L /var/log/pods - - - - ../../mnt/reimu/log/pods
+            L /var/swap - - - - ../../mnt/reimu/swap
+          dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
+          name: tmpfiles
+        - data: |
+            # Allow many inotify instances for controllers and Syncthing
+            fs.inotify.max_user_instances=8192
+            # Allow many watched paths for large libraries (Syncthing/copyparty)
+            fs.inotify.max_user_watches=524288
+            # Raise system-wide open files to prevent global exhaustion
+            fs.file-max=2097152
+            # Auto-reboot 10s after panic to restore availability
+            kernel.panic=10
+            # Panic on kernel oops for fast node recovery
+            kernel.panic_on_oops=1
+            # Increase conntrack capacity for Kubernetes NAT
+            net.netfilter.nf_conntrack_max=262144
+          dst: /etc/sysctl.d/10-k8s.conf
+          name: systctl-k8s
+        - data: |
+            # Fair queuing qdisc; synergizes with BBR
+            net.core.default_qdisc=fq
+            # Increase ingress backlog for bursty overlay traffic (Calico/Tailscale)
+            net.core.netdev_max_backlog=16384
+            # Raise default socket receive buffer for large transfers
+            net.core.rmem_default=7340032
+            # Allow larger autotuned receive buffers
+            net.core.rmem_max=16777216
+            # Increase accept backlog for busy services (Jellyfin/copyparty)
+            net.core.somaxconn=65535
+            # Raise default socket send buffer
+            net.core.wmem_default=7340032
+            # Allow larger autotuned send buffers
+            net.core.wmem_max=16777216
+            # Enable IPv4 forwarding for Kubernetes/overlay networking
+            net.ipv4.ip_forward=1
+            # Relax rp_filter for asymmetric routing via Tailscale subnet router
+            net.ipv4.conf.all.rp_filter=0
+            net.ipv4.conf.default.rp_filter=0
+            net.ipv4.conf.tailscale0.rp_filter=0
+            # Widen ephemeral port range to avoid exhaustion
+            net.ipv4.ip_local_port_range=1024 65535
+            # BBR congestion control for better throughput/latency
+            net.ipv4.tcp_congestion_control=bbr
+            # Free sockets sooner under load
+            net.ipv4.tcp_fin_timeout=30
+            # Maintain long-lived connections without frequent probes
+            net.ipv4.tcp_keepalive_time=600
+            # Enable PMTU probing for overlays/Tailnet
+            net.ipv4.tcp_mtu_probing=1
+            # Expand TCP autotuning bounds (recv)
+            net.ipv4.tcp_rmem=4096 87380 16777216
+            # Expand TCP autotuning bounds (send)
+            net.ipv4.tcp_wmem=4096 65536 16777216
+          dst: /etc/sysctl.d/20-network.conf
+          name: systctl-network
+        - data: |
+            # SATA SSD: background writeback tuned for balanced IO
+            vm.dirty_background_ratio=5
+            # SATA SSD: expire dirty data moderately for merges (15s)
+            vm.dirty_expire_centisecs=1500
+            # SATA SSD: limit dirty pages to reduce IO spikes
+            vm.dirty_ratio=15
+            # SATA SSD: writeback cadence (5s)
+            vm.dirty_writeback_centisecs=500
+            # Support many mmap/large indices/filesystems
+            vm.max_map_count=262144
+            # Allow moderate memory overcommit for containers
+            vm.overcommit_memory=1
+            # Prefer page cache, avoid swap thrash
+            vm.swappiness=10
+            # Favor inode/dentry caching for large media libraries
+            vm.vfs_cache_pressure=50
+          dst: /etc/sysctl.d/40-vm.conf
+          name: systctl-vm
+      hooks:
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+            - systemd-tmpfiles --create
+            - sysctl --system
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
+      privateAddress: 100.78.148.86
+      privateInterface: tailscale0
+      role: worker
       ssh:
         address: 100.78.148.86
         user: root
-    - role: worker
+    - files:
+        - data: |
+            L /var/lib/containerd - - - - ./k0s/containerd
+            L /var/lib/k0s - - - - ../../mnt/marisa/k0s
+            L /var/lib/kubelet - - - - ./k0s/kubelet
+            L /var/lib/longhorn - - - - ../../mnt/marisa/longhorn
+            L /var/log/calico - - - - ../../mnt/marisa/log/calico
+            L /var/log/pods - - - - ../../mnt/marisa/log/pods
+            L /var/swap - - - - ../../mnt/marisa/swap
+          dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
+          name: tmpfiles
+        - data: |
+            # Allow many inotify instances for controllers and Syncthing
+            fs.inotify.max_user_instances=8192
+            # Allow many watched paths for large libraries (Syncthing/copyparty)
+            fs.inotify.max_user_watches=524288
+            # Raise system-wide open files to prevent global exhaustion
+            fs.file-max=2097152
+            # Auto-reboot 10s after panic to restore availability
+            kernel.panic=10
+            # Panic on kernel oops for fast node recovery
+            kernel.panic_on_oops=1
+            # Increase conntrack capacity for Kubernetes NAT
+            net.netfilter.nf_conntrack_max=262144
+          dst: /etc/sysctl.d/10-k8s.conf
+          name: systctl-k8s
+        - data: |
+            # Fair queuing qdisc; synergizes with BBR
+            net.core.default_qdisc=fq
+            # Increase ingress backlog for bursty overlay traffic (Calico/Tailscale)
+            net.core.netdev_max_backlog=16384
+            # Raise default socket receive buffer for large transfers
+            net.core.rmem_default=7340032
+            # Allow larger autotuned receive buffers
+            net.core.rmem_max=16777216
+            # Increase accept backlog for busy services (Jellyfin/copyparty)
+            net.core.somaxconn=65535
+            # Raise default socket send buffer
+            net.core.wmem_default=7340032
+            # Allow larger autotuned send buffers
+            net.core.wmem_max=16777216
+            # Enable IPv4 forwarding for Kubernetes/overlay networking
+            net.ipv4.ip_forward=1
+            # Relax rp_filter for asymmetric routing via Tailscale subnet router
+            net.ipv4.conf.all.rp_filter=0
+            net.ipv4.conf.default.rp_filter=0
+            net.ipv4.conf.tailscale0.rp_filter=0
+            # Widen ephemeral port range to avoid exhaustion
+            net.ipv4.ip_local_port_range=1024 65535
+            # BBR congestion control for better throughput/latency
+            net.ipv4.tcp_congestion_control=bbr
+            # Free sockets sooner under load
+            net.ipv4.tcp_fin_timeout=30
+            # Maintain long-lived connections without frequent probes
+            net.ipv4.tcp_keepalive_time=600
+            # Enable PMTU probing for overlays/Tailnet
+            net.ipv4.tcp_mtu_probing=1
+            # Expand TCP autotuning bounds (recv)
+            net.ipv4.tcp_rmem=4096 87380 16777216
+            # Expand TCP autotuning bounds (send)
+            net.ipv4.tcp_wmem=4096 65536 16777216
+          dst: /etc/sysctl.d/20-network.conf
+          name: systctl-network
+        - data: |
+            # SATA SSD: background writeback tuned for balanced IO
+            vm.dirty_background_ratio=5
+            # SATA SSD: expire dirty data moderately for merges (15s)
+            vm.dirty_expire_centisecs=1500
+            # SATA SSD: limit dirty pages to reduce IO spikes
+            vm.dirty_ratio=15
+            # SATA SSD: writeback cadence (5s)
+            vm.dirty_writeback_centisecs=500
+            # Support many mmap/large indices/filesystems
+            vm.max_map_count=262144
+            # Allow moderate memory overcommit for containers
+            vm.overcommit_memory=1
+            # Prefer page cache, avoid swap thrash
+            vm.swappiness=10
+            # Favor inode/dentry caching for large media libraries
+            vm.vfs_cache_pressure=50
+          dst: /etc/sysctl.d/40-vm.conf
+          name: systctl-vm
+      hooks:
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+            - systemd-tmpfiles --create
+            - sysctl --system
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
+      privateAddress: 100.92.12.65
+      privateInterface: tailscale0
+      role: worker
       ssh:
         address: 100.92.12.65
         user: root
@@ -30,6 +303,8 @@ spec:
       metadata:
         name: nishir
       spec:
+        api:
+          address: 100.117.159.56
         extensions:
           helm:
             repositories:
@@ -50,7 +325,7 @@ spec:
             charts:
               - name: cert-manager
                 chartname: jetstack/cert-manager
-                version: "v1.18.2"
+                version: v1.19.1
                 namespace: cert-manager-system
                 values: |
                   clusterResourceNamespace: cert-manager-trust
@@ -58,27 +333,25 @@ spec:
                     enabled: true
               - name: cluster-api-operator
                 chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
-                version: "0.24.0"
+                version: 0.24.1
                 namespace: capi-operator-system
                 values: |
                   bootstrap:
                     k0sproject-k0smotron: {}
-                    kubeadm: {}
                   controlPlane:
                     k0sproject-k0smotron: {}
-                    kubeadm: {}
                   infrastructure:
                     hetzner: {}
                   cert-manager:
                     enabled: true
               - name: descheduler
                 chartname: kubernetes-sigs-descheduler/descheduler
-                version: "0.33.0"
+                version: 0.34.0
                 namespace: kube-system
                 values: |
                   deschedulerPolicy:
-                    metricsCollector:
-                      enabled: true
+                    metricsProviders:
+                      - name: KubernetesMetrics
                     profiles:
                       - name: default
                         pluginConfig:
@@ -132,41 +405,43 @@ spec:
                               - RemovePodsViolatingNodeTaints
               - name: longhorn
                 chartname: longhorn/longhorn
-                version: "1.10.0"
+                version: 1.10.1
                 namespace: longhorn-system
                 values: |
+                  image:
+                    longhorn:
+                      engine:
+                        repository: ghcr.io/shikanime/longhorn-engine/longhorn-engine
+                        tag: v1.10.x-head-arm64
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
-                    allowRecurringJobWhileVolumeDetached: true
-                    backupstorePollInterval: 6000
-                    defaultReplicaCount: "1"
+                    defaultDataLocality: best-effort
+                    defaultReplicaCount: '2'
+                    offlineReplicaRebuilding: true
                     replicaAutoBalance: best-effort
-                    snapshotDataIntegrityCronjob: "0 4 */7 * *"
+                    rwxVolumeFastFailover: true
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
                     backupTargetCredentialSecret: longhorn-hetzner-backups
                   persistence:
-                    defaultClassReplicaCount: 1
+                    defaultClassReplicaCount: 2
                     defaultFsType: xfs
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
-                version: "0.18.0"
+                version: 0.18.3
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
-                version: "1.88.3"
+                version: 1.90.9
                 namespace: tailscale-system
                 values: |
                   apiServerProxyConfig:
                     mode: "true"
-                  oauthSecretVolume:
-                    secret:
-                      secretName: oauth-client
                   operatorConfig:
                     hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: "v0.19.0"
+                version: v1.19.1
                 namespace: cert-manager-system
                 values: |
                   app:
@@ -174,12 +449,12 @@ spec:
                       namespace: cert-manager-trust
               - name: vpa
                 chartname: fairwinds-stable/vpa
-                version: "4.9.0"
+                version: 4.10.0
                 namespace: kube-system
         network:
-          kuberouter:
-            extraArgs:
-              advertise-cluster-ip: "true"
-              advertise-external-ip: "true"
-              advertise-loadbalancer-ip: "true"
-    version: v1.33.3+k0s.0
+          calico:
+            ipAutodetectionMethod: interface=tailscale0
+          provider: calico
+        storage:
+          type: kine
+    version: v1.34.1+k0s.0

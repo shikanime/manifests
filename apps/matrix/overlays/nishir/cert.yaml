@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: matrix-tls
-  namespace: shikanime
 spec:
   commonName: matrix
   dnsNames:
@@ -20,7 +19,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: matrix-manager-tls
-  namespace: shikanime
 spec:
   commonName: matrix
   dnsNames:

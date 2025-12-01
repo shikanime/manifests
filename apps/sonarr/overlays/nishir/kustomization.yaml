@@ -1,16 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+components:
+  - ../../components/tls
 configurations:
   - namereference.yaml
+namespace: shikanime
 patches:
-  - path: patch-ingress.yaml
   - path: patch-sts.yaml
-  - path: patch-svc.yaml
 resources:
-  - ../default
+  - ../../base
   - cert.yaml
 secretGenerator:
+  - files:
+      - sonarr/config.xml
+    name: sonarr
   - envs:
       - sonarr/.env
     name: sonarr-pkcs12-password
-    namespace: shikanime

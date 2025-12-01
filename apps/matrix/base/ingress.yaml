@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
@@ -28,7 +27,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-discord
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
@@ -43,7 +41,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-googlechat
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
@@ -57,8 +54,21 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-meta
+spec:
+  defaultBackend:
+    service:
+      name: matrix-meta
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-meta
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-signal
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
@@ -73,7 +83,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-slack
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
@@ -88,7 +97,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: matrix-whatsapp
-  namespace: shikanime
 spec:
   defaultBackend:
     service:
@@ -98,18 +106,3 @@ spec:
   tls:
     - hosts:
         - matrix-whatsapp
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-meta
-  namespace: shikanime
-spec:
-  defaultBackend:
-    service:
-      name: matrix-meta
-      port:
-        name: http
-  tls:
-    - hosts:
-        - matrix-meta

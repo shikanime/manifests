@@ -1,18 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "qbittorrent", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$", "exclude-tags": ["20.04.1", "14.3.9"] } ]'
 images:
   - name: qbittorrent
     newName: lscr.io/linuxserver/qbittorrent
-    newTag: 5.1.2
-resources:
-  - ingress.yaml
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
+    newTag: 5.1.4
 labels:
   - pairs:
       app.kubernetes.io/component: torrent-downloader
       app.kubernetes.io/name: qbittorrent
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 5.1.2
+      app.kubernetes.io/version: v5.1.4
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
