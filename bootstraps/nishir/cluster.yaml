@@ -89,10 +89,12 @@ spec:
       hooks:
         install:
           before:
-            - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
             - systemd-tmpfiles --create
             - sysctl --system
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
       noTaints: true
@@ -187,10 +189,12 @@ spec:
       hooks:
         install:
           before:
-            - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
             - systemd-tmpfiles --create
             - sysctl --system
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
       privateAddress: 100.78.148.86
@@ -284,10 +288,12 @@ spec:
       hooks:
         install:
           before:
-            - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
             - systemd-tmpfiles --create
             - sysctl --system
+        apply:
+          before:
+            - apt-get update
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
       privateAddress: 100.92.12.65
