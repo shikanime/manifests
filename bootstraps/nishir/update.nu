@@ -40,8 +40,7 @@ def get_longhorn_backup_target [] {
 }
 
 
-def get_latest_chart_version [repo_url: string, chart_name: string] {
-  let repo_name = $"temp-($repo_url | str replace -a -r '[^a-zA-Z0-9]' '-')"
+def get_latest_chart_version [repo_name: string, chart_name: string, repo_url: string] {
   ^helm repo add $repo_name $repo_url --force-update | ignore
   ^helm repo update | ignore
   let results = ^helm search repo $"($repo_name)/($chart_name)" --output json | from json
@@ -52,7 +51,6 @@ def get_latest_chart_version [repo_url: string, chart_name: string] {
       | get version
     } else { null }
   )
-  ^helm repo remove $repo_name | ignore
   if $version == null or $version == "" or $version == "null" { null } else { $version }
 }
 
@@ -106,12 +104,13 @@ def update_charts [] {
   )
   let charts = (
     $doc.spec.k0s.config.spec.extensions.helm.charts
-    | each {|chart|
+    | par-each {|chart|
       let repo_key = ($chart.chartname | split row "/" | get 0)
       let repo_url = try { $repo_map | get $repo_key } catch { null }
       if $repo_url != null {
         print $"Checking latest version for ($chart.name)..."
-        let latest_version = get_latest_chart_version $repo_url ($chart.name)
+        let chart_name_parts = ($chart.chartname | split row "/")
+        let latest_version = get_latest_chart_version ($chart_name_parts | get 0) ($chart_name_parts | get 1) ($repo_url)
         if $latest_version != null {
           $chart | update version $latest_version
         } else { $chart }
