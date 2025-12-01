@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -24,25 +23,17 @@ spec:
               port: https
               scheme: HTTPS
           volumeMounts:
-            - name: tls
-              mountPath: /etc/ssl/private
-              readOnly: true
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: matrix-tls
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-discord
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -52,16 +43,11 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-googlechat
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -71,16 +57,11 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-meta
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -90,16 +71,11 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-slack
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -109,16 +85,11 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-signal
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -128,16 +99,11 @@ spec:
             - name: certs
               mountPath: /etc/ssl/certs
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-whatsapp
-  namespace: shikanime
 spec:
   template:
     spec:

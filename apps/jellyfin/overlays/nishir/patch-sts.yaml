@@ -2,16 +2,57 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: jellyfin
-  namespace: shikanime
 spec:
   template:
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                      - rpi4-large
+      containers:
+        - name: jellyfin
+          volumeMounts:
+            - name: movies-data
+              mountPath: /data/movies
+            - name: music-data
+              mountPath: /data/music
+            - name: shows-data
+              mountPath: /data/shows
+            - name: sukebe-data
+              mountPath: /data/sukebe
+            - name: timeline-data
+              mountPath: /data/timeline
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: movies-data
+          persistentVolumeClaim:
+            claimName: movies-data
+        - name: music-data
+          persistentVolumeClaim:
+            claimName: music-data
+        - name: shows-data
+          persistentVolumeClaim:
+            claimName: shows-data
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data
+        - name: timeline-data
+          persistentVolumeClaim:
+            claimName: timeline-data
+        - name: tls
+          secret:
+            secretName: jellyfin-tls
+            items:
+              - key: keystore.p12
+                path: keystore.p12
+                mode: 0640
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: metatube
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt

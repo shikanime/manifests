@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: gitea
-  namespace: shikanime
 spec:
   replicas: 1
   serviceName: gitea
@@ -59,6 +58,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: data
           persistentVolumeClaim:

@@ -2,6 +2,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nishir-fast
+allowVolumeExpansion: true
 parameters:
   diskSelector: fast
   fsType: xfs
@@ -13,13 +14,13 @@ parameters:
     ]
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
-allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nishir-standard
+allowVolumeExpansion: true
 parameters:
   diskSelector: balanced
   fsType: xfs
@@ -31,23 +32,4 @@ parameters:
     ]
 provisioner: driver.longhorn.io
 reclaimPolicy: Retain
-allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: nishir-ephemeral
-parameters:
-  diskSelector: balanced
-  fsType: xfs
-  numberOfReplicas: "2"
-  recurringJobSelector: |
-    [
-      {"name": "default", "isGroup": true},
-      {"name": "ephemeral", "isGroup": true}
-    ]
-provisioner: driver.longhorn.io
-reclaimPolicy: Retain
-allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer

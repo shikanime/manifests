@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: qbittorrent-tls
-  namespace: shikanime
 spec:
   commonName: qbittorrent
   dnsNames:

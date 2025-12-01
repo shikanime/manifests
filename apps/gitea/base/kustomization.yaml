@@ -1,18 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "gitea", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: gitea
     newName: docker.io/gitea/gitea
-    newTag: 1.24.6
-resources:
-  - ingress.yaml
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
+    newTag: 1.25.2
 labels:
   - pairs:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/name: gitea
       app.kubernetes.io/part-of: nishir-platform
-      app.kubernetes.io/version: 1.24.6
+      app.kubernetes.io/version: v1.25.2
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

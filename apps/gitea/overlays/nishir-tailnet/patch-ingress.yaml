@@ -1,0 +1,9 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gitea
+  annotations:
+    tailscale.com/proxy-class: gitea
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale

@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configMapGenerator:
+  - files:
+      - accounts-ory/Caddyfile
+    name: accounts-ory
+  - files:
+      - kratos/identity.schema.json
+      - kratos/kratos.yaml
+    name: kratos
+  - files:
+      - kratos-postgres/postgresql.conf
+      - kratos-postgres/pg_hba.conf
+    name: kratos-postgres
+namespace: shikanime-studio
+patches:
+  - path: patch-ingress.yaml
+resources:
+  - ../nishir
+  - proxyclass.yaml
+secretGenerator:
+  - envs:
+      - kratos/.env
+    name: kratos
+  - envs:
+      - kratos-postgres/.env
+    name: kratos-postgres

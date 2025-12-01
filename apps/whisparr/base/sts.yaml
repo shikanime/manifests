@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: whisparr
-  namespace: shikanime
 spec:
   replicas: 1
   serviceName: whisparr
@@ -26,6 +25,27 @@ spec:
                         - media-server
                 topologyKey: kubernetes.io/hostname
               weight: 100
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/startup-config
+            - /mnt/config
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
       containers:
         - name: whisparr
           image: whisparr
@@ -66,3 +86,9 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: whisparr-config
+        - name: rclone-config
+          configMap:
+            name: rclone
+        - name: startup-config
+          secret:
+            secretName: whisparr

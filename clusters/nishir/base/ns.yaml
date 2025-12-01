@@ -1,9 +1,39 @@
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: capi-operator-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager-trust
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: nishir
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: shikanime
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: shikanime-studio
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tailscale-system

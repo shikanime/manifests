@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: matrix-manager
-  namespace: shikanime
 spec:
   template:
     spec:
@@ -27,10 +26,3 @@ spec:
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: matrix-manager-tls

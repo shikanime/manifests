@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarr
+spec:
+  template:
+    spec:
+      containers:
+        - name: sonarr
+          volumeMounts:
+            - name: shows-data
+              mountPath: /data/shows
+            - name: downloads-data
+              mountPath: /downloads
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: shows-data
+          persistentVolumeClaim:
+            claimName: shows-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: tls
+          secret:
+            secretName: sonarr-tls
+            items:
+              - key: keystore.p12
+                path: keystore.p12
+                mode: 0640

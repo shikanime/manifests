@@ -1,0 +1,179 @@
+apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+kind: K0sControlPlane
+metadata:
+  name: shana
+  namespace: nishir
+spec:
+  machineTemplate:
+    infrastructureRef:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+      kind: HCloudMachineTemplate
+      name: shana-control-plane
+  k0sConfigSpec:
+    k0s:
+      apiVersion: k0s.k0sproject.io/v1beta1
+      kind: ClusterConfig
+      metadata:
+        name: k0s
+      spec:
+        api:
+          port: 6443
+          extraArgs:
+            anonymous-auth: "true"
+        extensions:
+          helm:
+            repositories:
+              - name: fairwinds-stable
+                url: https://charts.fairwinds.com/stable
+              - name: jetstack
+                url: https://charts.jetstack.io
+              - name: kubernetes-sigs-cluster-api-operator
+                url: https://kubernetes-sigs.github.io/cluster-api-operator
+              - name: kubernetes-sigs-descheduler
+                url: https://kubernetes-sigs.github.io/descheduler
+              - name: kubernetes-sigs-nfd
+                url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+              - name: longhorn
+                url: https://charts.longhorn.io
+              - name: tailscale
+                url: https://pkgs.tailscale.com/helmcharts
+            charts:
+              - name: cert-manager
+                chartname: jetstack/cert-manager
+                version: "v1.18.2"
+                namespace: cert-manager-system
+                values: |
+                  clusterResourceNamespace: cert-manager-trust
+                  crds:
+                    enabled: true
+              - name: cluster-api-operator
+                chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
+                version: "0.23.0"
+                namespace: capi-operator-system
+                values: |
+                  bootstrap:
+                    k0sproject-k0smotron: {}
+                    kubeadm: {}
+                  controlPlane:
+                    k0sproject-k0smotron: {}
+                    kubeadm: {}
+                  infrastructure:
+                    hetzner: {}
+                  cert-manager:
+                    enabled: true
+              - name: descheduler
+                chartname: kubernetes-sigs-descheduler/descheduler
+                version: "0.33.0"
+                namespace: kube-system
+                values: |
+                  deschedulerPolicy:
+                    metricsCollector:
+                      enabled: true
+                    profiles:
+                      - name: default
+                        pluginConfig:
+                          - name: DefaultEvictor
+                            args:
+                              ignorePvcPods: true
+                              evictLocalStoragePods: false
+                          - name: HighNodeUtilization
+                            args:
+                              thresholds:
+                                cpu: 20
+                                memory: 20
+                                pods: 20
+                          - name: LowNodeUtilization
+                            args:
+                              thresholds:
+                                cpu: 60
+                                memory: 60
+                                pods: 60
+                              targetThresholds:
+                                cpu: 80
+                                memory: 80
+                                pods: 80
+                              metricsUtilization:
+                                source: KubernetesMetrics
+                          - name: RemoveDuplicates
+                          - name: RemovePodsHavingTooManyRestarts
+                            args:
+                              podRestartThreshold: 50
+                              includingInitContainers: true
+                          - name: RemovePodsViolatingInterPodAntiAffinity
+                          - name: RemovePodsViolatingNodeAffinity
+                            args:
+                              nodeAffinityType:
+                                - requiredDuringSchedulingIgnoredDuringExecution
+                          - name: RemovePodsViolatingNodeTaints
+                          - name: RemovePodsViolatingTopologySpreadConstraint
+                        plugins:
+                          balance:
+                            enabled:
+                              - HighNodeUtilization
+                              - LowNodeUtilization
+                              - RemoveDuplicates
+                              - RemovePodsViolatingTopologySpreadConstraint
+                          deschedule:
+                            enabled:
+                              - RemovePodsHavingTooManyRestarts
+                              - RemovePodsViolatingInterPodAntiAffinity
+                              - RemovePodsViolatingNodeAffinity
+                              - RemovePodsViolatingNodeTaints
+              - name: longhorn
+                chartname: longhorn/longhorn
+                version: "1.10.0"
+                namespace: longhorn-system
+                values: |
+                  defaultSettings:
+                    allowCollectingLonghornUsageMetrics: false
+                    allowRecurringJobWhileVolumeDetached: true
+                    backupstorePollInterval: 6000
+                    defaultReplicaCount: "1"
+                    replicaAutoBalance: best-effort
+                    snapshotDataIntegrityCronjob: "0 4 */7 * *"
+                  defaultBackupStore:
+                    backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
+                    backupTargetCredentialSecret: longhorn-hetzner-backups
+                  persistence:
+                    defaultClassReplicaCount: 1
+                    defaultFsType: xfs
+              - name: node-feature-discovery
+                chartname: kubernetes-sigs-nfd/node-feature-discovery
+                version: "0.17.4"
+                namespace: kube-system
+              - name: tailscale-operator
+                chartname: tailscale/tailscale-operator
+                version: "1.88.3"
+                namespace: tailscale-system
+                values: |
+                  apiServerProxyConfig:
+                    mode: "true"
+                  oauthSecretVolume:
+                    secret:
+                      secretName: operator-oauth
+                  operatorConfig:
+                    hostname: nishir-k8s-operator
+              - name: trust-manager
+                chartname: jetstack/trust-manager
+                version: "0.19.0"
+                namespace: cert-manager-system
+                values: |
+                  app:
+                    trust:
+                      namespace: cert-manager-trust
+              - name: vpa
+                chartname: fairwinds-stable/vpa
+                version: "4.9.0"
+                namespace: kube-system
+        network:
+          dualStack:
+            enabled: true
+            IPv6podCIDR: fd00::/108
+            IPv6serviceCIDR: fd01::/108
+          kuberouter:
+            extraArgs:
+              advertise-cluster-ip: "true"
+              advertise-external-ip: "true"
+              advertise-loadbalancer-ip: "true"
+  replicas: 1
+  version: v1.33.3+k0s.0

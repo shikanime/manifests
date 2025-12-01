@@ -1,0 +1,87 @@
+# Configuration file for Synapse.
+#
+# This is a YAML file: see [1] for a quick introduction. Note in particular
+# that *indentation is important*: all the elements of a list or dictionary
+# should have the same indentation.
+#
+# [1] https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html
+#
+# For more information on how to configure Synapse, including a complete accounting of
+# each option, go to docs/usage/configuration/config_documentation.md or
+# https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html
+server_name: matrix.taila659a.ts.net
+pid_file: /data/homeserver.pid
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    resources:
+      - compress: false
+        names:
+          - client
+          - federation
+  - port: 8448
+    tls: true
+    type: http
+    x_forwarded: true
+    resources:
+      - compress: false
+        names:
+          - client
+          - federation
+database:
+  name: sqlite3
+  args:
+    database: /data/homeserver.db
+log_config: /data/matrix.taila659a.ts.net.log.config
+media_store_path: /data/media_store
+registration_shared_secret: ENC[AES256_GCM,data:f5mRSZc5nyfSv/Hc0B6iGJ65hVdJKrLnhJzo46DXQ5S8Ki5vpd5otB4i6RfZ1YTirSA=,iv:c2dGubLTSiG24oDJcfui78KUNbpfZvVLCZw+XCUookA=,tag:LwuxdMNkYwunjLFT1pL+3g==,type:str]
+report_stats: false
+macaroon_secret_key: ENC[AES256_GCM,data:Lh2WmP4FI525077cVDEExGfn9hzm7dpfGlGGZSkkfh9sqtPnH0qCGTz0iloGjhRpvmE=,iv:X5J0JEZbcrOMuhpGqUPqvlYOitJKAr96DwEnAduoHeM=,tag:kacntoovoA/KdevQAYnMFQ==,type:str]
+form_secret: ENC[AES256_GCM,data:cHx93pZ6vXMTFBViRoNLIWFRTiPDwGfkyUhlbxGhQeidSXYH9D9c19Oxzb4gbBITgLQ=,iv:i8bpFo16duVCwvixAyWpWcqBopEqWvK00w+6mFXi1PY=,tag:qCOwSG7cisRQ2DTl/Y3vUg==,type:str]
+signing_key_path: /data/matrix.taila659a.ts.net.signing.key
+trusted_key_servers:
+  - server_name: matrix.org
+app_service_config_files:
+  - /data/appservices/mautrix-discord.yaml
+  - /data/appservices/mautrix-googlechat.yaml
+  - /data/appservices/mautrix-meta.yaml
+  - /data/appservices/mautrix-signal.yaml
+  - /data/appservices/mautrix-slack.yaml
+  - /data/appservices/mautrix-whatsapp.yaml
+tls_certificate_path: /etc/ssl/private/tls.crt
+tls_private_key_path: /etc/ssl/private/tls.key
+sops:
+  age:
+    - recipient: age1h0pg9ft6lpyequh7ew2yhrn5m9kc8alc5kmxj3ex2hlzav97lseqwlpz5p
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpY2RleGZKRDIvYlRHSnZU
+        V3JPME9sVmRlY0toZjFiUWtYNWRKVkt1enlVClJ1U25JVlZwVlpLU2x5OUowekRQ
+        OHQxWVAxWUh1bzlXTnJ1Yk9tMEFqOUkKLS0tIC9jSnF1NHIweS9JRFRsdkZoZDVq
+        Q1k4bCsvbk5FMnNuRWtMc3BvZFVLODgKdWf6SOMbVKHzgyfpjrwGqXbQntnswSMh
+        eV9VrDzmF00aZLE6NsURV6opbPGGTBt7ofi5sjPluErGJ1LJbcvIsg==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6dzFhNWk0VnpCNWkvWTZP
+        dm1XNVQvdU1tTmFzZzVzMnVBV0hOa0xoV1hvClkxMjVWalVYdDJ2bi8yblRNWW03
+        RTJraGtheEpFUkVRTUFoeWJWb0JBTkUKLS0tIGdiSm0wL09rWDQ2aTFQMDZ0Nk5I
+        LzJmY016K0RCT3pCVmFsTG1pblF0akkKDu9rjuCY2sV7Ew8tP9P8ni6Xg1dRRSFG
+        5e9ib8MEeM0jVtjuwXWmTp/RUBgmrTUfcZf0LLR+YwwuNoFBSmb2wQ==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhM0ZoZ3ZoaTJTNnNJbmhD
+        b2NPakxhalVSdTBHZTNWQXVzckdIQ3RxUlNjCjVIWTdYS3l5cVRIa2xOQUtrWjNH
+        bldJTVBIS3F4VExSZm1DQ3BnME5KcmcKLS0tIC9neWU1T0dqUjNkbWtrY0NaZmtD
+        QzJvZTdmN05hYTdHc2R0V3gxTCtIQlkKdlkP+0/BFXwCfMPa9V4Z7qthgRznKsOb
+        hPO2OkHeuj5eudseoUzvYoyqnjFg74koFdI9mndymNRxKILcCm1udw==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-10-26T00:36:13Z"
+  mac: ENC[AES256_GCM,data:ZMOlzQU9qT/uPPI9pTAAX7AvzbC6lrfAwuKonNmhjqYz5PP8zUunOG0jiDsicB/YVBG14hq3VNaBGXaQUTFIQBDhvR5M+VCji7+x6RQWo6t+tsAZ8rRZUlE3rMGhlYZwW0XnOgi7Aa7FcJoXibcdG7Al90JLWTvHYso7EoTGJUg=,iv:UjOFvPg28DWZ7idHtUeGt6nyMFY40CtROfbYy7rJFzE=,tag:ztX3NJxvLENKdQ+UHwQxTg==,type:str]
+  encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
+  version: 3.10.2

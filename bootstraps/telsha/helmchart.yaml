@@ -1,0 +1,58 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: cert-manager
+  namespace: kube-system
+spec:
+  chart: cert-manager
+  createNamespace: true
+  repo: https://charts.jetstack.io
+  targetNamespace: cert-manager-system
+  valuesContent: |
+    crds:
+      enabled: true
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: cluster-api-operator
+  namespace: kube-system
+spec:
+  chart: cluster-api-operator
+  createNamespace: true
+  repo: https://kubernetes-sigs.github.io/cluster-api-operator
+  targetNamespace: capi-operator-system
+  valuesContent: |
+    cert-manager:
+      enabled: true
+    bootstrap:
+      k0sproject-k0smotron: {}
+    controlPlane:
+      k0sproject-k0smotron: {}
+    infrastructure:
+      k0sproject-k0smotron: {}
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: tailscale-operator
+  namespace: kube-system
+spec:
+  chart: tailscale-operator
+  createNamespace: true
+  repo: https://pkgs.tailscale.com/helmcharts
+  targetNamespace: tailscale-system
+  valuesContent: |
+    operatorConfig:
+      hostname: telsha-k8s-operator
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: vpa
+  namespace: kube-system
+spec:
+  chart: vpa
+  createNamespace: true
+  repo: https://charts.fairwinds.com/stable
+  targetNamespace: vpa-system

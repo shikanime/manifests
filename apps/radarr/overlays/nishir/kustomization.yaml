@@ -1,12 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+components:
+  - ../../components/tls
 configurations:
   - namereference.yaml
+namespace: shikanime
+patches:
+  - path: patch-sts.yaml
 resources:
-  - ../default
+  - ../../base
   - cert.yaml
 secretGenerator:
+  - files:
+      - radarr/config.xml
+    name: radarr
   - envs:
       - radarr/.env
     name: radarr-pkcs12-password
-    namespace: shikanime

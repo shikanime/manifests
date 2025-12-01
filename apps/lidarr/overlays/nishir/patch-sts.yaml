@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: lidarr
+spec:
+  template:
+    spec:
+      containers:
+        - name: lidarr
+          volumeMounts:
+            - name: music-data
+              mountPath: /data/music
+            - name: downloads-data
+              mountPath: /downloads
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: music-data
+          persistentVolumeClaim:
+            claimName: music-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: tls
+          secret:
+            secretName: lidarr-tls
+            items:
+              - key: keystore.p12
+                path: keystore.p12
+                mode: 0640

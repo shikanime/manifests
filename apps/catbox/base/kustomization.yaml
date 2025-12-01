@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "catbox", "tag-regex": "^v(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)-(?P<build>\\d+)-g(?P<commit>[0-9a-f]+)$" } ]'
+images:
+  - name: catbox
+    newName: ghcr.io/shikanime/shikanime/catbox
+    newTag: "v0.17.1-427-gd26feab"
+labels:
+  - pairs:
+      app.kubernetes.io/component: backend-service
+      app.kubernetes.io/name: catbox
+      app.kubernetes.io/part-of: nishir-services
+      app.kubernetes.io/version: "v0.17.1"
+resources:
+  - deploy.yaml
+  - svc.yaml
+  - vpa.yaml

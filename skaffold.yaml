@@ -4,7 +4,16 @@ metadata:
   name: shikanime
 profiles:
   - name: nishir-tailnet
+    activation:
+      - kubeContext: nishir
     manifests:
       kustomize:
         paths:
           - clusters/nishir/overlays/tailnet
+  - name: telsha-tailnet
+    activation:
+      - kubeContext: rancher-desktop
+    manifests:
+      kustomize:
+        paths:
+          - clusters/telsha/overlays/tailnet

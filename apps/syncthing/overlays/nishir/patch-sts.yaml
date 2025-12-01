@@ -2,17 +2,33 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: syncthing
-  namespace: shikanime
 spec:
   template:
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                      - rpi5-large
-                      - rpi4-large
+      containers:
+        - name: syncthing
+          volumeMounts:
+            - name: staging-data
+              mountPath: /var/syncthing/Staging
+            - name: sukebe-data
+              mountPath: /var/syncthing/Sukebe
+            - name: sync-data
+              mountPath: /var/syncthing/Sync
+            - name: timeline-data
+              mountPath: /var/syncthing/Timeline
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: staging-data
+          persistentVolumeClaim:
+            claimName: staging-data
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data
+        - name: sync-data
+          persistentVolumeClaim:
+            claimName: sync-data
+        - name: timeline-data
+          persistentVolumeClaim:
+            claimName: timeline-data
