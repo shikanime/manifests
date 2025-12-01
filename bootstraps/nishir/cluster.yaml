@@ -407,7 +407,7 @@ spec:
                               - RemovePodsViolatingNodeTaints
               - name: k8s-monitoring
                 chartname: grafana/k8s-monitoring
-                version: "3.5.2"
+                version: 3.6.1
                 namespace: grafana-system
                 values: |
                   cluster:
@@ -661,7 +661,7 @@ spec:
                     hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: v1.19.1
+                version: v0.20.2
                 namespace: cert-manager-system
                 values: |
                   app:
