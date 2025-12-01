@@ -607,11 +607,6 @@ spec:
                 version: 1.10.1
                 namespace: longhorn-system
                 values: |
-                  image:
-                    longhorn:
-                      engine:
-                        repository: ghcr.io/shikanime/longhorn-engine/longhorn-engine
-                        tag: v1.10.x-head-arm64
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort
