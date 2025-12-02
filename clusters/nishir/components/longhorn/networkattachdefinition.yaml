@@ -1,0 +1,13 @@
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: bond0-dhcp
+  namespace: longhorn-system
+spec:
+  config: '{
+      "cniVersion": "1.0.0",
+      "type": "macvlan",
+      "master": "bond0",
+      "mode": "bridge",
+      "ipam": { "type": "dhcp" }
+    }'

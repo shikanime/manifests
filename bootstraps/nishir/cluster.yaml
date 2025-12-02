@@ -614,6 +614,7 @@ spec:
                     offlineReplicaRebuilding: true
                     replicaAutoBalance: best-effort
                     rwxVolumeFastFailover: true
+                    storageNetwork: kube-system/bond0-dhcp
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
                     backupTargetCredentialSecret: longhorn-hetzner-backups
