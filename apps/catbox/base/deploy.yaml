@@ -12,8 +12,6 @@ spec:
       labels:
         app.kubernetes.io/name: catbox
     spec:
-      securityContext:
-        fsGroup: 100
       containers:
         - image: catbox
           name: catbox
@@ -43,15 +41,23 @@ spec:
           volumeMounts:
             - mountPath: /workspaces
               name: catbox-workspaces
+            - mountPath: /nix
+              name: nix
             - mountPath: /sys/kernel/debug
               name: sys-kernel-debug
             - mountPath: /sys/kernel/tracing
               name: sys-kernel-tracing
       hostname: catbox
+      securityContext:
+        fsGroup: 100
       volumes:
         - name: catbox-workspaces
           persistentVolumeClaim:
             claimName: catbox-workspaces
+        - hostPath:
+            path: /nix
+            type: Directory
+          name: nix
         - hostPath:
             path: /sys/kernel/debug
             type: Directory
