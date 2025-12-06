@@ -16,11 +16,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: grafana-system
----
-apiVersion: v1
-kind: Namespace
-metadata:
   name: longhorn-system
 ---
 apiVersion: v1
