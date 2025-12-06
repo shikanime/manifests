@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
+  - path: patch-netpol.yaml
 resources:
   - ../nishir
   - proxyclass.yaml

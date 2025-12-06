@@ -18,6 +18,7 @@ patches:
 resources:
   - ../nishir
   - proxyclass.yaml
+  - netpol.yaml
 secretGenerator:
   - envs:
       - kratos/.env

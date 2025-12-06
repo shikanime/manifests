@@ -7,6 +7,25 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: matrix
+      port:
+        name: https
+  rules:
+    - host: matrix
+      http:
+        paths:
+          - backend:
+              service:
+                name: matrix-manager
+                port:
+                  name: https
+            path: /.well-known/matrix/mautrix
+            pathType: Prefix
+  tls:
+    - hosts:
+        - matrix
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -17,6 +36,14 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: matrix-discord
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-discord
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -27,6 +54,14 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: matrix-googlechat
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-googlechat
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -37,6 +72,14 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: matrix-meta
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-meta
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -47,6 +90,14 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: matrix-signal
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-signal
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -57,6 +108,14 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: matrix-slack
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-slack
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -67,3 +126,11 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: matrix-whatsapp
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-whatsapp

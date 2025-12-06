@@ -4,6 +4,7 @@ namespace: shikanime
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
+  - path: patch-netpol.yaml
 resources:
   - ../nishir
   - proxyclass.yaml

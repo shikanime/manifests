@@ -7,6 +7,21 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: accounts
+      port:
+        name: https
+  rules:
+    - http:
+        paths:
+          - path: /.ory/kratos/public
+            pathType: Prefix
+            backend:
+              service:
+                name: accounts-ory
+                port:
+                  name: https
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -17,3 +32,8 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
+  defaultBackend:
+    service:
+      name: kratos
+      port:
+        name: https
