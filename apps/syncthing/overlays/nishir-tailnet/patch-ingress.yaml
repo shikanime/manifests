@@ -7,8 +7,3 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: syncthing
-      port:
-        name: https

@@ -3,11 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: copyparty
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: copyparty
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:

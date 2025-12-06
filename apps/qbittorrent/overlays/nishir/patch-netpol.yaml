@@ -3,6 +3,11 @@ kind: NetworkPolicy
 metadata:
   name: qbittorrent
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: qbittorrent
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - podSelector:
