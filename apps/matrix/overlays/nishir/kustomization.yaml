@@ -5,8 +5,8 @@ components:
 namespace: shikanime
 patches:
   - path: patch-netpol.yaml
-  - path: patch-sts.yaml
   - path: patch-ingress.yaml
+  - path: patch-sts.yaml
 resources:
   - ../../base
   - cert.yaml

@@ -4,8 +4,8 @@ components:
   - ../../components/tls
 namespace: shikanime-studio
 patches:
-  - path: patch-sts.yaml
   - path: patch-ingress.yaml
+  - path: patch-sts.yaml
 resources:
   - ../../base
   - cert.yaml
