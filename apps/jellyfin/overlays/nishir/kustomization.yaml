@@ -12,8 +12,8 @@ patches:
   - path: patch-sts.yaml
 resources:
   - ../../base
-  - netpol.yaml
   - cert.yaml
+  - netpol.yaml
 secretGenerator:
   - envs:
       - jellyfin/.env
