@@ -36,11 +36,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: matrix-discord
-      port:
-        name: http
   tls:
     - hosts:
         - matrix-discord
@@ -54,11 +49,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: matrix-googlechat
-      port:
-        name: http
   tls:
     - hosts:
         - matrix-googlechat
@@ -72,11 +62,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: matrix-meta
-      port:
-        name: http
   tls:
     - hosts:
         - matrix-meta
@@ -90,11 +75,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: matrix-signal
-      port:
-        name: http
   tls:
     - hosts:
         - matrix-signal
@@ -108,11 +88,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: matrix-slack
-      port:
-        name: http
   tls:
     - hosts:
         - matrix-slack
@@ -126,11 +101,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: matrix-whatsapp
-      port:
-        name: http
   tls:
     - hosts:
         - matrix-whatsapp
