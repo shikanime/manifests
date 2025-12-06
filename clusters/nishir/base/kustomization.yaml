@@ -6,5 +6,6 @@ configMapGenerator:
     name: rclone
     namespace: shikanime
 resources:
+  - netpol.yaml
   - ns.yaml
   - pvc.yaml

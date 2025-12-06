@@ -9,7 +9,8 @@ patches:
 resources:
   - ../../base
   - cert.yaml
+  - netpol.yaml
 secretGenerator:
-  - name: qbittorrent-scripts
-    files:
+  - files:
       - qbittorrent-scripts/qbittorrent-torrent-finished-handler.sh
+    name: qbittorrent-scripts

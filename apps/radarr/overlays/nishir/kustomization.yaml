@@ -11,6 +11,7 @@ patches:
 resources:
   - ../../base
   - cert.yaml
+  - netpol.yaml
 secretGenerator:
   - files:
       - radarr/config.xml

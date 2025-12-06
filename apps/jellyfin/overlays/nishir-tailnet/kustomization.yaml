@@ -6,4 +6,5 @@ patches:
   - path: patch-sts.yaml
 resources:
   - ../nishir
+  - netpol.yaml
   - proxyclass.yaml

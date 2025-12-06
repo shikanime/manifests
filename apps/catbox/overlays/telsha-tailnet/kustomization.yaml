@@ -5,4 +5,5 @@ patches:
   - path: patch-svc.yaml
 resources:
   - ../telsha
+  - netpol.yaml
   - proxyclass.yaml

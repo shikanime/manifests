@@ -5,3 +5,4 @@ patches:
   - path: patch-sts.yaml
 resources:
   - ../../base
+  - netpol.yaml

@@ -13,6 +13,7 @@ patches:
 resources:
   - ../../base
   - cert.yaml
+  - netpol.yaml
 secretGenerator:
   - envs:
       - jellyfin/.env
