@@ -1,7 +1,6 @@
+"on":
+    - cron: 30 1 * * *
 jobs:
-  stale:
-    runs-on: ubuntu-latest
-    steps:
       - id: createGithubAppToken
         uses: actions/create-github-app-token@v2
         with:
@@ -15,6 +14,3 @@ jobs:
           stale-issue-label: stale
           stale-pr-label: stale
 name: Stale
-"on":
-  schedule:
-    - cron: 30 1 * * *

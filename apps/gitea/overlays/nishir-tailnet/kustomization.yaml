@@ -6,5 +6,5 @@ patches:
   - path: patch-svc.yaml
 resources:
   - ../nishir
-  - proxyclass.yaml
   - netpol.yaml
+  - proxyclass.yaml

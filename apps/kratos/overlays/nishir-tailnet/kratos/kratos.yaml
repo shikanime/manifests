@@ -1,27 +1,17 @@
-version: v1.3.1
-serve:
-  public:
-    base_url: https://accounts.taila659a.ts.net/.ory/kratos/public
-    cors:
-      enabled: true
-    tls:
-      cert:
-        path: /etc/ssl/private/tls.crt
-      key:
-        path: /etc/ssl/private/tls.key
-  admin:
-    base_url: https://kratos-admin:4434
-    tls:
-      cert:
-        path: /etc/ssl/private/tls.crt
-      key:
-        path: /etc/ssl/private/tls.key
-session:
-  whoami:
-    required_aal: aal1
+ciphers:
+  algorithm: xchacha20-poly1305
+hashers:
+  algorithm: bcrypt
+  bcrypt:
+    cost: 8
+identity:
+    - id: default
+      url: file:///etc/kratos/identity.schema.json
+log:
+  level: debug
+  format: text
+  leak_sensitive_values: true
 selfservice:
-  default_browser_return_url: https://accounts.taila659a.ts.net/welcome
-  allowed_return_urls:
     - https://accounts.taila659a.ts.net
   methods:
     link:
@@ -81,17 +71,24 @@ selfservice:
       ui_url: https://accounts.taila659a.ts.net/verify
     recovery:
       ui_url: https://accounts.taila659a.ts.net/recovery
-log:
-  level: debug
-  format: text
-  leak_sensitive_values: true
-ciphers:
-  algorithm: xchacha20-poly1305
-hashers:
-  algorithm: bcrypt
-  bcrypt:
-    cost: 8
-identity:
-  schemas:
-    - id: default
-      url: file:///etc/kratos/identity.schema.json
+serve:
+  public:
+    base_url: https://accounts.taila659a.ts.net/.ory/kratos/public
+    cors:
+      enabled: true
+    tls:
+      cert:
+        path: /etc/ssl/private/tls.crt
+      key:
+        path: /etc/ssl/private/tls.key
+  admin:
+    base_url: https://kratos-admin:4434
+    tls:
+      cert:
+        path: /etc/ssl/private/tls.crt
+      key:
+        path: /etc/ssl/private/tls.key
+session:
+  whoami:
+    required_aal: aal1
+version: v1.3.1
