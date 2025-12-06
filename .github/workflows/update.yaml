@@ -1,7 +1,7 @@
-"on":
-    - cron: 0 0 * * 0
-  workflow_dispatch: null
 jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
       - id: createGithubAppToken
         uses: actions/create-github-app-token@v2
         with:
@@ -11,6 +11,9 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token }}
+      - uses: shikanime-studio/setup-nix-action@v1
+        with:
+          github-token: ${{ steps.createGithubAppToken.outputs.token }}
       - uses: shikanime-studio/automata-action@v1
         with:
           ghstack-username: operator6o
@@ -19,7 +22,8 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           sign-commits: true
           username: Operator 6O <operator6o@shikanime.studio>
-      - uses: shikanime-studio/setup-nix-action@v1
-        with:
-          github-token: ${{ steps.createGithubAppToken.outputs.token }}
 name: Update
+"on":
+  schedule:
+    - cron: 0 0 * * 0
+  workflow_dispatch: null

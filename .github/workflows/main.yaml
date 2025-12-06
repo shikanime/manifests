@@ -1,23 +1,28 @@
-"on":
-      - gh/*/*/base
-  push:
-    branches:
-      - main
-      - main
-      - release-*
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
       - id: createGithubAppToken
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - run: nix flake check --accept-flake-config --all-systems --no-pure-eval
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: shikanime-studio/direnv-action@v2
       - uses: shikanime-studio/setup-nix-action@v1
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
+      - uses: shikanime-studio/direnv-action@v2
+      - run: nix flake check --accept-flake-config --all-systems --no-pure-eval
 name: Main
+"on":
+  pull_request:
+    branches:
+      - main
+      - gh/*/*/base
+  push:
+    branches:
+      - main
+      - release-*

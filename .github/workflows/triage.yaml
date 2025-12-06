@@ -1,16 +1,7 @@
-"on":
-      - completed
-  pull_request:
-    types:
-      - opened
-      - synchronize
 jobs:
-      - env:
-          GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
-        if:
-          github.event.pull_request.user.login == 'yorha-operator-6o[bot]' || github.event.pull_request.user.login
-          == 'dependabot[bot]'
-        run: gh pr edit ${{ github.event.pull_request.number }} --add-label dependencies
+  triage:
+    runs-on: ubuntu-latest
+    steps:
       - id: createGithubAppToken
         uses: actions/create-github-app-token@v2
         with:
@@ -20,4 +11,18 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token }}
+      - env:
+          GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
+        if:
+          github.event.pull_request.user.login == 'yorha-operator-6o[bot]' || github.event.pull_request.user.login
+          == 'dependabot[bot]'
+        run: gh pr edit ${{ github.event.pull_request.number }} --add-label dependencies
 name: Triage
+"on":
+  check_suite:
+    types:
+      - completed
+  pull_request:
+    types:
+      - opened
+      - synchronize
