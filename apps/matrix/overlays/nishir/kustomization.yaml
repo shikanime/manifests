@@ -7,6 +7,6 @@ patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
 resources:
-  - netpol.yaml
   - ../../base
+  - netpol.yaml
   - cert.yaml

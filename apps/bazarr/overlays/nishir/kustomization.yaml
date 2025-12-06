@@ -4,5 +4,5 @@ namespace: shikanime
 patches:
   - path: patch-sts.yaml
 resources:
-  - netpol.yaml
   - ../../base
+  - netpol.yaml
