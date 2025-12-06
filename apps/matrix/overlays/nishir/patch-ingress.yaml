@@ -3,60 +3,8 @@ kind: Ingress
 metadata:
   name: matrix
 spec:
-  tls:
-    - hosts:
-        - matrix
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-discord
-spec:
-  tls:
-    - hosts:
-        - matrix-discord
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-googlechat
-spec:
-  tls:
-    - hosts:
-        - matrix-googlechat
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-meta
-spec:
-  tls:
-    - hosts:
-        - matrix-meta
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-signal
-spec:
-  tls:
-    - hosts:
-        - matrix-signal
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-slack
-spec:
-  tls:
-    - hosts:
-        - matrix-slack
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-whatsapp
-spec:
-  tls:
-    - hosts:
-        - matrix-whatsapp
+  defaultBackend:
+    service:
+      name: matrix
+      port:
+        name: https

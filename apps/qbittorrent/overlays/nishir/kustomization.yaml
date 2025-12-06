@@ -4,11 +4,13 @@ components:
   - ../../components/tls
 namespace: shikanime
 patches:
+  - path: patch-netpol.yaml
   - path: patch-sts.yaml
+  - path: patch-ingress.yaml
 resources:
   - ../../base
   - cert.yaml
 secretGenerator:
-  - name: qbittorrent-scripts
-    files:
+  - files:
       - qbittorrent-scripts/qbittorrent-torrent-finished-handler.sh
+    name: qbittorrent-scripts

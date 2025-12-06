@@ -3,11 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: bazarr
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: bazarr
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:

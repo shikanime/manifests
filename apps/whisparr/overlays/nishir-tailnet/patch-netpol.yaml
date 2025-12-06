@@ -3,11 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: whisparr
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: whisparr
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:

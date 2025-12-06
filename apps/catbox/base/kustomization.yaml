@@ -17,3 +17,4 @@ resources:
   - deploy.yaml
   - svc.yaml
   - vpa.yaml
+  - netpol.yaml

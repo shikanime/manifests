@@ -10,7 +10,6 @@ patches:
   - path: patch-netpol.yaml
 resources:
   - ../nishir
-  - netpol.yaml
   - proxyclass.yaml
 secretGenerator:
   - files:

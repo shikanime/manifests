@@ -3,16 +3,14 @@ kind: NetworkPolicy
 metadata:
   name: sonarr
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: sonarr
-  policyTypes:
-    - Ingress
   ingress:
     - from:
-        - namespaceSelector:
+        - podSelector:
             matchLabels:
-              kubernetes.io/metadata.name: tailscale-system
+              app.kubernetes.io/name: bazarr
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: prowlarr
       ports:
         - port: https
           protocol: TCP

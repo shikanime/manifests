@@ -7,11 +7,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: matrix
-      port:
-        name: https
   rules:
     - host: matrix
       http:

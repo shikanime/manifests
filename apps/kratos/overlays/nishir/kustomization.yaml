@@ -5,6 +5,7 @@ components:
 namespace: shikanime-studio
 patches:
   - path: patch-sts.yaml
+  - path: patch-ingress.yaml
 resources:
   - ../../base
   - cert.yaml

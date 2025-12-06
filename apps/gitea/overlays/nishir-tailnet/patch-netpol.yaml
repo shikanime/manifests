@@ -3,11 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: gitea
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: gitea
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:

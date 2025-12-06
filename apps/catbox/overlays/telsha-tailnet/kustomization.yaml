@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: shikanime
 patches:
   - path: patch-svc.yaml
+  - path: patch-netpol.yaml
 resources:
   - ../telsha
-  - netpol.yaml
   - proxyclass.yaml

@@ -8,23 +8,3 @@ spec:
       app.kubernetes.io/name: qbittorrent
   policyTypes:
     - Ingress
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: lidarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: prowlarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: radarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: sonarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: whisparr
-      ports:
-        - port: http
-          protocol: TCP

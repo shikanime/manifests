@@ -1,0 +1,90 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-discord
+spec:
+  ingress:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: matrix
+      ports:
+        - port: http
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-googlechat
+spec:
+  ingress:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: matrix
+      ports:
+        - port: http
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-manager
+spec:
+  ingress:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: matrix
+      ports:
+        - port: https
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-meta
+spec:
+  ingress:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: matrix
+      ports:
+        - port: http
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-signal
+spec:
+  ingress:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: matrix
+      ports:
+        - port: http
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-slack
+spec:
+  ingress:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: matrix
+      ports:
+        - port: http
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-whatsapp
+spec:
+  ingress:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: matrix
+      ports:
+        - port: http
+          protocol: TCP

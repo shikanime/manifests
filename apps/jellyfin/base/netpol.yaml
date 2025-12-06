@@ -8,23 +8,6 @@ spec:
       app.kubernetes.io/name: jellyfin
   policyTypes:
     - Ingress
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: lidarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: radarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: sonarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: whisparr
-      ports:
-        - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -36,11 +19,3 @@ spec:
       app.kubernetes.io/name: metatube
   policyTypes:
     - Ingress
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: jellyfin
-      ports:
-        - port: http
-          protocol: TCP

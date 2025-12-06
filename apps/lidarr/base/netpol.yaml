@@ -8,11 +8,3 @@ spec:
       app.kubernetes.io/name: lidarr
   policyTypes:
     - Ingress
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: prowlarr
-      ports:
-        - port: http
-          protocol: TCP

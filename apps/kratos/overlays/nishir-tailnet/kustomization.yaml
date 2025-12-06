@@ -15,9 +15,9 @@ configMapGenerator:
 namespace: shikanime-studio
 patches:
   - path: patch-ingress.yaml
+  - path: patch-netpol.yaml
 resources:
   - ../nishir
-  - netpol.yaml
   - proxyclass.yaml
 secretGenerator:
   - envs:

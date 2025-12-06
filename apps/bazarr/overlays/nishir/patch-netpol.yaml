@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix
+  name: bazarr
 spec:
   ingress:
     - from:
-        - namespaceSelector:
+        - podSelector:
             matchLabels:
-              kubernetes.io/metadata.name: tailscale-system
+              app.kubernetes.io/name: prowlarr
       ports:
-        - port: https
+        - port: http
           protocol: TCP
