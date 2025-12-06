@@ -1,21 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix
-spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: matrix
-  policyTypes:
-    - Ingress
-  ingress:
-    - ports:
-        - port: http
-          protocol: TCP
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: matrix-discord
 spec:
   podSelector:
