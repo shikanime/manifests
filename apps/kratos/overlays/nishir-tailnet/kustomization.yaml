@@ -17,8 +17,8 @@ patches:
   - path: patch-ingress.yaml
 resources:
   - ../nishir
-  - proxyclass.yaml
   - netpol.yaml
+  - proxyclass.yaml
 secretGenerator:
   - envs:
       - kratos/.env
