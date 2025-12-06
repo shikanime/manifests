@@ -6,6 +6,7 @@ configurations:
   - namereference.yaml
 namespace: shikanime
 patches:
+  - path: patch-ingress.yaml
   - path: patch-sts.yaml
 resources:
   - ../../base
