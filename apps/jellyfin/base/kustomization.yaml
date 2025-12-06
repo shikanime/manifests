@@ -6,7 +6,7 @@ metadata:
 images:
   - name: jellyfin
     newName: docker.io/jellyfin/jellyfin
-    newTag: 10.11.3
+    newTag: 10.11.4
   - name: metatube
     newName: ghcr.io/metatube-community/metatube-server
     newTag: 1.3.2
@@ -15,7 +15,7 @@ labels:
       app.kubernetes.io/component: media-server
       app.kubernetes.io/name: jellyfin
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v10.11.3
+      app.kubernetes.io/version: v10.11.4
 resources:
   - ingress.yaml
   - sts.yaml
