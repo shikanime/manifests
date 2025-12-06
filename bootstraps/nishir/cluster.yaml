@@ -611,7 +611,6 @@ spec:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort
                     defaultReplicaCount: '2'
-                    offlineReplicaRebuilding: true
                     replicaAutoBalance: best-effort
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
