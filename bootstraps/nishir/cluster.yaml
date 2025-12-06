@@ -316,8 +316,6 @@ spec:
             repositories:
               - name: fairwinds-stable
                 url: https://charts.fairwinds.com/stable
-              - name: grafana
-                url: https://grafana.github.io/helm-charts
               - name: jetstack
                 url: https://charts.jetstack.io
               - name: kubernetes-sigs-cluster-api-operator
