@@ -1,6 +1,42 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: matrix
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-discord
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-googlechat
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-manager
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-meta
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-signal
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-slack
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-whatsapp
+      ports:
+        - port: https
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: matrix-discord
 spec:
   podSelector:
