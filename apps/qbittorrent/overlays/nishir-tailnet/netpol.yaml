@@ -1,8 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: copyparty
+  name: qbittorrent-tailscale
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: qbittorrent
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -11,3 +16,7 @@ spec:
       ports:
         - port: https
           protocol: TCP
+        - port: bittorrent
+          protocol: TCP
+        - port: bittorrent-udp
+          protocol: UDP

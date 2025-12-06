@@ -1,13 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: sonarr
+  name: copyparty-tailscale
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: copyparty
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: tailscale-system
       ports:
-        - port: http
+        - port: https
           protocol: TCP

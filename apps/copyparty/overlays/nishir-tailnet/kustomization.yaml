@@ -7,8 +7,8 @@ configMapGenerator:
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
-  - path: patch-netpol.yaml
   - path: patch-svc.yaml
 resources:
   - ../nishir
   - proxyclass.yaml
+  - netpol.yaml

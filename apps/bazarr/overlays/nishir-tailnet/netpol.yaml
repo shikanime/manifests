@@ -1,13 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: vaultwarden
+  name: bazarr-tailscale
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: bazarr
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: tailscale-system
       ports:
-        - port: https
+        - port: http
           protocol: TCP

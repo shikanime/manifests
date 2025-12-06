@@ -3,6 +3,11 @@ kind: NetworkPolicy
 metadata:
   name: matrix-discord
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-discord
+  policyTypes:
+    - Ingress
   ingress:
     - podSelector:
         matchLabels:
@@ -16,6 +21,11 @@ kind: NetworkPolicy
 metadata:
   name: matrix-googlechat
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-googlechat
+  policyTypes:
+    - Ingress
   ingress:
     - podSelector:
         matchLabels:
@@ -29,6 +39,11 @@ kind: NetworkPolicy
 metadata:
   name: matrix-manager
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-manager
+  policyTypes:
+    - Ingress
   ingress:
     - podSelector:
         matchLabels:
@@ -42,6 +57,11 @@ kind: NetworkPolicy
 metadata:
   name: matrix-meta
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-meta
+  policyTypes:
+    - Ingress
   ingress:
     - podSelector:
         matchLabels:
@@ -55,6 +75,11 @@ kind: NetworkPolicy
 metadata:
   name: matrix-signal
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-signal
+  policyTypes:
+    - Ingress
   ingress:
     - podSelector:
         matchLabels:
@@ -68,6 +93,11 @@ kind: NetworkPolicy
 metadata:
   name: matrix-slack
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-slack
+  policyTypes:
+    - Ingress
   ingress:
     - podSelector:
         matchLabels:
@@ -81,6 +111,11 @@ kind: NetworkPolicy
 metadata:
   name: matrix-whatsapp
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-whatsapp
+  policyTypes:
+    - Ingress
   ingress:
     - podSelector:
         matchLabels:

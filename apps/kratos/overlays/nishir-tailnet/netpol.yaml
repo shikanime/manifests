@@ -1,8 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: accounts
+  name: accounts-tailscale
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: accounts
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -17,6 +22,11 @@ kind: NetworkPolicy
 metadata:
   name: kratos
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: kratos
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - namespaceSelector:

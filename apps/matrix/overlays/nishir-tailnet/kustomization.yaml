@@ -7,10 +7,10 @@ configMapGenerator:
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
-  - path: patch-netpol.yaml
 resources:
   - ../nishir
   - proxyclass.yaml
+  - netpol.yaml
 secretGenerator:
   - files:
       - mautrix-discord/config.yaml

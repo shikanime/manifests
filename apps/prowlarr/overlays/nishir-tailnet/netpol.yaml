@@ -1,8 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: qbittorrent
+  name: prowlarr-tailscale
 spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: prowlarr
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -11,7 +16,3 @@ spec:
       ports:
         - port: https
           protocol: TCP
-        - port: bittorrent
-          protocol: TCP
-        - port: bittorrent-udp
-          protocol: UDP
