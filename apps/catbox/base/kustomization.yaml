@@ -15,6 +15,6 @@ labels:
       app.kubernetes.io/version: v0.17.1
 resources:
   - deploy.yaml
+  - netpol.yaml
   - svc.yaml
   - vpa.yaml
-  - netpol.yaml

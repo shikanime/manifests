@@ -18,7 +18,7 @@ labels:
       app.kubernetes.io/version: v1.19.21
 resources:
   - ingress.yaml
+  - netpol.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-  - netpol.yaml

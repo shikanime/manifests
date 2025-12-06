@@ -40,7 +40,7 @@ labels:
 resources:
   - deploy.yaml
   - ingress.yaml
+  - netpol.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-  - netpol.yaml
