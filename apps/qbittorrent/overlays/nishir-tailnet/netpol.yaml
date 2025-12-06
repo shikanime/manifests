@@ -15,8 +15,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: https
-          protocol: TCP
         - port: bittorrent
-          protocol: TCP
         - port: bittorrent-udp
           protocol: UDP

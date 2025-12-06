@@ -15,7 +15,6 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -34,7 +33,6 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -53,7 +51,6 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: https
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -72,7 +69,6 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -91,7 +87,6 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -110,7 +105,6 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -129,4 +123,3 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: http
-          protocol: TCP

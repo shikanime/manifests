@@ -15,7 +15,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: https
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -34,7 +33,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -53,7 +51,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -72,7 +69,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: https
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -91,7 +87,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -110,7 +105,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -129,7 +123,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-          protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -148,4 +141,3 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-          protocol: TCP

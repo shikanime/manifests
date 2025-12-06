@@ -15,4 +15,3 @@ spec:
               app.kubernetes.io/name: prowlarr
       ports:
         - port: http
-          protocol: TCP

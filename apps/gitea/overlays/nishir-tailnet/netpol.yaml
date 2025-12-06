@@ -15,6 +15,4 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: https
-          protocol: TCP
         - port: ssh
-          protocol: TCP

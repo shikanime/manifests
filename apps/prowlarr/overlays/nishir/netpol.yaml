@@ -1,11 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: qbittorrent
+  name: prowlarr-allow-apps
+  namespace: shikanime
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: qbittorrent
+      app.kubernetes.io/name: prowlarr
   policyTypes:
     - Ingress
   ingress:
@@ -15,13 +16,10 @@ spec:
               app.kubernetes.io/name: lidarr
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: prowlarr
+              app.kubernetes.io/name: sonarr
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: radarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: sonarr
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: whisparr
