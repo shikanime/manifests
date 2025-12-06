@@ -9,9 +9,10 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: matrix
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
       ports:
         - port: http
           protocol: TCP
@@ -27,9 +28,10 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: matrix
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
       ports:
         - port: http
           protocol: TCP
@@ -45,9 +47,10 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: matrix
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
       ports:
         - port: https
           protocol: TCP
@@ -63,9 +66,10 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: matrix
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
       ports:
         - port: http
           protocol: TCP
@@ -81,9 +85,10 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: matrix
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
       ports:
         - port: http
           protocol: TCP
@@ -99,9 +104,10 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: matrix
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
       ports:
         - port: http
           protocol: TCP
@@ -117,9 +123,10 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: matrix
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
       ports:
         - port: http
           protocol: TCP
