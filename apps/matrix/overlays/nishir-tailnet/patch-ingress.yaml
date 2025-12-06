@@ -7,17 +7,6 @@ metadata:
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
-  rules:
-    - host: matrix
-      http:
-        paths:
-          - backend:
-              service:
-                name: matrix-manager
-                port:
-                  name: https
-            path: /.well-known/matrix/mautrix
-            pathType: Prefix
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

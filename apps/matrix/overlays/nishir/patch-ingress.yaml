@@ -8,3 +8,14 @@ spec:
       name: matrix
       port:
         name: https
+  rules:
+    - host: matrix
+      http:
+        paths:
+          - backend:
+              service:
+                name: matrix-manager
+                port:
+                  name: https
+            path: /.well-known/matrix/mautrix
+            pathType: Prefix
