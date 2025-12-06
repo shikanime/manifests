@@ -1,25 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: accounts-tailscale
-spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: accounts
-  policyTypes:
-    - Ingress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: tailscale-system
-      ports:
-        - port: https
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: kratos-tailscale
+  name: kratos
 spec:
   podSelector:
     matchLabels:
@@ -28,9 +10,27 @@ spec:
     - Ingress
   ingress:
     - from:
-        - namespaceSelector:
+        - podSelector:
             matchLabels:
-              kubernetes.io/metadata.name: tailscale-system
+              app.kubernetes.io/name: accounts
       ports:
         - port: https
         - port: https-admin
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: kratos-postgres
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: kratos-postgres
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: kratos
+      ports:
+        - port: postgres
