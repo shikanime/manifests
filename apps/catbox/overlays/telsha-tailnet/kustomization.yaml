@@ -4,6 +4,6 @@ namespace: shikanime
 patches:
   - path: patch-svc.yaml
 resources:
-  - netpol.yaml
   - ../telsha
+  - netpol.yaml
   - proxyclass.yaml
