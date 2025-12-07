@@ -210,3 +210,5 @@ spec:
               name: ftp-data-12098
             - containerPort: 12099
               name: ftp-data-12099
+            - containerPort: 3990
+              name: ftps
