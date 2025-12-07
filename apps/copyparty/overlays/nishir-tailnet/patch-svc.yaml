@@ -8,14 +8,3 @@ metadata:
     tailscale.com/tags: tag:ftp
 spec:
   loadBalancerClass: tailscale
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ftps
-  annotations:
-    tailscale.com/hostname: ftps
-    tailscale.com/proxy-class: copyparty
-    tailscale.com/tags: tag:ftps
-spec:
-  loadBalancerClass: tailscale
