@@ -7,9 +7,6 @@ spec:
     spec:
       containers:
         - name: copyparty
-          ports:
-            - containerPort: 3923
-              name: http
           volumeMounts:
             - name: movies-data
               mountPath: /data/movies
