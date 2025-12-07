@@ -2,8 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "gitea", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "gitea", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.71.2
   - name: gitea
     newName: docker.io/gitea/gitea
     newTag: 1.25.2

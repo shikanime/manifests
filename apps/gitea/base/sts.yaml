@@ -13,6 +13,22 @@ spec:
       labels:
         app.kubernetes.io/name: gitea
     spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/startup-config
+            - /data/gitea/conf
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: config
+              mountPath: /mnt/startup-config
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -61,6 +77,9 @@ spec:
       securityContext:
         fsGroup: 1000
       volumes:
+        - name: config
+          configMap:
+            name: gitea-config
         - name: data
           persistentVolumeClaim:
             claimName: gitea-data
