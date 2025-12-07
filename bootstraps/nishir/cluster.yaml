@@ -456,4 +456,4 @@ spec:
           provider: calico
         storage:
           type: kine
-    version: v1.34.1+k0s.0
+    version: v1.34.2+k0s.0
