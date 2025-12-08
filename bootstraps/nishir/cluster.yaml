@@ -357,7 +357,7 @@ spec:
                 values: |
                   deschedulerPolicy:
                     metricsProviders:
-                      - name: KubernetesMetrics
+                      - source: KubernetesMetrics
                     profiles:
                       - name: default
                         pluginConfig:
@@ -374,13 +374,13 @@ spec:
                           - name: LowNodeUtilization
                             args:
                               thresholds:
-                                cpu: 60
-                                memory: 60
-                                pods: 60
+                                cpu: 20
+                                memory: 20
+                                pods: 20
                               targetThresholds:
-                                cpu: 80
-                                memory: 80
-                                pods: 80
+                                cpu: 50
+                                memory: 50
+                                pods: 50
                               metricsUtilization:
                                 source: KubernetesMetrics
                           - name: RemoveDuplicates

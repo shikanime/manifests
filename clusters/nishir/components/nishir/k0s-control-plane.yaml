@@ -67,8 +67,8 @@ spec:
                 namespace: kube-system
                 values: |
                   deschedulerPolicy:
-                    metricsCollector:
-                      enabled: true
+                    metricsProviders:
+                      - source: KubernetesMetrics
                     profiles:
                       - name: default
                         pluginConfig:
