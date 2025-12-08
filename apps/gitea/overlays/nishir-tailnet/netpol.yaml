@@ -14,5 +14,5 @@ spec:
             matchLabels:
               kubernetes.io/metadata.name: tailscale-system
       ports:
-        - port: https
+        - port: http
         - port: ssh

@@ -14,7 +14,7 @@ spec:
             matchLabels:
               kubernetes.io/metadata.name: tailscale-system
       ports:
-        - port: https
+        - port: http
         - port: ftp-control
         - port: ftp-data-12000
         - port: ftp-data-12001
