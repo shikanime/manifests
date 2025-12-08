@@ -5,7 +5,7 @@ metadata:
 spec:
   ports:
     - name: ftp-control
-      port: 21
+      port: 3921
       targetPort: ftp-control
     - name: ftp-data-12000
       port: 12000
