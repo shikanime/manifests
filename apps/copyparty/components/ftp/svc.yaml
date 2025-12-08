@@ -308,7 +308,7 @@ spec:
       port: 12099
       targetPort: ftp-data-12099
     - name: ftps
-      port: 990
+      port: 3990
       targetPort: ftps
   selector:
     app.kubernetes.io/name: copyparty
