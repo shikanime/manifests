@@ -417,13 +417,13 @@ spec:
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort
-                    defaultReplicaCount: '2'
+                    defaultReplicaCount: '1'
                     replicaAutoBalance: best-effort
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
                     backupTargetCredentialSecret: longhorn-hetzner-backups
                   persistence:
-                    defaultClassReplicaCount: 2
+                    defaultClassReplicaCount: 1
                     defaultFsType: xfs
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
