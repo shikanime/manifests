@@ -10,7 +10,7 @@ spec:
     - standard
   parameters:
     full-backup-interval: "7"
-  retain: 14
+  retain: 7
   task: backup
 ---
 apiVersion: longhorn.io/v1beta2
@@ -25,7 +25,7 @@ spec:
     - large
   parameters:
     full-backup-interval: "28"
-  retain: 12
+  retain: 4
   task: backup
 ---
 apiVersion: longhorn.io/v1beta2
@@ -51,7 +51,7 @@ spec:
   cron: "0 * * * *"
   groups:
     - default
-  retain: 48
+  retain: 24
   task: snapshot
 ---
 apiVersion: longhorn.io/v1beta2
