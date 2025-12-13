@@ -10,7 +10,6 @@ resources:
   - ../../../../apps/copyparty/overlays/nishir-tailnet
   - ../../../../apps/gitea/overlays/nishir-tailnet
   - ../../../../apps/jellyfin/overlays/nishir-tailnet
-  - ../../../../apps/kratos/overlays/nishir-tailnet
   - ../../../../apps/lidarr/overlays/nishir-tailnet
   - ../../../../apps/matrix/overlays/nishir-tailnet
   - ../../../../apps/prowlarr/overlays/nishir-tailnet
