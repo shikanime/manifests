@@ -145,10 +145,38 @@ def update_longhorn_charts [backup_target: string] {
   $doc | upsert spec.k0s.config.spec.extensions.helm.charts $charts
 }
 
+def update_multus_manifest [] {
+  let doc = $in
+  print "Updating Multus CNI manifest..."
+  let url = "https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml"
+  let content = (http get --raw $url)
+
+  let hosts = (
+    $doc.spec.hosts
+    | enumerate
+    | each {|it|
+      if $it.index == 0 {
+        let files = (
+          $it.item.files
+          | each {|f|
+            if ($f | get -i name) == "multus-manifests" {
+              $f | upsert data $content
+            } else { $f }
+          }
+        )
+        $it.item | upsert files $files
+      } else { $it.item }
+    }
+  )
+
+  $doc | upsert spec.hosts $hosts
+}
+
 open $"($env.FILE_PWD)/cluster.yaml"
 | update_hosts (get_tailscale_ips)
 | update_charts
 | update_longhorn_charts (get_longhorn_backup_target)
+| update_multus_manifest
 | to yaml
 | save --force $"($env.FILE_PWD)/cluster.yaml"
 
