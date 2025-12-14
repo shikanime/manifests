@@ -6,6 +6,7 @@ components:
   - ../../components/tailscale
   - ../../components/tls
 resources:
+  - ../../../../apps/multus/base
   - ../../../../apps/bazarr/overlays/nishir-tailnet
   - ../../../../apps/copyparty/overlays/nishir-tailnet
   - ../../../../apps/gitea/overlays/nishir-tailnet
