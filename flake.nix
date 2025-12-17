@@ -43,7 +43,13 @@
         {
           devenv.shells.default = {
             imports = [
-              devlib.devenvModules.shikanime-studio
+              inputs.devlib.devenvModules.docs
+              inputs.devlib.devenvModules.formats
+              inputs.devlib.devenvModules.github
+              inputs.devlib.devenvModules.nix
+              inputs.devlib.devenvModules.opentofu
+              inputs.devlib.devenvModules.shell
+              inputs.devlib.devenvModules.shikanime
             ];
             cachix.push = "shikanime";
             gitignore.content = [
@@ -81,6 +87,7 @@
             };
             treefmt.config.settings.global.excludes = [
               "*.excalidraw"
+              "*.enc.xml"
             ];
           };
         };
