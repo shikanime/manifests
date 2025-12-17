@@ -16,14 +16,14 @@ jobs:
         GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
         HEAD_REF: ${{ github.head_ref }}
         REPO: ${{ github.repository }}
-      if: '!(startsWith(github.head_ref, ''gh/'') && endsWith(github.head_ref, ''/head''))'
+      if: '!contains(github.event.pull_request.labels.*.name, ''ghstack'')'
       run: git push origin --delete "$HEAD_REF"
     - env:
         BASE_REF: ${{ github.base_ref }}
         GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
         HEAD_REF: ${{ github.head_ref }}
         REPO: ${{ github.repository }}
-      if: startsWith(github.head_ref, 'gh/') && endsWith(github.head_ref, '/head')
+      if: contains(github.event.pull_request.labels.*.name, 'ghstack')
       run: "for role in base head orig; do\n  git push origin --delete \"${HEAD_REF%/head}/$role\"\
         \ || true\ndone\n"
 name: Cleanup
