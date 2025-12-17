@@ -59,8 +59,26 @@
               pkgs.kustomize
               pkgs.nushell
               pkgs.skaffold
-              pkgs.sops
             ];
+            sops = {
+              enable = true;
+              settings = {
+                creation_rules = [
+                  {
+                    key_groups = [
+                      {
+                        age = [
+                          "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
+                          "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
+                          "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c" # telsha
+                        ];
+                      }
+                    ];
+                  }
+                ];
+                stores.yaml.indent = 2;
+              };
+            };
             treefmt.config.settings.global.excludes = [
               "*.excalidraw"
             ];
