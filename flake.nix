@@ -60,6 +60,14 @@
               pkgs.nushell
               pkgs.skaffold
             ];
+            tasks."sops:decrypt" = {
+              before = [ "devenv:enterShell"];
+              exec = ''
+                find . -type f -name '*.enc.*' | while read -r enc; do
+                  sops --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
+                done
+              '';
+            };
             sops = {
               enable = true;
               settings = {
