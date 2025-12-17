@@ -43,7 +43,13 @@
         {
           devenv.shells.default = {
             imports = [
-              devlib.devenvModules.shikanime-studio
+              inputs.devlib.devenvModules.docs
+              inputs.devlib.devenvModules.formats
+              inputs.devlib.devenvModules.github
+              inputs.devlib.devenvModules.nix
+              inputs.devlib.devenvModules.opentofu
+              inputs.devlib.devenvModules.shell
+              inputs.devlib.devenvModules.shikanime
             ];
             cachix.push = "shikanime";
             gitignore.content = [
@@ -61,7 +67,7 @@
               pkgs.skaffold
             ];
             tasks."sops:decrypt" = {
-              before = [ "devenv:enterShell"];
+              before = [ "devenv:enterShell" ];
               exec = ''
                 find . -type f -name '*.enc.*' | while read -r enc; do
                   sops --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
@@ -89,6 +95,7 @@
             };
             treefmt.config.settings.global.excludes = [
               "*.excalidraw"
+              "*.enc.xml"
             ];
           };
         };
