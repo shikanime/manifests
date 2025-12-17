@@ -15,8 +15,12 @@ jobs:
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
       - run: nix flake check --accept-flake-config --all-systems --no-pure-eval
-name: Push
-"on":
+name: Check
+'on':
+  pull_request:
+    branches:
+      - main
+      - gh/*/*/base
   push:
     branches:
       - main

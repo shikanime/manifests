@@ -35,7 +35,7 @@ jobs:
           REPO: ${{ github.repository }}
         run: gh release create "$REF_NAME" --repo "$REPO" --generate-notes
 name: Release
-"on":
+'on':
   push:
     tags:
       - v?[0-9]+.[0-9]+.[0-9]+*
