@@ -6,15 +6,14 @@ spec:
   hosts:
     - files:
         - data: |
-            L /var/lib/containerd - - - - ./k0s/containerd
-            L /var/lib/k0s - - - - ../../mnt/nishir/k0s
-            L /var/lib/kubelet - - - - ./k0s/kubelet
-            L /var/lib/longhorn - - - - ../../mnt/nishir/longhorn
-            L /var/log/calico - - - - ../../mnt/nishir/log/calico
-            L /var/log/pods - - - - ../../mnt/nishir/log/pods
-            L /var/swap - - - - ../../mnt/nishir/swap
-          dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
-          name: tmpfiles
+            [device-mac-randomization]
+            wifi.scan-rand-mac-address=yes
+
+            [connection]
+            wifi.cloned-mac-address=permanent
+            ethernet.cloned-mac-address=permanent
+          dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
+          name: mac-randomization
         - data: |
             # Allow many inotify instances for controllers and Syncthing
             fs.inotify.max_user_instances=8192
@@ -86,6 +85,16 @@ spec:
             vm.vfs_cache_pressure=50
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
+        - data: |
+            L /var/lib/containerd - - - - ./k0s/containerd
+            L /var/lib/k0s - - - - ../../mnt/nishir/k0s
+            L /var/lib/kubelet - - - - ./k0s/kubelet
+            L /var/lib/longhorn - - - - ../../mnt/nishir/longhorn
+            L /var/log/calico - - - - ../../mnt/nishir/log/calico
+            L /var/log/pods - - - - ../../mnt/nishir/log/pods
+            L /var/swap - - - - ../../mnt/nishir/swap
+          dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
+          name: tmpfiles
       hooks:
         install:
           before:
@@ -106,15 +115,14 @@ spec:
         user: root
     - files:
         - data: |
-            L /var/lib/containerd - - - - ./k0s/containerd
-            L /var/lib/k0s - - - - ../../mnt/reimu/k0s
-            L /var/lib/kubelet - - - - ./k0s/kubelet
-            L /var/lib/longhorn - - - - ../../mnt/reimu/longhorn
-            L /var/log/calico - - - - ../../mnt/reimu/log/calico
-            L /var/log/pods - - - - ../../mnt/reimu/log/pods
-            L /var/swap - - - - ../../mnt/reimu/swap
-          dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
-          name: tmpfiles
+            [device-mac-randomization]
+            wifi.scan-rand-mac-address=yes
+
+            [connection]
+            wifi.cloned-mac-address=permanent
+            ethernet.cloned-mac-address=permanent
+          dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
+          name: mac-randomization
         - data: |
             # Allow many inotify instances for controllers and Syncthing
             fs.inotify.max_user_instances=8192
@@ -186,6 +194,16 @@ spec:
             vm.vfs_cache_pressure=50
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
+        - data: |
+            L /var/lib/containerd - - - - ./k0s/containerd
+            L /var/lib/k0s - - - - ../../mnt/reimu/k0s
+            L /var/lib/kubelet - - - - ./k0s/kubelet
+            L /var/lib/longhorn - - - - ../../mnt/reimu/longhorn
+            L /var/log/calico - - - - ../../mnt/reimu/log/calico
+            L /var/log/pods - - - - ../../mnt/reimu/log/pods
+            L /var/swap - - - - ../../mnt/reimu/swap
+          dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
+          name: tmpfiles
       hooks:
         install:
           before:
@@ -205,15 +223,14 @@ spec:
         user: root
     - files:
         - data: |
-            L /var/lib/containerd - - - - ./k0s/containerd
-            L /var/lib/k0s - - - - ../../mnt/marisa/k0s
-            L /var/lib/kubelet - - - - ./k0s/kubelet
-            L /var/lib/longhorn - - - - ../../mnt/marisa/longhorn
-            L /var/log/calico - - - - ../../mnt/marisa/log/calico
-            L /var/log/pods - - - - ../../mnt/marisa/log/pods
-            L /var/swap - - - - ../../mnt/marisa/swap
-          dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
-          name: tmpfiles
+            [device-mac-randomization]
+            wifi.scan-rand-mac-address=yes
+
+            [connection]
+            wifi.cloned-mac-address=permanent
+            ethernet.cloned-mac-address=permanent
+          dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
+          name: mac-randomization
         - data: |
             # Allow many inotify instances for controllers and Syncthing
             fs.inotify.max_user_instances=8192
@@ -285,6 +302,16 @@ spec:
             vm.vfs_cache_pressure=50
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
+        - data: |
+            L /var/lib/containerd - - - - ./k0s/containerd
+            L /var/lib/k0s - - - - ../../mnt/marisa/k0s
+            L /var/lib/kubelet - - - - ./k0s/kubelet
+            L /var/lib/longhorn - - - - ../../mnt/marisa/longhorn
+            L /var/log/calico - - - - ../../mnt/marisa/log/calico
+            L /var/log/pods - - - - ../../mnt/marisa/log/pods
+            L /var/swap - - - - ../../mnt/marisa/swap
+          dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
+          name: tmpfiles
       hooks:
         install:
           before:
