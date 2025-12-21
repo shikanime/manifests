@@ -481,4 +481,6 @@ spec:
           calico:
             ipAutodetectionMethod: interface=tailscale0
           provider: calico
+        telemetry:
+          enabled: false
     version: v1.34.2+k0s.0
