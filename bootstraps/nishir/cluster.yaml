@@ -105,7 +105,7 @@ spec:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
+        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
       noTaints: true
       role: controller+worker
       ssh:
@@ -212,7 +212,7 @@ spec:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
+        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large,node.longhorn.io/create-default-disk=false"
       role: worker
       ssh:
         address: 100.78.148.86
@@ -318,7 +318,7 @@ spec:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
+        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium,node.longhorn.io/create-default-disk=false"
       role: worker
       ssh:
         address: 100.92.12.65
