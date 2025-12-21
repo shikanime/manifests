@@ -107,8 +107,6 @@ spec:
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
       noTaints: true
-      privateAddress: 100.117.159.56
-      privateInterface: tailscale0
       role: controller+worker
       ssh:
         address: 100.117.159.56
@@ -215,8 +213,6 @@ spec:
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
-      privateAddress: 100.78.148.86
-      privateInterface: tailscale0
       role: worker
       ssh:
         address: 100.78.148.86
@@ -323,8 +319,6 @@ spec:
             - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
-      privateAddress: 100.92.12.65
-      privateInterface: tailscale0
       role: worker
       ssh:
         address: 100.92.12.65
@@ -336,8 +330,6 @@ spec:
       metadata:
         name: nishir
       spec:
-        api:
-          address: 100.117.159.56
         extensions:
           helm:
             repositories:
@@ -477,10 +469,6 @@ spec:
                 chartname: fairwinds-stable/vpa
                 version: 4.10.0
                 namespace: kube-system
-        network:
-          calico:
-            ipAutodetectionMethod: interface=tailscale0
-          provider: calico
         telemetry:
           enabled: false
     version: v1.34.2+k0s.0
