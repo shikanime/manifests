@@ -469,11 +469,6 @@ spec:
                 chartname: fairwinds-stable/vpa
                 version: 4.10.0
                 namespace: kube-system
-        network:
-          dualStack:
-            enabled: true
-            IPv6podCIDR: fd00::/108
-            IPv6serviceCIDR: fd01::/108
         telemetry:
           enabled: false
     version: v1.34.2+k0s.0
