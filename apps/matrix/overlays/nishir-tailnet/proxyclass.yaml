@@ -7,15 +7,13 @@ spec:
     pod:
       affinity:
         podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: matrix
-                namespaces:
-                  - shikanime
-                topologyKey: kubernetes.io/hostname
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: matrix
+              namespaces:
+                - shikanime
+              topologyKey: kubernetes.io/hostname
 ---
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
