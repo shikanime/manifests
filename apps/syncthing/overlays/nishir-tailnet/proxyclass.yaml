@@ -7,12 +7,10 @@ spec:
     pod:
       affinity:
         podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: syncthing
-                namespaces:
-                  - shikanime
-                topologyKey: kubernetes.io/hostname
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: syncthing
+              namespaces:
+                - shikanime
+              topologyKey: kubernetes.io/hostname
