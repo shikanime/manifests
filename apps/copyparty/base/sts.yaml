@@ -41,13 +41,16 @@ spec:
             - containerPort: 3923
               name: http
           readinessProbe:
-            tcpSocket:
+            httpGet:
+              path: /?reset=/._
               port: http
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /?reset=/._
               port: http
           startupProbe:
-            tcpSocket:
+            httpGet:
+              path: /?reset=/._
               port: http
             failureThreshold: 30
           volumeMounts:
