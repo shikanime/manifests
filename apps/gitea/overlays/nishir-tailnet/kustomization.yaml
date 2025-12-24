@@ -8,3 +8,7 @@ resources:
   - ../nishir
   - netpol.yaml
   - proxyclass.yaml
+secretGenerator:
+  - name: gitea-config
+    files:
+      - gitea/app.ini

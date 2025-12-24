@@ -78,8 +78,8 @@ spec:
         fsGroup: 1000
       volumes:
         - name: config
-          configMap:
-            name: gitea-config
+          secret:
+            secretName: gitea-config
         - name: data
           persistentVolumeClaim:
             claimName: gitea-data
