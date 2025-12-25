@@ -53,6 +53,7 @@
             ];
             cachix.push = "shikanime";
             gitignore.content = [
+              "app.ini"
               "config.conf"
               "config.xml"
             ];
