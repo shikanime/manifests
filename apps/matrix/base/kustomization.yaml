@@ -15,22 +15,22 @@ images:
     newTag: v0.5.2
   - name: mautrix-meta
     newName: dock.mau.dev/mautrix/meta
-    newTag: v0.2511.0
+    newTag: v0.2512.0
   - name: mautrix-signal
     newName: dock.mau.dev/mautrix/signal
-    newTag: v0.2511.0
+    newTag: v0.2512.0
   - name: mautrix-slack
     newName: dock.mau.dev/mautrix/slack
     newTag: v0.2511.0
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
-    newTag: v0.2511.0
+    newTag: v0.2512.0
   - name: rclone
     newName: docker.io/rclone/rclone
     newTag: 1.72.0
   - name: synapse
     newName: docker.io/matrixdotorg/synapse
-    newTag: v1.143.0
+    newTag: v1.144.0
 labels:
   - pairs:
       app.kubernetes.io/component: communication
