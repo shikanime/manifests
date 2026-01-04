@@ -350,7 +350,7 @@ spec:
             charts:
               - name: cert-manager
                 chartname: jetstack/cert-manager
-                version: v1.19.1
+                version: v1.19.2
                 namespace: cert-manager-system
                 values: |
                   clusterResourceNamespace: cert-manager-trust
@@ -450,7 +450,7 @@ spec:
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
-                version: 1.90.9
+                version: 1.92.4
                 namespace: tailscale-system
                 values: |
                   apiServerProxyConfig:
@@ -459,7 +459,7 @@ spec:
                     hostname: nishir-k8s-operator
               - name: trust-manager
                 chartname: jetstack/trust-manager
-                version: v0.20.2
+                version: v1.19.2
                 namespace: cert-manager-system
                 values: |
                   app:

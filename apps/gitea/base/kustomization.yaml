@@ -6,16 +6,16 @@ metadata:
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
-    newTag: 1.71.2
+    newTag: 1.72.0
   - name: gitea
     newName: docker.io/gitea/gitea
-    newTag: 1.25.2
+    newTag: 1.25.3
 labels:
   - pairs:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/name: gitea
       app.kubernetes.io/part-of: nishir-platform
-      app.kubernetes.io/version: v1.25.2
+      app.kubernetes.io/version: v1.25.3
 resources:
   - ingress.yaml
   - sts.yaml

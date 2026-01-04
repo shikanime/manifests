@@ -1,38 +1,6 @@
 #!/usr/bin/env nix
 #! nix shell nixpkgs#nushell --command nu
 
-def get_tailscale_ips [] {
- print "Fetching Tailscale IPs..."
-  let peers = (
-    ^tailscale status -json
-    | from json
-    | get Peer
-    | values
-  )
-  let nishir_ip = (
-    $peers
-    | where HostName == "nishir"
-    | get 0
-    | get TailscaleIPs
-    | get 0
-  )
-  let fushi_ip = (
-    $peers
-    | where HostName == "fushi"
-    | get 0
-    | get TailscaleIPs
-    | get 0
-  )
-  let minish_ip = (
-    $peers
-    | where HostName == "minish"
-    | get 0
-    | get TailscaleIPs
-    | get 0
-  )
-  { nishir: $nishir_ip, fushi: $fushi_ip, minish: $minish_ip }
-}
-
 def get_longhorn_backup_target [] {
   print "Fetching Longhorn backup target..."
   let backup = (^tofu -chdir=$"($env.FILE_PWD)/../../infra/nishir-services" output -json longhorn_backupstore | from json)
@@ -54,46 +22,6 @@ def get_latest_chart_version [repo_name: string, chart_name: string, repo_url: s
   if $version == null or $version == "" or $version == "null" { null } else { $version }
 }
 
-def update_hosts [ips: record] {
-  let doc = $in
-  let hosts = (
-    $doc.spec.hosts
-    | enumerate
-    | each {|it|
-      match $it.index {
-        0 => {
-          $it.item
-          | update ssh (
-            $it.item.ssh
-            | update 'address' $ips.nishir
-          )
-          | update 'privateAddress' $ips.nishir
-        },
-        1 => {
-          $it.item
-          | update ssh (
-            $it.item.ssh
-            | update 'address' $ips.fushi
-          )
-          | update 'privateAddress' $ips.fushi
-        },
-        2 => {
-          $it.item
-          | update ssh (
-            $it.item.ssh
-            | update 'address' $ips.minish
-          )
-          | update 'privateAddress' $ips.minish
-        },
-        _ => { $it.item }
-      }
-    }
-  )
-  $doc
-  | upsert spec.hosts $hosts
-  | upsert spec.k0s.config.spec.api.address $ips.nishir
-}
-
 def update_charts [] {
   let doc = $in
   print "Updating helm chart versions..."
@@ -112,7 +40,11 @@ def update_charts [] {
         let chart_name_parts = ($chart.chartname | split row "/")
         let latest_version = get_latest_chart_version ($chart_name_parts | get 0) ($chart_name_parts | get 1) ($repo_url)
         if $latest_version != null {
-          $chart | update version $latest_version
+          if $chart.chartname == "fairwinds-stable/vpa" and $latest_version == "10.2.0" {
+            $chart
+          } else {
+            $chart | update version $latest_version
+          }
         } else { $chart }
       } else { $chart }
     }
@@ -146,7 +78,6 @@ def update_longhorn_charts [backup_target: string] {
 }
 
 open $"($env.FILE_PWD)/cluster.yaml"
-| update_hosts (get_tailscale_ips)
 | update_charts
 | update_longhorn_charts (get_longhorn_backup_target)
 | to yaml
