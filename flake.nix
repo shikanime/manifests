@@ -43,21 +43,20 @@
         {
           devenv.shells.default = {
             imports = [
-              inputs.devlib.devenvModules.docs
-              inputs.devlib.devenvModules.formats
-              inputs.devlib.devenvModules.github
-              inputs.devlib.devenvModules.nix
-              inputs.devlib.devenvModules.opentofu
-              inputs.devlib.devenvModules.shell
-              inputs.devlib.devenvModules.shikanime
+              devlib.devenvModules.docs
+              devlib.devenvModules.formats
+              devlib.devenvModules.git
+              devlib.devenvModules.github
+              devlib.devenvModules.nix
+              devlib.devenvModules.opentofu
+              devlib.devenvModules.shell
+              devlib.devenvModules.shikanime
             ];
-            cachix.push = "shikanime";
             gitignore.content = [
               "app.ini"
               "config.conf"
               "config.xml"
             ];
-            languages.opentofu.enable = true;
             packages = [
               pkgs.clusterctl
               pkgs.k0sctl
