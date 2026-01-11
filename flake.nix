@@ -52,10 +52,6 @@
               devlib.devenvModules.shell
               devlib.devenvModules.shikanime
             ];
-            gitignore.content = [
-              "app.ini"
-              "config.xml"
-            ];
             packages = [
               pkgs.clusterctl
               pkgs.k0sctl
