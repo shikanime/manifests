@@ -54,7 +54,6 @@
             ];
             gitignore.content = [
               "app.ini"
-              "config.conf"
               "config.xml"
             ];
             packages = [
