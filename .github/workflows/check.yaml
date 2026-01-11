@@ -1,27 +1,34 @@
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
-      - id: createGithubAppToken
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ vars.OPERATOR_APP_ID }}
-          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          token: ${{ steps.createGithubAppToken.outputs.token }}
-      - uses: shikanime-studio/setup-nix-action@v1
-        with:
-          github-token: ${{ steps.createGithubAppToken.outputs.token }}
-      - run: nix flake check --accept-flake-config --all-systems --no-pure-eval
+    - id: createGithubAppToken
+      uses: actions/create-github-app-token@v2
+      with:
+        app-id: ${{ vars.OPERATOR_APP_ID }}
+        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+        token: ${{ steps.createGithubAppToken.outputs.token }}
+    - uses: shikanime-studio/setup-nix-action@v1
+      with:
+        extra-platforms: ${{ matrix.extra-platforms }}
+    - run: nix flake check --accept-flake-config --no-pure-eval
+    strategy:
+      matrix:
+        include:
+        - extra-platforms: aarch64-linux
+          os: ubuntu-latest
+        - extra-platforms: ''
+          os: macos-latest
 name: Check
 'on':
   pull_request:
     branches:
-      - main
-      - gh/*/*/base
+    - main
+    - gh/*/*/base
   push:
     branches:
-      - main
-      - release-*
+    - main
+    - release-*
