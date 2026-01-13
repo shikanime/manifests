@@ -25,6 +25,27 @@ spec:
                         - media-server
                 topologyKey: kubernetes.io/hostname
               weight: 100
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/startup-config
+            - /mnt/config
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
       containers:
         - name: bazarr
           image: bazarr
@@ -61,3 +82,9 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: bazarr-config
+        - name: rclone-config
+          configMap:
+            name: rclone
+        - name: startup-config
+          secret:
+            secretName: bazarr

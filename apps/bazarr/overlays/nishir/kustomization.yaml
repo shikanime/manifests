@@ -6,3 +6,7 @@ patches:
 resources:
   - ../../base
   - netpol.yaml
+secretGenerator:
+  - files:
+      - bazarr/config.xml
+    name: bazarr
