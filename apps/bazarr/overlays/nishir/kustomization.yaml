@@ -8,5 +8,5 @@ resources:
   - netpol.yaml
 secretGenerator:
   - files:
-      - bazarr/config.xml
+      - bazarr/config.yaml
     name: bazarr
