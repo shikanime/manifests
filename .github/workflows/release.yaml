@@ -20,8 +20,6 @@ jobs:
         include:
         - extra-platforms: aarch64-linux
           os: ubuntu-latest
-        - extra-platforms: ''
-          os: macos-latest
   publish:
     needs:
     - check
