@@ -18,6 +18,8 @@ spec:
       containers:
         - name: copyparty
           volumeMounts:
+            - name: archives-data
+              mountPath: /data/archives
             - name: downloads-data
               mountPath: /data/downloads
             - name: movies-data
@@ -39,6 +41,9 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: archives-data
+          persistentVolumeClaim:
+            claimName: archives-data
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
