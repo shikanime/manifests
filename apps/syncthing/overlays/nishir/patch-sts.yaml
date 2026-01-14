@@ -18,6 +18,8 @@ spec:
       containers:
         - name: syncthing
           volumeMounts:
+            - name: archives-data
+              mountPath: /var/syncthing/Archives
             - name: movies-data
               mountPath: /var/syncthing/Movies
             - name: music-data
@@ -33,6 +35,9 @@ spec:
             - name: timeline-data
               mountPath: /var/syncthing/Timeline
       volumes:
+        - name: archives-data
+          persistentVolumeClaim:
+            claimName: archives-data
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
