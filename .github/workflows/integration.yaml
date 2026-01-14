@@ -1,6 +1,6 @@
 jobs:
   check:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
     - id: createGithubAppToken
       uses: actions/create-github-app-token@v2
@@ -15,11 +15,6 @@ jobs:
       with:
         github-token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix flake check --accept-flake-config --no-pure-eval
-    strategy:
-      matrix:
-        include:
-        - extra-platforms: aarch64-linux
-          os: ubuntu-latest
 name: Integration
 'on':
   pull_request:
