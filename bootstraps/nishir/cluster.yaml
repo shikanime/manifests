@@ -339,6 +339,16 @@ spec:
               - name: tailscale
                 url: https://pkgs.tailscale.com/helmcharts
             charts:
+              - name: arc
+                chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
+                version: 0.10.1
+                namespace: arc-systems
+              - name: nishir
+                chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
+                version: 0.10.1
+                namespace: arc-runners
+                values: |
+                  githubConfigUrl: "https://github.com/shikanime/manifests"
               - name: cert-manager
                 chartname: jetstack/cert-manager
                 version: v1.19.2
