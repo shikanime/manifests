@@ -1,6 +1,11 @@
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: arc-runners
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: capi-operator-system
 ---
 apiVersion: v1
