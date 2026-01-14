@@ -99,23 +99,17 @@
                   "run"
                 ];
               };
-              workflows.sync = {
+              workflows.release = {
                 enable = true;
-                settings = {
-                  name = "Sync";
-                  on = {
-                    push.branches = [ "main" ];
-                    workflow_dispatch = { };
-                  };
-                  jobs.deploy = with config.devenv.shells.default.github.actions; {
-                    runs-on = "nishir";
-                    steps = [
-                      create-github-app-token
-                      checkout
-                      setup-nix
-                      skaffold-run
-                    ];
-                  };
+                settings.jobs.sync = with config.devenv.shells.default.github.actions; {
+                  needs = [ "release-unstable" ];
+                  runs-on = "nishir";
+                  steps = [
+                    create-github-app-token
+                    checkout
+                    setup-nix
+                    skaffold-run
+                  ];
                 };
               };
             };
