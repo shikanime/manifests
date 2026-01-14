@@ -343,7 +343,7 @@ spec:
                 chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
                 version: 0.10.1
                 namespace: arc-systems
-              - name: arc-runner-set
+              - name: nishir
                 chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
                 version: 0.10.1
                 namespace: arc-runners
