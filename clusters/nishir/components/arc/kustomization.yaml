@@ -1,12 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 secretGenerator:
-  - name: shikanime-manifests-github-secret
+  - name: nishir-github-secret
     namespace: arc-runners
     literals:
       - github_app_id="1095999"
       - github_app_installation_id="93645926"
     files:
-      - github_app_private_key=shikanime-manifests-github-secret/yorha-operator-6o.2026-01-13.private-key.pem
+      - github_app_private_key=nishir-github-secret/yorha-operator-6o.2026-01-13.private-key.pem
     options:
       disableNameSuffixHash: true
