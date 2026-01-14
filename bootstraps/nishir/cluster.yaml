@@ -348,8 +348,13 @@ spec:
                 version: 0.10.1
                 namespace: arc-runners
                 values: |
+                  containerMode:
+                    type: "kubernetes"
                   githubConfigUrl: "https://github.com/shikanime/manifests"
                   githubConfigSecret: github-nishir
+                  template:
+                    spec:
+                      serviceAccountName: nishir-gha-rs
               - name: cert-manager
                 chartname: jetstack/cert-manager
                 version: v1.19.2
