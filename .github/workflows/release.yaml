@@ -73,6 +73,8 @@ jobs:
     - uses: shikanime-studio/setup-nix-action@v1
       with:
         github-token: ${{ steps.createGithubAppToken.outputs.token }}
+    - run: nix run nixpkgs#direnv -- direnv allow .
+    - run: nix run nixpkgs#direnv -- export gha >> "$GITHUB_ENV"
     - run: nix run nixpkgs#skaffold -- run
 name: Release
 'on':
