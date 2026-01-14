@@ -5,8 +5,8 @@ secretGenerator:
     namespace: arc-runners
     literals:
       - github_app_id="1095999"
-      - github_app_installation_id="93645926"
+      - github_app_installation_id="93636772"
     files:
-      - github_app_private_key=nishir-github-secret/yorha-operator-6o.2026-01-13.private-key.pem
+      - github_app_private_key=github-nishir/yorha-operator-6o.2026-01-13.private-key.pem
     options:
       disableNameSuffixHash: true
