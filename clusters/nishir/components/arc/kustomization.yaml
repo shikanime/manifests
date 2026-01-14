@@ -3,10 +3,7 @@ kind: Component
 secretGenerator:
   - name: github-nishir
     namespace: arc-runners
-    literals:
-      - github_app_id="1095999"
-      - github_app_installation_id="93645926"
-    files:
-      - github_app_private_key=nishir-github-secret/yorha-operator-6o.2026-01-13.private-key.pem
+    envs:
+      - github-nishir/.env
     options:
       disableNameSuffixHash: true
