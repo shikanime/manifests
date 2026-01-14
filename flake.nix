@@ -81,7 +81,6 @@
                     steps = [
                       create-github-app-token
                       checkout
-                      docker-login
                       setup-nix
                       skaffold-run
                     ];
