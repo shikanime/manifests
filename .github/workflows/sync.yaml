@@ -15,7 +15,7 @@ jobs:
       with:
         github-token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix run nixpkgs#skaffold -- run
-name: Deploy to Nishir
+name: Sync
 'on':
   push:
     branches:

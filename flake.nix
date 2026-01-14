@@ -71,7 +71,7 @@
               workflows.sync = {
                 enable = true;
                 settings = {
-                  name = "Deploy to Nishir";
+                  name = "Sync";
                   on = {
                     push.branches = [ "main" ];
                     workflow_dispatch = { };
