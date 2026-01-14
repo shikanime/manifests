@@ -39,9 +39,15 @@
         treefmt-nix.flakeModule
       ];
       perSystem =
-        { pkgs, ... }:
         {
-          devenv.shells.default = {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        with lib;
+        {
+          devenv.shells.default = with config.devenv.shells.default.github.lib; {
             imports = [
               devlib.devenvModules.docs
               devlib.devenvModules.formats
@@ -52,6 +58,37 @@
               devlib.devenvModules.shell
               devlib.devenvModules.shikanime
             ];
+            github = {
+              actions.skaffold-run = {
+                run = mkWorkflowRun [
+                  "nix"
+                  "run"
+                  "nixpkgs#skaffold"
+                  "--"
+                  "run"
+                ];
+              };
+              workflows.sync = {
+                enable = true;
+                settings = {
+                  name = "Deploy to Nishir";
+                  on = {
+                    push.branches = [ "main" ];
+                    workflow_dispatch = { };
+                  };
+                  jobs.deploy = with config.devenv.shells.default.github.actions; {
+                    runs-on = "nishir";
+                    steps = [
+                      create-github-app-token
+                      checkout
+                      docker-login
+                      setup-nix
+                      skaffold-run
+                    ];
+                  };
+                };
+              };
+            };
             packages = [
               pkgs.clusterctl
               pkgs.k0sctl
@@ -88,10 +125,32 @@
                 stores.yaml.indent = 2;
               };
             };
-            treefmt.config.settings.global.excludes = [
-              "*.excalidraw"
-              "*.enc.xml"
-            ];
+            treefmt.config = {
+              programs.actionlint.package =
+                let
+                  settingsFormat = pkgs.formats.yaml { };
+
+                  configFile = settingsFormat.generate "actionlint.yaml" {
+                    self-hosted-runner.labels = [ "nishir" ];
+                  };
+
+                  wrapped =
+                    pkgs.runCommand "actionlint-wrapped"
+                      {
+                        buildInputs = [ pkgs.makeWrapper ];
+                        meta.mainProgram = "actionlint";
+                      }
+                      ''
+                        makeWrapper ${getExe pkgs.actionlint} $out/bin/actionlint \
+                          --add-flags "-config-file ${configFile}"
+                      '';
+                in
+                wrapped;
+              settings.global.excludes = [
+                "*.excalidraw"
+                "*.enc.xml"
+              ];
+            };
           };
         };
       systems = [

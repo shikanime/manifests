@@ -1,0 +1,29 @@
+jobs:
+  deploy:
+    runs-on: nishir
+    steps:
+    - id: createGithubAppToken
+      uses: actions/create-github-app-token@v2
+      with:
+        app-id: ${{ vars.OPERATOR_APP_ID }}
+        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+        token: ${{ steps.createGithubAppToken.outputs.token }}
+    - env:
+        DOCKER_REGISTRY: ghcr.io
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: ${{ github.actor }}
+      run: nix run nixpkgs#docker -- login "$DOCKER_REGISTRY" --username "$USERNAME"
+        --password "$GITHUB_TOKEN"
+    - uses: shikanime-studio/setup-nix-action@v1
+      with:
+        github-token: ${{ steps.createGithubAppToken.outputs.token }}
+    - run: nix run nixpkgs#skaffold -- run
+name: Deploy to Nishir
+'on':
+  push:
+    branches:
+    - main
+  workflow_dispatch: {}
