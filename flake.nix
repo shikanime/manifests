@@ -92,9 +92,7 @@
             github = {
               actions = {
                 direnv-allow.run = "nix run nixpkgs#direnv -- direnv allow .";
-
                 direnv-export.run = ''nix run nixpkgs#direnv -- export gha >> "$GITHUB_ENV"'';
-
                 skaffold-run.run = "nix run nixpkgs#skaffold -- run";
               };
               workflows.release = {
@@ -122,13 +120,23 @@
               pkgs.nushell
               pkgs.skaffold
             ];
-            tasks."sops:decrypt" = {
-              before = [ "devenv:enterShell" ];
-              exec = ''
-                find . -type f -name '*.enc.*' | while read -r enc; do
-                  sops --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
-                done
-              '';
+            tasks = {
+              "skaffold:render:nishir-tailnet" = {
+                before = [ "devenv:enterTest" ];
+                exec = "${getExe pkgs.skaffold} render --profile nishir-tailnet";
+              };
+              "skaffold:render:telsha-tailnet" = {
+                before = [ "devenv:enterTest" ];
+                exec = "${getExe pkgs.skaffold} render --profile telsha-tailnet";
+              };
+              "sops:decrypt" = {
+                before = [ "devenv:enterShell" ];
+                exec = ''
+                  find . -type f -name '*.enc.*' | while read -r enc; do
+                    ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
+                  done
+                '';
+              };
             };
             sops = {
               enable = true;
