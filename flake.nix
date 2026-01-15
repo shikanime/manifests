@@ -92,28 +92,22 @@
             github = with config.devenv.shells.default.github.lib; {
               actions = {
                 devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
-                skaffold-run.run = "nix develop --no-pure-eval --command skaffold -- run";
+                install-xz-utils.run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
+                skaffold-run.run = "nix develop --accept-flake-config --no-pure-eval --command skaffold -- run";
               };
               workflows.release = {
                 enable = true;
-                settings.jobs.sync =
-                  with config.devenv.shells.default.github.actions;
-                  let
-                    install-xz-utils = {
-                      run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
-                    };
-                  in
-                  {
-                    needs = [ "release-unstable" ];
-                    runs-on = "nishir";
-                    steps = [
-                      install-xz-utils
-                      create-github-app-token
-                      checkout
-                      setup-nix
-                      skaffold-run
-                    ];
-                  };
+                settings.jobs.sync = with config.devenv.shells.default.github.actions; {
+                  needs = [ "release-unstable" ];
+                  runs-on = "nishir";
+                  steps = [
+                    install-xz-utils
+                    create-github-app-token
+                    checkout
+                    setup-nix
+                    skaffold-run
+                  ];
+                };
               };
             };
             packages = [
