@@ -89,8 +89,11 @@
               devlib.devenvModules.shell
               devlib.devenvModules.shikanime
             ];
-            github = {
-              actions.skaffold-run.run = "nix develop --no-pure-eval --command skaffold -- run";
+            github = with config.devenv.shells.default.github.lib; {
+              actions = {
+                devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
+                skaffold-run.run = "nix develop --no-pure-eval --command skaffold -- run";
+              };
               workflows.release = {
                 enable = true;
                 settings.jobs.sync = with config.devenv.shells.default.github.actions; {
@@ -131,8 +134,9 @@
                       {
                         age = [
                           "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
-                          "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
                           "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c" # telsha
+                          "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
+                          "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
                         ];
                       }
                     ];

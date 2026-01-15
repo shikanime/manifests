@@ -11,10 +11,13 @@ jobs:
       with:
         fetch-depth: 0
         token: ${{ steps.createGithubAppToken.outputs.token }}
-    - uses: shikanime-studio/setup-nix-action@v1
+    - uses: cachix/install-nix-action@v31
       with:
-        github-token: ${{ steps.createGithubAppToken.outputs.token }}
+        github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix flake check --accept-flake-config --no-pure-eval
+    - env:
+        SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+      run: nix develop --no-pure-eval --command devenv test
   release-tag:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
@@ -65,9 +68,9 @@ jobs:
       with:
         fetch-depth: 0
         token: ${{ steps.createGithubAppToken.outputs.token }}
-    - uses: shikanime-studio/setup-nix-action@v1
+    - uses: cachix/install-nix-action@v31
       with:
-        github-token: ${{ steps.createGithubAppToken.outputs.token }}
+        github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix develop --no-pure-eval --command skaffold -- run
 name: Release
 'on':
