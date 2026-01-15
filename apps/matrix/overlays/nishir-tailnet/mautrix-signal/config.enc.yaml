@@ -29,7 +29,7 @@ network:
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: "!signal"
+  command_prefix: '!signal'
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -124,18 +124,18 @@ bridge:
     #   .Caption - The `formatted_body` field of the message, if it's a caption. Otherwise an empty string.
     #   .FileName - The name of the file being sent.
     message_formats:
-      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
-      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
-      m.file: "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.image: "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.audio: "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.video: "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}"
-      m.location: "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}"
+      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
+      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
+      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
     # For networks that support per-message displaynames (i.e. Slack and Discord), the template for those names.
     # This has all the Sender variables available under message_formats (but without the .Sender prefix).
     # Note that you need to manually remove the displayname from message_formats above.
-    displayname_format: "{{ .DisambiguatedName }}"
+    displayname_format: '{{ .DisambiguatedName }}'
   # Permissions for using the bridge.
   # Permitted values:
   #    relay - Talk through the relaybot (if enabled), no access otherwise
@@ -147,9 +147,9 @@ bridge:
   #   domain - All users on that homeserver
   #     mxid - Specific user
   permissions:
-    "*": relay
+    '*': relay
     matrix.taila659a.ts.net: user
-    "@admin:matrix.taila659a.ts.net": admin
+    '@admin:matrix.taila659a.ts.net': admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -455,29 +455,38 @@ sops:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxSlVRU0dMeGNnL29FR3g4
-        SWRycDdIbWswbWlpVmNOczF4YVc3aTV3RUNrClJDSFZrTXlPSXpYQk1EVXVhSzhq
-        UTE3akRxVENJNUhUbjF3TEp5K2tBUkUKLS0tIFY3L0UxTlMxN1NyRUtRdktJMXRQ
-        V0tmVWl4d2s4aHA0MFA5dDROVE83OTQKm82edm6Zwu+W/AzKH7uJ71YSGWlCpk9+
-        B7B1ni+3ep27b3JasW2J87VY/kjY1H1+6TI7cvhGy2HUWsJgV9aF6Q==
-        -----END AGE ENCRYPTED FILE-----
-    - recipient: age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay
-      enc: |
-        -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwSkxmZzNjUXNuQzR4SFVD
-        bElKVEFjTDA5WERndVZnYlBBZ0ZJd3g0aGg0Cm1YMDE2TXNNZ2FsWUUrNlBUdCtX
-        ejgxa0lnaXp3V2VhV1hOaW5vRnNtNGsKLS0tIFlIaFdVSnRKei9GUDQ0OURsc3dG
-        YW1DTE1scWpWeDhHK3FvM0pOSzdWbW8Kbh1Yln6ddokEeAoBXSQb7OWsapJeiekG
-        UmWmTsPzoJYPb/hGF/1yAnAwrORjKV97SodxnjbtE3bGB28Q30jgXQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2UmVTZ2daQ2tPR2hSa3Bw
+        KzZBSW9ucVJTZk9MYnRHWWdWRHlVT2ZmY1FVCnBOYXpTVHVQWW56Yy8vQkg2ZUF1
+        d1kyRjhpU05pV3dpelpzRjVoZ2FvMDgKLS0tIGhvUXBuRnNOWkw3cFZRbkRBWitu
+        SUdVSjlWbFhONEpLWTFkdW1CT0xJSUEKHydaL4egp9V5eoRYmDFcejx9ScK6Zjai
+        SzqL3aDT318HpNqiewzmR2bivCb38oHx3DhDDzLRXc9hHjmF7pz0FA==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqdm40THRIQ2xLK0dzZkVt
-        bWYveXJSdUtWMkdtbnp1cmJmSnY3NEs0TVRZCjRUNkcxK3QxTkpHMUlrcU1ydlNJ
-        WFJtbHlUV2VMQ1hIR2xiSitWMlJ2eVUKLS0tIFJKL1NTd1V2amFBZU1zSExCdGNU
-        dit5Y1ZRc0tTOHlZNkJnTjA1R04yNkkKYL04tq6R72S4c+/yrsXfw8F7SZNW/kv4
-        v8EcZhFCzHYS0fokfi+XZVO+r0fPZ9FzxtONlX6rrJW29Fj3xARl6A==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2UkxaQW1Xc0lRNWZQNS9G
+        aFJkU05UMUh4Y0x4MVhHZ3NsS0UwTjd5ckZVCjcwNXY1MzJ2OHVrbjZrZjcxL1FO
+        U2VSYitWdUxpRGw2dTVDL1dZSzVMVDgKLS0tIGxzMktOVmJRQkZjcFJoRkp1QTFD
+        RHBFTG9mYmhSeHlMNlp3Nnc1Y3JQR0kKAzaWk+xIphUbHyueKly1/U7ejMAdmphq
+        Qj914QvmDhZ0Q7620oypNovV8meNgvndB1jy9W8IIuUIP2BocMbTOA==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1x8dv0wsu48ea7ce3xxauvxwarl9endvv24cmyyf56jpncl2dldcsf9g9z4
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBERzI2Zzd1OGVNN2x4Q0Qz
+        ZjF2dXQvSVpZTUt0Y2U1eHBMTGE5NEluQ3lJCkRKNkxLcFlodU9HNDhHQWZZcy9k
+        dTU4ZlM0OU5qSkJTVE0wS3dUakJ4NTAKLS0tIGNUbU8vSzRCMnJiYXU2NnZIUGhw
+        Y2NBSHJ6eGltd1AxZHNvZ3F2NG96NDgKUVZWR+K9QRtkRrh5xWDQEGuOzhyCGSO4
+        ZqNiCRd5gfEUAcAwOzJqzq4F+99aEo345ACY+xuLkMPSMgBV+XEUDw==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3bEhPVWlzVnVSZVg4M2NB
+        WFRZdys0UUxpYitkK1RGOVdYa1JUN0FET3pjCnEyQmxTaUZDTlVmOHNMdXlpclIy
+        YVkrZnhNRU0wSUNBSG8xZ1EzdUxyRXMKLS0tIFdaQ21scXBXbTRuQk5YVm9oYlZD
+        bFVESmx5WU8vRHBacTN1NEhpSnZENjQK+fWzbv0J2dI69sB14/k+Up1UJFH3AyqF
+        +0b4U6zEY7IhNTWSlrBt8hxXUKMvxnSaOQMOXn4xl3QP8xei+JT2Uw==
         -----END AGE ENCRYPTED FILE-----
   lastmodified: "2025-10-26T00:36:13Z"
   mac: ENC[AES256_GCM,data:1OHH1+n1FGjcVgkTvByHCqU0DkI1Kpnysj3xr0ZVw1crP8xnBTarlHi1ka0nElMJ1Fpo8AD0jVNvQ99CS1t71e9+TV1V3u59/K/irPBZYvQO8bPvKGM/El++XUqrOY96QzeiW0uqZO517Nrsf4oHSSXuQFjfPOM4jHQHnjEv4t0=,iv:1qOHuW9kcy+Zpx/4uEm8LDTRDoEpryEcmnrWThyOMW0=,tag:thIJUjt7pYkKvYR286+kCQ==,type:str]
