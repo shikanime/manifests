@@ -79,9 +79,9 @@ bridge:
   username_template: googlechat_{userid}
   # Displayname template for Google Chat users.
   # {full_name}, {first_name}, {last_name} and {email} are replaced with names.
-  displayname_template: "{full_name} (Google Chat)"
+  displayname_template: '{full_name} (Google Chat)'
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: "!gc"
+  command_prefix: '!gc'
   # Number of chats to sync (and create portals for) on startup/login.
   # Set 0 to disable automatic syncing.
   initial_chat_sync: 10
@@ -242,15 +242,15 @@ bridge:
   #     mxid - Specific user
   permissions:
     matrix.taila659a.ts.net: user
-    "@admin:matrix.taila659a.ts.net": admin
+    '@admin:matrix.taila659a.ts.net': admin
 logging:
   version: 1
   formatters:
     colored:
       (): mautrix_googlechat.util.ColorFormatter
-      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
+      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
     normal:
-      format: "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s"
+      format: '[%(asctime)s] [%(levelname)s@%(name)s] %(message)s'
   handlers:
     console:
       class: logging.StreamHandler
@@ -271,29 +271,38 @@ sops:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBySDV1cG1zZkhjbE9yb1hF
-        Sy9FNUlPT2cyS29KV0hzR3hvMHlESVJVWnpFClVvVEovMEpHdlBvdE9TUHlBNUxp
-        dFl2WktZb3hyS0llSWRyRXFvNEVxQzAKLS0tIHFUOWpqcWVpTGk4a1BjTnY4TWN0
-        dnQ5dHpYbjcrSkY3TlVYMndpMzRYeFEKgvbLm0++KEzbVIuE3QR+qDJnY9j0PPxf
-        kZb/e+D4PTPLS+JuUK030DlhfVNG3xB6JPUiXkXpwi1b8t0/qWg92Q==
-        -----END AGE ENCRYPTED FILE-----
-    - recipient: age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay
-      enc: |
-        -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2K1Fmdjd2U0ZUSVFCUy9V
-        R1VxYjdRTjF0aTMzdHU0eC93YS9ZZ2twcHo0CmpkTkN6RDZXQXNlSDRNWTYvNHZW
-        em1jVm0vL1JoTzl3b3Z6am4xcXZFS0UKLS0tIGpCSzNCcEJ5WXBGc3F2NXhYSFJP
-        T1N3ODBjeWx0UWxFbFRYQXRhWlptK00Kd+6UkiZ+dIAEin1be+wW+ankdpKcqWTj
-        xjcT2eBgMSFRpJ7kXjdCscgir0cehjnjRx6VNiHB72MtdCY/FhUbww==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3Kzl4aS9URTFBY0RPbjZy
+        UWFUZWExbnRzUld1TENFSFdtZEZkZzV6T1dFCnVUQ2VMQnA0cVE3eWhiYllSdU9v
+        YWM4d1loUlJYTmJIN0h6MEpUejd3MDAKLS0tIDdSQWY2NUtUTTJaSlVQUktXOTlC
+        L1dqTHNsaDRrMWtPM1ZhYWNyTkRCQUkKCP6quo05hdh4sbZuSkqjuB2+4ySjxeyi
+        AyFAGeANohYN+gWt31RF/RQeB+nHpxU6l8hgj/ku6sXjMhpXuZ32Eg==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB3TjR4RDFTR1Q2NkMwMDQ0
-        endGbkVTR1JTZkhmcjE0ZHEvUzgvT3ArTmd3CnpIT3pIUmVJV25mMVZRZ1poZWVX
-        TFlMZElLYTRIdkdzQXdUTHNieWFWQWMKLS0tIDRVaE9GeTNHdW5acjNRSUNHQ2h3
-        TERNM2VqUEtDVnBjU0h4K1dHbWMrNncKzbSzEKbh/Jc0z9FWIkD5CPFOfqgav37B
-        6QEjQ1FWaxT0YYK3HK2b2mAcEeoRm1mXUW4dQke7v2T0GiYuV/+dEg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtOWdXOWg0M3NNR1JZYjUy
+        Q1RBZEhVUGFJMU5KeDhlZHVRMHlUSWtaQkJ3CnZCQXpWM3pRNFJXY2RObWM1R0F0
+        b2tXTENLY2xoazR3blBTS1BqQ0ZUV2cKLS0tIFJOWEVRTUR5VGVFZmwwUlJlUlVG
+        UzRJRzBwbEVydDZlT0dNWHhvMFFncGMKaphPkUam7Bcy7f2425lYGRCQTiXwbfcI
+        g2zYlOoA9K6M0mKkSlUSGH9aTg+ngIYr8A/jk9czwXnlbpF+5ld5ZQ==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1x8dv0wsu48ea7ce3xxauvxwarl9endvv24cmyyf56jpncl2dldcsf9g9z4
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5d2NlV1VMMFNITlJKYXgz
+        dVd0UWVIU0VHKytCMnNDbjJUaVR6bC96aWlZCjhyYzBFcjNhd0tZSHNpa1QvQW83
+        SjVzTXVTeDhCMSsrTmQySER3cHdndkEKLS0tIFRWYlpIU2o4ZE9VazVJYUp1aUNQ
+        YWFQRW9pNEIxVG52bVlOVVZFZTJ6WEkKxxJGpYiVFv2BgELcW3Mh6Ko/BdeMBeC+
+        47r2FBePns4G8mZIuNnOImCJUtd2sSEDd304lSrdQDvbW3EegnLDiQ==
+        -----END AGE ENCRYPTED FILE-----
+    - recipient: age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLZjRtNzJWRnNVWXZmRUNT
+        SyswNEZENzd2NlRPYmJTano1dWNBUm5XdEFrCkVHMllVemtRR0Z2TG1QU2Z6UGNt
+        eGRwQWpueGlwSGs1dys4Q2daTHZjTGsKLS0tIDRkRGEvYjNnWk1YaHNwN0JxUXc4
+        VFNCOGVuRk55cWpDdWlRdy9Lc1R3SzAKlqVRbd15PbAN9OkLWsgFT9+thtlbeNT9
+        ZVNPvEPPeNRliz2OE3dTC66Bkez5ARLKHP2N4g//vSpMuC90Vwnd8g==
         -----END AGE ENCRYPTED FILE-----
   lastmodified: "2025-10-26T00:36:13Z"
   mac: ENC[AES256_GCM,data:NLv3YBx+EpJDrVSKJ+BebF6/y+xMkx4LcwK1kWhJ0aW/mnt/43Y0MuxotEQo+OT47TmKlYNBcDNmpr43DICy44lLeR24folWWi9L1iQbnEsKkK0m1MfLeiW9bZN0ISvrUJORLeXYiqYaSyD3w88gkCDbHHaFSEd29xYxhKoMfUo=,iv:k2KYCsfPBK/fqbz5MiX1q71f018tNPrVDX7jKjSMqUw=,tag:QTNs4G8GXH2WcBKDoXMtAQ==,type:str]
