@@ -108,8 +108,9 @@
                     runs-on = "nishir";
                     steps = [
                       install-xz-utils
-                      checkout
-                      setup-nix
+                      create-github-app-token
+                      checkout-with-github-app-token
+                      setup-nix-with-github-app-token
                       skaffold-run
                     ];
                   };

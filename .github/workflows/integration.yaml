@@ -7,9 +7,16 @@ jobs:
         fetch-depth: 0
     - uses: cachix/install-nix-action@v31
     - run: nix flake check --accept-flake-config --no-pure-eval
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    - uses: cachix/install-nix-action@v31
     - env:
         SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-      run: nix develop --no-pure-eval --command devenv test
+      run: nix develop --accept-flake-config --no-pure-eval --command devenv test
 name: Integration
 'on':
   pull_request:
