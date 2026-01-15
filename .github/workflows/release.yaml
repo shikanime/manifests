@@ -15,7 +15,9 @@ jobs:
       with:
         github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix flake check --accept-flake-config --no-pure-eval
-    - run: nix develop --no-pure-eval --command devenv test
+    - env:
+        SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+      run: nix develop --no-pure-eval --command devenv test
   release-tag:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
