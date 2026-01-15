@@ -82,7 +82,8 @@ jobs:
       with:
         github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
           }}
-    - run: nix develop --no-pure-eval --command skaffold -- run
+    - run: nix develop --accept-flake-config --no-pure-eval --command skaffold --
+        run
   test:
     runs-on: ubuntu-latest
     steps:
