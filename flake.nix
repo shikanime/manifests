@@ -100,7 +100,7 @@
                   with config.devenv.shells.default.github.actions;
                   let
                     install-xz-utils = {
-                      run = "apt-get update -y && apt-get install -y xz-utils";
+                      run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
                     };
                   in
                   {

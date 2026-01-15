@@ -58,7 +58,7 @@ jobs:
     - release-unstable
     runs-on: nishir
     steps:
-    - run: apt-get update -y && apt-get install -y xz-utils
+    - run: sudo apt-get update -y && sudo apt-get install -y xz-utils
     - id: createGithubAppToken
       uses: actions/create-github-app-token@v2
       with:
