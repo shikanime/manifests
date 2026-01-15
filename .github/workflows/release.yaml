@@ -69,9 +69,7 @@ jobs:
     - uses: cachix/install-nix-action@v31
       with:
         github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
-    - run: nix run nixpkgs#direnv -- direnv allow .
-    - run: nix run nixpkgs#direnv -- export gha >> "$GITHUB_ENV"
-    - run: nix run nixpkgs#skaffold -- run
+    - run: nix develop --no-pure-eval --command skaffold -- run
 name: Release
 'on':
   push:
