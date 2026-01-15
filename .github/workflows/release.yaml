@@ -2,18 +2,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token }}
     - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix flake check --accept-flake-config --no-pure-eval
     - env:
         SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
@@ -24,17 +16,11 @@ jobs:
     - check
     runs-on: ubuntu-slim
     steps:
-    - id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token }}
     - env:
-        GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REF_NAME: ${{ github.ref_name }}
         REPO: ${{ github.repository }}
       run: gh release create "$REF_NAME" --repo "$REPO" --generate-notes
@@ -44,15 +30,9 @@ jobs:
     - check
     runs-on: ubuntu-slim
     steps:
-    - id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: git push origin HEAD:refs/heads/release-unstable --force
   sync:
     needs:
