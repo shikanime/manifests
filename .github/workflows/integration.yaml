@@ -2,18 +2,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token }}
     - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix flake check --accept-flake-config --no-pure-eval
     - env:
         SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
