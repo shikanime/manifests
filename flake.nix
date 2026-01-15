@@ -89,8 +89,11 @@
               devlib.devenvModules.shell
               devlib.devenvModules.shikanime
             ];
-            github = {
-              actions.skaffold-run.run = "nix develop --no-pure-eval --command skaffold -- run";
+            github = with config.devenv.shells.default.github.lib; {
+              actions = {
+                devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
+                skaffold-run.run = "nix develop --no-pure-eval --command skaffold -- run";
+              };
               workflows.release = {
                 enable = true;
                 settings.jobs.sync = with config.devenv.shells.default.github.actions; {
