@@ -50,11 +50,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768480949,
-        "narHash": "sha256-oqGtjsBAGrQ0t5n9u/mLY+YJHtTQYWsK3LE/UR5obPU=",
+        "lastModified": 1768493557,
+        "narHash": "sha256-UJdG7mLrPMlkU2V0ubpTibL9ElknQQHUVyez8lzdXhk=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "59d6711d53d77c07e30348f7a08d183e90cf7e47",
+        "rev": "10f2047b3bd6600c2175278cd091a5068201481b",
         "type": "github"
       },
       "original": {
@@ -82,11 +82,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768493042,
-        "narHash": "sha256-5TAwn5OXgcDO/uv9u18cvtw4BL+NmaQ4Y57VGXDUf0A=",
+        "lastModified": 1768494585,
+        "narHash": "sha256-YhABeJJRqeXkP7G9NRA4o5rnN2EKJDk3sRaSRGVgl7Q=",
         "owner": "shikanime-studio",
         "repo": "devlib",
-        "rev": "2adfbc61b9649b55d863736fa66133a31b0dac3f",
+        "rev": "dac1183b5437b965cd2a5290ae0ab330a52b2801",
         "type": "github"
       },
       "original": {
@@ -231,11 +231,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768322802,
-        "narHash": "sha256-8/Ye9hw1SFXn+odPhZcISZyErFloPZLATI6VMjwzPps=",
+        "lastModified": 1768491252,
+        "narHash": "sha256-ZlIPlKCYXwQJsw9WYVeyCapF5Y8JZL2Hctf22+IbHqo=",
         "owner": "cachix",
         "repo": "nix",
-        "rev": "4cbf6a9e07dc2eb035865cde51e74217862573a1",
+        "rev": "9f0da1cd90b271569752a4c83f3ff700b8fcbe12",
         "type": "github"
       },
       "original": {

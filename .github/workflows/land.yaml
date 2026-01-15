@@ -2,7 +2,8 @@ jobs:
   land:
     runs-on: ubuntu-slim
     steps:
-    - id: createGithubAppToken
+    - continue-on-error: true
+      id: createGithubAppToken
       uses: actions/create-github-app-token@v2
       with:
         app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -10,13 +11,16 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token }}
+        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
+          }}
     - uses: cachix/install-nix-action@v31
       with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
+        github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
+          }}
     - uses: shikanime-studio/sapling-action@v6
       with:
-        github-token: ${{ steps.createGithubAppToken.outputs.token }}
+        github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
+          }}
         gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
         gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
         sign-commits: true
