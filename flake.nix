@@ -109,8 +109,8 @@
                     steps = [
                       install-xz-utils
                       create-github-app-token
-                      checkout-with-github-app-token
-                      setup-nix-with-github-app-token
+                      checkout
+                      setup-nix
                       skaffold-run
                     ];
                   };
