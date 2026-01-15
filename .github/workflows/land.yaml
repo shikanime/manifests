@@ -11,9 +11,9 @@ jobs:
       with:
         fetch-depth: 0
         token: ${{ steps.createGithubAppToken.outputs.token }}
-    - uses: shikanime-studio/setup-nix-action@v1
+    - uses: cachix/install-nix-action@v31
       with:
-        github-token: ${{ steps.createGithubAppToken.outputs.token }}
+        github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
     - uses: shikanime-studio/sapling-action@v6
       with:
         github-token: ${{ steps.createGithubAppToken.outputs.token }}
