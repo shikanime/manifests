@@ -90,13 +90,7 @@
               devlib.devenvModules.shikanime
             ];
             github = {
-              actions = {
-                direnv-allow.run = "nix run nixpkgs#direnv -- direnv allow .";
-
-                direnv-export.run = ''nix run nixpkgs#direnv -- export gha >> "$GITHUB_ENV"'';
-
-                skaffold-run.run = "nix run nixpkgs#skaffold -- run";
-              };
+              actions.skaffold-run.run = "nix develop --no-pure-eval --command skaffold -- run";
               workflows.release = {
                 enable = true;
                 settings.jobs.sync = with config.devenv.shells.default.github.actions; {
@@ -106,8 +100,6 @@
                     create-github-app-token
                     checkout
                     setup-nix
-                    direnv-allow
-                    direnv-export
                     skaffold-run
                   ];
                 };
