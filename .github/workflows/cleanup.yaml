@@ -13,14 +13,12 @@ jobs:
         token: ${{ steps.createGithubAppToken.outputs.token }}
     - env:
         BASE_REF: ${{ github.base_ref }}
-        GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
         HEAD_REF: ${{ github.head_ref }}
         REPO: ${{ github.repository }}
       if: '!(startsWith(github.head_ref, ''gh/'') && endsWith(github.head_ref, ''/head''))'
       run: git push origin --delete "$HEAD_REF" || true
     - env:
         BASE_REF: ${{ github.base_ref }}
-        GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token }}
         HEAD_REF: ${{ github.head_ref }}
         REPO: ${{ github.repository }}
       if: startsWith(github.head_ref, 'gh/') && endsWith(github.head_ref, '/head')

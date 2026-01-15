@@ -96,16 +96,23 @@
               };
               workflows.release = {
                 enable = true;
-                settings.jobs.sync = with config.devenv.shells.default.github.actions; {
-                  needs = [ "release-unstable" ];
-                  runs-on = "nishir";
-                  steps = [
-                    create-github-app-token
-                    checkout
-                    setup-nix
-                    skaffold-run
-                  ];
-                };
+                settings.jobs.sync =
+                  with config.devenv.shells.default.github.actions;
+                  let
+                    install-xz-utils = {
+                      run = "apt-get update -y && apt-get install -y xz-utils";
+                    };
+                  in
+                  {
+                    needs = [ "release-unstable" ];
+                    runs-on = "nishir";
+                    steps = [
+                      install-xz-utils
+                      checkout
+                      setup-nix
+                      skaffold-run
+                    ];
+                  };
               };
             };
             packages = [

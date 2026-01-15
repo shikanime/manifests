@@ -59,18 +59,11 @@ jobs:
     - release-unstable
     runs-on: nishir
     steps:
-    - id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+    - run: apt-get update -y && apt-get install -y xz-utils
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token }}
     - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token }}
     - run: nix develop --no-pure-eval --command skaffold -- run
 name: Release
 'on':
