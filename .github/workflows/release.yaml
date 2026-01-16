@@ -82,7 +82,7 @@ jobs:
           github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-        run: nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold -- run
+        run: nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold run
   test:
     runs-on: ubuntu-latest
     steps:
