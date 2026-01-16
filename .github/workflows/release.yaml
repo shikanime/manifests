@@ -2,124 +2,114 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - continue-on-error: true
-      id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-    - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - continue-on-error: true
-      uses: cachix/cachix-action@v15
-      with:
-        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-        name: shikanime
-    - run: nix flake check --accept-flake-config --no-pure-eval
+      - continue-on-error: true
+        id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - continue-on-error: true
+        uses: cachix/cachix-action@v15
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: shikanime
+      - run: nix flake check --accept-flake-config --no-pure-eval
   release-tag:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
-    - check
-    - test
+      - check
+      - test
     runs-on: ubuntu-slim
     steps:
-    - continue-on-error: true
-      id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-    - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - env:
-        GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-        REF_NAME: ${{ github.ref_name }}
-        REPO: ${{ github.repository }}
-      run: gh release create "$REF_NAME" --repo "$REPO" --generate-notes
+      - continue-on-error: true
+        id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - env:
+          GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+          REF_NAME: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: gh release create "$REF_NAME" --repo "$REPO" --generate-notes
   release-unstable:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
-    - check
-    - test
+      - check
+      - test
     runs-on: ubuntu-slim
     steps:
-    - continue-on-error: true
-      id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-    - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - run: git push origin HEAD:refs/heads/release-unstable --force
+      - continue-on-error: true
+        id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - run: git push origin HEAD:refs/heads/release-unstable --force
   sync:
     needs:
-    - release-unstable
+      - release-unstable
     runs-on: nishir
     steps:
-    - run: sudo apt-get update -y && sudo apt-get install -y xz-utils
-    - continue-on-error: true
-      id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-    - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - run: nix develop --accept-flake-config --no-pure-eval --command skaffold --
-        run
+      - run: sudo apt-get update -y && sudo apt-get install -y xz-utils
+      - continue-on-error: true
+        id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - run: nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold -- run
   test:
     runs-on: ubuntu-latest
     steps:
-    - continue-on-error: true
-      id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-    - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - continue-on-error: true
-      uses: cachix/cachix-action@v15
-      with:
-        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-        name: shikanime
-    - env:
-        SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-      run: nix develop --accept-flake-config --no-pure-eval --command devenv test
+      - continue-on-error: true
+        id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - continue-on-error: true
+        uses: cachix/cachix-action@v15
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          name: shikanime
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: nix develop --accept-flake-config --no-pure-eval --command devenv test
 name: Release
 'on':
   push:
     branches:
-    - main
-    - release-[0-9]+-[0-9]+
+      - main
+      - release-[0-9]+-[0-9]+
     tags:
-    - v?[0-9]+.[0-9]+.[0-9]+*
+      - v?[0-9]+.[0-9]+.[0-9]+*

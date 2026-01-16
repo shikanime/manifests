@@ -78,110 +78,131 @@
         }:
         with lib;
         {
-          devenv.shells.default = with config.devenv.shells.default.github.lib; {
-            imports = [
-              devlib.devenvModules.docs
-              devlib.devenvModules.formats
-              devlib.devenvModules.git
-              devlib.devenvModules.github
-              devlib.devenvModules.nix
-              devlib.devenvModules.opentofu
-              devlib.devenvModules.shell
-              devlib.devenvModules.shikanime
+          devenv = {
+            modules = [
+              {
+                sops = {
+                  enable = true;
+                  settings.creation_rules = [
+                    {
+                      key_groups = [
+                        {
+                          age = [
+                            "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
+                            "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c" # telsha
+                            "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
+                            "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
+                          ];
+                        }
+                      ];
+                    }
+                  ];
+                };
+
+                tasks."sops:decrypt" = {
+                  before = [ "devenv:enterShell" ];
+                  exec = ''
+                    find . -type f -name '*.enc.*' | while read -r enc; do
+                      ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
+                    done
+                  '';
+                };
+              }
             ];
-            github = with config.devenv.shells.default.github.lib; {
-              actions = {
-                devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
-                install-xz-utils.run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
-                skaffold-run.run = "nix develop --accept-flake-config --no-pure-eval --command skaffold -- run";
-              };
-              workflows.release = {
-                enable = true;
-                settings.jobs.sync = with config.devenv.shells.default.github.actions; {
-                  needs = [ "release-unstable" ];
-                  runs-on = "nishir";
-                  steps = [
-                    install-xz-utils
-                    create-github-app-token
-                    checkout
-                    setup-nix
-                    skaffold-run
+
+            shells = {
+              default = with config.devenv.shells.default.github.lib; {
+                imports = [
+                  devlib.devenvModules.git
+                  devlib.devenvModules.github
+                  devlib.devenvModules.nix
+                  devlib.devenvModules.opentofu
+                  devlib.devenvModules.shell
+                  devlib.devenvModules.shikanime
+                ];
+
+                github = with config.devenv.shells.default.github.lib; {
+                  actions = {
+                    devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
+                    install-xz-utils.run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
+                    skaffold-run.run = "nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold -- run";
+                  };
+
+                  workflows.release = {
+                    enable = true;
+                    settings.jobs.sync = with config.devenv.shells.default.github.actions; {
+                      needs = [ "release-unstable" ];
+                      runs-on = "nishir";
+                      steps = [
+                        install-xz-utils
+                        create-github-app-token
+                        checkout
+                        setup-nix
+                        skaffold-run
+                      ];
+                    };
+                  };
+                };
+
+                packages = [
+                  pkgs.clusterctl
+                  pkgs.k0sctl
+                  pkgs.kubectl
+                  pkgs.kubernetes-helm
+                  pkgs.kustomize
+                  pkgs.skaffold
+                ];
+
+                tasks = {
+                  "skaffold:render:nishir-tailnet" = {
+                    before = [ "devenv:enterTest" ];
+                    exec = "${getExe pkgs.skaffold} render --profile nishir-tailnet";
+                  };
+                  "skaffold:render:telsha-tailnet" = {
+                    before = [ "devenv:enterTest" ];
+                    exec = "${getExe pkgs.skaffold} render --profile telsha-tailnet";
+                  };
+                };
+
+                treefmt.config = {
+                  programs.actionlint.package =
+                    let
+                      settingsFormat = pkgs.formats.yaml { };
+
+                      configFile = settingsFormat.generate "actionlint.yaml" {
+                        self-hosted-runner.labels = [ "nishir" ];
+                      };
+
+                      wrapped =
+                        pkgs.runCommand "actionlint-wrapped"
+                          {
+                            buildInputs = [ pkgs.makeWrapper ];
+                            meta.mainProgram = "actionlint";
+                          }
+                          ''
+                            makeWrapper ${getExe pkgs.actionlint} $out/bin/actionlint \
+                              --add-flags "-config-file ${configFile}"
+                          '';
+                    in
+                    wrapped;
+
+                  settings.global.excludes = [
+                    "*.excalidraw"
+                    "*.enc.xml"
                   ];
                 };
               };
-            };
-            packages = [
-              pkgs.clusterctl
-              pkgs.k0sctl
-              pkgs.kubectl
-              pkgs.kubernetes-helm
-              pkgs.kustomize
-              pkgs.nushell
-              pkgs.skaffold
-            ];
-            tasks = {
-              "skaffold:render:nishir-tailnet" = {
-                before = [ "devenv:enterTest" ];
-                exec = "${getExe pkgs.skaffold} render --profile nishir-tailnet";
-              };
-              "skaffold:render:telsha-tailnet" = {
-                before = [ "devenv:enterTest" ];
-                exec = "${getExe pkgs.skaffold} render --profile telsha-tailnet";
-              };
-              "sops:decrypt" = {
-                before = [ "devenv:enterShell" ];
-                exec = ''
-                  find . -type f -name '*.enc.*' | while read -r enc; do
-                    ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
-                  done
-                '';
-              };
-            };
-            sops = {
-              enable = true;
-              settings = {
-                creation_rules = [
-                  {
-                    key_groups = [
-                      {
-                        age = [
-                          "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
-                          "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c" # telsha
-                          "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
-                          "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
-                        ];
-                      }
-                    ];
-                  }
+
+              sync = {
+                containers = mkForce { };
+
+                packages = [
+                  pkgs.kubectl
+                  pkgs.kubernetes-helm
+                  pkgs.kustomize
+                  pkgs.skaffold
                 ];
-                stores.yaml.indent = 2;
               };
-            };
-            treefmt.config = {
-              programs.actionlint.package =
-                let
-                  settingsFormat = pkgs.formats.yaml { };
-
-                  configFile = settingsFormat.generate "actionlint.yaml" {
-                    self-hosted-runner.labels = [ "nishir" ];
-                  };
-
-                  wrapped =
-                    pkgs.runCommand "actionlint-wrapped"
-                      {
-                        buildInputs = [ pkgs.makeWrapper ];
-                        meta.mainProgram = "actionlint";
-                      }
-                      ''
-                        makeWrapper ${getExe pkgs.actionlint} $out/bin/actionlint \
-                          --add-flags "-config-file ${configFile}"
-                      '';
-                in
-                wrapped;
-              settings.global.excludes = [
-                "*.excalidraw"
-                "*.enc.xml"
-              ];
             };
           };
         };
