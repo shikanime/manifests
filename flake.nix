@@ -81,10 +81,6 @@
           devenv = {
             modules = [
               {
-                imports = [
-                  devlib.devenvModules.shikanime
-                ];
-
                 sops = {
                   enable = true;
                   settings.creation_rules = [
@@ -124,6 +120,7 @@
                   devlib.devenvModules.nix
                   devlib.devenvModules.opentofu
                   devlib.devenvModules.shell
+                  devlib.devenvModules.shikanime
                 ];
 
                 github = with config.devenv.shells.default.github.lib; {
@@ -198,12 +195,16 @@
                 };
               };
 
-              sync.packages = [
-                pkgs.kubectl
-                pkgs.kubernetes-helm
-                pkgs.kustomize
-                pkgs.skaffold
-              ];
+              sync = {
+                containers = mkForce { };
+
+                packages = [
+                  pkgs.kubectl
+                  pkgs.kubernetes-helm
+                  pkgs.kustomize
+                  pkgs.skaffold
+                ];
+              };
             };
           };
         };
