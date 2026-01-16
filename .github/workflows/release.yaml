@@ -80,7 +80,9 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - run: nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold -- run
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold -- run
   test:
     runs-on: ubuntu-latest
     steps:
