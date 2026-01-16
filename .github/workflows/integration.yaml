@@ -2,46 +2,42 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - continue-on-error: true
-      id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-    - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - run: nix flake check --accept-flake-config --no-pure-eval
+      - continue-on-error: true
+        id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - run: nix flake check --accept-flake-config --no-pure-eval
   test:
     runs-on: ubuntu-latest
     steps:
-    - continue-on-error: true
-      id: createGithubAppToken
-      uses: actions/create-github-app-token@v2
-      with:
-        app-id: ${{ vars.OPERATOR_APP_ID }}
-        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-    - uses: actions/checkout@v6
-      with:
-        fetch-depth: 0
-        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - uses: cachix/install-nix-action@v31
-      with:
-        github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
-          }}
-    - env:
-        SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-      run: nix develop --accept-flake-config --no-pure-eval --command devenv test
+      - continue-on-error: true
+        id: createGithubAppToken
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.OPERATOR_APP_ID }}
+          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: nix develop --accept-flake-config --no-pure-eval --command devenv test
 name: Integration
 'on':
   pull_request:
     branches:
-    - main
-    - gh/*/*/base
+      - main
+      - gh/*/*/base

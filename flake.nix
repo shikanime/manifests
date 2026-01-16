@@ -113,8 +113,6 @@
             shells = {
               default = with config.devenv.shells.default.github.lib; {
                 imports = [
-                  devlib.devenvModules.docs
-                  devlib.devenvModules.formats
                   devlib.devenvModules.git
                   devlib.devenvModules.github
                   devlib.devenvModules.nix
