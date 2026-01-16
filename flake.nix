@@ -122,6 +122,7 @@
                   devlib.devenvModules.shell
                   devlib.devenvModules.shikanime
                 ];
+
                 github = with config.devenv.shells.default.github.lib; {
                   actions = {
                     devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
