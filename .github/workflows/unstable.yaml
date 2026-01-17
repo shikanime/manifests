@@ -3,8 +3,6 @@ jobs:
     environment:
       name: nishir
       url: https://nishir-k8s-operator.taila659a.ts.net/
-    needs:
-      - release-unstable
     runs-on: nishir
     steps:
       - run: sudo apt-get update -y && sudo apt-get install -y xz-utils
