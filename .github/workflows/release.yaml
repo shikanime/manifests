@@ -62,6 +62,9 @@ jobs:
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - run: git push origin HEAD:refs/heads/release-unstable --force
   sync:
+    environment:
+      name: nishir
+      url: https://nishir-k8s-operator.taila659a.ts.net/
     needs:
       - release-unstable
     runs-on: nishir
