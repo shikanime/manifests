@@ -129,7 +129,13 @@
 
                     skaffold-run = {
                       env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
-                      run = "nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold run";
+                      run = ''
+                        nix develop .#sync \
+                          --accept-flake-config \
+                          --no-pure-eval \
+                          --command \
+                          skaffold run --profile nishir-tailnet
+                      '';
                     };
                   };
 
