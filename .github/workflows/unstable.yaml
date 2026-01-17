@@ -22,3 +22,7 @@ jobs:
       - env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: "nix develop .#sync \\\n  --accept-flake-config \\\n  --no-pure-eval \\\n  --command \\\n  skaffold run --profile nishir-tailnet\n"
+'on':
+  push:
+    branches:
+      - release-unstable
