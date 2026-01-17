@@ -139,22 +139,24 @@
                     };
                   };
 
-                  workflows.release = {
+                  workflows.unstable = {
                     enable = true;
-                    settings.jobs.sync = with config.devenv.shells.default.github.actions; {
-                      environment = {
-                        name = "nishir";
-                        url = "https://nishir-k8s-operator.taila659a.ts.net/";
+                    settings = {
+                      jobs.sync = with config.devenv.shells.default.github.actions; {
+                        environment = {
+                          name = "nishir";
+                          url = "https://nishir-k8s-operator.taila659a.ts.net/";
+                        };
+                        runs-on = "nishir";
+                        steps = [
+                          install-xz-utils
+                          create-github-app-token
+                          checkout
+                          setup-nix
+                          skaffold-run
+                        ];
                       };
-                      needs = [ "release-unstable" ];
-                      runs-on = "nishir";
-                      steps = [
-                        install-xz-utils
-                        create-github-app-token
-                        checkout
-                        setup-nix
-                        skaffold-run
-                      ];
+                      on.push.branches = [ "release-unstable" ];
                     };
                   };
                 };
