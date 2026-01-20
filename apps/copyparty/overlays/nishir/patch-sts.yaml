@@ -7,13 +7,21 @@ spec:
     spec:
       affinity:
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 80
+              preference:
+                matchExpressions:
                   - key: node.kubernetes.io/instance-type
                     operator: In
                     values:
                       - rpi5-large
+            - weight: 50
+              preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi4-large
       containers:
         - name: copyparty
           volumeMounts:
