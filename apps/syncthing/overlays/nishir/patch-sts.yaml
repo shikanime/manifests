@@ -8,20 +8,20 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 80
-              preference:
+            - preference:
                 matchExpressions:
                   - key: node.kubernetes.io/instance-type
                     operator: In
                     values:
                       - rpi5-large
-            - weight: 50
-              preference:
+              weight: 80
+            - preference:
                 matchExpressions:
                   - key: node.kubernetes.io/instance-type
                     operator: In
                     values:
                       - rpi4-large
+              weight: 50
       containers:
         - name: syncthing
           volumeMounts:
