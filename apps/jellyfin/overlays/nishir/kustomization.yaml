@@ -3,7 +3,6 @@ kind: Kustomization
 components:
   - ../../components/dlna
   - ../../components/tls
-  - ../../components/v4l
 configurations:
   - namereference.yaml
 namespace: shikanime
