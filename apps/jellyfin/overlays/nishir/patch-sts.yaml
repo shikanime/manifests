@@ -72,13 +72,13 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              preference:
+            - preference:
                 matchExpressions:
                   - key: node.kubernetes.io/instance-type
                     operator: In
                     values:
                       - rpi4-medium
+              weight: 80
       volumes:
         - name: certs
           configMap:

@@ -16,8 +16,7 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
+            - podAffinityTerm:
                 labelSelector:
                   matchExpressions:
                     - key: app.kubernetes.io/part-of
@@ -25,6 +24,7 @@ spec:
                       values:
                         - nishir-office
                 topologyKey: kubernetes.io/hostname
+              weight: 100
       containers:
         - name: syncthing
           image: syncthing
