@@ -95,6 +95,9 @@ spec:
       hooks:
         install:
           before:
+            - dphys-swapfile swapoff || true
+            - systemctl disable dphys-swapfile || true
+            - dphys-swapfile uninstall || true
             - systemd-tmpfiles --create
             - sysctl --system
         apply:
@@ -199,6 +202,9 @@ spec:
       hooks:
         install:
           before:
+            - dphys-swapfile swapoff || true
+            - systemctl disable dphys-swapfile || true
+            - dphys-swapfile uninstall || true
             - systemd-tmpfiles --create
             - sysctl --system
         apply:
@@ -302,6 +308,9 @@ spec:
       hooks:
         install:
           before:
+            - dphys-swapfile swapoff || true
+            - systemctl disable dphys-swapfile || true
+            - dphys-swapfile uninstall || true
             - systemd-tmpfiles --create
             - sysctl --system
         apply:
