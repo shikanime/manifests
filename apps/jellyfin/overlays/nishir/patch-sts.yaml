@@ -7,13 +7,21 @@ spec:
     spec:
       affinity:
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
                   - key: node.kubernetes.io/instance-type
                     operator: In
                     values:
                       - rpi5-large
+              weight: 80
+            - preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi4-large
+              weight: 50
       containers:
         - name: jellyfin
           volumeMounts:
@@ -61,6 +69,16 @@ metadata:
 spec:
   template:
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi4-medium
+              weight: 80
       volumes:
         - name: certs
           configMap:
