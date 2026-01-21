@@ -21,7 +21,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: shikanime
       - run: nix flake check --accept-flake-config --no-pure-eval
-  release-stable:
+  release-branch:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '.0')
     needs:
       - check
@@ -40,15 +40,7 @@ jobs:
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - env:
           REF_NAME: ${{ github.ref_name }}
-        run: 'VERSION="${REF_NAME#v}"
-
-          BASE="${VERSION%.*}"
-
-          BRANCH="release-$BASE"
-
-          git push origin "HEAD:refs/heads/$BRANCH"
-
-'
+        run: VERSION="${REF_NAME#v}"; BASE="${VERSION%.*}"; BRANCH="release-$BASE"; git push origin "HEAD:refs/heads/$BRANCH"
   release-tag:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
@@ -71,13 +63,17 @@ jobs:
           REF_NAME: ${{ github.ref_name }}
           REPO: ${{ github.repository }}
         run: gh release create "$REF_NAME" --repo "$REPO" --generate-notes
-  release-unstable:
+  sync:
+    environment:
+      name: nishir
+      url: https://nishir-k8s-operator.taila659a.ts.net/
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
       - check
       - test
-    runs-on: ubuntu-slim
+    runs-on: nishir
     steps:
+      - run: sudo apt-get update -y && sudo apt-get install -y xz-utils
       - continue-on-error: true
         id: createGithubAppToken
         uses: actions/create-github-app-token@v2
@@ -88,7 +84,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - run: git push origin HEAD:refs/heads/release-unstable --force
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: nix develop .#sync --accept-flake-config --no-pure-eval --command skaffold run --profile nishir-tailnet
   test:
     runs-on: ubuntu-latest
     steps:

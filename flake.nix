@@ -129,34 +129,34 @@
 
                     skaffold-run = {
                       env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
-                      run = ''
-                        nix develop .#sync \
-                          --accept-flake-config \
-                          --no-pure-eval \
-                          --command \
-                          skaffold run --profile nishir-tailnet
-                      '';
+                      run =
+                        "nix develop .#sync "
+                        + "--accept-flake-config "
+                        + "--no-pure-eval "
+                        + "--command skaffold run --profile nishir-tailnet";
                     };
                   };
 
-                  workflows.unstable = {
+                  workflows.release = {
                     enable = true;
-                    settings = {
-                      jobs.sync = with config.devenv.shells.default.github.actions; {
-                        environment = {
-                          name = "nishir";
-                          url = "https://nishir-k8s-operator.taila659a.ts.net/";
-                        };
-                        runs-on = "nishir";
-                        steps = [
-                          install-xz-utils
-                          create-github-app-token
-                          checkout
-                          setup-nix
-                          skaffold-run
-                        ];
+                    settings.jobs.sync = with config.devenv.shells.default.github.actions; {
+                      environment = {
+                        name = "nishir";
+                        url = "https://nishir-k8s-operator.taila659a.ts.net/";
                       };
-                      on.push.branches = [ "release-unstable" ];
+                      "if" = "github.event_name == 'push' && github.ref == 'refs/heads/main'";
+                      needs = [
+                        "check"
+                        "test"
+                      ];
+                      runs-on = "nishir";
+                      steps = [
+                        install-xz-utils
+                        create-github-app-token
+                        checkout
+                        setup-nix
+                        skaffold-run
+                      ];
                     };
                   };
                 };
