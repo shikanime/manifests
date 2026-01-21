@@ -1,5 +1,6 @@
 jobs:
   backport:
+    if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.backport')
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
@@ -22,6 +23,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           sign-commits: true
   close:
+    if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.close')
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
@@ -42,6 +44,7 @@ jobs:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
           username: operator6o
   land:
+    if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.land')
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
@@ -67,6 +70,7 @@ jobs:
           sign-commits: true
           username: operator6o
   rebase:
+    if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.rebase')
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
@@ -91,7 +95,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           sign-commits: true
           username: operator6o
-name: Land
+name: Commands
 'on':
   issue_comment:
     types:
