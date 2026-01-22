@@ -363,6 +363,7 @@ spec:
                   githubConfigSecret: github-nishir
                   template:
                     spec:
+                      automountServiceAccountToken: true
                       serviceAccountName: nishir-gha-rs
               - name: cert-manager
                 chartname: jetstack/cert-manager
