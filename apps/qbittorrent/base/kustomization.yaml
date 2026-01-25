@@ -12,8 +12,8 @@ images:
     newName: alpine
     newTag: 3.21.2
   - name: qbittorrent
-    newName: lscr.io/linuxserver/qbittorrent
-    newTag: 5.1.4
+    newName: qbittorrentofficial/qbittorrent-nox
+    newTag: 5.1.4-2
 labels:
   - pairs:
       app.kubernetes.io/component: torrent-downloader
