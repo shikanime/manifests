@@ -10,9 +10,11 @@ spec:
         spec:
           containers:
             - command:
-                - /bin/bash
                 - /scripts/qbittorrent-resume.sh
-              image: qbittorrent
+              image: alpine
+              env:
+                - name: SHELLOPTS
+                  value: xtrace
               envFrom:
                 - secretRef:
                     name: qbittorrent
@@ -20,9 +22,13 @@ spec:
               volumeMounts:
                 - name: scripts
                   mountPath: /scripts
+                - name: apk-cache
+                  mountPath: /var/cache/apk
           restartPolicy: OnFailure
           volumes:
             - name: scripts
               configMap:
                 name: qbittorrent-scripts
                 defaultMode: 0755
+            - name: apk-cache
+              emptyDir: {}

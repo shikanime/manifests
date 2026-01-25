@@ -4,31 +4,26 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-if ! command -v qbt &>/dev/null; then
-  echo "Error: qbt CLI is not installed. Please ensure it is available in the PATH."
-  exit 1
-fi
+# Install dependencies
+echo "Installing dependencies..."
+apk add --no-cache curl jq
 
-echo 'Checking errored torrents...'
+# Create a temporary file for the cookie
+COOKIE_FILE=$(mktemp)
+trap 'rm -f "$COOKIE_FILE"' EXIT
 
-# Get list of errored torrents in CSV format
-# qbt torrent list returns a header row, so we need to skip it
-TORRENTS_CSV=$(qbt torrent list --filter errored --format csv)
+# Perform login and save cookie to file
+echo "Logging in..."
+curl -k -s -c "$COOKIE_FILE" -d "username=${QBT_USER}&password=${QBT_PASSWORD}" "${QBT_URL}/api/v2/auth/login" > /dev/null
 
-if [ -n "$TORRENTS_CSV" ]; then
-  # Skip the header line and read the rest
-  # We use tail -n +2 to start from the second line
-  # We use while loop with IFS=',' to parse the CSV
-  echo "$TORRENTS_CSV" | tail -n +2 | while IFS=',' read -r HASH REST; do
-    # Clean up HASH (remove quotes if any, though usually not present for hashes)
-    HASH="${HASH%\"}"
-    HASH="${HASH#\"}"
+# Get list of errored torrents and extract hashes joined by pipes
+echo "Checking for errored torrents..."
+HASHES=$(curl -k -s -b "$COOKIE_FILE" "${QBT_URL}/api/v2/torrents/info?filter=errored" | jq -r '.[].hash' | paste -sd '|' -)
 
-    if [ -n "$HASH" ]; then
-      echo "Resuming $HASH"
-      qbt torrent resume "$HASH"
-    fi
-  done
+if [ -n "$HASHES" ]; then
+    echo "Resuming torrents: $HASHES"
+    curl -k -s -b "$COOKIE_FILE" -X POST -d "hashes=$HASHES" "${QBT_URL}/api/v2/torrents/resume"
+    echo "Resume command sent."
 else
-  echo 'Failed to retrieve torrent list or empty response'
+    echo "No errored torrent found."
 fi
