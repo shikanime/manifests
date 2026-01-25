@@ -10,27 +10,36 @@ apk add curl jq
 
 # Create a temporary file for the cookie
 COOKIE_FILE=$(mktemp)
-trap 'rm --force "$COOKIE_FILE"' EXIT
+trap 'rm -f "$COOKIE_FILE"' EXIT
 
 # Perform login and save cookie to file
 echo "Logging in..."
 curl \
+  --show-error \
+  --fail \
   --cookie-jar "$COOKIE_FILE" \
-  --data "username=${QBT_USER}&password=${QBT_PASSWORD}" \
+  --data-urlencode "username=${QBT_USER}" \
+  --data-urlencode "password=${QBT_PASSWORD}" \
   "${QBT_URL}/api/v2/auth/login"
 
 # Get list of errored torrents and extract hashes joined by pipes
 echo "Checking for errored torrents..."
 HASHES=$(curl \
+  --show-error \
+  --fail \
   --cookie "$COOKIE_FILE" \
-  "${QBT_URL}/api/v2/torrents/info?filter=errored" | jq --raw-output '.[].hash' | paste -sd '|' -)
+  "${QBT_URL}/api/v2/torrents/info?filter=errored" |
+  jq --raw-output '.[].hash' |
+  paste -sd '|' -)
 
 if [ -n "$HASHES" ]; then
   echo "Resuming torrents: $HASHES"
   curl \
+    --show-error \
+    --fail \
     --cookie "$COOKIE_FILE" \
     --request POST \
-    --data "hashes=$HASHES" \
+    --data-urlencode "hashes=$HASHES" \
     "${QBT_URL}/api/v2/torrents/resume"
   echo "Resume command sent."
 else

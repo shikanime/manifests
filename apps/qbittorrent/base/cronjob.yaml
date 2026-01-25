@@ -7,6 +7,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app.kubernetes.io/component: qbittorrent-resume
         spec:
           containers:
             - command:
