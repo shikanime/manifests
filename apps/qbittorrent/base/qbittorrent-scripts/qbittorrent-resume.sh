@@ -15,19 +15,21 @@ trap 'rm -f "$COOKIE_FILE"' EXIT
 # Perform login and save cookie to file
 echo "Logging in..."
 curl \
-  --show-error \
-  --fail \
   --cookie-jar "$COOKIE_FILE" \
-  --data-urlencode "username=${QBT_USER}" \
   --data-urlencode "password=${QBT_PASSWORD}" \
+  --data-urlencode "username=${QBT_USER}" \
+  --fail \
+  --show-error \
+  --silent \
   "${QBT_URL}/api/v2/auth/login"
 
 # Get list of errored torrents and extract hashes joined by pipes
 echo "Checking for errored torrents..."
 HASHES=$(curl \
-  --show-error \
-  --fail \
   --cookie "$COOKIE_FILE" \
+  --fail \
+  --show-error \
+  --silent \
   "${QBT_URL}/api/v2/torrents/info?filter=errored" |
   jq --raw-output '.[].hash' |
   paste -sd '|' -)
@@ -35,9 +37,10 @@ HASHES=$(curl \
 if [ -n "$HASHES" ]; then
   echo "Resuming torrents: $HASHES"
   curl \
-    --show-error \
-    --fail \
     --cookie "$COOKIE_FILE" \
+    --fail \
+    --show-error \
+    --silent \
     --request POST \
     --data-urlencode "hashes=$HASHES" \
     "${QBT_URL}/api/v2/torrents/resume"
