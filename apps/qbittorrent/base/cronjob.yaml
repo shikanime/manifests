@@ -3,7 +3,6 @@ kind: CronJob
 metadata:
   name: qbittorrent-resume
 spec:
-  schedule: "*/2 * * * *"
   jobTemplate:
     spec:
       template:
@@ -32,3 +31,4 @@ spec:
                 defaultMode: 0755
             - name: apk-cache
               emptyDir: {}
+  schedule: "*/2 * * * *"
