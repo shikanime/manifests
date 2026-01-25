@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: qbittorrent-resume
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "*/2 * * * *"
   jobTemplate:
     spec:
       template:
