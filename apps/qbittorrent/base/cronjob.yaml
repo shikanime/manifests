@@ -11,7 +11,10 @@ spec:
           containers:
             - name: qbittorrent-resume
               image: qbittorrent
-              command: ["/bin/bash", "/scripts/qbittorrent-resume.sh"]
+              command:
+                - /scripts/qbittorrent-resume.sh
+              entrypoint:
+                - /bin/bash
               envFrom:
                 - secretRef:
                     name: qbittorrent
