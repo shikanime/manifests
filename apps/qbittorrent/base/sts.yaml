@@ -38,6 +38,8 @@ spec:
         - name: qbittorrent
           image: qbittorrent
           env:
+            - name: QBT_LEGAL_NOTICE
+              value: "confirm"
             - name: PUID
               value: "1000"
             - name: PGID
