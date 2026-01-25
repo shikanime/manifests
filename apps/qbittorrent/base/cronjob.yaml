@@ -9,15 +9,14 @@ spec:
       template:
         spec:
           containers:
-            - name: qbittorrent-resume
-              image: qbittorrent
-              command:
-                - /scripts/qbittorrent-resume.sh
-              entrypoint:
+            - command:
                 - /bin/bash
+                - /scripts/qbittorrent-resume.sh
+              image: qbittorrent
               envFrom:
                 - secretRef:
                     name: qbittorrent
+              name: qbittorrent-resume
               volumeMounts:
                 - name: scripts
                   mountPath: /scripts
