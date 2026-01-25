@@ -3,6 +3,10 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "qbittorrent", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$", "exclude-tags": ["20.04.1", "14.3.9"] } ]'
+configMapGenerator:
+  - name: qbittorrent-scripts
+    files:
+      - qbittorrent-scripts/qbittorrent-resume.sh
 images:
   - name: qbittorrent
     newName: lscr.io/linuxserver/qbittorrent
@@ -14,7 +18,12 @@ labels:
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: v5.1.4
 resources:
+  - cronjob.yaml
   - ingress.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml
+secretGenerator:
+  - name: qbittorrent
+    envs:
+      - qbittorrent/.env
