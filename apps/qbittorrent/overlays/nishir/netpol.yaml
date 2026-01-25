@@ -27,3 +27,9 @@ spec:
               app.kubernetes.io/name: whisparr
       ports:
         - port: https
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: qbittorrent-resume
+      ports:
+        - port: https

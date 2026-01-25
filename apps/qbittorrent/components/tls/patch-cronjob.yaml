@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: qbittorrent-resume
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: qbittorrent-resume
+              volumeMounts:
+                - name: certs
+                  mountPath: /etc/ssl/certs
+                  readOnly: true
+          volumes:
+            - name: certs
+              configMap:
+                name: nishir-ca-certificates.crt

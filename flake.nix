@@ -27,9 +27,7 @@
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
