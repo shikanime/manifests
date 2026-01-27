@@ -4,7 +4,7 @@ resources:
   - svc.yaml
 secretGenerator:
   - envs:
-      - operator-oauth/.enc.env
+      - operator-oauth/.env
     name: operator-oauth
     namespace: tailscale-system
     options:

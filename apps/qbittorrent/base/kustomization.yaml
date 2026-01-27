@@ -29,4 +29,4 @@ resources:
 secretGenerator:
   - name: qbittorrent
     envs:
-      - qbittorrent/.enc.env
+      - qbittorrent/.env

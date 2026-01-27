@@ -11,4 +11,4 @@ resources:
 secretGenerator:
   - name: gitea-config
     files:
-      - gitea/app.enc.ini
+      - gitea/app.ini

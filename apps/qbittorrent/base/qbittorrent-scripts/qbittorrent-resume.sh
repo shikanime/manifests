@@ -5,7 +5,7 @@ set -o nounset
 
 # Install dependencies
 echo "Installing dependencies..."
-apk add curl jq
+apk add --quiet curl jq
 
 # Create a temporary file for the cookie
 COOKIE_FILE=$(mktemp)
