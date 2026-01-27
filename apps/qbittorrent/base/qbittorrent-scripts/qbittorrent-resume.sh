@@ -17,7 +17,7 @@ curl \
   --cookie-jar "$COOKIE_FILE" \
   --data-urlencode "password=${QBT_PASSWORD}" \
   --data-urlencode "username=${QBT_USER}" \
-  --fail \
+  --fail-with-body \
   --show-error \
   --silent \
   "${QBT_URL}/api/v2/auth/login"
@@ -26,7 +26,7 @@ curl \
 echo "Checking for errored torrents..."
 HASHES=$(curl \
   --cookie "$COOKIE_FILE" \
-  --fail \
+  --fail-with-body \
   --show-error \
   --silent \
   "${QBT_URL}/api/v2/torrents/info?filter=errored" |
@@ -37,7 +37,7 @@ if [ -n "$HASHES" ]; then
   echo "Resuming torrents: $HASHES"
   curl \
     --cookie "$COOKIE_FILE" \
-    --fail \
+    --fail-with-body \
     --show-error \
     --silent \
     --request POST \
