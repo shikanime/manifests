@@ -14,8 +14,8 @@ resources:
   - netpol.yaml
 secretGenerator:
   - files:
-      - lidarr/config.xml
+      - lidarr/config.enc.xml
     name: lidarr
   - envs:
-      - lidarr/.env
+      - lidarr/.enc.env
     name: lidarr-pkcs12-password
