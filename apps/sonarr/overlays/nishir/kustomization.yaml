@@ -14,8 +14,8 @@ resources:
   - netpol.yaml
 secretGenerator:
   - files:
-      - sonarr/config.xml
+      - sonarr/config.enc.xml
     name: sonarr
   - envs:
-      - sonarr/.env
+      - sonarr/.enc.env
     name: sonarr-pkcs12-password

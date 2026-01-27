@@ -15,8 +15,8 @@ resources:
   - netpol.yaml
 secretGenerator:
   - envs:
-      - jellyfin/.env
+      - jellyfin/.enc.env
     name: jellyfin-pkcs12-password
   - envs:
-      - metatube/.env
+      - metatube/.enc.env
     name: metatube

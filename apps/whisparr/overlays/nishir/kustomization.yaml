@@ -14,8 +14,8 @@ resources:
   - netpol.yaml
 secretGenerator:
   - files:
-      - whisparr/config.xml
+      - whisparr/config.enc.xml
     name: whisparr
   - envs:
-      - whisparr/.env
+      - whisparr/.enc.env
     name: whisparr-pkcs12-password
