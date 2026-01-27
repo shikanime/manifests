@@ -11,6 +11,6 @@ resources:
   - machine-deployment.yaml
 secretGenerator:
   - envs:
-      - hetzner/.enc.env
+      - hetzner/.env
     name: hetzner
     namespace: nishir

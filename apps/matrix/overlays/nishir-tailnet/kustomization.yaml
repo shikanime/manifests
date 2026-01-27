@@ -13,30 +13,30 @@ resources:
   - proxyclass.yaml
 secretGenerator:
   - files:
-      - mautrix-discord/config.enc.yaml
-      - mautrix-discord/registration.enc.yaml
+      - mautrix-discord/config.yaml
+      - mautrix-discord/registration.yaml
     name: mautrix-discord
   - files:
-      - mautrix-googlechat/config.enc.yaml
-      - mautrix-googlechat/registration.enc.yaml
+      - mautrix-googlechat/config.yaml
+      - mautrix-googlechat/registration.yaml
     name: mautrix-googlechat
   - files:
-      - mautrix-meta/config.enc.yaml
-      - mautrix-meta/registration.enc.yaml
+      - mautrix-meta/config.yaml
+      - mautrix-meta/registration.yaml
     name: mautrix-meta
   - files:
-      - mautrix-signal/config.enc.yaml
-      - mautrix-signal/registration.enc.yaml
+      - mautrix-signal/config.yaml
+      - mautrix-signal/registration.yaml
     name: mautrix-signal
   - files:
-      - mautrix-slack/config.enc.yaml
-      - mautrix-slack/registration.enc.yaml
+      - mautrix-slack/config.yaml
+      - mautrix-slack/registration.yaml
     name: mautrix-slack
   - files:
-      - mautrix-whatsapp/config.enc.yaml
-      - mautrix-whatsapp/registration.enc.yaml
+      - mautrix-whatsapp/config.yaml
+      - mautrix-whatsapp/registration.yaml
     name: mautrix-whatsapp
   - files:
-      - synapse/homeserver.enc.yaml
+      - synapse/homeserver.yaml
       - synapse/matrix.taila659a.ts.net.log.config
     name: synapse

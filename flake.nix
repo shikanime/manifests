@@ -120,50 +120,47 @@
                 ];
 
                 github = with config.devenv.shells.default.github.lib; {
-                  actions.devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
+                  actions = {
+                    devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
 
-                  workflows.release.settings.jobs.publish = with config.devenv.shells.default.github.actions; {
-                    permissions = {
-                      contents = "read";
-                      packages = "write";
-                      id-token = "write";
-                      attestations = "write";
+                    install-xz-utils.run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
+
+                    skaffold-run = {
+                      env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
+                      run =
+                        "nix develop .#sync "
+                        + "--accept-flake-config "
+                        + "--no-pure-eval "
+                        + "--command skaffold run --profile nishir-tailnet";
                     };
-                    needs = [
-                      "release-branch"
-                      "release-tag"
-                    ];
-                    runs-on = "ubuntu-latest";
-                    steps = [
-                      create-github-app-token
-                      checkout
-                      setup-nix
-                      cachix-push
-                      docker-login
-                      {
-                        name = "Publish OCI Artifact";
-                        env = {
-                          GITHUB_SOURCE = mkWorkflowRef "github.event.repository.html_url";
-                          GITHUB_REVISION = mkWorkflowRef "github.sha";
-                        };
-                        run =
-                          "skaffold render --profile nishir-tailnet | "
-                          + "flux push artifact oci://ghcr.io/shikanime/manifests:latest "
-                          + "--path=\"-\" "
-                          + "--source=\"$GITHUB_SOURCE\" "
-                          + "--revision=\"$GITHUB_REVISION\" "
-                          + "--annotations=\"org.opencontainers.image.url=$GITHUB_SOURCE\" "
-                          + "--annotations=org.opencontainers.image.vendor=Shikanime "
-                          + "--annotations=org.opencontainers.image.title=Manifests "
-                          + "--annotations=\"org.opencontainers.image.description=FluxCD Manifests\"";
-                      }
-                    ];
+                  };
+
+                  workflows.release = {
+                    enable = true;
+                    settings.jobs.sync = with config.devenv.shells.default.github.actions; {
+                      environment = {
+                        name = "nishir";
+                        url = "https://nishir-k8s-operator.taila659a.ts.net/";
+                      };
+                      "if" = "github.event_name == 'push' && github.ref == 'refs/heads/main'";
+                      needs = [
+                        "check"
+                        "test"
+                      ];
+                      runs-on = "nishir";
+                      steps = [
+                        install-xz-utils
+                        create-github-app-token
+                        checkout
+                        setup-nix
+                        skaffold-run
+                      ];
+                    };
                   };
                 };
 
                 packages = [
                   pkgs.clusterctl
-                  pkgs.fluxcd
                   pkgs.k0sctl
                   pkgs.kubectl
                   pkgs.kubernetes-helm
@@ -182,9 +179,43 @@
                   };
                 };
 
-                treefmt.config.settings.global.excludes = [
-                  "*.excalidraw"
-                  "*.enc.xml"
+                treefmt.config = {
+                  programs.actionlint.package =
+                    let
+                      settingsFormat = pkgs.formats.yaml { };
+
+                      configFile = settingsFormat.generate "actionlint.yaml" {
+                        self-hosted-runner.labels = [ "nishir" ];
+                      };
+
+                      wrapped =
+                        pkgs.runCommand "actionlint-wrapped"
+                          {
+                            buildInputs = [ pkgs.makeWrapper ];
+                            meta.mainProgram = "actionlint";
+                          }
+                          ''
+                            makeWrapper ${getExe pkgs.actionlint} $out/bin/actionlint \
+                              --add-flags "-config-file ${configFile}"
+                          '';
+                    in
+                    wrapped;
+
+                  settings.global.excludes = [
+                    "*.excalidraw"
+                    "*.enc.xml"
+                  ];
+                };
+              };
+
+              sync = {
+                containers = mkForce { };
+
+                packages = [
+                  pkgs.kubectl
+                  pkgs.kubernetes-helm
+                  pkgs.kustomize
+                  pkgs.skaffold
                 ];
               };
             };
