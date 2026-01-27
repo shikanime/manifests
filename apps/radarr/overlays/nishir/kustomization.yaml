@@ -14,8 +14,8 @@ resources:
   - netpol.yaml
 secretGenerator:
   - files:
-      - radarr/config.xml
+      - radarr/config.enc.xml
     name: radarr
   - envs:
-      - radarr/.env
+      - radarr/.enc.env
     name: radarr-pkcs12-password
