@@ -4,6 +4,10 @@ namespace: shikanime
 patches:
   - path: patch-ingress.yaml
   - path: patch-sts.yaml
+  - path: patch-application.yaml
+    target:
+      kind: Application
+      name: jellyfin
 resources:
   - ../nishir
   - netpol.yaml

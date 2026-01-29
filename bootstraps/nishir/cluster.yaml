@@ -347,6 +347,8 @@ spec:
                 url: https://charts.longhorn.io
               - name: tailscale
                 url: https://pkgs.tailscale.com/helmcharts
+              - name: kubevela
+                url: https://kubevela.github.io/charts/
             charts:
               - name: arc
                 chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
@@ -486,6 +488,14 @@ spec:
                 chartname: fairwinds-stable/vpa
                 version: 4.10.1
                 namespace: kube-system
+              - name: kubevela
+                chartname: kubevela/vela-core
+                version: 1.10.6
+                namespace: vela-system
+                values: |
+                  optimize:
+                    kubeAPIQPS: 2000
+                    kubeAPIBurst: 2000
         telemetry:
           enabled: false
     version: v1.34.2+k0s.0

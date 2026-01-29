@@ -1,0 +1,13 @@
+- op: add
+  path: /spec/components/-
+  value:
+    name: jellyfin-tailnet
+    type: ref-objects
+    properties:
+      objects:
+        - resource: proxyclass
+          group: tailscale.com
+          name: jellyfin
+        - resource: networkpolicy
+          group: networking.k8s.io
+          name: jellyfin-tailscale
