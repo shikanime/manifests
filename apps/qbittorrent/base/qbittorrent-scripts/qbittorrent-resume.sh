@@ -43,7 +43,7 @@ if [ -n "$HASHES" ]; then
     --request POST \
     --data-urlencode "hashes=$HASHES" \
     "${QBT_URL}/api/v2/torrents/start"
-  echo "Resume command sent."
+  echo "Start command sent."
 else
   echo "No errored torrent found."
 fi
