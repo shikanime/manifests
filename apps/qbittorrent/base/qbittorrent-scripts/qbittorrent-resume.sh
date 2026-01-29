@@ -5,7 +5,7 @@ set -o nounset
 
 # Install dependencies
 echo "Installing dependencies..."
-apk add --quiet curl jq
+apk add --quiet --no-progress curl jq
 
 # Create a temporary file for the cookie
 COOKIE_FILE=$(mktemp)
@@ -42,8 +42,8 @@ if [ -n "$HASHES" ]; then
     --silent \
     --request POST \
     --data-urlencode "hashes=$HASHES" \
-    "${QBT_URL}/api/v2/torrents/resume"
-  echo "Resume command sent."
+    "${QBT_URL}/api/v2/torrents/start"
+  echo "Start command sent."
 else
   echo "No errored torrent found."
 fi
