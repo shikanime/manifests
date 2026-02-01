@@ -1,16 +1,28 @@
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
 metadata:
-  name: weekly-backup
+  name: daily-backup
   namespace: longhorn-system
 spec:
   concurrency: 5
   cron: "0 4 * * *"
   groups:
     - standard
-  parameters:
-    full-backup-interval: "7"
   retain: 7
+  task: backup
+---
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: weekly-backup
+  namespace: longhorn-system
+spec:
+  concurrency: 5
+  cron: "0 4 */7 * *"
+  groups:
+    - large
+    - standard
+  retain: 4
   task: backup
 ---
 apiVersion: longhorn.io/v1beta2
@@ -20,11 +32,9 @@ metadata:
   namespace: longhorn-system
 spec:
   concurrency: 5
-  cron: "0 4 */4 * *"
+  cron: "0 4 */28 * *"
   groups:
     - large
-  parameters:
-    full-backup-interval: "28"
   retain: 4
   task: backup
 ---
