@@ -1,16 +1,34 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 secretGenerator:
+  - name: alloy-logs-remote-cfg-grafana-k8s-monitoring
+    namespace: grafana-system
+    envs:
+      - alloy-logs-remote-cfg-grafana-k8s-monitoring/.env
+    options:
+      disableNameSuffixHash: true
   - name: alloy-metrics-remote-cfg-grafana-k8s-monitoring
     namespace: grafana-system
     envs:
       - alloy-metrics-remote-cfg-grafana-k8s-monitoring/.env
     options:
       disableNameSuffixHash: true
+  - name: alloy-receiver-remote-cfg-grafana-k8s-monitoring
+    namespace: grafana-system
+    envs:
+      - alloy-receiver-remote-cfg-grafana-k8s-monitoring/.env
+    options:
+      disableNameSuffixHash: true
   - name: alloy-singleton-remote-cfg-grafana-k8s-monitoring
     namespace: grafana-system
     envs:
       - alloy-singleton-remote-cfg-grafana-k8s-monitoring/.env
+    options:
+      disableNameSuffixHash: true
+  - name: gc-otlp-endpoint-grafana-k8s-monitoring
+    namespace: grafana-system
+    envs:
+      - gc-otlp-endpoint-grafana-k8s-monitoring/.env
     options:
       disableNameSuffixHash: true
   - name: grafana-cloud-logs-grafana-k8s-monitoring

@@ -472,7 +472,7 @@ spec:
                   persistence:
                     defaultClassReplicaCount: 1
                     defaultFsType: xfs
-              - name: k8s-monitoring
+              - name: grafana-k8s-monitoring
                 chartname: grafana/k8s-monitoring
                 version: 3.8.0
                 namespace: grafana-system
