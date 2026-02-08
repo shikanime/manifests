@@ -9,7 +9,7 @@ parameters:
   numberOfReplicas: "2"
   recurringJobSelector: |
     [
-      {"name": "default", "isGroup": true},
+      {"name": "default", "isGroup": true}
     ]
 provisioner: driver.longhorn.io
 volumeBindingMode: WaitForFirstConsumer
