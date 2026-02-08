@@ -347,6 +347,8 @@ spec:
                 url: https://charts.longhorn.io
               - name: tailscale
                 url: https://pkgs.tailscale.com/helmcharts
+              - name: grafana
+                url: https://grafana.github.io/helm-charts
             charts:
               - name: arc
                 chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
@@ -461,6 +463,194 @@ spec:
                   persistence:
                     defaultClassReplicaCount: 1
                     defaultFsType: xfs
+              - name: k8s-monitoring
+                chartname: grafana/k8s-monitoring
+                version: 3.8.0
+                namespace: grafana-system
+                values: |
+                  cluster:
+                    name: nishir
+                  destinations:
+                    - name: grafana-cloud-metrics
+                      type: prometheus
+                      url: https://prometheus-prod-01-eu-west-0.grafana.net./api/prom/push
+                      auth:
+                        type: basic
+                      secret:
+                        create: false
+                    - name: grafana-cloud-logs
+                      type: loki
+                      url: https://logs-prod-eu-west-0.grafana.net./loki/api/v1/push
+                      auth:
+                        type: basic
+                      secret:
+                        create: false
+                    - name: gc-otlp-endpoint
+                      type: otlp
+                      url: https://otlp-gateway-prod-eu-west-0.grafana.net./otlp
+                      protocol: http
+                      auth:
+                        type: basic
+                      secret:
+                        create: false
+                      metrics:
+                        enabled: true
+                      logs:
+                        enabled: true
+                      traces:
+                        enabled: true
+                  clusterMetrics:
+                    enabled: true
+                  clusterEvents:
+                    enabled: true
+                  podLogs:
+                    enabled: true
+                  applicationObservability:
+                    enabled: true
+                    receivers:
+                      otlp:
+                        grpc:
+                          enabled: true
+                          port: 4317
+                        http:
+                          enabled: true
+                          port: 4318
+                      zipkin:
+                        enabled: true
+                        port: 9411
+                  alloy-metrics:
+                    enabled: true
+                    alloy:
+                      extraEnv:
+                        - name: GCLOUD_RW_API_KEY
+                          valueFrom:
+                            secretKeyRef:
+                              name: alloy-metrics-remote-cfg-grafana-k8s-monitoring
+                              key: password
+                        - name: CLUSTER_NAME
+                          value: nishir
+                        - name: NAMESPACE
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.namespace
+                        - name: POD_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                        - name: GCLOUD_FM_COLLECTOR_ID
+                          value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-$(POD_NAME)
+                    remoteConfig:
+                      enabled: true
+                      url: https://fleet-management-prod-003.grafana.net
+                      auth:
+                        type: basic
+                      secret:
+                        create: false
+                  alloy-singleton:
+                    enabled: true
+                    alloy:
+                      extraEnv:
+                        - name: GCLOUD_RW_API_KEY
+                          valueFrom:
+                            secretKeyRef:
+                              name: alloy-singleton-remote-cfg-grafana-k8s-monitoring
+                              key: password
+                        - name: CLUSTER_NAME
+                          value: nishir
+                        - name: NAMESPACE
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.namespace
+                        - name: POD_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                        - name: GCLOUD_FM_COLLECTOR_ID
+                          value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-$(POD_NAME)
+                    remoteConfig:
+                      enabled: true
+                      url: https://fleet-management-prod-003.grafana.net
+                      auth:
+                        type: basic
+                      secret:
+                        create: false
+                  alloy-logs:
+                    enabled: true
+                    alloy:
+                      extraEnv:
+                        - name: GCLOUD_RW_API_KEY
+                          valueFrom:
+                            secretKeyRef:
+                              name: alloy-logs-remote-cfg-grafana-k8s-monitoring
+                              key: password
+                        - name: CLUSTER_NAME
+                          value: nishir
+                        - name: NAMESPACE
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.namespace
+                        - name: POD_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                        - name: NODE_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: spec.nodeName
+                        - name: GCLOUD_FM_COLLECTOR_ID
+                          value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-alloy-logs-$(NODE_NAME)
+                    remoteConfig:
+                      enabled: true
+                      url: https://fleet-management-prod-003.grafana.net
+                      auth:
+                        type: basic
+                      secret:
+                        create: false
+                  alloy-receiver:
+                    enabled: true
+                    alloy:
+                      extraPorts:
+                        - name: otlp-grpc
+                          port: 4317
+                          targetPort: 4317
+                          protocol: TCP
+                        - name: otlp-http
+                          port: 4318
+                          targetPort: 4318
+                          protocol: TCP
+                        - name: zipkin
+                          port: 9411
+                          targetPort: 9411
+                          protocol: TCP
+                      extraEnv:
+                        - name: GCLOUD_RW_API_KEY
+                          valueFrom:
+                            secretKeyRef:
+                              name: alloy-receiver-remote-cfg-grafana-k8s-monitoring
+                              key: password
+                        - name: CLUSTER_NAME
+                          value: nishir
+                        - name: NAMESPACE
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.namespace
+                        - name: POD_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: metadata.name
+                        - name: NODE_NAME
+                          valueFrom:
+                            fieldRef:
+                              fieldPath: spec.nodeName
+                        - name: GCLOUD_FM_COLLECTOR_ID
+                          value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-alloy-receiver-$(NODE_NAME)
+                    remoteConfig:
+                      enabled: true
+                      url: https://fleet-management-prod-003.grafana.net
+                      auth:
+                        type: basic
+                      secret:
+                        create: false
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
                 version: 0.18.3
