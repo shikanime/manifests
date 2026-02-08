@@ -372,6 +372,8 @@ spec:
                   runnerScaleSetName: nishir
                   template:
                     spec:
+                      securityContext:
+                        fsGroup: 123
                       automountServiceAccountToken: true
                       serviceAccountName: nishir-gha-rs
               - name: cert-manager

@@ -31,6 +31,12 @@ secretGenerator:
       - alloy-profiles-remote-cfg-grafana-k8s-monitoring/.enc.env
     options:
       disableNameSuffixHash: true
+  - name: grafana-cloud-logs-grafana-k8s-monitoring
+    namespace: grafana-system
+    envs:
+      - grafana-cloud-logs-grafana-k8s-monitoring/.enc.env
+    options:
+      disableNameSuffixHash: true
   - name: grafana-cloud-metrics-grafana-k8s-monitoring
     namespace: grafana-system
     envs:
