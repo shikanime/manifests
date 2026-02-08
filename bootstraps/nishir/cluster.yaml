@@ -361,6 +361,12 @@ spec:
                 values: |
                   containerMode:
                     type: "kubernetes"
+                    kubernetesModeWorkVolumeClaim:
+                      accessModes: ["ReadWriteOnce"]
+                      storageClassName: nishir-ephemeral
+                      resources:
+                        requests:
+                          storage: 1Gi
                   githubConfigUrl: "https://github.com/shikanime/manifests"
                   githubConfigSecret: github-nishir
                   runnerScaleSetName: nishir
