@@ -352,7 +352,7 @@ spec:
                 chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
                 version: 0.10.1
                 namespace: arc-systems
-              - name: nishir
+              - name: arc-runner-nishir
                 chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
                 version: 0.10.1
                 namespace: arc-runners
@@ -361,6 +361,7 @@ spec:
                     type: "kubernetes"
                   githubConfigUrl: "https://github.com/shikanime/manifests"
                   githubConfigSecret: github-nishir
+                  runnerScaleSetName: nishir
                   template:
                     spec:
                       automountServiceAccountToken: true
