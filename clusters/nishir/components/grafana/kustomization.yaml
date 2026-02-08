@@ -13,15 +13,15 @@ secretGenerator:
       - alloy-singleton-remote-cfg-grafana-k8s-monitoring/.env
     options:
       disableNameSuffixHash: true
-  - name: grafana-cloud-logs-k8s-monitoring
+  - name: grafana-cloud-logs-grafana-k8s-monitoring
     namespace: grafana-system
     envs:
-      - grafana-cloud-logs-k8s-monitoring/.env
+      - grafana-cloud-logs-grafana-k8s-monitoring/.env
     options:
       disableNameSuffixHash: true
-  - name: grafana-cloud-metrics-k8s-monitoring
+  - name: grafana-cloud-metrics-grafana-k8s-monitoring
     namespace: grafana-system
     envs:
-      - grafana-cloud-metrics-k8s-monitoring/.env
+      - grafana-cloud-metrics-grafana-k8s-monitoring/.env
     options:
       disableNameSuffixHash: true
