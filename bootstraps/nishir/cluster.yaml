@@ -375,7 +375,7 @@ spec:
                     enabled: true
               - name: cluster-api-operator
                 chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
-                version: 0.24.1
+                version: 0.25.0
                 namespace: capi-operator-system
                 values: |
                   bootstrap:
@@ -447,7 +447,7 @@ spec:
                               - RemovePodsViolatingNodeTaints
               - name: longhorn
                 chartname: longhorn/longhorn
-                version: 1.10.1
+                version: 1.11.0
                 namespace: longhorn-system
                 values: |
                   defaultSettings:
@@ -467,7 +467,7 @@ spec:
                 namespace: kube-system
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
-                version: 1.92.4
+                version: 1.92.5
                 namespace: tailscale-system
                 values: |
                   apiServerProxyConfig:
