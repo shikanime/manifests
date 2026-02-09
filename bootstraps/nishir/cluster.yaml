@@ -372,10 +372,14 @@ spec:
                   runnerScaleSetName: nishir
                   template:
                     spec:
+                      automountServiceAccountToken: true
+                      containers:
+                        - command: ["/home/runner/run.sh"]
+                          image: ghcr.io/actions/actions-runner:2.331.0
+                          name: runner
+                      serviceAccountName: nishir-gha-rs
                       securityContext:
                         fsGroup: 123
-                      automountServiceAccountToken: true
-                      serviceAccountName: nishir-gha-rs
               - name: cert-manager
                 chartname: jetstack/cert-manager
                 version: v1.19.2
