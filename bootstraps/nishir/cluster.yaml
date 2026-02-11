@@ -109,7 +109,7 @@ spec:
       noTaints: true
       role: controller+worker
       ssh:
-        address: 100.117.159.56
+        address: 100.100.33.76
         user: root
     - files:
         - data: |
@@ -215,7 +215,7 @@ spec:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large,node.longhorn.io/create-default-disk=false"
       role: worker
       ssh:
-        address: 100.78.148.86
+        address: 100.97.124.41
         user: root
     - files:
         - data: |
@@ -321,7 +321,7 @@ spec:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium,node.longhorn.io/create-default-disk=false"
       role: worker
       ssh:
-        address: 100.92.12.65
+        address: 100.84.215.34
         user: root
   k0s:
     config:
