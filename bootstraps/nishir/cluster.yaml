@@ -103,7 +103,14 @@ spec:
         apply:
           before:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+<<<<<<< conflict 1 of 3
+%%%%%%% diff from: snunrmyr a26b5d26 "Add Tailscale networkd-dispatcher" (parents of rebased revision)
+\\\\\\\        to: kmoumksr 452bde83 "Migrate cluster IP" (rebase destination)
+-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool
++            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
++++++++ otlnsnkm 73ba34e6 (rebased revision)
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool xfsprogs
+>>>>>>> conflict 1 of 3 ends
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
       noTaints: true
@@ -210,7 +217,14 @@ spec:
         apply:
           before:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+<<<<<<< conflict 2 of 3
+%%%%%%% diff from: snunrmyr a26b5d26 "Add Tailscale networkd-dispatcher" (parents of rebased revision)
+\\\\\\\        to: kmoumksr 452bde83 "Migrate cluster IP" (rebase destination)
+-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool
++            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
++++++++ otlnsnkm 73ba34e6 (rebased revision)
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool xfsprogs
+>>>>>>> conflict 2 of 3 ends
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large,node.longhorn.io/create-default-disk=false"
       role: worker
@@ -316,7 +330,14 @@ spec:
         apply:
           before:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+<<<<<<< conflict 3 of 3
+%%%%%%% diff from: snunrmyr a26b5d26 "Add Tailscale networkd-dispatcher" (parents of rebased revision)
+\\\\\\\        to: kmoumksr 452bde83 "Migrate cluster IP" (rebase destination)
+-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool
++            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
++++++++ otlnsnkm 73ba34e6 (rebased revision)
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool xfsprogs
+>>>>>>> conflict 3 of 3 ends
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium,node.longhorn.io/create-default-disk=false"
       role: worker
