@@ -94,6 +94,7 @@ spec:
           name: tmpfiles
         - data: |
             #!/bin/sh
+
             ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           name: networkd-dispatcher-tailscale
@@ -207,6 +208,7 @@ spec:
           name: tmpfiles
         - data: |
             #!/bin/sh
+
             ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           name: networkd-dispatcher-tailscale
@@ -319,6 +321,7 @@ spec:
           name: tmpfiles
         - data: |
             #!/bin/sh
+
             ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           name: networkd-dispatcher-tailscale
