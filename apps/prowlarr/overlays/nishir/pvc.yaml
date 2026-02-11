@@ -4,7 +4,7 @@ metadata:
   name: prowlarr-config
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOncePod
   resources:
     requests:
       storage: 512Mi

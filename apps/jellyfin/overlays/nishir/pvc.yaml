@@ -4,7 +4,7 @@ metadata:
   name: jellyfin-config
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOncePod
   resources:
     requests:
       storage: 32Gi
@@ -18,7 +18,7 @@ metadata:
   name: metatube-data
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOncePod
   resources:
     requests:
       storage: 512Mi

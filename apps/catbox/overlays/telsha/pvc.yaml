@@ -4,7 +4,7 @@ metadata:
   name: catbox-workspaces
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOncePod
   resources:
     requests:
       storage: 64Gi
