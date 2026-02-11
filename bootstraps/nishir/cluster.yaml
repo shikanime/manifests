@@ -92,6 +92,12 @@ spec:
             L /var/log/pods - - - - ../../mnt/nishir/log/pods
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
           name: tmpfiles
+        - data: |
+            #!/bin/sh
+            ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
+          dst: /etc/networkd-dispatcher/routable.d/50-tailscale
+          name: networkd-dispatcher-tailscale
+          perm: "0755"
       hooks:
         install:
           before:
@@ -103,7 +109,7 @@ spec:
         apply:
           before:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
       noTaints: true
@@ -199,6 +205,12 @@ spec:
             L /var/log/pods - - - - ../../mnt/reimu/log/pods
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
           name: tmpfiles
+        - data: |
+            #!/bin/sh
+            ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
+          dst: /etc/networkd-dispatcher/routable.d/50-tailscale
+          name: networkd-dispatcher-tailscale
+          perm: "0755"
       hooks:
         install:
           before:
@@ -210,7 +222,7 @@ spec:
         apply:
           before:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large,node.longhorn.io/create-default-disk=false"
       role: worker
@@ -305,6 +317,12 @@ spec:
             L /var/log/pods - - - - ../../mnt/marisa/log/pods
           dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
           name: tmpfiles
+        - data: |
+            #!/bin/sh
+            ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
+          dst: /etc/networkd-dispatcher/routable.d/50-tailscale
+          name: networkd-dispatcher-tailscale
+          perm: "0755"
       hooks:
         install:
           before:
@@ -316,7 +334,7 @@ spec:
         apply:
           before:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common
+            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium,node.longhorn.io/create-default-disk=false"
       role: worker
