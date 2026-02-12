@@ -706,4 +706,4 @@ spec:
                 namespace: kube-system
         telemetry:
           enabled: false
-    version: v1.34.2+k0s.0
+    version: v1.34.3+k0s.0
