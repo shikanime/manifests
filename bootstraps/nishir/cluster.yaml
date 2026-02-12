@@ -229,7 +229,7 @@ spec:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large,node.longhorn.io/create-default-disk=false"
       role: worker
       ssh:
-        address: 100.95.57.59
+        address: 100.94.149.17
         user: root
     - files:
         - data: |
@@ -342,7 +342,7 @@ spec:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium,node.longhorn.io/create-default-disk=false"
       role: worker
       ssh:
-        address: 100.94.149.17
+        address: 100.95.57.59
         user: root
   k0s:
     config:
@@ -706,4 +706,4 @@ spec:
                 namespace: kube-system
         telemetry:
           enabled: false
-    version: v1.34.2+k0s.0
+    version: v1.34.3+k0s.0
