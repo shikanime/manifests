@@ -79,8 +79,16 @@ spec:
             vm.max_map_count=262144
             # Allow moderate memory overcommit for containers
             vm.overcommit_memory=1
+            # Disable readahead for lower latency
+            vm.page-cluster=0
+            # Swappiness 100 to fully utilize compressed RAM
+            vm.swappiness=100
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
+            # Watermark boost factor 0
+            vm.watermark_boost_factor=0
+            # Watermark scale factor 125 (1.25% of RAM)
+            vm.watermark_scale_factor=125
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
         - data: |
@@ -91,6 +99,7 @@ spec:
             L /var/log/calico - - - - ../../mnt/nishir/log/calico
             L /var/log/containers - - - - ../../mnt/nishir/log/containers
             L /var/log/pods - - - - ../../mnt/nishir/log/pods
+            L /var/swap - - - - ../../mnt/nishir/swap
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
           name: tmpfiles
         - data: |
@@ -191,8 +200,16 @@ spec:
             vm.max_map_count=262144
             # Allow moderate memory overcommit for containers
             vm.overcommit_memory=1
+            # Disable readahead for lower latency
+            vm.page-cluster=0
+            # Swappiness 100 to fully utilize compressed RAM
+            vm.swappiness=100
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
+            # Watermark boost factor 0
+            vm.watermark_boost_factor=0
+            # Watermark scale factor 125 (1.25% of RAM)
+            vm.watermark_scale_factor=125
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
         - data: |
@@ -203,6 +220,7 @@ spec:
             L /var/log/calico - - - - ../../mnt/reimu/log/calico
             L /var/log/containers - - - - ../../mnt/reimu/log/containers
             L /var/log/pods - - - - ../../mnt/reimu/log/pods
+            L /var/swap - - - - ../../mnt/reimu/swap
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
           name: tmpfiles
         - data: |
@@ -302,8 +320,16 @@ spec:
             vm.max_map_count=262144
             # Allow moderate memory overcommit for containers
             vm.overcommit_memory=1
+            # Disable readahead for lower latency
+            vm.page-cluster=0
+            # Swappiness 100 to fully utilize compressed RAM
+            vm.swappiness=100
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
+            # Watermark boost factor 0
+            vm.watermark_boost_factor=0
+            # Watermark scale factor 125 (1.25% of RAM)
+            vm.watermark_scale_factor=125
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
         - data: |
@@ -314,6 +340,7 @@ spec:
             L /var/log/calico - - - - ../../mnt/marisa/log/calico
             L /var/log/containers - - - - ../../mnt/marisa/log/containers
             L /var/log/pods - - - - ../../mnt/marisa/log/pods
+            L /var/swap - - - - ../../mnt/marisa/swap
           dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
           name: tmpfiles
         - data: |
