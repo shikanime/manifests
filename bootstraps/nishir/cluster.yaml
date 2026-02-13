@@ -89,6 +89,7 @@ spec:
             L /var/lib/kubelet - - - - ./k0s/kubelet
             L /var/lib/longhorn - - - - ../../mnt/nishir/longhorn
             L /var/log/calico - - - - ../../mnt/nishir/log/calico
+            L /var/log/containers - - - - ../../mnt/nishir/log/containers
             L /var/log/pods - - - - ../../mnt/nishir/log/pods
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
           name: tmpfiles
@@ -102,9 +103,6 @@ spec:
       hooks:
         install:
           before:
-            - dphys-swapfile swapoff || true
-            - systemctl disable dphys-swapfile || true
-            - dphys-swapfile uninstall || true
             - systemd-tmpfiles --create
             - sysctl --system
         apply:
@@ -203,6 +201,7 @@ spec:
             L /var/lib/kubelet - - - - ./k0s/kubelet
             L /var/lib/longhorn - - - - ../../mnt/reimu/longhorn
             L /var/log/calico - - - - ../../mnt/reimu/log/calico
+            L /var/log/containers - - - - ../../mnt/reimu/log/containers
             L /var/log/pods - - - - ../../mnt/reimu/log/pods
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
           name: tmpfiles
@@ -216,9 +215,6 @@ spec:
       hooks:
         install:
           before:
-            - dphys-swapfile swapoff || true
-            - systemctl disable dphys-swapfile || true
-            - dphys-swapfile uninstall || true
             - systemd-tmpfiles --create
             - sysctl --system
         apply:
@@ -316,6 +312,7 @@ spec:
             L /var/lib/kubelet - - - - ./k0s/kubelet
             L /var/lib/longhorn - - - - ../../mnt/marisa/longhorn
             L /var/log/calico - - - - ../../mnt/marisa/log/calico
+            L /var/log/containers - - - - ../../mnt/marisa/log/containers
             L /var/log/pods - - - - ../../mnt/marisa/log/pods
           dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
           name: tmpfiles
@@ -329,9 +326,6 @@ spec:
       hooks:
         install:
           before:
-            - dphys-swapfile swapoff || true
-            - systemctl disable dphys-swapfile || true
-            - dphys-swapfile uninstall || true
             - systemd-tmpfiles --create
             - sysctl --system
         apply:
