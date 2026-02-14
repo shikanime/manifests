@@ -14,6 +14,7 @@ spec:
                     operator: In
                     values:
                       - rpi5-large
+                      - rpi4-large
               weight: 80
             - preference:
                 matchExpressions:
