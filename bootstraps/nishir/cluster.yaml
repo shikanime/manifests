@@ -81,8 +81,8 @@ spec:
             vm.overcommit_memory=1
             # Disable readahead for lower latency
             vm.page-cluster=0
-            # Disable swappiness to minimize swap pressure
-            vm.swappiness=0
+            # Swappiness 10 to minimize swap pressure on zram
+            vm.swappiness=10
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
             # Watermark boost factor 0
@@ -203,8 +203,8 @@ spec:
             vm.overcommit_memory=1
             # Disable readahead for lower latency
             vm.page-cluster=0
-            # Disable swappiness to minimize swap pressure
-            vm.swappiness=0
+            # Swappiness 10 to minimize swap pressure on zram
+            vm.swappiness=10
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
             # Watermark boost factor 0
@@ -324,8 +324,8 @@ spec:
             vm.overcommit_memory=1
             # Disable readahead for lower latency
             vm.page-cluster=0
-            # Disable swappiness to minimize swap pressure
-            vm.swappiness=0
+            # Swappiness 10 to minimize swap pressure on zram
+            vm.swappiness=10
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
             # Watermark boost factor 0
@@ -506,6 +506,7 @@ spec:
                 values: |
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
+                    concurrentReplicaRebuildPerNodeLimit: '1'
                     defaultDataLocality: best-effort
                     defaultReplicaCount: '1'
                     replicaAutoBalance: best-effort
