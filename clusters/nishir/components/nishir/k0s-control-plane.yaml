@@ -87,6 +87,12 @@ spec:
                                 pods: 80
                               metricsUtilization:
                                 source: KubernetesMetrics
+                          - name: PodLifeTime
+                            args:
+                              maxPodLifeTimeSeconds: 86400
+                              states:
+                                - Pending
+                                - PodInitializing
                           - name: RemoveDuplicates
                           - name: RemovePodsHavingTooManyRestarts
                             args:
@@ -108,6 +114,7 @@ spec:
                               - RemovePodsViolatingTopologySpreadConstraint
                           deschedule:
                             enabled:
+                              - PodLifeTime
                               - RemovePodsHavingTooManyRestarts
                               - RemovePodsViolatingInterPodAntiAffinity
                               - RemovePodsViolatingNodeAffinity
