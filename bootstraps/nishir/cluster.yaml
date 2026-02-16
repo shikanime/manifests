@@ -100,7 +100,7 @@ spec:
 
             [Main]
             Mechanism=none
-          dst: /etc/rpi/swap.conf
+          dst: /etc/rpi/swap.conf.d/k8s.conf
           name: rpi-swap-conf
         - data: |
             L /var/lib/containerd - - - - ./k0s/containerd
@@ -232,7 +232,7 @@ spec:
 
             [Main]
             Mechanism=none
-          dst: /etc/rpi/swap.conf
+          dst: /etc/rpi/swap.conf.d/k8s.conf
           name: rpi-swap-conf
         - data: |
             L /var/lib/containerd - - - - ./k0s/containerd
@@ -363,7 +363,7 @@ spec:
 
             [Main]
             Mechanism=none
-          dst: /etc/rpi/swap.conf
+          dst: /etc/rpi/swap.conf.d/k8s.conf
           name: rpi-swap-conf
         - data: |
             L /var/lib/containerd - - - - ./k0s/containerd
