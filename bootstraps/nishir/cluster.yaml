@@ -497,6 +497,7 @@ spec:
                 values: |
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
+                    concurrentReplicaRebuildPerNodeLimit: '1'
                     defaultDataLocality: best-effort
                     defaultReplicaCount: '1'
                     replicaAutoBalance: best-effort
