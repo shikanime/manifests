@@ -90,6 +90,19 @@ spec:
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
         - data: |
+            #  This file is part of rpi-swap.
+            #
+            #  Defaults are provided as commented-out options. Local configuration
+            #  should be created by either modifying this file, or by creating "drop-ins" in
+            #  the swap.conf.d/ subdirectory. The latter is generally recommended.
+            #
+            #  See swap.conf(5) for details.
+
+            [Main]
+            Mechanism=none
+          dst: /etc/rpi/swap.conf
+          name: rpi-swap-conf
+        - data: |
             L /var/lib/containerd - - - - ./k0s/containerd
             L /var/lib/k0s - - - - ../../mnt/nishir/k0s
             L /var/lib/kubelet - - - - ./k0s/kubelet
@@ -209,6 +222,19 @@ spec:
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
         - data: |
+            #  This file is part of rpi-swap.
+            #
+            #  Defaults are provided as commented-out options. Local configuration
+            #  should be created by either modifying this file, or by creating "drop-ins" in
+            #  the swap.conf.d/ subdirectory. The latter is generally recommended.
+            #
+            #  See swap.conf(5) for details.
+
+            [Main]
+            Mechanism=none
+          dst: /etc/rpi/swap.conf
+          name: rpi-swap-conf
+        - data: |
             L /var/lib/containerd - - - - ./k0s/containerd
             L /var/lib/k0s - - - - ../../mnt/reimu/k0s
             L /var/lib/kubelet - - - - ./k0s/kubelet
@@ -326,6 +352,19 @@ spec:
             vm.watermark_scale_factor=125
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
+        - data: |
+            #  This file is part of rpi-swap.
+            #
+            #  Defaults are provided as commented-out options. Local configuration
+            #  should be created by either modifying this file, or by creating "drop-ins" in
+            #  the swap.conf.d/ subdirectory. The latter is generally recommended.
+            #
+            #  See swap.conf(5) for details.
+
+            [Main]
+            Mechanism=none
+          dst: /etc/rpi/swap.conf
+          name: rpi-swap-conf
         - data: |
             L /var/lib/containerd - - - - ./k0s/containerd
             L /var/lib/k0s - - - - ../../mnt/marisa/k0s
