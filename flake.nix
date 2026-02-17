@@ -112,49 +112,63 @@
               default = with config.devenv.shells.default.github.lib; {
                 imports = [
                   devlib.devenvModules.git
-                  devlib.devenvModules.github
                   devlib.devenvModules.nix
                   devlib.devenvModules.opentofu
                   devlib.devenvModules.shell
                   devlib.devenvModules.shikanime
                 ];
 
-                github = with config.devenv.shells.default.github.lib; {
-                  actions = {
-                    devenv-test.env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
-
-                    install-xz-utils.run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
-
-                    skaffold-run = {
-                      env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
-                      run =
-                        "nix develop .#sync "
-                        + "--accept-flake-config "
-                        + "--no-pure-eval "
-                        + "--command skaffold run --profile nishir-tailnet";
-                    };
+                github = {
+                  workflows = {
+                    integration.settings.devenv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                    release.settings.devenv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
                   };
-
-                  workflows.release = {
-                    enable = true;
-                    settings.jobs.sync = with config.devenv.shells.default.github.actions; {
+                  settings.workflows.sync = {
+                    jobs.sync = with config.devenv.shells.default.github.actions; {
                       environment = {
                         name = "nishir";
                         url = "https://nishir-k8s-operator.taila659a.ts.net/";
                       };
-                      "if" = "github.event_name == 'push' && github.ref == 'refs/heads/main'";
-                      needs = [
-                        "check"
-                        "test"
-                      ];
                       runs-on = "nishir";
                       steps = [
-                        install-xz-utils
-                        create-github-app-token
-                        checkout
-                        setup-nix
-                        skaffold-run
+                        {
+                          run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
+                        }
+                        {
+                          continue-on-error = true;
+                          id = "createGithubAppToken";
+                          uses = "actions/create-github-app-token@v2";
+                          "with" = {
+                            app-id = "\${{ vars.OPERATOR_APP_ID }}";
+                            private-key = "\${{ secrets.OPERATOR_PRIVATE_KEY }}";
+                          };
+                        }
+                        {
+                          uses = "actions/checkout@v6";
+                          "with" = {
+                            fetch-depth = 0;
+                            token = "\${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}";
+                          };
+                        }
+                        {
+                          uses = "cachix/install-nix-action@v31";
+                          "with".github_access_token =
+                            "\${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}";
+                        }
+                        {
+                          env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
+                          run =
+                            "nix develop .#sync "
+                            + "--accept-flake-config "
+                            + "--no-pure-eval "
+                            + "--command skaffold run --profile nishir-tailnet";
+                        }
                       ];
+                    };
+                    name = "Sync";
+                    on = {
+                      push.branches = [ "main" ];
+                      workflow_dispatch = { };
                     };
                   };
                 };
