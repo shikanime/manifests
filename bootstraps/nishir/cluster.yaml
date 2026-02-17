@@ -120,14 +120,11 @@ spec:
           name: networkd-dispatcher-tailscale
           perm: "0755"
       hooks:
-        install:
-          before:
-            - systemd-tmpfiles --create
-            - sysctl --system
-        apply:
-          before:
+        connect:
+          after:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool xfsprogs
+            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
+            - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
@@ -252,14 +249,11 @@ spec:
           name: networkd-dispatcher-tailscale
           perm: "0755"
       hooks:
-        install:
-          before:
-            - systemd-tmpfiles --create
-            - sysctl --system
-        apply:
-          before:
+        connect:
+          after:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool xfsprogs
+            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
+            - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large,node.longhorn.io/create-default-disk=false"
@@ -383,14 +377,11 @@ spec:
           name: networkd-dispatcher-tailscale
           perm: "0755"
       hooks:
-        install:
-          before:
-            - systemd-tmpfiles --create
-            - sysctl --system
-        apply:
-          before:
+        connect:
+          after:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup open-iscsi nfs-common networkd-dispatcher ethtool xfsprogs
+            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
+            - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium,node.longhorn.io/create-default-disk=false"
