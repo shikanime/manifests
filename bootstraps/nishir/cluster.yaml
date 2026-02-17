@@ -81,6 +81,8 @@ spec:
             vm.overcommit_memory=1
             # Disable readahead for lower latency
             vm.page-cluster=0
+            # Swappiness 10 to minimize swap pressure on zram
+            vm.swappiness=10
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
             # Watermark boost factor 0
@@ -110,6 +112,7 @@ spec:
             L /var/log/calico - - - - ../../mnt/nishir/log/calico
             L /var/log/containers - - - - ../../mnt/nishir/log/containers
             L /var/log/pods - - - - ../../mnt/nishir/log/pods
+            L /var/swap - - - - ../../mnt/nishir/swap
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
           name: tmpfiles
         - data: |
@@ -213,6 +216,8 @@ spec:
             vm.overcommit_memory=1
             # Disable readahead for lower latency
             vm.page-cluster=0
+            # Swappiness 10 to minimize swap pressure on zram
+            vm.swappiness=10
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
             # Watermark boost factor 0
@@ -242,6 +247,7 @@ spec:
             L /var/log/calico - - - - ../../mnt/reimu/log/calico
             L /var/log/containers - - - - ../../mnt/reimu/log/containers
             L /var/log/pods - - - - ../../mnt/reimu/log/pods
+            L /var/swap - - - - ../../mnt/reimu/swap
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
           name: tmpfiles
         - data: |
@@ -344,6 +350,8 @@ spec:
             vm.overcommit_memory=1
             # Disable readahead for lower latency
             vm.page-cluster=0
+            # Swappiness 10 to minimize swap pressure on zram
+            vm.swappiness=10
             # Favor inode/dentry caching for large media libraries
             vm.vfs_cache_pressure=50
             # Watermark boost factor 0
@@ -373,6 +381,7 @@ spec:
             L /var/log/calico - - - - ../../mnt/marisa/log/calico
             L /var/log/containers - - - - ../../mnt/marisa/log/containers
             L /var/log/pods - - - - ../../mnt/marisa/log/pods
+            L /var/swap - - - - ../../mnt/marisa/swap
           dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
           name: tmpfiles
         - data: |
