@@ -27,6 +27,8 @@ spec:
           volumeMounts:
             - name: archives-data
               mountPath: /var/syncthing/Archives
+            - name: downloads-data
+              mountPath: /var/syncthing/Downloads
             - name: movies-data
               mountPath: /var/syncthing/Movies
             - name: music-data
@@ -48,6 +50,9 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
