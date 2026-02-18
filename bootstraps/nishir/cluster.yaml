@@ -506,10 +506,21 @@ spec:
                                 source: KubernetesMetrics
                           - name: PodLifeTime
                             args:
-                              maxPodLifeTimeSeconds: 86400
+                              maxPodLifeTimeSeconds: 3600
                               states:
                                 - Pending
                                 - PodInitializing
+                          - name: RemoveFailedPods
+                            args:
+                              reasons:
+                                - ContainerCannotRun
+                                - CrashLoopBackOff
+                                - CreateContainerConfigError
+                                - CreateContainerError
+                                - ErrImagePull
+                                - ImagePullBackOff
+                                - RunContainerError
+                              includingInitContainers: true
                           - name: RemoveDuplicates
                           - name: RemovePodsHavingTooManyRestarts
                             args:
@@ -532,6 +543,7 @@ spec:
                           deschedule:
                             enabled:
                               - PodLifeTime
+                              - RemoveFailedPods
                               - RemovePodsHavingTooManyRestarts
                               - RemovePodsViolatingInterPodAntiAffinity
                               - RemovePodsViolatingNodeAffinity
