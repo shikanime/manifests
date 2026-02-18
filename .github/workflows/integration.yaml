@@ -16,9 +16,11 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - env: {}
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: nix run nixpkgs#direnv allow
-      - env: {}
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: nix run nixpkgs#direnv export gha >> "$GITHUB_ENV"
       - env: {}
         run: nix flake check --accept-flake-config --no-pure-eval

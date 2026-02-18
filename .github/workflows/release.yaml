@@ -21,9 +21,11 @@ jobs:
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           name: shikanime
-      - env: {}
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: nix run nixpkgs#direnv allow
-      - env: {}
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: nix run nixpkgs#direnv export gha >> "$GITHUB_ENV"
       - env: {}
         run: nix flake check --accept-flake-config --no-pure-eval

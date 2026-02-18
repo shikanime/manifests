@@ -117,6 +117,11 @@
                   devlib.devenvModules.shikanime
                 ];
 
+                github.workflows = {
+                  integration.settings.direnv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                  release.settings.direnv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                };
+
                 packages = [
                   pkgs.clusterctl
                   pkgs.k0sctl
