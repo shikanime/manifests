@@ -7,7 +7,6 @@ jobs:
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
-          permission-contents: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
       - uses: actions/checkout@v6
         with:
@@ -24,11 +23,9 @@ jobs:
           HEAD_REF: ${{ github.head_ref }}
           REPO: ${{ github.repository }}
         if: startsWith(github.head_ref, 'gh/') && endsWith(github.head_ref, '/head')
-        run: for role in base head orig; do git push origin --delete "${HEAD_REF%/head}/$role" || true; done
+        run: "for role in base head orig; do\n  git push origin --delete \"${HEAD_REF%/head}/$role\" || true\ndone\n"
 name: Cleanup
 'on':
   pull_request:
     types:
       - closed
-permissions:
-  contents: write
