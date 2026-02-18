@@ -7,23 +7,7 @@ jobs:
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
-          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - run: nix flake check --accept-flake-config --no-pure-eval
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - continue-on-error: true
-        id: createGithubAppToken
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ vars.OPERATOR_APP_ID }}
+          permission-contents: read
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
       - uses: actions/checkout@v6
         with:
@@ -34,10 +18,17 @@ jobs:
           github_access_token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-        run: nix develop --accept-flake-config --no-pure-eval --command devenv test
+        run: nix run nixpkgs#direnv allow
+      - env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: nix run nixpkgs#direnv export gha >> "$GITHUB_ENV"
+      - env: {}
+        run: nix flake check --accept-flake-config --no-pure-eval
 name: Integration
 'on':
   pull_request:
     branches:
       - main
       - gh/*/*/base
+permissions:
+  contents: read
