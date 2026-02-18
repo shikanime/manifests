@@ -7,6 +7,8 @@ jobs:
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
+          permission-contents: read
+          permission-pull-requests: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
       - uses: actions/checkout@v6
         with:
@@ -25,9 +27,8 @@ jobs:
 name: Triage
 'on':
   pull_request:
-    branches:
-      - main
-      - gh/*/*/base
     types:
       - opened
-      - reopened
+      - synchronize
+permissions:
+  pull-requests: write

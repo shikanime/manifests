@@ -69,7 +69,6 @@
       ];
       perSystem =
         {
-          config,
           lib,
           pkgs,
           ...
@@ -109,7 +108,7 @@
             ];
 
             shells = {
-              default = with config.devenv.shells.default.github.lib; {
+              default = {
                 imports = [
                   devlib.devenvModules.git
                   devlib.devenvModules.nix
@@ -117,61 +116,6 @@
                   devlib.devenvModules.shell
                   devlib.devenvModules.shikanime
                 ];
-
-                github = {
-                  workflows = {
-                    integration.settings.devenv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                    release.settings.devenv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                  };
-                  settings.workflows.sync = {
-                    jobs.sync = with config.devenv.shells.default.github.actions; {
-                      environment = {
-                        name = "nishir";
-                        url = "https://nishir-k8s-operator.taila659a.ts.net/";
-                      };
-                      runs-on = "nishir";
-                      steps = [
-                        {
-                          run = "sudo apt-get update -y && sudo apt-get install -y xz-utils";
-                        }
-                        {
-                          continue-on-error = true;
-                          id = "createGithubAppToken";
-                          uses = "actions/create-github-app-token@v2";
-                          "with" = {
-                            app-id = "\${{ vars.OPERATOR_APP_ID }}";
-                            private-key = "\${{ secrets.OPERATOR_PRIVATE_KEY }}";
-                          };
-                        }
-                        {
-                          uses = "actions/checkout@v6";
-                          "with" = {
-                            fetch-depth = 0;
-                            token = "\${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}";
-                          };
-                        }
-                        {
-                          uses = "cachix/install-nix-action@v31";
-                          "with".github_access_token =
-                            "\${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}";
-                        }
-                        {
-                          env.SOPS_AGE_KEY = mkWorkflowRef "secrets.SOPS_AGE_KEY";
-                          run =
-                            "nix develop .#sync "
-                            + "--accept-flake-config "
-                            + "--no-pure-eval "
-                            + "--command skaffold run --profile nishir-tailnet";
-                        }
-                      ];
-                    };
-                    name = "Sync";
-                    on = {
-                      push.branches = [ "main" ];
-                      workflow_dispatch = { };
-                    };
-                  };
-                };
 
                 packages = [
                   pkgs.clusterctl
@@ -193,33 +137,10 @@
                   };
                 };
 
-                treefmt.config = {
-                  programs.actionlint.package =
-                    let
-                      settingsFormat = pkgs.formats.yaml { };
-
-                      configFile = settingsFormat.generate "actionlint.yaml" {
-                        self-hosted-runner.labels = [ "nishir" ];
-                      };
-
-                      wrapped =
-                        pkgs.runCommand "actionlint-wrapped"
-                          {
-                            buildInputs = [ pkgs.makeWrapper ];
-                            meta.mainProgram = "actionlint";
-                          }
-                          ''
-                            makeWrapper ${getExe pkgs.actionlint} $out/bin/actionlint \
-                              --add-flags "-config-file ${configFile}"
-                          '';
-                    in
-                    wrapped;
-
-                  settings.global.excludes = [
-                    "*.excalidraw"
-                    "*.enc.xml"
-                  ];
-                };
+                treefmt.config.settings.global.excludes = [
+                  "*.excalidraw"
+                  "*.enc.xml"
+                ];
               };
 
               sync = {
