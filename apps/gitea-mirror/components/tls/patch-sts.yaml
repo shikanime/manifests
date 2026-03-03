@@ -9,7 +9,7 @@ spec:
         - name: gitea-mirror
           env:
             - name: NODE_EXTRA_CA_CERTS
-              value: /etc/ssl/certs/nishir-ca-certificates.crt
+              value: /etc/ssl/certs/ca-certificates.crt
           volumeMounts:
             - name: certs
               mountPath: /etc/ssl/certs
