@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: gitea
+  name: forgero
 spec:
   statefulSet:
     pod:
@@ -10,7 +10,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchLabels:
-                  app.kubernetes.io/name: gitea
+                  app.kubernetes.io/name: forgero
               namespaces:
                 - shikanime
               topologyKey: kubernetes.io/hostname

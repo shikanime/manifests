@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: gitea
+  name: forgero
 spec:
   defaultBackend:
     service:
-      name: gitea
+      name: forgero
       port:
         name: https

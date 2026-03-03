@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: gitea
+  name: forgero
 spec:
   replicas: 1
-  serviceName: gitea
+  serviceName: forgero
   selector:
     matchLabels:
-      app.kubernetes.io/name: gitea
+      app.kubernetes.io/name: forgero
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: gitea
+        app.kubernetes.io/name: forgero
     spec:
       initContainers:
         - name: config-sync
@@ -46,8 +46,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       containers:
-        - name: gitea
-          image: gitea
+        - name: forgero
+          image: forgero
           env:
             - name: USER_UID
               value: "1000"
@@ -83,7 +83,7 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: gitea-config
+            secretName: forgero-config
         - name: data
           persistentVolumeClaim:
             claimName: gitea-data
