@@ -84,6 +84,9 @@ spec:
         - name: config
           secret:
             secretName: gitea-config
+        - name: rclone-config
+          configMap:
+            name: rclone
         - name: data
           persistentVolumeClaim:
             claimName: gitea-data
