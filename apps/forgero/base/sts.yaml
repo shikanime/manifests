@@ -23,10 +23,10 @@ spec:
             - --copy-links
             - --update
             - /mnt/startup-config
-            - /var/lib/gitea/data/gitea/conf
+            - /var/lib/gitea/custom/conf
           volumeMounts:
             - name: data
-              mountPath: /var/lib/gitea/data
+              mountPath: /var/lib/gitea
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
@@ -77,7 +77,7 @@ spec:
             failureThreshold: 30
           volumeMounts:
             - name: data
-              mountPath: /var/lib/gitea/data
+              mountPath: /var/lib/gitea
       securityContext:
         fsGroup: 1000
       volumes:
