@@ -29,14 +29,6 @@ spec:
         - name: gitea-mirror
           image: gitea-mirror
           env:
-            - name: NODE_ENV
-              value: "production"
-            - name: DATABASE_URL
-              value: "file:data/gitea-mirror.db"
-            - name: HOST
-              value: "0.0.0.0"
-            - name: PORT
-              value: "4321"
             - name: MIRROR_ISSUES
               value: "true"
             - name: MIRROR_WIKI
