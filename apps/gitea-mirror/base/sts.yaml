@@ -41,6 +41,8 @@ spec:
               value: "true"
             - name: GITEA_URL
               value: https://forgejo
+            - name: INCLUDE_ARCHIVED
+              value: "true"
             - name: MIRROR_ISSUES
               value: "true"
             - name: MIRROR_LABELS
