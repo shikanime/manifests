@@ -11,6 +11,7 @@ resources:
   - ../../../../apps/bazarr/overlays/nishir-tailnet
   - ../../../../apps/copyparty/overlays/nishir-tailnet
   - ../../../../apps/forgejo/overlays/nishir-tailnet
+  - ../../../../apps/gitea-mirror/overlays/nishir-tailnet
   - ../../../../apps/jellyfin/overlays/nishir-tailnet
   - ../../../../apps/lidarr/overlays/nishir-tailnet
   - ../../../../apps/matrix/overlays/nishir-tailnet
