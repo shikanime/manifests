@@ -22,3 +22,16 @@ spec:
                     values:
                       - rpi4-large
               weight: 50
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: forgejo-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
