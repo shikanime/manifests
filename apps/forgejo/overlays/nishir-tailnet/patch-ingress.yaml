@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: gitea
+  name: forgejo
   annotations:
-    tailscale.com/proxy-class: gitea
+    tailscale.com/proxy-class: forgejo
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

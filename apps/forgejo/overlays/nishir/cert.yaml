@@ -1,15 +1,15 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: gitea-tls
+  name: forgejo-tls
 spec:
-  commonName: gitea
+  commonName: forgejo
   dnsNames:
-    - gitea
+    - forgejo
   issuerRef:
     kind: ClusterIssuer
     name: nishir
-  secretName: gitea-tls
+  secretName: forgejo-tls
   usages:
     - digital signature
     - key encipherment

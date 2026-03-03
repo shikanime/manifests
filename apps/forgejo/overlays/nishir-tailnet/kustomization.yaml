@@ -9,6 +9,6 @@ resources:
   - netpol.yaml
   - proxyclass.yaml
 secretGenerator:
-  - name: gitea-config
+  - name: forgejo-config
     files:
-      - gitea/app.ini
+      - forgejo/app.ini

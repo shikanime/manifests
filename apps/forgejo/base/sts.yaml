@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: gitea
+  name: forgejo
 spec:
   replicas: 1
-  serviceName: gitea
+  serviceName: forgejo
   selector:
     matchLabels:
-      app.kubernetes.io/name: gitea
+      app.kubernetes.io/name: forgejo
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: gitea
+        app.kubernetes.io/name: forgejo
     spec:
       initContainers:
         - name: config-sync
@@ -23,10 +23,10 @@ spec:
             - --copy-links
             - --update
             - /mnt/startup-config
-            - /data/gitea/conf
+            - /var/lib/gitea/custom/conf
           volumeMounts:
             - name: data
-              mountPath: /data
+              mountPath: /var/lib/gitea
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
@@ -46,8 +46,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
               weight: 100
       containers:
-        - name: gitea
-          image: gitea
+        - name: forgejo
+          image: forgejo
           env:
             - name: USER_UID
               value: "1000"
@@ -58,7 +58,7 @@ spec:
           ports:
             - containerPort: 3000
               name: http
-            - containerPort: 22
+            - containerPort: 2222
               name: ssh
           readinessProbe:
             httpGet:
@@ -77,16 +77,16 @@ spec:
             failureThreshold: 30
           volumeMounts:
             - name: data
-              mountPath: /data
+              mountPath: /var/lib/gitea
       securityContext:
         fsGroup: 1000
       volumes:
         - name: config
           secret:
-            secretName: gitea-config
+            secretName: forgejo-config
         - name: rclone-config
           configMap:
             name: rclone
         - name: data
           persistentVolumeClaim:
-            claimName: gitea-data
+            claimName: forgejo-data

@@ -1,11 +1,11 @@
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: gitea
+  name: forgejo
 spec:
   targetRef:
     apiVersion: apps/v1
     kind: StatefulSet
-    name: gitea
+    name: forgejo
   updatePolicy:
     updateMode: Auto

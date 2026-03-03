@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: gitea-tailscale
+  name: forgejo-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: gitea
+      app.kubernetes.io/name: forgejo
   policyTypes:
     - Ingress
   ingress:
