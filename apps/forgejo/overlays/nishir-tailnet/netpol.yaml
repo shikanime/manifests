@@ -13,6 +13,9 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: tailscale-system
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: gitea-mirror
       ports:
         - port: http
         - port: ssh
