@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gitea-mirror
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi5-large
+              weight: 80
+            - preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi4-large
+              weight: 50
+      containers:
+        - name: gitea-mirror
+          env:
+            - name: HEADER_AUTH_EMAIL_HEADER
+              value: Tailscale-User-Login
+            - name: HEADER_AUTH_NAME_HEADER
+              value: Tailscale-User-Name
+            - name: HEADER_AUTH_AUTO_PROVISION
+              value: "true"
+            - name: HEADER_AUTH_ALLOWED_DOMAINS
+              value: gitea-mirror.taila659a.ts.net
+          envFrom:
+            - secret:
+                name: gitea-mirror
