@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: forgero-tailscale
+  name: forgejo-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: forgero
+      app.kubernetes.io/name: forgejo
   policyTypes:
     - Ingress
   ingress:

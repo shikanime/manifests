@@ -9,6 +9,6 @@ resources:
   - netpol.yaml
   - proxyclass.yaml
 secretGenerator:
-  - name: forgero-config
+  - name: forgejo-config
     files:
-      - forgero/app.ini
+      - forgejo/app.ini

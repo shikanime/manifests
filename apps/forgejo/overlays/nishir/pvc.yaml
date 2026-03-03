@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: gitea-data
+  name: forgejo-data
 spec:
   accessModes:
     - ReadWriteOncePod
@@ -10,4 +10,4 @@ spec:
       storage: 8Gi
   storageClassName: nishir-fast
   volumeMode: Filesystem
-  volumeName: gitea-data
+  volumeName: forgejo-data
