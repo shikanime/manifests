@@ -25,6 +25,8 @@ spec:
       containers:
         - name: gitea-mirror
           env:
+            - name: BETTER_AUTH_URL
+              value: https://gitea-mirror.taila659a.ts.net
             - name: HEADER_AUTH_EMAIL_HEADER
               value: Tailscale-User-Login
             - name: HEADER_AUTH_NAME_HEADER
