@@ -42,5 +42,5 @@ spec:
             - name: PUBLIC_BETTER_AUTH_URL
               value: https://gitea-mirror.taila659a.ts.net
           envFrom:
-            - secret:
+            - secretRef:
                 name: gitea-mirror
