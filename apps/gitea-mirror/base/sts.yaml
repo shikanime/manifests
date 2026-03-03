@@ -55,16 +55,14 @@ spec:
               value: "true"
             - name: MIRROR_RELEASES
               value: "true"
-            - name: MIRROR_STARRED
-              value: "true"
             - name: MIRROR_WIKI
+              value: "true"
+            - name: PRIVATE_REPOSITORIES
               value: "true"
             - name: PRESERVE_ORG_STRUCTURE
               value: "true"
             - name: SCHEDULE_ENABLED
               value: "true"
-            - name: STARRED_REPOS_MODE
-              value: "preserve-owner"
           ports:
             - containerPort: 4321
               name: http
