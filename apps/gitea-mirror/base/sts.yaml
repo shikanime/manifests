@@ -37,10 +37,6 @@ spec:
               value: "0.0.0.0"
             - name: PORT
               value: "4321"
-            - name: BETTER_AUTH_SECRET
-              value: "your-secret-key-change-this-in-production"
-            - name: BETTER_AUTH_URL
-              value: "http://gitea-mirror:4321"
             - name: MIRROR_ISSUES
               value: "true"
             - name: MIRROR_WIKI
