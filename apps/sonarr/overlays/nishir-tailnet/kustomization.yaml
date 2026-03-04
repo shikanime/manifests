@@ -1,9 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: shikanime
+images:
+  - name: caddy
+    newName: ghcr.io/tailscale/caddy-tailscale
+    newTag: main
 patches:
   - path: patch-ingress.yaml
 resources:
   - ../nishir
+  - deployment.yaml
   - netpol.yaml
   - proxyclass.yaml
+secretGenerator:
+  - name: sonarr-proxy
+    files:
+      - sonarr-proxy/Caddyfile

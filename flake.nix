@@ -99,8 +99,12 @@
                 tasks."sops:decrypt" = {
                   before = [ "devenv:enterShell" ];
                   exec = ''
-                    find . -type f -name '*.enc.*' | while read -r enc; do
-                      ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
+                    find . -type f -name '*.enc*' | while read -r enc; do
+                      case "$enc" in
+                        *.enc) out="''${enc%.enc}" ;;
+                        *) out="''${enc%.enc.*}.''${enc##*.enc.}" ;;
+                      esac
+                      ${getExe pkgs.sops} --decrypt "$enc" > "$out"
                     done
                   '';
                 };
@@ -123,6 +127,7 @@
                 };
 
                 packages = [
+                  pkgs.caddy
                   pkgs.clusterctl
                   pkgs.k0sctl
                   pkgs.kubectl
