@@ -6,13 +6,13 @@ metadata:
 images:
   - name: vaultwarden
     newName: docker.io/vaultwarden/server
-    newTag: 1.35.1
+    newTag: 1.35.4
 labels:
   - pairs:
       app.kubernetes.io/component: secret-manager
       app.kubernetes.io/name: vaultwarden
       app.kubernetes.io/part-of: nishir-security
-      app.kubernetes.io/version: v1.35.1
+      app.kubernetes.io/version: v1.35.4
 resources:
   - ingress.yaml
   - sts.yaml
