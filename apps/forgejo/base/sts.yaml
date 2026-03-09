@@ -19,11 +19,11 @@ spec:
           command:
             - rclone
           args:
-            - copy
+            - copyto
             - --copy-links
             - --update
-            - /mnt/startup-config
-            - /var/lib/gitea/custom/conf
+            - /mnt/startup-config/conf/app.ini
+            - /var/lib/gitea/custom/conf/app.ini
           volumeMounts:
             - name: data
               mountPath: /var/lib/gitea
