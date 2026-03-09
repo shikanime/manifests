@@ -22,7 +22,7 @@ spec:
             - copyto
             - --copy-links
             - --update
-            - /mnt/startup-config/conf/app.ini
+            - /mnt/startup-config/app.ini
             - /var/lib/gitea/custom/conf/app.ini
           volumeMounts:
             - name: data
