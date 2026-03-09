@@ -7,7 +7,7 @@ spec:
     - ReadWriteOncePod
   resources:
     requests:
-      storage: 16Gi
+      storage: 62Gi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: forgejo-data
