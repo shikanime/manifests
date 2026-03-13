@@ -518,6 +518,7 @@ spec:
                                 - CreateContainerConfigError
                                 - CreateContainerError
                                 - ErrImagePull
+                                - FailedMount
                                 - ImagePullBackOff
                                 - RunContainerError
                               includingInitContainers: true
