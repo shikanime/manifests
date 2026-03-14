@@ -557,7 +557,7 @@ spec:
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort
-                    defaultReplicaCount: '2'
+                    defaultReplicaCount: 2
                     replicaAutoBalance: best-effort
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
@@ -569,7 +569,7 @@ spec:
                       manager:
                         tag: v1.11.0-hotfix-1
                   persistence:
-                    defaultClassReplicaCount: 1
+                    defaultClassReplicaCount: 2
                     defaultFsType: xfs
               - name: grafana-k8s-monitoring
                 chartname: grafana/k8s-monitoring
