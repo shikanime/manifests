@@ -114,14 +114,14 @@ bridge:
   # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
   encryption:
     # Allow encryption, work in group chat rooms with e2ee enabled
-    allow: false
+    allow: true
     # Default to encryption, force-enable encryption in all portals the bridge creates
     # This will cause the bridge bot to be in private chats for the encryption to work properly.
-    default: false
+    default: true
     # Whether to use MSC2409/MSC3202 instead of /sync long polling for receiving encryption-related data.
     appservice: false
     # Require encryption, drop any unencrypted messages.
-    require: false
+    require: true
     # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
     # You must use a client that supports requesting keys from other users to use this feature.
     allow_key_sharing: false
@@ -131,21 +131,21 @@ bridge:
       # that the user has uploaded the key to key backup.
       delete_outbound_on_ack: false
       # Don't store outbound sessions in the inbound table.
-      dont_store_outbound: false
+      dont_store_outbound: true
       # Ratchet megolm sessions forward after decrypting messages.
-      ratchet_on_decrypt: false
+      ratchet_on_decrypt: true
       # Delete fully used keys (index >= max_messages) after decrypting messages.
-      delete_fully_used_on_decrypt: false
+      delete_fully_used_on_decrypt: true
       # Delete previous megolm sessions from same device when receiving a new one.
-      delete_prev_on_new_session: false
+      delete_prev_on_new_session: true
       # Delete megolm sessions received from a device when the device is deleted.
-      delete_on_device_delete: false
+      delete_on_device_delete: true
       # Periodically delete megolm sessions when 2x max_age has passed since receiving the session.
-      periodically_delete_expired: false
+      periodically_delete_expired: true
       # Delete inbound megolm sessions that don't have the received_at field used for
       # automatic ratcheting and expired session deletion. This is meant as a migration
       # to delete old keys prior to the bridge update.
-      delete_outdated_inbound: false
+      delete_outdated_inbound: true
     # What level of device verification should be required from users?
     #
     # Valid levels:
@@ -158,9 +158,9 @@ bridge:
     #              (currently only possible by modifying the `trust` column in the `crypto_device` database table).
     verification_levels:
       # Minimum level for which the bridge should send keys to when bridging messages from Telegram to Matrix.
-      receive: unverified
+      receive: cross-signed-tofu
       # Minimum level that the bridge should accept for incoming Matrix messages.
-      send: unverified
+      send: cross-signed-tofu
       # Minimum level that the bridge should require for accepting key requests.
       share: cross-signed-tofu
     # Options for Megolm room key rotation. These options allow you to
@@ -304,7 +304,7 @@ sops:
         L0FIOUpOZEtPcGlRUHpka1NNOXlHMlUKilz3rZ8gqizE8s0sgY6RSQV2GzeYmd2L
         57xWgacv2gHtWUJjnwligmY8RzjhMqG+MG68SX3a81JG+TnvG6+Bjw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T20:52:18Z"
-  mac: ENC[AES256_GCM,data:Kio1nS+bvkBhsLAEt7jFugxX5n6FEy1aupLnCWL4qBgPkLVKSYe39oRMUZjNhnDxNCkFpTuI20HgYvpQV76O4tJcyQjwU7PHv5RxWff0Zm7nzU8AiyGUxEPAh3OnM5HacIVFNxnes+qLnyZpujxlETlYiv9WJhhEPSDB5H5NT6Y=,iv:njTND0TmUatZ1vEjkccwb2CDaojocy186VzNpDCdqSg=,tag:dU9L8ST0oWSjyvrt8QrRxw==,type:str]
+  lastmodified: "2026-03-16T22:53:44Z"
+  mac: ENC[AES256_GCM,data:rOPZZG0sXSE3MwcmvnQ+nHouYqdQZoWWNZ579q3SJcEyhuDUepbDRJDmTYpK1j3ZD5aN2owz7mb1d9W0sNA9ZU5RtUPQVuZd7fjGcVsmBItP/j7/Gl237D9khP5to8R6mW5Tc7nI/UmhZ0Expm++TS2jua6lLlBoG226dcRhJyg=,iv:ikIX34oQhuEfmnc6scA85pz3GIriJCbrftVCqBB5DCE=,tag:8uZI69bb3ilWWzyUvoYxtQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1

@@ -359,11 +359,11 @@ double_puppet:
 # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
 encryption:
   # Whether to enable encryption at all. If false, the bridge will not function in encrypted rooms.
-  allow: false
+  allow: true
   # Whether to force-enable encryption in all bridged rooms.
-  default: false
+  default: true
   # Whether to require all messages to be encrypted and drop any unencrypted messages.
-  require: false
+  require: true
   # Whether to use MSC3202/MSC4203 instead of /sync long polling for receiving encryption-related data.
   # This option is not yet compatible with standard Matrix servers like Synapse and should not be used.
   # Changing this option requires updating the appservice registration file.
@@ -389,21 +389,21 @@ encryption:
     # that the user has uploaded the key to key backup.
     delete_outbound_on_ack: false
     # Don't store outbound sessions in the inbound table.
-    dont_store_outbound: false
+    dont_store_outbound: true
     # Ratchet megolm sessions forward after decrypting messages.
-    ratchet_on_decrypt: false
+    ratchet_on_decrypt: true
     # Delete fully used keys (index >= max_messages) after decrypting messages.
-    delete_fully_used_on_decrypt: false
+    delete_fully_used_on_decrypt: true
     # Delete previous megolm sessions from same device when receiving a new one.
-    delete_prev_on_new_session: false
+    delete_prev_on_new_session: true
     # Delete megolm sessions received from a device when the device is deleted.
-    delete_on_device_delete: false
+    delete_on_device_delete: true
     # Periodically delete megolm sessions when 2x max_age has passed since receiving the session.
-    periodically_delete_expired: false
+    periodically_delete_expired: true
     # Delete inbound megolm sessions that don't have the received_at field used for
     # automatic ratcheting and expired session deletion. This is meant as a migration
     # to delete old keys prior to the bridge update.
-    delete_outdated_inbound: false
+    delete_outdated_inbound: true
   # What level of device verification should be required from users?
   #
   # Valid levels:
@@ -416,9 +416,9 @@ encryption:
   #              (currently only possible by modifying the `trust` column in the `crypto_device` database table).
   verification_levels:
     # Minimum level for which the bridge should send keys to when bridging messages from the remote network to Matrix.
-    receive: unverified
+    receive: cross-signed-tofu
     # Minimum level that the bridge should accept for incoming Matrix messages.
-    send: unverified
+    send: cross-signed-tofu
     # Minimum level that the bridge should require for accepting key requests.
     share: cross-signed-tofu
   # Options for Megolm room key rotation. These options allow you to configure the m.room.encryption event content.
@@ -488,7 +488,7 @@ sops:
         RFhrL1htYWtYQXBNeU82RXFSOFlqVVkKO/+eap+MZ9gZU3Z6QUYTAyCAhRkajDSr
         a0wbxD7YsbguS0OsvdQTu75Z4UQ2aeaDBTSp1G13oeRiooEMgtYtCA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T21:29:14Z"
-  mac: ENC[AES256_GCM,data:x1DMQzx7zLTj3JwA0NmF0QsrL2MpJSW0Siq4Gm6tnBZlRYlSwSLlHlkdXRChDaBYLavSHvPaX8Tu+9VHEIfYWZXjsm+hOfgWbm6q0T98ce1JzbMymuhi9DWADFpNb/bpZqPGYEYL5byaqqq8oyGuYX1otoROPXFyLBIjzxBGSTQ=,iv:XG9rLvcymJLVM8YzU5tZV8NS8IvGTt8H9Q9+5s6jbbs=,tag:KgnLReGJfvo+8trjXDHqPQ==,type:str]
+  lastmodified: "2026-03-16T22:50:16Z"
+  mac: ENC[AES256_GCM,data:U53Vf3NndruKUrNXiJyH+poUdCFm7tZ2Z73Dr0rkPdJtoIzy/2zCR+a+dI8h6zSvCTd1WVGnPxhvQvQGlS8sJfpb7ukhyY2FnWIExhC3u+lHSNsfyp4MgnJHzCwwXB4pbW+nQfoC42J5lLS/SWTyXX8u0yRYJSfMfi0ChEeCXn8=,iv:kOgCZPkL4X9ByUBv5OZiU6oSfcDI32HOgPvyJInxZR8=,tag:pShiEAV9/6n9Tcijz3nRkw==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1
