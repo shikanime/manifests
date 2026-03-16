@@ -231,6 +231,7 @@ spec:
             - config.yaml
             - --include
             - doublepuppet.yaml
+            - --include
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -321,6 +322,7 @@ spec:
             - config.yaml
             - --include
             - doublepuppet.yaml
+            - --include
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -411,6 +413,7 @@ spec:
             - config.yaml
             - --include
             - doublepuppet.yaml
+            - --include
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -501,6 +504,7 @@ spec:
             - config.yaml
             - --include
             - doublepuppet.yaml
+            - --include
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -591,6 +595,7 @@ spec:
             - config.yaml
             - --include
             - doublepuppet.yaml
+            - --include
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -681,6 +686,7 @@ spec:
             - config.yaml
             - --include
             - doublepuppet.yaml
+            - --include
             - registration.yaml
             - /mnt/config
             - /mnt/data
