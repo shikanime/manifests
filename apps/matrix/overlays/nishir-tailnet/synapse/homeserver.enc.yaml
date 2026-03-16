@@ -58,6 +58,7 @@ app_service_config_files:
   - /data/appservices/mautrix-whatsapp-doublepuppet.yaml
 tls_certificate_path: /etc/ssl/private/tls.crt
 tls_private_key_path: /etc/ssl/private/tls.key
+suppress_key_server_warning: true
 sops:
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
@@ -96,7 +97,7 @@ sops:
         b1FKcDRGK2RqMG9pTVdnMGkxQndmcDgKG/MBxTB98GsULD5ZLPDlmX7Qu+uP7erZ
         ivFr2QpZy5o0pErcfJK0gBu+d3nGKDSnfiUB5FU5WLGVm/ICYp+YBg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T21:19:00Z"
-  mac: ENC[AES256_GCM,data:tq9dNkJxdFzn5WjSQcSw5WUpD6clCmy4h41kgfwJtPpMOmyC4rq3ueEJUHLS8vR8A/WZMcsHG+d8mU3c1GGbnxRWvywBi2Wp1qLIVCBzeykZWGzHqhP7q1+PFowJUldaiF9wY/OF5+9qeL9pTsX5g0+usbJPSt8LFRA99CJ3QNM=,iv:tOEqM9IuqWUuOXd0UAnQvTMgSKSRZkWNMDqijSqZEg0=,tag:e65JfAJeFCaYKbhmnLnf5A==,type:str]
+  lastmodified: "2026-03-16T23:15:25Z"
+  mac: ENC[AES256_GCM,data:irltw6Lmn8Fes5Zm8fxUfDREBgT6VnRikBbJtMDwD1iaBa5y7ek/wTSF0TVBb/QXBJ6OTq0pmpacXkiW28i7LVZFT5h71y5yvbd3jK4qd3QVGDwcc9x2lpDc4+cLMAgmXLdADS3/0zTfsgRuQ7xJlTzlTmyYrGwLe1bwUPlRbro=,iv:pgL8/9lCaq7dVFEtZe94veRfMBte4aVaNlv1pIegv9Q=,tag:SdTzZn2M9JpTRiE56Po11w==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   version: 3.12.1
