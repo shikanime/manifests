@@ -107,7 +107,7 @@ bridge:
   # If using this for other servers than the bridge's server,
   # you must also set the URL in the double_puppet_server_map.
   login_shared_secret_map:
-    matrix.taila659a.ts.net: foobar
+    matrix.taila659a.ts.net: EaBjw0gBOClgxVGEx1k2wX40OpxiOM6R8mEYtVV2XLBZ9Oej2Gfc8KFdoMsc1MYV
   update_avatar_initial_sync: true
   # End-to-bridge encryption support options.
   #
@@ -242,7 +242,7 @@ bridge:
   #     mxid - Specific user
   permissions:
     matrix.taila659a.ts.net: user
-    '@admin:matrix.taila659a.ts.net': admin
+    '@root:matrix.taila659a.ts.net': admin
 logging:
   version: 1
   formatters:
@@ -304,7 +304,7 @@ sops:
         L0FIOUpOZEtPcGlRUHpka1NNOXlHMlUKilz3rZ8gqizE8s0sgY6RSQV2GzeYmd2L
         57xWgacv2gHtWUJjnwligmY8RzjhMqG+MG68SX3a81JG+TnvG6+Bjw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-26T00:36:13Z"
-  mac: ENC[AES256_GCM,data:NLv3YBx+EpJDrVSKJ+BebF6/y+xMkx4LcwK1kWhJ0aW/mnt/43Y0MuxotEQo+OT47TmKlYNBcDNmpr43DICy44lLeR24folWWi9L1iQbnEsKkK0m1MfLeiW9bZN0ISvrUJORLeXYiqYaSyD3w88gkCDbHHaFSEd29xYxhKoMfUo=,iv:k2KYCsfPBK/fqbz5MiX1q71f018tNPrVDX7jKjSMqUw=,tag:QTNs4G8GXH2WcBKDoXMtAQ==,type:str]
+  lastmodified: "2026-03-16T20:52:18Z"
+  mac: ENC[AES256_GCM,data:Kio1nS+bvkBhsLAEt7jFugxX5n6FEy1aupLnCWL4qBgPkLVKSYe39oRMUZjNhnDxNCkFpTuI20HgYvpQV76O4tJcyQjwU7PHv5RxWff0Zm7nzU8AiyGUxEPAh3OnM5HacIVFNxnes+qLnyZpujxlETlYiv9WJhhEPSDB5H5NT6Y=,iv:njTND0TmUatZ1vEjkccwb2CDaojocy186VzNpDCdqSg=,tag:dU9L8ST0oWSjyvrt8QrRxw==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
-  version: 3.10.2
+  version: 3.12.1
