@@ -96,7 +96,7 @@ sops:
         b1FKcDRGK2RqMG9pTVdnMGkxQndmcDgKG/MBxTB98GsULD5ZLPDlmX7Qu+uP7erZ
         ivFr2QpZy5o0pErcfJK0gBu+d3nGKDSnfiUB5FU5WLGVm/ICYp+YBg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T20:45:09Z"
-  mac: ENC[AES256_GCM,data:+MdDIuK0bXFP3aSpRllKETDNU1CZd4p3pv15vtxOuzNRzGUsDXMaEn1HjniVpLq2Rf7kdBIbMHuf4SCxsmk4rHFDpXfGxNXhjYBxXKhdIQj5jLhySBKjzCDIRF1SIh7wzW5wZ97DNfHuUYKg7eCwp4Ti0REPy1Xi+nD8IBB9WH4=,iv:Z+GyDplAStBJVSDNw1nouXyDEIfFZfGfb7iTeVYDbZo=,tag:YEKH5CjBydZ/m9p83ueeSg==,type:str]
+  lastmodified: "2026-03-16T21:19:00Z"
+  mac: ENC[AES256_GCM,data:tq9dNkJxdFzn5WjSQcSw5WUpD6clCmy4h41kgfwJtPpMOmyC4rq3ueEJUHLS8vR8A/WZMcsHG+d8mU3c1GGbnxRWvywBi2Wp1qLIVCBzeykZWGzHqhP7q1+PFowJUldaiF9wY/OF5+9qeL9pTsX5g0+usbJPSt8LFRA99CJ3QNM=,iv:tOEqM9IuqWUuOXd0UAnQvTMgSKSRZkWNMDqijSqZEg0=,tag:e65JfAJeFCaYKbhmnLnf5A==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   version: 3.12.1

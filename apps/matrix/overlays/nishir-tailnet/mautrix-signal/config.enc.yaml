@@ -313,7 +313,7 @@ direct_media:
 # See https://docs.mau.fi/bridges/general/backfill.html for more details.
 backfill:
   # Whether to do backfilling at all.
-  enabled: false
+  enabled: true
   # Maximum number of messages to backfill in empty rooms.
   max_initial_messages: 50
   # Maximum number of missed messages to backfill after bridge restarts.
@@ -488,7 +488,7 @@ sops:
         RFhrL1htYWtYQXBNeU82RXFSOFlqVVkKO/+eap+MZ9gZU3Z6QUYTAyCAhRkajDSr
         a0wbxD7YsbguS0OsvdQTu75Z4UQ2aeaDBTSp1G13oeRiooEMgtYtCA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T20:52:33Z"
-  mac: ENC[AES256_GCM,data:IWU+pEod4c4fCU+vufHW8aN8iPqKcSbtgaeqWkWwbv3ONJcTWnwGIip4mKKfhdjP9BTcSPToYpwAhMl70z3yG9MjT1PuqSavUYpAhdRb0cg8A/FpObL8wCOifZ5Y9cO8pxPrC4Pl3NSiMCPXoVwUQTaGPhA5eGebpmysbAPLapc=,iv:Ps5qxAM2yXisgbtUpjbUjmh2fIPsPVpbfs5RMOicPVY=,tag:+cqPEZS9fM/Yx28fpujtCw==,type:str]
+  lastmodified: "2026-03-16T21:29:14Z"
+  mac: ENC[AES256_GCM,data:x1DMQzx7zLTj3JwA0NmF0QsrL2MpJSW0Siq4Gm6tnBZlRYlSwSLlHlkdXRChDaBYLavSHvPaX8Tu+9VHEIfYWZXjsm+hOfgWbm6q0T98ce1JzbMymuhi9DWADFpNb/bpZqPGYEYL5byaqqq8oyGuYX1otoROPXFyLBIjzxBGSTQ=,iv:XG9rLvcymJLVM8YzU5tZV8NS8IvGTt8H9Q9+5s6jbbs=,tag:KgnLReGJfvo+8trjXDHqPQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1
