@@ -198,7 +198,7 @@ bridge:
       fps: 25
   # Servers to always allow double puppeting from
   double_puppet_server_map:
-    matrix.taila659a.ts.net: https://matrix:8448
+    matrix.taila659a.ts.net: https://matrix.taila659a.ts.net
   # Allow using double puppeting from any server with a valid client .well-known file.
   double_puppet_allow_discovery: false
   # Shared secrets for https://github.com/devture/matrix-synapse-shared-secret-auth
@@ -207,7 +207,7 @@ bridge:
   # instead of users having to find an access token and run `login-matrix`
   # manually.
   login_shared_secret_map:
-    matrix.taila659a.ts.net: foobar
+    matrix.taila659a.ts.net: xi982s1jFZBgbffqIhrF7agyFTs4UZzMa4HAaiftaWEZhj7J729OmDuDvCr1i1PL
   # The prefix for commands. Only required in non-management rooms.
   command_prefix: '!discord'
   # Messages sent upon joining a management room.
@@ -229,17 +229,17 @@ bridge:
       # A special unlimited value is not supported, you must set a limit. Initial backfill will
       # fetch all messages first before backfilling anything, so high limits can take a lot of time.
       initial:
-        dm: 0
-        channel: 0
-        thread: 0
+        dm: 50
+        channel: 50
+        thread: 50
       # Missed message backfill (on startup).
       # 0 means backfill is disabled, -1 means fetch all messages since last bridged message.
       # When using unlimited backfill (-1), messages are backfilled as they are fetched.
       # With limits, all messages up to the limit are fetched first and backfilled afterwards.
       missed:
-        dm: 0
-        channel: 0
-        thread: 0
+        dm: 500
+        channel: 500
+        thread: 500
     # Maximum members in a guild to enable backfilling. Set to -1 to disable limit.
     # This can be used as a rough heuristic to disable backfilling in channels that are too active.
     # Currently only applies to missed message backfill.
@@ -347,7 +347,7 @@ bridge:
   permissions:
     '*': relay
     matrix.taila659a.ts.net: user
-    '@admin:matrix.taila659a.ts.net': admin
+    '@root:matrix.taila659a.ts.net': admin
 # Logging config. See https://github.com/tulir/zeroconfig for details.
 logging:
   min_level: debug
@@ -398,7 +398,7 @@ sops:
         eEQxTnJYU2JaOGloTUtNZFJTS1lrYUEKmJ4X+MpDMCz3/d0lAdj/OAn02/YKhZ7S
         TAtEePi3Yp15WF6fQBYScXatG0uBS/+VN9/avlEA5zcX3XwtJP17qw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-26T00:36:13Z"
-  mac: ENC[AES256_GCM,data:QyRQRdigDpuw4BLciQdBs3Zz4sIe5KmTUgr9yYSv98uuJj/for9N459yqtrHxd8yI6WRf67R/4HkmdqYyXzs5EY6fuPvnom7RC9V+GRYcgFOj8EFAhz8TQRezdK/AKsuyODA8H+SjkYfcKmkvpodZyircYFROrUMmLwsLrqeDH8=,iv:DXQ99gbyEDE4Ud+iHS7UkBqJz1xFykoGdZP1Lo6bg9M=,tag:ZjjyaLYMPOKJ4hMeOoqARA==,type:str]
+  lastmodified: "2026-03-16T21:32:16Z"
+  mac: ENC[AES256_GCM,data:pcoAuEnppG4mctHEO/jtNzKZPwoxWEsC1QzEX+dLk0YmqJKC7MPhhj8CZA9osO+FRp2sUGFQLRiD35MJXMaJEEABpChZEpgzLD9mdsOJ4k0tTIu8kVcRM9HRCDMUrfkIGqy/6T0/ZvLtyHyc6eGjVAhDqgPj9r0GClVTHY0T+Ww=,iv:dzrFXePHjETAq6tzlJq2slxKNdtp3MtGJWY1MMteD1I=,tag:aiZ8TLDOXOwPK3uzt8mPYQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
-  version: 3.10.2
+  version: 3.12.1

@@ -14,26 +14,32 @@ resources:
 secretGenerator:
   - files:
       - mautrix-discord/config.yaml
+      - mautrix-discord/doublepuppet.yaml
       - mautrix-discord/registration.yaml
     name: mautrix-discord
   - files:
       - mautrix-googlechat/config.yaml
+      - mautrix-googlechat/doublepuppet.yaml
       - mautrix-googlechat/registration.yaml
     name: mautrix-googlechat
   - files:
       - mautrix-meta/config.yaml
+      - mautrix-meta/doublepuppet.yaml
       - mautrix-meta/registration.yaml
     name: mautrix-meta
   - files:
       - mautrix-signal/config.yaml
+      - mautrix-signal/doublepuppet.yaml
       - mautrix-signal/registration.yaml
     name: mautrix-signal
   - files:
       - mautrix-slack/config.yaml
+      - mautrix-slack/doublepuppet.yaml
       - mautrix-slack/registration.yaml
     name: mautrix-slack
   - files:
       - mautrix-whatsapp/config.yaml
+      - mautrix-whatsapp/doublepuppet.yaml
       - mautrix-whatsapp/registration.yaml
     name: mautrix-whatsapp
   - files:

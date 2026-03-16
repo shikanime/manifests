@@ -181,7 +181,7 @@ bridge:
   permissions:
     '*': relay
     matrix.taila659a.ts.net: user
-    '@admin:matrix.taila659a.ts.net': admin
+    '@root:matrix.taila659a.ts.net': admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -345,7 +345,7 @@ direct_media:
 # See https://docs.mau.fi/bridges/general/backfill.html for more details.
 backfill:
   # Whether to do backfilling at all.
-  enabled: false
+  enabled: true
   # Maximum number of messages to backfill in empty rooms.
   max_initial_messages: 50
   # Maximum number of missed messages to backfill after bridge restarts.
@@ -385,7 +385,7 @@ double_puppet:
   # Shared secrets for automatic double puppeting.
   # See https://docs.mau.fi/bridges/general/double-puppeting.html for instructions.
   secrets:
-    matrix.taila659a.ts.net: as_token:foobar
+    matrix.taila659a.ts.net: as_token:JW85Gk6zfWqdir94utC1SlSC4CDJfk2fcqDCsZtmzEqx4qOPaUKlvPBYITbYMMsY
 # End-to-bridge encryption support options.
 #
 # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
@@ -520,7 +520,7 @@ sops:
         ekUxd2VYMTdTRyt6WFRjdkxkUDNOYk0KXEVsh8eW1ClsBKWNbhGH1or7zApJhpCE
         SAxPYZpnoS7+MlXcMleoJoSXKxf0zDyk4gdrqWmrJaRXzdKFraZyaw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-26T00:36:13Z"
-  mac: ENC[AES256_GCM,data:qnHxaJYCmyzYLXaSgdTXfaWh62eD7AGrg7Bs1TkoNfeBF+esMEikj8w9BZ/ASfkTTo0Pl3cNtbOLsA3HxCAkgqFBsPQyKSX6FGFrGLChV0quSy4VLixKlX4izpm4l7hoxOGlyOtOXuWtm8L6uD10Z0yoBcFIQt3Daj9oKu7SKaU=,iv:VBk404GoWBef3XKp0vmuf2AeJt2j+O9LvtphmYrqwZA=,tag:14PUsv+MM8VwNDDzv5pvbA==,type:str]
+  lastmodified: "2026-03-16T21:29:04Z"
+  mac: ENC[AES256_GCM,data:1iEHPCWnmySmNB/IaLN/CfkgVX9faWpbaXXSmOwlEosB2ha70kGhFwI5QwYGpnLq5EU/PZjCvmB85cVjqDkGnw2Tl78bVGEL60dEwh9dj8N8ILwHE79IJ0m7vzrlOjwXoxGGGPbGBiqd4b8kyitrxQP6Si0Z3KOkLtWOxtRBkxQ=,iv:Ie5YAoSqdzQdtZywzpdf43VZj9OVfGH1pkzKwEbTo6E=,tag:uYkT8QbsWNSArU+nv9kirg==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
-  version: 3.10.2
+  version: 3.12.1
