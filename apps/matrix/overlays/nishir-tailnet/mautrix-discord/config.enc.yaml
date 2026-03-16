@@ -168,7 +168,7 @@ bridge:
   # More details can be found at https://docs.mau.fi/bridges/go/discord/direct-media.html
   direct_media:
     # Should custom mxc:// URIs be used instead of reuploading media?
-    enabled: false
+    enabled: true
     # The server name to use for the custom mxc:// URIs.
     # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
     # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
@@ -249,10 +249,10 @@ bridge:
   # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
   encryption:
     # Allow encryption, work in group chat rooms with e2ee enabled
-    allow: false
+    allow: true
     # Default to encryption, force-enable encryption in all portals the bridge creates
     # This will cause the bridge bot to be in private chats for the encryption to work properly.
-    default: false
+    default: true
     # Whether to use MSC2409/MSC3202 instead of /sync long polling for receiving encryption-related data.
     # Changing this option requires updating the appservice registration file.
     appservice: false
@@ -262,7 +262,7 @@ bridge:
     # Changing this option requires updating the appservice registration file.
     msc4190: false
     # Require encryption, drop any unencrypted messages.
-    require: false
+    require: true
     # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
     # You must use a client that supports requesting keys from other users to use this feature.
     allow_key_sharing: false
@@ -274,21 +274,21 @@ bridge:
       # that the user has uploaded the key to key backup.
       delete_outbound_on_ack: false
       # Don't store outbound sessions in the inbound table.
-      dont_store_outbound: false
+      dont_store_outbound: true
       # Ratchet megolm sessions forward after decrypting messages.
-      ratchet_on_decrypt: false
+      ratchet_on_decrypt: true
       # Delete fully used keys (index >= max_messages) after decrypting messages.
-      delete_fully_used_on_decrypt: false
+      delete_fully_used_on_decrypt: true
       # Delete previous megolm sessions from same device when receiving a new one.
-      delete_prev_on_new_session: false
+      delete_prev_on_new_session: true
       # Delete megolm sessions received from a device when the device is deleted.
-      delete_on_device_delete: false
+      delete_on_device_delete: true
       # Periodically delete megolm sessions when 2x max_age has passed since receiving the session.
-      periodically_delete_expired: false
+      periodically_delete_expired: true
       # Delete inbound megolm sessions that don't have the received_at field used for
       # automatic ratcheting and expired session deletion. This is meant as a migration
       # to delete old keys prior to the bridge update.
-      delete_outdated_inbound: false
+      delete_outdated_inbound: true
     # What level of device verification should be required from users?
     #
     # Valid levels:
@@ -301,9 +301,9 @@ bridge:
     #              (currently only possible by modifying the `trust` column in the `crypto_device` database table).
     verification_levels:
       # Minimum level for which the bridge should send keys to when bridging messages from WhatsApp to Matrix.
-      receive: unverified
+      receive: cross-signed-tofu
       # Minimum level that the bridge should accept for incoming Matrix messages.
-      send: unverified
+      send: cross-signed-tofu
       # Minimum level that the bridge should require for accepting key requests.
       share: cross-signed-tofu
     # Options for Megolm room key rotation. These options allow you to
@@ -398,7 +398,7 @@ sops:
         eEQxTnJYU2JaOGloTUtNZFJTS1lrYUEKmJ4X+MpDMCz3/d0lAdj/OAn02/YKhZ7S
         TAtEePi3Yp15WF6fQBYScXatG0uBS/+VN9/avlEA5zcX3XwtJP17qw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T21:32:16Z"
-  mac: ENC[AES256_GCM,data:pcoAuEnppG4mctHEO/jtNzKZPwoxWEsC1QzEX+dLk0YmqJKC7MPhhj8CZA9osO+FRp2sUGFQLRiD35MJXMaJEEABpChZEpgzLD9mdsOJ4k0tTIu8kVcRM9HRCDMUrfkIGqy/6T0/ZvLtyHyc6eGjVAhDqgPj9r0GClVTHY0T+Ww=,iv:dzrFXePHjETAq6tzlJq2slxKNdtp3MtGJWY1MMteD1I=,tag:aiZ8TLDOXOwPK3uzt8mPYQ==,type:str]
+  lastmodified: "2026-03-16T23:09:45Z"
+  mac: ENC[AES256_GCM,data:a8BCwVkPZvV4GMOiyg32EEPxzH2+Vs4ajDoD4bw/y7OItPvUtpzayRRYjgwmNqWtqWu8NLUNCGb00TBOqHQvpLR3sm25W+FHFL4sl/ufbaWGhzFDMMHtDCv+JkMis04tnejnJQAq4m31UKUWBYEb1SDu8OFrgEsyUhwImD3+sD4=,iv:ubBQCJoIytdxIW2KihlNlU+upWwPQaLJnFo2gZb6c5g=,tag:IY7H9QGvGeILb46HwnpnWQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1

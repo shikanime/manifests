@@ -391,11 +391,11 @@ double_puppet:
 # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
 encryption:
   # Whether to enable encryption at all. If false, the bridge will not function in encrypted rooms.
-  allow: false
+  allow: true
   # Whether to force-enable encryption in all bridged rooms.
-  default: false
+  default: true
   # Whether to require all messages to be encrypted and drop any unencrypted messages.
-  require: false
+  require: true
   # Whether to use MSC3202/MSC4203 instead of /sync long polling for receiving encryption-related data.
   # This option is not yet compatible with standard Matrix servers like Synapse and should not be used.
   # Changing this option requires updating the appservice registration file.
@@ -421,21 +421,21 @@ encryption:
     # that the user has uploaded the key to key backup.
     delete_outbound_on_ack: false
     # Don't store outbound sessions in the inbound table.
-    dont_store_outbound: false
+    dont_store_outbound: true
     # Ratchet megolm sessions forward after decrypting messages.
-    ratchet_on_decrypt: false
+    ratchet_on_decrypt: true
     # Delete fully used keys (index >= max_messages) after decrypting messages.
-    delete_fully_used_on_decrypt: false
+    delete_fully_used_on_decrypt: true
     # Delete previous megolm sessions from same device when receiving a new one.
-    delete_prev_on_new_session: false
+    delete_prev_on_new_session: true
     # Delete megolm sessions received from a device when the device is deleted.
-    delete_on_device_delete: false
+    delete_on_device_delete: true
     # Periodically delete megolm sessions when 2x max_age has passed since receiving the session.
-    periodically_delete_expired: false
+    periodically_delete_expired: true
     # Delete inbound megolm sessions that don't have the received_at field used for
     # automatic ratcheting and expired session deletion. This is meant as a migration
     # to delete old keys prior to the bridge update.
-    delete_outdated_inbound: false
+    delete_outdated_inbound: true
   # What level of device verification should be required from users?
   #
   # Valid levels:
@@ -520,7 +520,7 @@ sops:
         ekUxd2VYMTdTRyt6WFRjdkxkUDNOYk0KXEVsh8eW1ClsBKWNbhGH1or7zApJhpCE
         SAxPYZpnoS7+MlXcMleoJoSXKxf0zDyk4gdrqWmrJaRXzdKFraZyaw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T21:29:04Z"
-  mac: ENC[AES256_GCM,data:1iEHPCWnmySmNB/IaLN/CfkgVX9faWpbaXXSmOwlEosB2ha70kGhFwI5QwYGpnLq5EU/PZjCvmB85cVjqDkGnw2Tl78bVGEL60dEwh9dj8N8ILwHE79IJ0m7vzrlOjwXoxGGGPbGBiqd4b8kyitrxQP6Si0Z3KOkLtWOxtRBkxQ=,iv:Ie5YAoSqdzQdtZywzpdf43VZj9OVfGH1pkzKwEbTo6E=,tag:uYkT8QbsWNSArU+nv9kirg==,type:str]
+  lastmodified: "2026-03-16T22:51:15Z"
+  mac: ENC[AES256_GCM,data:eB9gN4Kf1EGuNj4bXP1TYfx4WP0IZTsH5XkmNHU+YxBDUOLejCYIjoPtp9f59vKTLqRjnQmaSf3/OLjhU2oCyFnVjyHlQG1n3clsmBKQfL60bpmG2xL3UWuwFhMry5Q9pxag2TRp6gbWCEIpHfNMOf6IHBKCGchxwYCwGZICHj8=,iv:Y/2nZhT5AKjEXeY+x1qI/Wi0/fKWpj3N1sUUeReBDeo=,tag:Z0PQiQ+XQGioBXnrVrso1w==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1
