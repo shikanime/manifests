@@ -141,7 +141,7 @@ bridge:
   #    relay - Talk through the relaybot (if enabled), no access otherwise
   # commands - Access to use commands in the bridge, but not login.
   #     user - Access to use the bridge with puppeting.
-  #    root - Full access, user level with some additional administration tools.
+  #    admin - Full access, user level with some additional administration tools.
   # Permitted keys:
   #        * - All Matrix users
   #   domain - All users on that homeserver
@@ -149,7 +149,7 @@ bridge:
   permissions:
     '*': relay
     matrix.taila659a.ts.net: user
-    '@root:matrix.taila659a.ts.net': root
+    '@root:matrix.taila659a.ts.net': admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -488,7 +488,7 @@ sops:
         RFhrL1htYWtYQXBNeU82RXFSOFlqVVkKO/+eap+MZ9gZU3Z6QUYTAyCAhRkajDSr
         a0wbxD7YsbguS0OsvdQTu75Z4UQ2aeaDBTSp1G13oeRiooEMgtYtCA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T20:30:44Z"
-  mac: ENC[AES256_GCM,data:L1EetmkyB50uMebHhIiYuC4ljN7Z4XMNPFstyzUVSyit6JgI9gl8s5jrRNhQPb1soSV9LkpimmQauoszH6a9WMOcDgCZNc8eKWQ/mF4BTfMCFHRXy/9SPgCZ+u7Rk8KzBM7xCXVVa/Ouvnk2Pd7F6XfhLQXMAzRJ+DALoB4I2sw=,iv:xBrnfDhdPSgOibJbUru4NUYHLjBkESofMRHO+iWPP7Y=,tag:VDhgyF8NEW6oPKJzbyXC7w==,type:str]
+  lastmodified: "2026-03-16T20:52:33Z"
+  mac: ENC[AES256_GCM,data:IWU+pEod4c4fCU+vufHW8aN8iPqKcSbtgaeqWkWwbv3ONJcTWnwGIip4mKKfhdjP9BTcSPToYpwAhMl70z3yG9MjT1PuqSavUYpAhdRb0cg8A/FpObL8wCOifZ5Y9cO8pxPrC4Pl3NSiMCPXoVwUQTaGPhA5eGebpmysbAPLapc=,iv:Ps5qxAM2yXisgbtUpjbUjmh2fIPsPVpbfs5RMOicPVY=,tag:+cqPEZS9fM/Yx28fpujtCw==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1

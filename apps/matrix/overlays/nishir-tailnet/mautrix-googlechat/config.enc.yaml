@@ -235,14 +235,14 @@ bridge:
   # Permissions for using the bridge.
   # Permitted values:
   #       user - Use the bridge with puppeting.
-  #      root - Use and administrate the bridge.
+  #      admin - Use and administrate the bridge.
   # Permitted keys:
   #        * - All Matrix users
   #   domain - All users on that homeserver
   #     mxid - Specific user
   permissions:
     matrix.taila659a.ts.net: user
-    '@root:matrix.taila659a.ts.net': root
+    '@root:matrix.taila659a.ts.net': admin
 logging:
   version: 1
   formatters:
@@ -304,7 +304,7 @@ sops:
         L0FIOUpOZEtPcGlRUHpka1NNOXlHMlUKilz3rZ8gqizE8s0sgY6RSQV2GzeYmd2L
         57xWgacv2gHtWUJjnwligmY8RzjhMqG+MG68SX3a81JG+TnvG6+Bjw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T20:32:39Z"
-  mac: ENC[AES256_GCM,data:78oRzx0SlX+tFczznRdxXVCj11wunzuow33Uj0ncy7EeH7ZdF0uBN0WEs2gk/gm/LmnnZQyiQuR5IyAld0KtQsCFr+1/QRaYtxtOb8cqkx0CPCuhtRLPwk+N718m+PBIq77ePfXC58+P3S4FF94T3OSWa8bb3h0f47jLv+NO6H0=,iv:u+vgXT+3FGjQi3juru6RSfmbeDK74FinR3P+QU4EeR8=,tag:ROnegEGXXo8E5DsRWDBQXw==,type:str]
+  lastmodified: "2026-03-16T20:52:18Z"
+  mac: ENC[AES256_GCM,data:Kio1nS+bvkBhsLAEt7jFugxX5n6FEy1aupLnCWL4qBgPkLVKSYe39oRMUZjNhnDxNCkFpTuI20HgYvpQV76O4tJcyQjwU7PHv5RxWff0Zm7nzU8AiyGUxEPAh3OnM5HacIVFNxnes+qLnyZpujxlETlYiv9WJhhEPSDB5H5NT6Y=,iv:njTND0TmUatZ1vEjkccwb2CDaojocy186VzNpDCdqSg=,tag:dU9L8ST0oWSjyvrt8QrRxw==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1
