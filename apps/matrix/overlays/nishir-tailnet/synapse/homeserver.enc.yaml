@@ -45,11 +45,17 @@ trusted_key_servers:
   - server_name: matrix.org
 app_service_config_files:
   - /data/appservices/mautrix-discord.yaml
+  - /data/appservices/mautrix-discord-doublepuppet.yaml
   - /data/appservices/mautrix-googlechat.yaml
+  - /data/appservices/mautrix-googlechat-doublepuppet.yaml
   - /data/appservices/mautrix-meta.yaml
+  - /data/appservices/mautrix-meta-doublepuppet.yaml
   - /data/appservices/mautrix-signal.yaml
+  - /data/appservices/mautrix-signal-doublepuppet.yaml
   - /data/appservices/mautrix-slack.yaml
+  - /data/appservices/mautrix-slack-doublepuppet.yaml
   - /data/appservices/mautrix-whatsapp.yaml
+  - /data/appservices/mautrix-whatsapp-doublepuppet.yaml
 tls_certificate_path: /etc/ssl/private/tls.crt
 tls_private_key_path: /etc/ssl/private/tls.key
 sops:
@@ -90,7 +96,7 @@ sops:
         b1FKcDRGK2RqMG9pTVdnMGkxQndmcDgKG/MBxTB98GsULD5ZLPDlmX7Qu+uP7erZ
         ivFr2QpZy5o0pErcfJK0gBu+d3nGKDSnfiUB5FU5WLGVm/ICYp+YBg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-10-26T00:36:13Z"
-  mac: ENC[AES256_GCM,data:ZMOlzQU9qT/uPPI9pTAAX7AvzbC6lrfAwuKonNmhjqYz5PP8zUunOG0jiDsicB/YVBG14hq3VNaBGXaQUTFIQBDhvR5M+VCji7+x6RQWo6t+tsAZ8rRZUlE3rMGhlYZwW0XnOgi7Aa7FcJoXibcdG7Al90JLWTvHYso7EoTGJUg=,iv:UjOFvPg28DWZ7idHtUeGt6nyMFY40CtROfbYy7rJFzE=,tag:ztX3NJxvLENKdQ+UHwQxTg==,type:str]
+  lastmodified: "2026-03-16T20:45:09Z"
+  mac: ENC[AES256_GCM,data:+MdDIuK0bXFP3aSpRllKETDNU1CZd4p3pv15vtxOuzNRzGUsDXMaEn1HjniVpLq2Rf7kdBIbMHuf4SCxsmk4rHFDpXfGxNXhjYBxXKhdIQj5jLhySBKjzCDIRF1SIh7wzW5wZ97DNfHuUYKg7eCwp4Ti0REPy1Xi+nD8IBB9WH4=,iv:Z+GyDplAStBJVSDNw1nouXyDEIfFZfGfb7iTeVYDbZo=,tag:YEKH5CjBydZ/m9p83ueeSg==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
-  version: 3.10.2
+  version: 3.12.1

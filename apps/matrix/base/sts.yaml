@@ -42,6 +42,38 @@ spec:
                 /mnt/config \
                 /mnt/data
 
+              # Copy doublepuppet to synapse appservices
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-discord-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-discord-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-googlechat-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-googlechat-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-meta-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-meta-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-signal-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-signal-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-slack-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-slack-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-whatsapp-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-whatsapp-doublepuppet.yaml
+
               # Copy registration to synapse appservices
               rclone copyto \
                 --copy-links \
@@ -198,6 +230,7 @@ spec:
             - --include
             - config.yaml
             - --include
+            - doublepuppet.yaml
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -287,6 +320,7 @@ spec:
             - --include
             - config.yaml
             - --include
+            - doublepuppet.yaml
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -376,6 +410,7 @@ spec:
             - --include
             - config.yaml
             - --include
+            - doublepuppet.yaml
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -465,6 +500,7 @@ spec:
             - --include
             - config.yaml
             - --include
+            - doublepuppet.yaml
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -554,6 +590,7 @@ spec:
             - --include
             - config.yaml
             - --include
+            - doublepuppet.yaml
             - registration.yaml
             - /mnt/config
             - /mnt/data
@@ -643,6 +680,7 @@ spec:
             - --include
             - config.yaml
             - --include
+            - doublepuppet.yaml
             - registration.yaml
             - /mnt/config
             - /mnt/data
