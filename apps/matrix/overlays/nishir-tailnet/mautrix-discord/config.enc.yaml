@@ -262,7 +262,7 @@ bridge:
     # Changing this option requires updating the appservice registration file.
     msc4190: false
     # Require encryption, drop any unencrypted messages.
-    require: true
+    require: false
     # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
     # You must use a client that supports requesting keys from other users to use this feature.
     allow_key_sharing: false
@@ -398,7 +398,7 @@ sops:
         eEQxTnJYU2JaOGloTUtNZFJTS1lrYUEKmJ4X+MpDMCz3/d0lAdj/OAn02/YKhZ7S
         TAtEePi3Yp15WF6fQBYScXatG0uBS/+VN9/avlEA5zcX3XwtJP17qw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T23:09:45Z"
-  mac: ENC[AES256_GCM,data:a8BCwVkPZvV4GMOiyg32EEPxzH2+Vs4ajDoD4bw/y7OItPvUtpzayRRYjgwmNqWtqWu8NLUNCGb00TBOqHQvpLR3sm25W+FHFL4sl/ufbaWGhzFDMMHtDCv+JkMis04tnejnJQAq4m31UKUWBYEb1SDu8OFrgEsyUhwImD3+sD4=,iv:ubBQCJoIytdxIW2KihlNlU+upWwPQaLJnFo2gZb6c5g=,tag:IY7H9QGvGeILb46HwnpnWQ==,type:str]
+  lastmodified: "2026-03-17T00:48:04Z"
+  mac: ENC[AES256_GCM,data:/63sipy4JIMbf4oc81uJC9HebC7a0k35NtoCLG//5yeuxPp1yjPexYeRFA1w+pGxtqS77EE8vdoLF3CdSq3ngvShRatvi52wZypSW8aFJeEaRYxkCZcirDatFxdkHMSZqHJb9RX/+vsisbynbsMIHJOq/aSb0s4jySGY4VZKNqg=,iv:eZX4mpLXbvONBgIhLqGiaJUA0OQJFNwKi8E/cvZjSYE=,tag:REnhz4AzGYovbQu0dOwJDw==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1

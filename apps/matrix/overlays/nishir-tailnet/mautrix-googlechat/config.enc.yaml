@@ -121,7 +121,7 @@ bridge:
     # Whether to use MSC2409/MSC3202 instead of /sync long polling for receiving encryption-related data.
     appservice: false
     # Require encryption, drop any unencrypted messages.
-    require: true
+    require: false
     # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
     # You must use a client that supports requesting keys from other users to use this feature.
     allow_key_sharing: false
@@ -304,7 +304,7 @@ sops:
         L0FIOUpOZEtPcGlRUHpka1NNOXlHMlUKilz3rZ8gqizE8s0sgY6RSQV2GzeYmd2L
         57xWgacv2gHtWUJjnwligmY8RzjhMqG+MG68SX3a81JG+TnvG6+Bjw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T22:53:44Z"
-  mac: ENC[AES256_GCM,data:rOPZZG0sXSE3MwcmvnQ+nHouYqdQZoWWNZ579q3SJcEyhuDUepbDRJDmTYpK1j3ZD5aN2owz7mb1d9W0sNA9ZU5RtUPQVuZd7fjGcVsmBItP/j7/Gl237D9khP5to8R6mW5Tc7nI/UmhZ0Expm++TS2jua6lLlBoG226dcRhJyg=,iv:ikIX34oQhuEfmnc6scA85pz3GIriJCbrftVCqBB5DCE=,tag:8uZI69bb3ilWWzyUvoYxtQ==,type:str]
+  lastmodified: "2026-03-17T00:48:20Z"
+  mac: ENC[AES256_GCM,data:BTPs8let4vndeR5DSviJ//KtWQF8eKi0jXNE4+qRwAznILJAhTvhBEQS75qyprUgynNLAbLpSsGZxgUOqQCNQFnaR+l7P0wU08dzPJoKSOY7mwxfkVClWD4ayjyHQo/TH/h9OH6hB0xcTfvouGmN+l2wQ5QuckxGQVZiTd2lYpA=,iv:opswwBT5pT2djwQb7W9wFTZEeiA+bRlOUHbNrTaVDm0=,tag:ilGxcRTJftEiS70SGCvFZQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1

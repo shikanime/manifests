@@ -451,7 +451,7 @@ encryption:
   # Whether to force-enable encryption in all bridged rooms.
   default: true
   # Whether to require all messages to be encrypted and drop any unencrypted messages.
-  require: true
+  require: false
   # Whether to use MSC3202/MSC4203 instead of /sync long polling for receiving encryption-related data.
   # This option is not yet compatible with standard Matrix servers like Synapse and should not be used.
   # Changing this option requires updating the appservice registration file.
@@ -576,7 +576,7 @@ sops:
         SmVySVQzRWc4ODFiT0NTV0FLV3YyVWMK/iD0mfAwYS70i3+aBbvfJXbstg7wfbh5
         3sqvQK8ciwATywscVc3Z8HMC/+zU3zJeKDdLXzTgEVu8AVBtyHIiWw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-16T22:50:27Z"
-  mac: ENC[AES256_GCM,data:JMXxaEOlBb7WqbfnxCpre31fONVdYDOJ/vnQY+n3XkvjphQmV+i8Bdv09xYwDhUhjBjozOS8YA6Y7UyOKjtSq4P0yTnyq+LZIxdCini0NvVnuIEsjSzSNmqXq5Y9GuFAwAYbThl4iPR4OnCsoZCNEPnv7fcvgCVCC2zqj5SKPn8=,iv:vAU4bQU799pYXGoPQ9/tOT0bA1pG/V971qoOk3SBk04=,tag:S1KMn7GHbQea1e7cCGHHfQ==,type:str]
+  lastmodified: "2026-03-17T00:49:01Z"
+  mac: ENC[AES256_GCM,data:rcZC60v88THGwwvVi1O7dTBVaQrayJQ2I8xbiDUKHHnz8JOiB+8XsYGfjuokplhMO+Cf7CF1GTXudUrIDzyqiUWs6hLja3g33h+rLajNAVX0yl83Pu6yIHt+FSPPB5X6m13Y0ypqlMkPyI2au/R8Ix45Mp51SoWAsvxyRsAiyo4=,iv:8kaeI0iztVRg36DePiKqQdZFi2F7mHuzzyLNhR3jeD0=,tag:5zjLRaKsc4TS0DZktbkWUA==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key)$
   version: 3.12.1
