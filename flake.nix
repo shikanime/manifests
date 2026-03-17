@@ -80,9 +80,9 @@
               {
                 sops = {
                   enable = true;
-                  settings.creation_rules = [
-                    {
-                      key_groups = [
+                  settings =
+                    let
+                      keyGroups = [
                         {
                           age = [
                             "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
@@ -92,8 +92,39 @@
                           ];
                         }
                       ];
-                    }
-                  ];
+                    in
+                    {
+                      creation_rules = [
+                        {
+                          path_regex = "apps/bazarr/overlays/.*/bazarr/config\\..*";
+                          encrypted_regex = "^(apikey|api_key|password|token|cookies|passkey|flask_secret_key|encryption_key|hashed_password|anti_captcha_key|gemini_key)$";
+                          key_groups = keyGroups;
+                        }
+                        {
+                          path_regex = "apps/forgejo/overlays/.*/forgejo/app\\..*";
+                          encrypted_regex = "^(PASSWD|SECRET_KEY|INTERNAL_TOKEN|LFS_JWT_SECRET|JWT_SECRET|PASSWORD|PROVIDER_CONFIG)$";
+                          key_groups = keyGroups;
+                        }
+                        {
+                          path_regex = "apps/matrix/overlays/.*/synapse/homeserver\\..*";
+                          encrypted_regex = "^(registration_shared_secret|form_secret|macaroon_secret_key)$";
+                          key_groups = keyGroups;
+                        }
+                        {
+                          path_regex = "apps/matrix/overlays/.*/mautrix-.*/config\\..*";
+                          encrypted_regex = "^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$";
+                          key_groups = keyGroups;
+                        }
+                        {
+                          path_regex = "apps/matrix/overlays/.*/mautrix-.*/(registration|doublepuppet)*\\..*";
+                          encrypted_regex = "^(as_token|hs_token)$";
+                          key_groups = keyGroups;
+                        }
+                        {
+                          key_groups = keyGroups;
+                        }
+                      ];
+                    };
                 };
 
                 tasks."sops:decrypt" = {
