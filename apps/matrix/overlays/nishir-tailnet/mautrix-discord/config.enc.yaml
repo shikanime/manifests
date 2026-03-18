@@ -168,7 +168,7 @@ bridge:
   # More details can be found at https://docs.mau.fi/bridges/go/discord/direct-media.html
   direct_media:
     # Should custom mxc:// URIs be used instead of reuploading media?
-    enabled: true
+    enabled: false
     # The server name to use for the custom mxc:// URIs.
     # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
     # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
@@ -291,63 +291,205 @@ bridge:
       delete_outdated_inbound: true
     # What level of device verification should be required from users?
     #
-    # Valid levels:
-    #   unverified - Send keys to all device in the room.
-    #   cross-signed-untrusted - Require valid cross-signing, but trust all cross-signing keys.
-    #   cross-signed-tofu - Require valid cross-signing, trust cross-signing keys on first use (and reject changes).
-    #   cross-signed-verified - Require valid cross-signing, plus a valid user signature from the bridge bot.
-    #                           Note that creating user signatures from the bridge bot is not currently possible.
-    #   verified - Require manual per-device verification
-    #              (currently only possible by modifying the `trust` column in the `crypto_device` database table).
-    verification_levels:
-      # Minimum level for which the bridge should send keys to when bridging messages from WhatsApp to Matrix.
-      receive: cross-signed-tofu
-      # Minimum level that the bridge should accept for incoming Matrix messages.
-      send: cross-signed-tofu
-      # Minimum level that the bridge should require for accepting key requests.
-      share: cross-signed-tofu
-    # Options for Megolm room key rotation. These options allow you to
-    # configure the m.room.encryption event content. See:
-    # https://spec.matrix.org/v1.3/client-server-api/#mroomencryption for
-    # more information about that event.
-    rotation:
-      # Enable custom Megolm room key rotation settings. Note that these
-      # settings will only apply to rooms created after this option is
-      # set.
-      enable_custom: false
-      # The maximum number of milliseconds a session should be used
-      # before changing it. The Matrix spec recommends 604800000 (a week)
-      # as the default.
-      milliseconds: 604800000
-      # The maximum number of messages that should be sent with a given a
-      # session before changing it. The Matrix spec recommends 100 as the
-      # default.
-      messages: 100
-      # Disable rotating keys when a user's devices change?
-      # You should not enable this option unless you understand all the implications.
-      disable_device_change_key_rotation: false
-  # Settings for provisioning API
-  provisioning:
-    # Prefix for the provisioning API paths.
-    prefix: /_matrix/provision
-    # Shared secret for authentication. If set to "generate", a random secret will be generated,
-    # or if set to "disable", the provisioning API will be disabled.
-    shared_secret: ENC[AES256_GCM,data:aGT6JEM5X4+HqWpH0OXptdDhBBRk6AkyFEF5xx7tynz91HGa34KSJQa7tcYjSg1Ev/pATBJ9iGPIWCHktF9wdA==,iv:xmQiQlDsnmxPgQ7NT+7dXtBAB7VbNJVQLr2ELW07N+A=,tag:UNquxX8fdOLZowgeS5iCVQ==,type:str]
-    # Enable debug API at /debug with provisioning authentication.
-    debug_endpoints: false
-  # Permissions for using the bridge.
-  # Permitted values:
-  #    relay - Talk through the relaybot (if enabled), no access otherwise
-  #     user - Access to use the bridge to chat with a Discord account.
-  #    admin - User level and some additional administration tools
-  # Permitted keys:
-  #        * - All Matrix users
-  #   domain - All users on that homeserver
-  #     mxid - Specific user
-  permissions:
-    '*': relay
-    matrix.taila659a.ts.net: user
-    '@root:matrix.taila659a.ts.net': admin
+    # This will use the fallback mode in MSC4144, which means clients that support MSC4144 will not show the prefix
+    # (and will instead show the name and avatar as the message sender).
+    prefix_webhook_messages: true
+    # Bridge webhook avatars?
+    enable_webhook_avatars: false
+    # Should the bridge upload media to the Discord CDN directly before sending the message when using a user token,
+    # like the official client does? The other option is sending the media in the message send request as a form part
+    # (which is always used by bots and webhooks).
+    use_discord_cdn_upload: true
+    # Proxy for Discord connections
+    proxy: null
+    # Should mxc uris copied from Discord be cached?
+    # This can be `never` to never cache, `unencrypted` to only cache unencrypted mxc uris, or `always` to cache everything.
+    # If you have a media repo that generates non-unique mxc uris, you should set this to never.
+    cache_media: unencrypted
+    # Settings for converting Discord media to custom mxc:// URIs instead of reuploading.
+    # More details can be found at https://docs.mau.fi/bridges/go/discord/direct-media.html
+    direct_media:
+        # Should custom mxc:// URIs be used instead of reuploading media?
+        enabled: false
+        # The server name to use for the custom mxc:// URIs.
+        # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
+        # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
+        server_name: matrix-discord.taila659a.ts.net
+        # Optionally a custom .well-known response. This defaults to `server_name:443`
+        well_known_response: null
+        # The bridge supports MSC3860 media download redirects and will use them if the requester supports it.
+        # Optionally, you can force redirects and not allow proxying at all by setting this to false.
+        allow_proxy: true
+        # Matrix server signing key to make the federation tester pass, same format as synapse's .signing.key file.
+        # This key is also used to sign the mxc:// URIs to ensure only the bridge can generate them.
+        server_key: ENC[AES256_GCM,data:Rp7m2dstFZwvlwh14cdN/qKI6vHWh7vojzE/GIl+EFFs4hZvbV3j2CesnEUGObs4MCQlSee6gfcURg==,iv:YtEjkRZY4YfU26SxDEwOFfSe7WLaMznBwmTOCMd1Dwc=,tag:QWIrrDTGy4dYyQTGVIugMw==,type:str]
+    # Settings for converting animated stickers.
+    animated_sticker:
+        # Format to which animated stickers should be converted.
+        # disable - No conversion, send as-is (lottie JSON)
+        # png - converts to non-animated png (fastest)
+        # gif - converts to animated gif
+        # webm - converts to webm video, requires ffmpeg executable with vp9 codec and webm container support
+        # webp - converts to animated webp, requires ffmpeg executable with webp codec/container support
+        target: webp
+        # Arguments for converter. All converters take width and height.
+        args:
+            width: 320
+            height: 320
+            # only for webm, webp and gif (2, 5, 10, 20 or 25 recommended)
+            fps: 25
+    # Servers to always allow double puppeting from
+    double_puppet_server_map:
+        matrix.taila659a.ts.net: https://matrix.taila659a.ts.net
+    # Allow using double puppeting from any server with a valid client .well-known file.
+    double_puppet_allow_discovery: false
+    # Shared secrets for https://github.com/devture/matrix-synapse-shared-secret-auth
+    #
+    # If set, double puppeting will be enabled automatically for local users
+    # instead of users having to find an access token and run `login-matrix`
+    # manually.
+    login_shared_secret_map:
+        matrix.taila659a.ts.net: ENC[AES256_GCM,data:2sE4XHnBlK9hRmlmAJQiKyPXua6SmX255PxvdhBog2g75sobR2V0Ral74tYXh1j83STuQQlx8ms3qmrdP5tjbg==,iv:QoREEn7UbO8ap35+lJXGXD1E415KecImXbw/8f1LKp0=,tag:2eCUZwqLhdgAHzzBi/A9uA==,type:str]
+    # The prefix for commands. Only required in non-management rooms.
+    command_prefix: '!discord'
+    # Messages sent upon joining a management room.
+    # Markdown is supported. The defaults are listed below.
+    management_room_text:
+        # Sent when joining a room.
+        welcome: Hello, I'm a Discord bridge bot.
+        # Sent when joining a management room and the user is already logged in.
+        welcome_connected: Use `help` for help.
+        # Sent when joining a management room and the user is not logged in.
+        welcome_unconnected: Use `help` for help or `login` to log in.
+        # Optional extra text sent when joining a management room.
+        additional_help: ""
+    # Settings for backfilling messages.
+    backfill:
+        # Limits for forward backfilling.
+        forward_limits:
+            # Initial backfill (when creating portal). 0 means backfill is disabled.
+            # A special unlimited value is not supported, you must set a limit. Initial backfill will
+            # fetch all messages first before backfilling anything, so high limits can take a lot of time.
+            initial:
+                dm: 50
+                channel: 50
+                thread: 50
+            # Missed message backfill (on startup).
+            # 0 means backfill is disabled, -1 means fetch all messages since last bridged message.
+            # When using unlimited backfill (-1), messages are backfilled as they are fetched.
+            # With limits, all messages up to the limit are fetched first and backfilled afterwards.
+            missed:
+                dm: 500
+                channel: 500
+                thread: 500
+        # Maximum members in a guild to enable backfilling. Set to -1 to disable limit.
+        # This can be used as a rough heuristic to disable backfilling in channels that are too active.
+        # Currently only applies to missed message backfill.
+        max_guild_members: -1
+    # End-to-bridge encryption support options.
+    #
+    # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
+    encryption:
+        # Allow encryption, work in group chat rooms with e2ee enabled
+        allow: true
+        # Default to encryption, force-enable encryption in all portals the bridge creates
+        # This will cause the bridge bot to be in private chats for the encryption to work properly.
+        default: true
+        # Whether to use MSC2409/MSC3202 instead of /sync long polling for receiving encryption-related data.
+        # Changing this option requires updating the appservice registration file.
+        appservice: false
+        # Whether to use MSC4190 instead of appservice login to create the bridge bot device.
+        # Requires the homeserver to support MSC4190 and the device masquerading parts of MSC3202.
+        # Only relevant when using end-to-bridge encryption, required when using encryption with next-gen auth (MSC3861).
+        # Changing this option requires updating the appservice registration file.
+        msc4190: false
+        # Require encryption, drop any unencrypted messages.
+        require: false
+        # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
+        # You must use a client that supports requesting keys from other users to use this feature.
+        allow_key_sharing: false
+        # Should users mentions be in the event wire content to enable the server to send push notifications?
+        plaintext_mentions: false
+        # Options for deleting megolm sessions from the bridge.
+        delete_keys:
+            # Beeper-specific: delete outbound sessions when hungryserv confirms
+            # that the user has uploaded the key to key backup.
+            delete_outbound_on_ack: false
+            # Don't store outbound sessions in the inbound table.
+            dont_store_outbound: true
+            # Ratchet megolm sessions forward after decrypting messages.
+            ratchet_on_decrypt: true
+            # Delete fully used keys (index >= max_messages) after decrypting messages.
+            delete_fully_used_on_decrypt: true
+            # Delete previous megolm sessions from same device when receiving a new one.
+            delete_prev_on_new_session: true
+            # Delete megolm sessions received from a device when the device is deleted.
+            delete_on_device_delete: true
+            # Periodically delete megolm sessions when 2x max_age has passed since receiving the session.
+            periodically_delete_expired: true
+            # Delete inbound megolm sessions that don't have the received_at field used for
+            # automatic ratcheting and expired session deletion. This is meant as a migration
+            # to delete old keys prior to the bridge update.
+            delete_outdated_inbound: true
+        # What level of device verification should be required from users?
+        #
+        # Valid levels:
+        #   unverified - Send keys to all device in the room.
+        #   cross-signed-untrusted - Require valid cross-signing, but trust all cross-signing keys.
+        #   cross-signed-tofu - Require valid cross-signing, trust cross-signing keys on first use (and reject changes).
+        #   cross-signed-verified - Require valid cross-signing, plus a valid user signature from the bridge bot.
+        #                           Note that creating user signatures from the bridge bot is not currently possible.
+        #   verified - Require manual per-device verification
+        #              (currently only possible by modifying the `trust` column in the `crypto_device` database table).
+        verification_levels:
+            # Minimum level for which the bridge should send keys to when bridging messages from WhatsApp to Matrix.
+            receive: cross-signed-tofu
+            # Minimum level that the bridge should accept for incoming Matrix messages.
+            send: cross-signed-tofu
+            # Minimum level that the bridge should require for accepting key requests.
+            share: cross-signed-tofu
+        # Options for Megolm room key rotation. These options allow you to
+        # configure the m.room.encryption event content. See:
+        # https://spec.matrix.org/v1.3/client-server-api/#mroomencryption for
+        # more information about that event.
+        rotation:
+            # Enable custom Megolm room key rotation settings. Note that these
+            # settings will only apply to rooms created after this option is
+            # set.
+            enable_custom: false
+            # The maximum number of milliseconds a session should be used
+            # before changing it. The Matrix spec recommends 604800000 (a week)
+            # as the default.
+            milliseconds: 604800000
+            # The maximum number of messages that should be sent with a given a
+            # session before changing it. The Matrix spec recommends 100 as the
+            # default.
+            messages: 100
+            # Disable rotating keys when a user's devices change?
+            # You should not enable this option unless you understand all the implications.
+            disable_device_change_key_rotation: false
+    # Settings for provisioning API
+    provisioning:
+        # Prefix for the provisioning API paths.
+        prefix: /_matrix/provision
+        # Shared secret for authentication. If set to "generate", a random secret will be generated,
+        # or if set to "disable", the provisioning API will be disabled.
+        shared_secret: ENC[AES256_GCM,data:aGT6JEM5X4+HqWpH0OXptdDhBBRk6AkyFEF5xx7tynz91HGa34KSJQa7tcYjSg1Ev/pATBJ9iGPIWCHktF9wdA==,iv:xmQiQlDsnmxPgQ7NT+7dXtBAB7VbNJVQLr2ELW07N+A=,tag:UNquxX8fdOLZowgeS5iCVQ==,type:str]
+        # Enable debug API at /debug with provisioning authentication.
+        debug_endpoints: false
+    # Permissions for using the bridge.
+    # Permitted values:
+    #    relay - Talk through the relaybot (if enabled), no access otherwise
+    #     user - Access to use the bridge to chat with a Discord account.
+    #    admin - User level and some additional administration tools
+    # Permitted keys:
+    #        * - All Matrix users
+    #   domain - All users on that homeserver
+    #     mxid - Specific user
+    permissions:
+        '*': relay
+        matrix.taila659a.ts.net: user
+        '@root:matrix.taila659a.ts.net': admin
 # Logging config. See https://github.com/tulir/zeroconfig for details.
 logging:
   min_level: debug
@@ -398,7 +540,7 @@ sops:
         UG1nbmJqMGk1Y2REY05Sb3I0RGRGTXMKkjKlYcbVvkMUaltlsfDSN+ckg4p+Fvi3
         X2cjPxvN/IDqCsFZTdlGc+am1b4dtEFyXeXzsjpAAZqITWuXNjzy/Q==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:57:05Z"
-  mac: ENC[AES256_GCM,data:8Qasar2ZIy7SQzTMtZZsVat+PzlgHgIY5/0juHhZmmjdYcjra6pJvY3nqY84conJExyobnT1vhlF0VocDQK5cb4pxEL6MVRkWGh4o8SZWa4QfRNf4KQhIeIPHCAPWSm5+W76bYZBIbcLW8aN6lpVGN2H0mA/YukDJB3X8hr8RFg=,iv:NgbkJJwGKiTazKdJzy7AA3Cw/lCx9RThHcGLS7eSGRI=,tag:rZLdg0/c7K9lxddmfZ+GLg==,type:str]
+  lastmodified: "2026-03-18T09:51:23Z"
+  mac: ENC[AES256_GCM,data:DGVHJEFFknTA25aS5m4TKkOmC9YEOZGMvACquA9MzIF9LJusOUX251y/dxAuzZiXBfJiU98dak9tQL2IWdOyHJrFXUnjQWKaMbsTHIuK7lqKWuYhp6+zl6L8BsKax0jOCeSZPGn06RhJ02j0vGclrZM1mqvVuZDADKxz5N7HB/Q=,iv:mWTWZIz0xaV+9LCtfiEQsxRE6Oi1VAN0d0LoMedWuLg=,tag:9ZeVivGE78pfPyFEwMacjw==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.1
