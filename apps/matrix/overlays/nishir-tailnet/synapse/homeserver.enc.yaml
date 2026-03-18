@@ -59,6 +59,9 @@ app_service_config_files:
 tls_certificate_path: /etc/ssl/private/tls.crt
 tls_private_key_path: /etc/ssl/private/tls.key
 suppress_key_server_warning: true
+auto_accept_invites:
+  enabled: true
+  only_from_local_users: true
 sops:
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
@@ -97,7 +100,7 @@ sops:
         UUwyZGp3WEZ2NHBqTkJGaEhqWnJqOHMKPm9MtaO3gGaHxF5bp1j5vTYHHnKgryMr
         PKZQvVKTL+h81Wu7c8wPUMTW/HRFUw9YKCGafwvZCya3FUg12VAZfA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:55Z"
-  mac: ENC[AES256_GCM,data:JfHgNdVGdsSRvuE8A3z4p0BBcmcQVbcb15NmKFRFMqhwDMIGQNW9ptD2Rd4aG0fGbbSZoSatvVadofebmBY/1Z7AjirrckCnzv3r3oau1KExr8X77XcDK9vJgn0FmbnQQSr88ASYk3+LLRE+Jl2U4GfNygpAt5dRcFDpckYcbZM=,iv:/EKdLAGi/HI2ldJzUEWOP6CBXjgKO/osttJNIDVYQiE=,tag:np8Zi1T5uE+QB2QM+3B1gw==,type:str]
+  lastmodified: "2026-03-18T17:57:30Z"
+  mac: ENC[AES256_GCM,data:tWK5R8gGyHXX6/DYOmTYbuofK+yt7WkzTUEW92qg+FG8h5qQsXN0Q2nIUvqLE5/2GYjRCfibN1PaqG1xMUx3uFkMtB2eq9UOVWZLABGdR2j7XwwUmmDB0eJPEItks8XmMa7modnjlA0Nswmpxe6xIRvMGZ9Q8EcIRtLKOXAy/r4=,iv:CcWmDFDdwpjOm1GWgnx2bXnb0ouImHvM7YEclO5Q4wk=,tag:JohiVRFhd5zXGkK46JIwaQ==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   version: 3.12.1
