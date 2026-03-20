@@ -551,7 +551,7 @@ spec:
                               - RemovePodsViolatingNodeTaints
               - name: longhorn
                 chartname: longhorn/longhorn
-                version: 1.11.0
+                version: 1.11.1
                 namespace: longhorn-system
                 values: |
                   defaultSettings:
@@ -562,12 +562,6 @@ spec:
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
                     backupTargetCredentialSecret: longhorn-hetzner-backups
-                  image:
-                    longhorn:
-                      instanceManager:
-                        tag: v1.11.0-hotfix-1
-                      manager:
-                        tag: v1.11.0-hotfix-1
                   persistence:
                     defaultClassReplicaCount: 2
                     defaultFsType: xfs
@@ -786,4 +780,4 @@ spec:
                 namespace: kube-system
         telemetry:
           enabled: false
-    version: v1.34.3+k0s.0
+    version: v1.35.2+k0s.0
