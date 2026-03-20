@@ -79,6 +79,7 @@ def update_longhorn_charts [backup_target: string] {
 
 open $"($env.FILE_PWD)/cluster.yaml"
 | update_charts
+| update_longhorn_charts (get_longhorn_backup_target)
 | to yaml
 | save --force $"($env.FILE_PWD)/cluster.yaml"
 
