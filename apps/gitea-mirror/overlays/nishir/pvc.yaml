@@ -7,7 +7,7 @@ spec:
     - ReadWriteOncePod
   resources:
     requests:
-      storage: 512Mi
+      storage: 1Gi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: gitea-mirror-data
