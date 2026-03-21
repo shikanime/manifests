@@ -14,14 +14,8 @@ spec:
                     operator: In
                     values:
                       - rpi5-large
-              weight: 80
-            - preference:
-                matchExpressions:
-                  - key: node.kubernetes.io/instance-type
-                    operator: In
-                    values:
                       - rpi4-large
-              weight: 50
+              weight: 80
       containers:
         - name: lidarr
           volumeMounts:
