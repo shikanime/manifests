@@ -3,8 +3,12 @@
 
 def get_longhorn_backup_target [] {
   print "Fetching Longhorn backup target..."
-  let backup = (^tofu -chdir=$"($env.FILE_PWD)/../../infra/nishir-services" output -json longhorn_backupstore | from json)
-  $"s3://($backup.bucket)@($backup.region)/"
+  try {
+    let backup = (^tofu -chdir=$"($env.FILE_PWD)/../../infra/nishir-services" output -json longhorn_backupstore | from json)
+    $"s3://($backup.bucket)@($backup.region)/"
+  } catch {
+    null
+  }
 }
 
 
@@ -53,6 +57,9 @@ def update_charts [] {
 }
 
 def update_longhorn_charts [backup_target: string] {
+  if $backup_target == null {
+    return $in
+  }
   let doc = $in
   let charts = (
     $doc.spec.k0s.config.spec.extensions.helm.charts
