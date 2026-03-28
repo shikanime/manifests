@@ -120,6 +120,10 @@ bridge:
     default: true
     # Whether to use MSC2409/MSC3202 instead of /sync long polling for receiving encryption-related data.
     appservice: false
+    # Should the bridge bot generate a recovery key and cross-signing keys and verify itself?
+    # Note that without the latest version of MSC4190, this will fail if you reset the bridge database.
+    # The generated recovery key will be saved in the kv_store table under `recovery_key`.
+    self_sign: true
     # Require encryption, drop any unencrypted messages.
     require: false
     # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
@@ -304,7 +308,7 @@ sops:
         Y0RHdTQ3Z0RoWm9EQk04cjRJNGZSSHMKCNVnmY0cW93eU8lHxDDLXwvdN+RKA/rt
         ZSHaZsHe3tjcUKhRM+Qe4z+a4dTUfmd1KpobaBzaAIkauaaD2a20hg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:57:27Z"
-  mac: ENC[AES256_GCM,data:LAEJ863iVUFwjCLqa2DdBue86v1cK4iEeqrXrIByk5YeafyuJIux8C/K5ZaGQHbFphL5h4gy/ZdgvpQYgFLeJnTaR8La14De1Sd/1fZoUdMyOhfFqxeA9wSQBfajEoQJ25AZwbA7K/1hS4o/Kxjc9MyuF5LSruZEiDUW1hqICU0=,iv:bNA0kD9JDJ9i8ng6r4xUJnSejPjXr34EKkorIemWmDI=,tag:AUrdvBtCfODBLZ4CcvzGrA==,type:str]
+  lastmodified: "2026-03-28T15:51:32Z"
+  mac: ENC[AES256_GCM,data:fzCxVxzef6xyZx93c8lBhY+ETI1+t5QnZcPBibBJKo4cpfvQt1zOUTFLILDvw0yd74G5rZSOxOldt2L9jKLytpU0s2bKrOzvAFr05ihAHTXGWrVXFx98pXcJ2E5v6/mmnHdjHJ/YitxbaQgfT9AWJMWjqwBmixeiooU3TbhDZUA=,iv:jSpnTxsTAHsAYfbNlDc/JtUUfd6ZrE1JYES3TLOYbNs=,tag:2OB8F3Isl2f+EOPFlnd+lg==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.1

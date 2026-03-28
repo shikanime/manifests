@@ -261,6 +261,10 @@ bridge:
     # Only relevant when using end-to-bridge encryption, required when using encryption with next-gen auth (MSC3861).
     # Changing this option requires updating the appservice registration file.
     msc4190: false
+    # Should the bridge bot generate a recovery key and cross-signing keys and verify itself?
+    # Note that without the latest version of MSC4190, this will fail if you reset the bridge database.
+    # The generated recovery key will be saved in the kv_store table under `recovery_key`.
+    self_sign: true
     # Require encryption, drop any unencrypted messages.
     require: false
     # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
@@ -398,7 +402,7 @@ sops:
         UG1nbmJqMGk1Y2REY05Sb3I0RGRGTXMKkjKlYcbVvkMUaltlsfDSN+ckg4p+Fvi3
         X2cjPxvN/IDqCsFZTdlGc+am1b4dtEFyXeXzsjpAAZqITWuXNjzy/Q==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-18T18:01:59Z"
-  mac: ENC[AES256_GCM,data:wSHGxWKt5NmhrKaHewFWEiFQw4bLqaH2ri7NPAJmQLafFWdrW2zQ0OAqghH+NirCAhTfBXIt+tpFs1Oq/xTIvDPrWR9oX/edlejaaNayDVZrHSE0YcqHBPk1JUZYjuoKHgYZmt2oNjBdb5OH5PjGfVJ6hARSImAGAhwN8Fhd1AI=,iv:WNQC0pAMs+6WvO40Tg0vH6t4u/yI1q6OLLIWxTvTdU4=,tag:a4w//glJmdsrq/BMTBLcbw==,type:str]
+  lastmodified: "2026-03-28T15:51:57Z"
+  mac: ENC[AES256_GCM,data:Ixl+hNocMNslbPjOEHf4WzZ21bbtCYtXUBb2YKQiSaTMeL8p2hF57wHUfLQ1AGkpvFkRWYt2B+HN8q2qEHu5IAT+wTZpOYvUElOkcsAQeYjfYxq6v5sUYFJVNOASb/fLq7meSnUm72KzKA6fWgzd303/qN6boKjJuegWaOPwa8k=,iv:ZNz+56VtUBaD8jd11Tdv4r6IqiCn+s07zdY3Qk1C6MU=,tag:xnYKVvznThlXaKqvJDbwGg==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.1
