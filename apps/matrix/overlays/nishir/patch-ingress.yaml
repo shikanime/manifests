@@ -9,8 +9,7 @@ spec:
       port:
         name: https
   rules:
-    - host: matrix
-      http:
+    - http:
         paths:
           - backend:
               service:
