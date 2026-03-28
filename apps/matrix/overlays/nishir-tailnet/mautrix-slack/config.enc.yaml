@@ -408,7 +408,7 @@ encryption:
   # Should the bridge bot generate a recovery key and cross-signing keys and verify itself?
   # Note that without the latest version of MSC4190, this will fail if you reset the bridge database.
   # The generated recovery key will be saved in the kv_store table under `recovery_key`.
-  self_sign: false
+  self_sign: true
   # Enable key sharing? If enabled, key requests for rooms where users are in will be fulfilled.
   # You must use a client that supports requesting keys from other users to use this feature.
   allow_key_sharing: true
@@ -520,7 +520,7 @@ sops:
         ZFRVc3VIV2xNQmVvUXFuT3NDNENBVDQK56egNX9NDsit+37c31bmdSHwFFrjASql
         N/5Vm49uppscnflFZ/1xiUEPIPa1UrlIqdM5xGTxQ5LBSAWFVP8pgw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:58:04Z"
-  mac: ENC[AES256_GCM,data:mKtL8nlLmZVWITs6aHlT6EVEhBAQ6vaImnYx6Cn53T4tWyxzfgVuzQhESJKwaxj3Z81UdWoaGhKh85aBXdvcEPCsf4OoMQEr/+Rbpu96t3gel9dm92tHZOtVu7odDWwacYYk+Gec8ydaBAF8RBAQs/2Tb7Z4y8hFChFgja6YVUs=,iv:aH7g7S1zU5AamKXbXcvyteFEir7bGs2aoRoRrhLJC4k=,tag:yJ7l3ENxC9SEV9shb2h+yA==,type:str]
+  lastmodified: "2026-03-28T15:49:27Z"
+  mac: ENC[AES256_GCM,data:eivKQ8SC7oVBhSe+S4uVApnb5aVI+t1Ra4hfzSiQDFE4CiqaLBZ1L0idCSZkhtq0l/5jqh0Xq5p53rH4rsJo16ToXOdB7LkMbmrQofwKrEZ89Oeig+jq9lf3FLZFodI+GAuRU2KONy10QwqpSa3fet4UmK+l1/hUdH8juvCnnZA=,iv:N+TeipI6DSu2Nb23hrZV2nfBdUAzDOGpqzzoHEAsZoY=,tag:1NZJL2lU8uDHO9IxJEMa7g==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.1
