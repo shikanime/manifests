@@ -435,7 +435,7 @@ spec:
                     enabled: true
               - name: grafana-k8s-monitoring
                 chartname: grafana/k8s-monitoring
-                version: 4.0.0
+                version: 3.8.4
                 namespace: grafana-system
                 values: |
                   cluster:
