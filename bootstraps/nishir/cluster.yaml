@@ -412,8 +412,6 @@ spec:
                 url: https://charts.fairwinds.com/stable
               - name: jetstack
                 url: https://charts.jetstack.io
-              - name: kubernetes-sigs-cluster-api-operator
-                url: https://kubernetes-sigs.github.io/cluster-api-operator
               - name: kubernetes-sigs-descheduler
                 url: https://kubernetes-sigs.github.io/descheduler
               - name: kubernetes-sigs-nfd
@@ -432,19 +430,6 @@ spec:
                 values: |
                   clusterResourceNamespace: cert-manager-trust
                   crds:
-                    enabled: true
-              - name: cluster-api-operator
-                chartname: kubernetes-sigs-cluster-api-operator/cluster-api-operator
-                version: 0.26.0
-                namespace: capi-operator-system
-                values: |
-                  bootstrap:
-                    k0sproject-k0smotron: {}
-                  controlPlane:
-                    k0sproject-k0smotron: {}
-                  infrastructure:
-                    hetzner: {}
-                  cert-manager:
                     enabled: true
               - name: descheduler
                 chartname: kubernetes-sigs-descheduler/descheduler
