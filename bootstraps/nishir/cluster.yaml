@@ -425,36 +425,6 @@ spec:
               - name: grafana
                 url: https://grafana.github.io/helm-charts
             charts:
-              - name: arc
-                chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
-                version: 0.10.1
-                namespace: arc-systems
-              - name: arc-runner-nishir
-                chartname: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
-                version: 0.10.1
-                namespace: arc-runners
-                values: |
-                  containerMode:
-                    type: "kubernetes"
-                    kubernetesModeWorkVolumeClaim:
-                      accessModes: ["ReadWriteOnce"]
-                      storageClassName: nishir-ephemeral
-                      resources:
-                        requests:
-                          storage: 1Gi
-                  githubConfigUrl: "https://github.com/shikanime/manifests"
-                  githubConfigSecret: github-nishir
-                  runnerScaleSetName: nishir
-                  template:
-                    spec:
-                      automountServiceAccountToken: true
-                      containers:
-                        - command: ["/home/runner/run.sh"]
-                          image: ghcr.io/actions/actions-runner:2.331.0
-                          name: runner
-                      serviceAccountName: nishir-gha-rs
-                      securityContext:
-                        fsGroup: 123
               - name: cert-manager
                 chartname: jetstack/cert-manager
                 version: v1.20.0
