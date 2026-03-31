@@ -71,9 +71,6 @@ spec:
                       - name: default
                         pluginConfig:
                           - name: DefaultEvictor
-                            args:
-                              ignorePvcPods: true
-                              evictLocalStoragePods: false
                           - name: LowNodeUtilization
                             args:
                               useDeviationThresholds: true
