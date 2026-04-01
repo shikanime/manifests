@@ -109,6 +109,20 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-twitter
+spec:
+  defaultBackend:
+    service:
+      name: matrix-twitter
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-twitter
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-whatsapp
 spec:
   defaultBackend:

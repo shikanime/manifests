@@ -29,20 +29,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mautrix-slack-data
-spec:
-  accessModes:
-    - ReadWriteOncePod
-  resources:
-    requests:
-      storage: 512Mi
-  storageClassName: nishir-fast
-  volumeMode: Filesystem
-  volumeName: mautrix-slack-data
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: mautrix-linkedin-data
 spec:
   accessModes:
@@ -57,7 +43,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mautrix-whatsapp-data
+  name: mautrix-meta-data
 spec:
   accessModes:
     - ReadWriteOncePod
@@ -66,7 +52,7 @@ spec:
       storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
-  volumeName: mautrix-whatsapp-data
+  volumeName: mautrix-meta-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -85,7 +71,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mautrix-meta-data
+  name: mautrix-slack-data
 spec:
   accessModes:
     - ReadWriteOncePod
@@ -94,7 +80,35 @@ spec:
       storage: 512Mi
   storageClassName: nishir-fast
   volumeMode: Filesystem
-  volumeName: mautrix-meta-data
+  volumeName: mautrix-slack-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mautrix-twitter-data
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  resources:
+    requests:
+      storage: 512Mi
+  storageClassName: nishir-fast
+  volumeMode: Filesystem
+  volumeName: mautrix-twitter-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mautrix-whatsapp-data
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  resources:
+    requests:
+      storage: 512Mi
+  storageClassName: nishir-fast
+  volumeMode: Filesystem
+  volumeName: mautrix-whatsapp-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

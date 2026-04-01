@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-linkedin", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-linkedin", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-twitter", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: caddy
     newName: docker.io/library/caddy
@@ -13,6 +13,9 @@ images:
   - name: mautrix-googlechat
     newName: dock.mau.dev/mautrix/googlechat
     newTag: v0.5.2
+  - name: mautrix-linkedin
+    newName: dock.mau.dev/mautrix/linkedin
+    newTag: v0.2602.0
   - name: mautrix-meta
     newName: dock.mau.dev/mautrix/meta
     newTag: v0.2512.0
@@ -22,9 +25,9 @@ images:
   - name: mautrix-slack
     newName: dock.mau.dev/mautrix/slack
     newTag: v0.2511.0
-  - name: mautrix-linkedin
-    newName: dock.mau.dev/mautrix/linkedin
-    newTag: v0.2602.0
+  - name: mautrix-twitter
+    newName: dock.mau.dev/mautrix/twitter
+    newTag: v0.2512.0
   - name: mautrix-whatsapp
     newName: dock.mau.dev/mautrix/whatsapp
     newTag: v0.2512.0

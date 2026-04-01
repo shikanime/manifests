@@ -56,6 +56,11 @@ spec:
               rclone copyto \
                 --copy-links \
                 --update \
+                /mnt/mautrix-linkedin-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-linkedin-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
                 /mnt/mautrix-meta-config/doublepuppet.yaml \
                 /mnt/data/appservices/mautrix-meta-doublepuppet.yaml
               rclone copyto \
@@ -71,13 +76,13 @@ spec:
               rclone copyto \
                 --copy-links \
                 --update \
-                /mnt/mautrix-whatsapp-config/doublepuppet.yaml \
-                /mnt/data/appservices/mautrix-whatsapp-doublepuppet.yaml
+                /mnt/mautrix-twitter-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-twitter-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
                 --update \
-                /mnt/mautrix-linkedin-config/doublepuppet.yaml \
-                /mnt/data/appservices/mautrix-linkedin-doublepuppet.yaml
+                /mnt/mautrix-whatsapp-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-whatsapp-doublepuppet.yaml
 
               # Copy registration to synapse appservices
               rclone copyto \
@@ -90,6 +95,11 @@ spec:
                 --update \
                 /mnt/mautrix-googlechat-config/registration.yaml \
                 /mnt/data/appservices/mautrix-googlechat.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-linkedin-config/registration.yaml \
+                /mnt/data/appservices/mautrix-linkedin.yaml
               rclone copyto \
                 --copy-links \
                 --update \
@@ -108,13 +118,13 @@ spec:
               rclone copyto \
                 --copy-links \
                 --update \
-                /mnt/mautrix-whatsapp-config/registration.yaml \
-                /mnt/data/appservices/mautrix-whatsapp.yaml
+                /mnt/mautrix-twitter-config/registration.yaml \
+                /mnt/data/appservices/mautrix-twitter.yaml
               rclone copyto \
                 --copy-links \
                 --update \
-                /mnt/mautrix-linkedin-config/registration.yaml \
-                /mnt/data/appservices/mautrix-linkedin.yaml
+                /mnt/mautrix-whatsapp-config/registration.yaml \
+                /mnt/data/appservices/mautrix-whatsapp.yaml
           volumeMounts:
             - name: config
               mountPath: /mnt/config
@@ -138,6 +148,9 @@ spec:
               readOnly: true
             - name: mautrix-slack-config
               mountPath: /mnt/mautrix-slack-config
+              readOnly: true
+            - name: mautrix-twitter-config
+              mountPath: /mnt/mautrix-twitter-config
               readOnly: true
             - name: mautrix-whatsapp-config
               mountPath: /mnt/mautrix-whatsapp-config
@@ -191,6 +204,9 @@ spec:
         - name: mautrix-linkedin-config
           secret:
             secretName: mautrix-linkedin
+        - name: mautrix-twitter-config
+          secret:
+            secretName: mautrix-twitter
         - name: mautrix-meta-config
           secret:
             secretName: mautrix-meta
@@ -749,6 +765,97 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-slack-data
+        - name: rclone-config
+          configMap:
+            name: rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-twitter
+spec:
+  replicas: 1
+  serviceName: matrix-twitter
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-twitter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-twitter
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - matrix
+                topologyKey: kubernetes.io/hostname
+              weight: 80
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-twitter
+          image: mautrix-twitter
+          ports:
+            - containerPort: 29327
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            failureThreshold: 12
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-twitter
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-twitter-data
         - name: rclone-config
           configMap:
             name: rclone

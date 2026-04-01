@@ -106,6 +106,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: matrix-twitter
+spec:
+  ports:
+    - name: http
+      port: 29327
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: matrix-twitter
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: matrix-whatsapp
 spec:
   ports:
