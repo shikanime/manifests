@@ -132,6 +132,25 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
+  name: matrix-twitter
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: matrix-twitter
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
   name: matrix-whatsapp
 spec:
   statefulSet:
