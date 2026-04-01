@@ -33,6 +33,9 @@ spec:
               app.kubernetes.io/name: matrix-slack
         - podSelector:
             matchLabels:
+              app.kubernetes.io/name: matrix-twitter
+        - podSelector:
+            matchLabels:
               app.kubernetes.io/name: matrix-whatsapp
       ports:
         - port: https

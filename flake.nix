@@ -154,10 +154,10 @@
                 };
 
                 gitignore.content = [
-                  "/apps/matrix/overlays/*/synapse/homeserver.yaml"
-                  "/apps/matrix/overlays/*/mautrix-*/config.yaml"
-                  "/apps/matrix/overlays/*/mautrix-*/doublepuppet.yaml"
-                  "/apps/matrix/overlays/*/mautrix-*/registration.yaml"
+                  "apps/matrix/overlays/*/synapse/homeserver.yaml"
+                  "apps/matrix/overlays/*/mautrix-*/config.yaml"
+                  "apps/matrix/overlays/*/mautrix-*/doublepuppet.yaml"
+                  "apps/matrix/overlays/*/mautrix-*/registration.yaml"
                 ];
 
                 packages = [
