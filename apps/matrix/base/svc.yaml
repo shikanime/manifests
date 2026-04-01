@@ -42,6 +42,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: matrix-linkedin
+spec:
+  ports:
+    - name: http
+      port: 29341
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: matrix-linkedin
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: matrix-manager
 spec:
   ports:

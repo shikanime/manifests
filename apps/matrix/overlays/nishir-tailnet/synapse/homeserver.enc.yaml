@@ -48,6 +48,8 @@ app_service_config_files:
   - /data/appservices/mautrix-discord-doublepuppet.yaml
   - /data/appservices/mautrix-googlechat.yaml
   - /data/appservices/mautrix-googlechat-doublepuppet.yaml
+  - /data/appservices/mautrix-linkedin.yaml
+  - /data/appservices/mautrix-linkedin-doublepuppet.yaml
   - /data/appservices/mautrix-meta.yaml
   - /data/appservices/mautrix-meta-doublepuppet.yaml
   - /data/appservices/mautrix-signal.yaml
@@ -100,7 +102,7 @@ sops:
         UUwyZGp3WEZ2NHBqTkJGaEhqWnJqOHMKPm9MtaO3gGaHxF5bp1j5vTYHHnKgryMr
         PKZQvVKTL+h81Wu7c8wPUMTW/HRFUw9YKCGafwvZCya3FUg12VAZfA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-18T17:57:30Z"
-  mac: ENC[AES256_GCM,data:tWK5R8gGyHXX6/DYOmTYbuofK+yt7WkzTUEW92qg+FG8h5qQsXN0Q2nIUvqLE5/2GYjRCfibN1PaqG1xMUx3uFkMtB2eq9UOVWZLABGdR2j7XwwUmmDB0eJPEItks8XmMa7modnjlA0Nswmpxe6xIRvMGZ9Q8EcIRtLKOXAy/r4=,iv:CcWmDFDdwpjOm1GWgnx2bXnb0ouImHvM7YEclO5Q4wk=,tag:JohiVRFhd5zXGkK46JIwaQ==,type:str]
+  lastmodified: "2026-04-01T08:22:50Z"
+  mac: ENC[AES256_GCM,data:oVKr89vAoTlg9bQWpv0t9QMhSktPiQIm84VgDKcv5ICLeWnTNYEMlX5cVtRXkgyVlvOyZIRROl49JGD3GiPYUEyQaYtgHl1IJYmzNAdFu03xESV85SpBxd9fVhxQUOyyzpvjUTqMt0f8rq8LKAhmGd28BC/jNmE9iGDNAkWLz2I=,iv:1xLu1cM1EFRYqbGXMR//elZQU/sVgRj36YFE+H7vyPY=,tag:hIqTH4Zmkj+LhNXnDwIFzg==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   version: 3.12.1

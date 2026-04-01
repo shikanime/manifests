@@ -6,7 +6,7 @@ sender_localpart: qe9j2UVcDL4IxTKBGKlEublo7CBdCZOk
 rate_limited: false
 namespaces:
   users:
-    - regex: '@.*:matrix\.taila659a\.ts\.net'
+    - regex: ^@.*:matrix\.taila659a\.ts\.net$
       exclusive: false
 sops:
   age:
@@ -46,7 +46,7 @@ sops:
         NXBkblBwWG5uTnRNa21TanRUS3lLcjgK+cUdi2bWtXLkUvlPu5em0ArOOC5GWKKD
         O4MDDEnDATGvLinuuH5SdKXiF95vYbDiUsF0dLNHM/PFoidPXLXtSQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:55Z"
-  mac: ENC[AES256_GCM,data:6GJmO3jP2e306xLY+QXFKXjMA+BP4YSb0F2z8DMXzR9QbqZCt4UXRGCf9ER9osePwV8ojVVTOatQS0bKlcjr93ZSq0ur42sbuq7wi2ritk3C4HaVsJfJPe8xpF6LvaIEPzog++JPjJjhIdXZY0/hOZDkaN+5zOp3nhx+5L8DXbY=,iv:sg2ovSlr8Q1Q+f1d/vuWFZuGmR1/wWpOfpHYJxA7Cq0=,tag:L208y1WANcuycA87r/hmNw==,type:str]
+  lastmodified: "2026-04-01T07:55:21Z"
+  mac: ENC[AES256_GCM,data:omp3EjG/Oa3lICEhz1HKIacIgBiwx1p8Mt7i1g4atWUAaTl9+l0DtjUehUAAaywvCbyWkF8+6xorwC9KGOCX0hf4w/0HR1E4JCL+HnwdLROGNqPF0dJ0vqfb+znu2fwPSa30gyt1k80QOJbj59UdMsel7yIde+JYndHlfOIhmTE=,iv:EomjcT8H1VKZzsjEtxCJbTiMDXYSGlSWaElhQlvuDGY=,tag:BzQi1CJYL8ObD5ZIaRhJSA==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
   version: 3.12.1

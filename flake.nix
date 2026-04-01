@@ -153,6 +153,13 @@
                   release.settings.direnv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
                 };
 
+                gitignore.content = [
+                  "/apps/matrix/overlays/*/synapse/homeserver.yaml"
+                  "/apps/matrix/overlays/*/mautrix-*/config.yaml"
+                  "/apps/matrix/overlays/*/mautrix-*/doublepuppet.yaml"
+                  "/apps/matrix/overlays/*/mautrix-*/registration.yaml"
+                ];
+
                 packages = [
                   pkgs.clusterctl
                   pkgs.k0sctl
