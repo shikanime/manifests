@@ -18,6 +18,9 @@ spec:
               app.kubernetes.io/name: matrix-googlechat
         - podSelector:
             matchLabels:
+              app.kubernetes.io/name: matrix-linkedin
+        - podSelector:
+            matchLabels:
               app.kubernetes.io/name: matrix-manager
         - podSelector:
             matchLabels:
@@ -60,6 +63,24 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: matrix-googlechat
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
+      ports:
+        - port: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-linkedin
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-linkedin
   policyTypes:
     - Ingress
   ingress:

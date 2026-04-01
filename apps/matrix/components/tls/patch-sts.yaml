@@ -61,6 +61,20 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  name: matrix-linkedin
+spec:
+  template:
+    spec:
+      containers:
+        - name: mautrix-linkedin
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
   name: matrix-meta
 spec:
   template:
