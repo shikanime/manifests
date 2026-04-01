@@ -725,6 +725,11 @@ spec:
                       enable: true
                       selector: fast
                     defaultFsType: xfs
+                    recurringJobSelector:
+                      enable: true
+                      jobList:
+                        - name: standard
+                          isGroup: true
               - name: trust-manager
                 chartname: jetstack/trust-manager
                 version: v0.22.0
