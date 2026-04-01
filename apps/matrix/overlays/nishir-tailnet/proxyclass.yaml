@@ -56,6 +56,25 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
+  name: matrix-linkedin
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: matrix-linkedin
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
   name: matrix-meta
 spec:
   statefulSet:
@@ -75,25 +94,6 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: matrix-slack
-spec:
-  statefulSet:
-    pod:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: matrix-slack
-                namespaces:
-                  - shikanime
-                topologyKey: kubernetes.io/hostname
----
-apiVersion: tailscale.com/v1alpha1
-kind: ProxyClass
-metadata:
   name: matrix-signal
 spec:
   statefulSet:
@@ -106,6 +106,25 @@ spec:
                 labelSelector:
                   matchLabels:
                     app.kubernetes.io/name: matrix-signal
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: matrix-slack
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: matrix-slack
                 namespaces:
                   - shikanime
                 topologyKey: kubernetes.io/hostname

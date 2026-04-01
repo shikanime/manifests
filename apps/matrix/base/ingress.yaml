@@ -53,6 +53,20 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-linkedin
+spec:
+  defaultBackend:
+    service:
+      name: matrix-linkedin
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-linkedin
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-meta
 spec:
   defaultBackend:
