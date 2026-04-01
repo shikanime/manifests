@@ -95,6 +95,28 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  name: matrix-linkedin
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi4-medium
+              weight: 80
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
   name: matrix-meta
 spec:
   template:
