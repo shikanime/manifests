@@ -721,6 +721,9 @@ spec:
                     backupTargetCredentialSecret: longhorn-hetzner-backups
                   persistence:
                     defaultClassReplicaCount: 2
+                    defaultDiskSelector:
+                      enable: true
+                      selector: fast
                     defaultFsType: xfs
               - name: trust-manager
                 chartname: jetstack/trust-manager
