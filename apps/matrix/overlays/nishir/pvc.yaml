@@ -105,7 +105,7 @@ spec:
     - ReadWriteOncePod
   resources:
     requests:
-      storage: 4Gi
+      storage: 8Gi
   storageClassName: nishir-fast
   volumeMode: Filesystem
   volumeName: synapse-data
