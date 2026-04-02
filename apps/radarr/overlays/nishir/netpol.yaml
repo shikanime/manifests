@@ -15,6 +15,9 @@ spec:
               app.kubernetes.io/name: bazarr
         - podSelector:
             matchLabels:
+              app.kubernetes.io/name: jellyfin
+        - podSelector:
+            matchLabels:
               app.kubernetes.io/name: prowlarr
       ports:
         - port: https
