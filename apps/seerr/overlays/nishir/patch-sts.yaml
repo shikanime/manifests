@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: bazarr
+  name: seerr
 spec:
   template:
     spec:
@@ -16,20 +16,7 @@ spec:
                       - rpi5-large
                       - rpi4-large
               weight: 80
-      containers:
-        - name: bazarr
-          volumeMounts:
-            - name: movies-data
-              mountPath: /data/movies
-            - name: shows-data
-              mountPath: /data/shows
       volumes:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: movies-data
-          persistentVolumeClaim:
-            claimName: movies-data
-        - name: shows-data
-          persistentVolumeClaim:
-            claimName: shows-data

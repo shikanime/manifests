@@ -18,6 +18,9 @@ spec:
               app.kubernetes.io/name: radarr
         - podSelector:
             matchLabels:
+              app.kubernetes.io/name: seerr
+        - podSelector:
+            matchLabels:
               app.kubernetes.io/name: sonarr
         - podSelector:
             matchLabels:
