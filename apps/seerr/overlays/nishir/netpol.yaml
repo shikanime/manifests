@@ -9,6 +9,9 @@ spec:
   policyTypes:
     - Ingress
   ingress:
-    - from: []
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: jellyfin
       ports:
         - port: http
