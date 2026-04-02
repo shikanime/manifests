@@ -16,3 +16,7 @@ spec:
                       - rpi5-large
                       - rpi4-large
               weight: 80
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
