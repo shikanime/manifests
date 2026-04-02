@@ -24,6 +24,9 @@ spec:
             - name: shows-data
               mountPath: /data/shows
       volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
