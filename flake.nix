@@ -182,8 +182,8 @@
                             "with".github-token = "\${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}";
                           }
                           { uses = "shikanime-studio/actions/direnv@v8"; }
-                          { run = "devenv tasks run skaffold:render:nishir-tailnet"; }
-                          { run = "devenv tasks run skaffold:render:telsha-tailnet"; }
+                          { run = "skaffold render --profile telsha-tailnet"; }
+                          { run = "skaffold render --profile nishir-tailnet"; }
                         ];
                       };
                     };
