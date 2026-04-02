@@ -17,6 +17,7 @@ resources:
   - ../../../../apps/prowlarr/overlays/nishir-tailnet
   - ../../../../apps/qbittorrent/overlays/nishir-tailnet
   - ../../../../apps/radarr/overlays/nishir-tailnet
+  - ../../../../apps/seerr/overlays/nishir-tailnet
   - ../../../../apps/sonarr/overlays/nishir-tailnet
   - ../../../../apps/syncthing/overlays/nishir-tailnet
   - ../../../../apps/vaultwarden/overlays/nishir-tailnet
