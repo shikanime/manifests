@@ -4,7 +4,7 @@ jobs:
     steps:
       - continue-on-error: true
         id: createGithubAppToken
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-contents: write
@@ -12,19 +12,12 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          ref: main
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - env:
-          BASE_REF: ${{ github.base_ref }}
-          HEAD_REF: ${{ github.head_ref }}
-          REPO: ${{ github.repository }}
-        if: '!(startsWith(github.head_ref, ''gh/'') && endsWith(github.head_ref, ''/head''))'
-        run: git push origin --delete "$HEAD_REF" || true
-      - env:
-          BASE_REF: ${{ github.base_ref }}
-          HEAD_REF: ${{ github.head_ref }}
-          REPO: ${{ github.repository }}
-        if: startsWith(github.head_ref, 'gh/') && endsWith(github.head_ref, '/head')
-        run: for role in base head orig; do git push origin --delete "${HEAD_REF%/head}/$role" || true; done
+      - uses: shikanime-studio/actions/cleanup@v8
+        with:
+          github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+          pull-request-url: ${{ github.event.pull_request.html_url }}
 name: Cleanup
 'on':
   pull_request:

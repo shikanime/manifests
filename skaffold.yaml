@@ -7,6 +7,14 @@ profiles:
     activation:
       - kubeContext: nishir
     manifests:
+      hooks:
+        before:
+          - host:
+              command:
+                - devenv
+                - tasks
+                - run
+                - sops:decrypt
       kustomize:
         paths:
           - clusters/nishir/overlays/tailnet
@@ -14,6 +22,14 @@ profiles:
     activation:
       - kubeContext: rancher-desktop
     manifests:
+      hooks:
+        before:
+          - host:
+              command:
+                - devenv
+                - tasks
+                - run
+                - sops:decrypt
       kustomize:
         paths:
           - clusters/telsha/overlays/tailnet
