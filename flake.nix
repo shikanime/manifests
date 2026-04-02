@@ -87,7 +87,7 @@
                           age = [
                             "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
                             "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c" # telsha
-                            "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
+                            "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2head5j73awtqmyr0cy354q068md4" # github
                             "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
                           ];
                         }
@@ -127,14 +127,11 @@
                     };
                 };
 
-                tasks."sops:decrypt" = {
-                  before = [ "devenv:enterShell" ];
-                  exec = ''
-                    find . -type f -name '*.enc.*' | while read -r enc; do
-                      ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
-                    done
-                  '';
-                };
+                tasks."sops:decrypt".exec = ''
+                  find . -type f -name '*.enc.*' | while read -r enc; do
+                    ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
+                  done
+                '';
               }
             ];
 
@@ -148,9 +145,66 @@
                   devlib.devenvModules.shikanime
                 ];
 
-                github.workflows = {
-                  integration.settings.direnv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                  release.settings.direnv.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                github.settings.workflows = {
+                  skaffold = {
+                    name = "Skaffold";
+                    on.workflow_call.secrets = {
+                      OPERATOR_PRIVATE_KEY.required = true;
+                      SOPS_AGE_KEY.required = true;
+                    };
+                    permissions.contents = "read";
+                    jobs = {
+                      render = {
+                        name = "Render";
+                        runs-on = "ubuntu-latest";
+                        env.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                        steps = [
+                          {
+                            continue-on-error = true;
+                            id = "createGithubAppToken";
+                            uses = "actions/create-github-app-token@v3";
+                            "with" = {
+                              app-id = "\${{ vars.OPERATOR_APP_ID }}";
+                              private-key = "\${{ secrets.OPERATOR_PRIVATE_KEY }}";
+                              permission-contents = "read";
+                            };
+                          }
+                          {
+                            uses = "actions/checkout@v6";
+                            "with" = {
+                              fetch-depth = 0;
+                              persist-credentials = false;
+                              token = "\${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}";
+                            };
+                          }
+                          {
+                            uses = "shikanime-studio/actions/nix/setup@v8";
+                            "with".github-token = "\${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}";
+                          }
+                          { uses = "shikanime-studio/actions/direnv@v8"; }
+                          { run = "devenv tasks run skaffold:render:nishir-tailnet"; }
+                          { run = "devenv tasks run skaffold:render:telsha-tailnet"; }
+                        ];
+                      };
+                    };
+                  };
+
+                  integration.jobs.skaffold = {
+                    "if" = "\${{ github.event.pull_request.draft == false }}";
+                    uses = "./.github/workflows/skaffold.yaml";
+                    secrets = {
+                      OPERATOR_PRIVATE_KEY = "\${{ secrets.OPERATOR_PRIVATE_KEY }}";
+                      SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                    };
+                  };
+
+                  release.jobs.skaffold = {
+                    uses = "./.github/workflows/skaffold.yaml";
+                    secrets = {
+                      OPERATOR_PRIVATE_KEY = "\${{ secrets.OPERATOR_PRIVATE_KEY }}";
+                      SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                    };
+                  };
                 };
 
                 gitignore.content = [
@@ -168,17 +222,6 @@
                   pkgs.kustomize
                   pkgs.skaffold
                 ];
-
-                tasks = {
-                  "skaffold:render:nishir-tailnet" = {
-                    before = [ "devenv:enterTest" ];
-                    exec = "${getExe pkgs.skaffold} render --profile nishir-tailnet";
-                  };
-                  "skaffold:render:telsha-tailnet" = {
-                    before = [ "devenv:enterTest" ];
-                    exec = "${getExe pkgs.skaffold} render --profile telsha-tailnet";
-                  };
-                };
 
                 treefmt.config.settings.global.excludes = [
                   "*.excalidraw"
