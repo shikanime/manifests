@@ -1,9 +1,5 @@
 # AGENTS.md
 
-AGENTS.md is a dedicated, predictable place for instructions that help coding agents work effectively in this repository. It complements README.md by focusing on the practical context agents need (commands, checks, conventions, and safety notes).
-
-## Project Overview
-
 This repository contains Kubernetes manifests for multiple clusters, organized around Kustomize. Cluster overlay entrypoints live under `clusters/`, and they compose cluster-wide components plus selected app overlays from `apps/`.
 
 ## Setup Commands
