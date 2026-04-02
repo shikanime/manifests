@@ -12,6 +12,6 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: jellyfin
+              app.kubernetes.io/name: prowlarr
       ports:
         - port: http
