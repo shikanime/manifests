@@ -28,13 +28,6 @@ spec:
       containers:
         - name: seerr
           image: seerr
-          env:
-            - name: PUID
-              value: "1000"
-            - name: PGID
-              value: "1000"
-            - name: TZ
-              value: Europe/Paris
           ports:
             - containerPort: 5055
               name: http
