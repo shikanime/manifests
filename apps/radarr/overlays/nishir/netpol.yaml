@@ -18,6 +18,9 @@ spec:
               app.kubernetes.io/name: jellyfin
         - podSelector:
             matchLabels:
+              app.kubernetes.io/name: jellyfin
+        - podSelector:
+            matchLabels:
               app.kubernetes.io/name: seerr
         - podSelector:
             matchLabels:
