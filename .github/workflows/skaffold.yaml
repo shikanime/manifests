@@ -22,10 +22,10 @@ jobs:
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - uses: shikanime-studio/actions/direnv@v8
-      - run: skaffold build --profile ${{ matrix.profile }}
+      - run: skaffold build --profile ${{ matrix.name }}
       - env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-        run: skaffold render --profile ${{ matrix.profile }}
+        run: skaffold render --profile ${{ matrix.name }}
     strategy:
       fail-fast: false
       matrix:
