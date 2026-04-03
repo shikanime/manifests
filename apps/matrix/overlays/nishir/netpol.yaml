@@ -21,10 +21,10 @@ spec:
               app.kubernetes.io/name: matrix-linkedin
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-manager
+              app.kubernetes.io/name: matrix-meta
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-meta
+              app.kubernetes.io/name: matrix-proxy
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: matrix-signal
@@ -97,24 +97,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-manager
-spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: matrix-manager
-  policyTypes:
-    - Ingress
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: matrix
-      ports:
-        - port: https
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: matrix-meta
 spec:
   podSelector:
@@ -129,6 +111,24 @@ spec:
               app.kubernetes.io/name: matrix
       ports:
         - port: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-proxy
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-proxy
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix
+      ports:
+        - port: https
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

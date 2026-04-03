@@ -215,6 +215,7 @@
                 ];
 
                 packages = [
+                  pkgs.caddy
                   pkgs.clusterctl
                   pkgs.k0sctl
                   pkgs.kubectl
