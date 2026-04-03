@@ -110,9 +110,20 @@ Most apps follow the same pattern:
 - Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound to
   a Longhorn `PV`
 - Secrets/config: stored as `*.enc.*` and fed into `secretGenerator` (see
-  [Secrets (SOPS)](#secrets-sops))
+  [Secrets](#secrets))
 
 Hardware-dependent apps can also add scheduling constraints via components (example:
 [patch-sts.yaml](apps/jellyfin/components/v4l/patch-sts.yaml)), which rely on NFD
 labels from
 [nodefeature.yaml](clusters/nishir/components/node-feature/nodefeature.yaml).
+
+### Secrets
+
+Sensitive values are stored encrypted in-repo and materialized at render/apply
+time.
+
+- Encrypted files use the `*.enc.*` naming pattern (examples: `.enc.env`,
+  `config.enc.yaml`).
+- Decrypted outputs are derived by stripping `.enc.` from the filename (example:
+  `.enc.env` → `.env`).
+- Never commit decrypted outputs. Change the encrypted source instead.
