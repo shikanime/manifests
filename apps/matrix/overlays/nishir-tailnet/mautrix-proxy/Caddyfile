@@ -1,5 +1,6 @@
 (mautrix) {
-	handle /.well-known/matrix/mautrix {
+	@isMautrixWellKnown path /.well-known/matrix/mautrix
+	handle @isMautrixWellKnown {
 		header Content-Type application/json
 		header Access-Control-Allow-Origin "*"
 		header Access-Control-Allow-Methods "GET, OPTIONS"
@@ -9,21 +10,63 @@
 	}
 }
 
-:8008 {
-	import mautrix
-	handle {
+(matrix-funnel-http) {
+	@isServerServerApi path /.well-known/matrix/server /_matrix/federation/* /_matrix/key/*
+	handle @isServerServerApi {
 		reverse_proxy http://matrix:8008
+	}
+	handle {
+		respond 404
 	}
 }
 
-:8448 {
-	import mautrix
-	tls /etc/ssl/private/tls.crt /etc/ssl/private/tls.key
-	handle {
+(matrix-funnel-https) {
+	@isServerServerApi path /.well-known/matrix/server /_matrix/federation/* /_matrix/key/*
+	handle @isServerServerApi {
 		reverse_proxy https://matrix:8448 {
 			transport http {
 				tls_server_name matrix
 			}
 		}
+	}
+	handle {
+		respond 404
+	}
+}
+
+(matrix-https) {
+	import mautrix
+	reverse_proxy https://matrix:8448 {
+		transport http {
+			tls_server_name matrix
+		}
+	}
+}
+
+(matrix-http) {
+	import mautrix
+	reverse_proxy http://matrix:8008
+}
+
+:8008 {
+	log
+	@isFunnel header Tailscale-Funnel-Request ?1
+	handle @isFunnel {
+		import matrix-funnel-http
+	}
+	handle {
+		import matrix-http
+	}
+}
+
+:8448 {
+	tls /etc/ssl/private/tls.crt /etc/ssl/private/tls.key
+	log
+	@isFunnel header Tailscale-Funnel-Request ?1
+	handle @isFunnel {
+		import matrix-funnel-https
+	}
+	handle {
+		import matrix-https
 	}
 }

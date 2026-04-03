@@ -67,6 +67,7 @@ auto_accept_invites:
   enabled: true
   only_from_local_users: true
 serve_server_wellknown: true
+encryption_enabled_by_default_for_room_type: all
 sops:
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
@@ -105,7 +106,7 @@ sops:
         UUwyZGp3WEZ2NHBqTkJGaEhqWnJqOHMKPm9MtaO3gGaHxF5bp1j5vTYHHnKgryMr
         PKZQvVKTL+h81Wu7c8wPUMTW/HRFUw9YKCGafwvZCya3FUg12VAZfA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-03T10:26:22Z"
-  mac: ENC[AES256_GCM,data:pLCdfQvnqKRk/Wexku3QmBVb245ueSuPLf/OZab6sGAQtpE7YmEXe+AuMJ6k33jSRzzj81JaxFMqNoJlIDNO0gByPz9WAaRag6wekFsk3azyHqRleaHPi0viyC/2qFOFeaTNz8lwyMMBuhaX6MbaewNjEjbWV1L4rN7dvgsVCt0=,iv:vj1syZVizS6VpA+hLNyEMGTVtYDZK3CGs70ymNhytlc=,tag:Znu+tnKE69QOWAGEKfvlFQ==,type:str]
+  lastmodified: "2026-04-03T15:28:00Z"
+  mac: ENC[AES256_GCM,data:ev6gmVRmYR31od7Kjo5TAlYA/3mtG1EGaaqNCPCoa2MMFUGMMvvhYUp/DWywMjmiwLS+76QROmnYDSRTwcnTff5zf9qyGT46KwOl4UyLOzlrEorRMvy+0t6bf2M8G9S9v2hzjFmu1f+IvZHrDiRQ6yHV3igGEULfWHW7Bwa/4UY=,iv:T5sfmYJy1Avuu48aZiZ4efmf18hBcF25F0qzWVFxgcQ=,tag:LzyxlsLjrYxNFRVIwUwwOQ==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   version: 3.12.2
