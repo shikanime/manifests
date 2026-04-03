@@ -12,18 +12,25 @@ spec:
               port: https
               scheme: HTTPS
             initialDelaySeconds: 60
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               port: https
               scheme: HTTPS
             initialDelaySeconds: 120
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               port: https
               scheme: HTTPS
             initialDelaySeconds: 15
+            timeoutSeconds: 10
             periodSeconds: 10
-            failureThreshold: 60
+            failureThreshold: 90
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
