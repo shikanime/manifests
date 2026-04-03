@@ -1,7 +1,6 @@
 jobs:
   nix:
-    if: ${{ github.event_name == 'workflow_call' || github.event.pull_request.draft
-      == false }}
+    if: ${{ github.event_name == 'workflow_call' || github.event.pull_request.draft == false }}
     secrets:
       CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
@@ -9,8 +8,7 @@ jobs:
     with:
       cachix-name: shikanime
   skaffold:
-    if: ${{ github.event_name == 'workflow_call' || github.event.pull_request.draft
-      == false }}
+    if: ${{ github.event_name == 'workflow_call' || github.event.pull_request.draft == false }}
     secrets:
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
       SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
@@ -19,13 +17,13 @@ name: Integration
 'on':
   pull_request:
     branches:
-    - main
-    - gh/*/*/base
+      - main
+      - gh/*/*/base
     types:
-    - opened
-    - reopened
-    - synchronize
-    - ready_for_review
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
   workflow_call:
     secrets:
       CACHIX_AUTH_TOKEN:
