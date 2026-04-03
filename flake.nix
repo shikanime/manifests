@@ -183,6 +183,7 @@
                 packages = [
                   pkgs.caddy
                   pkgs.clusterctl
+                  pkgs.docker
                   pkgs.k0sctl
                   pkgs.kubectl
                   pkgs.kubernetes-helm
