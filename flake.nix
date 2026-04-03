@@ -132,6 +132,14 @@
                     ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
                   done
                 '';
+                tasks."sops:cleanup".exec = ''
+                  find . -type f -name '*.enc.*' | while read -r enc; do
+                    dec="''${enc%.enc.*}.''${enc##*.enc.}"
+                    if [ -f "$dec" ]; then
+                      rm -f "$dec"
+                    fi
+                  done
+                '';
               }
             ];
 
