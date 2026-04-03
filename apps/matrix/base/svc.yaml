@@ -106,6 +106,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: matrix-telegram
+spec:
+  ports:
+    - name: http
+      port: 29317
+      targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: matrix-telegram
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: matrix-twitter
 spec:
   ports:

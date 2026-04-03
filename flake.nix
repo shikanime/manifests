@@ -127,11 +127,14 @@
                     };
                 };
 
-                tasks."sops:decrypt".exec = ''
-                  find . -type f -name '*.enc.*' | while read -r enc; do
-                    ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
-                  done
-                '';
+                tasks."sops:decrypt" = {
+                  after = [ "sops:cleanup" ];
+                  exec = ''
+                    find . -type f -name '*.enc.*' | while read -r enc; do
+                      ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
+                    done
+                  '';
+                };
                 tasks."sops:cleanup".exec = ''
                   find . -type f -name '*.enc.*' | while read -r enc; do
                     dec="''${enc%.enc.*}.''${enc##*.enc.}"
@@ -183,6 +186,7 @@
                 packages = [
                   pkgs.caddy
                   pkgs.clusterctl
+                  pkgs.docker
                   pkgs.k0sctl
                   pkgs.kubectl
                   pkgs.kubernetes-helm
