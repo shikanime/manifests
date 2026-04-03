@@ -43,7 +43,7 @@ Each cluster typically looks like:
 - `clusters/<cluster>/components/`: cluster-wide components (e.g. `tls/`,
   `tailscale/`, `longhorn/`)
 - `clusters/<cluster>/overlays/<overlay>/`: build entrypoints that compose
-  cluster components + selected app overlays
+  cluster base + components + selected app overlays
 
 For example, `clusters/nishir/overlays/tailnet/kustomization.yaml` pulls in
 cluster components and a list of `apps/*/overlays/nishir-tailnet`, plus the
@@ -56,19 +56,6 @@ This repository is intentionally split into two concerns:
 - Compose and configure cluster services and apps with Kustomize (`clusters/` +
   `apps/`)
 - Bootstrap the controllers/operators those manifests depend on (`bootstraps/`)
-
-### Layers
-
-At render time, a cluster overlay is the entrypoint:
-
-- `clusters/<cluster>/overlays/<overlay>/kustomization.yaml` composes:
-  - `clusters/<cluster>/base/` (namespaces, shared policies/PVCs, cluster-wide
-    defaults)
-  - `clusters/<cluster>/components/*` (cluster add-on configuration)
-  - selected `apps/*/overlays/<cluster>-<overlay>` (workloads + per-cluster
-    patches)
-
-Skaffold profiles in `skaffold.yaml` point at those overlay entrypoints.
 
 ### Bootstrap
 
@@ -179,8 +166,8 @@ Most apps follow the same pattern:
     [patch-ingress.yaml](apps/jellyfin/overlays/nishir-tailnet/patch-ingress.yaml))
 - Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound to
   a Longhorn `PV`
-- Secrets/config: encrypted on disk as `*.enc.*`, decrypted locally and fed into
-  `secretGenerator`
+- Secrets/config: stored as `*.enc.*` and fed into `secretGenerator` (see
+  [Secrets (SOPS)](#secrets-sops))
 
 Hardware-dependent apps can also add scheduling constraints via components (example:
 [patch-sts.yaml](apps/jellyfin/components/v4l/patch-sts.yaml)), which rely on NFD
