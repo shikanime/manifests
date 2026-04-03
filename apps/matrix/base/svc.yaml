@@ -55,18 +55,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: matrix-manager
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: http
-  selector:
-    app.kubernetes.io/name: matrix-manager
----
-apiVersion: v1
-kind: Service
-metadata:
   name: matrix-meta
 spec:
   ports:
@@ -76,6 +64,18 @@ spec:
   publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/name: matrix-meta
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-proxy
+spec:
+  ports:
+    - name: http
+      port: 8008
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: matrix-proxy
 ---
 apiVersion: v1
 kind: Service

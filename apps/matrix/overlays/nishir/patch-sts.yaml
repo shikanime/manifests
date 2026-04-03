@@ -137,6 +137,59 @@ spec:
             name: nishir-ca-certificates.crt
 ---
 apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matrix-proxy
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi4-medium
+              weight: 80
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: tls
+          secret:
+            secretName: matrix-proxy-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-signal
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values:
+                      - rpi4-medium
+              weight: 80
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: matrix-slack
@@ -183,28 +236,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-signal
-spec:
-  template:
-    spec:
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - preference:
-                matchExpressions:
-                  - key: node.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                      - rpi4-medium
-              weight: 80
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
   name: matrix-whatsapp
 spec:
   template:
@@ -223,34 +254,3 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: matrix-manager
-spec:
-  template:
-    spec:
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - preference:
-                matchExpressions:
-                  - key: node.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                      - rpi4-medium
-              weight: 80
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: matrix-manager-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640

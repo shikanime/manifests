@@ -37,12 +37,12 @@ spec:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: matrix-manager
+  name: matrix-linkedin
 spec:
   targetRef:
     apiVersion: apps/v1
-    kind: Deployment
-    name: matrix-manager
+    kind: StatefulSet
+    name: matrix-linkedin
   updatePolicy:
     updateMode: Auto
 ---
@@ -55,6 +55,18 @@ spec:
     apiVersion: apps/v1
     kind: StatefulSet
     name: matrix-meta
+  updatePolicy:
+    updateMode: Auto
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: matrix-proxy
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: matrix-proxy
   updatePolicy:
     updateMode: Auto
 ---
@@ -79,18 +91,6 @@ spec:
     apiVersion: apps/v1
     kind: StatefulSet
     name: matrix-slack
-  updatePolicy:
-    updateMode: Auto
----
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
-  name: matrix-linkedin
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: StatefulSet
-    name: matrix-linkedin
   updatePolicy:
     updateMode: Auto
 ---

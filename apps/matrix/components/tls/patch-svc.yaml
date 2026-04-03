@@ -11,9 +11,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: matrix-manager
+  name: matrix-proxy
 spec:
   ports:
     - name: https
-      port: 443
+      port: 8448
       targetPort: https

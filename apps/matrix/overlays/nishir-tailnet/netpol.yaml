@@ -55,24 +55,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-manager-tailscale
-spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: matrix-manager
-  policyTypes:
-    - Ingress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: tailscale-system
-      ports:
-        - port: https
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: matrix-meta-tailscale
 spec:
   podSelector:
@@ -87,6 +69,24 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-proxy-tailscale
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-proxy
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tailscale-system
+      ports:
+        - port: https
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
