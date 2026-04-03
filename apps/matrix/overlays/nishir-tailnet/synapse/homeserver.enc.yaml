@@ -43,6 +43,7 @@ form_secret: ENC[AES256_GCM,data:dtH2CvdxvzM8un1ZoqhvEsPb9fuzm6wIlnWfKd3RTVjEQ9O
 signing_key_path: /data/matrix.taila659a.ts.net.signing.key
 trusted_key_servers:
   - server_name: matrix.org
+  - server_name: nixos.org
 app_service_config_files:
   - /data/appservices/mautrix-discord.yaml
   - /data/appservices/mautrix-discord-doublepuppet.yaml
@@ -62,7 +63,6 @@ app_service_config_files:
   - /data/appservices/mautrix-whatsapp-doublepuppet.yaml
 tls_certificate_path: /etc/ssl/private/tls.crt
 tls_private_key_path: /etc/ssl/private/tls.key
-suppress_key_server_warning: true
 auto_accept_invites:
   enabled: true
   only_from_local_users: true
@@ -106,7 +106,7 @@ sops:
         UUwyZGp3WEZ2NHBqTkJGaEhqWnJqOHMKPm9MtaO3gGaHxF5bp1j5vTYHHnKgryMr
         PKZQvVKTL+h81Wu7c8wPUMTW/HRFUw9YKCGafwvZCya3FUg12VAZfA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-03T15:28:00Z"
-  mac: ENC[AES256_GCM,data:ev6gmVRmYR31od7Kjo5TAlYA/3mtG1EGaaqNCPCoa2MMFUGMMvvhYUp/DWywMjmiwLS+76QROmnYDSRTwcnTff5zf9qyGT46KwOl4UyLOzlrEorRMvy+0t6bf2M8G9S9v2hzjFmu1f+IvZHrDiRQ6yHV3igGEULfWHW7Bwa/4UY=,iv:T5sfmYJy1Avuu48aZiZ4efmf18hBcF25F0qzWVFxgcQ=,tag:LzyxlsLjrYxNFRVIwUwwOQ==,type:str]
+  lastmodified: "2026-04-03T16:25:06Z"
+  mac: ENC[AES256_GCM,data:R3o0EQ9Topx1dlR/NMhSR1OROBi3QQc4Sb8fMOave1v308B72gnsRZKcC2tznBdDfXsSGHslxnvXh0RXRhfNb4KOQhmwu0m4kK+/72J9sBKHy2SjeSG+fUO6rH2lRBRxBvPFVHZpm2QGWKVhzB826IFC5p1rwEAne3Z2I3n46bs=,iv:eSWCqBHLrF+qVkthcJgTa2vfAOIlyIffRYZnEpj/Ayk=,tag:dblvwDoxMr92kzNugBweow==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   version: 3.12.2
