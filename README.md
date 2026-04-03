@@ -17,6 +17,8 @@ This repo is organized around Kustomize:
   per-cluster overlays)
 - `clusters/` contains cluster entrypoints that compose shared cluster bits +
   app overlays
+- `bootstraps/` contains cluster bootstrap inputs (controllers/operators
+  installation lives here)
 - `skaffold.yaml` provides renderable profiles that point at the cluster overlay
   entrypoints
 
@@ -41,50 +43,76 @@ Each cluster typically looks like:
 - `clusters/<cluster>/components/`: cluster-wide components (e.g. `tls/`,
   `tailscale/`, `longhorn/`)
 - `clusters/<cluster>/overlays/<overlay>/`: build entrypoints that compose
-  cluster components + selected app overlays
+  cluster base + components + selected app overlays
 
 For example, `clusters/nishir/overlays/tailnet/kustomization.yaml` pulls in
 cluster components and a list of `apps/*/overlays/nishir-tailnet`, plus the
 cluster `base`.
 
-### Getting A Dev Environment
+## Architecture
 
-This repo ships a Nix flake + `direnv` integration so you can get consistent
-tooling (`kustomize`, `kubectl`, `helm`, `skaffold`, `sops`, …).
+This repository is intentionally split into two concerns:
 
-- With `direnv`:
-  - `nix run nixpkgs#direnv allow`
-- Without `direnv`:
-  - `nix develop --accept-flake-config --no-pure-eval`
+- Compose and configure cluster services and apps with Kustomize (`clusters/` +
+  `apps/`)
+- Bootstrap the controllers/operators those manifests depend on (`bootstraps/`)
 
-### Rendering Manifests
+### Bootstrap
 
-You can render via Skaffold (preferred for the predefined profiles) or directly
-with Kustomize.
+The Kustomize overlays assume the underlying controllers/operators already
+exist. Those are installed out-of-band using the manifests in `bootstraps/`.
 
-- Render with Skaffold:
-  - `skaffold render --profile nishir-tailnet`
-  - `skaffold render --profile telsha-tailnet`
-- Render with Kustomize:
-  - `kustomize build clusters/nishir/overlays/tailnet`
-  - `kustomize build clusters/telsha/overlays/tailnet`
+- `bootstraps/nishir/` contains a k0sctl cluster definition
+  ([cluster.yaml](bootstraps/nishir/cluster.yaml))
+- `bootstraps/telsha/` contains `HelmChart` resources
+  ([helmchart.yaml](bootstraps/telsha/helmchart.yaml))
 
-### Secrets (SOPS)
+### Clusters
 
-Secrets/config files are stored encrypted on disk using SOPS and Age.
+This repo currently defines two cluster trees:
 
-- Encrypted files follow the pattern `*.enc.*` (for example `.enc.env`,
-  `config.enc.yaml`)
-- When working locally inside the dev shell, a decrypt task writes decrypted
-  siblings by removing `.enc.` from the filename (for example `.enc.env` → `.env`)
-- Decrypted files are treated as generated/sensitive and are ignored (or should
-  be kept ignored) by git
+- `clusters/nishir/` (overlay: `tailnet`, components: grafana, longhorn,
+  node-feature, tailscale, tls)
+- `clusters/telsha/` (overlay: `tailnet`, component: tailscale)
 
-CI runs with `SOPS_AGE_KEY` provided as a secret to allow decryption when
-evaluating the flake.
+### Cluster Services (Add-ons)
 
-### CI / Checks
+The “cluster services” in this repo are mostly configuration and glue for
+controllers installed during bootstrap.
 
-The main “does this repo still evaluate and render?” check is:
+- TLS / trust distribution:
+  - cert-manager resources (issuers/certs) under `clusters/<cluster>/components/tls/`
+  - trust-manager `Bundle` to publish CA material to workloads as a ConfigMap
+- Tailnet ingress:
+  - Tailscale Operator credentials under `clusters/<cluster>/components/tailscale/`
+  - app overlays patch `Ingress` to use `ingressClassName: tailscale` and set
+    `ProxyClass`
+- Storage:
+  - Longhorn settings, storage class, and recurring jobs under `clusters/<cluster>/components/longhorn/`
+- Observability:
+  - Grafana k8s monitoring / Alloy remote config secrets under
+    `clusters/<cluster>/components/grafana/`
+- Scheduling / hardware discovery:
+  - Node Feature Discovery rules under `clusters/<cluster>/components/node-feature/`
+- Vertical Pod Autoscaler:
+  - many apps include `vpa.yaml` and expect a VPA controller to be present
 
-- `nix flake check --accept-flake-config --no-pure-eval`
+### How Apps Plug In
+
+Most apps follow the same pattern:
+
+- Workload: `Deployment` or `StatefulSet` in `apps/<app>/base/`
+- Network: `Service` + `Ingress` in `apps/<app>/base/`, patched per overlay
+  - tailnet overlays typically set `ingressClassName: tailscale` and attach a
+    `ProxyClass`
+    (example:
+    [patch-ingress.yaml](apps/jellyfin/overlays/nishir-tailnet/patch-ingress.yaml))
+- Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound to
+  a Longhorn `PV`
+- Secrets/config: stored as `*.enc.*` and fed into `secretGenerator` (see
+  [Secrets (SOPS)](#secrets-sops))
+
+Hardware-dependent apps can also add scheduling constraints via components (example:
+[patch-sts.yaml](apps/jellyfin/components/v4l/patch-sts.yaml)), which rely on NFD
+labels from
+[nodefeature.yaml](clusters/nishir/components/node-feature/nodefeature.yaml).
