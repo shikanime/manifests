@@ -9,6 +9,7 @@ jobs:
   release-branch:
     if: (startsWith(github.ref, 'refs/tags/v') && endsWith(github.ref_name, '.0')) || (github.event_name == 'workflow_dispatch' && startsWith(github.event.inputs.ref_name, 'v') && endsWith(github.event.inputs.ref_name, '.0'))
     needs:
+      - skaffold
       - nix
     permissions:
       contents: write
@@ -31,6 +32,7 @@ jobs:
   release-tag:
     if: (startsWith(github.ref, 'refs/tags/v')) || (github.event_name == 'workflow_dispatch' && startsWith(github.event.inputs.ref_name, 'v'))
     needs:
+      - skaffold
       - nix
     permissions:
       contents: write
@@ -65,6 +67,14 @@ name: Release
       - release-[0-9]+.[0-9]+
     tags:
       - v?[0-9]+.[0-9]+.[0-9]+*
+  workflow_call:
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        required: true
+      OPERATOR_PRIVATE_KEY:
+        required: true
+      SOPS_AGE_KEY:
+        required: true
   workflow_dispatch:
     inputs:
       ref_name:
