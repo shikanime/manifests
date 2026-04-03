@@ -1,6 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: matrix-tailscale
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tailscale-system
+      ports:
+        - port: https
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: matrix-discord-tailscale
 spec:
   podSelector:
@@ -127,11 +145,11 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-tailscale
+  name: matrix-telegram-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: matrix
+      app.kubernetes.io/name: matrix-telegram
   policyTypes:
     - Ingress
   ingress:
@@ -140,7 +158,7 @@ spec:
             matchLabels:
               kubernetes.io/metadata.name: tailscale-system
       ports:
-        - port: https
+        - port: http
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
