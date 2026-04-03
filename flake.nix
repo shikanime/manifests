@@ -199,17 +199,6 @@
                   "*.enc.xml"
                 ];
               };
-
-              sync = {
-                containers = mkForce { };
-
-                packages = [
-                  pkgs.kubectl
-                  pkgs.kubernetes-helm
-                  pkgs.kustomize
-                  pkgs.skaffold
-                ];
-              };
             };
           };
         };
