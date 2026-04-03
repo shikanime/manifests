@@ -99,6 +99,20 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-telegram
+spec:
+  defaultBackend:
+    service:
+      name: matrix-telegram
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-telegram
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-twitter
 spec:
   defaultBackend:

@@ -21,6 +21,16 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-linkedin
+  annotations:
+    tailscale.com/proxy-class: matrix-linkedin
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-meta
   annotations:
     tailscale.com/proxy-class: matrix-meta
@@ -62,9 +72,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-linkedin
+  name: matrix-telegram
   annotations:
-    tailscale.com/proxy-class: matrix-linkedin
+    tailscale.com/proxy-class: matrix-telegram
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

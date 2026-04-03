@@ -23,6 +23,11 @@ secretGenerator:
       - mautrix-googlechat/registration.yaml
     name: mautrix-googlechat
   - files:
+      - mautrix-linkedin/config.yaml
+      - mautrix-linkedin/doublepuppet.yaml
+      - mautrix-linkedin/registration.yaml
+    name: mautrix-linkedin
+  - files:
       - mautrix-meta/config.yaml
       - mautrix-meta/doublepuppet.yaml
       - mautrix-meta/registration.yaml
@@ -38,20 +43,20 @@ secretGenerator:
       - mautrix-slack/registration.yaml
     name: mautrix-slack
   - files:
-      - mautrix-whatsapp/config.yaml
-      - mautrix-whatsapp/doublepuppet.yaml
-      - mautrix-whatsapp/registration.yaml
-    name: mautrix-whatsapp
-  - files:
-      - mautrix-linkedin/config.yaml
-      - mautrix-linkedin/doublepuppet.yaml
-      - mautrix-linkedin/registration.yaml
-    name: mautrix-linkedin
+      - mautrix-telegram/config.enc.yaml
+      - mautrix-telegram/doublepuppet.enc.yaml
+      - mautrix-telegram/registration.enc.yaml
+    name: mautrix-telegram
   - files:
       - mautrix-twitter/config.yaml
       - mautrix-twitter/doublepuppet.yaml
       - mautrix-twitter/registration.yaml
     name: mautrix-twitter
+  - files:
+      - mautrix-whatsapp/config.yaml
+      - mautrix-whatsapp/doublepuppet.yaml
+      - mautrix-whatsapp/registration.yaml
+    name: mautrix-whatsapp
   - files:
       - synapse/homeserver.yaml
       - synapse/matrix.taila659a.ts.net.log.config
