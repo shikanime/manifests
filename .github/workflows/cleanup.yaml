@@ -2,26 +2,28 @@ jobs:
   cleanup:
     runs-on: ubuntu-slim
     steps:
-      - continue-on-error: true
-        id: createGithubAppToken
-        uses: actions/create-github-app-token@v3
-        with:
-          app-id: ${{ vars.OPERATOR_APP_ID }}
-          permission-contents: write
-          private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/cleanup@v8
-        with:
-          github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-          pull-request-url: ${{ github.event.pull_request.html_url }}
+    - continue-on-error: true
+      id: createGithubAppToken
+      uses: actions/create-github-app-token@v3
+      with:
+        app-id: ${{ vars.OPERATOR_APP_ID }}
+        permission-contents: write
+        private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+        ref: main
+        token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
+          }}
+    - uses: shikanime-studio/actions/cleanup@v8
+      with:
+        github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN
+          }}
+        pull-request-url: ${{ github.event.pull_request.html_url }}
 name: Cleanup
 'on':
   pull_request:
     types:
-      - closed
+    - closed
 permissions:
   contents: write
