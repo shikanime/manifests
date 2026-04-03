@@ -17,6 +17,8 @@ This repo is organized around Kustomize:
   per-cluster overlays)
 - `clusters/` contains cluster entrypoints that compose shared cluster bits +
   app overlays
+- `bootstraps/` contains cluster bootstrap inputs (controllers/operators
+  installation lives here)
 - `skaffold.yaml` provides renderable profiles that point at the cluster overlay
   entrypoints
 
@@ -46,6 +48,144 @@ Each cluster typically looks like:
 For example, `clusters/nishir/overlays/tailnet/kustomization.yaml` pulls in
 cluster components and a list of `apps/*/overlays/nishir-tailnet`, plus the
 cluster `base`.
+
+## Architecture
+
+This repository is intentionally split into two concerns:
+
+- Compose and configure cluster services and apps with Kustomize (`clusters/` +
+  `apps/`)
+- Bootstrap the controllers/operators those manifests depend on (`bootstraps/`)
+
+### Layers
+
+At render time, a cluster overlay is the entrypoint:
+
+- `clusters/<cluster>/overlays/<overlay>/kustomization.yaml` composes:
+  - `clusters/<cluster>/base/` (namespaces, shared policies/PVCs, cluster-wide
+    defaults)
+  - `clusters/<cluster>/components/*` (cluster add-on configuration)
+  - selected `apps/*/overlays/<cluster>-<overlay>` (workloads + per-cluster
+    patches)
+
+Skaffold profiles in `skaffold.yaml` point at those overlay entrypoints.
+
+### Bootstrap
+
+The Kustomize overlays assume the underlying controllers/operators already
+exist. Those are installed out-of-band using the manifests in `bootstraps/`.
+
+- `bootstraps/nishir/` contains a k0sctl cluster definition
+  ([cluster.yaml](bootstraps/nishir/cluster.yaml))
+- `bootstraps/telsha/` contains `HelmChart` resources
+  ([helmchart.yaml](bootstraps/telsha/helmchart.yaml))
+
+### Clusters
+
+This repo currently defines two cluster trees:
+
+- `clusters/nishir/` (overlay: `tailnet`, components: grafana, longhorn,
+  node-feature, tailscale, tls)
+- `clusters/telsha/` (overlay: `tailnet`, component: tailscale)
+
+### Cluster Services (Add-ons)
+
+The “cluster services” in this repo are mostly configuration and glue for
+controllers installed during bootstrap.
+
+- TLS / trust distribution:
+  - cert-manager resources (issuers/certs) under `clusters/<cluster>/components/tls/`
+  - trust-manager `Bundle` to publish CA material to workloads as a ConfigMap
+- Tailnet ingress:
+  - Tailscale Operator credentials under `clusters/<cluster>/components/tailscale/`
+  - app overlays patch `Ingress` to use `ingressClassName: tailscale` and set
+    `ProxyClass`
+- Storage:
+  - Longhorn settings, storage class, and recurring jobs under `clusters/<cluster>/components/longhorn/`
+- Observability:
+  - Grafana k8s monitoring / Alloy remote config secrets under
+    `clusters/<cluster>/components/grafana/`
+- Scheduling / hardware discovery:
+  - Node Feature Discovery rules under `clusters/<cluster>/components/node-feature/`
+- Vertical Pod Autoscaler:
+  - many apps include `vpa.yaml` and expect a VPA controller to be present
+
+### Service Interactions
+
+In this repo, the “tailnet” overlay means apps are exposed through the Tailscale
+IngressClass to your Tailscale network.
+
+The diagram below shows the common runtime interactions in the “tailnet” overlay
+(example: [kustomization.yaml](clusters/nishir/overlays/tailnet/kustomization.yaml)).
+
+```mermaid
+graph LR
+  user[User device] -->|Tailscale tailnet| tailnet[Tailscale network]
+
+  subgraph k8s[Kubernetes cluster]
+
+    subgraph ns_tailscale[tailscale-system]
+      tsop[Tailscale Operator]
+      tsic[IngressClass tailscale]
+      tsop --> tsic
+    end
+
+    subgraph ns_cert[cert-manager + trust]
+      cm[cert-manager]
+      tm[trust-manager]
+      ca[(Cluster CA secret)]
+      cm -->|issues| ca
+      tm -->|bundles| cabundle[(CA bundle ConfigMap)]
+      ca --> tm
+    end
+
+    subgraph ns_apps[app namespaces]
+      ing[Ingress per app]
+      svc[Service]
+      pod[Pods]
+      pvc[(PVC)]
+
+      ing --> svc --> pod
+
+      cabundle -->|mounted / referenced| pod
+    end
+
+    subgraph ns_storage[longhorn-system]
+      lh[Longhorn CSI]
+      pv[(PV)]
+      lh -->|provisions| pv
+      pvc --> pv
+      pv --> pod
+    end
+
+    subgraph ns_obs[grafana-system]
+      alloy[Monitoring agents]
+    end
+  end
+
+  tailnet -->|HTTPS via IngressClass tailscale| ing
+  pod -->|logs/metrics/OTLP| alloy --> gc[Grafana Cloud]
+```
+
+### How Apps Plug In
+
+Most apps follow the same pattern:
+
+- Workload: `Deployment` or `StatefulSet` in `apps/<app>/base/`
+- Network: `Service` + `Ingress` in `apps/<app>/base/`, patched per overlay
+  - tailnet overlays typically set `ingressClassName: tailscale` and attach a
+    `ProxyClass`
+    (example:
+    [patch-ingress.yaml](apps/jellyfin/overlays/nishir-tailnet/patch-ingress.yaml))
+- Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound to
+  a Longhorn `PV`
+- Secrets/config: encrypted on disk as `*.enc.*`, decrypted locally and fed into
+  `secretGenerator`
+
+Hardware-dependent apps can also add scheduling constraints via components (example:
+[patch-sts.yaml](apps/jellyfin/components/v4l/patch-sts.yaml)), which rely on NFD
+labels from
+[nodefeature.yaml](clusters/nishir/components/node-feature/nodefeature.yaml).
 
 ### Getting A Dev Environment
 
