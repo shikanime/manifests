@@ -11,8 +11,8 @@
 }
 
 (matrix-discord-media) {
-	@directMediaApi path /.well-known/matrix/server /_matrix/federation/v1/media/download/* /_matrix/client/v1/media/* /_matrix/media/* /_matrix/key/* /_matrix/federation/v1/version
-	handle @directMediaApi {
+	@isDiscordDirectMediaApi path /.well-known/matrix/server /_matrix/federation/v1/media/download/* /_matrix/client/v1/media/* /_matrix/media/* /_matrix/key/* /_matrix/federation/v1/version
+	handle @isDiscordDirectMediaApi {
 		reverse_proxy http://matrix-discord:29334 {
 			header_up Host {host}
 			header_up X-Forwarded-Proto {scheme}
