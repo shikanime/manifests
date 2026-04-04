@@ -22,13 +22,8 @@ jobs:
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - uses: shikanime-studio/actions/direnv@v8
+      - run: skaffold build --profile ${{ matrix.name }}
       - env:
-          SKAFFOLD_COLLECT_METRICS: 'false'
-          SKAFFOLD_LOG_LEVEL: ${{ runner.debug == '1' && 'debug' || 'info' }}
-        run: skaffold build --profile ${{ matrix.name }}
-      - env:
-          SKAFFOLD_COLLECT_METRICS: 'false'
-          SKAFFOLD_LOG_LEVEL: ${{ runner.debug == '1' && 'debug' || 'info' }}
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
         run: skaffold render --profile ${{ matrix.name }}
     strategy:
