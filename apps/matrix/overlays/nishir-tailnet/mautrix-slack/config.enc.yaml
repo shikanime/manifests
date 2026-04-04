@@ -327,7 +327,7 @@ direct_media:
   # The server name to use for the custom mxc:// URIs.
   # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
   # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
-  server_name: matrix-discord.taila659a.ts.net
+  server_name: matrix-discord-media.taila659a.ts.net
   # Optionally a custom .well-known response. This defaults to `server_name:443`
   well_known_response: null
   # Optionally specify a custom prefix for the media ID part of the MXC URI.
@@ -520,7 +520,7 @@ sops:
         ZFRVc3VIV2xNQmVvUXFuT3NDNENBVDQK56egNX9NDsit+37c31bmdSHwFFrjASql
         N/5Vm49uppscnflFZ/1xiUEPIPa1UrlIqdM5xGTxQ5LBSAWFVP8pgw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-28T15:49:27Z"
-  mac: ENC[AES256_GCM,data:eivKQ8SC7oVBhSe+S4uVApnb5aVI+t1Ra4hfzSiQDFE4CiqaLBZ1L0idCSZkhtq0l/5jqh0Xq5p53rH4rsJo16ToXOdB7LkMbmrQofwKrEZ89Oeig+jq9lf3FLZFodI+GAuRU2KONy10QwqpSa3fet4UmK+l1/hUdH8juvCnnZA=,iv:N+TeipI6DSu2Nb23hrZV2nfBdUAzDOGpqzzoHEAsZoY=,tag:1NZJL2lU8uDHO9IxJEMa7g==,type:str]
+  lastmodified: "2026-04-04T18:06:26Z"
+  mac: ENC[AES256_GCM,data:yt+yn6aimbvjhvPrEhDQ7ArlSQOAApgkeJzmsY9J/CB/2+hr2sl8fbjli4qNHhJRM3srEuMpYuBM85hhicAhztFyn+4YG0Hbj7N86VKYt/+6SB5SAv+RATuXKT45dZLF7I4wCYZyGJHaudJwmiVpXBfXD9MEuNmtgXb24fLjLcI=,iv:3sYG/Vsmn2ZmnzHRR8ZvQsvWZjfWzj8MqS5iYN8LPdA=,tag:mUi8/2IYw8Wqw/9nzes0FA==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
-  version: 3.12.1
+  version: 3.12.2

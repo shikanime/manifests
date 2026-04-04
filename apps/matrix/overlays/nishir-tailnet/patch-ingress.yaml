@@ -11,6 +11,16 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: matrix-discord-media
+  annotations:
+    tailscale.com/proxy-class: matrix-proxy
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: matrix-googlechat
   annotations:
     tailscale.com/proxy-class: matrix-googlechat
