@@ -171,18 +171,26 @@ spec:
             httpGet:
               path: /_matrix/client/versions
               port: http
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
+            timeoutSeconds: 20
+            periodSeconds: 20
+            failureThreshold: 15
           livenessProbe:
             httpGet:
               path: /_matrix/client/versions
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
+            timeoutSeconds: 30
+            periodSeconds: 30
+            failureThreshold: 15
           startupProbe:
             httpGet:
               path: /_matrix/client/versions
               port: http
-            initialDelaySeconds: 5
-            failureThreshold: 30
+            initialDelaySeconds: 20
+            timeoutSeconds: 15
+            periodSeconds: 10
+            failureThreshold: 120
           volumeMounts:
             - name: data
               mountPath: /data
@@ -288,16 +296,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
@@ -379,16 +396,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
@@ -470,16 +496,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
@@ -561,16 +596,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
@@ -652,16 +696,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
@@ -743,16 +796,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
@@ -834,16 +896,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
@@ -925,16 +996,25 @@ spec:
               path: /_matrix/mau/ready
               port: http
             initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /_matrix/mau/live
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /_matrix/mau/ready
               port: http
-            failureThreshold: 12
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
           volumeMounts:
             - name: data
               mountPath: /data
