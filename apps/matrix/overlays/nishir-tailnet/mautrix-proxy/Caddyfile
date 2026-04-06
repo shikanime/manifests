@@ -17,21 +17,6 @@
 	}
 }
 
-(matrix-funnel) {
-	import mautrix
-	@isMatrixClient path /.well-known/matrix/server /_matrix/* /_synapse/client/*
-	handle @isMatrixClient {
-		reverse_proxy https://matrix:8448 {
-			transport http {
-				tls_server_name matrix
-			}
-		}
-	}
-	handle {
-		respond 404
-	}
-}
-
 (matrix) {
 	import mautrix
 	@isMatrixClient path /.well-known/matrix/server /_matrix/* /_synapse/client/*
@@ -53,10 +38,6 @@
 	handle @isDiscordDirectMedia {
 		import matrix-discord-media
 	}
-	@isFunnel header Tailscale-Funnel-Request ?1
-	handle @isFunnel {
-		import matrix-funnel
-	}
 	handle {
 		import matrix
 	}
@@ -68,10 +49,6 @@
 	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
 	handle @isDiscordDirectMedia {
 		import matrix-discord-media
-	}
-	@isFunnel header Tailscale-Funnel-Request ?1
-	handle @isFunnel {
-		import matrix-funnel
 	}
 	handle {
 		import matrix
