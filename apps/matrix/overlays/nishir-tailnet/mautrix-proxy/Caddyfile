@@ -29,29 +29,32 @@
 			}
 		}
 	}
-}
-
-(matrix-funnel-http) {
-	@isServerServerApi path /.well-known/matrix/server /_matrix/federation/* /_matrix/key/*
-	handle @isServerServerApi {
-		reverse_proxy http://matrix:8008
-	}
 	handle {
 		respond 404
 	}
 }
 
+(matrix-funnel-http) {
+	@isSynapseSensitive path /_synapse/admin/* /_synapse/replication/* /_synapse/metrics* /_synapse/client/*
+	handle @isSynapseSensitive {
+		respond 404
+	}
+	handle {
+		reverse_proxy http://matrix:8008
+	}
+}
+
 (matrix-funnel-https) {
-	@isServerServerApi path /.well-known/matrix/server /_matrix/federation/* /_matrix/key/*
-	handle @isServerServerApi {
+	@isSynapseSensitive path /_synapse/admin/* /_synapse/replication/* /_synapse/metrics* /_synapse/client/*
+	handle @isSynapseSensitive {
+		respond 404
+	}
+	handle {
 		reverse_proxy https://matrix:8448 {
 			transport http {
 				tls_server_name matrix
 			}
 		}
-	}
-	handle {
-		respond 404
 	}
 }
 
