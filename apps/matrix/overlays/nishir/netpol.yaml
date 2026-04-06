@@ -55,6 +55,9 @@ spec:
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: matrix
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-proxy
       ports:
         - port: http
 ---
