@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: syncthing-replication
   annotations:
-    tailscale.com/hostname: syncthing-replication
     tailscale.com/proxy-class: syncthing
     tailscale.com/tags: tag:syncthing
 spec:

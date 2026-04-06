@@ -4,7 +4,6 @@ metadata:
   name: ftp
   annotations:
     tailscale.com/funnel: "true"
-    tailscale.com/hostname: ftp
     tailscale.com/proxy-class: copyparty
     tailscale.com/tags: tag:ftp
 spec:

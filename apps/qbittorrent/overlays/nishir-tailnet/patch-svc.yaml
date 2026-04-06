@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: qbittorrent-tracker
   annotations:
-    tailscale.com/hostname: qbittorrent-tracker
     tailscale.com/proxy-class: qbittorrent
     tailscale.com/tags: tag:bittorrent
 spec:
