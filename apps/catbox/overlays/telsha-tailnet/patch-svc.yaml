@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: catbox
   annotations:
-    tailscale.com/hostname: catbox
     tailscale.com/proxy-class: catbox
     tailscale.com/tags: tag:ssh
 spec:
