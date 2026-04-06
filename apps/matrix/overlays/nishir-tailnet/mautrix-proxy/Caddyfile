@@ -18,7 +18,7 @@
 }
 
 (matrix-funnel-http) {
-	@isSynapseSensitive path /_synapse/admin/* /_synapse/replication/* /_synapse/metrics* /_synapse/client/*
+	@isSynapse path /_synapse/admin/* /_synapse/replication/* /_synapse/metrics* /_synapse/client/*
 	handle @isSynapse {
 		respond 404
 	}
