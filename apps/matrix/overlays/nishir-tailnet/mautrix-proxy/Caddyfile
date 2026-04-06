@@ -29,9 +29,6 @@
 			}
 		}
 	}
-	handle {
-		respond 404
-	}
 }
 
 (matrix-funnel-http) {
