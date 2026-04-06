@@ -1,5 +1,7 @@
 jobs:
   build-render:
+    env:
+      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
     name: Build & Render
     runs-on: ubuntu-latest
     steps:
@@ -20,8 +22,6 @@ jobs:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - uses: shikanime-studio/actions/direnv@v8
       - uses: shikanime-studio/actions/skaffold/integration@v8
-        with:
-          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
   build-render-profile:
     if: ${{ needs['setup-profiles-jobs'].outputs.continue == 'true' }}
     name: Build & Render (Profile)
@@ -47,7 +47,6 @@ jobs:
       - uses: shikanime-studio/actions/direnv@v8
       - uses: shikanime-studio/actions/skaffold/integration@v8
         with:
-          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
           profile: ${{ matrix.name }}
     strategy:
       fail-fast: false

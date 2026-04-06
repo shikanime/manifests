@@ -157,12 +157,12 @@
                 ];
 
                 github = {
-                  workflows.skaffold = {
-                    enable = true;
-                    settings.integration.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                  };
+                  workflows.skaffold.enable = true;
                   settings.workflows = {
-                    skaffold.on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
+                    skaffold = {
+                      on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
+                      jobs.build-render.env.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                    };
 
                     integration = {
                       on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
