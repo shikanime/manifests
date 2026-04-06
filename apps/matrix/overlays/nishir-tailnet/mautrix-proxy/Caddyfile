@@ -17,18 +17,7 @@
 	}
 }
 
-(matrix-funnel-http) {
-	import mautrix
-	@matrixClient path /_matrix/* /_synapse/client/*
-	handle @matrixClient {
-		reverse_proxy http://matrix:8008
-	}
-	handle {
-		respond 404
-	}
-}
-
-(matrix-funnel-https) {
+(matrix-funnel) {
 	import mautrix
 	@matrixClient path /_matrix/* /_synapse/client/*
 	handle @matrixClient {
@@ -43,7 +32,7 @@
 	}
 }
 
-(matrix-https) {
+(matrix) {
 	import mautrix
 	@matrixClient path /_matrix/* /_synapse/client/*
 	handle @matrixClient {
@@ -52,17 +41,6 @@
 				tls_server_name matrix
 			}
 		}
-	}
-	handle {
-		respond 404
-	}
-}
-
-(matrix-http) {
-	import mautrix
-	@matrixClient path /_matrix/* /_synapse/client/*
-	handle @matrixClient {
-		reverse_proxy http://matrix:8008
 	}
 	handle {
 		respond 404
@@ -77,10 +55,10 @@
 	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
-		import matrix-funnel-http
+		import matrix-funnel
 	}
 	handle {
-		import matrix-http
+		import matrix
 	}
 }
 
@@ -93,9 +71,9 @@
 	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
-		import matrix-funnel-https
+		import matrix-funnel
 	}
 	handle {
-		import matrix-https
+		import matrix
 	}
 }
