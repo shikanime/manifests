@@ -19,8 +19,8 @@
 
 (matrix-funnel) {
 	import mautrix
-	@matrixClient path /_matrix/* /_synapse/client/*
-	handle @matrixClient {
+	@isMatrixClient path /.well-known/matrix/server /_matrix/* /_synapse/client/*
+	handle @isMatrixClient {
 		reverse_proxy https://matrix:8448 {
 			transport http {
 				tls_server_name matrix
@@ -34,8 +34,8 @@
 
 (matrix) {
 	import mautrix
-	@matrixClient path /_matrix/* /_synapse/client/*
-	handle @matrixClient {
+	@isMatrixClient path /.well-known/matrix/server /_matrix/* /_synapse/client/*
+	handle @isMatrixClient {
 		reverse_proxy https://matrix:8448 {
 			transport http {
 				tls_server_name matrix
