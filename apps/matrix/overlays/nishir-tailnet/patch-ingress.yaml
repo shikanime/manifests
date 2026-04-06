@@ -44,6 +44,7 @@ kind: Ingress
 metadata:
   name: matrix-proxy-discord-media
   annotations:
+    tailscale.com/funnel: "true"
     tailscale.com/proxy-class: matrix-proxy
     tailscale.com/tags: tag:web
 spec:

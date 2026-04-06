@@ -10,30 +10,16 @@
 	}
 }
 
-(matrix-discord-media-http) {
+(matrix-discord-media) {
 	@isDiscordDirectMediaApi path /.well-known/matrix/server /_matrix/federation/v1/media/download/* /_matrix/client/v1/media/* /_matrix/media/* /_matrix/key/* /_matrix/federation/v1/version
 	handle @isDiscordDirectMediaApi {
 		reverse_proxy http://matrix-discord:29334
-	}
-	handle {
-		respond 404
-	}
-}
-
-(matrix-discord-media-https) {
-	@isDiscordDirectMediaApi path /.well-known/matrix/server /_matrix/federation/v1/media/download/* /_matrix/client/v1/media/* /_matrix/media/* /_matrix/key/* /_matrix/federation/v1/version
-	handle @isDiscordDirectMediaApi {
-		reverse_proxy https://matrix-discord:29334 {
-			transport http {
-				tls_server_name matrix-discord
-			}
-		}
 	}
 }
 
 (matrix-funnel-http) {
 	@isSynapseSensitive path /_synapse/admin/* /_synapse/replication/* /_synapse/metrics* /_synapse/client/*
-	handle @isSynapseSensitive {
+	handle @isSynapse {
 		respond 404
 	}
 	handle {
@@ -42,8 +28,8 @@
 }
 
 (matrix-funnel-https) {
-	@isSynapseSensitive path /_synapse/admin/* /_synapse/replication/* /_synapse/metrics* /_synapse/client/*
-	handle @isSynapseSensitive {
+	@isSynapse path /_synapse/admin/* /_synapse/replication/* /_synapse/metrics* /_synapse/client/*
+	handle @isSynapse {
 		respond 404
 	}
 	handle {
@@ -73,7 +59,7 @@
 	log
 	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
 	handle @isDiscordDirectMedia {
-		import matrix-discord-media-http
+		import matrix-discord-media
 	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
@@ -89,7 +75,7 @@
 	log
 	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
 	handle @isDiscordDirectMedia {
-		import matrix-discord-media-https
+		import matrix-discord-media
 	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
