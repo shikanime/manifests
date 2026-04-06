@@ -13,29 +13,14 @@
 (matrix-discord-media) {
 	@isDiscordDirectMediaApi path /.well-known/matrix/server /_matrix/federation/v1/media/download/* /_matrix/client/v1/media/* /_matrix/media/* /_matrix/key/* /_matrix/federation/v1/version
 	handle @isDiscordDirectMediaApi {
-		reverse_proxy http://matrix-discord:29334 {
-			header_up Host {host}
-			header_up X-Forwarded-Proto {scheme}
-		}
-	}
-	handle {
-		respond 404
+		reverse_proxy http://matrix-discord:29334
 	}
 }
 
-(matrix-funnel-http) {
-	@isServerServerApi path /.well-known/matrix/server /_matrix/federation/* /_matrix/key/*
-	handle @isServerServerApi {
-		reverse_proxy http://matrix:8008
-	}
-	handle {
-		respond 404
-	}
-}
-
-(matrix-funnel-https) {
-	@isServerServerApi path /.well-known/matrix/server /_matrix/federation/* /_matrix/key/*
-	handle @isServerServerApi {
+(matrix-funnel) {
+	import mautrix
+	@isMatrixClient path /.well-known/matrix/server /_matrix/* /_synapse/client/*
+	handle @isMatrixClient {
 		reverse_proxy https://matrix:8448 {
 			transport http {
 				tls_server_name matrix
@@ -47,18 +32,19 @@
 	}
 }
 
-(matrix-https) {
+(matrix) {
 	import mautrix
-	reverse_proxy https://matrix:8448 {
-		transport http {
-			tls_server_name matrix
+	@isMatrixClient path /.well-known/matrix/server /_matrix/* /_synapse/client/*
+	handle @isMatrixClient {
+		reverse_proxy https://matrix:8448 {
+			transport http {
+				tls_server_name matrix
+			}
 		}
 	}
-}
-
-(matrix-http) {
-	import mautrix
-	reverse_proxy http://matrix:8008
+	handle {
+		respond 404
+	}
 }
 
 :8008 {
@@ -69,10 +55,10 @@
 	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
-		import matrix-funnel-http
+		import matrix-funnel
 	}
 	handle {
-		import matrix-http
+		import matrix
 	}
 }
 
@@ -85,9 +71,9 @@
 	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
-		import matrix-funnel-https
+		import matrix-funnel
 	}
 	handle {
-		import matrix-https
+		import matrix
 	}
 }
