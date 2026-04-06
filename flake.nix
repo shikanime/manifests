@@ -161,7 +161,10 @@
                   settings.workflows = {
                     skaffold = {
                       on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
-                      jobs.build-render.env.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                      jobs = {
+                        build-render.env.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                        build-render-profile.env.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                      };
                     };
 
                     integration = {
