@@ -159,7 +159,7 @@
                 github = {
                   workflows.skaffold = {
                     enable = true;
-                    settings.skaffold-render.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
+                    settings.integration.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
                   };
                   settings.workflows = {
                     skaffold.on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
