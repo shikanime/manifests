@@ -15,12 +15,6 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-    - from:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: matrix-proxy
-      ports:
-        - port: https
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
