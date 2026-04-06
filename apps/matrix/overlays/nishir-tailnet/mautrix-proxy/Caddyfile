@@ -10,16 +10,23 @@
 	}
 }
 
-(matrix-discord-media) {
+(matrix-discord-media-http) {
 	@isDiscordDirectMediaApi path /.well-known/matrix/server /_matrix/federation/v1/media/download/* /_matrix/client/v1/media/* /_matrix/media/* /_matrix/key/* /_matrix/federation/v1/version
 	handle @isDiscordDirectMediaApi {
 		reverse_proxy http://matrix-discord:29334 {
 			header_up Host {host}
-			header_up X-Forwarded-Proto {scheme}
+			header_up X-Forwarded-Proto http
 		}
 	}
-	handle {
-		respond 404
+}
+
+(matrix-discord-media-https) {
+	@isDiscordDirectMediaApi path /.well-known/matrix/server /_matrix/federation/v1/media/download/* /_matrix/client/v1/media/* /_matrix/media/* /_matrix/key/* /_matrix/federation/v1/version
+	handle @isDiscordDirectMediaApi {
+		reverse_proxy http://matrix-discord:29334 {
+			header_up Host {host}
+			header_up X-Forwarded-Proto https
+		}
 	}
 }
 
@@ -61,12 +68,8 @@
 	reverse_proxy http://matrix:8008
 }
 
-:8008 {
+matrix.taila659a.ts.net:8008 {
 	log
-	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
-	handle @isDiscordDirectMedia {
-		import matrix-discord-media
-	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
 		import matrix-funnel-http
@@ -76,13 +79,9 @@
 	}
 }
 
-:8448 {
+matrix.taila659a.ts.net:8448 {
 	tls /etc/ssl/private/tls.crt /etc/ssl/private/tls.key
 	log
-	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
-	handle @isDiscordDirectMedia {
-		import matrix-discord-media
-	}
 	@isFunnel header Tailscale-Funnel-Request ?1
 	handle @isFunnel {
 		import matrix-funnel-https
@@ -90,4 +89,15 @@
 	handle {
 		import matrix-https
 	}
+}
+
+matrix-discord-media.taila659a.ts.net:8008 {
+	log
+	import matrix-discord-media-http
+}
+
+matrix-discord-media.taila659a.ts.net:8448 {
+	tls /etc/ssl/private/tls.crt /etc/ssl/private/tls.key
+	log
+	import matrix-discord-media-https
 }
