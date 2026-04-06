@@ -599,8 +599,8 @@ spec:
                                 cpu: 60
                                 memory: 60
                               targetThresholds:
-                                cpu: 80
-                                memory: 80
+                                cpu: 70
+                                memory: 70
                               metricsUtilization:
                                 source: KubernetesMetrics
                           - name: PodLifeTime
