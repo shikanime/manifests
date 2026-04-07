@@ -166,14 +166,24 @@ spec:
           configMap:
             name: nishir-ca-certificates.crt
         - name: tls
-          secret:
-            secretName: matrix-proxy-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640
+          projected:
+            sources:
+              - secret:
+                  name: matrix-proxy-discord-media-tls
+                  items:
+                    - key: tls.crt
+                      path: matrix-discord-media.taila659a.ts.net.crt
+                    - key: tls.key
+                      path: matrix-discord-media.taila659a.ts.net.key
+                      mode: 0640
+              - secret:
+                  name: matrix-proxy-tls
+                  items:
+                    - key: tls.crt
+                      path: matrix.taila659a.ts.net.crt
+                    - key: tls.key
+                      path: matrix.taila659a.ts.net.key
+                      mode: 0640
 ---
 apiVersion: apps/v1
 kind: StatefulSet

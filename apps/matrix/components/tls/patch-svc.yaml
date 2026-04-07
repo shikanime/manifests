@@ -11,6 +11,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: matrix-proxy-discord-media
+spec:
+  ports:
+    - name: https
+      port: 8448
+      targetPort: https
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: matrix-proxy
 spec:
   ports:

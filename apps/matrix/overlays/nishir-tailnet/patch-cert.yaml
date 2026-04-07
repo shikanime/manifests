@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: matrix-proxy-discord-media-tls
+spec:
+  commonName: matrix-discord-media.taila659a.ts.net
+  dnsNames:
+    - matrix-discord-media.taila659a.ts.net
+  issuerRef:
+    kind: ClusterIssuer
+    name: nishir-gateway
+  secretName: matrix-proxy-discord-media-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: matrix-proxy-tls
+spec:
+  commonName: matrix.taila659a.ts.net
+  dnsNames:
+    - matrix.taila659a.ts.net
+  issuerRef:
+    kind: ClusterIssuer
+    name: nishir-gateway
+  secretName: matrix-proxy-tls

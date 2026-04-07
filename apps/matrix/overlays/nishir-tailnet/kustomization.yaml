@@ -6,7 +6,9 @@ configMapGenerator:
     name: matrix-proxy
 namespace: shikanime
 patches:
+  - path: patch-cert.yaml
   - path: patch-ingress.yaml
+  - path: patch-svc.yaml
 resources:
   - ../nishir
   - netpol.yaml

@@ -31,28 +31,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-proxy
-  annotations:
-    tailscale.com/funnel: "true"
-    tailscale.com/proxy-class: matrix-proxy
-    tailscale.com/tags: tag:web
-spec:
-  ingressClassName: tailscale
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: matrix-proxy-discord-media
-  annotations:
-    tailscale.com/funnel: "true"
-    tailscale.com/proxy-class: matrix-proxy
-    tailscale.com/tags: tag:web
-spec:
-  ingressClassName: tailscale
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
   name: matrix-signal
   annotations:
     tailscale.com/proxy-class: matrix-signal

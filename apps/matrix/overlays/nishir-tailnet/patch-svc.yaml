@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-proxy
+  annotations:
+    tailscale.com/funnel: "true"
+    tailscale.com/proxy-class: matrix-proxy
+    tailscale.com/tags: tag:web
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-proxy-discord-media
+  annotations:
+    tailscale.com/funnel: "true"
+    tailscale.com/proxy-class: matrix-proxy
+    tailscale.com/tags: tag:web
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale

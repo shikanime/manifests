@@ -1,15 +1,15 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: matrix-tls
+  name: matrix-proxy-discord-media-tls
 spec:
   commonName: matrix
   dnsNames:
-    - matrix
+    - matrix-proxy-discord-media
   issuerRef:
     kind: ClusterIssuer
     name: nishir
-  secretName: matrix-tls
+  secretName: matrix-proxy-discord-media-tls
   usages:
     - digital signature
     - key encipherment
@@ -27,6 +27,23 @@ spec:
     kind: ClusterIssuer
     name: nishir
   secretName: matrix-proxy-tls
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: matrix-tls
+spec:
+  commonName: matrix
+  dnsNames:
+    - matrix
+  issuerRef:
+    kind: ClusterIssuer
+    name: nishir
+  secretName: matrix-tls
   usages:
     - digital signature
     - key encipherment

@@ -44,13 +44,14 @@
 }
 
 :8448 {
-	tls /etc/ssl/private/tls.crt /etc/ssl/private/tls.key
 	log
 	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
 	handle @isDiscordDirectMedia {
+		tls /etc/ssl/private/matrix-discord-media.taila659a.ts.net.crt /etc/ssl/private/matrix-discord-media.taila659a.ts.net.key
 		import matrix-discord-media
 	}
 	handle {
+		tls /etc/ssl/private/matrix.taila659a.ts.net.crt /etc/ssl/private/matrix.taila659a.ts.net.key
 		import matrix
 	}
 }

@@ -80,6 +80,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: matrix-proxy-discord-media
+spec:
+  ports:
+    - name: http
+      port: 8008
+      targetPort: http
+  selector:
+    app.kubernetes.io/name: matrix-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: matrix-signal
 spec:
   ports:
