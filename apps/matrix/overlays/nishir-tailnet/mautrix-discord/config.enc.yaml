@@ -168,7 +168,7 @@ bridge:
   # More details can be found at https://docs.mau.fi/bridges/go/discord/direct-media.html
   direct_media:
     # Should custom mxc:// URIs be used instead of reuploading media?
-    enabled: true
+    enabled: false
     # The server name to use for the custom mxc:// URIs.
     # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
     # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
@@ -402,7 +402,7 @@ sops:
         UG1nbmJqMGk1Y2REY05Sb3I0RGRGTXMKkjKlYcbVvkMUaltlsfDSN+ckg4p+Fvi3
         X2cjPxvN/IDqCsFZTdlGc+am1b4dtEFyXeXzsjpAAZqITWuXNjzy/Q==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-04T17:56:36Z"
-  mac: ENC[AES256_GCM,data:jJjWi5QJ16yDLDcIz1Fpd+nWsG/d+eCPm84FMZ+2nEOhNeHQhSmKi1IXIUOqHrrqbpHWUAVN9V7ISjqDtyNp2lOjbL3B02nJTKMG19nn7Uq6mqHUqY/ISBXKhOxAApZm0uPSzV85KVMrm9Ocy8M8yXALxORceb9DGXELO7zoJbI=,iv:wxbxUjKpnsM0tlaFMkC/AYlBIY2pRzrDlt+3g/Hpqro=,tag:sN+TjolH7Nu81Z9IoeNakQ==,type:str]
+  lastmodified: "2026-04-07T09:53:44Z"
+  mac: ENC[AES256_GCM,data:CZ3xusaljxgS4Y4XfFQJQVqpWQnRs0UWeYrf0KczMOh3kW99H9WF3BKCN3M0L7YK0aOhvtCgTDITmqIoKcXWKOX26P22inaGH+6ywRnxM1dXu9WuhfskvzBPCLQeHHl4/jDluKj3KNihmEp9LaBITJM4ezU9Dwdu/ZlVAMSGToQ=,iv:NXxqSv/GZtKZfrrcPZCHwisEAWS3B7T3+aN9Q+sZiU8=,tag:xSRHMw4cphZXHAGqltnzTA==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2
