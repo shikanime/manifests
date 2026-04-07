@@ -638,8 +638,6 @@ spec:
                           - name: LowNodeUtilization
                             args:
                               useDeviationThresholds: true
-                              resourceNames:
-                                - cpu
                               thresholds:
                                 cpu: 5
                               targetThresholds:
@@ -652,8 +650,6 @@ spec:
                           - name: LowNodeUtilization
                             args:
                               useDeviationThresholds: true
-                              resourceNames:
-                                - memory
                               thresholds:
                                 memory: 5
                               targetThresholds:
