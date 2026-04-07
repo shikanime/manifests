@@ -100,18 +100,6 @@ spec:
       labels:
         app.kubernetes.io/name: metatube
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - jellyfin
-                topologyKey: kubernetes.io/hostname
-              weight: 100
       containers:
         - name: metatube
           image: metatube
