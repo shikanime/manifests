@@ -51,3 +51,11 @@ the flake evaluates.
 - Prefer Kustomize patches/components over duplicating manifests across overlays.
 - Keep overlays minimal: patch only what differs per cluster/overlay.
 - Avoid changing generated/decrypted files; change the encrypted source instead.
+- Keep `kustomization.yaml` lists (resources, patches, generators) sorted.
+- Within multi-document YAML files, keep resources sorted by `metadata.name` (or
+  `name` where applicable), and keep YAML keys ordered the way the Kubernetes
+  API typically emits them (`apiVersion`, `kind`, `metadata`, `spec`, ...).
+- Group same-kind resources into `svc.yaml`, `ingress.yaml`, `cert.yaml`, etc.
+  Avoid per-resource filenames.
+- Split overlay patches by purpose/kind (for example `patch-svc.yaml`,
+  `patch-ingress.yaml`, `cert.yaml`).
