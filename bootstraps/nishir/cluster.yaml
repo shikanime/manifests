@@ -592,17 +592,6 @@ spec:
                       - name: default
                         pluginConfig:
                           - name: DefaultEvictor
-                          - name: LowNodeUtilization
-                            args:
-                              useDeviationThresholds: true
-                              thresholds:
-                                cpu: 60
-                                memory: 60
-                              targetThresholds:
-                                cpu: 70
-                                memory: 70
-                              metricsUtilization:
-                                source: KubernetesMetrics
                           - name: PodLifeTime
                             args:
                               maxPodLifeTimeSeconds: 3600
@@ -635,11 +624,6 @@ spec:
                           - name: RemovePodsViolatingNodeTaints
                           - name: RemovePodsViolatingTopologySpreadConstraint
                         plugins:
-                          balance:
-                            enabled:
-                              - LowNodeUtilization
-                              - RemoveDuplicates
-                              - RemovePodsViolatingTopologySpreadConstraint
                           deschedule:
                             enabled:
                               - PodLifeTime
@@ -648,6 +632,48 @@ spec:
                               - RemovePodsViolatingInterPodAntiAffinity
                               - RemovePodsViolatingNodeAffinity
                               - RemovePodsViolatingNodeTaints
+                      - name: cpu
+                        pluginConfig:
+                          - name: DefaultEvictor
+                          - name: LowNodeUtilization
+                            args:
+                              useDeviationThresholds: true
+                              thresholds:
+                                cpu: 5
+                              targetThresholds:
+                                cpu: 5
+                              metricsUtilization:
+                                source: KubernetesMetrics
+                      - name: memory
+                        pluginConfig:
+                          - name: DefaultEvictor
+                          - name: LowNodeUtilization
+                            args:
+                              useDeviationThresholds: true
+                              thresholds:
+                                memory: 5
+                              targetThresholds:
+                                memory: 5
+                              metricsUtilization:
+                                source: KubernetesMetrics
+                        plugins:
+                          balance:
+                            enabled:
+                              - LowNodeUtilization
+                        plugins:
+                          balance:
+                            enabled:
+                              - LowNodeUtilization
+                      - name: spread
+                        pluginConfig:
+                          - name: DefaultEvictor
+                          - name: RemoveDuplicates
+                          - name: RemovePodsViolatingTopologySpreadConstraint
+                        plugins:
+                          balance:
+                            enabled:
+                              - RemoveDuplicates
+                              - RemovePodsViolatingTopologySpreadConstraint
               - name: tailscale-operator
                 chartname: tailscale/tailscale-operator
                 version: 1.94.2
