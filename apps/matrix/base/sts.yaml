@@ -13,18 +13,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/part-of
-                      operator: NotIn
-                      values:
-                        - nishir-office
-                topologyKey: kubernetes.io/hostname
-              weight: 100
       initContainers:
         - name: config-sync
           image: rclone
@@ -246,18 +234,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-discord
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
@@ -346,18 +322,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-googlechat
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
@@ -446,18 +410,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-linkedin
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
@@ -546,18 +498,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-meta
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
@@ -646,18 +586,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-signal
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
@@ -746,18 +674,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-slack
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
@@ -846,18 +762,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-twitter
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
@@ -946,18 +850,6 @@ spec:
       labels:
         app.kubernetes.io/name: matrix-whatsapp
     spec:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/name
-                      operator: In
-                      values:
-                        - matrix
-                topologyKey: kubernetes.io/hostname
-              weight: 80
       initContainers:
         - name: config-sync
           image: rclone
