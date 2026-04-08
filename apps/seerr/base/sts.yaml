@@ -13,18 +13,6 @@ spec:
       labels:
         app.kubernetes.io/name: seerr
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/component
-                      operator: In
-                      values:
-                        - media-server
-                topologyKey: kubernetes.io/hostname
-              weight: 100
       containers:
         - name: seerr
           image: seerr

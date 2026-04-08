@@ -13,18 +13,6 @@ spec:
       labels:
         app.kubernetes.io/name: jellyfin
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/part-of
-                      operator: NotIn
-                      values:
-                        - nishir-media
-                topologyKey: kubernetes.io/hostname
-              weight: 100
       containers:
         - name: jellyfin
           image: jellyfin

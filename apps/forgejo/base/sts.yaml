@@ -33,18 +33,6 @@ spec:
               readOnly: true
             - name: config
               mountPath: /mnt/startup-config
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app.kubernetes.io/part-of
-                      operator: NotIn
-                      values:
-                        - nishir-platform
-                topologyKey: kubernetes.io/hostname
-              weight: 100
       containers:
         - name: forgejo
           image: forgejo
