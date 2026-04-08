@@ -639,9 +639,9 @@ spec:
                             args:
                               useDeviationThresholds: true
                               thresholds:
-                                cpu: 5
+                                cpu: 10
                               targetThresholds:
-                                cpu: 5
+                                cpu: 10
                               metricsUtilization:
                                 source: KubernetesMetrics
                       - name: memory
