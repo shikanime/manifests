@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rclone-move-hane-ame
+  namespace: shikanime
+spec:
+  backoffLimit: 5
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: rclone
+          image: docker.io/rclone/rclone:1.72.0
+          command:
+            - rclone
+          args:
+            - move
+            - /download-data/prowlarr/Hane Ame
+            - /sukebe-data/Photos/Hane Ame
+            - --delete-empty-src-dirs
+            - --progress
+            - --retries
+            - "3"
+          volumeMounts:
+            - name: downloads-data
+              mountPath: /download-data
+            - name: sukebe-data
+              mountPath: /sukebe-data
+      volumes:
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data
