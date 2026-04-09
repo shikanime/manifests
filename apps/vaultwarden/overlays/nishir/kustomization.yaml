@@ -11,5 +11,5 @@ resources:
   - cert.yaml
 secretGenerator:
   - envs:
-      - vaultwarden/.env
+      - vaultwarden/.enc.env
     name: vaultwarden

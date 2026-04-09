@@ -14,5 +14,5 @@ resources:
   - netpol.yaml
 secretGenerator:
   - envs:
-      - prowlarr/.env
+      - prowlarr/.enc.env
     name: prowlarr-pkcs12-password
