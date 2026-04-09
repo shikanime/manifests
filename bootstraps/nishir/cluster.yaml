@@ -606,10 +606,12 @@ spec:
                             args:
                               reasons:
                                 - ContainerCannotRun
+                                - ContainerStatusUnknown
                                 - CrashLoopBackOff
                                 - CreateContainerConfigError
                                 - CreateContainerError
                                 - ErrImagePull
+                                - Error
                                 - FailedMount
                                 - ImagePullBackOff
                                 - RunContainerError
