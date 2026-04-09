@@ -592,6 +592,10 @@ spec:
                       - name: default
                         pluginConfig:
                           - name: DefaultEvictor
+                            args:
+                              podProtections:
+                                defaultDisabled:
+                                  - PodsWithPVC
                           - name: PodLifeTime
                             args:
                               maxPodLifeTimeSeconds: 3600
