@@ -113,9 +113,11 @@ spec:
         connect:
           after:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
+            - apt-get install -y age dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
             - systemd-tmpfiles --create
             - sysctl --system
+            - k0s kubectl wait --for=create namespace/flux-system --timeout=300s
+            - sh -c 'k0s kubectl -n flux-system get secret sops-age >/dev/null 2>&1 || (age-keygen | k0s kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin --dry-run=client -o yaml | k0s kubectl apply -f -)'
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
       noTaints: true
@@ -605,10 +607,8 @@ spec:
                           target:
                             kind: Kustomization
                     sync:
-                      interval: 1m
                       kind: GitRepository
                       path: clusters/nishir/overlays/tailnet
-                      provider: github
                       ref: refs/heads/main
                       url: https://github.com/shikanime/manifests.git
               - name: descheduler
