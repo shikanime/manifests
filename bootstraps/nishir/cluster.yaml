@@ -5,107 +5,22 @@ metadata:
 spec:
   hosts:
     - files:
-        - data: |
-            [device-mac-randomization]
-            wifi.scan-rand-mac-address=yes
-
-            [connection]
-            wifi.cloned-mac-address=permanent
-            ethernet.cloned-mac-address=permanent
+        - src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
           name: mac-randomization
-        - data: |
-            # Allow many inotify instances for controllers and Syncthing
-            fs.inotify.max_user_instances=8192
-            # Allow many watched paths for large libraries (Syncthing/copyparty)
-            fs.inotify.max_user_watches=524288
-            # Raise system-wide open files to prevent global exhaustion
-            fs.file-max=2097152
-            # Auto-reboot 10s after panic to restore availability
-            kernel.panic=10
-            # Panic on kernel oops for fast node recovery
-            kernel.panic_on_oops=1
-            # Increase conntrack capacity for Kubernetes NAT
-            net.netfilter.nf_conntrack_max=262144
+        - src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
           name: systctl-k8s
-        - data: |
-            # Fair queuing qdisc; synergizes with BBR
-            net.core.default_qdisc=fq
-            # Increase ingress backlog for bursty overlay traffic (Calico/Tailscale)
-            net.core.netdev_max_backlog=16384
-            # Raise default socket receive buffer for large transfers
-            net.core.rmem_default=7340032
-            # Allow larger autotuned receive buffers
-            net.core.rmem_max=16777216
-            # Increase accept backlog for busy services (Jellyfin/copyparty)
-            net.core.somaxconn=65535
-            # Raise default socket send buffer
-            net.core.wmem_default=7340032
-            # Allow larger autotuned send buffers
-            net.core.wmem_max=16777216
-            # Enable IPv4 forwarding for Kubernetes/overlay networking
-            net.ipv4.ip_forward=1
-            # Relax rp_filter for asymmetric routing via Tailscale subnet router
-            net.ipv4.conf.all.rp_filter=0
-            net.ipv4.conf.default.rp_filter=0
-            net.ipv4.conf.tailscale0.rp_filter=0
-            # Widen ephemeral port range to avoid exhaustion
-            net.ipv4.ip_local_port_range=1024 65535
-            # BBR congestion control for better throughput/latency
-            net.ipv4.tcp_congestion_control=bbr
-            # Free sockets sooner under load
-            net.ipv4.tcp_fin_timeout=30
-            # Maintain long-lived connections without frequent probes
-            net.ipv4.tcp_keepalive_time=600
-            # Enable PMTU probing for overlays/Tailnet
-            net.ipv4.tcp_mtu_probing=1
-            # Expand TCP autotuning bounds (recv)
-            net.ipv4.tcp_rmem=4096 87380 16777216
-            # Expand TCP autotuning bounds (send)
-            net.ipv4.tcp_wmem=4096 65536 16777216
+        - src: files/sysctl/20-network.conf
           dst: /etc/sysctl.d/20-network.conf
           name: systctl-network
-        - data: |
-            # NVMe: increase background writeback for higher throughput
-            vm.dirty_background_ratio=10
-            # NVMe: delay expiration to allow larger merges (20s)
-            vm.dirty_expire_centisecs=2000
-            # NVMe: allow more dirty pages to utilize fast storage
-            vm.dirty_ratio=20
-            # NVMe: schedule writeback frequency (5s)
-            vm.dirty_writeback_centisecs=500
-            # Support many mmap/large indices/filesystems
-            vm.max_map_count=262144
-            # Allow moderate memory overcommit for containers
-            vm.overcommit_memory=1
-            # Disable readahead for lower latency
-            vm.page-cluster=0
-            # Swappiness 10 to minimize swap pressure on zram
-            vm.swappiness=10
-            # Favor inode/dentry caching for large media libraries
-            vm.vfs_cache_pressure=50
-            # Watermark boost factor 0
-            vm.watermark_boost_factor=0
-            # Watermark scale factor 125 (1.25% of RAM)
-            vm.watermark_scale_factor=125
+        - src: files/sysctl/40-vm-nvme.conf
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
-        - data: |
-            L /var/lib/containerd - - - - ./k0s/containerd
-            L /var/lib/k0s - - - - ../../mnt/nishir/k0s
-            L /var/lib/kubelet - - - - ./k0s/kubelet
-            L /var/lib/longhorn - - - - ../../mnt/nishir/longhorn
-            L /var/log/calico - - - - ../../mnt/nishir/log/calico
-            L /var/log/containers - - - - ../../mnt/nishir/log/containers
-            L /var/log/pods - - - - ../../mnt/nishir/log/pods
-            L /var/swap - - - - ../../mnt/nishir/swap
+        - src: files/tmpfiles/mnt-nishir-k0s.conf
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
           name: tmpfiles
-        - data: |
-            #!/bin/sh
-
-            ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
+        - src: files/networkd-dispatcher/50-tailscale
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           name: networkd-dispatcher-tailscale
           perm: '0755'
@@ -126,107 +41,22 @@ spec:
         address: 100.65.153.31
         user: root
     - files:
-        - data: |
-            [device-mac-randomization]
-            wifi.scan-rand-mac-address=yes
-
-            [connection]
-            wifi.cloned-mac-address=permanent
-            ethernet.cloned-mac-address=permanent
+        - src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
           name: mac-randomization
-        - data: |
-            # Allow many inotify instances for controllers and Syncthing
-            fs.inotify.max_user_instances=8192
-            # Allow many watched paths for large libraries (Syncthing/copyparty)
-            fs.inotify.max_user_watches=524288
-            # Raise system-wide open files to prevent global exhaustion
-            fs.file-max=2097152
-            # Auto-reboot 10s after panic to restore availability
-            kernel.panic=10
-            # Panic on kernel oops for fast node recovery
-            kernel.panic_on_oops=1
-            # Increase conntrack capacity for Kubernetes NAT
-            net.netfilter.nf_conntrack_max=262144
+        - src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
           name: systctl-k8s
-        - data: |
-            # Fair queuing qdisc; synergizes with BBR
-            net.core.default_qdisc=fq
-            # Increase ingress backlog for bursty overlay traffic (Calico/Tailscale)
-            net.core.netdev_max_backlog=16384
-            # Raise default socket receive buffer for large transfers
-            net.core.rmem_default=7340032
-            # Allow larger autotuned receive buffers
-            net.core.rmem_max=16777216
-            # Increase accept backlog for busy services (Jellyfin/copyparty)
-            net.core.somaxconn=65535
-            # Raise default socket send buffer
-            net.core.wmem_default=7340032
-            # Allow larger autotuned send buffers
-            net.core.wmem_max=16777216
-            # Enable IPv4 forwarding for Kubernetes/overlay networking
-            net.ipv4.ip_forward=1
-            # Relax rp_filter for asymmetric routing via Tailscale subnet router
-            net.ipv4.conf.all.rp_filter=0
-            net.ipv4.conf.default.rp_filter=0
-            net.ipv4.conf.tailscale0.rp_filter=0
-            # Widen ephemeral port range to avoid exhaustion
-            net.ipv4.ip_local_port_range=1024 65535
-            # BBR congestion control for better throughput/latency
-            net.ipv4.tcp_congestion_control=bbr
-            # Free sockets sooner under load
-            net.ipv4.tcp_fin_timeout=30
-            # Maintain long-lived connections without frequent probes
-            net.ipv4.tcp_keepalive_time=600
-            # Enable PMTU probing for overlays/Tailnet
-            net.ipv4.tcp_mtu_probing=1
-            # Expand TCP autotuning bounds (recv)
-            net.ipv4.tcp_rmem=4096 87380 16777216
-            # Expand TCP autotuning bounds (send)
-            net.ipv4.tcp_wmem=4096 65536 16777216
+        - src: files/sysctl/20-network.conf
           dst: /etc/sysctl.d/20-network.conf
           name: systctl-network
-        - data: |
-            # SATA SSD: background writeback tuned for balanced IO
-            vm.dirty_background_ratio=5
-            # SATA SSD: expire dirty data moderately for merges (15s)
-            vm.dirty_expire_centisecs=1500
-            # SATA SSD: limit dirty pages to reduce IO spikes
-            vm.dirty_ratio=15
-            # SATA SSD: writeback cadence (5s)
-            vm.dirty_writeback_centisecs=500
-            # Support many mmap/large indices/filesystems
-            vm.max_map_count=262144
-            # Allow moderate memory overcommit for containers
-            vm.overcommit_memory=1
-            # Disable readahead for lower latency
-            vm.page-cluster=0
-            # Swappiness 10 to minimize swap pressure on zram
-            vm.swappiness=10
-            # Favor inode/dentry caching for large media libraries
-            vm.vfs_cache_pressure=50
-            # Watermark boost factor 0
-            vm.watermark_boost_factor=0
-            # Watermark scale factor 125 (1.25% of RAM)
-            vm.watermark_scale_factor=125
+        - src: files/sysctl/40-vm-sata.conf
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
-        - data: |
-            L /var/lib/containerd - - - - ./k0s/containerd
-            L /var/lib/k0s - - - - ../../mnt/reimu/k0s
-            L /var/lib/kubelet - - - - ./k0s/kubelet
-            L /var/lib/longhorn - - - - ../../mnt/reimu/longhorn
-            L /var/log/calico - - - - ../../mnt/reimu/log/calico
-            L /var/log/containers - - - - ../../mnt/reimu/log/containers
-            L /var/log/pods - - - - ../../mnt/reimu/log/pods
-            L /var/swap - - - - ../../mnt/reimu/swap
+        - src: files/tmpfiles/mnt-reimu-k0s.conf
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
           name: tmpfiles
-        - data: |
-            #!/bin/sh
-
-            ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
+        - src: files/networkd-dispatcher/50-tailscale
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           name: networkd-dispatcher-tailscale
           perm: '0755'
@@ -244,107 +74,22 @@ spec:
         address: 100.94.149.17
         user: root
     - files:
-        - data: |
-            [device-mac-randomization]
-            wifi.scan-rand-mac-address=yes
-
-            [connection]
-            wifi.cloned-mac-address=permanent
-            ethernet.cloned-mac-address=permanent
+        - src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
           name: mac-randomization
-        - data: |
-            # Allow many inotify instances for controllers and Syncthing
-            fs.inotify.max_user_instances=8192
-            # Allow many watched paths for large libraries (Syncthing/copyparty)
-            fs.inotify.max_user_watches=524288
-            # Raise system-wide open files to prevent global exhaustion
-            fs.file-max=2097152
-            # Auto-reboot 10s after panic to restore availability
-            kernel.panic=10
-            # Panic on kernel oops for fast node recovery
-            kernel.panic_on_oops=1
-            # Increase conntrack capacity for Kubernetes NAT
-            net.netfilter.nf_conntrack_max=262144
+        - src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
           name: systctl-k8s
-        - data: |
-            # Fair queuing qdisc; synergizes with BBR
-            net.core.default_qdisc=fq
-            # Increase ingress backlog for bursty overlay traffic (Calico/Tailscale)
-            net.core.netdev_max_backlog=16384
-            # Raise default socket receive buffer for large transfers
-            net.core.rmem_default=7340032
-            # Allow larger autotuned receive buffers
-            net.core.rmem_max=16777216
-            # Increase accept backlog for busy services (Jellyfin/copyparty)
-            net.core.somaxconn=65535
-            # Raise default socket send buffer
-            net.core.wmem_default=7340032
-            # Allow larger autotuned send buffers
-            net.core.wmem_max=16777216
-            # Enable IPv4 forwarding for Kubernetes/overlay networking
-            net.ipv4.ip_forward=1
-            # Relax rp_filter for asymmetric routing via Tailscale subnet router
-            net.ipv4.conf.all.rp_filter=0
-            net.ipv4.conf.default.rp_filter=0
-            net.ipv4.conf.tailscale0.rp_filter=0
-            # Widen ephemeral port range to avoid exhaustion
-            net.ipv4.ip_local_port_range=1024 65535
-            # BBR congestion control for better throughput/latency
-            net.ipv4.tcp_congestion_control=bbr
-            # Free sockets sooner under load
-            net.ipv4.tcp_fin_timeout=30
-            # Maintain long-lived connections without frequent probes
-            net.ipv4.tcp_keepalive_time=600
-            # Enable PMTU probing for overlays/Tailnet
-            net.ipv4.tcp_mtu_probing=1
-            # Expand TCP autotuning bounds (recv)
-            net.ipv4.tcp_rmem=4096 87380 16777216
-            # Expand TCP autotuning bounds (send)
-            net.ipv4.tcp_wmem=4096 65536 16777216
+        - src: files/sysctl/20-network.conf
           dst: /etc/sysctl.d/20-network.conf
           name: systctl-network
-        - data: |
-            # SATA SSD: background writeback tuned for balanced IO
-            vm.dirty_background_ratio=5
-            # SATA SSD: expire dirty data moderately for merges (15s)
-            vm.dirty_expire_centisecs=1500
-            # SATA SSD: limit dirty pages to reduce IO spikes
-            vm.dirty_ratio=15
-            # SATA SSD: writeback cadence (5s)
-            vm.dirty_writeback_centisecs=500
-            # Support many mmap/large indices/filesystems
-            vm.max_map_count=262144
-            # Allow moderate memory overcommit for containers
-            vm.overcommit_memory=1
-            # Disable readahead for lower latency
-            vm.page-cluster=0
-            # Swappiness 10 to minimize swap pressure on zram
-            vm.swappiness=10
-            # Favor inode/dentry caching for large media libraries
-            vm.vfs_cache_pressure=50
-            # Watermark boost factor 0
-            vm.watermark_boost_factor=0
-            # Watermark scale factor 125 (1.25% of RAM)
-            vm.watermark_scale_factor=125
+        - src: files/sysctl/40-vm-sata.conf
           dst: /etc/sysctl.d/40-vm.conf
           name: systctl-vm
-        - data: |
-            L /var/lib/containerd - - - - ./k0s/containerd
-            L /var/lib/k0s - - - - ../../mnt/marisa/k0s
-            L /var/lib/kubelet - - - - ./k0s/kubelet
-            L /var/lib/longhorn - - - - ../../mnt/marisa/longhorn
-            L /var/log/calico - - - - ../../mnt/marisa/log/calico
-            L /var/log/containers - - - - ../../mnt/marisa/log/containers
-            L /var/log/pods - - - - ../../mnt/marisa/log/pods
-            L /var/swap - - - - ../../mnt/marisa/swap
+        - src: files/tmpfiles/mnt-marisa-k0s.conf
           dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
           name: tmpfiles
-        - data: |
-            #!/bin/sh
-
-            ethtool -K $(ip route show 0/0 | cut -f5 -d" ") rx-udp-gro-forwarding on rx-gro-list off
+        - src: files/networkd-dispatcher/50-tailscale
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           name: networkd-dispatcher-tailscale
           perm: '0755'
