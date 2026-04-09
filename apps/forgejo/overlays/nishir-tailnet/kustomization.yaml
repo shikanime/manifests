@@ -11,4 +11,4 @@ resources:
 secretGenerator:
   - name: forgejo-config
     files:
-      - forgejo/app.ini
+      - app.ini=forgejo/app.enc.ini
