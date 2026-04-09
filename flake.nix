@@ -127,23 +127,6 @@
                       ];
                     };
                 };
-
-                tasks."sops:decrypt" = {
-                  after = [ "sops:cleanup" ];
-                  exec = ''
-                    find . -type f -name '*.enc.*' | while read -r enc; do
-                      ${getExe pkgs.sops} --decrypt "$enc" > "''${enc%.enc.*}.''${enc##*.enc.}"
-                    done
-                  '';
-                };
-                tasks."sops:cleanup".exec = ''
-                  find . -type f -name '*.enc.*' | while read -r enc; do
-                    dec="''${enc%.enc.*}.''${enc##*.enc.}"
-                    if [ -f "$dec" ]; then
-                      rm -f "$dec"
-                    fi
-                  done
-                '';
               }
             ];
 
@@ -157,28 +140,7 @@
                   devlib.devenvModules.shikanime
                 ];
 
-                github = {
-                  workflows.skaffold.enable = true;
-                  settings.workflows = {
-                    skaffold = {
-                      on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
-                      jobs = {
-                        build-render.env.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                        build-render-profile.env.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                      };
-                    };
-
-                    integration = {
-                      on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
-                      jobs.skaffold.secrets.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                    };
-
-                    release = {
-                      on.workflow_call.secrets.SOPS_AGE_KEY.required = mkDefault true;
-                      jobs.skaffold.secrets.SOPS_AGE_KEY = "\${{ secrets.SOPS_AGE_KEY }}";
-                    };
-                  };
-                };
+                github.workflows.skaffold.enable = true;
 
                 gitignore.content = [
                   "apps/matrix/overlays/*/synapse/homeserver.yaml"

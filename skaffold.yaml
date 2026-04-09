@@ -7,21 +7,6 @@ profiles:
     activation:
       - kubeContext: nishir-k8s-operator.taila659a.ts.net
     manifests:
-      hooks:
-        before:
-          - host:
-              command:
-                - devenv
-                - tasks
-                - run
-                - sops:decrypt
-        after:
-          - host:
-              command:
-                - devenv
-                - tasks
-                - run
-                - sops:cleanup
       kustomize:
         paths:
           - clusters/nishir/overlays/tailnet
@@ -29,21 +14,6 @@ profiles:
     activation:
       - kubeContext: rancher-desktop
     manifests:
-      hooks:
-        before:
-          - host:
-              command:
-                - devenv
-                - tasks
-                - run
-                - sops:decrypt
-        after:
-          - host:
-              command:
-                - devenv
-                - tasks
-                - run
-                - sops:cleanup
       kustomize:
         paths:
           - clusters/telsha/overlays/tailnet

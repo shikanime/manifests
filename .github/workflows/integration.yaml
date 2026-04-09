@@ -11,7 +11,6 @@ jobs:
     if: ${{ github.event_name == 'workflow_call' || github.event.pull_request.draft == false }}
     secrets:
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
     uses: ./.github/workflows/skaffold.yaml
 name: Integration
 'on':
@@ -29,8 +28,6 @@ name: Integration
       CACHIX_AUTH_TOKEN:
         required: false
       OPERATOR_PRIVATE_KEY:
-        required: true
-      SOPS_AGE_KEY:
         required: true
 permissions:
   contents: read
