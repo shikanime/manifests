@@ -625,8 +625,10 @@ spec:
                           - name: DefaultEvictor
                             args:
                               podProtections:
-                                defaultDisabled:
+                                extraEnabled:
+                                  - PodsWithoutPDB
                                   - PodsWithPVC
+                                  - PodsWithResourceClaims
                           - name: PodLifeTime
                             args:
                               maxPodLifeTimeSeconds: 3600
