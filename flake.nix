@@ -187,9 +187,11 @@
                 ];
 
                 packages = [
+                  pkgs.age
                   pkgs.caddy
                   pkgs.clusterctl
                   pkgs.docker
+                  pkgs.fluxcd-operator
                   pkgs.k0sctl
                   pkgs.kubectl
                   pkgs.kubernetes-helm
