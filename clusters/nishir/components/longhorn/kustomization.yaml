@@ -6,7 +6,7 @@ resources:
   - storageclass.yaml
 secretGenerator:
   - envs:
-      - longhorn-hetzner-backups/.env
+      - longhorn-hetzner-backups/.enc.env
     name: longhorn-hetzner-backups
     namespace: longhorn-system
     options:

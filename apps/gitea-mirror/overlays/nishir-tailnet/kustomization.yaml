@@ -10,5 +10,5 @@ resources:
   - proxyclass.yaml
 secretGenerator:
   - name: gitea-mirror
-    files:
-      - gitea-mirror/.env
+    envs:
+      - gitea-mirror/.enc.env
