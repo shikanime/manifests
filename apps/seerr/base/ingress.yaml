@@ -8,3 +8,6 @@ spec:
       name: seerr
       port:
         name: http
+  tls:
+    - hosts:
+        - seerr
