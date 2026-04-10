@@ -8,6 +8,3 @@ spec:
       name: bazarr
       port:
         name: http
-  tls:
-    - hosts:
-        - bazarr

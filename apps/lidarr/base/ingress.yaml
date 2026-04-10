@@ -8,6 +8,3 @@ spec:
       name: lidarr
       port:
         name: http
-  tls:
-    - hosts:
-        - lidarr

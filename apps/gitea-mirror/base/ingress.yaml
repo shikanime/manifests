@@ -8,6 +8,3 @@ spec:
       name: gitea-mirror
       port:
         name: http
-  tls:
-    - hosts:
-        - gitea-mirror
