@@ -4,3 +4,7 @@ namespace: shikanime
 resources:
   - ../../base
   - pvc.yaml
+secretGenerator:
+  - envs:
+      - hermes-agent/.enc.env
+    name: hermes-agent

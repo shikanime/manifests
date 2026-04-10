@@ -13,12 +13,27 @@ spec:
       labels:
         app.kubernetes.io/name: hermes-agent
     spec:
+      initContainers:
+        - name: hermes-setup
+          image: hermes-agent
+          args:
+            - setup
+            - --non-interactive
+          envFrom:
+            - secretRef:
+                name: hermes-agent
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
       containers:
         - name: hermes-agent
           image: hermes-agent
           args:
             - gateway
             - run
+          envFrom:
+            - secretRef:
+                name: hermes-agent
           volumeMounts:
             - name: data
               mountPath: /opt/data
