@@ -45,7 +45,7 @@ metadata:
   name: matrix-discord-media
   annotations:
     tailscale.com/funnel: "true"
-    tailscale.com/proxy-class: matrix-discord-media
+    tailscale.com/proxy-class: matrix
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

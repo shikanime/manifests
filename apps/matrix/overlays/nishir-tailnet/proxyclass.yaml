@@ -37,25 +37,6 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: matrix-discord-media
-spec:
-  statefulSet:
-    pod:
-      affinity:
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: matrix-discord-media
-                namespaces:
-                  - shikanime
-                topologyKey: kubernetes.io/hostname
----
-apiVersion: tailscale.com/v1alpha1
-kind: ProxyClass
-metadata:
   name: matrix-googlechat
 spec:
   statefulSet:
