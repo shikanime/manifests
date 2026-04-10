@@ -8,6 +8,3 @@ spec:
       name: syncthing
       port:
         name: http
-  tls:
-    - hosts:
-        - syncthing

@@ -8,6 +8,3 @@ spec:
       name: vaultwarden
       port:
         name: http
-  tls:
-    - hosts:
-        - vaultwarden

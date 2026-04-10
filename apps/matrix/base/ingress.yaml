@@ -8,9 +8,6 @@ spec:
       name: matrix-discord
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-discord
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -22,9 +19,6 @@ spec:
       name: matrix-googlechat
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-googlechat
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -36,9 +30,6 @@ spec:
       name: matrix-linkedin
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-linkedin
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -50,23 +41,17 @@ spec:
       name: matrix-meta
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-meta
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-proxy
+  name: matrix
 spec:
   defaultBackend:
     service:
       name: matrix-proxy
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -78,9 +63,6 @@ spec:
       name: matrix-proxy
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-discord-media
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -92,9 +74,6 @@ spec:
       name: matrix-signal
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-signal
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -106,9 +85,6 @@ spec:
       name: matrix-slack
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-slack
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -120,9 +96,6 @@ spec:
       name: matrix-twitter
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-twitter
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -134,6 +107,3 @@ spec:
       name: matrix-whatsapp
       port:
         name: http
-  tls:
-    - hosts:
-        - matrix-whatsapp

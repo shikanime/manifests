@@ -8,6 +8,3 @@ spec:
       name: forgejo
       port:
         name: http
-  tls:
-    - hosts:
-        - forgejo

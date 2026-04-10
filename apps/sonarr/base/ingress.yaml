@@ -8,6 +8,3 @@ spec:
       name: sonarr
       port:
         name: http
-  tls:
-    - hosts:
-        - sonarr
