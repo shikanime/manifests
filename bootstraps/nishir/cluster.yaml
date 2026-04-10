@@ -347,7 +347,7 @@ spec:
                         tailscale.com/proxy-class: flux
                         tailscale.com/tags: tag:web
                       hosts:
-                        - host: ""
+                        - host: nishir-flux
                           paths:
                             - path: /
                               pathType: ImplementationSpecific
@@ -505,6 +505,14 @@ spec:
                 version: 1.11.1
                 namespace: longhorn-system
                 values: |
+                  ingress:
+                    enabled: true
+                    ingressClassName: tailscale
+                    annotations:
+                      tailscale.com/proxy-class: longhorn
+                      tailscale.com/tags: tag:web
+                    host: nishir-longhorn
+                    tls: true
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort

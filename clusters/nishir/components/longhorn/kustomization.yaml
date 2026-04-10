@@ -1,7 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 resources:
-  - ingress.yaml
   - node.yaml
   - proxyclass.yaml
   - recurringjob.yaml
