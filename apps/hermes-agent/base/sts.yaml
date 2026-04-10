@@ -31,33 +31,37 @@ spec:
           args:
             - gateway
             - run
+          env:
+            - name: API_SERVER_ENABLED
+              value: "true"
+            - name: WEBHOOK_ENABLED
+              value: "true"
           envFrom:
             - secretRef:
                 name: hermes-agent
+          ports:
+            - name: api
+              containerPort: 8642
+            - name: webhook
+              containerPort: 8644
           startupProbe:
-            exec:
-              command:
-                - hermes
-                - gateway
-                - status
+            httpGet:
+              path: /health
+              port: api
             failureThreshold: 30
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:
-            exec:
-              command:
-                - hermes
-                - gateway
-                - status
+            httpGet:
+              path: /health
+              port: api
             failureThreshold: 3
             periodSeconds: 10
             timeoutSeconds: 5
           livenessProbe:
-            exec:
-              command:
-                - hermes
-                - gateway
-                - status
+            httpGet:
+              path: /health
+              port: api
             failureThreshold: 3
             periodSeconds: 30
             timeoutSeconds: 5

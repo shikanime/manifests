@@ -4,5 +4,12 @@ metadata:
   name: hermes-agent
 spec:
   clusterIP: None
+  ports:
+    - name: api
+      port: 8642
+      targetPort: api
+    - name: webhook
+      port: 8644
+      targetPort: webhook
   selector:
     app.kubernetes.io/name: hermes-agent

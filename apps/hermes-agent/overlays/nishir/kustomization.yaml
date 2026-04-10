@@ -3,7 +3,9 @@ kind: Kustomization
 namespace: shikanime
 resources:
   - ../../base
+  - ingress.yaml
   - pvc.yaml
+  - proxyclass.yaml
 secretGenerator:
   - envs:
       - hermes-agent/.enc.env
