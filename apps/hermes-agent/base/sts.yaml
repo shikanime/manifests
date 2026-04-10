@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hermes-agent
+spec:
+  replicas: 1
+  serviceName: hermes-agent
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hermes-agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hermes-agent
+    spec:
+      initContainers:
+        - name: hermes-setup
+          image: hermes-agent
+          args:
+            - setup
+            - --non-interactive
+          envFrom:
+            - secretRef:
+                name: hermes-agent
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+      containers:
+        - name: hermes-agent
+          image: hermes-agent
+          args:
+            - gateway
+            - run
+          envFrom:
+            - secretRef:
+                name: hermes-agent
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hermes-agent-data
