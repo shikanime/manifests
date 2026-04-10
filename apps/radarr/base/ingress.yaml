@@ -8,3 +8,6 @@ spec:
       name: radarr
       port:
         name: http
+  tls:
+    - hosts:
+        - radarr

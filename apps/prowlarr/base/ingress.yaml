@@ -8,3 +8,6 @@ spec:
       name: prowlarr
       port:
         name: http
+  tls:
+    - hosts:
+        - prowlarr

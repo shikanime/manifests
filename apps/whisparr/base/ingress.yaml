@@ -8,3 +8,6 @@ spec:
       name: whisparr
       port:
         name: http
+  tls:
+    - hosts:
+        - whisparr

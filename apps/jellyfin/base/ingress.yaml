@@ -8,3 +8,6 @@ spec:
       name: jellyfin
       port:
         name: http
+  tls:
+    - hosts:
+        - jellyfin
