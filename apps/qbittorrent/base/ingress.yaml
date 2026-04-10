@@ -8,6 +8,3 @@ spec:
       name: qbittorrent
       port:
         name: http
-  tls:
-    - hosts:
-        - qbittorrent

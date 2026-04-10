@@ -8,6 +8,3 @@ spec:
       name: copyparty
       port:
         name: http
-  tls:
-    - hosts:
-        - copyparty
