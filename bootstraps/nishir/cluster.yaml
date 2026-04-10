@@ -331,6 +331,28 @@ spec:
                 chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
                 version: 0.46.0
                 namespace: flux-system
+                values: |
+                  web:
+                    config:
+                      authentication:
+                        type: Anonymous
+                        anonymous:
+                          username: admin
+                          groups:
+                            - system:masters
+                    ingress:
+                      enabled: true
+                      className: tailscale
+                      annotations:
+                        tailscale.com/proxy-class: flux
+                        tailscale.com/tags: tag:web
+                      hosts:
+                        - host: "*"
+                          paths:
+                            - path: /
+                              pathType: ImplementationSpecific
+                    rbac:
+                      createRoles: true
               - name: flux-instance
                 chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
                 version: 0.46.0
@@ -480,6 +502,13 @@ spec:
                 version: 1.11.1
                 namespace: longhorn-system
                 values: |
+                  ingress:
+                    enabled: true
+                    ingressClassName: tailscale
+                    annotations:
+                      tailscale.com/proxy-class: longhorn
+                      tailscale.com/tags: tag:web
+                    host: "*"
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort
