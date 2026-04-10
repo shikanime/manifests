@@ -347,7 +347,7 @@ spec:
                         tailscale.com/proxy-class: flux
                         tailscale.com/tags: tag:web
                       hosts:
-                        - host: *
+                        - host: "*"
                           paths:
                             - path: /
                               pathType: ImplementationSpecific
