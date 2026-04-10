@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: hermes-agent
 spec:
   replicas: 1
+  serviceName: hermes-agent
   selector:
     matchLabels:
       app.kubernetes.io/name: hermes-agent
