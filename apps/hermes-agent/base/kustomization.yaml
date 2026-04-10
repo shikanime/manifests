@@ -6,7 +6,7 @@ metadata:
 images:
   - name: hermes-agent
     newName: docker.io/nousresearch/hermes-agent
-    newTag: latest
+    newTag: latest # TODO: the ARM64 image just released
 labels:
   - pairs:
       app.kubernetes.io/component: agent

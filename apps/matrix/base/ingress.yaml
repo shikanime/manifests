@@ -57,7 +57,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-proxy
+  name: matrix
 spec:
   defaultBackend:
     service:
@@ -71,7 +71,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-proxy-discord-media
+  name: matrix-discord-media
 spec:
   defaultBackend:
     service:

@@ -1,7 +1,5 @@
 jobs:
   build-render:
-    env:
-      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
     name: Build & Render
     runs-on: ubuntu-latest
     steps:
@@ -23,8 +21,6 @@ jobs:
       - uses: shikanime-studio/actions/direnv@v8
       - uses: shikanime-studio/actions/skaffold/integration@v8
   build-render-profile:
-    env:
-      SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
     if: ${{ needs['setup-profiles-jobs'].outputs.continue == 'true' }}
     name: Build & Render (Profile)
     needs:
@@ -83,8 +79,6 @@ name: Skaffold
   workflow_call:
     secrets:
       OPERATOR_PRIVATE_KEY:
-        required: true
-      SOPS_AGE_KEY:
         required: true
 permissions:
   contents: read
