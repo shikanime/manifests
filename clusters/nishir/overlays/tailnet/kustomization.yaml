@@ -12,7 +12,7 @@ resources:
   - ../../../../apps/copyparty/overlays/nishir-tailnet
   - ../../../../apps/forgejo/overlays/nishir-tailnet
   - ../../../../apps/gitea-mirror/overlays/nishir-tailnet
-  - ../../../../apps/hermes-agent/overlays/nishir-tailnet
+  - ../../../../apps/hermes-agent/overlays/nishir
   - ../../../../apps/jellyfin/overlays/nishir-tailnet
   - ../../../../apps/lidarr/overlays/nishir-tailnet
   - ../../../../apps/matrix/overlays/nishir-tailnet
