@@ -49,14 +49,14 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-proxy
+      name: matrix
       port:
         name: http
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-proxy-discord-media
+  name: matrix-discord-media
 spec:
   defaultBackend:
     service:
