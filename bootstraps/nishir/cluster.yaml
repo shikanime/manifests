@@ -340,17 +340,6 @@ spec:
                           username: admin
                           groups:
                             - system:masters
-                    ingress:
-                      enabled: true
-                      className: tailscale
-                      annotations:
-                        tailscale.com/proxy-class: flux
-                        tailscale.com/tags: tag:web
-                      hosts:
-                        - host: "*"
-                          paths:
-                            - path: /
-                              pathType: ImplementationSpecific
                     rbac:
                       createRoles: true
               - name: flux-instance
@@ -502,13 +491,6 @@ spec:
                 version: 1.11.1
                 namespace: longhorn-system
                 values: |
-                  ingress:
-                    enabled: true
-                    ingressClassName: tailscale
-                    annotations:
-                      tailscale.com/proxy-class: longhorn
-                      tailscale.com/tags: tag:web
-                    host: "*"
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort
