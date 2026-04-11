@@ -1,0 +1,422 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-flux-operator
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/flux-operator/base
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-grafana
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/grafana/overlays/nishir
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-longhorn
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/longhorn/overlays/nishir
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-node-feature
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/node-feature/base
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-tailscale
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/tailscale/overlays/nishir
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-tls
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/tls/overlays/nishir
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-bazarr
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/bazarr/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-copyparty
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/copyparty/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-forgejo
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/forgejo/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-gitea-mirror
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/gitea-mirror/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-hermes-agent
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/hermes-agent/overlays/nishir
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-jellyfin
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-node-feature
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/jellyfin/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-lidarr
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/lidarr/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/matrix/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-prowlarr
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/prowlarr/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-qbittorrent
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/qbittorrent/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-radarr
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/radarr/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-seerr
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/seerr/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-sonarr
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/sonarr/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-syncthing
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/syncthing/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-vaultwarden
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/vaultwarden/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-whisparr
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/whisparr/overlays/nishir-tailnet
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: manifests
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
