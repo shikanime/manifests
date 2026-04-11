@@ -505,6 +505,29 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: infrastructure-nfd
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./infrastructure/nfd/base
+  prune: true
+  deletionPolicy: Orphan
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: node-feature-discovery
+      namespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: infrastructure-longhorn
   namespace: flux-system
 spec:
