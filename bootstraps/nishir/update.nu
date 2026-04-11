@@ -4,7 +4,7 @@
 def get_longhorn_backup_target [] {
   print "Fetching Longhorn backup target..."
   try {
-    let backup = (^tofu -chdir=$"($env.FILE_PWD)/../../infra/nishir-services" output -json longhorn_backupstore | from json)
+    let backup = (^tofu -chdir=$"($env.FILE_PWD)/../../modules/nishir-services" output -json longhorn_backupstore | from json)
     $"s3://($backup.bucket)@($backup.region)/"
   } catch {
     null
