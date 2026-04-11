@@ -143,10 +143,6 @@ spec:
             - name: mautrix-whatsapp-config
               mountPath: /mnt/mautrix-whatsapp-config
               readOnly: true
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: synapse
           image: synapse
@@ -215,9 +211,6 @@ spec:
         - name: mautrix-whatsapp-config
           secret:
             secretName: mautrix-whatsapp
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -257,10 +250,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-discord
           image: mautrix-discord
@@ -303,9 +292,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-discord-data
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -345,10 +331,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-googlechat
           image: mautrix-googlechat
@@ -391,9 +373,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-googlechat-data
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -433,10 +412,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-linkedin
           image: mautrix-linkedin
@@ -479,9 +454,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-linkedin-data
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -521,10 +493,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-meta
           image: mautrix-meta
@@ -567,9 +535,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-meta-data
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -609,10 +574,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-signal
           image: mautrix-signal
@@ -655,9 +616,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-signal-data
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -697,10 +655,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-slack
           image: mautrix-slack
@@ -743,9 +697,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-slack-data
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -785,10 +736,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-twitter
           image: mautrix-twitter
@@ -831,9 +778,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-twitter-data
-        - name: rclone-config
-          configMap:
-            name: rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -873,10 +817,6 @@ spec:
               readOnly: true
             - name: data
               mountPath: /mnt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
       containers:
         - name: mautrix-whatsapp
           image: mautrix-whatsapp
@@ -919,6 +859,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: mautrix-whatsapp-data
-        - name: rclone-config
-          configMap:
-            name: rclone
