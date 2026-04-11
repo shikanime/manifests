@@ -443,6 +443,7 @@ spec:
   interval: 10m
   path: ./infrastructure/descheduler/base
   prune: true
+  deletionPolicy: Orphan
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -465,6 +466,7 @@ spec:
   interval: 10m
   path: ./infrastructure/flux-operator/base
   prune: true
+  deletionPolicy: Orphan
   healthChecks:
     - apiVersion: tailscale.com/v1alpha1
       kind: ProxyClass
@@ -486,6 +488,7 @@ spec:
   interval: 10m
   path: ./infrastructure/grafana/overlays/nishir
   prune: true
+  deletionPolicy: Orphan
   healthChecks:
     - apiVersion: v1
       kind: Secret
@@ -532,6 +535,7 @@ spec:
   interval: 10m
   path: ./infrastructure/longhorn/overlays/nishir
   prune: true
+  deletionPolicy: Orphan
   healthChecks:
     - apiVersion: v1
       kind: Secret
@@ -554,6 +558,7 @@ spec:
   interval: 10m
   path: ./infrastructure/tailscale/overlays/nishir
   prune: true
+  deletionPolicy: Orphan
   healthChecks:
     - apiVersion: v1
       kind: Secret
