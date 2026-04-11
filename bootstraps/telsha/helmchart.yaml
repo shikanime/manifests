@@ -79,6 +79,8 @@ spec:
   targetNamespace: flux-system
   version: 0.46.0
   valuesContent: |
+    healthcheck:
+      enabled: true
     web:
       config:
         authentication:
