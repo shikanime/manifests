@@ -116,8 +116,6 @@ spec:
         extensions:
           helm:
             repositories:
-              - name: fairwinds-stable
-                url: https://charts.fairwinds.com/stable
               - name: jetstack
                 url: https://charts.jetstack.io
               - name: kubernetes-sigs-nfd
@@ -391,10 +389,6 @@ spec:
               - name: node-feature-discovery
                 chartname: kubernetes-sigs-nfd/node-feature-discovery
                 version: 0.18.3
-                namespace: kube-system
-              - name: vpa
-                chartname: fairwinds-stable/vpa
-                version: 4.10.2
                 namespace: kube-system
               - name: longhorn
                 chartname: longhorn/longhorn
