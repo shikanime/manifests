@@ -490,34 +490,10 @@ spec:
   prune: true
   deletionPolicy: Orphan
   healthChecks:
-    - apiVersion: v1
-      kind: Secret
-      name: alloy-logs-remote-cfg-grafana-k8s-monitoring
-      namespace: grafana-system
-    - apiVersion: v1
-      kind: Secret
-      name: alloy-metrics-remote-cfg-grafana-k8s-monitoring
-      namespace: grafana-system
-    - apiVersion: v1
-      kind: Secret
-      name: alloy-receiver-remote-cfg-grafana-k8s-monitoring
-      namespace: grafana-system
-    - apiVersion: v1
-      kind: Secret
-      name: alloy-singleton-remote-cfg-grafana-k8s-monitoring
-      namespace: grafana-system
-    - apiVersion: v1
-      kind: Secret
-      name: gc-otlp-endpoint-grafana-k8s-monitoring
-      namespace: grafana-system
-    - apiVersion: v1
-      kind: Secret
-      name: grafana-cloud-logs-grafana-k8s-monitoring
-      namespace: grafana-system
-    - apiVersion: v1
-      kind: Secret
-      name: grafana-cloud-metrics-grafana-k8s-monitoring
-      namespace: grafana-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: grafana-k8s-monitoring
+      namespace: flux-system
   sourceRef:
     kind: GitRepository
     name: flux-system
