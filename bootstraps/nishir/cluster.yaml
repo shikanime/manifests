@@ -328,6 +328,8 @@ spec:
                 version: 0.46.0
                 namespace: flux-system
                 values: |
+                  healthcheck:
+                    enabled: true
                   web:
                     config:
                       authentication:
