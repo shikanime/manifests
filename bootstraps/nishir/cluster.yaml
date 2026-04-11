@@ -118,8 +118,6 @@ spec:
             repositories:
               - name: jetstack
                 url: https://charts.jetstack.io
-              - name: kubernetes-sigs-nfd
-                url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
               - name: longhorn
                 url: https://charts.longhorn.io
               - name: tailscale
@@ -198,10 +196,6 @@ spec:
                     mode: "true"
                   operatorConfig:
                     hostname: nishir-k8s-operator
-              - name: node-feature-discovery
-                chartname: kubernetes-sigs-nfd/node-feature-discovery
-                version: 0.18.3
-                namespace: kube-system
               - name: longhorn
                 chartname: longhorn/longhorn
                 version: 1.11.1
