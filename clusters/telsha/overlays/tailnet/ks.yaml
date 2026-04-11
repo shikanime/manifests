@@ -9,6 +9,11 @@ spec:
   interval: 10m
   path: ./apps/catbox/overlays/telsha-tailnet
   prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: catbox
+      namespace: shikanime
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -26,6 +31,11 @@ spec:
   interval: 10m
   path: ./infrastructure/tailscale/overlays/telsha
   prune: true
+  healthChecks:
+    - apiVersion: v1
+      kind: Secret
+      name: operator-oauth
+      namespace: tailscale-system
   sourceRef:
     kind: GitRepository
     name: flux-system
