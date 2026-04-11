@@ -35,7 +35,7 @@ spec:
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: flux-instance
+  name: flux
   namespace: kube-system
 spec:
   chart: flux-instance

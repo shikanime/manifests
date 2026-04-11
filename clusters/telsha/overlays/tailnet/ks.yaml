@@ -1,11 +1,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-tailscale
+  name: apps-catbox
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-tailscale
   interval: 10m
-  path: ./infrastructure/tailscale/overlays/telsha
+  path: ./apps/catbox/overlays/telsha-tailnet
   prune: true
   sourceRef:
     kind: GitRepository
@@ -18,13 +20,11 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-catbox
+  name: infrastructure-tailscale
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/catbox/overlays/telsha-tailnet
+  path: ./infrastructure/tailscale/overlays/telsha
   prune: true
   sourceRef:
     kind: GitRepository

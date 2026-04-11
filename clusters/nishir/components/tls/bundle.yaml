@@ -5,8 +5,8 @@ metadata:
 spec:
   sources:
     - secret:
-        name: nishir-ca
         key: tls.crt
+        name: nishir-ca
     - useDefaultCAs: true
   target:
     configMap:
