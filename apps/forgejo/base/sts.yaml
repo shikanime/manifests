@@ -27,6 +27,10 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/gitea
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
             - name: config
               mountPath: /mnt/startup-config
       containers:
@@ -68,6 +72,9 @@ spec:
         - name: config
           secret:
             secretName: forgejo-config
+        - name: rclone-config
+          configMap:
+            name: rclone
         - name: data
           persistentVolumeClaim:
             claimName: forgejo-data
