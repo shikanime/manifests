@@ -44,11 +44,7 @@ def update_charts [] {
         let chart_name_parts = ($chart.chartname | split row "/")
         let latest_version = get_latest_chart_version ($chart_name_parts | get 0) ($chart_name_parts | get 1) ($repo_url)
         if $latest_version != null {
-          if $chart.chartname == "fairwinds-stable/vpa" and $latest_version == "10.2.0" {
-            $chart
-          } else {
-            $chart | update version $latest_version
-          }
+          $chart | update version $latest_version
         } else { $chart }
       } else { $chart }
     }
