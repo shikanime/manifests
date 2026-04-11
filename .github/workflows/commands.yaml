@@ -16,15 +16,10 @@ jobs:
           permission-issues: write
           permission-pull-requests: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/nix/setup@v8
+      - uses: shikanime-studio/actions/nix/setup@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/command/backport@v8
+      - uses: shikanime-studio/actions/command/backport@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
@@ -47,15 +42,10 @@ jobs:
           permission-issues: write
           permission-pull-requests: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/nix/setup@v8
+      - uses: shikanime-studio/actions/nix/setup@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/command/close@v8
+      - uses: shikanime-studio/actions/command/close@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
           username: operator6o
@@ -77,15 +67,10 @@ jobs:
           permission-issues: write
           permission-pull-requests: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/nix/setup@v8
+      - uses: shikanime-studio/actions/nix/setup@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/command/land@v8
+      - uses: shikanime-studio/actions/command/land@v9
         with:
           email: operator6o@shikanime.studio
           fullname: Operator 6O
@@ -111,15 +96,10 @@ jobs:
           permission-issues: write
           permission-pull-requests: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/nix/setup@v8
+      - uses: shikanime-studio/actions/nix/setup@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/command/rebase@v8
+      - uses: shikanime-studio/actions/command/rebase@v9
         with:
           email: operator6o@shikanime.studio
           fullname: Operator 6O
@@ -145,15 +125,10 @@ jobs:
           permission-issues: write
           permission-pull-requests: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/nix/setup@v8
+      - uses: shikanime-studio/actions/nix/setup@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/command/run@v8
+      - uses: shikanime-studio/actions/command/run@v9
         with:
           email: operator6o@shikanime.studio
           fullname: Operator 6O

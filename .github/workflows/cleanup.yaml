@@ -9,12 +9,7 @@ jobs:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-contents: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: main
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - uses: shikanime-studio/actions/cleanup@v8
+      - uses: shikanime-studio/actions/cleanup@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
           pull-request-url: ${{ github.event.pull_request.html_url }}

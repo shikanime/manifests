@@ -9,6 +9,9 @@ jobs:
       cachix-name: shikanime
   skaffold:
     if: ${{ github.event_name == 'workflow_call' || github.event.pull_request.draft == false }}
+    permissions:
+      contents: read
+      packages: write
     secrets:
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     uses: ./.github/workflows/skaffold.yaml
