@@ -11,7 +11,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: manifests
+    name: flux-system
   decryption:
     provider: sops
     secretRef:
@@ -28,7 +28,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: manifests
+    name: flux-system
   decryption:
     provider: sops
     secretRef:
