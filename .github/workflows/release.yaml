@@ -22,13 +22,10 @@ jobs:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-contents: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
+      - uses: shikanime-studio/actions/checkout@v9
         with:
-          fetch-depth: 0
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-      - env:
-          REF_NAME: ${{ github.ref_name || github.event.inputs.ref_name }}
-        run: VERSION="${REF_NAME#v}"; BASE="${VERSION%.*}"; BRANCH="release-$BASE"; git push origin "HEAD:refs/heads/$BRANCH"
+          github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+      - run: git push origin "HEAD:refs/heads/release-$(printf '%s' "${{ github.ref_name || github.event.inputs.ref_name }}" | sed -e 's/^v//' -e 's/[.][^.]*$//')"
   release-tag:
     if: (startsWith(github.ref, 'refs/tags/v')) || (github.event_name == 'workflow_dispatch' && startsWith(github.event.inputs.ref_name, 'v'))
     needs:
@@ -45,16 +42,16 @@ jobs:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-contents: write
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
-      - uses: actions/checkout@v6
+      - uses: shikanime-studio/actions/checkout@v9
         with:
-          fetch-depth: 0
-          token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - env:
           GITHUB_TOKEN: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
-          REF_NAME: ${{ github.ref_name || github.event.inputs.ref_name }}
-          REPO: ${{ github.repository }}
-        run: gh release create "$REF_NAME" --repo "$REPO" --generate-notes || true
+        run: gh release create "${{ github.ref_name || github.event.inputs.ref_name }}" --repo "${{ github.repository }}" --generate-notes || true
   skaffold:
+    permissions:
+      contents: read
+      packages: write
     secrets:
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     uses: ./.github/workflows/skaffold.yaml
