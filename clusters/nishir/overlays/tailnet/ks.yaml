@@ -105,7 +105,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: components-node-feature
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
@@ -322,57 +321,6 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: components-longhorn
-  namespace: flux-system
-spec:
-  interval: 10m
-  path: ./clusters/nishir/components/longhorn
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: manifests
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: components-node-feature
-  namespace: flux-system
-spec:
-  interval: 10m
-  path: ./clusters/nishir/components/node-feature
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: manifests
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: components-tls
-  namespace: flux-system
-spec:
-  interval: 10m
-  path: ./clusters/nishir/components/tls
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: manifests
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: infrastructure-flux-operator
   namespace: flux-system
 spec:
@@ -410,8 +358,6 @@ metadata:
   name: infrastructure-longhorn
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: components-longhorn
   interval: 10m
   path: ./infrastructure/longhorn/overlays/nishir
   prune: true
