@@ -34,6 +34,8 @@ spec:
           env:
             - name: API_SERVER_ENABLED
               value: "true"
+            - name: API_SERVER_HOST
+              value: "0.0.0.0"
             - name: WEBHOOK_ENABLED
               value: "true"
           envFrom:
