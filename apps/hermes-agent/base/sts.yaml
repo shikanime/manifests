@@ -17,9 +17,13 @@ spec:
         - name: config-sync
           image: rclone
           command:
-            - sh
-            - -c
-            - mkdir -p /opt/data/.hermes && rclone copyto --copy-links --update /mnt/startup-config/SOUL.md /opt/data/.hermes/SOUL.md
+            - rclone
+          args:
+            - copyto
+            - --copy-links
+            - --update
+            - /mnt/startup-config/SOUL.md
+            - /opt/data/.hermes/SOUL.md
           volumeMounts:
             - name: data
               mountPath: /opt/data
@@ -31,9 +35,6 @@ spec:
           args:
             - setup
             - --non-interactive
-          env:
-            - name: HERMES_HOME
-              value: /opt/data/.hermes
           envFrom:
             - secretRef:
                 name: hermes-agent
@@ -51,8 +52,6 @@ spec:
               value: "true"
             - name: API_SERVER_HOST
               value: "0.0.0.0"
-            - name: HERMES_HOME
-              value: /opt/data/.hermes
             - name: WEBHOOK_ENABLED
               value: "true"
           envFrom:
