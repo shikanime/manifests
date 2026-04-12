@@ -73,7 +73,7 @@ spec:
             claimName: radarr-config
         - name: rclone-config
           configMap:
-            name: rclone
+            name: radarr-rclone
         - name: startup-config
           secret:
             secretName: radarr

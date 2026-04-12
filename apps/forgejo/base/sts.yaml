@@ -74,7 +74,7 @@ spec:
             secretName: forgejo-config
         - name: rclone-config
           configMap:
-            name: rclone
+            name: forgejo-rclone
         - name: data
           persistentVolumeClaim:
             claimName: forgejo-data

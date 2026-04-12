@@ -3,6 +3,13 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "lidarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$", "exclude-tags": ["8.1.2135"] } ]'
+configMapGenerator:
+  - files:
+      - rclone/rclone.conf
+    name: lidarr-rclone
+    namespace: shikanime
+    options:
+      disableNameSuffixHash: true
 images:
   - name: lidarr
     newName: lscr.io/linuxserver/lidarr

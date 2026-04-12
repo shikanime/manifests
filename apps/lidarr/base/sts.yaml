@@ -73,7 +73,7 @@ spec:
             claimName: lidarr-config
         - name: rclone-config
           configMap:
-            name: rclone
+            name: lidarr-rclone
         - name: startup-config
           secret:
             secretName: lidarr

@@ -3,6 +3,13 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "forgejo", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+-rootless)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+.*)$" } ]'
+configMapGenerator:
+  - files:
+      - rclone/rclone.conf
+    name: forgejo-rclone
+    namespace: shikanime
+    options:
+      disableNameSuffixHash: true
 images:
   - name: rclone
     newName: docker.io/rclone/rclone

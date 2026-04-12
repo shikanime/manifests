@@ -3,6 +3,13 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-discord", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-googlechat", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-linkedin", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-meta", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-signal", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-slack", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-twitter", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "mautrix-whatsapp", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - files:
+      - rclone/rclone.conf
+    name: matrix-rclone
+    namespace: shikanime
+    options:
+      disableNameSuffixHash: true
 images:
   - name: caddy
     newName: docker.io/library/caddy
