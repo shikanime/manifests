@@ -5,5 +5,5 @@ resources:
   - ks.yaml
 components:
   - ../../components/longhorn
-  - ../../components/node-feature
+  - ../../components/nfd
   - ../../components/tls

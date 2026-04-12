@@ -93,7 +93,7 @@ controllers installed during bootstrap.
   - Grafana k8s monitoring / Alloy remote config secrets under
     `clusters/<cluster>/components/grafana/`
 - Scheduling / hardware discovery:
-  - Node Feature Discovery rules under `clusters/<cluster>/components/node-feature/`
+  - Node Feature Discovery rules under `clusters/<cluster>/components/nfd/`
 - Vertical Pod Autoscaler:
   - many apps include `vpa.yaml` and expect a VPA controller to be present
 
@@ -115,7 +115,7 @@ Most apps follow the same pattern:
 Hardware-dependent apps can also add scheduling constraints via components (example:
 [patch-sts.yaml](apps/jellyfin/components/v4l2/patch-sts.yaml)), which rely on NFD
 labels from
-[nodefeature.yaml](clusters/nishir/components/node-feature/nodefeature.yaml).
+[nodefeature.yaml](clusters/nishir/components/nfd/nodefeature.yaml).
 
 ### Secrets
 
