@@ -116,21 +116,11 @@ spec:
         extensions:
           helm:
             repositories:
-              - name: jetstack
-                url: https://charts.jetstack.io
               - name: longhorn
                 url: https://charts.longhorn.io
               - name: tailscale
                 url: https://pkgs.tailscale.com/helmcharts
             charts:
-              - name: cert-manager
-                chartname: jetstack/cert-manager
-                version: v1.20.1
-                namespace: cert-manager-system
-                values: |
-                  clusterResourceNamespace: cert-manager-trust
-                  crds:
-                    enabled: true
               - name: flux-operator
                 chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
                 version: 0.46.0
@@ -228,14 +218,6 @@ spec:
                       jobList:
                         - name: standard
                           isGroup: true
-              - name: trust-manager
-                chartname: jetstack/trust-manager
-                version: v0.22.0
-                namespace: cert-manager-system
-                values: |
-                  app:
-                    trust:
-                      namespace: cert-manager-trust
         telemetry:
           enabled: false
     version: v1.35.2+k0s.0
