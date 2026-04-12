@@ -19,11 +19,17 @@ spec:
           command:
             - rclone
           args:
-            - copyto
+            - copy
             - --copy-links
             - --update
-            - /mnt/startup-config/SOUL.md
-            - /opt/data/SOUL.md
+            - --include
+            - SOUL.md
+            - --include
+            - config.yaml
+            - --exclude
+            - "*"
+            - /mnt/startup-config
+            - /opt/data
           volumeMounts:
             - name: data
               mountPath: /opt/data

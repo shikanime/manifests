@@ -6,6 +6,7 @@ components:
   - ../../components/webhook
 configMapGenerator:
   - files:
+      - hermes-agent/config.yaml
       - hermes-agent/SOUL.md
     name: hermes-agent-startup-config
 resources:
