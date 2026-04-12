@@ -30,6 +30,22 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
+        - name: config-sync-yaml
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copyto
+            - --copy-links
+            - --update
+            - /mnt/startup-config/config.yaml
+            - /opt/data/config.yaml
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
         - name: hermes-setup
           image: hermes-agent
           args:
