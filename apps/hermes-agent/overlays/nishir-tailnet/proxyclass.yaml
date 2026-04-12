@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: automata-webhook
+  name: automata
 spec:
   statefulSet:
     pod:
@@ -18,7 +18,7 @@ spec:
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: automata
+  name: automata-webhook
 spec:
   statefulSet:
     pod:

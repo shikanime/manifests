@@ -17,8 +17,6 @@ This repo is organized around Kustomize:
   per-cluster overlays)
 - `clusters/` contains cluster entrypoints that compose shared cluster bits +
   app overlays
-- `infrastructure/` contains cluster add-ons (HelmReleases, namespaces, and
-  related resources) reconciled by Flux
 - `bootstraps/` contains cluster bootstrap inputs (controllers/operators
   installation lives here)
 - `skaffold.yaml` provides renderable profiles that point at the cluster overlay
@@ -69,31 +67,13 @@ exist. Those are installed out-of-band using the manifests in `bootstraps/`.
 - `bootstraps/telsha/` contains `HelmChart` resources
   ([helmchart.yaml](bootstraps/telsha/helmchart.yaml))
 
-### Deployment Flow
-
-The intended flow is “minimal bootstrap → Flux → infrastructure → apps”:
-
-1. Bootstrap installs only Flux/Flux Operator (and any required secrets like the
-   SOPS age key).
-2. Flux syncs this repo and reconciles a cluster overlay entrypoint under
-   `clusters/<cluster>/overlays/<overlay>/`.
-3. That cluster overlay creates Flux `Kustomization` objects (commonly in a
-   `ks.yaml`) which reconcile:
-   - `infrastructure/*` add-ons (HelmReleases, namespaces, CRDs/config)
-   - `apps/*` overlays (workloads, Services, Ingresses, per-cluster patches)
-4. Infra add-ons provide the controllers that apps expect (for example VPA,
-   Cluster API operator, cert-manager), while cluster components provide
-   cluster-local glue/config (for example Tailscale ProxyClass, Grafana secrets,
-   Longhorn tuning).
-
 ### Clusters
 
 This repo currently defines two cluster trees:
 
 - `clusters/nishir/` (overlay: `tailnet`, components: grafana, longhorn,
   node-feature, tailscale, tls)
-- `clusters/telsha/` (overlay: `tailnet`, components: tailscale; infra add-ons:
-  cluster-api, vpa)
+- `clusters/telsha/` (overlay: `tailnet`, component: tailscale)
 
 ### Cluster Services (Add-ons)
 
@@ -115,10 +95,7 @@ controllers installed during bootstrap.
 - Scheduling / hardware discovery:
   - Node Feature Discovery rules under `clusters/<cluster>/components/nfd/`
 - Vertical Pod Autoscaler:
-  - `infrastructure/vpa/` installs the VPA controller
-  - many apps include `vpa.yaml` and expect the controller to be present
-- Cluster API:
-  - `infrastructure/cluster-api/` installs the Cluster API operator
+  - many apps include `vpa.yaml` and expect a VPA controller to be present
 
 ### How Apps Plug In
 
@@ -150,13 +127,3 @@ time.
 - Decrypted outputs are derived by stripping `.enc.` from the filename (example:
   `.enc.env` → `.env`).
 - Never commit decrypted outputs. Change the encrypted source instead.
-
-### Conventions
-
-- Prefer Kustomize patches/components over duplicating manifests across overlays.
-- Keep overlays minimal: patch only what differs per cluster/overlay.
-- If an overlay is empty and only forwards to `../../base`, don’t create it;
-  point consumers at `base` directly.
-- Prefer env vars for runtime behavior toggles (for example Hermes Agent Discord
-  gateway settings like `DISCORD_REACTIONS="false"` and
-  `DISCORD_ALLOW_BOTS="mentions"`).
