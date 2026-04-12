@@ -13,8 +13,6 @@ spec:
         name: tailscale
         namespace: flux-system
       version: 1.94.2
-  install:
-    createNamespace: true
   interval: 10m
   releaseName: tailscale-operator
   targetNamespace: tailscale-system

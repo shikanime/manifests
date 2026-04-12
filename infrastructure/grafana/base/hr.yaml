@@ -13,8 +13,6 @@ spec:
         name: grafana
         namespace: flux-system
       version: 3.8.4
-  install:
-    createNamespace: true
   interval: 10m
   releaseName: grafana-k8s-monitoring
   targetNamespace: grafana-system
