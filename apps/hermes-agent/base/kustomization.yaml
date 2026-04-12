@@ -4,6 +4,9 @@ metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
 images:
+  - name: rclone
+    newName: docker.io/rclone/rclone
+    newTag: 1.71.2
   - name: hermes-agent
     newName: docker.io/nousresearch/hermes-agent
     newTag: latest # TODO: the ARM64 image just released
