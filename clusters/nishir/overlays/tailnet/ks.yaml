@@ -490,6 +490,8 @@ metadata:
   name: infrastructure-flux-operator
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./infrastructure/flux-operator/base
   prune: true
@@ -558,6 +560,8 @@ metadata:
   name: infrastructure-longhorn
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./infrastructure/longhorn/overlays/nishir
   prune: true
@@ -586,10 +590,10 @@ spec:
   prune: true
   deletionPolicy: Orphan
   healthChecks:
-    - apiVersion: v1
-      kind: Secret
-      name: operator-oauth
-      namespace: tailscale-system
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: tailscale-operator
+      namespace: flux-system
   sourceRef:
     kind: GitRepository
     name: flux-system
