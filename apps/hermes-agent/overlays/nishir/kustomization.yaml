@@ -7,9 +7,7 @@ configMapGenerator:
     name: hermes-agent-startup-config
 resources:
   - ../../base
-  - ingress.yaml
   - pvc.yaml
-  - proxyclass.yaml
 secretGenerator:
   - envs:
       - hermes-agent/.enc.env
