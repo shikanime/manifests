@@ -5,8 +5,6 @@ configMapGenerator:
   - files:
       - hermes-agent/SOUL.md
     name: hermes-agent-startup-config
-    options:
-      disableNameSuffixHash: true
 resources:
   - ../../base
   - ingress.yaml
