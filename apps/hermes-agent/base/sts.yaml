@@ -35,9 +35,6 @@ spec:
           args:
             - setup
             - --non-interactive
-          env:
-            - name: HERMES_HOME
-              value: /opt/data
           envFrom:
             - secretRef:
                 name: hermes-agent
@@ -55,8 +52,6 @@ spec:
               value: "true"
             - name: API_SERVER_HOST
               value: "0.0.0.0"
-            - name: HERMES_HOME
-              value: /opt/data
             - name: WEBHOOK_ENABLED
               value: "true"
           envFrom:
