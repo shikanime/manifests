@@ -119,6 +119,31 @@ spec:
               - name: longhorn
                 url: https://charts.longhorn.io
             charts:
+              - name: flux
+                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
+                version: 0.46.0
+                namespace: flux-system
+                values: |
+                  instance:
+                    distribution:
+                      registry: ghcr.io/fluxcd
+                      version: 2.x
+                    kustomize:
+                      patches:
+                        - patch: |
+                            - op: add
+                              path: /spec/decryption
+                              value:
+                                provider: sops
+                                secretRef:
+                                  name: sops-age
+                          target:
+                            kind: Kustomization
+                    sync:
+                      kind: GitRepository
+                      path: clusters/nishir/overlays/tailnet
+                      ref: refs/heads/main
+                      url: https://github.com/shikanime/manifests.git
               - name: flux-operator
                 chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
                 version: 0.46.0
@@ -150,31 +175,6 @@ spec:
                             - nishir-flux
                     rbac:
                       createRoles: true
-              - name: flux
-                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
-                version: 0.46.0
-                namespace: flux-system
-                values: |
-                  instance:
-                    distribution:
-                      registry: ghcr.io/fluxcd
-                      version: 2.x
-                    kustomize:
-                      patches:
-                        - patch: |
-                            - op: add
-                              path: /spec/decryption
-                              value:
-                                provider: sops
-                                secretRef:
-                                  name: sops-age
-                          target:
-                            kind: Kustomization
-                    sync:
-                      kind: GitRepository
-                      path: clusters/nishir/overlays/tailnet
-                      ref: refs/heads/main
-                      url: https://github.com/shikanime/manifests.git
               - name: longhorn
                 chartname: longhorn/longhorn
                 version: 1.11.1
