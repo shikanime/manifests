@@ -72,7 +72,7 @@ spec:
             claimName: bazarr-config
         - name: rclone-config
           configMap:
-            name: rclone
+            name: bazarr-rclone
         - name: startup-config
           secret:
             secretName: bazarr

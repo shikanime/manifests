@@ -70,7 +70,7 @@ spec:
             claimName: copyparty-config
         - name: rclone-config
           configMap:
-            name: rclone
+            name: copyparty-rclone
         - name: startup-config
           configMap:
             name: copyparty

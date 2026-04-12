@@ -217,7 +217,7 @@ spec:
             secretName: mautrix-whatsapp
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -305,7 +305,7 @@ spec:
             claimName: mautrix-discord-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -393,7 +393,7 @@ spec:
             claimName: mautrix-googlechat-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -481,7 +481,7 @@ spec:
             claimName: mautrix-linkedin-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -569,7 +569,7 @@ spec:
             claimName: mautrix-meta-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -657,7 +657,7 @@ spec:
             claimName: mautrix-signal-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -745,7 +745,7 @@ spec:
             claimName: mautrix-slack-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -833,7 +833,7 @@ spec:
             claimName: mautrix-twitter-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -921,4 +921,4 @@ spec:
             claimName: mautrix-whatsapp-data
         - name: rclone-config
           configMap:
-            name: rclone
+            name: matrix-rclone
