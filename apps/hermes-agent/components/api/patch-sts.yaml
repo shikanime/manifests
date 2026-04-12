@@ -15,3 +15,24 @@ spec:
           ports:
             - name: api
               containerPort: 8642
+          startupProbe:
+            httpGet:
+              path: /health
+              port: api
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: api
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: api
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 5
