@@ -3,6 +3,5 @@ kind: Service
 metadata:
   name: hermes-agent
 spec:
-  clusterIP: None
   selector:
     app.kubernetes.io/name: hermes-agent
