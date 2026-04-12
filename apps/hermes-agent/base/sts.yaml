@@ -14,6 +14,22 @@ spec:
         app.kubernetes.io/name: hermes-agent
     spec:
       initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copyto
+            - --copy-links
+            - --update
+            - /mnt/startup-config/SOUL.md
+            - /opt/data/SOUL.md
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
         - name: hermes-setup
           image: hermes-agent
           args:
@@ -74,3 +90,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: hermes-agent-data
+        - name: startup-config
+          configMap:
+            name: hermes-agent-startup-config
