@@ -34,12 +34,14 @@ the flake evaluates.
   - `apps/<app>/base/`: app resources common across clusters
   - `apps/<app>/components/`: optional Kustomize components
   - `apps/<app>/overlays/<cluster>*/`: cluster-specific overlays (often `*-tailnet`)
-- `infrastructure/`: foundational cluster components (e.g. cert-manager, tailscale, vpa)
-  - `infrastructure/<infra>/base/`: infrastructure resources common across clusters
+- `infrastructure/`: foundational cluster components (e.g. cert-manager)
+  - `infrastructure/<infra>/base/`: infrastructure resources common across
+    clusters
   - `infrastructure/<infra>/components/`: optional Kustomize components
   - `infrastructure/<infra>/overlays/<cluster>*/`: cluster-specific overlays
 - `clusters/`: cluster-specific build entrypoints and compositions
-  - `clusters/<cluster>/base/`: cluster-wide resources (namespaces, policies, storage, etc.)
+  - `clusters/<cluster>/base/`: cluster-wide resources (namespaces, policies,
+    storage, etc.)
   - `clusters/<cluster>/components/`: cluster-wide components
   - `clusters/<cluster>/overlays/<overlay>/`: cluster build entrypoints (Kustomize)
 - `skaffold.yaml`: render profiles pointing at cluster overlay entrypoints
