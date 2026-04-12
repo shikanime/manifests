@@ -9,7 +9,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: automata-webhook
+      name: hermes-agent
       port:
         name: webhook
   ingressClassName: tailscale
@@ -27,7 +27,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: automata
+      name: hermes-agent
       port:
         name: api
   ingressClassName: tailscale
