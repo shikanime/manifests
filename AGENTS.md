@@ -50,6 +50,8 @@ the flake evaluates.
 
 - Prefer Kustomize patches/components over duplicating manifests across overlays.
 - Keep overlays minimal: patch only what differs per cluster/overlay.
+- If an overlay is empty and only forwards to `../../base`, don’t create it;
+  point consumers at `base` directly.
 - Avoid changing generated/decrypted files; change the encrypted source instead.
 - Keep `kustomization.yaml` lists (resources, patches, generators) sorted.
 - Within multi-document YAML files, keep resources sorted by `metadata.name` (or
