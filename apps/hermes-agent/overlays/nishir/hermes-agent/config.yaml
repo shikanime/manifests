@@ -1,7 +1,7 @@
 model:
-  default: google/gemini-3.1-pro-preview
-  provider: auto
-  base_url: https://openrouter.ai/api/v1
+  default: gemini-3-pro-preview
+  provider: gemini
+  base_url: https://generativelanguage.googleapis.com/v1beta/openai
 terminal:
   backend: local
   cwd: .
