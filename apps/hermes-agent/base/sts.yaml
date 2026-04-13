@@ -13,7 +13,6 @@ spec:
       labels:
         app.kubernetes.io/name: hermes-agent
     spec:
-      enableServiceLinks: true
       initContainers:
         - name: config-sync
           image: rclone
