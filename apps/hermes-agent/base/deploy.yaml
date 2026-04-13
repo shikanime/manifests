@@ -18,6 +18,13 @@ spec:
           ports:
             - containerPort: 9222
               name: cdp
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: dshm
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
 ---
 apiVersion: v1
 kind: Service
