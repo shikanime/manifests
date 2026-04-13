@@ -100,6 +100,27 @@ platforms:
     extra:
       port: 8644
       routes:
+        github-issue:
+          events:
+            - issues
+            - issue_comment
+          prompt: |-
+            Triage and respond to this GitHub issue:
+            Repository: {repository.full_name}
+            Issue #{issue.number}: {issue.title}
+            Author: {issue.user.login}
+            URL: {issue.html_url}
+            Action: {action}
+            Body:
+            {issue.body}
+            Comment (if present):
+            {comment.body}
+          skills:
+            - github-issue
+          deliver: github_comment
+          deliver_extra:
+            repo: "{repository.full_name}"
+            issue_number: "{issue.number}"
         github-pr:
           events:
             - pull_request
