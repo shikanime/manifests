@@ -1,5 +1,5 @@
 model:
-  default: anthropic/claude-opus-4.6
+  default: google/gemini-3.1-pro-preview
   provider: auto
   base_url: https://openrouter.ai/api/v1
 terminal:
