@@ -22,17 +22,21 @@ spec:
             - copy
             - --copy-links
             - --update
-            - --include
-            - SOUL.md
-            - --include
-            - config.yaml
-            - --exclude
-            - "*"
+            - --filter
+            - "+ SOUL.md"
+            - --filter
+            - "+ config.yaml"
+            - --filter
+            - "- *"
             - /mnt/startup-config
             - /opt/data
           volumeMounts:
             - name: data
               mountPath: /opt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
@@ -47,6 +51,10 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       containers:
         - name: hermes-agent
           image: hermes-agent
@@ -66,10 +74,17 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: hermes-agent-data
+        - name: rclone-config
+          configMap:
+            name: hermes-agent-rclone
         - name: startup-config
           configMap:
             name: hermes-agent-startup-config
