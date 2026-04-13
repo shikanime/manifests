@@ -16,7 +16,7 @@ spec:
         - name: chrome
           image: chrome
           ports:
-            - containerPort: 3000
+            - containerPort: 9222
               name: cdp
 ---
 apiVersion: v1
