@@ -27,6 +27,7 @@ labels:
       app.kubernetes.io/version: latest
 resources:
   - deploy.yaml
+  - netpol.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml
