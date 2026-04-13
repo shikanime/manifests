@@ -17,6 +17,7 @@ spec:
           image: chrome
           args:
             - --remote-debugging-address=0.0.0.0
+            - --remote-allow-origins=*
           ports:
             - containerPort: 9222
               name: cdp
@@ -27,15 +28,3 @@ spec:
         - name: dshm
           emptyDir:
             medium: Memory
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: chrome
-spec:
-  ports:
-    - name: cdp
-      port: 9222
-      targetPort: cdp
-  selector:
-    app.kubernetes.io/name: chrome
