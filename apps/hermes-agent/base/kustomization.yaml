@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" }, { "name": "chrome", "tag-regex": "^(?P<version>.+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
 configMapGenerator:
   - files:
       - rclone/rclone.conf
@@ -16,9 +16,6 @@ images:
   - name: hermes-agent
     newName: docker.io/nousresearch/hermes-agent
     newTag: latest # TODO: the ARM64 image just released
-  - name: chrome
-    newName: docker.io/chromedp/headless-shell
-    newTag: 149.0.7779.3
 labels:
   - pairs:
       app.kubernetes.io/component: agent
@@ -26,8 +23,6 @@ labels:
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: latest
 resources:
-  - deploy.yaml
-  - netpol.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml

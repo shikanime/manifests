@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: shikanime
 components:
   - ../../components/api
+  - ../../components/browser
   - ../../components/webhook
 configMapGenerator:
   - files:
