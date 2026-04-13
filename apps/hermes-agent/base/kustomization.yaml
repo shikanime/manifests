@@ -11,8 +11,8 @@ images:
     newName: docker.io/nousresearch/hermes-agent
     newTag: latest # TODO: the ARM64 image just released
   - name: chrome
-    newName: docker.io/browserless/chrome
-    newTag: 1.61.1-chrome-stable
+    newName: docker.io/chromedp/headless-shell
+    newTag: 149.0.7779.3
 labels:
   - pairs:
       app.kubernetes.io/component: agent
