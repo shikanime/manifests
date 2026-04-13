@@ -3,6 +3,12 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" }, { "name": "chrome", "tag-regex": "^(?P<version>.+)$" } ]'
+configMapGenerator:
+  - files:
+      - rclone/rclone.conf
+    name: hermes-agent-rclone
+    options:
+      disableNameSuffixHash: true
 images:
   - name: rclone
     newName: docker.io/rclone/rclone
