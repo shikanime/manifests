@@ -237,6 +237,31 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: apps-metatube
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/metatube/overlays/nishir
+  prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: StatefulSet
+      name: metatube
+      namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: apps-prowlarr
   namespace: flux-system
 spec:

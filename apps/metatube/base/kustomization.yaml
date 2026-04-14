@@ -16,3 +16,4 @@ labels:
 resources:
   - sts.yaml
   - svc.yaml
+  - vpa.yaml
