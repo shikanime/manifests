@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: matrix-linkedin
   annotations:
-    tailscale.com/proxy-class: matrix-linkedin
+    tailscale.com/proxy-class: mautrix-linkedin
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

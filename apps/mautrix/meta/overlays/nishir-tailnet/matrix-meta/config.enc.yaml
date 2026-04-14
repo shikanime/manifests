@@ -223,7 +223,7 @@ appservice:
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
   # If you want to use https, you need to use a reverse proxy. The bridge does not have TLS support built in.
-  address: http://matrix-meta:29319
+  address: http://mautrix-meta:29319
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
@@ -517,7 +517,7 @@ sops:
         NWxzbXpmdEdZRlFUQ1RaRUdoQjNlaDQKG7hPgdRRsr2W3coAyRrFHMuPbw809ePg
         MI7ZjgmY82xmGW7qpEKXMVS7wtAzpeM4R80nIqMla76nwDzcaMA3wA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-07T09:54:05Z"
-  mac: ENC[AES256_GCM,data:8GWWJkuA6xenklSnKCGHpUiOIRygQfRZ2jvnDPhePyp8CwEk2jbP9tnshpQUpv4YPlo3MKFslLPk8nRyhYqu8YmRHXbh04PVAPE7lCtb5D2DbRwybYg7WLNiv5BI7UXJEviaHTTV/GftTl8z9huvgnbdROd+bi8NGsKkYl8QNtI=,iv:LaSgyIg3jHFDDZCkIjq/1F/mUFYbR4mTn+qFtab9UI0=,tag:8rDEhYpfWzkdoSkqsO1WJg==,type:str]
+  lastmodified: "2026-04-14T22:03:41Z"
+  mac: ENC[AES256_GCM,data:EZZeKmBA0KX0Io+vtDKdZD/ojkPWKgPeR4ap9SYvokUlCfKdi6nBcS6DmAuLQ+vLoPerSRcdx3mGILW+ALfVKL6SBuDlA32+s/vL4s4jymQAeawc1XAV3r7McjISrK9oQCeZcTS5D1fLHsdaOAWTiqbSf5gEip1msReaA+RCmu0=,iv:FLCdqGzugryqPDIavfEPEJCuK+/1Mam8sJtA3G/j+oU=,tag:1nzONwxAGRiArthC0uA1bg==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2

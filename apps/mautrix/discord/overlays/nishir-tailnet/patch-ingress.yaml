@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: matrix-discord
   annotations:
-    tailscale.com/proxy-class: matrix-discord
+    tailscale.com/proxy-class: mautrix-discord
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

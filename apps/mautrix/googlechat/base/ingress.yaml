@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-googlechat
+      name: mautrix-googlechat
       port:
         name: http
   tls:

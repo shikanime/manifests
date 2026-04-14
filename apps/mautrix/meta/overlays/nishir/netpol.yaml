@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-meta
+  name: mautrix-meta
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: matrix-meta
+      app.kubernetes.io/name: mautrix-meta
   policyTypes:
     - Ingress
   ingress:

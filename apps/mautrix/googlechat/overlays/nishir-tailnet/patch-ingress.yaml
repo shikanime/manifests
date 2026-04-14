@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: matrix-googlechat
   annotations:
-    tailscale.com/proxy-class: matrix-googlechat
+    tailscale.com/proxy-class: mautrix-googlechat
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

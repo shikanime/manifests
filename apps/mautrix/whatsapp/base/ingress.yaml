@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-whatsapp
+      name: mautrix-whatsapp
       port:
         name: http
   tls:

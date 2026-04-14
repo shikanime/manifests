@@ -1,5 +1,5 @@
 id: whatsapp
-url: http://matrix-whatsapp:29318
+url: http://mautrix-whatsapp:29318
 as_token: ENC[AES256_GCM,data:wxGtjocU6I/BjGzAIkAFR7Yj/K3BpDxflsKKJNRn04iQd+SGfmmLuiPSmEJvc3JGj9DM3KyuUy+RU1sbsxXT2g==,iv:PAWtAAsjhVw5qKmM5z480f4+CokPe+WvdIn/e/QmP20=,tag:BeeBf3xP4wnPOp+a2SpMaw==,type:str]
 hs_token: ENC[AES256_GCM,data:LzchqFMGFzOCURIcUwsEP9ACKnO+1zrvd1WQWEoOavKVNSx//gPuCbTZVfA7vzwf74p25A0gfDERYKisnF8BMQ==,iv:jGORtUAjgnYzUDaBYJNi92kvcIz1Rwqpj889HRhMkVk=,tag:Qy7TMSmQuMhRCDAv++RqXA==,type:str]
 sender_localpart: t8iaBytUUysNeiWALGzdXlDUxIpAn2Vg
@@ -59,7 +59,7 @@ sops:
         V3N1S3JkSFVidFNOQ2xMOHFoVTUzMEkKYG2f6DXrBZ59Bq1AcgFXiyL1RK16aaYb
         AbjNBzJ6MOrWqGeebto7pxWKdzg9tFRX/sEhg21RN7EsSchReBldEA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:54Z"
-  mac: ENC[AES256_GCM,data:4vYr6fd3WCiolYEE4Dv07lHcjQN39Qmng3MiInSRU4fEWzUlbgQk8LPCNiWGL7FJpjYQKIMEkONS24y+3dKBlX0SKhf23ZzokZzjE0WWfdpEO1Uz+JbpfYvTjvuF0g8U2RWvlP6r/gEU1S/VmPgKGWEhTTUgmuW9u/So9aLOMsU=,iv:4ObSLlgzN6Pys/9Qt6oHG97M4h+yGPVhyhPSO9Qq2bg=,tag:TZmbPquaduVjCSoSZR71uA==,type:str]
+  lastmodified: "2026-04-14T22:06:48Z"
+  mac: ENC[AES256_GCM,data:WiBU8g04nHjCQfnWUWrYcb9HE+H0Td3ImuLclkKoawh9awXdrwxISCcJo7Q+3/SYRzXQ8EVxJuY1m53aLWFw/39V7n2I9p0vFbUSxI6OY6MrT4zv6mwbaSPxPbJzhL+X9ix8NxD460S/dLlNAiWmZCKZz8rnDjOoHA7U7Kx5pXE=,iv:6lcxRGdvFRMWS0DVdwXKTMXltg3ssDpkkIY8P/P24xM=,tag:0IF0aHr+0IV5QZWKOC/NQQ==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1
+  version: 3.12.2

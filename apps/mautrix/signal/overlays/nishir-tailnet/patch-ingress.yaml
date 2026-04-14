@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: matrix-signal
   annotations:
-    tailscale.com/proxy-class: matrix-signal
+    tailscale.com/proxy-class: mautrix-signal
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

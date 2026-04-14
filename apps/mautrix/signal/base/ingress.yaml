@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-signal
+      name: mautrix-signal
       port:
         name: http
   tls:

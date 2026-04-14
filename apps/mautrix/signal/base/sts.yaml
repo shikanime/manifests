@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-signal
+  name: mautrix-signal
 spec:
   replicas: 1
-  serviceName: matrix-signal
+  serviceName: mautrix-signal
   selector:
     matchLabels:
-      app.kubernetes.io/name: matrix-signal
+      app.kubernetes.io/name: mautrix-signal
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: matrix-signal
+        app.kubernetes.io/name: mautrix-signal
     spec:
       initContainers:
         - name: config-sync
@@ -80,10 +80,10 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: matrix-signal
+            secretName: mautrix-signal
         - name: data
           persistentVolumeClaim:
-            claimName: matrix-signal-data
+            claimName: mautrix-signal-data
         - name: rclone-config
           configMap:
-            name: matrix-rclone
+            name: mautrix-rclone

@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-discord-tailscale
+  name: mautrix-discord-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: matrix-discord
+      app.kubernetes.io/name: mautrix-discord
   policyTypes:
     - Ingress
   ingress:

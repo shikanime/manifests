@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: matrix-twitter
+  name: mautrix-twitter
 spec:
   statefulSet:
     pod:
@@ -12,7 +12,7 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: matrix-twitter
+                    app.kubernetes.io/name: mautrix-twitter
                 namespaces:
                   - shikanime
                 topologyKey: kubernetes.io/hostname

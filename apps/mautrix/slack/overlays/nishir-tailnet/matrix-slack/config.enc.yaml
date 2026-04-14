@@ -235,7 +235,7 @@ appservice:
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
   # If you want to use https, you need to use a reverse proxy. The bridge does not have TLS support built in.
-  address: http://matrix-slack:29335
+  address: http://mautrix-slack:29335
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
@@ -529,7 +529,7 @@ sops:
         bE9PTmZLU244ZFZYVzRYOUsrcUowRDgK4uQC3hpWOxL2u+TV81LfblR8gUdTUvzV
         25HyKLX1QA9JYBPf61pc3NoMMmplq9G1Gt4rz6NE1AHDqgZsNqV71w==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-04T18:06:26Z"
-  mac: ENC[AES256_GCM,data:yt+yn6aimbvjhvPrEhDQ7ArlSQOAApgkeJzmsY9J/CB/2+hr2sl8fbjli4qNHhJRM3srEuMpYuBM85hhicAhztFyn+4YG0Hbj7N86VKYt/+6SB5SAv+RATuXKT45dZLF7I4wCYZyGJHaudJwmiVpXBfXD9MEuNmtgXb24fLjLcI=,iv:3sYG/Vsmn2ZmnzHRR8ZvQsvWZjfWzj8MqS5iYN8LPdA=,tag:mUi8/2IYw8Wqw/9nzes0FA==,type:str]
+  lastmodified: "2026-04-14T22:05:49Z"
+  mac: ENC[AES256_GCM,data:eaJzIKEMDGC/+mr7V8wlcBLzU0fQaQtju+bNMCF27NA/Zv4UGZPCqndQtXF7VMWH860kRvqH4/73RR0SZ61MFwVysJRH7HHJVJ/FQJMhrKc6AZiRP2HFWVUdM9Dqw9r5coUo/YS3py8/Hu5VEdCCgzE/tPR3bjFvLfR1Pp2nxsc=,iv:QYxi0DfLoyMf5p8q9eD7W0sZUkEwtmox6A1RoRciG7I=,tag:f8azbW4kzMy08+zFSt+mLw==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2

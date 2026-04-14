@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-twitter
+      name: mautrix-twitter
       port:
         name: http
   tls:

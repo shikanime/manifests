@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-discord
+      name: mautrix-discord
       port:
         name: http
   tls:

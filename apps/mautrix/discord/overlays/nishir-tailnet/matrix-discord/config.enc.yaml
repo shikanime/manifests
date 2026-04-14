@@ -25,7 +25,7 @@ homeserver:
 # Changing these values requires regeneration of the registration.
 appservice:
   # The address that the homeserver can use to connect to this appservice.
-  address: http://matrix-discord:29334
+  address: http://mautrix-discord:29334
   # The hostname and port where this appservice should listen.
   hostname: 0.0.0.0
   port: 29334
@@ -411,7 +411,7 @@ sops:
         TXdLN1BieERpTVh6Q2MyTFAvd2dwdlkKweFLLJXDIovObvUt79Rgk6Gc5c4eHW3J
         wlWC94NlEdch5HjlhBfi0pCB88nYRDHSb36pVtAUwhBFc1SiZjWMeQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-07T09:53:44Z"
-  mac: ENC[AES256_GCM,data:CZ3xusaljxgS4Y4XfFQJQVqpWQnRs0UWeYrf0KczMOh3kW99H9WF3BKCN3M0L7YK0aOhvtCgTDITmqIoKcXWKOX26P22inaGH+6ywRnxM1dXu9WuhfskvzBPCLQeHHl4/jDluKj3KNihmEp9LaBITJM4ezU9Dwdu/ZlVAMSGToQ=,iv:NXxqSv/GZtKZfrrcPZCHwisEAWS3B7T3+aN9Q+sZiU8=,tag:xSRHMw4cphZXHAGqltnzTA==,type:str]
+  lastmodified: "2026-04-14T22:02:37Z"
+  mac: ENC[AES256_GCM,data:cOGGTnFGd8QV/dLJF0XvwmXu0DpR6kQ2TbSJ5LbmJee4uXUHDoGOQR+zi0HuLNxGc65uVP7wAIuZEs3wPTvM39u+ZbgfMkoHT2V0s32HE287qboExRUAXz8vtzeso1RoXArE2/3M0qTE+05WVArdPTppFNMHMwXNk3PLSymhXX0=,iv:bXbZp2j2G1p/Yjo9s73/haX7qbPIMJuE2eczyHswrOQ=,tag:hTv9J2hrQynBb0y8/hfUsQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2

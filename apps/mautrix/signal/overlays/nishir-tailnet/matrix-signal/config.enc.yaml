@@ -203,7 +203,7 @@ appservice:
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
   # If you want to use https, you need to use a reverse proxy. The bridge does not have TLS support built in.
-  address: http://matrix-signal:29328
+  address: http://mautrix-signal:29328
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
@@ -497,7 +497,7 @@ sops:
         b3U5SlR6Q1hGSDdXbmFMRGhRSFQyUncKqOVlgFhpWEG6ZcTdGDVjEJ1QmUYQs8ok
         brL6+gY92OiAPPBKBzawWzu3064+F3qz6wtAAAT6KiP7BvR/Gmf0Iw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-07T09:54:16Z"
-  mac: ENC[AES256_GCM,data:nwySZMj9HaR+iplRaDF+wGSbs4yTapIZEIAEqowxbzoKIUD9Sr3+CrHCAMXlKM5nIMdIBgPFzvzFjfCBJIqkaieXnKLZlSdKXpxVKJHKBDQxnjeV55zkwxO8AvjBPYYFrKMdSf/vwHEI+yaP5xUF4t7Meis3LmmTCY/wOEy7dRk=,iv:RjXdZby2p6SSYOqa4VcuNYBPYSDbT6Qu/NEbg58PKhs=,tag:XsF1JFNdWFSoz86qdulYPw==,type:str]
+  lastmodified: "2026-04-14T22:05:15Z"
+  mac: ENC[AES256_GCM,data:yoDpEeQsoUAi2AfWsLkl2A9sRJPmksvJEc15e/ckrQwRmBsuZvYhUswbryNqsXdVLE2Czd5HCiy3OW67zzk6n0cz+bck2SQCkBR2ZAol/mpjzM4zBdtH6ruVnAml91NIC8qkc9DvV0/I4km6xKRwckF/iORDDI2XEQbouKG5Rmo=,iv:A9j13BTtl6vBHaLIHIho2g71p8KPq8ZhplUfbvKh84E=,tag:9TBuCfbt8F27XFzql9w8AA==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2

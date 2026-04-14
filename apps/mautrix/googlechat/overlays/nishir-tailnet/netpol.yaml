@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-googlechat-tailscale
+  name: mautrix-googlechat-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: matrix-googlechat
+      app.kubernetes.io/name: mautrix-googlechat
   policyTypes:
     - Ingress
   ingress:

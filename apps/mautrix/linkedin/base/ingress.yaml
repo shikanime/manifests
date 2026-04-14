@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-linkedin
+      name: mautrix-linkedin
       port:
         name: http
   tls:

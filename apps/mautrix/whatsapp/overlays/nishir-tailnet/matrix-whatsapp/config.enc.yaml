@@ -291,7 +291,7 @@ appservice:
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
   # If you want to use https, you need to use a reverse proxy. The bridge does not have TLS support built in.
-  address: http://matrix-whatsapp:29318
+  address: http://mautrix-whatsapp:29318
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
@@ -585,7 +585,7 @@ sops:
         S2RUR0VGZUlFSkZia2pWL00xdDdXUncKbxv9H90DgF2Jlqo7yNC2V6W4LORCbgeJ
         EhVVQgLBG0e/tBEB7yP4ET+IiUte+ltA5RhOp/XTJNEoISLHafqUJg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-07T09:55:09Z"
-  mac: ENC[AES256_GCM,data:CRreKcdtjsvs00Ekxmoqu1zvpw9VFLlD0j7aLO4rV0vYU7XMM7XI0O/5RispZ0VBGupbQJQrh05lmhulOSPMW2eRzKWY6mv1fZDiwfJc8IZd2Sy8mnWMd0wOz2RCA1BTMMA5gD5yYiHM0u8t6qY1+B0tr1ZO8Ti7dcKibIM0txo=,iv:QklMRe6fR7GQ+In9WtBiVtQ3g46yFMAC4vNG/nj34DY=,tag:EwkEsk9puyCW+LIKx61qkQ==,type:str]
+  lastmodified: "2026-04-14T22:06:41Z"
+  mac: ENC[AES256_GCM,data:KjXK8dpB9Klbrryq0XBhC3sdlrAE0j7tvnaVNN+xOueoK0OzJVeaA72qv6OxjQC3KJl2l196Czww7xrbSOJL78n8ZdTC6HIv/2Oze78OjblXwmFSWimKOiSfY89T4LpUy+wP91T1rR+B4zA5s97klZNbV7IonQAPJau0nj8tjVc=,iv:Kiq+BwOj8ohCN6KIYZfYT7ad3MF+7utzNajNer1p058=,tag:OHvcs7365ZI+V3hh0IN2SQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2

@@ -11,6 +11,6 @@ secretGenerator:
       - config.yaml=matrix-slack/config.enc.yaml
       - doublepuppet.yaml=matrix-slack/doublepuppet.enc.yaml
       - registration.yaml=matrix-slack/registration.enc.yaml
-    name: matrix-slack
+    name: mautrix-slack
     options:
       disableNameSuffixHash: true

@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-twitter
+  name: mautrix-twitter
 spec:
   replicas: 1
-  serviceName: matrix-twitter
+  serviceName: mautrix-twitter
   selector:
     matchLabels:
-      app.kubernetes.io/name: matrix-twitter
+      app.kubernetes.io/name: mautrix-twitter
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: matrix-twitter
+        app.kubernetes.io/name: mautrix-twitter
     spec:
       initContainers:
         - name: config-sync
@@ -80,10 +80,10 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: matrix-twitter
+            secretName: mautrix-twitter
         - name: data
           persistentVolumeClaim:
-            claimName: matrix-twitter-data
+            claimName: mautrix-twitter-data
         - name: rclone-config
           configMap:
-            name: matrix-rclone
+            name: mautrix-rclone

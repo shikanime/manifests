@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: matrix-twitter
   annotations:
-    tailscale.com/proxy-class: matrix-twitter
+    tailscale.com/proxy-class: mautrix-twitter
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

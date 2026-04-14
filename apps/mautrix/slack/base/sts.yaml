@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-slack
+  name: mautrix-slack
 spec:
   replicas: 1
-  serviceName: matrix-slack
+  serviceName: mautrix-slack
   selector:
     matchLabels:
-      app.kubernetes.io/name: matrix-slack
+      app.kubernetes.io/name: mautrix-slack
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: matrix-slack
+        app.kubernetes.io/name: mautrix-slack
     spec:
       initContainers:
         - name: config-sync
@@ -80,10 +80,10 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: matrix-slack
+            secretName: mautrix-slack
         - name: data
           persistentVolumeClaim:
-            claimName: matrix-slack-data
+            claimName: mautrix-slack-data
         - name: rclone-config
           configMap:
-            name: matrix-rclone
+            name: mautrix-rclone

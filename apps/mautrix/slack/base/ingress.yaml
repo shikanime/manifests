@@ -5,7 +5,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-slack
+      name: mautrix-slack
       port:
         name: http
   tls:

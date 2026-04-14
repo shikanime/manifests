@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-whatsapp
+  name: mautrix-whatsapp
 spec:
   replicas: 1
-  serviceName: matrix-whatsapp
+  serviceName: mautrix-whatsapp
   selector:
     matchLabels:
-      app.kubernetes.io/name: matrix-whatsapp
+      app.kubernetes.io/name: mautrix-whatsapp
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: matrix-whatsapp
+        app.kubernetes.io/name: mautrix-whatsapp
     spec:
       initContainers:
         - name: config-sync
@@ -80,10 +80,10 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: matrix-whatsapp
+            secretName: mautrix-whatsapp
         - name: data
           persistentVolumeClaim:
-            claimName: matrix-whatsapp-data
+            claimName: mautrix-whatsapp-data
         - name: rclone-config
           configMap:
-            name: matrix-rclone
+            name: mautrix-rclone
