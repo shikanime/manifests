@@ -7,8 +7,6 @@ configMapGenerator:
   - files:
       - rclone/rclone.conf
     name: hermes-agent-rclone
-    options:
-      disableNameSuffixHash: true
 images:
   - name: rclone
     newName: rclone/rclone

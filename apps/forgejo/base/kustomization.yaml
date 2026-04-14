@@ -8,8 +8,6 @@ configMapGenerator:
       - rclone/rclone.conf
     name: forgejo-rclone
     namespace: shikanime
-    options:
-      disableNameSuffixHash: true
 images:
   - name: rclone
     newName: rclone/rclone

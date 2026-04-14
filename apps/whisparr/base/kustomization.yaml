@@ -8,8 +8,6 @@ configMapGenerator:
       - rclone/rclone.conf
     name: whisparr-rclone
     namespace: shikanime
-    options:
-      disableNameSuffixHash: true
 images:
   - name: rclone
     newName: rclone/rclone
