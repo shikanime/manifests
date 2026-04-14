@@ -1,5 +1,5 @@
 id: discord
-url: http://matrix-discord:29334
+url: http://mautrix-discord:29334
 as_token: ENC[AES256_GCM,data:hl9mNH+XBy7eYJ/DFgtM9yAW98tZBE9evkVBzDSw2kFcd/NPLlL2GDa0XnUmWVy+pVqhGWku5H/eedD+s2OVUA==,iv:NwEWwQ+ZIl9kQ3gGdOkiF4hZ/U+IU3PPtlUiG/tTJ5M=,tag:/kFVR8VoaYYRjsgV7SjcqA==,type:str]
 hs_token: ENC[AES256_GCM,data:B/2DtsP8UyGzQx11oRVkTNhGG2y8hOcKSFpS4fOe9qJbJe9m+k4He1uutDyUqoJtcoi/fNuC1LziKk8HgS94XQ==,iv:oJocqqlKieaKBTOpSMlZwuhCtp3LZScwCdsjg2vQqVw=,tag:ag6MqvAfr40yIKT3wfDM+A==,type:str]
 sender_localpart: Rd1diJXgdeSsDIBz3LtlcQcrjY2WDAVX
@@ -59,7 +59,7 @@ sops:
         TWlZNWtEdVFYUDBmU05YbVlYa0wwSU0K4Z2oj7CVSZCz5onFgS/S4urp604A1B7n
         FxYrbDVT86E/FSR0GcV+BEroEH2pKv21q9ba4noAD9Lc/h1YYf2+OQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:54Z"
-  mac: ENC[AES256_GCM,data:QmDQkOoI1dD0lJmGZsLPEXBbx0zMH4hF6YqQCJyFx7wGrjQxTyjLMqSAV6DtG9r16NBQLehfezscerh/cchkYLTW/nW2DyJeovP6e4uZa/R8WxEY+vt18zR3+A473jddjuwOcWFy8/q/843M5cXeBRuc10d2+Wt+1EVvt5vTl8M=,iv:BfjY/LHXZrEVuQ9mr9xco6OaRNWGMcSvyijY6WkBgr8=,tag:MruRs2RRxOLsFV5b2HhUlg==,type:str]
+  lastmodified: "2026-04-14T22:02:53Z"
+  mac: ENC[AES256_GCM,data:0VmGLYnv1XQBZUAlMJY721fcKID21LXaNMMv+a/wxRs5QHzti/pQX/mZDWPfk/Xm2qFQOx0SMPsZrJ76rqKol7uaezLfukWnNZgL+QZ7EEQoakLgsF5AAevoOCeUbeCagBnMbT69y/67SELE7dZM6bajQTaAnhTB6C9R1y9UbFU=,iv:8Z94Ye1FbDeKI1PrzSAp1nmgcHdfIXaRs3xseBRsAiQ=,tag:LAhepQ7U2UPyeji+Uw1cBg==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1
+  version: 3.12.2

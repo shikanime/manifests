@@ -1,5 +1,5 @@
 id: linkedin
-url: http://matrix-linkedin:29341
+url: http://mautrix-linkedin:29341
 as_token: ENC[AES256_GCM,data:LfJpjHeVMGE7ms+Ey67zVHWLi72hNNcUX6e04stnLoERMIgPMfJslfCDBR+zqCWeMIprqvIxA1n6llTp8QWRpg==,iv:zMOiXO6Y0aeI42z+4TmTlhtKshGP9pinoBUNROf46JU=,tag:c2EVrgV8X5Gus8tbSUBZaQ==,type:str]
 hs_token: ENC[AES256_GCM,data:FTlzJqv/Ks3tVBoDIaSwUIRRsmQWzkcdb1CFYLmXKukaOxpThnzjgKRV4brhBY2JrMuz0MWVS9U3x8E2W2bg/Q==,iv:wbZJKvgR9ITG0HhjeJMud9axVSfFCtc92LJ9sN7oM5o=,tag:bvuAANWK92YstR51XLhRYg==,type:str]
 sender_localpart: yhOAOXPg6urLYarvXlIQBkDk6gT1zYE4
@@ -59,7 +59,7 @@ sops:
         N1ZXVWlVcVRRSkh2Z1dxRm1pYk5BU1UKXDYeqEVSdU/fbuFowOELNxbN4ycdXL6q
         QJt/wmdE/OMyf6LtsiM6OWNSrA+r3m7hULiAI6J+xwFXKAZdrUVlRg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-01T07:51:38Z"
-  mac: ENC[AES256_GCM,data:HC3R6pWKKbomMz0SCOn5jTN3kPi6Ck7eUwdK+ImtQdJYZovky93uGouUHJ/br+58x/QNRUg0p5BJd8FmT57gBNmmsTgx/j6R0gbu9c+j4o9/jhWhQMaFVqPg7GRlqy5gUWcZJXNv6wLX7COF9oq6jqkQ+SHdcdkmeFxkW6szq/A=,iv:NYfI5AaOLLQzFtLTpyoZ5zybp/hokrIwKfLPciiPCj8=,tag:lOj9uwZAtn6q1uXguOIKNg==,type:str]
+  lastmodified: "2026-04-14T22:03:31Z"
+  mac: ENC[AES256_GCM,data:pp+hG7281/kJ09ZwGm7izy3Zh6g0L/8BUjjaOEKfj+fNgTKh5d1PbxHgjPfKm+AT9m+ViFFp2g8z1iyxvVJ9Y4/b7Wt/4oZWKZ5DjdwqGmo5O1esIZB+REAeIxn9dILZn943xpgLzx/QsUD3IG28CzJ4VKc1CsfUogKsvaRZMgU=,iv:/NxhaD8LgRyOb+F6ufeFdAbUbkTiT8j5jT6glyK3oqA=,tag:+Zw0P4LCkO9XNgzag9gDtw==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1
+  version: 3.12.2

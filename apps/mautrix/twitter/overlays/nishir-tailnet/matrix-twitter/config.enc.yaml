@@ -1,123 +1,24 @@
 # Network-specific config options
 network:
-  # Device name that's shown in the "WhatsApp Web" section in the mobile app.
-  os_name: Mautrix-WhatsApp bridge
-  # Browser name that determines the logo shown in the mobile app.
-  # Must be "unknown" for a generic icon or a valid browser name if you want a specific icon.
-  # List of valid browser names: https://github.com/tulir/whatsmeow/blob/efc632c008604016ddde63bfcfca8de4e5304da9/binary/proto/def.proto#L43-L64
-  browser_name: unknown
-  # Proxy to use for all WhatsApp connections.
+  # Proxy to use for all Twitter connections.
   proxy: null
-  # Alternative to proxy: an HTTP endpoint that returns the proxy URL to use for WhatsApp connections.
+  # Alternative to proxy: an HTTP endpoint that returns the proxy URL to use for Twitter connections.
   get_proxy_url: null
-  # Whether the proxy options should only apply to the login websocket and not to authenticated connections.
-  proxy_only_login: false
-  # Displayname template for WhatsApp users.
-  # {{.PushName}}      - nickname set by the WhatsApp user
-  # {{.BusinessName}}  - validated WhatsApp business name
-  # {{.Phone}}         - phone number (international format)
-  # {{.RedactedPhone}} - phone number with middle digits replaced by "∙"
-  # {{.FullName}}      - Name you set in the contacts list
-  displayname_template: '{{or .BusinessName .PushName .Phone .RedactedPhone "Unknown user"}} (WA)'
-  # Should incoming calls send a message to the Matrix room?
-  call_start_notices: true
-  # Should another user's cryptographic identity changing send a message to Matrix?
-  identity_change_notices: false
-  # Should the bridge mark you as online on WhatsApp when you send typing notifications?
-  # Full presence bridging is not supported.
-  send_presence_on_typing: false
-  # Should WhatsApp status messages be bridged into a Matrix room?
-  enable_status_broadcast: true
-  # Should sending WhatsApp status messages be allowed?
-  # This can cause issues if the user has lots of contacts, so it's disabled by default.
-  disable_status_broadcast_send: true
-  # Should the status broadcast room be muted and moved into low priority by default?
-  # This is only applied when creating the room, the user can unmute it later.
-  mute_status_broadcast: true
-  # Tag to apply to pinned chats on WhatsApp.
-  pinned_tag: m.favourite
-  # Tag to apply to archived chats on WhatsApp.
-  # Set to m.lowpriority to move them to low priority.
-  archive_tag: null
-  # Tag to apply to the status broadcast room.
-  status_broadcast_tag: m.lowpriority
-  # Should the bridge use thumbnails from WhatsApp?
-  # They're disabled by default due to very low resolution.
-  whatsapp_thumbnail: false
-  # Should the bridge detect URLs in outgoing messages, ask the homeserver to generate a preview,
-  # and send it to WhatsApp? URL previews can always be sent using the `com.beeper.linkpreviews`
-  # key in the event content even if this is disabled.
-  url_previews: false
-  # Should polls be sent using unstable MSC3381 event types?
-  extev_polls: false
-  # Should view-once messages be disabled entirely?
-  disable_view_once: false
-  # Should the bridge always send "active" delivery receipts (two gray ticks on WhatsApp)
-  # even if the user isn't marked as online (e.g. when presence bridging isn't enabled)?
-  #
-  # By default, the bridge acts like WhatsApp web, which only sends active delivery
-  # receipts when it's in the foreground.
-  force_active_delivery_receipts: false
-  # When direct media is enabled and a piece of media isn't available on the WhatsApp servers,
-  # should it be automatically requested from the phone?
-  direct_media_auto_request: true
-  # Should the bridge automatically reconnect if it fails to connect on startup?
-  initial_auto_reconnect: true
-  # Settings for converting animated stickers.
-  animated_sticker:
-    # Format to which animated stickers should be converted.
-    # disable - No conversion, just unzip and send raw lottie JSON
-    # png - converts to non-animated png (fastest)
-    # gif - converts to animated gif
-    # webm - converts to webm video, requires ffmpeg executable with vp9 codec and webm container support
-    # webp - converts to animated webp, requires ffmpeg executable with webp codec/container support
-    target: webp
-    # Arguments for converter. All converters take width and height.
-    args:
-      width: 320
-      height: 320
-      # only for webm, webp and gif (2, 5, 10, 20 or 25 recommended)
-      fps: 25
-  # Settings for handling history sync payloads.
-  history_sync:
-    # How many conversations should the bridge create after login?
-    # If -1, all conversations received from history sync will be bridged.
-    # Other conversations will be backfilled on demand when receiving a message.
-    max_initial_conversations: -1
-    # Should the bridge request a full sync from the phone when logging in?
-    # This bumps the size of history syncs from 3 months to 1 year.
-    request_full_sync: false
-    # Time to wait for history sync payloads before starting backfill. Each new payload resets the timer.
-    # If this is too low, the backfill may happen with incomplete history
-    # and backfill less messages than what is configured in the backfill section.
-    dispatch_wait: 1m
-    # Configuration parameters that are sent to the phone along with the request full sync flag.
-    # By default, (when the values are null or 0), the config isn't sent at all.
-    full_sync_config:
-      # Number of days of history to request.
-      # The limit seems to be around 3 years, but using higher values doesn't break.
-      days_limit: null
-      # This is presumably the maximum size of the transferred history sync blob, which may affect what the phone includes in the blob.
-      size_mb_limit: null
-      # This is presumably the local storage quota, which may affect what the phone includes in the history sync blob.
-      storage_quota_mb: null
-    # Settings for media requests. If the media expired, then it will not be on the WA servers.
-    # Media can always be requested by reacting with the ♻️ (recycle) emoji.
-    # These settings determine if the media requests should be done automatically during or after backfill.
-    media_requests:
-      # Should the expired media be automatically requested from the server as part of the backfill process?
-      auto_request_media: true
-      # Whether to request the media immediately after the media message is backfilled ("immediate")
-      # or at a specific time of the day ("local_time").
-      request_method: immediate
-      # If request_method is "local_time", what time should the requests be sent (in minutes after midnight)?
-      request_local_time: 120
-      # Maximum number of media request responses to handle in parallel per user.
-      max_async_handle: 2
+  # Displayname template for Twitter users.
+  # {{ .DisplayName }} is replaced with the display name of the Twitter user.
+  # {{ .Username }} is replaced with the username of the Twitter user.
+  displayname_template: '{{ .DisplayName }} (Twitter)'
+  # Maximum number of conversations to sync on startup
+  conversation_sync_limit: 20
+  # Should the bridge cache sessions instead of resyncing chats on every restart?
+  cache_session: true
+  # Should the bridge use "X" instead of "Twitter" in certain places,
+  # such as the management room welcome message and MSC2346 bridge info?
+  x: false
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: '!wa'
+  command_prefix: '!twitter'
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -145,6 +46,9 @@ bridge:
   # How long after an unknown error should the bridge attempt a full reconnect?
   # Must be at least 1 minute. The bridge will add an extra ±20% jitter to this value.
   unknown_error_auto_reconnect: null
+  # Maximum number of times to do the auto-reconnect above.
+  # The counter is per login, but is never reset except on logout and restart.
+  unknown_error_max_auto_reconnects: 10
   # Should leaving Matrix rooms be bridged as leaving groups on the remote network?
   bridge_matrix_leave: false
   # Should `m.notice` messages be bridged?
@@ -164,6 +68,11 @@ bridge:
   # Should cross-room reply metadata be bridged?
   # Most Matrix clients don't support this and servers may reject such messages too.
   cross_room_replies: false
+  # If a state event fails to bridge, should the bridge revert any state changes made by that event?
+  revert_failed_state_changes: false
+  # In portals with no relay set, should Matrix users be kicked if they're
+  # not logged into an account that's in the remote chat?
+  kick_matrix_users: true
   # What should be done to portal rooms when a user logs out or is logged out?
   # Permitted values:
   #   nothing - Do nothing, let the user stay in the portals
@@ -237,7 +146,7 @@ bridge:
   permissions:
     '*': relay
     matrix.taila659a.ts.net: user
-    '@root:matrix.taila659a.ts.net': admin
+    '@shikanime:matrix.taila659a.ts.net': admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -247,7 +156,7 @@ database:
   #           https://github.com/mattn/go-sqlite3#connection-string
   #   Postgres: Connection string. For example, postgres://user:password@host/database?sslmode=disable
   #             To connect via Unix socket, use something like postgres:///dbname?host=/var/run/postgresql
-  uri: file:/data/whatsapp.db?_txlock=immediate
+  uri: file:/data/twitter.db?_txlock=immediate
   # Maximum number of connections.
   max_open_conns: 5
   max_idle_conns: 1
@@ -291,25 +200,25 @@ appservice:
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
   # If you want to use https, you need to use a reverse proxy. The bridge does not have TLS support built in.
-  address: http://matrix-whatsapp:29318
+  address: http://mautrix-twitter:29327
   # A public address that external services can use to reach this appservice.
   # This is only needed for things like public media. A reverse proxy is generally necessary when using this field.
   # This value doesn't affect the registration file.
-  public_address: https://matrix-whatsapp.taila659a.ts.net
+  public_address: https://matrix-twitter.taila659a.ts.net
   # The hostname and port where this appservice should listen.
   # For Docker, you generally have to change the hostname to 0.0.0.0.
   hostname: 0.0.0.0
-  port: 29318
+  port: 29327
   # The unique ID of this appservice.
-  id: whatsapp
+  id: twitter
   # Appservice bot details.
   bot:
     # Username of the appservice bot.
-    username: whatsappbot
+    username: twitterbot
     # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
     # to leave display name/avatar as-is.
-    displayname: WhatsApp bridge bot
-    avatar: mxc://maunium.net/NeXNQarUbrlYBiPCpprYsRqr
+    displayname: Twitter bridge bot
+    avatar: mxc://maunium.net/HVHcnusJkQcpVcsVGZRELLCn
   # Whether to receive ephemeral events via appservice transactions.
   ephemeral_events: true
   # Should incoming events be handled asynchronously?
@@ -318,11 +227,11 @@ appservice:
   # This value doesn't affect the registration file.
   async_transactions: false
   # Authentication tokens for AS <-> HS communication. Autogenerated; do not modify.
-  as_token: ENC[AES256_GCM,data:UYibFtAJt6855E+941eSkERlW3R6Mz+gmfYjhtSpNXTByS0Fi9D+n7vL1MzXvneYJtOBGXEGsBeHUpSppeRexw==,iv:fMduK9c/MgbkOYNl/FWzA5tcFDcAhOcr+oq94PPrSUU=,tag:i8W5xDJnDnZk4/guhtLvcg==,type:str]
-  hs_token: ENC[AES256_GCM,data:OT3/97hxtiUtpCu1MV+y22w5D7u8Asr6YkADoJKNDJHSf2lrsk/lZTH3RQhrYhPvEAJNYrtoDr0ZUlzp8hSllA==,iv:8fNKRjKjhCoSADCQaMl4t+HLvTIRqHydBGJuAnSAXpQ=,tag:mZsVxknTAzVUycHLLRWemQ==,type:str]
+  as_token: ENC[AES256_GCM,data:iec3rT9T5nYVQBYRq78RT3Tqk6ZRupLZGnaUulePiRHk6hhmQSecHpc/cG0D/Ti03OzV3N97hTFCKL4fnWj9fw==,iv:NdIvbBgPkbeMF/BtZqBCm4J+JQBUQp1SD2j4aIbooZk=,tag:MoXxvXRMQRKPQDiU/QRQsg==,type:str]
+  hs_token: ENC[AES256_GCM,data:Mb3GDUqtTCXJYKP7YolCmxr9QseOlUp2bZtqYNm+iQ4H9l3uLdeeEZElHkTIAoEZGkrgjpR3c7IK8RkOlcgQSg==,iv:AGqEEK0tcRdmvfzREdMfZyjrKt81bEYMsRhLGLw/Qp0=,tag:cZDylrUrOTjWvwYLBcgxrA==,type:str]
   # Localpart template of MXIDs for remote users.
   # {{.}} is replaced with the internal ID of the user.
-  username_template: whatsapp_{{.}}
+  username_template: twitter_{{.}}
 # Config options that affect the Matrix connector of the bridge.
 matrix:
   # Whether the bridge should send the message status as a custom com.beeper.message_send_status event.
@@ -339,6 +248,9 @@ matrix:
   # The threshold as bytes after which the bridge should roundtrip uploads via the disk
   # rather than keeping the whole file in memory.
   upload_file_threshold: 5242880
+  # Should the bridge set additional custom profile info for ghosts?
+  # This can make a lot of requests, as there's no batch profile update endpoint.
+  ghost_extra_profile_info: false
 # Segment-compatible analytics endpoint for tracking some events, like provisioning API login and encryption errors.
 analytics:
   # API key to send with tracking requests. Tracking is disabled if this is null.
@@ -351,7 +263,7 @@ analytics:
 provisioning:
   # Shared secret for authentication. If set to "generate" or null, a random secret will be generated,
   # or if set to "disable", the provisioning API will be disabled. Must be at least 16 characters.
-  shared_secret: ENC[AES256_GCM,data:+K+OLMjgUFE/Ng1/aV7OA+ou3erVQB+wI9qdzHzY+VtBQoUXlcN5Hquwu++duKz0dNGz4V4xwZ2skmqJcVFAeA==,iv:ntotbaR4Offaa6JZmbmnxsJfdfztJOBKfD+2hjUEzHA=,tag:IF9B5mJk6aK6MPhwDWBKYQ==,type:str]
+  shared_secret: ENC[AES256_GCM,data:2JEaagqVyYDpQdwcYMNkc6krKwFhCvS6/GwtJSpEPrxrAteIkwmkDLX6kGdQjaemJTvm1IZ+rvVqIXXx/X/hFQ==,iv:BcCZX2yY40yY+J/B0Tcwd7SMEjuAD1RIg7iUyd8/+Tw=,tag:xP3M8ysrI9JNvSc+zHKAtg==,type:str]
   # Whether to allow provisioning API requests to be authed using Matrix access tokens.
   # This follows the same rules as double puppeting to determine which server to contact to check the token,
   # which means that by default, it only works for users on the same server as the bridge.
@@ -369,12 +281,20 @@ public_media:
   enabled: false
   # A key for signing public media URLs.
   # If set to "generate", a random key will be generated.
-  signing_key: ENC[AES256_GCM,data:DaQiUhdDs31EL6wgQNNmRBLQhqY45lmOvX4zyhKYzTUi0YSO4tRQ1n206QFtAAMcGsESO0gvOkQaA8TJj30Kzw==,iv:Ztixhdvd/1fei9BSuuegzR1PF8IXrvgBI6iULjaISHI=,tag:vnMNYybtPhjJuGtR3/wYzA==,type:str]
+  signing_key: ENC[AES256_GCM,data:0PGGEw22ImcNsKjmuIeH+FmLfp1Kuh6WlhfT/tG7gJ+8Wrs30rBDiY/f2vWo88bwpYrgVMU5UA4lHJPVdDwhfw==,iv:IzNBm1j7WK5uOambzox3WmOB5ZrtR+QIOPFycGtDHH0=,tag:ZoZO+U0xyw/+b9u3orcb1w==,type:str]
   # Number of seconds that public media URLs are valid for.
   # If set to 0, URLs will never expire.
   expiry: 0
   # Length of hash to use for public media URLs. Must be between 0 and 32.
   hash_length: 32
+  # The path prefix for generated URLs. Note that this will NOT change the path where media is actually served.
+  # If you change this, you must configure your reverse proxy to rewrite the path accordingly.
+  path_prefix: /_mautrix/publicmedia
+  # Should the bridge store media metadata in the database in order to support encrypted media and generate shorter URLs?
+  # If false, the generated URLs will just have the MXC URI and a HMAC signature.
+  # The hash_length field will be used to decide the length of the generated URL.
+  # This also allows invalidating URLs by deleting the database entry.
+  use_database: false
 # Settings for converting remote media to custom mxc:// URIs instead of reuploading.
 # More details can be found at https://docs.mau.fi/bridges/go/discord/direct-media.html
 direct_media:
@@ -383,7 +303,7 @@ direct_media:
   # The server name to use for the custom mxc:// URIs.
   # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
   # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
-  server_name: mautrix-discord-media.taila659a.ts.net
+  server_name: matrix-discord-media.taila659a.ts.net
   # Optionally a custom .well-known response. This defaults to `server_name:443`
   well_known_response: null
   # Optionally specify a custom prefix for the media ID part of the MXC URI.
@@ -395,7 +315,7 @@ direct_media:
   allow_proxy: true
   # Matrix server signing key to make the federation tester pass, same format as synapse's .signing.key file.
   # This key is also used to sign the mxc:// URIs to ensure only the bridge can generate them.
-  server_key: ENC[AES256_GCM,data:dqYWNxqmgcnk6ry4IXGd5+tzDeParg9i5ZNA0QncNVR8LsUqC3dZYI+SWL/N1lXqk1c56Gnn/RfDRw==,iv:xF8ialIPqVIKiD5/NnbBFCOsa1TbqI3piMIDu3sPwDE=,tag:aom9xoITvncyCj10v6lSAg==,type:str]
+  server_key: ENC[AES256_GCM,data:0AHhz5JdMKeycV6wSCoOl/kdGTpvNBvXBTUtIwDO8u9Bz0uypx3ekLQC+BQZYqG9WtxRaq57/eLsUg==,iv:2b782dva90Fq0cZBpcJBLggCSyaU3YiHVbRDyRZateA=,tag:obpnmaAZdgg3v5fLN3Gi9w==,type:str]
 # Settings for backfilling messages.
 # Note that the exact way settings are applied depends on the network connector.
 # See https://docs.mau.fi/bridges/general/backfill.html for more details.
@@ -441,7 +361,7 @@ double_puppet:
   # Shared secrets for automatic double puppeting.
   # See https://docs.mau.fi/bridges/general/double-puppeting.html for instructions.
   secrets:
-    matrix.taila659a.ts.net: ENC[AES256_GCM,data:XFmi/yn+qoBnu6eQ+E03kr5DiESXJYtU1CxjmYU2/KXH22bOJQF3p2Grq+F53olWb5pfWp7z4i3FDeL8fm1I8pHOa8BIk6CZtw==,iv:qVHBwgpvUrM3bOX9oHm+Y61QbEPB44mBe59ohWp2DRA=,tag:wVDoPjgBd9Gao2XihYXJKQ==,type:str]
+    matrix.taila659a.ts.net: ENC[AES256_GCM,data:NQLQLahgThC8YehzaNwCzU4kfXhkIQGXxpghrjusiQSE8y6DzPyunwWP/Oj0EFox7RFufyE8giEemqkb8EJxu3sgLmiLRnST/A==,iv:kmD+ClIwtCZKjGQbOhwnnrMSt8lJKaScvs93Dlbuk9w=,tag:RlXA+3Hqlvk7X10u6W32EA==,type:str]
 # End-to-bridge encryption support options.
 #
 # See https://docs.mau.fi/bridges/general/end-to-bridge-encryption.html for more info.
@@ -461,6 +381,8 @@ encryption:
   # Only relevant when using end-to-bridge encryption, required when using encryption with next-gen auth (MSC3861).
   # Changing this option requires updating the appservice registration file.
   msc4190: false
+  # Whether to encrypt reactions and reply metadata as per MSC4392.
+  msc4392: false
   # Should the bridge bot generate a recovery key and cross-signing keys and verify itself?
   # Note that without the latest version of MSC4190, this will fail if you reset the bridge database.
   # The generated recovery key will be saved in the kv_store table under `recovery_key`.
@@ -470,7 +392,7 @@ encryption:
   allow_key_sharing: true
   # Pickle key for encrypting encryption keys in the bridge database.
   # If set to generate, a random key will be generated.
-  pickle_key: ENC[AES256_GCM,data:zNzk/OD58OEzVWoI+0Rqn6cSlaeDwRMsDt/4XGN4K0TVZ7BtYvuecmg3MOo1vzo6KQPsUcNowPUF9K5meI/4Tw==,iv:Re3HIujZIYFqWAOg06msWHddcGSRZMqtF7kYTmq1l4c=,tag:5zHgHRng6bDHJoK55eFatg==,type:str]
+  pickle_key: ENC[AES256_GCM,data:1mzzmI/KLD7o2K5Yh6wZFOB5VXgiikxWg6feINbKvUUBVFmoHNXxuszCNJo3dqHjlt+yGw5lA/1/kiD4YsbLtA==,iv:2eDm2dkTmnriT3HwFWfMKKaXeZZbNZPkTx0uHcCb66k=,tag:T9RJn9rwE5pwoDFX9muDfw==,type:str]
   # Options for deleting megolm sessions from the bridge.
   delete_keys:
     # Beeper-specific: delete outbound sessions when hungryserv confirms
@@ -526,6 +448,15 @@ encryption:
     # Disable rotating keys when a user's devices change?
     # You should not enable this option unless you understand all the implications.
     disable_device_change_key_rotation: false
+# Prefix for environment variables. All variables with this prefix must map to valid config fields.
+# Nesting in variable names is represented with a dot (.).
+# If there are no dots in the name, two underscores (__) are replaced with a dot.
+#
+# e.g. if the prefix is set to `BRIDGE_`, then `BRIDGE_APPSERVICE__AS_TOKEN` will set appservice.as_token.
+# `BRIDGE_appservice.as_token` would work as well, but can't be set in a shell as easily.
+#
+# If this is null, reading config fields from environment will be disabled.
+env_config_prefix: null
 # Logging config. See https://github.com/tulir/zeroconfig for details.
 logging:
   min_level: debug
@@ -543,49 +474,49 @@ sops:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3WjY0QWNyclVBZitPSjQy
-        NWFwTW9lN0I0REtTNUQrUGIxY09oUmVtRkVnCjJRV3JqQkhkalhhcTB2RjNlN0o1
-        YkZndzJEWlVqS0FidGVXNGJzanVzTTgKLS0tIEJ1V0gvZzlBcEdPVFJqVG1KSW5l
-        WGFVOWVMdVlWaCtoTmFxQVVES0thZFkKo4oGo1qyWS1LC2JTpDWn1wj6i9Uu/9Qm
-        hE9ygJMdqJcYvgs9YNLUTiT01oVZy1vDhbMCOLs9+7/M5WIsOrM2ew==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrRWxKWGw0dHlZeWFDdUR5
+        b2Izd3pUZ3k4NlFEbzdBV2loajZZSndNNUgwCkhua1VxY0dRYmErbkg1UmpQRDhY
+        WDk4WXhFTEg2OEhkYWRacHVhRHl5MnMKLS0tIHIyTlFkMXMxMEJUVGZjRENJcWpF
+        Q09jVU16dXdWRTFaR09NOTJ6WnAvYmcKV7/zyBmYjvq8uq8evqavBEYjRZcpxdbb
+        TPQpw1ruozTxISI8u0+7ICbCIQJpccWQ9DpxcFdKvaSAhMgV04CWBQ==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3VjJ3QitOZGF0TGNEU09E
-        dmZMTmlsMU1vbkV1Y0JlbDV5QVNDakxEOHpnCm1IMjUyVTVsNG5NSmdITHZOTnpl
-        WTlSSnQ2SGFOaUlBRGlBajZ0TXdqLzAKLS0tIDZNNjdraUYxYnhBRkovM3RncHlD
-        V0JDSFFVNmxZczVrSnBabkQ1eGs1Y1kK4sLhpW8Xcy8m+dreGEIQurEzOFSZJ553
-        t4PuoLdyMCbJQTxySUBlK2ADT2BtSBDs54L8Oux5upP31nTUUETimQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGSnd4YTJKVGVsS25uM0FI
+        M2JGTEJWUXZyV1FhNWJFOHBYME10ZXVXV1hNCnkwOENaM0U1SHY3MVc1Q3ZFVXpn
+        aHMzM0UvdHQzTTJRVUNLUytlR3ZlZGMKLS0tIDF6NDFjZlJzV3M4V0hBSWVUQk53
+        YmVIRzZyS1JVbE5LdXA2K3Y3aEtCa28KjIX0jByJ8DeHND9lUiAXf8G7Ia/QzfAj
+        P8rC6WvdxSF380oUQJUb+C1Y96xLmOFhehU0qbHoexFJA+z5s6Fxow==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBPY1Y0cDg1RmE0a1BnMGsw
-        UjZvVC81WENmYUZkbmd3RC9FYlIxKzZxNjFBCmpOU05lSnR3MUt4a3c5WlZxVEpL
-        SlRlc0NQK0dVRG55ZHZWM1lzL2xPY2cKLS0tIDRQa1lNOVkvVTdDZmhkWDluc3lM
-        Mmg3Um1FWGg3YWh5Y01nK1Z6M0dPc00K9VGL+8NKhRznRh6wSk91QsChoy8hGQML
-        PhfNMigNhssvbSVAbmFaMT7El9Ni9I/sz/qYoLwL7G0cajjE6wRYkg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4azJZWHE5UXJYdkNVTi9C
+        bUQ0ZE9Fak5FSzZCTW1xRG40WlJuRHZ1clFNCi9ERnhGNTE4U0taUG5XRVJLL1Jn
+        SzRhdjA0Wk1GdExTQXZ2U2EzdVVnZzQKLS0tIDVhVFllVzlWNmt4R1lEWGgvb3Fh
+        UWxRS1RFV1RnZUZTVGZlV0tBOC9ocjQKYrloWAni0oMz3bLLf1RsRSdxAzylOGwx
+        PdgRn9Y9cUMbb/jDC7+lsumWYbQfUsL9IR0QMXWtfykJoIn3Vcs36w==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17pepaj2fgfsh5a0nzdhjsylv8qdstffmapy5xwvymjh5s9wz8uaqgvzdvr
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYREhUZWZXbzVpVU9ON3ZQ
-        NWd1K1NLSWM2eWxKN0hQZmtMRjFZQ3RkblIwCjFuWjZnTnQ5b2o0K0ZGaU9rcStP
-        b01NYm5SSEFaaTlGeEpzNmp1T21CQTQKLS0tIElzYlovdnFwN1RlZm1Yc0tiSzR5
-        a1BER3NUVWNXQjExM3MwS3dnMkRCaUkK5jijodCdvujLDinkIMrBqxY+3eT+/TX5
-        doGntA83oKhf9/rhSL23euE5MBP9WL/sMr3YXpMkAV7qzDOAlbLLtA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArTTNRYTJiNmttRXpGWE5T
+        N0hZVnMwR3V4QmI1WkE2TnNRM3RjOUN2R1Q0Cmx2ajdTMGZWeEJENGJTWDVWWDNZ
+        NSt5alhhZGV6SVpVckxxZi9IVXhPZmcKLS0tIERQNmpmTzV5UkZhNnQ0SlE0RUMw
+        bExsd2p0QzNrQnVPMW9sM2htcVhNWlEK5LmFwtp3a9gJBRcqW1UmrIouzHbqERTO
+        0kVulyFwn5qsRhYvl0YT/6+qo8W+SaGuTWuvnXsIHYT9cn2ZefO6jw==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5WXRWWjBPN25pdUQ2WGxI
-        RnNKaCtuY1hVUjl1Yk54M0tnclpzMkw0ZkRrCnRqVkZOSHRuRWxSQitzK0Z4REFr
-        WGdyTW44SHN6UTd5eWdaQ0YzNmx2VFUKLS0tIGpRenVvK2E5R2tjRjkvZ2hUcjNL
-        S2RUR0VGZUlFSkZia2pWL00xdDdXUncKbxv9H90DgF2Jlqo7yNC2V6W4LORCbgeJ
-        EhVVQgLBG0e/tBEB7yP4ET+IiUte+ltA5RhOp/XTJNEoISLHafqUJg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvSlQzZGJ1UEd5UHNWM0sz
+        Z2J1YVFmcDBDTUdEcEorK0dIdGlITVdONW0wCjJCMVRrWkRZZFZYemZ4QVgxazE4
+        TkdVV2lDclZSbU1RdFpPV0lkcHhIL0UKLS0tIHd6bWlxeDdNK0x1OHNWZWkySnlW
+        RkY1T3VUckEwVDlRVjcwOEtGR2N3WVkKdK8rb71zYztEg+tmHJ3P8Ws0HquZqJvG
+        1uqT/5x37Eo7kK+t5DmOYqyQRbgweYX0YmC9IFulGKdg0ZLheJQdHA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-07T09:55:09Z"
-  mac: ENC[AES256_GCM,data:CRreKcdtjsvs00Ekxmoqu1zvpw9VFLlD0j7aLO4rV0vYU7XMM7XI0O/5RispZ0VBGupbQJQrh05lmhulOSPMW2eRzKWY6mv1fZDiwfJc8IZd2Sy8mnWMd0wOz2RCA1BTMMA5gD5yYiHM0u8t6qY1+B0tr1ZO8Ti7dcKibIM0txo=,iv:QklMRe6fR7GQ+In9WtBiVtQ3g46yFMAC4vNG/nj34DY=,tag:EwkEsk9puyCW+LIKx61qkQ==,type:str]
+  lastmodified: "2026-04-14T22:06:14Z"
+  mac: ENC[AES256_GCM,data:8VFy8ZB+MyFFy7APWk/XJc2/86eM6dl4LhausoKsfRzRGcomZyuHypB8H1nPmmo8UpgkLF8b3GSEOJJNvRTo/o5UEkYz2N2ZUs3fqtV7dq8EV4y38nHhzPYDI9qmo7GvdyqX8mjvpmjKe6Jnmph/4VvjMMdtt8KOk8M5JcktbtI=,iv:/pzNN8X32/a9WHhTywaRYSQpRk3rsuNebf0C4SyGrJ0=,tag:ucdfsmE4FjbwOq0eQPC3CQ==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2

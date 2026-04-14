@@ -1,5 +1,5 @@
 id: meta
-url: http://matrix-meta:29319
+url: http://mautrix-meta:29319
 as_token: ENC[AES256_GCM,data:v91KVhPWbqiFw5DQkMotP2y+29qRgoXa/lJ8adfa1SJPycTbfjTbHxghT0vt8fqXHreIAnoCgjSaB52z2vAQFA==,iv:Ov3kXJbSEO9Fluzz8fLiNmCQ09JOji7Pub3+8qw8AdE=,tag:9WfwEXA6g/QdKFZv5VwARg==,type:str]
 hs_token: ENC[AES256_GCM,data:w9F6WbA+665rGbQTEhNOqn1uQlv5BJ3aDzROYwYY3xo5vHUpTXkvbkJ/okREMzboYOLp33d1pwRjjgev74utLA==,iv:dUdBl+ZYCiNw2HzLjpGlKIiqt4+xACeEDwpNCmnSED4=,tag:3xa1r1d9QTtnq+BBkoSrbg==,type:str]
 sender_localpart: VwV7pnSh9eP4flEBzESHiks634IdmzeH
@@ -59,7 +59,7 @@ sops:
         cUtrREtpVDExeTVwMFpDMU9RTExTdmsK1vjbe0/eNBzA+zPjTsd3gq7JuNgS4SIy
         saLGaTsKfoN0YhJWSY0adze4+KiOESdEBP4x6HLxcAA8kCY7Jt5pDQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:55Z"
-  mac: ENC[AES256_GCM,data:r7360UCpvnntv1ZQIahnOzyD7ywwW8P8qGAIZ+17KFoiirmaz6/FfjF14i6GUAvl6nCsXHnMketX+DywicO3OcPy7a1hkWMPlXIlMXCpdUE4+8WHFyYwK2LLcVkf5Vjh1LQRLzn+ggt4O6wfw5K0Y9GkBn5ZzsO+Aobx12awuBg=,iv:G1YjmwcmK/xJnaxzVOQZ/0xX9eKL0ESQs7v77QwbrPw=,tag:o1WNnDINdbwSaMnzM8RVHA==,type:str]
+  lastmodified: "2026-04-14T22:03:50Z"
+  mac: ENC[AES256_GCM,data:bZvoMsZxnecnrgoAD0BGLTgkv2csvC049ZE6P2r9YucWCOBgMjFzWNWy3HluFmXnzulDJ3qRkE3qHJyNzNoQNu1SUmlzu2k7mjpk/QkVio33U9i+aR8/PkHp48ZITC83wpqI1ADbNbGc/mZgRQrE6oPTR87cMw0+FHRHqlGxhec=,iv:O41nzN9WMSsdP1NIV5Ccr/v2HSUl0tLnYsSxws6r44M=,tag:WGPlxJcN9pjTZx9Tpb7hcQ==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1
+  version: 3.12.2

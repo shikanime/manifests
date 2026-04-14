@@ -8,7 +8,7 @@ namespaces:
     - exclusive: true
       regex: '@googlechatbot:matrix\.taila659a\.ts\.net'
   aliases: []
-url: http://matrix-googlechat:29320
+url: http://mautrix-googlechat:29320
 sender_localpart: Ez3AAYo2EypqoaIGaN2fXO56CRArQSLfATcESIavVKFAYrEnK1cVN9QwaRvG3pCn
 rate_limited: false
 de.sorunome.msc2409.push_ephemeral: true
@@ -60,7 +60,7 @@ sops:
         dlZVZlNJVVpiM2dYOXpvcWh5ZkdxT0kKen72SdMhmYA/zCtl6akjErvOICE11eVj
         QwYn/zhCaO39nC9+Sl+i87sFEOY0tJKPTJBFGhqzXtxoh2XlpdozkQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:54Z"
-  mac: ENC[AES256_GCM,data:OZzq5bwdqyI/7DwSzdFWEwUF2HPO9ZehHqHFD4lBfofDnd1SWlbYH30sReG2+jZE/RlfYZAA+hv5UTG6RAcR7QHG79dIzfGixH+ZecF2ohow5/yfpQ16MbrRaHz3kYO6hS50gUQK9a7VSzw8SB4xctGQkH2pfXDuHOQdCHsghDs=,iv:eW8iUapqCHTOP0mHn0oDM91C5++hgs5pTxeDArGh9Ak=,tag:0I6jyLkRUJflznBv/2Cm2Q==,type:str]
+  lastmodified: "2026-04-14T22:03:12Z"
+  mac: ENC[AES256_GCM,data:8VPIkUJdsI3l66Td/XDLpdAnzOVZ0YpkFUlR+V+YW5m953CSpmuZnDsX3wttLfJlA8erxGomWYFcjjikecQOU8k3yOIx0QbluJNlL6SOilG8xNdKiCOTYmvBq7LsiryJVsAtSTctuWLk4p2+B+vDOkX34/SBHvKxWNMLVyfOzsU=,iv:MZ2oTbdys8Uc1nMNGbPALL4xSvMI8I5Bd0BtelYt5nI=,tag:aJJv+m/iBc8mV1PIul/LPA==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1
+  version: 3.12.2

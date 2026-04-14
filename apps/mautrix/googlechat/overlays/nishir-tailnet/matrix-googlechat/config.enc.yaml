@@ -25,7 +25,7 @@ homeserver:
 # Changing these values requires regeneration of the registration.
 appservice:
   # The address that the homeserver can use to connect to this appservice.
-  address: http://matrix-googlechat:29320
+  address: http://mautrix-googlechat:29320
   # The hostname and port where this appservice should listen.
   hostname: 0.0.0.0
   port: 29320
@@ -317,7 +317,7 @@ sops:
         d01lYUYyVGZOOWJXa0dhR2pvcEpUWWMKjdnqfXK57IGme5U1lbqACBJk6Q2NXCf3
         1stZh7NyrGBqt0BYyhUi6cW7V/5o1Sut0uyHaL5szbzcto3m1JJC3g==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-28T15:51:32Z"
-  mac: ENC[AES256_GCM,data:fzCxVxzef6xyZx93c8lBhY+ETI1+t5QnZcPBibBJKo4cpfvQt1zOUTFLILDvw0yd74G5rZSOxOldt2L9jKLytpU0s2bKrOzvAFr05ihAHTXGWrVXFx98pXcJ2E5v6/mmnHdjHJ/YitxbaQgfT9AWJMWjqwBmixeiooU3TbhDZUA=,iv:jSpnTxsTAHsAYfbNlDc/JtUUfd6ZrE1JYES3TLOYbNs=,tag:2OB8F3Isl2f+EOPFlnd+lg==,type:str]
+  lastmodified: "2026-04-14T22:03:04Z"
+  mac: ENC[AES256_GCM,data:1/7ZomTDDS2xhmqnk9SKg4ENle0F/ycF4m/4lvlfHYPQJpSjdGBdHqHaE2g2rSJV10McqNraBtHVKvaLWFmL+a2oU4Cu04uHy6hYBh0TMiJ+wo2F0BFeuwPHc45hkzJUEq4v2BzHeZOh4thkeKlh3RzoP7V0j2cB4XAUmF0drLU=,iv:ccjbcj9YH8yfhd2UJW23au3ll+AMHT6f+UCdwyvZ1OU=,tag:2r4j1alrJuqvU6Zn1U0gfg==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
-  version: 3.12.1
+  version: 3.12.2

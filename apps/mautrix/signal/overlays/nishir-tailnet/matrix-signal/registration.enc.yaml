@@ -1,5 +1,5 @@
 id: signal
-url: http://matrix-signal:29328
+url: http://mautrix-signal:29328
 as_token: ENC[AES256_GCM,data:uyEK+ruAUfphBEca2cikR+3BkS46KGWZ7EopzIJh49PX2x2NihzXfRu9/WO/YV4Kunof9yqn4Ev9Xe/9+buO3A==,iv:G8mTcbJN/frC/w8QE9jslzqE+kS7Zgi+zzc8W3/yyfw=,tag:fTTgE1eNfu/9uobcDbWd1Q==,type:str]
 hs_token: ENC[AES256_GCM,data:IELf3NXUJm3fw3wWZ9voB+1mmhHuyxgzbK4p4k5fVZQzrah4AY+SluDcOpgzRdZ3OCh4WIJ124NUNNF3TQNTcg==,iv:tbdu7fO9AGOSSRAxc0Q8LaT8S2YQ38hRdkO0Qm20e6Y=,tag:w2uU0hndLKjcR4n9CAeGrg==,type:str]
 sender_localpart: CLDFON4eEXABKN5jmyoChh4DkPSIyWX3
@@ -59,7 +59,7 @@ sops:
         OXNHY2NRd2VESUF6Y21DUHQ4YXo1R3cKccEjCQYN+4I/Nw0P06It+cy1TUIjT/Fg
         18RrYEE0wXLJVGXgyQujL6xGH4dzp55Pnt1Pet2j6DQPOhKHJGgMcw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:55Z"
-  mac: ENC[AES256_GCM,data:Hy3a/2CK70gnED/BHmerd/P+npsO4WKivJUk/X6ZtYl64cUm4XL95ZtNXTtqsW+xVIFrdljo44NikKMKFOrAW21Pbwu2H+LXgA+Q2/cKTMHvFxIobwmo0D8EUur3eemZw1OtO0Rgnh48M9Aq2Dc1+qZEP+WyKeobB7ZqEtXmRiY=,iv:zRnTKXh7gWyf0VuK5a59i7ujVSZlWNCChdgKb8MHDQI=,tag:9GB02F/Eiztf/d1/0Cbv8Q==,type:str]
+  lastmodified: "2026-04-14T22:05:28Z"
+  mac: ENC[AES256_GCM,data:rMBO1X45v9qFzUMVANEY0U4GgNUqK/i3YHSEn+g049i4cprVuQDo93FJ00EWSpjmiyQ+JFQ19JISyBfs4sH3XW77JiGH2Hq4S5Y5e3Y5brdUywDPCUaIUbi+FjP5rN1vquYxyBLFgOaqUwGsJUVDMb6l6GRJZkmzZRmBWGt38RU=,iv:oApwA4MVB9aWOha+9cfTJ7iXbH0ycsRz37zqQKUM43Y=,tag:hJ5LhBjYZ0dDdoqORGpGXA==,type:str]
   encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1
+  version: 3.12.2
