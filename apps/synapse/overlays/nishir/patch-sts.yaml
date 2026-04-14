@@ -7,6 +7,10 @@ spec:
     spec:
       containers:
         - name: synapse
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
           readinessProbe:
             httpGet:
               port: https
@@ -35,15 +39,6 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: synapse-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -52,16 +47,13 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: caddy
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: synapse-proxy-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640
