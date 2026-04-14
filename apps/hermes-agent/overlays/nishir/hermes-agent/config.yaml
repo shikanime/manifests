@@ -19,7 +19,7 @@ compression:
   threshold: 0.5
   target_ratio: 0.2
   protect_last_n: 20
-  summary_model: gemini-3-flash-preview
+  summary_model: gemini-3.1-flash-lite-preview
 memory:
   provider: honcho
   memory_enabled: true
