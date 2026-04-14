@@ -18,8 +18,6 @@ secretGenerator:
   - envs:
       - honcho/.enc.env
     name: honcho
-    options:
-      disableNameSuffixHash: true
   - envs:
       - honcho-postgres/.enc.env
     name: honcho-postgres
