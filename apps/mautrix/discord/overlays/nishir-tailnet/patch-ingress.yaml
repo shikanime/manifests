@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mautrix-discord
+  name: matrix-discord
   annotations:
     tailscale.com/proxy-class: mautrix-discord
     tailscale.com/tags: tag:web
@@ -11,7 +11,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mautrix-discord-media
+  name: matrix-discord-media
   annotations:
     tailscale.com/funnel: "true"
     tailscale.com/proxy-class: synapse

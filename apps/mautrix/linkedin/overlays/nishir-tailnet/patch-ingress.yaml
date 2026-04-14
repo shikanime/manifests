@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mautrix-linkedin
+  name: matrix-linkedin
   annotations:
     tailscale.com/proxy-class: mautrix-linkedin
     tailscale.com/tags: tag:web
