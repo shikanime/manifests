@@ -7,13 +7,17 @@ spec:
     spec:
       containers:
         - name: gitea-mirror
-          env:
-            - name: NODE_EXTRA_CA_CERTS
-              value: /etc/ssl/certs/ca-certificates.crt
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: forgejo-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640

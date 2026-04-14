@@ -313,7 +313,3 @@ $RECYCLE.BIN/
 ###-------------------###
 
 .pre-commit-config.yaml
-apps/matrix/overlays/*/synapse/homeserver.yaml
-apps/matrix/overlays/*/mautrix-*/config.yaml
-apps/matrix/overlays/*/mautrix-*/doublepuppet.yaml
-apps/matrix/overlays/*/mautrix-*/registration.yaml

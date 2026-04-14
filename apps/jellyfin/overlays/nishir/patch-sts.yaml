@@ -19,6 +19,9 @@ spec:
       containers:
         - name: jellyfin
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: movies-data
               mountPath: /data/movies
             - name: music-data
@@ -48,10 +51,3 @@ spec:
         - name: timeline-data
           persistentVolumeClaim:
             claimName: timeline-data
-        - name: tls
-          secret:
-            secretName: jellyfin-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640
