@@ -193,28 +193,28 @@ spec:
             claimName: synapse-data
         - name: matrix-discord-config
           secret:
-            secretName: matrix-discord
+            secretName: mautrix-discord
         - name: matrix-googlechat-config
           secret:
-            secretName: matrix-googlechat
+            secretName: mautrix-googlechat
         - name: matrix-linkedin-config
           secret:
-            secretName: matrix-linkedin
+            secretName: mautrix-linkedin
         - name: matrix-twitter-config
           secret:
-            secretName: matrix-twitter
+            secretName: mautrix-twitter
         - name: matrix-meta-config
           secret:
-            secretName: matrix-meta
+            secretName: mautrix-meta
         - name: matrix-signal-config
           secret:
-            secretName: matrix-signal
+            secretName: mautrix-signal
         - name: matrix-slack-config
           secret:
-            secretName: matrix-slack
+            secretName: mautrix-slack
         - name: matrix-whatsapp-config
           secret:
-            secretName: matrix-whatsapp
+            secretName: mautrix-whatsapp
         - name: rclone-config
           configMap:
             name: synapse-rclone
