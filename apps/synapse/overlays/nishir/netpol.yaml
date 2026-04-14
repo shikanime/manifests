@@ -12,28 +12,28 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-discord
+              app.kubernetes.io/name: mautrix-discord
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-googlechat
+              app.kubernetes.io/name: mautrix-googlechat
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-linkedin
+              app.kubernetes.io/name: mautrix-linkedin
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-meta
+              app.kubernetes.io/name: mautrix-meta
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-signal
+              app.kubernetes.io/name: mautrix-signal
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-slack
+              app.kubernetes.io/name: mautrix-slack
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-twitter
+              app.kubernetes.io/name: mautrix-twitter
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: matrix-whatsapp
+              app.kubernetes.io/name: mautrix-whatsapp
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: synapse-proxy
