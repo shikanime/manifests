@@ -1,0 +1,58 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configMapGenerator:
+  - files:
+      - mautrix-proxy/Caddyfile
+    name: matrix-proxy
+namespace: shikanime
+patches:
+  - path: patch-ingress.yaml
+resources:
+  - ../nishir
+  - netpol.yaml
+  - proxyclass.yaml
+secretGenerator:
+  - files:
+      - config.yaml=mautrix-discord/config.enc.yaml
+      - doublepuppet.yaml=mautrix-discord/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-discord/registration.enc.yaml
+    name: mautrix-discord
+  - files:
+      - config.yaml=mautrix-googlechat/config.enc.yaml
+      - doublepuppet.yaml=mautrix-googlechat/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-googlechat/registration.enc.yaml
+    name: mautrix-googlechat
+  - files:
+      - config.yaml=mautrix-meta/config.enc.yaml
+      - doublepuppet.yaml=mautrix-meta/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-meta/registration.enc.yaml
+    name: mautrix-meta
+  - files:
+      - config.yaml=mautrix-signal/config.enc.yaml
+      - doublepuppet.yaml=mautrix-signal/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-signal/registration.enc.yaml
+    name: mautrix-signal
+  - files:
+      - config.yaml=mautrix-slack/config.enc.yaml
+      - doublepuppet.yaml=mautrix-slack/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-slack/registration.enc.yaml
+    name: mautrix-slack
+  - files:
+      - config.yaml=mautrix-whatsapp/config.enc.yaml
+      - doublepuppet.yaml=mautrix-whatsapp/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-whatsapp/registration.enc.yaml
+    name: mautrix-whatsapp
+  - files:
+      - config.yaml=mautrix-linkedin/config.enc.yaml
+      - doublepuppet.yaml=mautrix-linkedin/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-linkedin/registration.enc.yaml
+    name: mautrix-linkedin
+  - files:
+      - config.yaml=mautrix-twitter/config.enc.yaml
+      - doublepuppet.yaml=mautrix-twitter/doublepuppet.enc.yaml
+      - registration.yaml=mautrix-twitter/registration.enc.yaml
+    name: mautrix-twitter
+  - files:
+      - homeserver.yaml=synapse/homeserver.enc.yaml
+      - synapse/matrix.taila659a.ts.net.log.config
+    name: synapse

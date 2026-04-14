@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: qbittorrent
+spec:
+  template:
+    spec:
+      containers:
+        - name: qbittorrent
+          volumeMounts:
+            - name: downloads-data
+              mountPath: /downloads
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: tls
+          secret:
+            secretName: qbittorrent-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640

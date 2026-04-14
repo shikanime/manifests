@@ -1,0 +1,924 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix
+spec:
+  replicas: 1
+  serviceName: matrix
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - sh
+            - -c
+            - |
+              # Copy synapse config
+              rclone copy \
+                --copy-links \
+                --include "*.log.config" \
+                --include "*.signing.key" \
+                --include "homeserver.yaml" \
+                --update \
+                /mnt/config \
+                /mnt/data
+
+              # Copy doublepuppet to synapse appservices
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-discord-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-discord-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-googlechat-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-googlechat-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-linkedin-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-linkedin-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-meta-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-meta-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-signal-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-signal-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-slack-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-slack-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-twitter-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-twitter-doublepuppet.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-whatsapp-config/doublepuppet.yaml \
+                /mnt/data/appservices/mautrix-whatsapp-doublepuppet.yaml
+
+              # Copy registration to synapse appservices
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-discord-config/registration.yaml \
+                /mnt/data/appservices/mautrix-discord.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-googlechat-config/registration.yaml \
+                /mnt/data/appservices/mautrix-googlechat.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-linkedin-config/registration.yaml \
+                /mnt/data/appservices/mautrix-linkedin.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-meta-config/registration.yaml \
+                /mnt/data/appservices/mautrix-meta.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-signal-config/registration.yaml \
+                /mnt/data/appservices/mautrix-signal.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-slack-config/registration.yaml \
+                /mnt/data/appservices/mautrix-slack.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-twitter-config/registration.yaml \
+                /mnt/data/appservices/mautrix-twitter.yaml
+              rclone copyto \
+                --copy-links \
+                --update \
+                /mnt/mautrix-whatsapp-config/registration.yaml \
+                /mnt/data/appservices/mautrix-whatsapp.yaml
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: mautrix-discord-config
+              mountPath: /mnt/mautrix-discord-config
+              readOnly: true
+            - name: mautrix-googlechat-config
+              mountPath: /mnt/mautrix-googlechat-config
+              readOnly: true
+            - name: mautrix-linkedin-config
+              mountPath: /mnt/mautrix-linkedin-config
+              readOnly: true
+            - name: mautrix-meta-config
+              mountPath: /mnt/mautrix-meta-config
+              readOnly: true
+            - name: mautrix-signal-config
+              mountPath: /mnt/mautrix-signal-config
+              readOnly: true
+            - name: mautrix-slack-config
+              mountPath: /mnt/mautrix-slack-config
+              readOnly: true
+            - name: mautrix-twitter-config
+              mountPath: /mnt/mautrix-twitter-config
+              readOnly: true
+            - name: mautrix-whatsapp-config
+              mountPath: /mnt/mautrix-whatsapp-config
+              readOnly: true
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: synapse
+          image: synapse
+          ports:
+            - containerPort: 8008
+              name: http
+            - containerPort: 9090
+              name: metrics
+          readinessProbe:
+            httpGet:
+              path: /_matrix/client/versions
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 20
+            periodSeconds: 20
+            failureThreshold: 15
+          livenessProbe:
+            httpGet:
+              path: /_matrix/client/versions
+              port: http
+            initialDelaySeconds: 120
+            timeoutSeconds: 30
+            periodSeconds: 30
+            failureThreshold: 15
+          startupProbe:
+            httpGet:
+              path: /_matrix/client/versions
+              port: http
+            initialDelaySeconds: 20
+            timeoutSeconds: 15
+            periodSeconds: 10
+            failureThreshold: 120
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 991
+      volumes:
+        - name: config
+          secret:
+            secretName: synapse
+        - name: data
+          persistentVolumeClaim:
+            claimName: synapse-data
+        - name: mautrix-discord-config
+          secret:
+            secretName: mautrix-discord
+        - name: mautrix-googlechat-config
+          secret:
+            secretName: mautrix-googlechat
+        - name: mautrix-linkedin-config
+          secret:
+            secretName: mautrix-linkedin
+        - name: mautrix-twitter-config
+          secret:
+            secretName: mautrix-twitter
+        - name: mautrix-meta-config
+          secret:
+            secretName: mautrix-meta
+        - name: mautrix-signal-config
+          secret:
+            secretName: mautrix-signal
+        - name: mautrix-slack-config
+          secret:
+            secretName: mautrix-slack
+        - name: mautrix-whatsapp-config
+          secret:
+            secretName: mautrix-whatsapp
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-discord
+spec:
+  replicas: 1
+  serviceName: matrix-discord
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-discord
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-discord
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-discord
+          image: mautrix-discord
+          ports:
+            - containerPort: 29334
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-discord
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-discord-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-googlechat
+spec:
+  replicas: 1
+  serviceName: matrix-googlechat
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-googlechat
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-googlechat
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-googlechat
+          image: mautrix-googlechat
+          ports:
+            - containerPort: 29320
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-googlechat
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-googlechat-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-linkedin
+spec:
+  replicas: 1
+  serviceName: matrix-linkedin
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-linkedin
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-linkedin
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-linkedin
+          image: mautrix-linkedin
+          ports:
+            - containerPort: 29341
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-linkedin
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-linkedin-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-meta
+spec:
+  replicas: 1
+  serviceName: matrix-meta
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-meta
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-meta
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-meta
+          image: mautrix-meta
+          ports:
+            - containerPort: 29319
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-meta
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-meta-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-signal
+spec:
+  replicas: 1
+  serviceName: matrix-signal
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-signal
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-signal
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-signal
+          image: mautrix-signal
+          ports:
+            - containerPort: 29328
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-signal
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-signal-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-slack
+spec:
+  replicas: 1
+  serviceName: matrix-slack
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-slack
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-slack
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-slack
+          image: mautrix-slack
+          ports:
+            - containerPort: 29335
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-slack
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-slack-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-twitter
+spec:
+  replicas: 1
+  serviceName: matrix-twitter
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-twitter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-twitter
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-twitter
+          image: mautrix-twitter
+          ports:
+            - containerPort: 29327
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-twitter
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-twitter-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-whatsapp
+spec:
+  replicas: 1
+  serviceName: matrix-whatsapp
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-whatsapp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-whatsapp
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --include
+            - config.yaml
+            - --include
+            - doublepuppet.yaml
+            - --include
+            - registration.yaml
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix-whatsapp
+          image: mautrix-whatsapp
+          ports:
+            - containerPort: 29318
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: mautrix-whatsapp
+        - name: data
+          persistentVolumeClaim:
+            claimName: mautrix-whatsapp-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone
