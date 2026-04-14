@@ -8,8 +8,6 @@ configMapGenerator:
       - rclone/rclone.conf
     name: matrix-rclone
     namespace: shikanime
-    options:
-      disableNameSuffixHash: true
 images:
   - name: caddy
     newName: library/caddy

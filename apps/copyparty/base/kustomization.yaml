@@ -8,8 +8,6 @@ configMapGenerator:
       - rclone/rclone.conf
     name: copyparty-rclone
     namespace: shikanime
-    options:
-      disableNameSuffixHash: true
 images:
   - name: copyparty
     newName: copyparty/dj
