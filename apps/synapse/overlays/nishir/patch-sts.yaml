@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: synapse
+spec:
+  template:
+    spec:
+      containers:
+        - name: synapse
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+            initialDelaySeconds: 80
+            timeoutSeconds: 20
+            periodSeconds: 20
+            failureThreshold: 15
+          livenessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+            initialDelaySeconds: 150
+            timeoutSeconds: 30
+            periodSeconds: 30
+            failureThreshold: 15
+          startupProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+            initialDelaySeconds: 20
+            timeoutSeconds: 15
+            periodSeconds: 10
+            failureThreshold: 120
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: synapse-proxy
+spec:
+  template:
+    spec:
+      containers:
+        - name: caddy
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt

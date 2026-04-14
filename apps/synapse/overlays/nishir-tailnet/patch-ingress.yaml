@@ -1,0 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix
+  annotations:
+    tailscale.com/funnel: "true"
+    tailscale.com/proxy-class: synapse
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale
