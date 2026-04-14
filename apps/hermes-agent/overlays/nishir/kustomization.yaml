@@ -20,9 +20,6 @@ secretGenerator:
       - hermes-agent/.enc.env
     name: hermes-agent
   - envs:
-      - hermes-agent-honcho/.enc.env
-    name: hermes-agent-honcho
-  - envs:
       - hermes-agent-postgres/.enc.env
     name: hermes-agent-postgres
     type: basic-auth
