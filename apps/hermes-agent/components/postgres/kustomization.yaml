@@ -11,6 +11,8 @@ configMapGenerator:
   - files:
       - hermes-agent-postgres/init.sql
     name: hermes-agent-postgres
+    options:
+      disableNameSuffix: true
 resources:
   - sts.yaml
   - svc.yaml
