@@ -1,7 +1,7 @@
 # Homeserver details.
 homeserver:
   # The address that this appservice can use to connect to the homeserver.
-  address: https://matrix:8448
+  address: https://synapse:8448
   # The domain of the homeserver (also known as server_name, used for MXIDs, etc).
   domain: matrix.taila659a.ts.net
   # What software is the homeserver running?
@@ -411,7 +411,7 @@ sops:
         TXdLN1BieERpTVh6Q2MyTFAvd2dwdlkKweFLLJXDIovObvUt79Rgk6Gc5c4eHW3J
         wlWC94NlEdch5HjlhBfi0pCB88nYRDHSb36pVtAUwhBFc1SiZjWMeQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:02:37Z"
-  mac: ENC[AES256_GCM,data:cOGGTnFGd8QV/dLJF0XvwmXu0DpR6kQ2TbSJ5LbmJee4uXUHDoGOQR+zi0HuLNxGc65uVP7wAIuZEs3wPTvM39u+ZbgfMkoHT2V0s32HE287qboExRUAXz8vtzeso1RoXArE2/3M0qTE+05WVArdPTppFNMHMwXNk3PLSymhXX0=,iv:bXbZp2j2G1p/Yjo9s73/haX7qbPIMJuE2eczyHswrOQ=,tag:hTv9J2hrQynBb0y8/hfUsQ==,type:str]
+  lastmodified: "2026-04-14T23:43:33Z"
+  mac: ENC[AES256_GCM,data:buKjRHyRu2L3hw+oyliFuk4ra5GOJLIjjH9OkTtzqKMhwcwnhws+BXEtuihOrKY7+bBkK7T3CuWqF2c60ePvJkdjOXgCkNTo/rpEOyhEyIoJcwrWLcA2oAwuc6IkKE0f3VYMpVzngBObAkbvCOCW/9T2EJDrvVyy0ail7PYxTDE=,iv:9yrVk82dvTNo1XsZswRXp1NOMadG3d7mGSPQXZKy9AA=,tag:iKme6+qoy5nNt9SQ1Wdz2A==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2

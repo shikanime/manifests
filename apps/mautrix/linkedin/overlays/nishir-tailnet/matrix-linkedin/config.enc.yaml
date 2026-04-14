@@ -164,7 +164,7 @@ homeserver:
   # The address that this appservice can use to connect to the homeserver.
   # Local addresses without HTTPS are generally recommended when the bridge is running on the same machine,
   # but https also works if they run on different machines.
-  address: https://matrix:8448
+  address: https://synapse:8448
   # The domain of the homeserver (also known as server_name, used for MXIDs, etc).
   domain: matrix.taila659a.ts.net
   # What software is the homeserver running?
@@ -508,7 +508,7 @@ sops:
         RVVUd2dOa1kvMDhFeHFGOFVnZFFTWHcKOW5wy86Dw+EVPOkltTcp5RzcUWv0TldR
         iNQ/RpKJxajX0ZzQTFpdRTtIvZB3dWk3WtCnzmKbCLY1gbQWfq9gBw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:03:24Z"
-  mac: ENC[AES256_GCM,data:idW5Fax0+wJ8HNJsrS6s+pbD8LQUWxujuvbfxtUG3+l7UXRvcLNdGSBvmjMOUxIUYozhUoEgBnZ78Yj98KDxjCPNR9WewoRsE2k7UnV9BBhoJnP5lrKFTwynvmKlFw9IjhgN3Dq84OJZn5zyCiw8abZM1IHIs4Z8ru06/5+jYRU=,iv:8WaCDV/BvtcgytmNLGdx8vHeuU7EWNmI4B1mvbGbOV8=,tag:U8+RScCXwC52BgYhvIe33w==,type:str]
+  lastmodified: "2026-04-14T23:44:09Z"
+  mac: ENC[AES256_GCM,data:5YYXZRzKt9x39S+hROe9D/GmNmX9sSp1c6CMGrAZGwWD+H1ijoK6lUuXA1p0IdAhtMu0A6bJ1oPQ4LHCY/ZGEEJLodeAvSXRQbbMcqJQnPur8Lc+1AKNv001Kvgf3ldGouLRWtSPdr/ODAPOfLCbCGgVfSmiovBFsmvrbINRUYM=,iv:7We2rUhbX/y4Cx0OFVIOwkJGzPmE6YTmsCmLetyXQ0s=,tag:04vtsonnrtAU57nBEQDYVA==,type:str]
   encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   version: 3.12.2
