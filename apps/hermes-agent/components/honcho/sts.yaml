@@ -1,80 +1,65 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: honcho-postgres
+  name: hermes-agent-honcho
 spec:
   replicas: 1
+  serviceName: hermes-agent-honcho
   selector:
     matchLabels:
-      app.kubernetes.io/name: honcho-postgres
-  serviceName: honcho-postgres
+      app.kubernetes.io/name: hermes-agent-honcho
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: honcho-postgres
+        app.kubernetes.io/name: hermes-agent-honcho
     spec:
       containers:
-        - name: postgres
-          image: honcho-postgres
+        - name: hermes-agent-honcho
+          image: hermes-agent-honcho
           env:
-            - name: POSTGRES_DB
+            - name: AUTH_USE_AUTH
+              value: "true"
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: honcho-postgres
-                  key: database
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: honcho-postgres
+                  name: hermes-agent-postgres
                   key: username
-            - name: POSTGRES_PASSWORD
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: honcho-postgres
+                  name: hermes-agent-postgres
                   key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-agent-postgres
+                  key: database
+            - name: DB_CONNECTION_URI
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
+          envFrom:
+            - secretRef:
+                name: hermes-agent-honcho
           ports:
-            - name: postgres
-              containerPort: 5432
+            - name: http
+              containerPort: 8000
           startupProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            httpGet:
+              path: /health
+              port: http
             failureThreshold: 30
             periodSeconds: 5
             timeoutSeconds: 5
-          readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
-            failureThreshold: 3
-            periodSeconds: 10
-            timeoutSeconds: 5
           livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            httpGet:
+              path: /health
+              port: http
             failureThreshold: 3
             periodSeconds: 30
             timeoutSeconds: 5
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/postgresql/data
-            - name: initdb
-              mountPath: /docker-entrypoint-initdb.d
-              readOnly: true
-      volumes:
-        - name: initdb
-          configMap:
-            name: honcho-postgres
-            items:
-              - key: init.sql
-                path: init.sql
-        - name: data
-          persistentVolumeClaim:
-            claimName: honcho-postgres-data
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 5

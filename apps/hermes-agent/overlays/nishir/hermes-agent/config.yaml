@@ -1,5 +1,5 @@
 model:
-  default: gemini-3-pro-preview
+  default: gemini-3-flash-preview
   provider: gemini
   base_url: https://generativelanguage.googleapis.com/v1beta/openai
 terminal:
@@ -19,7 +19,7 @@ compression:
   threshold: 0.5
   target_ratio: 0.2
   protect_last_n: 20
-  summary_model: google/gemini-3-flash-preview
+  summary_model: gemini-3-flash-preview
 memory:
   provider: honcho
   memory_enabled: true
