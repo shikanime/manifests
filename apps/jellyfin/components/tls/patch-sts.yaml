@@ -29,17 +29,3 @@ spec:
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: metatube
-spec:
-  template:
-    spec:
-      containers:
-        - name: metatube
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
