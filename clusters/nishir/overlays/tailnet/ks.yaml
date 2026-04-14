@@ -245,7 +245,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-discord
+  name: apps-mautrix-discord
   namespace: flux-system
 spec:
   dependsOn:
@@ -269,7 +269,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-googlechat
+  name: apps-mautrix-googlechat
   namespace: flux-system
 spec:
   dependsOn:
@@ -293,7 +293,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-linkedin
+  name: apps-mautrix-linkedin
   namespace: flux-system
 spec:
   dependsOn:
@@ -317,7 +317,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-meta
+  name: apps-mautrix-meta
   namespace: flux-system
 spec:
   dependsOn:
@@ -341,7 +341,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-signal
+  name: apps-mautrix-signal
   namespace: flux-system
 spec:
   dependsOn:
@@ -365,7 +365,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-slack
+  name: apps-mautrix-slack
   namespace: flux-system
 spec:
   dependsOn:
@@ -389,7 +389,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-twitter
+  name: apps-mautrix-twitter
   namespace: flux-system
 spec:
   dependsOn:
@@ -413,7 +413,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix-whatsapp
+  name: apps-mautrix-whatsapp
   namespace: flux-system
 spec:
   dependsOn:
