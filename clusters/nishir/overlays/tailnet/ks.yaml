@@ -130,6 +130,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-metatube
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
@@ -158,7 +159,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/servarr/lidarr/overlays/nishir-tailnet
+  path: ./apps/lidarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -424,7 +425,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/servarr/prowlarr/overlays/nishir-tailnet
+  path: ./apps/prowlarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -474,7 +475,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/servarr/radarr/overlays/nishir-tailnet
+  path: ./apps/radarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -524,7 +525,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/servarr/sonarr/overlays/nishir-tailnet
+  path: ./apps/sonarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -548,14 +549,6 @@ spec:
   dependsOn:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
-    - name: apps-matrix-discord
-    - name: apps-matrix-googlechat
-    - name: apps-matrix-linkedin
-    - name: apps-matrix-meta
-    - name: apps-matrix-signal
-    - name: apps-matrix-slack
-    - name: apps-matrix-twitter
-    - name: apps-matrix-whatsapp
   interval: 10m
   path: ./apps/synapse/overlays/nishir-tailnet
   prune: true
@@ -636,7 +629,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/servarr/whisparr/overlays/nishir-tailnet
+  path: ./apps/whisparr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1

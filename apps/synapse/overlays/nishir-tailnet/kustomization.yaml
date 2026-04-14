@@ -9,6 +9,8 @@ patches:
   - path: patch-ingress.yaml
 resources:
   - ../nishir
+  - netpol.yaml
+  - proxyclass.yaml
 secretGenerator:
   - files:
       - homeserver.yaml=synapse/homeserver.enc.yaml
