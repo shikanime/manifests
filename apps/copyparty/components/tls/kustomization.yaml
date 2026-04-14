@@ -5,7 +5,7 @@ metadata:
     automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: rclone
-    newName: docker.io/rclone/rclone
+    newName: rclone/rclone
     newTag: 1.72.0
 patches:
   - path: patch-ingress.yaml

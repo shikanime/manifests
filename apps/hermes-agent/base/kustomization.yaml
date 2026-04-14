@@ -11,10 +11,10 @@ configMapGenerator:
       disableNameSuffixHash: true
 images:
   - name: rclone
-    newName: docker.io/rclone/rclone
+    newName: rclone/rclone
     newTag: 1.71.2
   - name: hermes-agent
-    newName: docker.io/nousresearch/hermes-agent
+    newName: nousresearch/hermes-agent
     newTag: latest # TODO: the ARM64 image just released
 labels:
   - pairs:

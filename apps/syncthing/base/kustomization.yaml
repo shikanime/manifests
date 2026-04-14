@@ -5,7 +5,7 @@ metadata:
     automata.shikanime.studio/images: '[ { "name": "syncthing", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: syncthing
-    newName: docker.io/syncthing/syncthing
+    newName: syncthing/syncthing
     newTag: 2.0.12
 labels:
   - pairs:

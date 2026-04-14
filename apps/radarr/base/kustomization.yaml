@@ -15,7 +15,7 @@ images:
     newName: lscr.io/linuxserver/radarr
     newTag: 6.0.4
   - name: rclone
-    newName: docker.io/rclone/rclone
+    newName: rclone/rclone
     newTag: 1.71.2
 labels:
   - pairs:
