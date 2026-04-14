@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: shikanime
 resources:
   - ../../base
-  - netpol.yaml
   - pvc.yaml
 secretGenerator:
   - envs:
