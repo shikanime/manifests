@@ -7,3 +7,5 @@ secretGenerator:
   - envs:
       - metatube/.enc.env
     name: metatube
+    options:
+      disableNameSuffixHash: true

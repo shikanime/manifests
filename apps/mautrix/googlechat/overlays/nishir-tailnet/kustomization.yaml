@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../nishir
+secretGenerator:
+  - files:
+      - config.yaml=matrix-googlechat/config.enc.yaml
+      - doublepuppet.yaml=matrix-googlechat/doublepuppet.enc.yaml
+      - registration.yaml=matrix-googlechat/registration.enc.yaml
+    name: matrix-googlechat
+    options:
+      disableNameSuffixHash: true

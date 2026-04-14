@@ -158,7 +158,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/lidarr/overlays/nishir-tailnet
+  path: ./apps/servarr/lidarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -176,55 +176,219 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-matrix
+  name: apps-matrix-discord
   namespace: flux-system
 spec:
   dependsOn:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/matrix/overlays/nishir-tailnet
+  path: ./apps/mautrix/discord/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix
-      namespace: shikanime
-    - apiVersion: apps/v1
-      kind: StatefulSet
       name: matrix-discord
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix-googlechat
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: matrix-googlechat
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix-linkedin
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: matrix-linkedin
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix-meta
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/mautrix/meta/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: matrix-meta
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix-signal
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/mautrix/signal/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: matrix-signal
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix-slack
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/mautrix/slack/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: matrix-slack
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix-twitter
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/mautrix/twitter/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: matrix-twitter
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-matrix-whatsapp
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: matrix-whatsapp
       namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-metatube
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/metatube/overlays/nishir
+  prune: true
+  healthChecks:
     - apiVersion: apps/v1
-      kind: Deployment
-      name: matrix-proxy
+      kind: StatefulSet
+      name: metatube
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -244,7 +408,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/prowlarr/overlays/nishir-tailnet
+  path: ./apps/servarr/prowlarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -294,7 +458,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/radarr/overlays/nishir-tailnet
+  path: ./apps/servarr/radarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -344,12 +508,49 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/sonarr/overlays/nishir-tailnet
+  path: ./apps/servarr/sonarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: sonarr
+      namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-synapse
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-longhorn
+    - name: infrastructure-tailscale
+    - name: apps-matrix-discord
+    - name: apps-matrix-googlechat
+    - name: apps-matrix-linkedin
+    - name: apps-matrix-meta
+    - name: apps-matrix-signal
+    - name: apps-matrix-slack
+    - name: apps-matrix-twitter
+    - name: apps-matrix-whatsapp
+  interval: 10m
+  path: ./apps/synapse/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: StatefulSet
+      name: matrix
+      namespace: shikanime
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: matrix-proxy
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -419,7 +620,7 @@ spec:
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/whisparr/overlays/nishir-tailnet
+  path: ./apps/servarr/whisparr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1

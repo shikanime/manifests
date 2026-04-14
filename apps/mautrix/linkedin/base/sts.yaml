@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix-linkedin
+spec:
+  replicas: 1
+  serviceName: matrix-linkedin
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-linkedin
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix-linkedin
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - --filter
+            - "+ config.yaml"
+            - --filter
+            - "+ doublepuppet.yaml"
+            - --filter
+            - "+ registration.yaml"
+            - --filter
+            - "- *"
+            - /mnt/config
+            - /mnt/data
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+              readOnly: true
+            - name: data
+              mountPath: /mnt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+      containers:
+        - name: mautrix
+          image: mautrix
+          ports:
+            - containerPort: 29341
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /_matrix/mau/live
+              port: http
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
+            periodSeconds: 30
+            failureThreshold: 10
+          startupProbe:
+            httpGet:
+              path: /_matrix/mau/ready
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 90
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        fsGroup: 1337
+      volumes:
+        - name: config
+          secret:
+            secretName: matrix-linkedin
+        - name: data
+          persistentVolumeClaim:
+            claimName: matrix-linkedin-data
+        - name: rclone-config
+          configMap:
+            name: matrix-rclone

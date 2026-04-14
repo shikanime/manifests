@@ -1,9 +1,0 @@
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: grafana-k8s-monitoring
-  namespace: flux-system
-spec:
-  values:
-    cluster:
-      name: nishir
