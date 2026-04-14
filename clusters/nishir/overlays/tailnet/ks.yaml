@@ -105,6 +105,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-honcho
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
@@ -114,6 +115,28 @@ spec:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: hermes-agent
+      namespace: shikanime
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-honcho
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: ./apps/honcho/overlays/nishir
+  prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: StatefulSet
+      name: hermes-agent-honcho
       namespace: shikanime
   sourceRef:
     kind: GitRepository
