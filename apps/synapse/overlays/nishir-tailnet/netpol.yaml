@@ -1,47 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: synapse-proxy-tailscale
-spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: synapse-proxy
-  policyTypes:
-    - Ingress
-    - Egress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: tailscale-system
-      ports:
-        - port: https
-  egress:
-    - to:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: synapse
-      ports:
-        - port: https
-    - to:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: matrix-discord
-      ports:
-        - port: http
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - port: 53
-          protocol: TCP
-        - port: 53
-          protocol: UDP
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
   name: synapse-tailscale
 spec:
   podSelector:

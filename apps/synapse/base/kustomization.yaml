@@ -2,16 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "caddy", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 configMapGenerator:
   - files:
       - rclone/rclone.conf
     name: synapse-rclone
     namespace: shikanime
 images:
-  - name: caddy
-    newName: library/caddy
-    newTag: 2.11.2
   - name: rclone
     newName: rclone/rclone
     newTag: 1.73.3
@@ -25,8 +22,6 @@ labels:
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.140.0
 resources:
-  - deploy.yaml
-  - ingress.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml

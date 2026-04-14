@@ -3,11 +3,10 @@ kind: Kustomization
 namespace: shikanime
 configMapGenerator:
   - files:
-      - ./copyparty/config.conf
-    name: copyparty
+      - synapse-proxy/Caddyfile
+    name: synapse-proxy
 patches:
   - path: patch-ingress.yaml
-  - path: patch-svc.yaml
 resources:
   - ../nishir
   - netpol.yaml
