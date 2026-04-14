@@ -37,7 +37,6 @@ spec:
                 path: tls.key
                 mode: 0640
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
