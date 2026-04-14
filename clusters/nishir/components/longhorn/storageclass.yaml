@@ -20,6 +20,7 @@ metadata:
   name: nishir-fast
 allowVolumeExpansion: true
 parameters:
+  dataLocality: best-effort
   diskSelector: fast
   fsType: xfs
   numberOfReplicas: "2"
