@@ -9,6 +9,6 @@ spec:
         - name: hermes-agent
           env:
             - name: HONCHO_BASE_URL
-              value: http://$(HONCHO_SERVICE_HOST):$(HONCHO_SERVICE_PORT)
+              value: http://$(HERMES_AGENT_HONCHO_SERVICE_HOST):$(HERMES_AGENT_HONCHO_SERVICE_PORT)
             - name: HONCHO_API_KEY
               value: local
