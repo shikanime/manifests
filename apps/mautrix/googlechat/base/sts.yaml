@@ -86,4 +86,4 @@ spec:
             claimName: mautrix-googlechat-data
         - name: rclone-config
           configMap:
-            name: mautrix-rclone
+            name: mautrix-googlechat-rclone

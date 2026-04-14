@@ -3,7 +3,7 @@ kind: Kustomization
 configMapGenerator:
   - files:
       - rclone/rclone.conf
-    name: mautrix-rclone
+    name: mautrix-whatsapp-rclone
     namespace: shikanime
 labels:
   - pairs:
