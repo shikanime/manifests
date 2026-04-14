@@ -21,12 +21,16 @@ compression:
   protect_last_n: 20
   summary_model: google/gemini-3-flash-preview
 memory:
+  provider: honcho
   memory_enabled: true
   user_profile_enabled: true
   memory_char_limit: 2200
   user_char_limit: 1375
   nudge_interval: 10
   flush_min_turns: 6
+honcho:
+  observation: unified
+  peer_name: ""
 session_reset:
   mode: both
   idle_minutes: 1440
