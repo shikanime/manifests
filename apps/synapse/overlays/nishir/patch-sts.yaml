@@ -39,21 +39,3 @@ spec:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: synapse-proxy
-spec:
-  template:
-    spec:
-      containers:
-        - name: caddy
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
-      volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
