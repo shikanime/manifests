@@ -107,17 +107,17 @@
                           key_groups = keyGroups;
                         }
                         {
-                          path_regex = "apps/matrix/overlays/.*/synapse/homeserver\\..*";
+                          path_regex = "apps/synapse/overlays/.*/synapse/homeserver\\..*";
                           encrypted_regex = "^(registration_shared_secret|form_secret|macaroon_secret_key)$";
                           key_groups = keyGroups;
                         }
                         {
-                          path_regex = "apps/matrix/overlays/.*/mautrix-.*/config\\..*";
+                          path_regex = "apps/mautrix/.*/overlays/.*/matrix-.*/config\\..*";
                           encrypted_regex = "^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$";
                           key_groups = keyGroups;
                         }
                         {
-                          path_regex = "apps/matrix/overlays/.*/mautrix-.*/(registration|doublepuppet)*\\..*";
+                          path_regex = "apps/mautrix/.*/overlays/.*/matrix-.*/(registration|doublepuppet)\\..*";
                           encrypted_regex = "^(as_token|hs_token)$";
                           key_groups = keyGroups;
                         }
@@ -143,10 +143,10 @@
                 github.workflows.skaffold.enable = true;
 
                 gitignore.content = [
-                  "apps/matrix/overlays/*/synapse/homeserver.yaml"
-                  "apps/matrix/overlays/*/mautrix-*/config.yaml"
-                  "apps/matrix/overlays/*/mautrix-*/doublepuppet.yaml"
-                  "apps/matrix/overlays/*/mautrix-*/registration.yaml"
+                  "apps/synapse/overlays/*/synapse/homeserver.yaml"
+                  "apps/mautrix/*/overlays/*/matrix-*/config.yaml"
+                  "apps/mautrix/*/overlays/*/matrix-*/doublepuppet.yaml"
+                  "apps/mautrix/*/overlays/*/matrix-*/registration.yaml"
                 ];
 
                 packages = [

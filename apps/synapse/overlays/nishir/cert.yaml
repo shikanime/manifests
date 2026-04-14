@@ -1,0 +1,33 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: synapse-tls
+spec:
+  commonName: synapse
+  dnsNames:
+    - synapse
+  issuerRef:
+    kind: ClusterIssuer
+    name: nishir
+  secretName: synapse-tls
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: synapse-proxy-tls
+spec:
+  commonName: synapse
+  dnsNames:
+    - synapse-proxy
+  issuerRef:
+    kind: ClusterIssuer
+    name: nishir
+  secretName: synapse-proxy-tls
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
