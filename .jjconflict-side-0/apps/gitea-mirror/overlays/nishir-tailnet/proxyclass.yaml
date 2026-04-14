@@ -1,0 +1,16 @@
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: gitea-mirror
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: gitea-mirror
+              namespaces:
+                - shikanime
+              topologyKey: kubernetes.io/hostname

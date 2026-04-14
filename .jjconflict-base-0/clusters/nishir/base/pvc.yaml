@@ -1,0 +1,134 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: archives-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: archives-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: downloads-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: movies-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: movies-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: music-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: music-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shows-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 512Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: shows-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: staging-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: staging-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sukebe-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Ti
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: sukebe-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sync-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Ti
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: sync-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: timeline-data
+  namespace: shikanime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti
+  storageClassName: nishir-standard
+  volumeMode: Filesystem
+  volumeName: timeline-data

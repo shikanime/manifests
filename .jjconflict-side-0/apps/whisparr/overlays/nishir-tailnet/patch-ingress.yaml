@@ -1,0 +1,9 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whisparr
+  annotations:
+    tailscale.com/proxy-class: whisparr
+    tailscale.com/tags: tag:web
+spec:
+  ingressClassName: tailscale

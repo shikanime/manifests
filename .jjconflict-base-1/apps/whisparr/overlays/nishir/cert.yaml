@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: whisparr-tls
+spec:
+  commonName: whisparr
+  dnsNames:
+    - whisparr
+  issuerRef:
+    kind: ClusterIssuer
+    name: nishir
+  secretName: whisparr-tls
+  keystores:
+    pkcs12:
+      create: true
+      passwordSecretRef:
+        name: whisparr-pkcs12-password
+        key: password
+      profile: Modern2023
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
