@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-meta
+spec:
+  defaultBackend:
+    service:
+      name: matrix-meta
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-meta

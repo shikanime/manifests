@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: matrix-linkedin
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: matrix-linkedin
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: synapse
+      ports:
+        - port: http

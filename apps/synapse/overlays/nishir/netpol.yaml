@@ -1,0 +1,59 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: synapse
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: synapse
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-discord
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-googlechat
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-linkedin
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-meta
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-signal
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-slack
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-twitter
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: matrix-whatsapp
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: synapse-proxy
+      ports:
+        - port: https
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: synapse-proxy
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: synapse-proxy
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: synapse
+      ports:
+        - port: https
