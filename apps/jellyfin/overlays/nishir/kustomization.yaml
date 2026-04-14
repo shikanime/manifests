@@ -13,6 +13,7 @@ resources:
   - ../../base
   - cert.yaml
   - netpol.yaml
+  - pvc.yaml
 secretGenerator:
   - envs:
       - jellyfin/.enc.env

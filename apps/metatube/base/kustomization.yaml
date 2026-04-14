@@ -10,9 +10,9 @@ images:
 labels:
   - pairs:
       app.kubernetes.io/component: media-server
-      app.kubernetes.io/name: jellyfin
+      app.kubernetes.io/name: metatube
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v10.11.5
+      app.kubernetes.io/version: v1.3.2
 resources:
   - sts.yaml
   - svc.yaml

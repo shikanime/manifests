@@ -130,6 +130,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-metatube
     - name: infrastructure-longhorn
     - name: infrastructure-tailscale
   interval: 10m
