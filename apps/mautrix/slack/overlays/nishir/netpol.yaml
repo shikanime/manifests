@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-slack
+  name: muatrix-slack
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: matrix-slack
+      app.kubernetes.io/name: muatrix-slack
   policyTypes:
     - Ingress
   ingress:

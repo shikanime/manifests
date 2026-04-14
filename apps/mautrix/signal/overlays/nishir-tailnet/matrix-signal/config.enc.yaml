@@ -17,7 +17,7 @@ network:
   # Should the Signal user's phone number be included in the room topic in private chat portal rooms?
   number_in_topic: true
   # Default device name that shows up in the Signal app.
-  device_name: matrix-signal
+  device_name: muatrix-signal
   # Avatar image for the Note to Self room.
   note_to_self_avatar: mxc://maunium.net/REBIVrqjZwmaWpssCZpBlmlL
   # Format for generating URLs from location messages for sending to Signal.
@@ -295,7 +295,7 @@ direct_media:
   # The server name to use for the custom mxc:// URIs.
   # This server name will effectively be a real Matrix server, it just won't implement anything other than media.
   # You must either set up .well-known delegation from this domain to the bridge, or proxy the domain directly to the bridge.
-  server_name: matrix-discord-media.taila659a.ts.net
+  server_name: muatrix-discord-media.taila659a.ts.net
   # Optionally a custom .well-known response. This defaults to `server_name:443`
   well_known_response: null
   # Optionally specify a custom prefix for the media ID part of the MXC URI.

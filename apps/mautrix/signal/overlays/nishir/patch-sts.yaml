@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-signal
+  name: muatrix-signal
 spec:
   template:
     spec:

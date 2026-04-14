@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: matrix-linkedin
+  name: muatrix-linkedin
 spec:
   statefulSet:
     pod:
@@ -12,7 +12,7 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: matrix-linkedin
+                    app.kubernetes.io/name: muatrix-linkedin
                 namespaces:
                   - shikanime
                 topologyKey: kubernetes.io/hostname

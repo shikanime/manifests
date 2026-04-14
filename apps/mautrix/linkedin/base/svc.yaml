@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: matrix-linkedin
+  name: muatrix-linkedin
 spec:
   publishNotReadyAddresses: true
   ports:
@@ -9,4 +9,4 @@ spec:
       port: 29341
       targetPort: http
   selector:
-    app.kubernetes.io/name: matrix-linkedin
+    app.kubernetes.io/name: muatrix-linkedin

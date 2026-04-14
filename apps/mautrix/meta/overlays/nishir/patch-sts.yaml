@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-meta
+  name: muatrix-meta
 spec:
   template:
     spec:

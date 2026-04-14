@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-meta
+  name: muatrix-meta
   annotations:
-    tailscale.com/proxy-class: matrix-meta
+    tailscale.com/proxy-class: muatrix-meta
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

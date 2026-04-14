@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: matrix-slack
+  name: muatrix-slack
 spec:
   defaultBackend:
     service:
-      name: matrix-slack
+      name: muatrix-slack
       port:
         name: http
   tls:

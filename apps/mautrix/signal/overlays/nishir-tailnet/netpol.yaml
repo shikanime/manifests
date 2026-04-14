@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: matrix-signal-tailscale
+  name: muatrix-signal-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: matrix-signal
+      app.kubernetes.io/name: muatrix-signal
   policyTypes:
     - Ingress
   ingress:

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: matrix-signal
+  name: muatrix-signal
 spec:
   publishNotReadyAddresses: true
   ports:
@@ -9,4 +9,4 @@ spec:
       port: 29328
       targetPort: http
   selector:
-    app.kubernetes.io/name: matrix-signal
+    app.kubernetes.io/name: muatrix-signal

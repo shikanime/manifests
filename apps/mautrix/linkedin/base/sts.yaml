@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: matrix-linkedin
+  name: muatrix-linkedin
 spec:
   replicas: 1
-  serviceName: matrix-linkedin
+  serviceName: muatrix-linkedin
   selector:
     matchLabels:
-      app.kubernetes.io/name: matrix-linkedin
+      app.kubernetes.io/name: muatrix-linkedin
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: matrix-linkedin
+        app.kubernetes.io/name: muatrix-linkedin
     spec:
       initContainers:
         - name: config-sync
@@ -80,10 +80,10 @@ spec:
       volumes:
         - name: config
           secret:
-            secretName: matrix-linkedin
+            secretName: muatrix-linkedin
         - name: data
           persistentVolumeClaim:
-            claimName: matrix-linkedin-data
+            claimName: muatrix-linkedin-data
         - name: rclone-config
           configMap:
-            name: matrix-rclone
+            name: muatrix-rclone

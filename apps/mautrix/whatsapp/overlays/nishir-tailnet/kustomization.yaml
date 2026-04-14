@@ -11,6 +11,6 @@ secretGenerator:
       - config.yaml=matrix-whatsapp/config.enc.yaml
       - doublepuppet.yaml=matrix-whatsapp/doublepuppet.enc.yaml
       - registration.yaml=matrix-whatsapp/registration.enc.yaml
-    name: matrix-whatsapp
+    name: muatrix-whatsapp
     options:
       disableNameSuffixHash: true

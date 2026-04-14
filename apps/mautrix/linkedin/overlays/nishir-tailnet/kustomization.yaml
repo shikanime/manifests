@@ -11,6 +11,6 @@ secretGenerator:
       - config.yaml=matrix-linkedin/config.enc.yaml
       - doublepuppet.yaml=matrix-linkedin/doublepuppet.enc.yaml
       - registration.yaml=matrix-linkedin/registration.enc.yaml
-    name: matrix-linkedin
+    name: muatrix-linkedin
     options:
       disableNameSuffixHash: true

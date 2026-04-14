@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: matrix-googlechat
+  name: muatrix-googlechat
 spec:
   statefulSet:
     pod:
@@ -12,7 +12,7 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: matrix-googlechat
+                    app.kubernetes.io/name: muatrix-googlechat
                 namespaces:
                   - shikanime
                 topologyKey: kubernetes.io/hostname
