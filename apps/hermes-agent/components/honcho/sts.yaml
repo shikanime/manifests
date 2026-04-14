@@ -19,6 +19,42 @@ spec:
           env:
             - name: AUTH_USE_AUTH
               value: "true"
+            - name: DERIVER_PROVIDER
+              value: google
+            - name: DERIVER_MODEL
+              value: gemini-3.1-flash-lite-preview
+            - name: SUMMARY_PROVIDER
+              value: google
+            - name: SUMMARY_MODEL
+              value: gemini-3-flash-preview
+            - name: DREAM_PROVIDER
+              value: google
+            - name: DREAM_MODEL
+              value: gemini-3.1-pro-preview
+            - name: DREAM_DEDUCTION_MODEL
+              value: gemini-3-flash-preview
+            - name: DREAM_INDUCTION_MODEL
+              value: gemini-3-flash-preview
+            - name: DIALECTIC_LEVELS__minimal__PROVIDER
+              value: google
+            - name: DIALECTIC_LEVELS__minimal__MODEL
+              value: gemini-3.1-flash-lite-preview
+            - name: DIALECTIC_LEVELS__low__PROVIDER
+              value: google
+            - name: DIALECTIC_LEVELS__low__MODEL
+              value: gemini-3.1-flash-lite-preview
+            - name: DIALECTIC_LEVELS__medium__PROVIDER
+              value: google
+            - name: DIALECTIC_LEVELS__medium__MODEL
+              value: gemini-3-flash-preview
+            - name: DIALECTIC_LEVELS__high__PROVIDER
+              value: google
+            - name: DIALECTIC_LEVELS__high__MODEL
+              value: gemini-3.1-pro-preview
+            - name: DIALECTIC_LEVELS__max__PROVIDER
+              value: google
+            - name: DIALECTIC_LEVELS__max__MODEL
+              value: gemini-3.1-pro-preview
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
