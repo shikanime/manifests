@@ -9,5 +9,5 @@ secretGenerator:
       - hermes-agent-postgres/.enc.env
     name: hermes-agent-postgres
     options:
-      disableNameSuffix: true
+      disableNameSuffixHash: true
     type: basic-auth
