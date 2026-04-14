@@ -22,8 +22,8 @@ spec:
             - containerPort: 9222
               name: cdp
           volumeMounts:
-            - mountPath: /dev/shm
-              name: dshm
+            - name: dshm
+              mountPath: /dev/shm
       volumes:
         - name: dshm
           emptyDir:
