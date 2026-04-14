@@ -65,6 +65,8 @@ the flake evaluates.
 - If an overlay is empty and only forwards to `../../base`, don’t create it;
   point consumers at `base` directly.
 - Avoid changing generated/decrypted files; change the encrypted source instead.
+- Avoid `generatorOptions`; set per-generator `options` on the specific
+  `secretGenerator`/`configMapGenerator` entry.
 - Keep `kustomization.yaml` lists (resources, patches, generators) sorted.
 - Within multi-document YAML files, keep resources sorted by `metadata.name` (or
   `name` where applicable), and keep YAML keys ordered the way the Kubernetes
