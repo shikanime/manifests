@@ -7,21 +7,6 @@ images:
   - name: hermes-agent-honcho
     newName: ghcr.io/plastic-labs/honcho
     newTag: latest
-  - name: honcho-postgres
-    newName: pgvector/pgvector
-    newTag: pg15
-configMapGenerator:
-  - files:
-      - honcho-postgres/init.sql
-    name: honcho-postgres
-secretGenerator:
-  - envs:
-      - honcho/.enc.env
-    name: honcho
-  - envs:
-      - honcho-postgres/.enc.env
-    name: honcho-postgres
-    type: basic-auth
 patches:
   - path: patch-sts.yaml
 resources:
