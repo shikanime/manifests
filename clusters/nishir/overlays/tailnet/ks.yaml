@@ -145,7 +145,6 @@ metadata:
   name: apps-hermes-agent-postgres
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/hermes-agent-postgres/overlays/nishir
   prune: true
@@ -240,7 +239,6 @@ metadata:
   name: apps-mautrix-discord
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
   prune: true
@@ -263,7 +261,6 @@ metadata:
   name: apps-mautrix-googlechat
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
   prune: true
@@ -286,7 +283,6 @@ metadata:
   name: apps-mautrix-linkedin
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
   prune: true
@@ -309,7 +305,6 @@ metadata:
   name: apps-mautrix-meta
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
   prune: true
@@ -332,7 +327,6 @@ metadata:
   name: apps-mautrix-signal
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
   prune: true
@@ -355,7 +349,6 @@ metadata:
   name: apps-mautrix-slack
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
   prune: true
@@ -378,7 +371,6 @@ metadata:
   name: apps-mautrix-twitter
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
   prune: true
@@ -401,7 +393,6 @@ metadata:
   name: apps-mautrix-whatsapp
   namespace: flux-system
 spec:
-  dependsOn:
   interval: 10m
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
   prune: true
