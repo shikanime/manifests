@@ -5,12 +5,6 @@ metadata:
 spec:
   template:
     spec:
-      containers:
-        - name: metatube
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
       volumes:
         - name: certs
           configMap:

@@ -242,7 +242,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-longhorn
-    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/metatube/overlays/nishir
   prune: true
