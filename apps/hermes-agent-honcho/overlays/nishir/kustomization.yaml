@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: shikanime
 resources:
   - ../../base
+  - netpol.yaml
 secretGenerator:
   - envs:
       - hermes-agent-honcho/.enc.env
