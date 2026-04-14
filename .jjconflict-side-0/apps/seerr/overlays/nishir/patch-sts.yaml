@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: seerr
+spec:
+  template:
+    spec:
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt

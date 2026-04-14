@@ -1,0 +1,16 @@
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: longhorn
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: longhorn-ui
+              namespaces:
+                - longhorn-system
+              topologyKey: kubernetes.io/hostname

@@ -1,0 +1,20 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: node-feature-discovery
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: node-feature-discovery
+      interval: 1h
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-sigs-nfd
+        namespace: flux-system
+      version: 0.18.3
+  install:
+    createNamespace: true
+  interval: 10m
+  releaseName: node-feature-discovery
+  targetNamespace: kube-system

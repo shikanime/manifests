@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  annotations:
+    automata.shikanime.studio/images: '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
+configMapGenerator:
+  - files:
+      - rclone/rclone.conf
+    name: hermes-agent-rclone
+images:
+  - name: rclone
+    newName: rclone/rclone
+    newTag: 1.71.2
+  - name: hermes-agent
+    newName: nousresearch/hermes-agent
+    newTag: latest # TODO: the ARM64 image just released
+labels:
+  - pairs:
+      app.kubernetes.io/component: agent
+      app.kubernetes.io/name: hermes-agent
+      app.kubernetes.io/part-of: nishir-platform
+      app.kubernetes.io/version: latest
+resources:
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: whisparr
+spec:
+  template:
+    spec:
+      containers:
+        - name: whisparr
+          volumeMounts:
+            - name: sukebe-data
+              mountPath: /data/sukebe
+            - name: downloads-data
+              mountPath: /downloads
+      volumes:
+        - name: certs
+          configMap:
+            name: nishir-ca-certificates.crt
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data
+        - name: downloads-data
+          persistentVolumeClaim:
+            claimName: downloads-data
+        - name: tls
+          secret:
+            secretName: whisparr-tls
+            items:
+              - key: keystore.p12
+                path: keystore.p12
+                mode: 0640
