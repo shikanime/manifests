@@ -33,10 +33,3 @@ spec:
             items:
               - key: tls-combined.pem
                 path: cert.pem
-      volumes:
-        - name: tls
-          secret:
-            secretName: copyparty-tls
-            items:
-              - key: tls-combined.pem
-                path: cert.pem
