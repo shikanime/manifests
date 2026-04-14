@@ -18,3 +18,6 @@ images:
   - name: mautrix
     newName: dock.mau.dev/mautrix/whatsapp
     newTag: v0.2603.0
+  - name: rclone
+    newName: rclone/rclone
+    newTag: 1.71.2
