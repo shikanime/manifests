@@ -5,7 +5,7 @@ metadata:
     automata.shikanime.studio/images: '[ { "name": "jellyfin", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "metatube", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: jellyfin
-    newName: docker.io/jellyfin/jellyfin
+    newName: jellyfin/jellyfin
     newTag: 10.11.5
   - name: metatube
     newName: ghcr.io/metatube-community/metatube-server

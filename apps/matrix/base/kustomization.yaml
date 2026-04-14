@@ -12,7 +12,7 @@ configMapGenerator:
       disableNameSuffixHash: true
 images:
   - name: caddy
-    newName: docker.io/library/caddy
+    newName: library/caddy
     newTag: 2.11.2
   - name: mautrix-discord
     newName: dock.mau.dev/mautrix/discord
@@ -39,10 +39,10 @@ images:
     newName: dock.mau.dev/mautrix/whatsapp
     newTag: v0.2603.0
   - name: rclone
-    newName: docker.io/rclone/rclone
+    newName: rclone/rclone
     newTag: 1.73.3
   - name: synapse
-    newName: docker.io/matrixdotorg/synapse
+    newName: matrixdotorg/synapse
     newTag: v1.150.0
 labels:
   - pairs:

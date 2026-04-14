@@ -12,7 +12,7 @@ configMapGenerator:
       disableNameSuffixHash: true
 images:
   - name: rclone
-    newName: docker.io/rclone/rclone
+    newName: rclone/rclone
     newTag: 1.72.0
   - name: forgejo
     newName: codeberg.org/forgejo/forgejo

@@ -5,7 +5,7 @@ metadata:
     automata.shikanime.studio/images: '[ { "name": "chrome", "tag-regex": "^(?P<version>.+)$" } ]'
 images:
   - name: chrome
-    newName: docker.io/chromedp/headless-shell
+    newName: chromedp/headless-shell
     newTag: 149.0.7779.3
 patches:
   - path: patch-sts.yaml

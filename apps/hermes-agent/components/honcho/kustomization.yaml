@@ -8,7 +8,7 @@ images:
     newName: ghcr.io/plastic-labs/honcho
     newTag: latest
   - name: honcho-postgres
-    newName: docker.io/pgvector/pgvector
+    newName: pgvector/pgvector
     newTag: pg15
 configMapGenerator:
   - files:
