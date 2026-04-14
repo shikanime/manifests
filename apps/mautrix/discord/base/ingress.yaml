@@ -19,7 +19,7 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: matrix-proxy
+      name: synapse-proxy
       port:
         name: http
   tls:

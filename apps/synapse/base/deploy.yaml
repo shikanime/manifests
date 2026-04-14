@@ -12,6 +12,7 @@ spec:
       labels:
         app.kubernetes.io/name: synapse-proxy
     spec:
+      enableServiceLinks: true
       affinity:
         podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
