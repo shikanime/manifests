@@ -1,18 +1,14 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: vaultwarden
+  name: matrix
 spec:
   template:
     spec:
       containers:
-        - name: vaultwarden
-          env:
-            - name: ROCKET_TLS
-              value: |
-                {certs="/etc/ssl/private/tls.crt",key="/etc/ssl/private/tls.key"}
+        - name: synapse
           ports:
-            - containerPort: 80
+            - containerPort: 8448
               name: https
           readinessProbe:
             httpGet:
@@ -33,7 +29,31 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: vaultwarden-tls
+            secretName: matrix-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matrix-proxy
+spec:
+  template:
+    spec:
+      containers:
+        - name: caddy
+          volumeMounts:
+            - name: tls
+              mountPath: /etc/ssl/private
+              readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: matrix-proxy-tls
             items:
               - key: tls.crt
                 path: tls.crt

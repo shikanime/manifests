@@ -1,27 +1,24 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: jellyfin
+  name: matrix-proxy
 spec:
   template:
     spec:
       containers:
-        - name: jellyfin
+        - name: caddy
           ports:
-            - containerPort: 8920
+            - containerPort: 8448
               name: https
           readinessProbe:
-            httpGet:
+            tcpSocket:
               port: https
-              scheme: HTTPS
           livenessProbe:
-            httpGet:
+            tcpSocket:
               port: https
-              scheme: HTTPS
           startupProbe:
-            httpGet:
+            tcpSocket:
               port: https
-              scheme: HTTPS
           volumeMounts:
             - name: tls
               mountPath: /etc/ssl/private
@@ -29,8 +26,10 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: jellyfin-tls
+            secretName: matrix-proxy-tls
             items:
-              - key: keystore.p12
-                path: keystore.p12
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
                 mode: 0640

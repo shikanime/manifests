@@ -8,6 +8,9 @@ spec:
       containers:
         - name: radarr
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: movies-data
               mountPath: /data/movies
             - name: downloads-data
@@ -22,10 +25,3 @@ spec:
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
-        - name: tls
-          secret:
-            secretName: radarr-tls
-            items:
-              - key: keystore.p12
-                path: keystore.p12
-                mode: 0640

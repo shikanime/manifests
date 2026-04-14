@@ -16,16 +16,13 @@ spec:
                       - rpi5-large
                       - rpi4-large
               weight: 80
+      containers:
+        - name: forgejo
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: forgejo-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640

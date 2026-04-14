@@ -8,6 +8,9 @@ spec:
       containers:
         - name: qbittorrent
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: downloads-data
               mountPath: /downloads
       volumes:
@@ -17,12 +20,3 @@ spec:
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
-        - name: tls
-          secret:
-            secretName: qbittorrent-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640

@@ -142,13 +142,6 @@
 
                 github.workflows.skaffold.enable = true;
 
-                gitignore.content = [
-                  "apps/synapse/overlays/*/synapse/homeserver.yaml"
-                  "apps/mautrix/*/overlays/*/matrix-*/config.yaml"
-                  "apps/mautrix/*/overlays/*/matrix-*/doublepuppet.yaml"
-                  "apps/mautrix/*/overlays/*/matrix-*/registration.yaml"
-                ];
-
                 packages = [
                   pkgs.age
                   pkgs.caddy

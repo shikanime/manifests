@@ -8,8 +8,6 @@ configMapGenerator:
       - rclone/rclone.conf
     name: lidarr-rclone
     namespace: shikanime
-    options:
-      disableNameSuffixHash: true
 images:
   - name: lidarr
     newName: lscr.io/linuxserver/lidarr
