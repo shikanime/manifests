@@ -5,12 +5,6 @@ metadata:
 spec:
   template:
     spec:
-      containers:
-        - name: copyparty
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
       initContainers:
         - name: tls-sync
           image: rclone

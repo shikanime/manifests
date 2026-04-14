@@ -16,6 +16,12 @@ spec:
                       - rpi5-large
                       - rpi4-large
               weight: 80
+      containers:
+        - name: forgejo
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:

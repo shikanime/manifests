@@ -8,6 +8,9 @@ spec:
       containers:
         - name: radarr
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: movies-data
               mountPath: /data/movies
             - name: downloads-data

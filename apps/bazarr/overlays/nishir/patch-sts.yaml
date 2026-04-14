@@ -8,6 +8,9 @@ spec:
       containers:
         - name: bazarr
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: movies-data
               mountPath: /data/movies
             - name: shows-data

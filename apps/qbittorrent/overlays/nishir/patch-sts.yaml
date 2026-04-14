@@ -8,6 +8,9 @@ spec:
       containers:
         - name: qbittorrent
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: downloads-data
               mountPath: /downloads
       volumes:
