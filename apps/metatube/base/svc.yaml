@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: jellyfin
+  name: metatube
 spec:
   ports:
     - name: http
-      port: 8096
+      port: 80
       targetPort: http
   selector:
-    app.kubernetes.io/name: jellyfin
+    app.kubernetes.io/name: metatube
