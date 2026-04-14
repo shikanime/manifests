@@ -17,6 +17,3 @@ secretGenerator:
   - envs:
       - jellyfin/.enc.env
     name: jellyfin-pkcs12-password
-  - envs:
-      - metatube/.enc.env
-    name: metatube
