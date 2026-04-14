@@ -37,6 +37,8 @@ spec:
               value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HONCHO_POSTGRES_SERVICE_HOST):$(HONCHO_POSTGRES_SERVICE_PORT)/$(DB_NAME)
           envFrom:
             - secretRef:
+                name: honcho
+            - secretRef:
                 name: hermes-agent
           ports:
             - name: http
