@@ -86,4 +86,4 @@ spec:
             claimName: mautrix-discord-data
         - name: rclone-config
           configMap:
-            name: mautrix-rclone
+            name: mautrix-discord-rclone
