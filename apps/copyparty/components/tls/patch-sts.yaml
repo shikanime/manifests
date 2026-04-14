@@ -26,3 +26,17 @@ spec:
             - name: tls
               mountPath: /mnt/tls
               readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: copyparty-tls
+            items:
+              - key: tls-combined.pem
+                path: cert.pem
+      volumes:
+        - name: tls
+          secret:
+            secretName: copyparty-tls
+            items:
+              - key: tls-combined.pem
+                path: cert.pem

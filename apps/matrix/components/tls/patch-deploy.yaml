@@ -23,3 +23,13 @@ spec:
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: matrix-proxy-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
