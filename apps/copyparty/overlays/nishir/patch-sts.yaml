@@ -19,6 +19,9 @@ spec:
       containers:
         - name: copyparty
           volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
             - name: archives-data
               mountPath: /data/archives
             - name: downloads-data
@@ -71,12 +74,6 @@ spec:
         - name: timeline-data
           persistentVolumeClaim:
             claimName: timeline-data
-        - name: tls
-          secret:
-            secretName: copyparty-tls
-            items:
-              - key: tls-combined.pem
-                path: cert.pem
         - name: startup-config
           configMap:
             name: copyparty

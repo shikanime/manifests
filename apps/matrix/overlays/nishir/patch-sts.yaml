@@ -31,19 +31,14 @@ spec:
             timeoutSeconds: 15
             periodSeconds: 10
             failureThreshold: 120
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: matrix-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -52,6 +47,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-discord
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -64,6 +65,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-googlechat
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -76,6 +83,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-linkedin
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -88,6 +101,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-meta
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -100,19 +119,16 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: caddy
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
             name: nishir-ca-certificates.crt
-        - name: tls
-          secret:
-            secretName: matrix-proxy-tls
-            items:
-              - key: tls.crt
-                path: tls.crt
-              - key: tls.key
-                path: tls.key
-                mode: 0640
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -121,6 +137,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-signal
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -133,6 +155,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-slack
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -145,6 +173,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-twitter
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:
@@ -157,6 +191,12 @@ metadata:
 spec:
   template:
     spec:
+      containers:
+        - name: mautrix-whatsapp
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: certs
           configMap:

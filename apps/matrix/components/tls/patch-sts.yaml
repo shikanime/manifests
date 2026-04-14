@@ -23,121 +23,40 @@ spec:
               port: https
               scheme: HTTPS
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
             - name: tls
               mountPath: /etc/ssl/private
               readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: matrix-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: matrix-discord
+  name: matrix-proxy
 spec:
   template:
     spec:
       containers:
-        - name: mautrix-discord
+        - name: caddy
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
+            - name: tls
+              mountPath: /etc/ssl/private
               readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-googlechat
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-googlechat
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-linkedin
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-linkedin
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-meta
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-meta
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-slack
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-slack
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-signal
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-signal
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-twitter
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-twitter
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: matrix-whatsapp
-spec:
-  template:
-    spec:
-      containers:
-        - name: mautrix-whatsapp
-          volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: matrix-proxy-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+                mode: 0640
