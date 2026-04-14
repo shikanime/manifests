@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: muatrix-whatsapp-tailscale
+  name: mautrix-whatsapp-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: muatrix-whatsapp
+      app.kubernetes.io/name: mautrix-whatsapp
   policyTypes:
     - Ingress
   ingress:

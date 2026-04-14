@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: muatrix-twitter
+  name: mautrix-twitter
   annotations:
-    tailscale.com/proxy-class: muatrix-twitter
+    tailscale.com/proxy-class: mautrix-twitter
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

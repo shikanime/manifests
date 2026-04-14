@@ -1,7 +1,7 @@
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
 metadata:
-  name: muatrix-slack
+  name: mautrix-slack
 spec:
   statefulSet:
     pod:
@@ -12,7 +12,7 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: muatrix-slack
+                    app.kubernetes.io/name: mautrix-slack
                 namespaces:
                   - shikanime
                 topologyKey: kubernetes.io/hostname

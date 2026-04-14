@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: muatrix-googlechat
+  name: mautrix-googlechat
 spec:
   defaultBackend:
     service:
-      name: muatrix-googlechat
+      name: mautrix-googlechat
       port:
         name: http
   tls:

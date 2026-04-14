@@ -11,6 +11,6 @@ secretGenerator:
       - config.yaml=matrix-googlechat/config.enc.yaml
       - doublepuppet.yaml=matrix-googlechat/doublepuppet.enc.yaml
       - registration.yaml=matrix-googlechat/registration.enc.yaml
-    name: muatrix-googlechat
+    name: mautrix-googlechat
     options:
       disableNameSuffixHash: true

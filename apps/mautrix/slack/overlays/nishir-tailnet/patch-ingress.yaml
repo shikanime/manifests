@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: muatrix-slack
+  name: mautrix-slack
   annotations:
-    tailscale.com/proxy-class: muatrix-slack
+    tailscale.com/proxy-class: mautrix-slack
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: muatrix-signal
+  name: mautrix-signal
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: muatrix-signal
+      app.kubernetes.io/name: mautrix-signal
   policyTypes:
     - Ingress
   ingress:

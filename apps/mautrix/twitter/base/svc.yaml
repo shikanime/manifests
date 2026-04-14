@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: muatrix-twitter
+  name: mautrix-twitter
 spec:
   publishNotReadyAddresses: true
   ports:
@@ -9,4 +9,4 @@ spec:
       port: 29327
       targetPort: http
   selector:
-    app.kubernetes.io/name: muatrix-twitter
+    app.kubernetes.io/name: mautrix-twitter

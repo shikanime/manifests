@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: muatrix-twitter
+  name: mautrix-twitter
 spec:
   defaultBackend:
     service:
-      name: muatrix-twitter
+      name: mautrix-twitter
       port:
         name: http
   tls:

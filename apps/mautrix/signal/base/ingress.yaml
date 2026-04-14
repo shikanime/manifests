@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: muatrix-signal
+  name: mautrix-signal
 spec:
   defaultBackend:
     service:
-      name: muatrix-signal
+      name: mautrix-signal
       port:
         name: http
   tls:
