@@ -68,12 +68,7 @@
         treefmt-nix.flakeModule
       ];
       perSystem =
-        {
-          lib,
-          pkgs,
-          ...
-        }:
-        with lib;
+        { pkgs, ... }:
         {
           devenv = {
             modules = [
