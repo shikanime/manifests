@@ -238,7 +238,7 @@ spec:
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-discord
       namespace: shikanime
@@ -260,7 +260,7 @@ spec:
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-googlechat
       namespace: shikanime
@@ -282,7 +282,7 @@ spec:
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-linkedin
       namespace: shikanime
@@ -304,7 +304,7 @@ spec:
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-meta
       namespace: shikanime
@@ -326,7 +326,7 @@ spec:
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-signal
       namespace: shikanime
@@ -348,7 +348,7 @@ spec:
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-slack
       namespace: shikanime
@@ -370,7 +370,7 @@ spec:
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-twitter
       namespace: shikanime
@@ -392,7 +392,7 @@ spec:
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - apiVersion: v1
       kind: Service
       name: mautrix-whatsapp
       namespace: shikanime
