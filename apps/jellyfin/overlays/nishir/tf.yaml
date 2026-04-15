@@ -1,0 +1,35 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: jellyfin-pkcs12-password
+  namespace: shikanime
+spec:
+  approvePlan: auto
+  interval: 30m
+  path: ./modules/pkcs12-password
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  values:
+    name: jellyfin-pkcs12-password
+    namespace: shikanime
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: jellyfin-startup-config
+  namespace: shikanime
+spec:
+  approvePlan: auto
+  interval: 30m
+  path: ./modules/jellyfin-config
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  values:
+    name: jellyfin
+    namespace: shikanime
+    passwordSecretRef:
+      name: jellyfin-pkcs12-password

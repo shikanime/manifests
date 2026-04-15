@@ -13,6 +13,27 @@ spec:
       labels:
         app.kubernetes.io/name: prowlarr
     spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/startup-config
+            - /mnt/config
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
       containers:
         - name: prowlarr
           image: prowlarr
@@ -51,3 +72,9 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: prowlarr-config
+        - name: rclone-config
+          configMap:
+            name: prowlarr-rclone
+        - name: startup-config
+          secret:
+            secretName: prowlarr

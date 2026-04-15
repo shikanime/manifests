@@ -1,0 +1,35 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: whisparr-pkcs12-password
+  namespace: shikanime
+spec:
+  approvePlan: auto
+  interval: 30m
+  path: ./modules/pkcs12-password
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  values:
+    name: whisparr-pkcs12-password
+    namespace: shikanime
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: whisparr-startup-config
+  namespace: shikanime
+spec:
+  approvePlan: auto
+  interval: 30m
+  path: ./modules/whisparr-config
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  values:
+    name: whisparr
+    namespace: shikanime
+    passwordSecretRef:
+      name: whisparr-pkcs12-password

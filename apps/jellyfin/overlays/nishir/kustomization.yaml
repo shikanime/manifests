@@ -4,7 +4,7 @@ components:
   - ../../components/tls
   - ../../components/v4l2
 configurations:
-  - namereference.yaml
+  - config.yaml
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
@@ -14,7 +14,4 @@ resources:
   - cert.yaml
   - netpol.yaml
   - pvc.yaml
-secretGenerator:
-  - envs:
-      - jellyfin/.enc.env
-    name: jellyfin-pkcs12-password
+  - tf.yaml

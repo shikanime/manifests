@@ -3,7 +3,7 @@ kind: Kustomization
 components:
   - ../../components/tls
 configurations:
-  - namereference.yaml
+  - config.yaml
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
@@ -12,7 +12,4 @@ resources:
   - ../../base
   - cert.yaml
   - netpol.yaml
-secretGenerator:
-  - envs:
-      - prowlarr/.enc.env
-    name: prowlarr-pkcs12-password
+  - tf.yaml
