@@ -101,9 +101,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: apps-chrome
-    - name: apps-hermes-agent-postgres
-    - name: apps-hermes-agent-honcho
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/hermes-agent/overlays/nishir-tailnet
@@ -167,8 +164,6 @@ metadata:
   name: apps-hermes-agent-honcho
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: apps-hermes-agent-postgres
   interval: 10m
   path: ./apps/hermes-agent-honcho/overlays/nishir
   prune: true
@@ -415,8 +410,6 @@ metadata:
   name: apps-metatube
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: apps-jellyfin
   interval: 10m
   path: ./apps/metatube/overlays/nishir
   prune: true
@@ -584,8 +577,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: apps-mautrix-discord
-    - name: apps-synapse
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
