@@ -55,3 +55,22 @@ spec:
               - system:masters
       rbac:
         createRoles: true
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: tofu-controller
+  namespace: kube-system
+spec:
+  chart: tofu-controller
+  createNamespace: true
+  repo: https://flux-iac.github.io/tofu-controller
+  targetNamespace: flux-system
+  version: 0.16.2
+  valuesContent: |
+    awsPackage:
+      install: false
+    runner:
+      allowedNamespaces:
+        - flux-system
+        - shikanime

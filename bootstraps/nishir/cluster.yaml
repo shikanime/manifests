@@ -118,6 +118,8 @@ spec:
             repositories:
               - name: longhorn
                 url: https://charts.longhorn.io
+              - name: tofu-controller
+                url: https://flux-iac.github.io/tofu-controller
             charts:
               - name: flux
                 chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
@@ -175,6 +177,17 @@ spec:
                             - nishir-flux
                     rbac:
                       createRoles: true
+              - name: tofu-controller
+                chartname: tofu-controller/tofu-controller
+                version: 0.16.2
+                namespace: flux-system
+                values: |
+                  awsPackage:
+                    install: false
+                  runner:
+                    allowedNamespaces:
+                      - flux-system
+                      - shikanime
               - name: longhorn
                 chartname: longhorn/longhorn
                 version: 1.11.1
