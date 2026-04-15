@@ -46,7 +46,7 @@ spec:
             tcpSocket:
               port: http
             initialDelaySeconds: 10
-            failureThreshold: 30
+            failureThreshold: 180
           volumeMounts:
             - name: config
               mountPath: /config

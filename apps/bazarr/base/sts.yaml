@@ -58,7 +58,7 @@ spec:
           startupProbe:
             tcpSocket:
               port: http
-            failureThreshold: 30
+            failureThreshold: 180
             periodSeconds: 10
             timeoutSeconds: 5
           volumeMounts:

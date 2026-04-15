@@ -41,7 +41,7 @@ spec:
                 - sh
                 - -c
                 - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
-            failureThreshold: 30
+            failureThreshold: 180
             periodSeconds: 5
             timeoutSeconds: 5
           readinessProbe:

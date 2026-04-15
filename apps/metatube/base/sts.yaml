@@ -36,7 +36,7 @@ spec:
           startupProbe:
             tcpSocket:
               port: http
-            failureThreshold: 30
+            failureThreshold: 180
           volumeMounts:
             - name: data
               mountPath: /data
