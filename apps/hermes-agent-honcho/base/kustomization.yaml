@@ -9,6 +9,5 @@ images:
     newTag: latest
 resources:
   - deploy.yaml
-  - job.yaml
   - svc.yaml
   - vpa.yaml

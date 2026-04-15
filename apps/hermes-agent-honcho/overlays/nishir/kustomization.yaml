@@ -8,6 +8,3 @@ secretGenerator:
   - envs:
       - hermes-agent-honcho/.enc.env
     name: hermes-agent-honcho
-  - envs:
-      - hermes-agent-honcho/auth.enc.env
-    name: hermes-agent-honcho-auth
