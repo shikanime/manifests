@@ -80,9 +80,9 @@ spec:
                 metricsUtilization:
                   source: KubernetesMetrics
                 targetThresholds:
-                  cpu: 10
+                  cpu: 20
                 thresholds:
-                  cpu: 10
+                  cpu: 20
                 useDeviationThresholds: true
           plugins:
             balance:
@@ -96,9 +96,9 @@ spec:
                 metricsUtilization:
                   source: KubernetesMetrics
                 targetThresholds:
-                  memory: 5
+                  memory: 10
                 thresholds:
-                  memory: 5
+                  memory: 10
                 useDeviationThresholds: true
           plugins:
             balance:
