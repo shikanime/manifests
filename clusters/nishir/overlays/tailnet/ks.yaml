@@ -245,7 +245,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-discord
+      name: mautrix-discord
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -267,7 +267,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-googlechat
+      name: mautrix-googlechat
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -289,7 +289,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-linkedin
+      name: mautrix-linkedin
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -311,7 +311,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-meta
+      name: mautrix-meta
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -333,7 +333,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-signal
+      name: mautrix-signal
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -355,7 +355,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-slack
+      name: mautrix-slack
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -377,7 +377,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-twitter
+      name: mautrix-twitter
       namespace: shikanime
   sourceRef:
     kind: GitRepository
@@ -399,7 +399,7 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: matrix-whatsapp
+      name: mautrix-whatsapp
       namespace: shikanime
   sourceRef:
     kind: GitRepository
