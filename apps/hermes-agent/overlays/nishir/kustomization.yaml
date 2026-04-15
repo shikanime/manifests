@@ -9,6 +9,7 @@ components:
 configMapGenerator:
   - files:
       - hermes-agent/config.yaml
+      - hermes-agent/honcho.json
       - hermes-agent/SOUL.md
     name: hermes-agent-startup-config
 resources:

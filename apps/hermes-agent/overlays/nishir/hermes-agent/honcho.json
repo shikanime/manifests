@@ -1,0 +1,16 @@
+{
+  "hosts": {
+    "hermes": {
+      "peerName": "user",
+      "aiPeer": "hermes",
+      "workspace": "hermes",
+      "observationMode": "directional",
+      "writeFrequency": "async",
+      "recallMode": "hybrid",
+      "sessionStrategy": "per-directory",
+      "enabled": true,
+      "saveMessages": true
+    }
+  },
+  "baseUrl": "http://hermes-agent-honcho:8000"
+}
