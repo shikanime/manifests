@@ -64,7 +64,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 2
-            failureThreshold: 30
+            failureThreshold: 180
           volumeMounts:
             - name: config
               mountPath: /config
