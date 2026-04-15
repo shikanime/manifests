@@ -16,8 +16,6 @@ spec:
         - name: hermes-agent-honcho
           image: hermes-agent-honcho
           env:
-            - name: AUTH_USE_AUTH
-              value: "true"
             - name: DERIVER_PROVIDER
               value: google
             - name: DERIVER_MODEL
@@ -100,8 +98,6 @@ spec:
           envFrom:
             - secretRef:
                 name: hermes-agent-honcho
-            - secretRef:
-                name: hermes-agent-honcho-auth
           ports:
             - name: http
               containerPort: 8000
