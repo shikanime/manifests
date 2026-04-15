@@ -23,11 +23,11 @@ spec:
             - --copy-links
             - --update
             - --filter
-            - "+ SOUL.md"
-            - --filter
             - "+ config.yaml"
             - --filter
             - "+ honcho.json"
+            - --filter
+            - "+ SOUL.md"
             - --filter
             - "- *"
             - /mnt/startup-config

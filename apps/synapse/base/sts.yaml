@@ -23,9 +23,10 @@ spec:
               # Copy synapse config
               rclone copy \
                 --copy-links \
-                --include "*.log.config" \
-                --include "*.signing.key" \
-                --include "homeserver.yaml" \
+                --filter "+ *.log.config" \
+                --filter "+ *.signing.key" \
+                --filter "+ homeserver.yaml" \
+                --filter "- *" \
                 --update \
                 /mnt/config \
                 /mnt/data
