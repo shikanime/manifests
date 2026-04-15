@@ -27,6 +27,8 @@ spec:
             - --filter
             - "+ config.yaml"
             - --filter
+            - "+ honcho.json"
+            - --filter
             - "- *"
             - /mnt/startup-config
             - /opt/data
