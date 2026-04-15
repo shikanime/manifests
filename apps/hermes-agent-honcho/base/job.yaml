@@ -17,5 +17,5 @@ spec:
             - scripts/generate_jwt_secret.py
           envFrom:
             - secretRef:
-                name: hermes-agent-honcho
+                name: hermes-agent-honcho-auth
       restartPolicy: Never
