@@ -7,13 +7,15 @@ spec:
     pod:
       affinity:
         podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: hermes-agent
-              namespaces:
-                - shikanime
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: hermes-agent
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
 ---
 apiVersion: tailscale.com/v1alpha1
 kind: ProxyClass
@@ -24,10 +26,12 @@ spec:
     pod:
       affinity:
         podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: hermes-agent
-              namespaces:
-                - shikanime
-              topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: hermes-agent
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
