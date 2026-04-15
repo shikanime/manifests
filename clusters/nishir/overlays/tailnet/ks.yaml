@@ -244,7 +244,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-discord
       namespace: shikanime
   sourceRef:
@@ -266,7 +266,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-googlechat
       namespace: shikanime
   sourceRef:
@@ -288,7 +288,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-linkedin
       namespace: shikanime
   sourceRef:
@@ -310,7 +310,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-meta
       namespace: shikanime
   sourceRef:
@@ -332,7 +332,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-signal
       namespace: shikanime
   sourceRef:
@@ -354,7 +354,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-slack
       namespace: shikanime
   sourceRef:
@@ -376,7 +376,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-twitter
       namespace: shikanime
   sourceRef:
@@ -398,7 +398,7 @@ spec:
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
+      kind: Service
       name: mautrix-whatsapp
       namespace: shikanime
   sourceRef:
