@@ -36,7 +36,7 @@ spec:
               path: /api/v1/status
               port: http
             initialDelaySeconds: 20
-            failureThreshold: 30
+            failureThreshold: 180
           volumeMounts:
             - name: config
               mountPath: /app/config

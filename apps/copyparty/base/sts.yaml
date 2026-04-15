@@ -60,7 +60,7 @@ spec:
               port: http
             timeoutSeconds: 5
             periodSeconds: 10
-            failureThreshold: 60
+            failureThreshold: 180
           volumeMounts:
             - name: config
               mountPath: /cfg

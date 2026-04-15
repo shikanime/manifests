@@ -32,7 +32,7 @@ spec:
             tcpSocket:
               port: ssh
           startupProbe:
-            failureThreshold: 30
+            failureThreshold: 180
             initialDelaySeconds: 3
             tcpSocket:
               port: ssh
