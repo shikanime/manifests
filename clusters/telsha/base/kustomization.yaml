@@ -3,8 +3,7 @@ kind: Kustomization
 configurations:
   - config.yaml
 resources:
-  - gitrepo.yaml
   - alert.yaml
-  - ks.yaml
+  - gitrepo.yaml
   - ns.yaml
   - provider.yaml
