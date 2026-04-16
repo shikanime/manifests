@@ -1,19 +1,18 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-catbox
+  name: infrastructure-tailscale
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/catbox/overlays/telsha-tailnet
+  path: ./infrastructure/tailscale/overlays/telsha
   prune: true
+  deletionPolicy: Orphan
   healthChecks:
-    - apiVersion: apps/v1
-      kind: Deployment
-      name: catbox
-      namespace: shikanime
+    - apiVersion: v1
+      kind: Secret
+      name: operator-oauth
+      namespace: tailscale-system
   sourceRef:
     kind: GitRepository
     name: flux-system
