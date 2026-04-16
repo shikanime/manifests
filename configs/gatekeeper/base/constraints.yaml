@@ -27,6 +27,12 @@ spec:
           - Pod
     namespaces:
       - shikanime
+  parameters:
+    allowedHostPaths:
+      - pathPrefix: /dev/dri
+      - pathPrefix: /dev/video10
+      - pathPrefix: /dev/video11
+      - pathPrefix: /dev/video12
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPAllowPrivilegeEscalationContainer
@@ -42,6 +48,9 @@ spec:
           - Pod
     namespaces:
       - shikanime
+  parameters:
+    exemptImages:
+      - jellyfin*
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPPrivilegedContainer
@@ -57,21 +66,9 @@ spec:
           - Pod
     namespaces:
       - shikanime
----
-apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sPSPReadOnlyRootFilesystem
-metadata:
-  name: shikanime-require-readonly-root-fs
-spec:
-  enforcementAction: dryrun
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
+  parameters:
+    exemptImages:
+      - jellyfin*
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPSeccomp

@@ -24,13 +24,33 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-gatekeeper-config
+  name: infrastructure-gatekeeper-templates
   namespace: flux-system
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
   interval: 10m
-  path: ./configs/gatekeeper/base
+  path: ./clusters/nishir/components/gatekeeper/templates
+  prune: true
+  deletionPolicy: Orphan
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-gatekeeper-policies
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-gatekeeper-templates
+  interval: 10m
+  path: ./clusters/nishir/components/gatekeeper/policies
   prune: true
   deletionPolicy: Orphan
   sourceRef:
