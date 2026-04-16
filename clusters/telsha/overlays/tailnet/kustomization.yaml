@@ -1,14 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+components:
+  - ../../components/cluster-api
+  - ../../components/tailscale
+  - ../../components/vpa
 resources:
   - ../../base
   - alert.yaml
   - ks.yaml
   - provider.yaml
-components:
-  - ../../components/cluster-api
-  - ../../components/tailscale
-  - ../../components/vpa
 secretGenerator:
   - envs:
       - discord-webhook/.enc.env
