@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hermes-agent-honcho
+  name: honcho
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: hermes-agent-honcho
+      app.kubernetes.io/name: honcho
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: hermes-agent-honcho
+        app.kubernetes.io/name: honcho
     spec:
       initContainers:
         - name: alembic-upgrade
-          image: hermes-agent-honcho
+          image: honcho
           command:
             - alembic
             - upgrade
@@ -23,26 +23,26 @@ spec:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
                   key: username
+                  name: hermes-agent-postgres
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
                   key: password
+                  name: hermes-agent-postgres
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
                   key: database
+                  name: hermes-agent-postgres
             - name: DB_CONNECTION_URI
               value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
           envFrom:
             - secretRef:
-                name: hermes-agent-honcho
+                name: honcho
       containers:
-        - name: hermes-agent-honcho
-          image: hermes-agent-honcho
+        - name: honcho
+          image: honcho
           env:
             - name: DERIVER_PROVIDER
               value: google
@@ -109,46 +109,46 @@ spec:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
                   key: username
+                  name: hermes-agent-postgres
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
                   key: password
+                  name: hermes-agent-postgres
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
                   key: database
+                  name: hermes-agent-postgres
             - name: DB_CONNECTION_URI
               value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
             - name: AUTH_USE_AUTH
               value: "false"
           envFrom:
             - secretRef:
-                name: hermes-agent-honcho
+                name: honcho
           ports:
             - name: http
               containerPort: 8000
           startupProbe:
+            failureThreshold: 180
             httpGet:
               path: /health
               port: http
-            failureThreshold: 180
             periodSeconds: 5
             timeoutSeconds: 5
           livenessProbe:
+            failureThreshold: 3
             httpGet:
               path: /health
               port: http
-            failureThreshold: 3
             periodSeconds: 30
             timeoutSeconds: 5
           readinessProbe:
+            failureThreshold: 3
             httpGet:
               path: /health
               port: http
-            failureThreshold: 3
             periodSeconds: 10
             timeoutSeconds: 5

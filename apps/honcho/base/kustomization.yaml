@@ -4,10 +4,10 @@ metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "honcho", "tag-regex": "^(?P<version>.+)$" } ]'
 images:
-  - name: hermes-agent-honcho
+  - name: honcho
     newName: ghcr.io/plastic-labs/honcho
     newTag: latest
 resources:
-  - sts.yaml
+  - deploy.yaml
   - svc.yaml
   - vpa.yaml
