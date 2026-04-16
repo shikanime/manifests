@@ -161,16 +161,18 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-hermes-agent-honcho
+  name: apps-honcho
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/hermes-agent-honcho/overlays/nishir
+  path: ./apps/honcho/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
-      name: hermes-agent-honcho
+      name: honcho
       namespace: shikanime
   sourceRef:
     kind: GitRepository

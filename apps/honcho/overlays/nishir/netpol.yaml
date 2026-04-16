@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: hermes-agent-postgres
+  name: honcho
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: hermes-agent-postgres
+      app.kubernetes.io/name: honcho
   policyTypes:
     - Ingress
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: honcho
+              app.kubernetes.io/name: hermes-agent
       ports:
-        - port: postgres
+        - port: http
