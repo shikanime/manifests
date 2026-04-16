@@ -27,7 +27,6 @@ spec:
               args:
                 podProtections:
                   extraEnabled:
-                    - PodsWithoutPDB
                     - PodsWithPVC
                     - PodsWithResourceClaims
             - name: PodLifeTime
@@ -59,10 +58,8 @@ spec:
             - name: RemovePodsViolatingNodeAffinity
               args:
                 nodeAffinityType:
-                  - preferredDuringSchedulingIgnoredDuringExecution
                   - requiredDuringSchedulingIgnoredDuringExecution
             - name: RemovePodsViolatingNodeTaints
-            - name: RemovePodsViolatingTopologySpreadConstraint
           plugins:
             deschedule:
               enabled:
@@ -72,32 +69,18 @@ spec:
                 - RemovePodsViolatingInterPodAntiAffinity
                 - RemovePodsViolatingNodeAffinity
                 - RemovePodsViolatingNodeTaints
-        - name: cpu
+        - name: utilization
           pluginConfig:
             - name: DefaultEvictor
             - name: LowNodeUtilization
               args:
                 metricsUtilization:
                   source: KubernetesMetrics
+                thresholds:
+                  cpu: 10
+                  memory: 10
                 targetThresholds:
                   cpu: 20
-                thresholds:
-                  cpu: 20
-                useDeviationThresholds: true
-          plugins:
-            balance:
-              enabled:
-                - LowNodeUtilization
-        - name: memory
-          pluginConfig:
-            - name: DefaultEvictor
-            - name: LowNodeUtilization
-              args:
-                metricsUtilization:
-                  source: KubernetesMetrics
-                targetThresholds:
-                  memory: 20
-                thresholds:
                   memory: 20
                 useDeviationThresholds: true
           plugins:
