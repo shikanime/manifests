@@ -6,5 +6,5 @@ resources:
   - netpol.yaml
 secretGenerator:
   - envs:
-      - hermes-agent-honcho/.enc.env
-    name: hermes-agent-honcho
+      - honcho/.enc.env
+    name: honcho
