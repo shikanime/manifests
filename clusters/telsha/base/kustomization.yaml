@@ -4,4 +4,7 @@ configurations:
   - config.yaml
 resources:
   - gitrepo.yaml
+  - alert.yaml
+  - ks.yaml
   - ns.yaml
+  - provider.yaml
