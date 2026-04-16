@@ -1,0 +1,21 @@
+commonAnnotations:
+  - create: true
+    group: infra.contrib.fluxcd.io
+    kind: Terraform
+    path: spec/values/annotations
+    version: v1alpha2
+commonLabels:
+  - create: true
+    group: infra.contrib.fluxcd.io
+    kind: Terraform
+    path: spec/values/labels
+    version: v1alpha2
+nameReference:
+  - fieldSpecs:
+      - kind: Certificate
+        path: spec/keystores/pkcs12/passwordSecretRef/name
+    kind: Secret
+  - fieldSpecs:
+      - kind: Terraform
+        path: spec/values/passwordSecretRef/name
+    kind: Secret

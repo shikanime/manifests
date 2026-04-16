@@ -1,0 +1,16 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: metatube
+  namespace: shikanime
+spec:
+  approvePlan: auto
+  interval: 30m
+  path: ./modules/metatube-token
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  values:
+    name: metatube
+    namespace: shikanime

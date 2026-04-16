@@ -3,10 +3,18 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "prowlarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - files:
+      - rclone/rclone.conf
+    name: prowlarr-rclone
+    namespace: shikanime
 images:
   - name: prowlarr
     newName: lscr.io/linuxserver/prowlarr
     newTag: 2.3.0
+  - name: rclone
+    newName: rclone/rclone
+    newTag: 1.72.0
 labels:
   - pairs:
       app.kubernetes.io/component: torrent-tracker

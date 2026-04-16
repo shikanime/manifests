@@ -3,7 +3,7 @@ kind: Kustomization
 components:
   - ../../components/tls
 configurations:
-  - namereference.yaml
+  - config.yaml
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
@@ -12,10 +12,4 @@ resources:
   - ../../base
   - cert.yaml
   - netpol.yaml
-secretGenerator:
-  - files:
-      - config.xml=whisparr/config.enc.xml
-    name: whisparr
-  - envs:
-      - whisparr/.enc.env
-    name: whisparr-pkcs12-password
+  - tf.yaml
