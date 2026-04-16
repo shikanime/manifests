@@ -12,6 +12,34 @@ spec:
       labels:
         app.kubernetes.io/name: hermes-agent-honcho
     spec:
+      initContainers:
+        - name: alembic-upgrade
+          image: hermes-agent-honcho
+          command:
+            - alembic
+            - upgrade
+            - head
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-agent-postgres
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-agent-postgres
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-agent-postgres
+                  key: database
+            - name: DB_CONNECTION_URI
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
+          envFrom:
+            - secretRef:
+                name: hermes-agent-honcho
       containers:
         - name: hermes-agent-honcho
           image: hermes-agent-honcho
@@ -95,6 +123,8 @@ spec:
                   key: database
             - name: DB_CONNECTION_URI
               value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
+            - name: AUTH_USE_AUTH
+              value: "false"
           envFrom:
             - secretRef:
                 name: hermes-agent-honcho
