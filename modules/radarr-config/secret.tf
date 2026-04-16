@@ -17,10 +17,11 @@ locals {
   config_xml = <<-XML
     <Config>
       <ApiKey>${random_password.api_key.result}</ApiKey>
-      <AuthenticationMethod>None</AuthenticationMethod>
+      <AuthenticationMethod>Forms</AuthenticationMethod>
+      <AuthenticationRequired>Enabled</AuthenticationRequired>
       <BindAddress>*</BindAddress>
       <EnableSsl>True</EnableSsl>
-      <InstanceName>radarr</InstanceName>
+      <InstanceName>Radarr</InstanceName>
       <LaunchBrowser>False</LaunchBrowser>
       <LogLevel>info</LogLevel>
       <Port>7878</Port>

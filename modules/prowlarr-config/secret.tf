@@ -21,7 +21,7 @@ locals {
       <AuthenticationMethod>Forms</AuthenticationMethod>
       <AuthenticationRequired>Enabled</AuthenticationRequired>
       <Branch>master</Branch>
-      <LogLevel>debug</LogLevel>
+      <LogLevel>info</LogLevel>
       <SslCertPath>/etc/ssl/private/keystore.p12</SslCertPath>
       <SslCertPassword>${data.kubernetes_secret_v1.pkcs12_password.data["password"]}</SslCertPassword>
       <UrlBase></UrlBase>
