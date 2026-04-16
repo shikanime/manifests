@@ -115,7 +115,7 @@ Most apps follow the same pattern:
 Hardware-dependent apps can also add scheduling constraints via components (example:
 [patch-sts.yaml](apps/jellyfin/components/v4l2/patch-sts.yaml)), which rely on NFD
 labels from
-[nodefeature.yaml](clusters/nishir/components/nfd/nodefeature.yaml).
+[nodefeature.yaml](configs/nfd/overlays/nishir/nodefeature.yaml).
 
 ### Secrets
 

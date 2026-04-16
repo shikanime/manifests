@@ -5,10 +5,12 @@ resources:
   - alert.yaml
   - ks.yaml
   - provider.yaml
+components:
+  - ../../components/cluster-api
+  - ../../components/tailscale
+  - ../../components/vpa
 secretGenerator:
   - envs:
       - discord-webhook/.enc.env
     name: discord-webhook
     namespace: flux-system
-    options:
-      disableNameSuffixHash: true
