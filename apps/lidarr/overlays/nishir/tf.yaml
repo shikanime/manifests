@@ -1,0 +1,35 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: lidarr-pkcs12-password
+  namespace: shikanime
+spec:
+  approvePlan: auto
+  interval: 30m
+  path: ./modules/pkcs12-password
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  values:
+    name: lidarr-pkcs12-password
+    namespace: shikanime
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: lidarr-startup-config
+  namespace: shikanime
+spec:
+  approvePlan: auto
+  interval: 30m
+  path: ./modules/lidarr-config
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  values:
+    name: lidarr
+    namespace: shikanime
+    passwordSecretRef:
+      name: lidarr-pkcs12-password

@@ -13,6 +13,27 @@ spec:
       labels:
         app.kubernetes.io/name: jellyfin
     spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --update
+            - /mnt/startup-config
+            - /mnt/config/config
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
       containers:
         - name: jellyfin
           image: jellyfin
@@ -68,7 +89,13 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
+        - name: rclone-config
+          configMap:
+            name: jellyfin-rclone
         - name: dev-dri
           hostPath:
             path: /dev/dri
             type: Directory
+        - name: startup-config
+          secret:
+            secretName: jellyfin

@@ -3,10 +3,18 @@ kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images: '[ { "name": "jellyfin", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+configMapGenerator:
+  - files:
+      - rclone/rclone.conf
+    name: jellyfin-rclone
+    namespace: shikanime
 images:
   - name: jellyfin
     newName: jellyfin/jellyfin
     newTag: 10.11.5
+  - name: rclone
+    newName: rclone/rclone
+    newTag: 1.72.0
 labels:
   - pairs:
       app.kubernetes.io/component: media-server

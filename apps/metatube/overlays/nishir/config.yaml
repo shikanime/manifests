@@ -1,0 +1,12 @@
+commonAnnotations:
+  - create: true
+    group: infra.contrib.fluxcd.io
+    kind: Terraform
+    path: spec/values/annotations
+    version: v1alpha2
+commonLabels:
+  - create: true
+    group: infra.contrib.fluxcd.io
+    kind: Terraform
+    path: spec/values/labels
+    version: v1alpha2

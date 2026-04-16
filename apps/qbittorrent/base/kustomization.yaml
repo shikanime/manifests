@@ -26,7 +26,3 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-secretGenerator:
-  - name: qbittorrent
-    envs:
-      - qbittorrent/.enc.env
