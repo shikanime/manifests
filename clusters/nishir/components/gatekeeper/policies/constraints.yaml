@@ -1,0 +1,92 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPHostNamespace
+metadata:
+  name: shikanime-disallow-host-namespaces
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPHostFilesystem
+metadata:
+  name: shikanime-disallow-hostpath
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPAllowPrivilegeEscalationContainer
+metadata:
+  name: shikanime-disallow-privilege-escalation
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPPrivilegedContainer
+metadata:
+  name: shikanime-disallow-privileged
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPReadOnlyRootFilesystem
+metadata:
+  name: shikanime-require-readonly-root-fs
+spec:
+  enforcementAction: dryrun
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPSeccomp
+metadata:
+  name: shikanime-require-seccomp-runtime-default
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+  parameters:
+    allowedProfiles:
+      - runtime/default

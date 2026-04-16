@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: catbox
+        policy.shikanime.studio/allow-hostpath: "true"
+        policy.shikanime.studio/allow-privileged: "true"
     spec:
       securityContext:
         fsGroup: 100
