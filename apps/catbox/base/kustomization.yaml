@@ -15,5 +15,6 @@ labels:
       app.kubernetes.io/version: v0.17.1
 resources:
   - deploy.yaml
+  - pvc.yaml
   - svc.yaml
   - vpa.yaml
