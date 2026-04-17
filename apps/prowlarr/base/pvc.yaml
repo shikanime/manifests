@@ -7,5 +7,5 @@ spec:
     - ReadWriteOncePod
   resources:
     requests:
-      storage: 512Mi
+      storage: 2Gi
   volumeMode: Filesystem
