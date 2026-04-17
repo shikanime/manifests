@@ -27,15 +27,18 @@ spec:
             initialDelaySeconds: 30
             tcpSocket:
               port: ssh
+            timeoutSeconds: 5
           readinessProbe:
             initialDelaySeconds: 10
             tcpSocket:
               port: ssh
+            timeoutSeconds: 5
           startupProbe:
             failureThreshold: 180
             initialDelaySeconds: 3
             tcpSocket:
               port: ssh
+            timeoutSeconds: 5
           securityContext:
             privileged: true
           stdin: true

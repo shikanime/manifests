@@ -51,10 +51,12 @@ spec:
             tcpSocket:
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 5
           livenessProbe:
             tcpSocket:
               port: http
             initialDelaySeconds: 60
+            timeoutSeconds: 5
           startupProbe:
             tcpSocket:
               port: http

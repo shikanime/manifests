@@ -31,16 +31,19 @@ spec:
               path: /ping
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /ping
               port: http
             initialDelaySeconds: 60
+            timeoutSeconds: 5
           startupProbe:
             httpGet:
               path: /ping
               port: http
             initialDelaySeconds: 5
+            timeoutSeconds: 5
             failureThreshold: 180
           volumeMounts:
             - name: config
