@@ -1,0 +1,9 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: nishir-davinci-resolve
+spec:
+  cluster:
+    name: nishir
+  name: davinci_resolve
+  owner: app

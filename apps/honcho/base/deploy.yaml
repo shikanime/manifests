@@ -24,19 +24,26 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: username
-                  name: hermes-agent-postgres
+                  name: nishir-app
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: hermes-agent-postgres
-            - name: DB_NAME
+                  name: nishir-app
+            - name: DB_HOST
               valueFrom:
                 secretKeyRef:
-                  key: database
-                  name: hermes-agent-postgres
+                  key: host
+                  name: nishir-app
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: nishir-app
+            - name: DB_NAME
+              value: honcho
             - name: DB_CONNECTION_URI
-              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)
           envFrom:
             - secretRef:
                 name: honcho
@@ -110,19 +117,26 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: username
-                  name: hermes-agent-postgres
+                  name: nishir-app
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: hermes-agent-postgres
-            - name: DB_NAME
+                  name: nishir-app
+            - name: DB_HOST
               valueFrom:
                 secretKeyRef:
-                  key: database
-                  name: hermes-agent-postgres
+                  key: host
+                  name: nishir-app
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: nishir-app
+            - name: DB_NAME
+              value: honcho
             - name: DB_CONNECTION_URI
-              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)
             - name: AUTH_USE_AUTH
               value: "false"
           envFrom:
