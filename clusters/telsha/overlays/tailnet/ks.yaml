@@ -7,7 +7,7 @@ spec:
   dependsOn:
     - name: infrastructure-tailscale
   interval: 10m
-  path: ./apps/catbox/overlays/telsha
+  path: ./apps/catbox/base
   prune: true
   healthChecks:
     - apiVersion: apps/v1
