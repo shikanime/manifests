@@ -1,0 +1,16 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nishir
+spec:
+  instances: 1
+  postgresql:
+    parameters:
+      effective_cache_size: 256MB
+      maintenance_work_mem: 64MB
+      max_connections: "50"
+      shared_buffers: 128MB
+      work_mem: 4MB
+  storage:
+    size: 512Mi
+    storageClass: nishir-fast

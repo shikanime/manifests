@@ -8,6 +8,7 @@ images:
     newName: ghcr.io/plastic-labs/honcho
     newTag: latest
 resources:
+  - db.yaml
   - deploy.yaml
   - svc.yaml
   - vpa.yaml

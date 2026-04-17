@@ -139,37 +139,20 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-hermes-agent-postgres
-  namespace: flux-system
-spec:
-  interval: 10m
-  path: ./apps/hermes-agent-postgres/overlays/nishir
-  prune: true
-  healthChecks:
-    - apiVersion: apps/v1
-      kind: StatefulSet
-      name: hermes-agent-postgres
-      namespace: shikanime
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: apps-honcho
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cloudnative-pg-config
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/honcho/overlays/nishir-tailnet
   prune: true
   healthChecks:
+    - apiVersion: postgresql.cnpg.io/v1
+      kind: Cluster
+      name: nishir
+      namespace: shikanime
     - apiVersion: apps/v1
       kind: Deployment
       name: honcho

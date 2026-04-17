@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: nishir-honcho
+spec:
+  cluster:
+    name: nishir
+  extensions:
+    - name: pg_trgm
+    - name: vector
+  name: honcho
+  owner: app

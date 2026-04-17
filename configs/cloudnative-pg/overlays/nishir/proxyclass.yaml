@@ -1,0 +1,19 @@
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: nishir-postgres
+spec:
+  statefulSet:
+    pod:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    cnpg.io/cluster: nishir
+                    cnpg.io/instanceRole: primary
+                namespaces:
+                  - shikanime
+                topologyKey: kubernetes.io/hostname
