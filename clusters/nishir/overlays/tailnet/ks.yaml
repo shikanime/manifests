@@ -28,8 +28,6 @@ metadata:
   name: apps-catbox
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/catbox/overlays/nishir
   prune: true
