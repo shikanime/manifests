@@ -6,12 +6,14 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/catbox/base
   prune: true
+  targetNamespace: shikanime
   healthChecks:
     - apiVersion: apps/v1
-      kind: Deployment
+      kind: StatefulSet
       name: catbox
       namespace: shikanime
   sourceRef:
