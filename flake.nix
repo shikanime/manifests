@@ -165,8 +165,8 @@
 
                     if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
                       ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} \
-                        -n flux-system \
                         create secret generic sops-age \
+                        --namespace flux-system \
                         --from-file=age.agekey=/dev/stdin
                     fi
                   '';
