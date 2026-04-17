@@ -14,7 +14,7 @@ labels:
       app.kubernetes.io/part-of: telsha-workstation
       app.kubernetes.io/version: v0.17.1
 resources:
-  - deploy.yaml
   - pvc.yaml
+  - sts.yaml
   - svc.yaml
   - vpa.yaml
