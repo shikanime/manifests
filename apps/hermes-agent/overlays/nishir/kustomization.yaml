@@ -6,6 +6,8 @@ components:
   - ../../components/browser
   - ../../components/honcho
   - ../../components/webhook
+patches:
+  - path: patch-pvc.yaml
 configMapGenerator:
   - files:
       - hermes-agent/config.yaml
@@ -14,7 +16,6 @@ configMapGenerator:
     name: hermes-agent-startup-config
 resources:
   - ../../base
-  - pvc.yaml
 secretGenerator:
   - envs:
       - hermes-agent/.enc.env

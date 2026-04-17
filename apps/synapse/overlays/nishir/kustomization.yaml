@@ -4,9 +4,9 @@ components:
   - ../../components/tls
 namespace: shikanime
 patches:
+  - path: patch-pvc.yaml
   - path: patch-sts.yaml
 resources:
   - ../../base
   - cert.yaml
   - netpol.yaml
-  - pvc.yaml
