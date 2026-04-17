@@ -28,22 +28,15 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: configs-cert-manager
+  name: infrastructure-cert-manager-config
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-cert-manager
   interval: 10m
-  path: ./configs/cert-manager/base
+  path: ./configs/cert-manager/overlays
   prune: true
   deletionPolicy: Orphan
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: cert-manager
-      namespace: flux-system
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: trust-manager
-      namespace: flux-system
   sourceRef:
     kind: GitRepository
     name: flux-system
