@@ -24,18 +24,21 @@ spec:
               path: /api/v1/status
               port: http
             initialDelaySeconds: 20
+            timeoutSeconds: 5
             failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /api/v1/status
               port: http
             initialDelaySeconds: 20
+            timeoutSeconds: 5
             failureThreshold: 3
           startupProbe:
             httpGet:
               path: /api/v1/status
               port: http
             initialDelaySeconds: 20
+            timeoutSeconds: 5
             failureThreshold: 180
           volumeMounts:
             - name: config

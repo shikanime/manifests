@@ -21,6 +21,22 @@ spec:
           ports:
             - containerPort: 9222
               name: cdp
+          readinessProbe:
+            tcpSocket:
+              port: cdp
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: cdp
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          startupProbe:
+            tcpSocket:
+              port: cdp
+            initialDelaySeconds: 3
+            timeoutSeconds: 5
+            failureThreshold: 180
           volumeMounts:
             - name: dshm
               mountPath: /dev/shm
