@@ -61,7 +61,7 @@ spec:
             httpGet:
               path: /ping
               port: http
-            failureThreshold: 180
+            failureThreshold: 360
             periodSeconds: 10
             timeoutSeconds: 5
           volumeMounts:
