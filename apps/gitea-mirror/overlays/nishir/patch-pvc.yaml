@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitea-mirror-data
+spec:
+  storageClassName: nishir-fast
+  volumeName: gitea-mirror-data

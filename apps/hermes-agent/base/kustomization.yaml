@@ -21,6 +21,7 @@ labels:
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: latest
 resources:
+  - pvc.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml

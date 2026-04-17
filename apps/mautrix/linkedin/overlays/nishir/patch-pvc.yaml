@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mautrix-linkedin-data
+spec:
+  storageClassName: nishir-fast
+  volumeName: mautrix-linkedin-data

@@ -12,6 +12,7 @@ images:
     newName: pgvector/pgvector
     newTag: pg15
 resources:
+  - pvc.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml
