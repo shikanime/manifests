@@ -66,12 +66,6 @@ spec:
           env:
             - name: DISCORD_ALLOW_BOTS
               value: "mentions"
-            - name: TERMINAL_SSH_HOST
-              value: catbox
-            - name: TERMINAL_SSH_PORT
-              value: "22"
-            - name: TERMINAL_SSH_USER
-              value: root
           envFrom:
             - secretRef:
                 name: hermes-agent
