@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -26,13 +27,13 @@ spec:
       volumes:
         - name: dev-video10
           hostPath:
-            path: /dev/video10
             type: CharDevice
+            path: /dev/video10
         - name: dev-video11
           hostPath:
-            path: /dev/video11
             type: CharDevice
+            path: /dev/video11
         - name: dev-video12
           hostPath:
-            path: /dev/video12
             type: CharDevice
+            path: /dev/video12

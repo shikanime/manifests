@@ -1,13 +1,15 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+---
+resources:
+  - ingress.yaml
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "copyparty", "tag-regex": "^(?P<version>.+)$" }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
-configMapGenerator:
-  - files:
-      - rclone/rclone.conf
-    name: copyparty-rclone
-    namespace: shikanime
+    automata.shikanime.studio/images:
+      '[ { "name": "copyparty", "tag-regex": "^(?P<version>.+)$" }, { "name":
+      "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: copyparty
     newName: copyparty/dj
@@ -15,15 +17,14 @@ images:
   - name: rclone
     newName: rclone/rclone
     newTag: 1.72.0
+configMapGenerator:
+  - name: copyparty-rclone
+    namespace: shikanime
+    files:
+      - rclone/rclone.conf
 labels:
   - pairs:
       app.kubernetes.io/component: file-server
       app.kubernetes.io/name: copyparty
       app.kubernetes.io/part-of: nishir-operation
       app.kubernetes.io/version: 1.20.0
-resources:
-  - ingress.yaml
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml

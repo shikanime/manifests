@@ -1,8 +1,15 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+---
+resources:
+  - ingress.yaml
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "seerr", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
+    automata.shikanime.studio/images:
+      '[ { "name": "seerr", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" }
+      ]'
 images:
   - name: seerr
     newName: ghcr.io/seerr-team/seerr
@@ -13,9 +20,3 @@ labels:
       app.kubernetes.io/name: seerr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 3.1.0
-resources:
-  - ingress.yaml
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml

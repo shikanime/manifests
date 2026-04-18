@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -9,13 +10,13 @@ spec:
   prune: true
   deletionPolicy: Orphan
   healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
+    - name: descheduler
+      apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
-      name: descheduler
       namespace: flux-system
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:

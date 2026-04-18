@@ -1,18 +1,23 @@
-id: linkedin
+---
 url: http://mautrix-linkedin:29341
+id: linkedin
 as_token: ENC[AES256_GCM,data:LfJpjHeVMGE7ms+Ey67zVHWLi72hNNcUX6e04stnLoERMIgPMfJslfCDBR+zqCWeMIprqvIxA1n6llTp8QWRpg==,iv:zMOiXO6Y0aeI42z+4TmTlhtKshGP9pinoBUNROf46JU=,tag:c2EVrgV8X5Gus8tbSUBZaQ==,type:str]
 hs_token: ENC[AES256_GCM,data:FTlzJqv/Ks3tVBoDIaSwUIRRsmQWzkcdb1CFYLmXKukaOxpThnzjgKRV4brhBY2JrMuz0MWVS9U3x8E2W2bg/Q==,iv:wbZJKvgR9ITG0HhjeJMud9axVSfFCtc92LJ9sN7oM5o=,tag:bvuAANWK92YstR51XLhRYg==,type:str]
 sender_localpart: yhOAOXPg6urLYarvXlIQBkDk6gT1zYE4
 rate_limited: false
+de.sorunome.msc2409.push_ephemeral: true
+receive_ephemeral: true
 namespaces:
   users:
     - regex: ^@linkedinbot:matrix\.taila659a\.ts\.net$
       exclusive: true
     - regex: ^@linkedin_.*:matrix\.taila659a\.ts\.net$
       exclusive: true
-de.sorunome.msc2409.push_ephemeral: true
-receive_ephemeral: true
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T22:03:31Z"
+  mac: ENC[AES256_GCM,data:pp+hG7281/kJ09ZwGm7izy3Zh6g0L/8BUjjaOEKfj+fNgTKh5d1PbxHgjPfKm+AT9m+ViFFp2g8z1iyxvVJ9Y4/b7Wt/4oZWKZ5DjdwqGmo5O1esIZB+REAeIxn9dILZn943xpgLzx/QsUD3IG28CzJ4VKc1CsfUogKsvaRZMgU=,iv:/NxhaD8LgRyOb+F6ufeFdAbUbkTiT8j5jT6glyK3oqA=,tag:+Zw0P4LCkO9XNgzag9gDtw==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -68,7 +73,3 @@ sops:
         WFBVbFlyUmMzRXhoVXlmNEt6MFB3NG8Kvcy51OlRLp5cFn3pTAaLGT+hcPxjBQ99
         txBmFamtCbK8qvyJxB8se4JG4D+K19HYo5bgTgWbb2PKBRJsNXb+6Q==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:03:31Z"
-  mac: ENC[AES256_GCM,data:pp+hG7281/kJ09ZwGm7izy3Zh6g0L/8BUjjaOEKfj+fNgTKh5d1PbxHgjPfKm+AT9m+ViFFp2g8z1iyxvVJ9Y4/b7Wt/4oZWKZ5DjdwqGmo5O1esIZB+REAeIxn9dILZn943xpgLzx/QsUD3IG28CzJ4VKc1CsfUogKsvaRZMgU=,iv:/NxhaD8LgRyOb+F6ufeFdAbUbkTiT8j5jT6glyK3oqA=,tag:+Zw0P4LCkO9XNgzag9gDtw==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.2

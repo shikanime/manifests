@@ -1,5 +1,6 @@
-id: discord-doublepuppet
+---
 url: ""
+id: discord-doublepuppet
 as_token: ENC[AES256_GCM,data:akfC0gMcnTIFWYqkyebOOksMbRR8Dr8M0kM6785mtgTw4Bjf1j4pcJOpGbQXTLYtOcoCtSvQce48bdcoUqxDhQ==,iv:qfBzk3/1rAETuQEQIcUvZmZ8p46CDMZjZjPhnQy2M2Y=,tag:nCC3968t67zeSLEYl1QA1Q==,type:str]
 hs_token: ENC[AES256_GCM,data:1kfeht+KfO5IVIkmthici3opRCflV9xKde6Z/WrNJ07aylGz9keIkglEh+4Ds7bze8GrnWtziStquVGJ3wTtfg==,iv:J3ejuRmM4EXQIZ8IwhlibF4ko7jJrpjZtBxWOOh4Qeg=,tag:wwzoea4aBLebqqo/vykIsg==,type:str]
 sender_localpart: GLWb0dWBIzWr8A9DYzfyOPZPVZY0bO8h
@@ -9,6 +10,10 @@ namespaces:
     - regex: ^@.*:matrix\.taila659a\.ts\.net$
       exclusive: false
 sops:
+  version: 3.12.1
+  lastmodified: "2026-04-01T07:54:42Z"
+  mac: ENC[AES256_GCM,data:mPU+x+crMhbe6i0W4oDiyPSHsorlfzSit+8eOHHm6a+2xsrfcFZ+ukT6sT6T8XaX8hs5YlVgCmwVSOhyKDW9MrAOmnQDz+j7HixBnZYfofv6HYVSalUyGAlzjLpez8t5V3rJ02M3s38qcNX2o2oVTwHCVZDRILjoRZxVUrOuV5Q=,iv:igSvK+CTkB36mCeNWCeFcENXxuU5dLK666q93g7GMBs=,tag:bGn/qfj5ZlPtnwd1anLfdA==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -64,7 +69,3 @@ sops:
         M3dFQ1h5c2VzY3htUGJrUnNQcUN6VU0Kf26MCJd6FgupZt4dDrLKTKjlWYEZ8rDl
         glbqQ3s7GSTgWOfDWhxg9ZQyY6SRYO7MddSogQpob8FZ4S5czdXtYQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-01T07:54:42Z"
-  mac: ENC[AES256_GCM,data:mPU+x+crMhbe6i0W4oDiyPSHsorlfzSit+8eOHHm6a+2xsrfcFZ+ukT6sT6T8XaX8hs5YlVgCmwVSOhyKDW9MrAOmnQDz+j7HixBnZYfofv6HYVSalUyGAlzjLpez8t5V3rJ02M3s38qcNX2o2oVTwHCVZDRILjoRZxVUrOuV5Q=,iv:igSvK+CTkB36mCeNWCeFcENXxuU5dLK666q93g7GMBs=,tag:bGn/qfj5ZlPtnwd1anLfdA==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1

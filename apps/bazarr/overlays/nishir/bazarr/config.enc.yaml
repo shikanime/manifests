@@ -1,11 +1,17 @@
-addic7ed:
-  cookies: ""
-  password: ""
-  user_agent: ""
-  username: ""
-  vip: false
-analytics:
-  enabled: false
+---
+auth:
+  type: basic
+  apikey: ENC[AES256_GCM,data:cUWBnFiM/6Qrr+LpIY8hFjWFqh3wcm7RAM+6GnDUWmM=,iv:GMjIXmy3sbBkPukZcDrmRSu9T+qPOOFkqsESgEd0450=,tag:62fQSTWYkzDUTw2YeFpUdg==,type:str]
+  password: ENC[AES256_GCM,data:tLOTfQ7jBLOp3lnhp4kQ61vCpswWLfYOf7hWd5NFaTY=,iv:w5IvS+/LWcFOVb0yPSvr2M9yNi7ocFGJJvtsT+w5maM=,tag:y+j09+RqvBf6Kwk/2AmCCg==,type:str]
+  username: bazarr
+log:
+  exclude_filter: ""
+  ignore_case: false
+  include_filter: ""
+  use_regex: false
+napiprojekt:
+  only_authors: false
+  only_real_names: false
 anidb:
   api_client: ""
   api_client_ver: 1
@@ -17,11 +23,6 @@ anticaptcha:
   anti_captcha_key: ""
 assrt:
   token: ""
-auth:
-  apikey: ENC[AES256_GCM,data:cUWBnFiM/6Qrr+LpIY8hFjWFqh3wcm7RAM+6GnDUWmM=,iv:GMjIXmy3sbBkPukZcDrmRSu9T+qPOOFkqsESgEd0450=,tag:62fQSTWYkzDUTw2YeFpUdg==,type:str]
-  password: ENC[AES256_GCM,data:tLOTfQ7jBLOp3lnhp4kQ61vCpswWLfYOf7hWd5NFaTY=,iv:w5IvS+/LWcFOVb0yPSvr2M9yNi7ocFGJJvtsT+w5maM=,tag:y+j09+RqvBf6Kwk/2AmCCg==,type:str]
-  type: basic
-  username: bazarr
 avistaz:
   cookies: ""
   user_agent: ""
@@ -47,100 +48,9 @@ embeddedsubtitles:
   included_codecs: []
   timeout: 600
   unknown_as_fallback: false
-general:
-  adaptive_searching: true
-  adaptive_searching_delay: 3w
-  adaptive_searching_delta: 1w
-  anti_captcha_provider: null
-  auto_update: true
-  base_url: ""
-  branch: master
-  chmod: "0640"
-  chmod_enabled: false
-  days_to_upgrade_subs: 30
-  debug: false
-  default_und_audio_lang: ""
-  default_und_embedded_subtitles_lang: ""
-  dont_notify_manual_actions: false
-  embedded_subs_show_desired: true
-  embedded_subtitles_parser: ffprobe
-  enabled_integrations: []
-  enabled_providers:
-    - animekalesi
-    - animetosho
-    - embeddedsubtitles
-    - gestdown
-    - greeksubs
-    - greeksubtitles
-    - hosszupuska
-    - napiprojekt
-    - nekur
-    - podnapisi
-    - regielive
-    - soustitreseu
-    - subdivx
-    - subssabbz
-    - subs4free
-    - subs4series
-    - subscenter
-    - subsro
-    - subsunacs
-    - subsynchro
-    - subtitrarinoi
-    - subtitriid
-    - subtitulamostv
-    - supersubtitles
-    - titrari
-    - tvsubtitles
-    - wizdom
-    - yavkanet
-    - yifysubtitles
-    - zimuku
-  flask_secret_key: ENC[AES256_GCM,data:r0kW6h96pmw3OEP8TgACLs4W520krS5GRJvqqJxhHm0=,iv:j1xT2/6fa2pF7Q4AiYR1QUkkKqnHrSjyp8oIEYMRkEg=,tag:0UbXwQt8mnOUijrb5pl6sA==,type:str]
-  hi_extension: hi
-  ignore_ass_subs: false
-  ignore_pgs_subs: false
-  ignore_vobsub_subs: false
-  ip: '*'
-  language_equals: []
-  minimum_score: 90
-  minimum_score_movie: 70
-  movie_default_enabled: true
-  movie_default_profile: 1
-  movie_tag_enabled: false
-  multithreading: true
-  page_size: 25
-  parse_embedded_audio_track: false
-  path_mappings: []
-  path_mappings_movie: []
-  port: 6767
-  postprocessing_cmd: ""
-  postprocessing_threshold: 90
-  postprocessing_threshold_movie: 70
-  remove_profile_tags: []
-  serie_default_enabled: true
-  serie_default_profile: 1
-  serie_tag_enabled: false
-  single_language: false
-  skip_hashing: false
-  subfolder: current
-  subfolder_custom: ""
-  subzero_mods: ""
-  theme: auto
-  upgrade_frequency: 12
-  upgrade_manual: false
-  upgrade_subs: true
-  use_embedded_subs: true
-  use_plex: false
-  use_postprocessing: false
-  use_postprocessing_threshold: false
-  use_postprocessing_threshold_movie: false
-  use_radarr: true
-  use_scenename: true
-  use_sonarr: true
-  utf8_encode: true
-  wanted_search_frequency: 6
-  wanted_search_frequency_movie: 6
+xsubs:
+  password: ""
+  username: ""
 hdbits:
   passkey: ""
   username: ""
@@ -154,9 +64,18 @@ karagarga:
   f_username: ""
   password: ""
   username: ""
-ktuvit:
-  email: ""
-  hashed_password: ""
+movie_scores:
+  source: 7
+  audio_codec: 3
+  edition: 1
+  hash: 119
+  hearing_impaired: 1
+  release_group: 13
+  resolution: 2
+  streaming_service: 1
+  title: 60
+  video_codec: 2
+  year: 30
 legendasdivx:
   password: ""
   skip_wrong_fps: false
@@ -164,26 +83,17 @@ legendasdivx:
 legendasnet:
   password: ""
   username: ""
-log:
-  exclude_filter: ""
-  ignore_case: false
-  include_filter: ""
-  use_regex: false
-movie_scores:
-  audio_codec: 3
-  edition: 1
-  hash: 119
-  hearing_impaired: 1
-  release_group: 13
-  resolution: 2
-  source: 7
-  streaming_service: 1
-  title: 60
-  video_codec: 2
-  year: 30
-napiprojekt:
-  only_authors: false
-  only_real_names: false
+analytics:
+  enabled: false
+addic7ed:
+  cookies: ""
+  password: ""
+  user_agent: ""
+  username: ""
+  vip: false
+ktuvit:
+  email: ""
+  hashed_password: ""
 napisy24:
   password: ""
   username: ""
@@ -234,15 +144,12 @@ postgresql:
   password: ""
   port: 5432
   username: ""
-proxy:
-  exclude:
-    - localhost
-    - 127.0.0.1
-  password: ""
-  port: ""
-  type: null
-  url: ""
-  username: ""
+whisperai:
+  endpoint: http://127.0.0.1:9000
+  loglevel: INFO
+  pass_video_name: false
+  response: 5
+  timeout: 3600
 radarr:
   apikey: ENC[AES256_GCM,data:bAEw5Y1Pcy2jS3LKPExGF+ceEdMfBanSwrQaNg1pTAA=,iv:nj7uLmxIqGQ0g8GBLny23Nkc89W8GussqrdaJibrh0g=,tag:oGmLJqMRSwJErPxEkJ7pHA==,type:str]
   base_url: ""
@@ -260,6 +167,7 @@ radarr:
   sync_only_monitored_movies: false
   use_ffprobe_cache: true
 series_scores:
+  source: 7
   audio_codec: 3
   episode: 30
   hash: 359
@@ -268,7 +176,6 @@ series_scores:
   resolution: 2
   season: 30
   series: 180
-  source: 7
   streaming_service: 1
   video_codec: 2
   year: 90
@@ -328,16 +235,114 @@ translator:
 turkcealtyaziorg:
   cookies: ""
   user_agent: ""
-whisperai:
-  endpoint: http://127.0.0.1:9000
-  loglevel: INFO
-  pass_video_name: false
-  response: 5
-  timeout: 3600
-xsubs:
+proxy:
+  url: ""
   password: ""
+  port: ""
+  type: null
   username: ""
+  exclude:
+    - localhost
+    - 127.0.0.1
+general:
+  adaptive_searching: true
+  adaptive_searching_delay: 3w
+  adaptive_searching_delta: 1w
+  anti_captcha_provider: null
+  auto_update: true
+  base_url: ""
+  branch: master
+  chmod: "0640"
+  chmod_enabled: false
+  days_to_upgrade_subs: 30
+  debug: false
+  default_und_audio_lang: ""
+  default_und_embedded_subtitles_lang: ""
+  dont_notify_manual_actions: false
+  embedded_subs_show_desired: true
+  embedded_subtitles_parser: ffprobe
+  enabled_integrations: []
+  enabled_providers:
+    - animekalesi
+    - animetosho
+    - embeddedsubtitles
+    - gestdown
+    - greeksubs
+    - greeksubtitles
+    - hosszupuska
+    - napiprojekt
+    - nekur
+    - podnapisi
+    - regielive
+    - soustitreseu
+    - subdivx
+    - subssabbz
+    - subs4free
+    - subs4series
+    - subscenter
+    - subsro
+    - subsunacs
+    - subsynchro
+    - subtitrarinoi
+    - subtitriid
+    - subtitulamostv
+    - supersubtitles
+    - titrari
+    - tvsubtitles
+    - wizdom
+    - yavkanet
+    - yifysubtitles
+    - zimuku
+  flask_secret_key: ENC[AES256_GCM,data:r0kW6h96pmw3OEP8TgACLs4W520krS5GRJvqqJxhHm0=,iv:j1xT2/6fa2pF7Q4AiYR1QUkkKqnHrSjyp8oIEYMRkEg=,tag:0UbXwQt8mnOUijrb5pl6sA==,type:str]
+  hi_extension: hi
+  ignore_ass_subs: false
+  ignore_pgs_subs: false
+  ignore_vobsub_subs: false
+  ip: "*"
+  language_equals: []
+  minimum_score: 90
+  minimum_score_movie: 70
+  movie_default_enabled: true
+  movie_default_profile: 1
+  movie_tag_enabled: false
+  multithreading: true
+  page_size: 25
+  parse_embedded_audio_track: false
+  path_mappings: []
+  path_mappings_movie: []
+  port: 6767
+  postprocessing_cmd: ""
+  postprocessing_threshold: 90
+  postprocessing_threshold_movie: 70
+  remove_profile_tags: []
+  serie_default_enabled: true
+  serie_default_profile: 1
+  serie_tag_enabled: false
+  single_language: false
+  skip_hashing: false
+  subfolder: current
+  subfolder_custom: ""
+  subzero_mods: ""
+  theme: auto
+  upgrade_frequency: 12
+  upgrade_manual: false
+  upgrade_subs: true
+  use_embedded_subs: true
+  use_plex: false
+  use_postprocessing: false
+  use_postprocessing_threshold: false
+  use_postprocessing_threshold_movie: false
+  use_radarr: true
+  use_scenename: true
+  use_sonarr: true
+  utf8_encode: true
+  wanted_search_frequency: 6
+  wanted_search_frequency_movie: 6
 sops:
+  version: 3.12.1
+  lastmodified: "2026-03-17T00:26:53Z"
+  mac: ENC[AES256_GCM,data:1UuUsGNGSvP/9PODygPrk60P7FoAGyAz4du8poP8MXmBglBwGX4hdxr0UHx6Xn0cH/qFyFRK5IWoznggHKcS+tfy28QzmHrkVPg7SYlpmsMPh802GabjrvLCaGbPYxP95zbHknoCZYyp7aDoN6RX665QEC6QX0BnYTegWTk6Yos=,iv:OqV5FZHW+32cuLPu0NkygpCsTDUxSsUqWmsGfkbTEAo=,tag:HBmp4UngccaHXGeRRMcr5Q==,type:str]
+  encrypted_regex: ^(apikey|api_key|password|token|cookies|passkey|flask_secret_key|encryption_key|hashed_password|anti_captcha_key|gemini_key)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -393,7 +398,3 @@ sops:
         OXg0ODBGUm1xNzdhR1F0OVJuci9HVW8KL/xItvztxKqr18OxGpmP6pNFKyqqGDFZ
         2JAy+xel67TseiKi8eSPdfaabOzoh5UuDHvjgVstAe4ocmh2qOdN+A==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-17T00:26:53Z"
-  mac: ENC[AES256_GCM,data:1UuUsGNGSvP/9PODygPrk60P7FoAGyAz4du8poP8MXmBglBwGX4hdxr0UHx6Xn0cH/qFyFRK5IWoznggHKcS+tfy28QzmHrkVPg7SYlpmsMPh802GabjrvLCaGbPYxP95zbHknoCZYyp7aDoN6RX665QEC6QX0BnYTegWTk6Yos=,iv:OqV5FZHW+32cuLPu0NkygpCsTDUxSsUqWmsGfkbTEAo=,tag:HBmp4UngccaHXGeRRMcr5Q==,type:str]
-  encrypted_regex: ^(apikey|api_key|password|token|cookies|passkey|flask_secret_key|encryption_key|hashed_password|anti_captcha_key|gemini_key)$
-  version: 3.12.1

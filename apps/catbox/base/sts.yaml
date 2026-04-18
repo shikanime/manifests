@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -16,13 +17,17 @@ spec:
       securityContext:
         fsGroup: 100
       containers:
-        - image: catbox
-          name: catbox
+        - name: catbox
+          image: catbox
+          stdin: true
+          tty: true
+          securityContext:
+            privileged: true
           ports:
-            - containerPort: 22
-              name: ssh
-            - containerPort: 5353
-              name: mdns
+            - name: ssh
+              containerPort: 22
+            - name: mdns
+              containerPort: 5353
               protocol: UDP
           livenessProbe:
             initialDelaySeconds: 30
@@ -40,27 +45,23 @@ spec:
             tcpSocket:
               port: ssh
             timeoutSeconds: 5
-          securityContext:
-            privileged: true
-          stdin: true
-          tty: true
           volumeMounts:
-            - mountPath: /workspaces
-              name: catbox-workspaces
-            - mountPath: /sys/kernel/debug
-              name: sys-kernel-debug
-            - mountPath: /sys/kernel/tracing
-              name: sys-kernel-tracing
+            - name: catbox-workspaces
+              mountPath: /workspaces
+            - name: sys-kernel-debug
+              mountPath: /sys/kernel/debug
+            - name: sys-kernel-tracing
+              mountPath: /sys/kernel/tracing
       hostname: catbox
       volumes:
         - name: catbox-workspaces
           persistentVolumeClaim:
             claimName: catbox-workspaces
-        - hostPath:
+        - name: sys-kernel-debug
+          hostPath:
+            type: Directory
             path: /sys/kernel/debug
+        - name: sys-kernel-tracing
+          hostPath:
             type: Directory
-          name: sys-kernel-debug
-        - hostPath:
             path: /sys/kernel/tracing
-            type: Directory
-          name: sys-kernel-tracing

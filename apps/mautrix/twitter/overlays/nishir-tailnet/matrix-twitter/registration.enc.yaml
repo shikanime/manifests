@@ -1,18 +1,23 @@
-id: twitter
+---
 url: http://mautrix-twitter:29327
+id: twitter
 as_token: ENC[AES256_GCM,data:/fqoPJsBcubohxlHmHOTyllptSC6pmnN2f2O0ngrw1+tPtxP3zeFW8ZAYNsT7djWCx3v3JqDaMByYFDFto1N7w==,iv:8gtQR3czrlcEetiZ6k8RPZ8Rj2U3XFAJQ5lcnWQ9nac=,tag:vUH8MpegsOE8mJE52jZbxA==,type:str]
 hs_token: ENC[AES256_GCM,data:bANbTKCchHJk6JZS8z11BxVk8ucHDJpbHlvg2U0vw1TM1lhrCa5CzFF6zJOpWe9qdSY0Rnk3Z97QDbRQehCMFA==,iv:bsbYg/k1gABya02WUk4keS/tVoHs6syvSt7sl5SHkqI=,tag:6Fu6JN17rZfx8gHuFzouCg==,type:str]
 sender_localpart: D2x81bUOmzcd7JdHVEesHVgAuLJM32dc
 rate_limited: false
+de.sorunome.msc2409.push_ephemeral: true
+receive_ephemeral: true
 namespaces:
   users:
     - regex: ^@twitterbot:matrix\.taila659a\.ts\.net$
       exclusive: true
     - regex: ^@twitter_.*:matrix\.taila659a\.ts\.net$
       exclusive: true
-de.sorunome.msc2409.push_ephemeral: true
-receive_ephemeral: true
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T22:06:22Z"
+  mac: ENC[AES256_GCM,data:bNM73rm8YrpXPMMsy0OEFAdqi6i2DgEE2I10bz0KQsMj4yNJPw+fwSmtBO0R6r1MQm4bdGSwZat9DzNnmKcLM8DxXfT0jRo8qyFPtpMtH8DYF29zEcqrb1ADlfQBhKF4G98v16KdpfrCWFucDX+gjXcB6GrMNEkR7OeN6TMCTR8=,iv:Uh8AEjnxwqTbtkGrkloCuBaNRpQGC7p1ThOckZm3nuw=,tag:PAwp0f/1OEDhHMNzvK97pQ==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -68,7 +73,3 @@ sops:
         MURLdFBkQnRCUnMvSmN1UDZCMXBTMFkKn+SrdO+CXZgyoXYIilTYTHauc15jfYra
         MbrfTuo1utRwV/x/glwXMckhw1TWu5dfx4wR60+2AQMBDFg22XXPaw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:06:22Z"
-  mac: ENC[AES256_GCM,data:bNM73rm8YrpXPMMsy0OEFAdqi6i2DgEE2I10bz0KQsMj4yNJPw+fwSmtBO0R6r1MQm4bdGSwZat9DzNnmKcLM8DxXfT0jRo8qyFPtpMtH8DYF29zEcqrb1ADlfQBhKF4G98v16KdpfrCWFucDX+gjXcB6GrMNEkR7OeN6TMCTR8=,iv:Uh8AEjnxwqTbtkGrkloCuBaNRpQGC7p1ThOckZm3nuw=,tag:PAwp0f/1OEDhHMNzvK97pQ==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.2

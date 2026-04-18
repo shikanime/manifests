@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -17,8 +18,8 @@ spec:
         - name: seerr
           image: seerr
           ports:
-            - containerPort: 5055
-              name: http
+            - name: http
+              containerPort: 5055
           readinessProbe:
             httpGet:
               path: /api/v1/status

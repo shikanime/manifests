@@ -1,5 +1,6 @@
-id: twitter-doublepuppet
+---
 url: ""
+id: twitter-doublepuppet
 as_token: ENC[AES256_GCM,data:grjJqT84AuBYZ16s6vOYZP3jVJ4VOQRmFilMpJszY1Nk8aXaJVyLLt4F0kafdSjSRwZ3h9WoJ5+sBeVxSiVdEw==,iv:4C/1nisXvInPgaH8D2juCV58gi+o5Y6bxxL4hNmgFj4=,tag:uraOPAUjp7CDgCvE6ys4XA==,type:str]
 hs_token: ENC[AES256_GCM,data:8Pb4hH9u46Wtk7uI9Cf3/HzZS2KQj8FlrsPxaJiAdXIRU2f2qo4bnB5/0fyC/q3Ksw5kcso1lJSYExZ681QXVg==,iv:JglhRmpl6zTG/QsG+u9aTIetm45ARNQ8bRu2sGcHAj8=,tag:1E+Ugaq2ErPyVmGxe7Mbqw==,type:str]
 sender_localpart: T0sb3TEdrtA3ErIeYI1KVn9leHOkd9bu
@@ -9,6 +10,10 @@ namespaces:
     - regex: ^@.*:matrix\.taila659a\.ts\.net$
       exclusive: false
 sops:
+  version: 3.12.1
+  lastmodified: "2026-04-01T10:42:39Z"
+  mac: ENC[AES256_GCM,data:DGXbt3kFisdvQkLmDqW8KWMGuphjCPqFlxrtPoiIT+hFlU8J45AosP2t2fOTyh5CcrFWsV/Vr8UpdPEjq85JVhw8oYM5u9TbrHLCVg6V0AQ3dv9KTyoHj6Gi5TUWKqpyZ0Qxjw2+uaV6ZwZZLNmrU9pxza9Xx5keBctr00Se+b0=,iv:GGgvby+0csCzjGmpONR2Ed0FNsTzFTkpYzWyRCGGwmU=,tag:mvX0+dzUkr2b7OJG6ZQt4w==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -64,7 +69,3 @@ sops:
         c3c4ejFqYmtCN3BieVBKWDFIdFE1bU0KZj1QA+fbdOtgW2vR/Q/wVrRRD0UUSx0g
         PVlDAoE7FvoGTfXM0E81LrJ0xbsoLvkJaNzy6L2yUl1y9+LPULiBvQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-01T10:42:39Z"
-  mac: ENC[AES256_GCM,data:DGXbt3kFisdvQkLmDqW8KWMGuphjCPqFlxrtPoiIT+hFlU8J45AosP2t2fOTyh5CcrFWsV/Vr8UpdPEjq85JVhw8oYM5u9TbrHLCVg6V0AQ3dv9KTyoHj6Gi5TUWKqpyZ0Qxjw2+uaV6ZwZZLNmrU9pxza9Xx5keBctr00Se+b0=,iv:GGgvby+0csCzjGmpONR2Ed0FNsTzFTkpYzWyRCGGwmU=,tag:mvX0+dzUkr2b7OJG6ZQt4w==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1

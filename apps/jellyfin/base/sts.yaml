@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -16,6 +17,8 @@ spec:
       containers:
         - name: jellyfin
           image: jellyfin
+          securityContext:
+            privileged: true
           env:
             - name: PUID
               value: "1000"
@@ -24,10 +27,10 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - containerPort: 8096
-              name: http
-            - containerPort: 7359
-              name: discovery
+            - name: http
+              containerPort: 8096
+            - name: discovery
+              containerPort: 7359
               protocol: UDP
           readinessProbe:
             httpGet:
@@ -52,8 +55,6 @@ spec:
             failureThreshold: 480
             periodSeconds: 15
             timeoutSeconds: 10
-          securityContext:
-            privileged: true
           volumeMounts:
             - name: cache
               mountPath: /cache
@@ -71,5 +72,5 @@ spec:
             claimName: jellyfin-config
         - name: dev-dri
           hostPath:
-            path: /dev/dri
             type: Directory
+            path: /dev/dri

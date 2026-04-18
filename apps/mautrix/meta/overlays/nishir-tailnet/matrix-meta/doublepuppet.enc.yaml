@@ -1,5 +1,6 @@
-id: meta-doublepuppet
+---
 url: ""
+id: meta-doublepuppet
 as_token: ENC[AES256_GCM,data:cNkIym+bWhPGgxyc8Ida9gGDIaivEjH7jUJ9xbWMiz9O5bPGxDv1ljJrmkhkR1fmaiKqPP61iLtAz20dOju4SA==,iv:Q8o8luvjYIIfW/thmnTMaLMktREeEI93YT8O4JH8cRo=,tag:yJw0VfYWeVwM3tN3WakGHA==,type:str]
 hs_token: ENC[AES256_GCM,data:SOqgVlM180zZ2NS03qzf72aZZ88GBW3kE56xIoqANfsulOYDt71IqiD/x71CscQWH5trg6yliP3iGPxqrKk8vQ==,iv:k4ejDpcjoeupkGCkOtCW1b3tsLbuIcTW5l5NXi0xwb0=,tag:eOTFbVRDTKX2clXQA/ey5A==,type:str]
 sender_localpart: qe9j2UVcDL4IxTKBGKlEublo7CBdCZOk
@@ -9,6 +10,10 @@ namespaces:
     - regex: ^@.*:matrix\.taila659a\.ts\.net$
       exclusive: false
 sops:
+  version: 3.12.1
+  lastmodified: "2026-04-01T07:55:21Z"
+  mac: ENC[AES256_GCM,data:omp3EjG/Oa3lICEhz1HKIacIgBiwx1p8Mt7i1g4atWUAaTl9+l0DtjUehUAAaywvCbyWkF8+6xorwC9KGOCX0hf4w/0HR1E4JCL+HnwdLROGNqPF0dJ0vqfb+znu2fwPSa30gyt1k80QOJbj59UdMsel7yIde+JYndHlfOIhmTE=,iv:EomjcT8H1VKZzsjEtxCJbTiMDXYSGlSWaElhQlvuDGY=,tag:BzQi1CJYL8ObD5ZIaRhJSA==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -64,7 +69,3 @@ sops:
         Y2dTL2JwdThtM1RFWVBBRXM4eCtzeVEKGRanf2UFydY04Ue9BosB9YxU6YNfhWwq
         r9N/OZQnSYN9KlFtvFrPCauiPG1O1FQOKXkFDvFXsFTainWhtCo8Rg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-01T07:55:21Z"
-  mac: ENC[AES256_GCM,data:omp3EjG/Oa3lICEhz1HKIacIgBiwx1p8Mt7i1g4atWUAaTl9+l0DtjUehUAAaywvCbyWkF8+6xorwC9KGOCX0hf4w/0HR1E4JCL+HnwdLROGNqPF0dJ0vqfb+znu2fwPSa30gyt1k80QOJbj59UdMsel7yIde+JYndHlfOIhmTE=,iv:EomjcT8H1VKZzsjEtxCJbTiMDXYSGlSWaElhQlvuDGY=,tag:BzQi1CJYL8ObD5ZIaRhJSA==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1

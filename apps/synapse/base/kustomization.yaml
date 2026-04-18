@@ -1,13 +1,14 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+---
+resources:
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }, { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
-configMapGenerator:
-  - files:
-      - rclone/rclone.conf
-    name: synapse-rclone
-    namespace: shikanime
+    automata.shikanime.studio/images:
+      '[ { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" },
+      { "name": "synapse", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: rclone
     newName: rclone/rclone
@@ -15,14 +16,14 @@ images:
   - name: synapse
     newName: matrixdotorg/synapse
     newTag: v1.150.0
+configMapGenerator:
+  - name: synapse-rclone
+    namespace: shikanime
+    files:
+      - rclone/rclone.conf
 labels:
   - pairs:
       app.kubernetes.io/component: communication
       app.kubernetes.io/name: synapse
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.140.0
-resources:
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml

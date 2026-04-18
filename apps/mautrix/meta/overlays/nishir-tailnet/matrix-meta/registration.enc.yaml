@@ -1,18 +1,23 @@
-id: meta
+---
 url: http://mautrix-meta:29319
+id: meta
 as_token: ENC[AES256_GCM,data:v91KVhPWbqiFw5DQkMotP2y+29qRgoXa/lJ8adfa1SJPycTbfjTbHxghT0vt8fqXHreIAnoCgjSaB52z2vAQFA==,iv:Ov3kXJbSEO9Fluzz8fLiNmCQ09JOji7Pub3+8qw8AdE=,tag:9WfwEXA6g/QdKFZv5VwARg==,type:str]
 hs_token: ENC[AES256_GCM,data:w9F6WbA+665rGbQTEhNOqn1uQlv5BJ3aDzROYwYY3xo5vHUpTXkvbkJ/okREMzboYOLp33d1pwRjjgev74utLA==,iv:dUdBl+ZYCiNw2HzLjpGlKIiqt4+xACeEDwpNCmnSED4=,tag:3xa1r1d9QTtnq+BBkoSrbg==,type:str]
 sender_localpart: VwV7pnSh9eP4flEBzESHiks634IdmzeH
 rate_limited: false
+de.sorunome.msc2409.push_ephemeral: true
+receive_ephemeral: true
 namespaces:
   users:
     - regex: ^@metabot:matrix\.taila659a\.ts\.net$
       exclusive: true
     - regex: ^@meta_.*:matrix\.taila659a\.ts\.net$
       exclusive: true
-de.sorunome.msc2409.push_ephemeral: true
-receive_ephemeral: true
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T22:03:50Z"
+  mac: ENC[AES256_GCM,data:bZvoMsZxnecnrgoAD0BGLTgkv2csvC049ZE6P2r9YucWCOBgMjFzWNWy3HluFmXnzulDJ3qRkE3qHJyNzNoQNu1SUmlzu2k7mjpk/QkVio33U9i+aR8/PkHp48ZITC83wpqI1ADbNbGc/mZgRQrE6oPTR87cMw0+FHRHqlGxhec=,iv:O41nzN9WMSsdP1NIV5Ccr/v2HSUl0tLnYsSxws6r44M=,tag:WGPlxJcN9pjTZx9Tpb7hcQ==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -68,7 +73,3 @@ sops:
         UkNNbmV2NFhVMDJMeHNKbkpscnBtdVkKJer6wgacHe61OQnsyow9lKAqI4GOkhy3
         n6nIDK1dnwL8ARJv0ssfJGwcS2tpN7Th05qSBgZThsHqIaIoAML0zg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:03:50Z"
-  mac: ENC[AES256_GCM,data:bZvoMsZxnecnrgoAD0BGLTgkv2csvC049ZE6P2r9YucWCOBgMjFzWNWy3HluFmXnzulDJ3qRkE3qHJyNzNoQNu1SUmlzu2k7mjpk/QkVio33U9i+aR8/PkHp48ZITC83wpqI1ADbNbGc/mZgRQrE6oPTR87cMw0+FHRHqlGxhec=,iv:O41nzN9WMSsdP1NIV5Ccr/v2HSUl0tLnYsSxws6r44M=,tag:WGPlxJcN9pjTZx9Tpb7hcQ==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.2

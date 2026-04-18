@@ -1,5 +1,6 @@
-id: slack-doublepuppet
+---
 url: ""
+id: slack-doublepuppet
 as_token: ENC[AES256_GCM,data:AN0xFR9H2yNgL4y57OMZGAhgqRGzZXEh1XShanD15GGotLm7H0MgU65Vz0lKFMkscTgwogV4IFDyMFI7394zsg==,iv:dRgjaaloJzaX8Wv3F7sFjihZpB/0WjCSJQ4Dg+qo7Tk=,tag:juVgSYFdvpC3UXrOa+rXSA==,type:str]
 hs_token: ENC[AES256_GCM,data:o2z4HdKCXMSiuVyN/TXpCd5GfW/FIEzINS19T55mNKDzON2j7cHOzIzHhb/yVCvsECsmrIOy+ySycZ32sRjYVg==,iv:lQYTR/b+kLWXEJPenOv/tO30da+ssRDtP0dRaXcrIQM=,tag:BFFAKYO40Evyg/9ivMCtrA==,type:str]
 sender_localpart: TzFzKGCgoPh73J67W3qyMVlcRJVXXitp
@@ -9,6 +10,10 @@ namespaces:
     - regex: ^@.*:matrix\.taila659a\.ts\.net$
       exclusive: false
 sops:
+  version: 3.12.1
+  lastmodified: "2026-04-01T07:55:43Z"
+  mac: ENC[AES256_GCM,data:/+/s2YbrRWfrdMUR/iJQpcVtPQO8Uiaf6v1S6gKQN2UF6hN/S9yF23nxcZQ4h8e7QWPho7CFe+T3TeovwdyUcrRoFthDDcYl/fOsuSMVSklNQGX1SrB0uZHMomxAIJeuo973ocFr9TbJOzPLWVjrmG+Q9jA8nAKUXzNVJe62Fv4=,iv:cfQsX2T/wTQ4fh2mUl/FoGReJVf5nJvjixF/JVf28tI=,tag:/++yuJrxaBFa2Hqt1RhP0Q==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -64,7 +69,3 @@ sops:
         cXR6THIveGpiTHUvSTFHaTY1MCtSaU0K+RhVlF9JznQNLKp5bT/GPC0tNNmKmWWJ
         EREC6/8NkEcju8PNBTX9KJcTcG9IeMvES+UKYg+va4lSbBa4uHdSBw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-01T07:55:43Z"
-  mac: ENC[AES256_GCM,data:/+/s2YbrRWfrdMUR/iJQpcVtPQO8Uiaf6v1S6gKQN2UF6hN/S9yF23nxcZQ4h8e7QWPho7CFe+T3TeovwdyUcrRoFthDDcYl/fOsuSMVSklNQGX1SrB0uZHMomxAIJeuo973ocFr9TbJOzPLWVjrmG+Q9jA8nAKUXzNVJe62Fv4=,iv:cfQsX2T/wTQ4fh2mUl/FoGReJVf5nJvjixF/JVf28tI=,tag:/++yuJrxaBFa2Hqt1RhP0Q==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.1

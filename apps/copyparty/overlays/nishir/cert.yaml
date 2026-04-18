@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -9,8 +10,8 @@ spec:
   dnsNames:
     - copyparty
   issuerRef:
-    kind: ClusterIssuer
     name: nishir
+    kind: ClusterIssuer
   secretName: copyparty-tls
   usages:
     - digital signature
