@@ -160,14 +160,12 @@
                   "bootstrap:nishir".exec = ''
                     ${getExe pkgs.k0sctl} apply --config $DEVENV_ROOT/bootstraps/nishir/cluster.yaml
                   '';
-                  "boostrap:telsha".exec = ''
+                  "bootstrap:telsha".exec = ''
                     ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
 
                     if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
-                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} \
-                        create secret generic sops-age \
-                        --namespace flux-system \
-                        --from-file=age.agekey=/dev/stdin
+                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} -n flux-system \
+                        create secret generic sops-age --from-file=age.agekey=/dev/stdin
                     fi
                   '';
                 };

@@ -57,6 +57,9 @@ spec:
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
+            - name: ssh-key
+              mountPath: /root/.ssh
+              readOnly: true
       containers:
         - name: hermes-agent
           image: hermes-agent
@@ -66,12 +69,6 @@ spec:
           env:
             - name: DISCORD_ALLOW_BOTS
               value: "mentions"
-            - name: TERMINAL_SSH_HOST
-              value: catbox
-            - name: TERMINAL_SSH_PORT
-              value: "22"
-            - name: TERMINAL_SSH_USER
-              value: root
           envFrom:
             - secretRef:
                 name: hermes-agent
@@ -81,6 +78,9 @@ spec:
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
+              readOnly: true
+            - name: ssh-key
+              mountPath: /root/.ssh
               readOnly: true
       volumes:
         - name: data
@@ -92,3 +92,7 @@ spec:
         - name: startup-config
           configMap:
             name: hermes-agent-startup-config
+        - name: ssh-key
+          secret:
+            secretName: hermes-agent-ssh
+            defaultMode: 0400

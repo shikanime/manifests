@@ -6,7 +6,7 @@ metadata:
 images:
   - name: catbox
     newName: ghcr.io/shikanime/shikanime/catbox
-    newTag: v0.17.1-427-gd26feab
+    newTag: v0.17.1-609-g4de443c
 labels:
   - pairs:
       app.kubernetes.io/component: backend-service
@@ -14,7 +14,7 @@ labels:
       app.kubernetes.io/part-of: telsha-workstation
       app.kubernetes.io/version: v0.17.1
 resources:
-  - deploy.yaml
   - pvc.yaml
+  - sts.yaml
   - svc.yaml
   - vpa.yaml

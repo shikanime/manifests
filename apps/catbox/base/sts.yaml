@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: catbox
 spec:
@@ -7,6 +7,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: catbox
+  serviceName: catbox
   template:
     metadata:
       labels:
