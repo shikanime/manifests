@@ -2,8 +2,6 @@
 resources:
   - ../../base
   - ks.yaml
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
 components:
   - ../../components/cert-manager
   - ../../components/cluster-api
