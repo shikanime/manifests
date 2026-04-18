@@ -27,7 +27,7 @@ resources:
   - vpa.yaml
 secretGenerator:
   - files:
-      - id_ed25519=hermes-agent/.enc.id_ed25519
+      - id_ed25519=hermes-agent/enc.id_ed25519
     name: hermes-agent-ssh
     options:
       disableNameSuffixHash: true
