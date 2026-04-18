@@ -73,8 +73,7 @@ agent:
       This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS!
       \U0001F4AA\U0001F624\U0001F680\""
 terminal:
-  backend: ssh
-  user: automata
+  backend: local
   modal_mode: auto
   cwd: .
   timeout: 180
