@@ -13,7 +13,7 @@ metadata:
 images:
   - name: catbox
     newName: ghcr.io/shikanime/shikanime/catbox
-    newTag: v0.17.1-609-g4de443c
+    newTag: v0.17.1-612-g8107bb5
 labels:
   - pairs:
       app.kubernetes.io/component: backend-service
