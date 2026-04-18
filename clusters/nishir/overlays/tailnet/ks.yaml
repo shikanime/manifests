@@ -6,6 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/bazarr/overlays/nishir-tailnet
   prune: true
@@ -29,13 +30,13 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/catbox/overlays/nishir
   prune: true
   healthChecks:
     - apiVersion: apps/v1
-      kind: Deployment
+      kind: StatefulSet
       name: catbox
       namespace: shikanime
   sourceRef:
@@ -54,6 +55,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/copyparty/overlays/nishir-tailnet
   prune: true
@@ -78,6 +80,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/forgejo/overlays/nishir-tailnet
   prune: true
@@ -102,6 +105,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/gitea-mirror/overlays/nishir-tailnet
   prune: true
@@ -126,6 +130,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent/overlays/nishir-tailnet
   prune: true
@@ -148,6 +153,8 @@ metadata:
   name: apps-chrome
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/chrome/overlays/nishir
   prune: true
@@ -166,6 +173,8 @@ metadata:
   name: apps-hermes-agent-postgres
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent-postgres/overlays/nishir
   prune: true
@@ -190,6 +199,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/honcho/overlays/nishir-tailnet
   prune: true
@@ -214,6 +224,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/jellyfin/overlays/nishir-tailnet
   prune: true
@@ -238,6 +249,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/lidarr/overlays/nishir-tailnet
   prune: true
@@ -260,6 +272,8 @@ metadata:
   name: apps-mautrix-discord
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
   prune: true
@@ -282,6 +296,8 @@ metadata:
   name: apps-mautrix-googlechat
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
   prune: true
@@ -304,6 +320,8 @@ metadata:
   name: apps-mautrix-linkedin
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
   prune: true
@@ -326,6 +344,8 @@ metadata:
   name: apps-mautrix-meta
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
   prune: true
@@ -348,6 +368,8 @@ metadata:
   name: apps-mautrix-signal
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
   prune: true
@@ -370,6 +392,8 @@ metadata:
   name: apps-mautrix-slack
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
   prune: true
@@ -392,6 +416,8 @@ metadata:
   name: apps-mautrix-twitter
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
   prune: true
@@ -414,6 +440,8 @@ metadata:
   name: apps-mautrix-whatsapp
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
   prune: true
@@ -436,6 +464,8 @@ metadata:
   name: apps-metatube
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/metatube/overlays/nishir
   prune: true
@@ -460,6 +490,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/prowlarr/overlays/nishir-tailnet
   prune: true
@@ -484,6 +515,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/qbittorrent/overlays/nishir-tailnet
   prune: true
@@ -508,6 +540,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/radarr/overlays/nishir-tailnet
   prune: true
@@ -532,6 +565,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/seerr/overlays/nishir-tailnet
   prune: true
@@ -556,6 +590,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/sonarr/overlays/nishir-tailnet
   prune: true
@@ -580,6 +615,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse/overlays/nishir-tailnet
   prune: true
@@ -604,6 +640,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
   prune: true
@@ -624,6 +661,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/syncthing/overlays/nishir-tailnet
   prune: true
@@ -648,6 +686,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/vaultwarden/overlays/nishir-tailnet
   prune: true
@@ -672,6 +711,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/whisparr/overlays/nishir-tailnet
   prune: true
