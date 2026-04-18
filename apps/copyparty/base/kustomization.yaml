@@ -20,7 +20,7 @@ labels:
       app.kubernetes.io/component: file-server
       app.kubernetes.io/name: copyparty
       app.kubernetes.io/part-of: nishir-operation
-      app.kubernetes.io/version: v1.20.0
+      app.kubernetes.io/version: 1.20.0
 resources:
   - ingress.yaml
   - pvc.yaml

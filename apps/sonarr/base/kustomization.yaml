@@ -20,7 +20,7 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: sonarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v4.0.16
+      app.kubernetes.io/version: 4.0.16
 resources:
   - ingress.yaml
   - pvc.yaml

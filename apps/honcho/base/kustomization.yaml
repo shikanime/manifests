@@ -6,7 +6,13 @@ metadata:
 images:
   - name: honcho
     newName: ghcr.io/plastic-labs/honcho
-    newTag: latest
+    newTag: v3.0.6
+labels:
+  - pairs:
+      app.kubernetes.io/component: agent
+      app.kubernetes.io/name: honcho
+      app.kubernetes.io/part-of: nishir-platform
+      app.kubernetes.io/version: 3.0.6
 resources:
   - deploy.yaml
   - svc.yaml

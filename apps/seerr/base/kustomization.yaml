@@ -12,7 +12,7 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: seerr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v3.1.0
+      app.kubernetes.io/version: 3.1.0
 resources:
   - ingress.yaml
   - pvc.yaml

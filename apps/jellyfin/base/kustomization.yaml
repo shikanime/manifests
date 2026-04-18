@@ -12,7 +12,7 @@ labels:
       app.kubernetes.io/component: media-server
       app.kubernetes.io/name: jellyfin
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v10.11.5
+      app.kubernetes.io/version: 10.11.5
 resources:
   - ingress.yaml
   - pvc.yaml

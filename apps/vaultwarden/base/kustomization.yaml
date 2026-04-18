@@ -12,7 +12,7 @@ labels:
       app.kubernetes.io/component: secret-manager
       app.kubernetes.io/name: vaultwarden
       app.kubernetes.io/part-of: nishir-security
-      app.kubernetes.io/version: v1.35.4
+      app.kubernetes.io/version: 1.35.4
 resources:
   - ingress.yaml
   - pvc.yaml

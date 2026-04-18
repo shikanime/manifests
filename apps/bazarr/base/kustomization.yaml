@@ -20,7 +20,7 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: bazarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v1.5.3
+      app.kubernetes.io/version: 1.5.3
 resources:
   - ingress.yaml
   - pvc.yaml
