@@ -1,7 +1,6 @@
 ---
 resources:
   - ../../base
-  - ks.yaml
 components:
   - ../../components/cert-manager
   - ../../components/cluster-api
