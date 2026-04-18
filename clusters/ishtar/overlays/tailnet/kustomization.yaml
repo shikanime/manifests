@@ -1,0 +1,15 @@
+---
+resources:
+  - ../../base
+  - ks.yaml
+components:
+  - ../../components/cert-manager
+  - ../../components/cluster-api
+  - ../../components/flux-operator
+  - ../../components/tailscale
+  - ../../components/vpa
+secretGenerator:
+  - name: discord-webhook
+    namespace: flux-system
+    envs:
+      - discord-webhook/.enc.env

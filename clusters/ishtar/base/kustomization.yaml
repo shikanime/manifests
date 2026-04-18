@@ -1,0 +1,8 @@
+---
+resources:
+  - gitrepo.yaml
+  - alert.yaml
+  - ns.yaml
+  - provider.yaml
+configurations:
+  - config.yaml
