@@ -1,0 +1,11 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: manifests
+  namespace: flux-system
+spec:
+  url: https://github.com/shikanime/manifests.git
+  interval: 1m
+  ref:
+    branch: main

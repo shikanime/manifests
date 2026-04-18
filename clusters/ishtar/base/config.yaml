@@ -1,0 +1,6 @@
+---
+nameReference:
+  - kind: Secret
+    fieldSpecs:
+      - kind: Provider
+        path: spec/secretRef/name
