@@ -1,18 +1,23 @@
-id: signal
+---
 url: http://mautrix-signal:29328
+id: signal
 as_token: ENC[AES256_GCM,data:uyEK+ruAUfphBEca2cikR+3BkS46KGWZ7EopzIJh49PX2x2NihzXfRu9/WO/YV4Kunof9yqn4Ev9Xe/9+buO3A==,iv:G8mTcbJN/frC/w8QE9jslzqE+kS7Zgi+zzc8W3/yyfw=,tag:fTTgE1eNfu/9uobcDbWd1Q==,type:str]
 hs_token: ENC[AES256_GCM,data:IELf3NXUJm3fw3wWZ9voB+1mmhHuyxgzbK4p4k5fVZQzrah4AY+SluDcOpgzRdZ3OCh4WIJ124NUNNF3TQNTcg==,iv:tbdu7fO9AGOSSRAxc0Q8LaT8S2YQ38hRdkO0Qm20e6Y=,tag:w2uU0hndLKjcR4n9CAeGrg==,type:str]
 sender_localpart: CLDFON4eEXABKN5jmyoChh4DkPSIyWX3
 rate_limited: false
+de.sorunome.msc2409.push_ephemeral: true
+receive_ephemeral: true
 namespaces:
   users:
     - regex: ^@signalbot:matrix\.taila659a\.ts\.net$
       exclusive: true
     - regex: ^@signal_.*:matrix\.taila659a\.ts\.net$
       exclusive: true
-de.sorunome.msc2409.push_ephemeral: true
-receive_ephemeral: true
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T22:05:28Z"
+  mac: ENC[AES256_GCM,data:rMBO1X45v9qFzUMVANEY0U4GgNUqK/i3YHSEn+g049i4cprVuQDo93FJ00EWSpjmiyQ+JFQ19JISyBfs4sH3XW77JiGH2Hq4S5Y5e3Y5brdUywDPCUaIUbi+FjP5rN1vquYxyBLFgOaqUwGsJUVDMb6l6GRJZkmzZRmBWGt38RU=,iv:oApwA4MVB9aWOha+9cfTJ7iXbH0ycsRz37zqQKUM43Y=,tag:hJ5LhBjYZ0dDdoqORGpGXA==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -68,7 +73,3 @@ sops:
         NnRZS1Q3Q1JlQnBQVXdTdlRrNVdZQXcK7sFnND3JSRqQy0GxUdRv5KLqsfkhb31w
         Wot4AGThQ4zSftiaTRbpMiMDW6M80A5Zx6gPPKHsjn3vZ/S7MmfmCQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:05:28Z"
-  mac: ENC[AES256_GCM,data:rMBO1X45v9qFzUMVANEY0U4GgNUqK/i3YHSEn+g049i4cprVuQDo93FJ00EWSpjmiyQ+JFQ19JISyBfs4sH3XW77JiGH2Hq4S5Y5e3Y5brdUywDPCUaIUbi+FjP5rN1vquYxyBLFgOaqUwGsJUVDMb6l6GRJZkmzZRmBWGt38RU=,iv:oApwA4MVB9aWOha+9cfTJ7iXbH0ycsRz37zqQKUM43Y=,tag:hJ5LhBjYZ0dDdoqORGpGXA==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.2

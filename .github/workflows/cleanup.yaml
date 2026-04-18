@@ -1,9 +1,17 @@
+---
+name: Cleanup
+permissions:
+  contents: read
+"on":
+  pull_request:
+    types:
+      - closed
 jobs:
   cleanup:
+    if: ${{ github.event.pull_request.head.repo.fork == false }}
     runs-on: ubuntu-slim
     steps:
-      - continue-on-error: true
-        id: createGithubAppToken
+      - id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -11,12 +19,5 @@ jobs:
           private-key: ${{ secrets.OPERATOR_PRIVATE_KEY }}
       - uses: shikanime-studio/actions/cleanup@v9
         with:
-          github-token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.createGithubAppToken.outputs.token }}
           pull-request-url: ${{ github.event.pull_request.html_url }}
-name: Cleanup
-'on':
-  pull_request:
-    types:
-      - closed
-permissions:
-  contents: write

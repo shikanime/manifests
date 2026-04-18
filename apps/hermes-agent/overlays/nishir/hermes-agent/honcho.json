@@ -1,16 +1,16 @@
 {
+  "baseUrl": "http://honcho:8000",
   "hosts": {
     "hermes": {
-      "peerName": "user",
       "aiPeer": "hermes",
-      "workspace": "hermes",
-      "observationMode": "directional",
-      "writeFrequency": "async",
-      "recallMode": "hybrid",
-      "sessionStrategy": "per-directory",
       "enabled": true,
-      "saveMessages": true
+      "observationMode": "directional",
+      "peerName": "user",
+      "recallMode": "hybrid",
+      "saveMessages": true,
+      "sessionStrategy": "per-directory",
+      "workspace": "hermes",
+      "writeFrequency": "async"
     }
-  },
-  "baseUrl": "http://honcho:8000"
+  }
 }

@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -45,8 +46,8 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - containerPort: 6767
-              name: http
+            - name: http
+              containerPort: 6767
           readinessProbe:
             tcpSocket:
               port: http

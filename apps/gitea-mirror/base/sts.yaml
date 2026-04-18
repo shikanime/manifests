@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -54,8 +55,8 @@ spec:
             - name: SCHEDULE_ENABLED
               value: "true"
           ports:
-            - containerPort: 4321
-              name: http
+            - name: http
+              containerPort: 4321
           readinessProbe:
             httpGet:
               path: /api/health

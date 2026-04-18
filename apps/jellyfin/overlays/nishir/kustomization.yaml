@@ -1,20 +1,21 @@
+---
+resources:
+  - ../../base
+  - cert.yaml
+  - netpol.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: shikanime
 components:
   - ../../components/tls
   - ../../components/v4l2
 configurations:
   - namereference.yaml
-namespace: shikanime
 patches:
   - path: patch-ingress.yaml
   - path: patch-pvc.yaml
   - path: patch-sts.yaml
-resources:
-  - ../../base
-  - cert.yaml
-  - netpol.yaml
 secretGenerator:
-  - envs:
+  - name: jellyfin-pkcs12-password
+    envs:
       - jellyfin/.enc.env
-    name: jellyfin-pkcs12-password

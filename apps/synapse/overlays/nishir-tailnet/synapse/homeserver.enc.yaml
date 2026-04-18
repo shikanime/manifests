@@ -1,3 +1,4 @@
+---
 # Configuration file for Synapse.
 #
 # This is a YAML file: see [1] for a quick introduction. Note in particular
@@ -12,24 +13,24 @@
 server_name: matrix.taila659a.ts.net
 pid_file: /data/homeserver.pid
 listeners:
-  - port: 8008
+  - resources:
+      - compress: false
+        names:
+          - client
+          - federation
+    port: 8008
     tls: false
     type: http
     x_forwarded: true
-    resources:
+  - resources:
       - compress: false
         names:
           - client
           - federation
-  - port: 8448
+    port: 8448
     tls: true
     type: http
     x_forwarded: true
-    resources:
-      - compress: false
-        names:
-          - client
-          - federation
 database:
   name: sqlite3
   args:
@@ -69,6 +70,10 @@ auto_accept_invites:
 serve_server_wellknown: true
 encryption_enabled_by_default_for_room_type: all
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T16:49:08Z"
+  mac: ENC[AES256_GCM,data:XqVsjgT7WqrNw2ZBaF+n2jTnTtf89qTTwwYccNKrWwJ6Oho1Ki6pMC0pca6h/BH5JL18F6GfomdBZchUFNy4G5ZGopMkZ2JdpWjL6ZlXDFzbVM6ofSTDo7l5E/CkLBN9w7F6aOav6UCezuTRGM46VoQ2QvwZLdGYtrhGR7+9HmE=,iv:AE4XJCCH52hmZP+ENIlZ0ujF9gdwHSiiNyI1Dq6EMig=,tag:YFgy8i3LtXfZMGLIAKIUbQ==,type:str]
+  encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -124,7 +129,3 @@ sops:
         YUEwN1lvelMvdFBudjZYc2Uvb2s3RDgK7esE1xc3t0ZjTWV5SUp9CxJjXKKK3cee
         uVdz06AFw6h77Wi2RlqLzhAe2hRXUTWJWK/5RGQcQJsLo/g64gk2Yw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T16:49:08Z"
-  mac: ENC[AES256_GCM,data:XqVsjgT7WqrNw2ZBaF+n2jTnTtf89qTTwwYccNKrWwJ6Oho1Ki6pMC0pca6h/BH5JL18F6GfomdBZchUFNy4G5ZGopMkZ2JdpWjL6ZlXDFzbVM6ofSTDo7l5E/CkLBN9w7F6aOav6UCezuTRGM46VoQ2QvwZLdGYtrhGR7+9HmE=,iv:AE4XJCCH52hmZP+ENIlZ0ujF9gdwHSiiNyI1Dq6EMig=,tag:YFgy8i3LtXfZMGLIAKIUbQ==,type:str]
-  encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
-  version: 3.12.2

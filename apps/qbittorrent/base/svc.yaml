@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -15,6 +16,9 @@ kind: Service
 metadata:
   name: qbittorrent-tracker
 spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: qbittorrent
   ports:
     - name: bittorrent
       port: 6881
@@ -23,6 +27,3 @@ spec:
       protocol: UDP
       port: 6881
       targetPort: bittorrent-udp
-  selector:
-    app.kubernetes.io/name: qbittorrent
-  type: LoadBalancer

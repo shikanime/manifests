@@ -1,3 +1,4 @@
+---
 # Network-specific config options
 network:
   # Proxy to use for all Twitter connections.
@@ -7,7 +8,7 @@ network:
   # Displayname template for Twitter users.
   # {{ .DisplayName }} is replaced with the display name of the Twitter user.
   # {{ .Username }} is replaced with the username of the Twitter user.
-  displayname_template: '{{ .DisplayName }} (Twitter)'
+  displayname_template: "{{ .DisplayName }} (Twitter)"
   # Maximum number of conversations to sync on startup
   conversation_sync_limit: 20
   # Should the bridge cache sessions instead of resyncing chats on every restart?
@@ -18,7 +19,7 @@ network:
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: '!twitter'
+  command_prefix: "!twitter"
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -121,18 +122,28 @@ bridge:
     #   .Caption - The `formatted_body` field of the message, if it's a caption. Otherwise an empty string.
     #   .FileName - The name of the file being sent.
     message_formats:
-      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
-      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
+      m.file:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{
+        .Caption }}{{ end }}"
+      m.image:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}:
+        {{ .Caption }}{{ end }}"
+      m.audio:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption
+        }}: {{ .Caption }}{{ end }}"
+      m.video:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}:
+        {{ .Caption }}{{ end }}"
+      m.location:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption
+        }}: {{ .Caption }}{{ end }}"
     # For networks that support per-message displaynames (i.e. Slack and Discord), the template for those names.
     # This has all the Sender variables available under message_formats (but without the .Sender prefix).
     # Note that you need to manually remove the displayname from message_formats above.
-    displayname_format: '{{ .DisambiguatedName }}'
+    displayname_format: "{{ .DisambiguatedName }}"
   # Permissions for using the bridge.
   # Permitted values:
   #    relay - Talk through the relaybot (if enabled), no access otherwise
@@ -144,9 +155,9 @@ bridge:
   #   domain - All users on that homeserver
   #     mxid - Specific user
   permissions:
-    '*': relay
+    "*": relay
     matrix.taila659a.ts.net: user
-    '@shikanime:matrix.taila659a.ts.net': admin
+    "@shikanime:matrix.taila659a.ts.net": admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -196,6 +207,8 @@ homeserver:
 # Application service host/registration related details.
 # Changing these values requires regeneration of the registration (except when noted otherwise)
 appservice:
+  # The unique ID of this appservice.
+  id: twitter
   # The address that the homeserver can use to connect to this appservice.
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
@@ -209,16 +222,6 @@ appservice:
   # For Docker, you generally have to change the hostname to 0.0.0.0.
   hostname: 0.0.0.0
   port: 29327
-  # The unique ID of this appservice.
-  id: twitter
-  # Appservice bot details.
-  bot:
-    # Username of the appservice bot.
-    username: twitterbot
-    # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
-    # to leave display name/avatar as-is.
-    displayname: Twitter bridge bot
-    avatar: mxc://maunium.net/HVHcnusJkQcpVcsVGZRELLCn
   # Whether to receive ephemeral events via appservice transactions.
   ephemeral_events: true
   # Should incoming events be handled asynchronously?
@@ -232,6 +235,14 @@ appservice:
   # Localpart template of MXIDs for remote users.
   # {{.}} is replaced with the internal ID of the user.
   username_template: twitter_{{.}}
+  # Appservice bot details.
+  bot:
+    # Username of the appservice bot.
+    username: twitterbot
+    # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
+    # to leave display name/avatar as-is.
+    displayname: Twitter bridge bot
+    avatar: mxc://maunium.net/HVHcnusJkQcpVcsVGZRELLCn
 # Config options that affect the Matrix connector of the bridge.
 matrix:
   # Whether the bridge should send the message status as a custom com.beeper.message_send_status event.
@@ -253,10 +264,10 @@ matrix:
   ghost_extra_profile_info: false
 # Segment-compatible analytics endpoint for tracking some events, like provisioning API login and encryption errors.
 analytics:
-  # API key to send with tracking requests. Tracking is disabled if this is null.
-  token: null
   # Address to send tracking requests to.
   url: https://api.segment.io/v1/track
+  # API key to send with tracking requests. Tracking is disabled if this is null.
+  token: null
   # Optional user ID for tracking events. If null, defaults to using Matrix user ID.
   user_id: null
 # Settings for provisioning API
@@ -470,6 +481,10 @@ logging:
       max_backups: 10
       compress: false
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T23:45:57Z"
+  mac: ENC[AES256_GCM,data:P1+n6RD9IKprg4SCw+QEo8/4Htq58RDx26w286DziOidPS/L487W1LOF4dgMyWePwcWRWrJkqK/8q2xHWlatTUkrqlj2KutM/uUGG3xbloXPvFEN/FEHQtGvePKUKEDcqwHSpdN6iHEgDnif3Hlw9Vjsulx/VBr+aep01viiO08=,iv:i/Z/C84RGVSq9yFjWohSGhT+SHruGcsLY+VrlokU7DQ=,tag:hzZHLobQLF68r7lDzsn2EA==,type:str]
+  encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -525,7 +540,3 @@ sops:
         SmJkOFY5MU5leHRJS2VJNi9jcnFma0EKeVSnPlOgDzIOWwCwyJZLFtYAKFCltavI
         QoOKA8elJ5x4xKeHGS8+2oAIHclO1faW73igVI63oJj7mQLG890dyw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T23:45:57Z"
-  mac: ENC[AES256_GCM,data:P1+n6RD9IKprg4SCw+QEo8/4Htq58RDx26w286DziOidPS/L487W1LOF4dgMyWePwcWRWrJkqK/8q2xHWlatTUkrqlj2KutM/uUGG3xbloXPvFEN/FEHQtGvePKUKEDcqwHSpdN6iHEgDnif3Hlw9Vjsulx/VBr+aep01viiO08=,iv:i/Z/C84RGVSq9yFjWohSGhT+SHruGcsLY+VrlokU7DQ=,tag:hzZHLobQLF68r7lDzsn2EA==,type:str]
-  encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
-  version: 3.12.2

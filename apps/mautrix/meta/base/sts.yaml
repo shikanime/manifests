@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -46,8 +47,8 @@ spec:
         - name: mautrix
           image: mautrix
           ports:
-            - containerPort: 29319
-              name: http
+            - name: http
+              containerPort: 29319
           readinessProbe:
             httpGet:
               path: /_matrix/mau/ready

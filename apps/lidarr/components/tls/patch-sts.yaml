@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -8,8 +9,8 @@ spec:
       containers:
         - name: lidarr
           ports:
-            - containerPort: 6868
-              name: https
+            - name: https
+              containerPort: 6868
           readinessProbe:
             httpGet:
               port: https

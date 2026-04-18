@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -30,8 +31,8 @@ spec:
         - name: caddy
           image: caddy
           ports:
-            - containerPort: 8008
-              name: http
+            - name: http
+              containerPort: 8008
           readinessProbe:
             tcpSocket:
               port: http

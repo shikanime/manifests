@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -11,12 +12,12 @@ spec:
   prune: true
   deletionPolicy: Orphan
   healthChecks:
-    - apiVersion: tailscale.com/v1alpha1
+    - name: flux
+      apiVersion: tailscale.com/v1alpha1
       kind: ProxyClass
-      name: flux
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:

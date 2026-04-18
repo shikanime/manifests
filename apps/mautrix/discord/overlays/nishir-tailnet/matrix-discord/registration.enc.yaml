@@ -1,18 +1,23 @@
-id: discord
+---
 url: http://mautrix-discord:29334
+id: discord
 as_token: ENC[AES256_GCM,data:hl9mNH+XBy7eYJ/DFgtM9yAW98tZBE9evkVBzDSw2kFcd/NPLlL2GDa0XnUmWVy+pVqhGWku5H/eedD+s2OVUA==,iv:NwEWwQ+ZIl9kQ3gGdOkiF4hZ/U+IU3PPtlUiG/tTJ5M=,tag:/kFVR8VoaYYRjsgV7SjcqA==,type:str]
 hs_token: ENC[AES256_GCM,data:B/2DtsP8UyGzQx11oRVkTNhGG2y8hOcKSFpS4fOe9qJbJe9m+k4He1uutDyUqoJtcoi/fNuC1LziKk8HgS94XQ==,iv:oJocqqlKieaKBTOpSMlZwuhCtp3LZScwCdsjg2vQqVw=,tag:ag6MqvAfr40yIKT3wfDM+A==,type:str]
 sender_localpart: Rd1diJXgdeSsDIBz3LtlcQcrjY2WDAVX
 rate_limited: false
+de.sorunome.msc2409.push_ephemeral: true
+push_ephemeral: true
 namespaces:
   users:
     - regex: ^@discordbot:matrix\.taila659a\.ts\.net$
       exclusive: true
     - regex: ^@discord_.*:matrix\.taila659a\.ts\.net$
       exclusive: true
-de.sorunome.msc2409.push_ephemeral: true
-push_ephemeral: true
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T22:02:53Z"
+  mac: ENC[AES256_GCM,data:0VmGLYnv1XQBZUAlMJY721fcKID21LXaNMMv+a/wxRs5QHzti/pQX/mZDWPfk/Xm2qFQOx0SMPsZrJ76rqKol7uaezLfukWnNZgL+QZ7EEQoakLgsF5AAevoOCeUbeCagBnMbT69y/67SELE7dZM6bajQTaAnhTB6C9R1y9UbFU=,iv:8Z94Ye1FbDeKI1PrzSAp1nmgcHdfIXaRs3xseBRsAiQ=,tag:LAhepQ7U2UPyeji+Uw1cBg==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -68,7 +73,3 @@ sops:
         VGpaS1NlelRwT2FvMXZpY1NPMFFVdlkKs899DH22zDRsr6AwKQw+bvwv8IMclbtV
         mHI1IARXAKAxs6bqim3yfFwaOnZ10dW+hV22f60r/qLxwz4yrmnu6g==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:02:53Z"
-  mac: ENC[AES256_GCM,data:0VmGLYnv1XQBZUAlMJY721fcKID21LXaNMMv+a/wxRs5QHzti/pQX/mZDWPfk/Xm2qFQOx0SMPsZrJ76rqKol7uaezLfukWnNZgL+QZ7EEQoakLgsF5AAevoOCeUbeCagBnMbT69y/67SELE7dZM6bajQTaAnhTB6C9R1y9UbFU=,iv:8Z94Ye1FbDeKI1PrzSAp1nmgcHdfIXaRs3xseBRsAiQ=,tag:LAhepQ7U2UPyeji+Uw1cBg==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.2

@@ -1,8 +1,9 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: shikanime
+---
 resources:
   - ../nishir
   - ingress.yaml
   - netpol.yaml
   - proxyclass.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: shikanime

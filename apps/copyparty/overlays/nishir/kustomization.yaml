@@ -1,14 +1,15 @@
+---
+resources:
+  - ../../base
+  - cert.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: shikanime
 components:
   - ../../components/ftp
   - ../../components/tls
   - ../../components/zeroconf
-namespace: shikanime
 patches:
   - path: patch-ingress.yaml
   - path: patch-pvc.yaml
   - path: patch-sts.yaml
-resources:
-  - ../../base
-  - cert.yaml

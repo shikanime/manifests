@@ -1,6 +1,12 @@
+---
+url: http://mautrix-googlechat:29320
 id: googlechat
 as_token: ENC[AES256_GCM,data:NuamskS6bgppygXaCI63zQwzjPuynOJ03c0MO62NPfYZw0hgMYeaAC8rjuiBJqPFPnvv06+3ZnhyhLXRIptERQ==,iv:hei6ZfKgI48S9GGC8uzLSdIQ+Pv2yiDn7BGYlLziKF8=,tag:YdkO4jjaoXJa9LVhhMEEcQ==,type:str]
 hs_token: ENC[AES256_GCM,data:JRguPUNA1Log+vaWNTeiZsZxAj7C34PFs7PiWPp1zS1jmlTdwQ9OISFhjb14zH2TOfEpO/2eCYapL+fCoWgkeA==,iv:HU6lZU/WH/ih3ewH19QYlpwgBqsR6cClAsJmwvOAUn8=,tag:EsQ7Khij/wVlYRUd9s3qrw==,type:str]
+sender_localpart: Ez3AAYo2EypqoaIGaN2fXO56CRArQSLfATcESIavVKFAYrEnK1cVN9QwaRvG3pCn
+rate_limited: false
+de.sorunome.msc2409.push_ephemeral: true
+push_ephemeral: true
 namespaces:
   users:
     - exclusive: true
@@ -8,12 +14,11 @@ namespaces:
     - exclusive: true
       regex: '@googlechatbot:matrix\.taila659a\.ts\.net'
   aliases: []
-url: http://mautrix-googlechat:29320
-sender_localpart: Ez3AAYo2EypqoaIGaN2fXO56CRArQSLfATcESIavVKFAYrEnK1cVN9QwaRvG3pCn
-rate_limited: false
-de.sorunome.msc2409.push_ephemeral: true
-push_ephemeral: true
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T22:03:12Z"
+  mac: ENC[AES256_GCM,data:8VPIkUJdsI3l66Td/XDLpdAnzOVZ0YpkFUlR+V+YW5m953CSpmuZnDsX3wttLfJlA8erxGomWYFcjjikecQOU8k3yOIx0QbluJNlL6SOilG8xNdKiCOTYmvBq7LsiryJVsAtSTctuWLk4p2+B+vDOkX34/SBHvKxWNMLVyfOzsU=,iv:MZ2oTbdys8Uc1nMNGbPALL4xSvMI8I5Bd0BtelYt5nI=,tag:aJJv+m/iBc8mV1PIul/LPA==,type:str]
+  encrypted_regex: ^(as_token|hs_token)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
@@ -69,7 +74,3 @@ sops:
         QVNWRDI2Lzk0TERLMExCSkh3VWxRNUkKJRBxciI4Bm12yhFMaUw+P9SsiLt2HDYK
         ACM93bUuRzdVS0McZDFgIynVcBMV+WTywaSiRkf8imTKkaU4Zoh2ng==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T22:03:12Z"
-  mac: ENC[AES256_GCM,data:8VPIkUJdsI3l66Td/XDLpdAnzOVZ0YpkFUlR+V+YW5m953CSpmuZnDsX3wttLfJlA8erxGomWYFcjjikecQOU8k3yOIx0QbluJNlL6SOilG8xNdKiCOTYmvBq7LsiryJVsAtSTctuWLk4p2+B+vDOkX34/SBHvKxWNMLVyfOzsU=,iv:MZ2oTbdys8Uc1nMNGbPALL4xSvMI8I5Bd0BtelYt5nI=,tag:aJJv+m/iBc8mV1PIul/LPA==,type:str]
-  encrypted_regex: ^(as_token|hs_token)$
-  version: 3.12.2

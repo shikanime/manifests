@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -45,8 +46,8 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - containerPort: 8686
-              name: http
+            - name: http
+              containerPort: 8686
           readinessProbe:
             httpGet:
               path: /ping

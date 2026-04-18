@@ -1,8 +1,12 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: ftp
 spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: copyparty
   ports:
     - name: ftp-control
       port: 3921
@@ -310,6 +314,3 @@ spec:
     - name: ftps
       port: 3990
       targetPort: ftps
-  selector:
-    app.kubernetes.io/name: copyparty
-  type: LoadBalancer

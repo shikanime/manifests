@@ -1,12 +1,15 @@
+---
+resources:
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
-configMapGenerator:
-  - files:
-      - rclone/rclone.conf
-    name: hermes-agent-rclone
+    automata.shikanime.studio/images:
+      '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
 images:
   - name: rclone
     newName: rclone/rclone
@@ -14,20 +17,19 @@ images:
   - name: hermes-agent
     newName: nousresearch/hermes-agent
     newTag: v2026.4.16
+configMapGenerator:
+  - name: hermes-agent-rclone
+    files:
+      - rclone/rclone.conf
 labels:
   - pairs:
       app.kubernetes.io/component: agent
       app.kubernetes.io/name: hermes-agent
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 2026.4.16
-resources:
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 secretGenerator:
-  - files:
+  - name: hermes-agent-ssh
+    files:
       - id_ed25519=hermes-agent/id_ed25519.enc
-    name: hermes-agent-ssh
     options:
       disableNameSuffixHash: true

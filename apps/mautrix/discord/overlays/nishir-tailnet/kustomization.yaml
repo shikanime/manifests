@@ -1,17 +1,18 @@
+---
+resources:
+  - ../nishir
+  - netpol.yaml
+  - proxyclass.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
-resources:
-  - ../nishir
-  - netpol.yaml
-  - proxyclass.yaml
 secretGenerator:
-  - files:
+  - name: mautrix-discord
+    files:
       - config.yaml=matrix-discord/config.enc.yaml
       - doublepuppet.yaml=matrix-discord/doublepuppet.enc.yaml
       - registration.yaml=matrix-discord/registration.enc.yaml
-    name: mautrix-discord
     options:
       disableNameSuffixHash: true

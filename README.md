@@ -6,8 +6,8 @@
 
 # Manifests
 
-Hey 🌸 I'm Shikanime Deva, this repository contains the Kubernetes
-manifests for my clusters.
+Hey 🌸 I'm Shikanime Deva, this repository contains the Kubernetes manifests for
+my clusters.
 
 ## What’s In Here
 
@@ -81,14 +81,17 @@ The “cluster services” in this repo are mostly configuration and glue for
 controllers installed during bootstrap.
 
 - TLS / trust distribution:
-  - cert-manager resources (issuers/certs) under `clusters/<cluster>/components/tls/`
+  - cert-manager resources (issuers/certs) under
+    `clusters/<cluster>/components/tls/`
   - trust-manager `Bundle` to publish CA material to workloads as a ConfigMap
 - Tailnet ingress:
-  - Tailscale Operator credentials under `clusters/<cluster>/components/tailscale/`
+  - Tailscale Operator credentials under
+    `clusters/<cluster>/components/tailscale/`
   - app overlays patch `Ingress` to use `ingressClassName: tailscale` and set
     `ProxyClass`
 - Storage:
-  - Longhorn settings, storage class, and recurring jobs under `clusters/<cluster>/components/longhorn/`
+  - Longhorn settings, storage class, and recurring jobs under
+    `clusters/<cluster>/components/longhorn/`
 - Observability:
   - Grafana k8s monitoring / Alloy remote config secrets under
     `clusters/<cluster>/components/grafana/`
@@ -104,17 +107,16 @@ Most apps follow the same pattern:
 - Workload: `Deployment` or `StatefulSet` in `apps/<app>/base/`
 - Network: `Service` + `Ingress` in `apps/<app>/base/`, patched per overlay
   - tailnet overlays typically set `ingressClassName: tailscale` and attach a
-    `ProxyClass`
-    (example:
+    `ProxyClass` (example:
     [patch-ingress.yaml](apps/jellyfin/overlays/nishir-tailnet/patch-ingress.yaml))
-- Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound to
-  a Longhorn `PV`
+- Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound
+  to a Longhorn `PV`
 - Secrets/config: stored as `*.enc.*` and fed into `secretGenerator` (see
   [Secrets](#secrets))
 
-Hardware-dependent apps can also add scheduling constraints via components (example:
-[patch-sts.yaml](apps/jellyfin/components/v4l2/patch-sts.yaml)), which rely on NFD
-labels from
+Hardware-dependent apps can also add scheduling constraints via components
+(example: [patch-sts.yaml](apps/jellyfin/components/v4l2/patch-sts.yaml)), which
+rely on NFD labels from
 [nodefeature.yaml](configs/nfd/overlays/nishir/nodefeature.yaml).
 
 ### Secrets

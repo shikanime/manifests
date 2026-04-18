@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -26,13 +27,13 @@ spec:
             - name: TZ
               value: Europe/Paris
           ports:
-            - containerPort: 8080
-              name: http
-            - containerPort: 6881
-              name: bittorrent
+            - name: http
+              containerPort: 8080
+            - name: bittorrent
+              containerPort: 6881
               protocol: TCP
-            - containerPort: 6881
-              name: bittorrent-udp
+            - name: bittorrent-udp
+              containerPort: 6881
               protocol: UDP
           readinessProbe:
             tcpSocket:

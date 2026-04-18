@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,8 +20,8 @@ spec:
             - --remote-debugging-address=0.0.0.0
             - --remote-allow-origins=*
           ports:
-            - containerPort: 9222
-              name: cdp
+            - name: cdp
+              containerPort: 9222
           readinessProbe:
             tcpSocket:
               port: cdp

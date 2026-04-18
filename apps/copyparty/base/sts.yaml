@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -38,8 +39,8 @@ spec:
         - name: copyparty
           image: copyparty
           ports:
-            - containerPort: 3923
-              name: http
+            - name: http
+              containerPort: 3923
           readinessProbe:
             httpGet:
               path: /?reset=/._

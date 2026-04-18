@@ -1,3 +1,6 @@
+---
+resources:
+  - ../../base
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: shikanime
@@ -9,14 +12,12 @@ components:
 patches:
   - path: patch-pvc.yaml
 configMapGenerator:
-  - files:
+  - name: hermes-agent-startup-config
+    files:
       - hermes-agent/config.yaml
       - hermes-agent/honcho.json
       - hermes-agent/SOUL.md
-    name: hermes-agent-startup-config
-resources:
-  - ../../base
 secretGenerator:
-  - envs:
+  - name: hermes-agent
+    envs:
       - hermes-agent/.enc.env
-    name: hermes-agent
