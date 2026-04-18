@@ -20,7 +20,7 @@ labels:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: radarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v6.0.4
+      app.kubernetes.io/version: 6.0.4
 resources:
   - ingress.yaml
   - pvc.yaml

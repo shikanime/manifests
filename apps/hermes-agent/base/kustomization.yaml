@@ -13,13 +13,13 @@ images:
     newTag: 1.71.2
   - name: hermes-agent
     newName: nousresearch/hermes-agent
-    newTag: latest # TODO: the ARM64 image just released
+    newTag: v2026.4.16
 labels:
   - pairs:
       app.kubernetes.io/component: agent
       app.kubernetes.io/name: hermes-agent
       app.kubernetes.io/part-of: nishir-platform
-      app.kubernetes.io/version: latest
+      app.kubernetes.io/version: 2026.4.16
 resources:
   - pvc.yaml
   - sts.yaml
