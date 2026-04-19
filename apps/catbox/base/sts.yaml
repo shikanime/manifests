@@ -22,7 +22,11 @@ spec:
           stdin: true
           tty: true
           securityContext:
-            privileged: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+            seccompProfile:
+              type: Unconfined
           ports:
             - name: ssh
               containerPort: 22
@@ -48,20 +52,23 @@ spec:
           volumeMounts:
             - name: catbox-workspaces
               mountPath: /workspaces
-            - name: run
-              mountPath: /run
+            - name: cgroup
+              mountPath: /sys/fs/cgroup
             - name: sys-kernel-debug
               mountPath: /sys/kernel/debug
             - name: sys-kernel-tracing
               mountPath: /sys/kernel/tracing
+            - name: var-lib-systemd
+              mountPath: /var/lib/systemd
       hostname: catbox
       volumes:
         - name: catbox-workspaces
           persistentVolumeClaim:
             claimName: catbox-workspaces
-        - name: run
-          emptyDir:
-            medium: Memory
+        - name: cgroup
+          hostPath:
+            type: Directory
+            path: /sys/fs/cgroup
         - name: sys-kernel-debug
           hostPath:
             type: Directory
@@ -70,3 +77,5 @@ spec:
           hostPath:
             type: Directory
             path: /sys/kernel/tracing
+        - name: var-lib-systemd
+          emptyDir: {}
