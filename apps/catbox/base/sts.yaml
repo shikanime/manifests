@@ -22,11 +22,7 @@ spec:
           stdin: true
           tty: true
           securityContext:
-            capabilities:
-              add:
-                - SYS_ADMIN
-            seccompProfile:
-              type: Unconfined
+            privileged: true
           ports:
             - name: ssh
               containerPort: 22
