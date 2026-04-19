@@ -7,16 +7,14 @@ resources:
 metadata:
   annotations:
     automata.shikanime.studio/images:
-      '[ { "name": "catbox", "tag-regex":
-      "^v(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)-(?P<build>\\d+)-g(?P<commit>[0-9a-f]+)$"
-      } ]'
+      '[ { "name": "catbox", "tag-regex": "^(?P<version>\\d+\\.\\d+)$" } ]'
 images:
   - name: catbox
-    newName: ghcr.io/shikanime/shikanime/catbox
-    newTag: v0.17.1-612-g8107bb5
+    newName: qemux/qemu
+    newTag: "7.29"
 labels:
   - pairs:
       app.kubernetes.io/component: backend-service
       app.kubernetes.io/name: catbox
       app.kubernetes.io/part-of: telsha-workstation
-      app.kubernetes.io/version: 0.17.1
+      app.kubernetes.io/version: "7.29"
