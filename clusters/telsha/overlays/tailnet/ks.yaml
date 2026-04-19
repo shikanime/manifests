@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/catbox/base
+  path: ./apps/catbox/overlays/telsha
   prune: true
   healthChecks:
     - name: catbox
