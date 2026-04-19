@@ -17,8 +17,6 @@ spec:
       containers:
         - name: jellyfin
           image: jellyfin
-          securityContext:
-            privileged: true
           env:
             - name: PUID
               value: "1000"
@@ -64,6 +62,8 @@ spec:
               mountPath: /dev/dri
       securityContext:
         fsGroup: 1000
+        supplementalGroups:
+          - 44
       volumes:
         - name: cache
           emptyDir: {}
