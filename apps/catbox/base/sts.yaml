@@ -58,8 +58,6 @@ spec:
               mountPath: /sys/kernel/debug
             - name: sys-kernel-tracing
               mountPath: /sys/kernel/tracing
-            - name: var-nscd-db
-              mountPath: /var/db/nscd
             - name: var-lib-systemd
               mountPath: /var/lib/systemd
       hostname: catbox
@@ -79,7 +77,5 @@ spec:
           hostPath:
             type: Directory
             path: /sys/kernel/tracing
-        - name: var-nscd-db
-          emptyDir: {}
         - name: var-lib-systemd
           emptyDir: {}
