@@ -21,10 +21,8 @@ spec:
           image: catbox
           stdin: true
           tty: true
-          env:
-            - name: NIX_CONFIG
-              value: |
-                sandbox = false
+          securityContext:
+            privileged: true
           ports:
             - name: ssh
               containerPort: 22
@@ -56,8 +54,6 @@ spec:
               mountPath: /sys/kernel/debug
             - name: sys-kernel-tracing
               mountPath: /sys/kernel/tracing
-            - name: var-lib-systemd
-              mountPath: /var/lib/systemd
       hostname: catbox
       volumes:
         - name: catbox-workspaces
@@ -74,5 +70,3 @@ spec:
           hostPath:
             type: Directory
             path: /sys/kernel/tracing
-        - name: var-lib-systemd
-          emptyDir: {}
