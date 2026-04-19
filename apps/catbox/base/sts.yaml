@@ -21,9 +21,8 @@ spec:
           image: catbox
           stdin: true
           tty: true
-          env:
-            - name: BOOT
-              value: nixos
+          securityContext:
+            privileged: true
           ports:
             - name: ssh
               containerPort: 22
@@ -47,27 +46,22 @@ spec:
               port: ssh
             timeoutSeconds: 5
           volumeMounts:
-            - name: catbox-data
-              mountPath: /storage
-          volumeDevices:
-            - name: kvm
-              mountPath: /dev/kvm
-            - name: tun
-              mountPath: /dev/net/tun
-          securityContext:
-            privileged: true
-            capabilities:
-              add:
-                - NET_ADMIN
+            - name: catbox-workspaces
+              mountPath: /workspaces
+            - name: sys-kernel-debug
+              mountPath: /sys/kernel/debug
+            - name: sys-kernel-tracing
+              mountPath: /sys/kernel/tracing
+      hostname: catbox
       volumes:
-        - name: catbox-data
+        - name: catbox-workspaces
           persistentVolumeClaim:
-            claimName: catbox-storage
-        - name: kvm
-          type: CharDevice
+            claimName: catbox-workspaces
+        - name: sys-kernel-debug
           hostPath:
-            path: /dev/kvm
-        - name: tun
-          type: CharDevice
+            type: Directory
+            path: /sys/kernel/debug
+        - name: sys-kernel-tracing
           hostPath:
-            path: /dev/net/tun
+            type: Directory
+            path: /sys/kernel/tracing
