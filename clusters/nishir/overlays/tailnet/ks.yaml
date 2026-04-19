@@ -33,7 +33,7 @@ spec:
   dependsOn:
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/catbox/overlays/nishir-tailnet
+  path: ./apps/catbox/overlays/nishir
   prune: true
   healthChecks:
     - name: catbox
