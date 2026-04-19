@@ -1,6 +1,6 @@
 ---
 resources:
-  - ../../base
+  - ../../overlays/telsha
 components:
   - ../../components/cert-manager
   - ../../components/cluster-api
