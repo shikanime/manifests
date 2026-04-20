@@ -1,13 +1,14 @@
+---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: flux
   namespace: kube-system
 spec:
+  version: 0.46.0
   chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
   createNamespace: true
   targetNamespace: flux-system
-  version: 0.46.0
   valuesContent: |
     instance:
       distribution:
@@ -38,10 +39,10 @@ metadata:
   name: flux-operator
   namespace: kube-system
 spec:
+  version: 0.46.0
   chart: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
   createNamespace: true
   targetNamespace: flux-system
-  version: 0.46.0
   valuesContent: |
     healthcheck:
       enabled: true
@@ -53,6 +54,20 @@ spec:
             username: admin
             groups:
               - system:masters
+      ingress:
+        enabled: true
+        className: tailscale
+        annotations:
+          tailscale.com/proxy-class: flux
+          tailscale.com/tags: tag:web
+        hosts:
+          - host: telsha-flux
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - telsha-flux
       rbac:
         createRoles: true
 ---
@@ -62,11 +77,11 @@ metadata:
   name: tofu-controller
   namespace: kube-system
 spec:
+  version: 0.16.2
   chart: tofu-controller
   createNamespace: true
   repo: https://flux-iac.github.io/tofu-controller
   targetNamespace: flux-system
-  version: 0.16.2
   valuesContent: |
     awsPackage:
       install: false

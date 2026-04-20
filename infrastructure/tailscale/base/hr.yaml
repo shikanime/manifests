@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -6,13 +7,13 @@ metadata:
 spec:
   chart:
     spec:
+      version: 1.94.2
       chart: tailscale-operator
       interval: 1h
       sourceRef:
-        kind: HelmRepository
         name: tailscale
+        kind: HelmRepository
         namespace: flux-system
-      version: 1.94.2
   interval: 10m
   releaseName: tailscale-operator
   targetNamespace: tailscale-system

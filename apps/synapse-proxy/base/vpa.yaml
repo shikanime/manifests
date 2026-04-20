@@ -1,11 +1,12 @@
+---
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
   name: synapse-proxy
 spec:
   targetRef:
+    name: synapse-proxy
     apiVersion: apps/v1
     kind: Deployment
-    name: synapse-proxy
   updatePolicy:
     updateMode: Auto

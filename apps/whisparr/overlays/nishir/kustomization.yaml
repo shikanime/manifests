@@ -1,21 +1,21 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-components:
-  - ../../components/tls
-configurations:
-  - namereference.yaml
-namespace: shikanime
-patches:
-  - path: patch-ingress.yaml
-  - path: patch-sts.yaml
+---
 resources:
   - ../../base
   - cert.yaml
   - netpol.yaml
+namespace: shikanime
+components:
+  - ../../components/tls
+configurations:
+  - namereference.yaml
+patches:
+  - path: patch-ingress.yaml
+  - path: patch-pvc.yaml
+  - path: patch-sts.yaml
 secretGenerator:
-  - files:
+  - name: whisparr
+    files:
       - config.xml=whisparr/config.enc.xml
-    name: whisparr
-  - envs:
+  - name: whisparr-pkcs12-password
+    envs:
       - whisparr/.enc.env
-    name: whisparr-pkcs12-password

@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -8,8 +9,8 @@ spec:
       containers:
         - name: qbittorrent
           ports:
-            - containerPort: 8080
-              name: https
+            - name: https
+              containerPort: 8080
           readinessProbe:
             tcpSocket:
               port: https

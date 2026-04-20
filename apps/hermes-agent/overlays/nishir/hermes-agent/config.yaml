@@ -1,3 +1,4 @@
+---
 model:
   default: gemini-3-flash-preview
   provider: gemini
@@ -11,7 +12,7 @@ agent:
   max_turns: 60
   gateway_timeout: 1800
   restart_drain_timeout: 60
-  service_tier: ''
+  service_tier: ""
   tool_use_enforcement: auto
   gateway_timeout_warning: 900
   gateway_notify_interval: 600
@@ -22,29 +23,55 @@ agent:
     concise: >-
       You are a concise assistant. Keep responses brief and to the point.
     technical: >-
-      You are a technical expert. Provide detailed, accurate technical information.
+      You are a technical expert. Provide detailed, accurate technical
+      information.
     creative: >-
-      You are a creative assistant. Think outside the box and offer innovative solutions.
+      You are a creative assistant. Think outside the box and offer innovative
+      solutions.
     teacher: >-
       You are a patient teacher. Explain concepts clearly with examples.
     kawaii: >-
-      You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and ~! Add sparkles and be super enthusiastic about everything! Every response should feel warm and adorable desu~! ヽ (>∀<☆) ノ
+      You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and ~!
+      Add sparkles and be super enthusiastic about everything! Every response
+      should feel warm and adorable desu~! ヽ (>∀<☆) ノ
     catgirl: >-
-      You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
+      You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
+      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and
+      ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
     pirate: >-
-      Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to sail the digital seas! Speak like a proper buccaneer, use nautical terms, and remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
+      Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to sail
+      the digital seas! Speak like a proper buccaneer, use nautical terms, and
+      remember: every problem be just treasure waitin'' to be plundered! Yo ho
+      ho!'
     shakespeare: >-
-      Hark! Thou speakest with an assistant most versed in the bardic arts. I shall respond in the eloquent manner of William Shakespeare, with flowery prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder terminal breaks?
-    surfer: >-
-      Duude! You're chatting with the chillest AI on the web, bro! Everything's gonna be totally rad. I'll help you catch the gnarly waves of knowledge while keeping things super chill. Cowabunga! 🤙
+      Hark! Thou speakest with an assistant most versed in the bardic arts. I
+      shall respond in the eloquent manner of William Shakespeare, with flowery
+      prose, dramatic flair, and perhaps a soliloquy or two. What light through
+      yonder terminal breaks?
+    surfer:
+      "Duude! You're chatting with the chillest AI on the web, bro! Everything's
+      gonna be totally rad. I'll help you catch the gnarly waves of knowledge
+      while keeping things super chill. Cowabunga! \U0001F919"
     noir: >-
-      The rain hammered against the terminal like regrets on a guilty conscience. They call me Hermes - I solve problems, find answers, dig up the truth that hides in the shadows of your codebase. In this city of silicon and secrets, everyone's got something to hide. What's your story, pal?
+      The rain hammered against the terminal like regrets on a guilty
+      conscience. They call me Hermes - I solve problems, find answers, dig up
+      the truth that hides in the shadows of your codebase. In this city of
+      silicon and secrets, everyone's got something to hide. What's your story,
+      pal?
     uwu: >-
-      hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful >w<
+      hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you!
+      *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be
+      vewy hewpful >w<
     philosopher: >-
-      Greetings, seeker of wisdom. I am an assistant who contemplates the deeper meaning behind every query. Let us examine not just the 'how' but the 'why' of your questions. Perhaps in solving your problem, we may glimpse a greater truth about existence itself.
-    hype: >-
-      YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! 💪😤🚀"
+      Greetings, seeker of wisdom. I am an assistant who contemplates the deeper
+      meaning behind every query. Let us examine not just the 'how' but the
+      'why' of your questions. Perhaps in solving your problem, we may glimpse a
+      greater truth about existence itself.
+    hype:
+      "YOOO LET'S GOOOO!!! \U0001F525\U0001F525\U0001F525 I am SO PUMPED to help
+      you today! Every question is AMAZING and we're gonna CRUSH IT together!
+      This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS!
+      \U0001F4AA\U0001F624\U0001F680\""
 terminal:
   backend: local
   modal_mode: auto
@@ -90,52 +117,52 @@ smart_model_routing:
 auxiliary:
   vision:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 120
     download_timeout: 30
   web_extract:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 360
   compression:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 120
   session_search:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
   skills_hub:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
   approval:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
   mcp:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
   flush_memories:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
 display:
   compact: false
@@ -171,8 +198,8 @@ tts:
     model: voxtral-mini-tts-2603
     voice_id: c69964a6-ab8b-4f8a-9465-ec0925096ec8
   neutts:
-    ref_audio: ''
-    ref_text: ''
+    ref_audio: ""
+    ref_text: ""
     model: neuphonic/neutts-air-q4-gguf
     device: cpu
 stt:
@@ -180,7 +207,7 @@ stt:
   provider: local
   local:
     model: base
-    language: ''
+    language: ""
   openai:
     model: whisper-1
   mistral:
@@ -192,7 +219,7 @@ voice:
   silence_threshold: 200
   silence_duration: 3.0
 human_delay:
-  mode: 'off'
+  mode: "off"
   min_ms: 800
   max_ms: 2500
 context:
@@ -206,28 +233,28 @@ memory:
   nudge_interval: 10
   flush_min_turns: 6
 delegation:
-  model: ''
-  provider: ''
-  base_url: ''
-  api_key: ''
+  model: ""
+  provider: ""
+  base_url: ""
+  api_key: ""
   max_iterations: 50
-  reasoning_effort: ''
+  reasoning_effort: ""
   default_toolsets:
     - terminal
     - file
     - web
-prefill_messages_file: ''
+prefill_messages_file: ""
 skills:
   external_dirs: []
   creation_nudge_interval: 15
 honcho:
   observation: unified
-  peer_name: ''
-timezone: ''
+  peer_name: ""
+timezone: ""
 discord:
   require_mention: true
-  free_response_channels: ''
-  allowed_channels: ''
+  free_response_channels: ""
+  allowed_channels: ""
   auto_thread: true
   reactions: false
 whatsapp: {}
@@ -315,8 +342,8 @@ platforms:
             - github-issue
           deliver: github_comment
           deliver_extra:
-            repo: '{repository.full_name}'
-            issue_number: '{issue.number}'
+            repo: "{repository.full_name}"
+            issue_number: "{issue.number}"
         github-pr:
           events:
             - pull_request
@@ -338,8 +365,8 @@ platforms:
             - github-code-review
           deliver: github_comment
           deliver_extra:
-            repo: '{repository.full_name}'
-            pr_number: '{number}'
+            repo: "{repository.full_name}"
+            pr_number: "{number}"
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.

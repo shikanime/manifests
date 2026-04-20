@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -16,25 +17,15 @@ spec:
       containers:
         - name: postgres
           image: hermes-agent-postgres
-          env:
-            - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  name: hermes-agent-postgres
-                  key: database
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: hermes-agent-postgres
-                  key: username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: hermes-agent-postgres
-                  key: password
           ports:
             - name: postgres
               containerPort: 5432
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
           startupProbe:
             exec:
               command:
@@ -62,12 +53,22 @@ spec:
             failureThreshold: 3
             periodSeconds: 30
             timeoutSeconds: 5
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/postgresql/data
-            - name: initdb
-              mountPath: /docker-entrypoint-initdb.d
-              readOnly: true
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-agent-postgres
+                  key: database
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-agent-postgres
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hermes-agent-postgres
+                  key: password
       volumes:
         - name: initdb
           configMap:

@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synapse-data
+spec:
+  storageClassName: nishir-fast
+  volumeName: synapse-data

@@ -1,3 +1,4 @@
+---
 # Network-specific config options
 network:
   # Proxy to use for all Twitter connections.
@@ -7,7 +8,7 @@ network:
   # Displayname template for Twitter users.
   # {{ .DisplayName }} is replaced with the display name of the Twitter user.
   # {{ .Username }} is replaced with the username of the Twitter user.
-  displayname_template: '{{ .DisplayName }} (Twitter)'
+  displayname_template: "{{ .DisplayName }} (Twitter)"
   # Maximum number of conversations to sync on startup
   conversation_sync_limit: 20
   # Should the bridge cache sessions instead of resyncing chats on every restart?
@@ -18,7 +19,7 @@ network:
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: '!twitter'
+  command_prefix: "!twitter"
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -121,18 +122,28 @@ bridge:
     #   .Caption - The `formatted_body` field of the message, if it's a caption. Otherwise an empty string.
     #   .FileName - The name of the file being sent.
     message_formats:
-      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
-      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
+      m.file:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{
+        .Caption }}{{ end }}"
+      m.image:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}:
+        {{ .Caption }}{{ end }}"
+      m.audio:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption
+        }}: {{ .Caption }}{{ end }}"
+      m.video:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}:
+        {{ .Caption }}{{ end }}"
+      m.location:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption
+        }}: {{ .Caption }}{{ end }}"
     # For networks that support per-message displaynames (i.e. Slack and Discord), the template for those names.
     # This has all the Sender variables available under message_formats (but without the .Sender prefix).
     # Note that you need to manually remove the displayname from message_formats above.
-    displayname_format: '{{ .DisambiguatedName }}'
+    displayname_format: "{{ .DisambiguatedName }}"
   # Permissions for using the bridge.
   # Permitted values:
   #    relay - Talk through the relaybot (if enabled), no access otherwise
@@ -144,9 +155,9 @@ bridge:
   #   domain - All users on that homeserver
   #     mxid - Specific user
   permissions:
-    '*': relay
+    "*": relay
     matrix.taila659a.ts.net: user
-    '@shikanime:matrix.taila659a.ts.net': admin
+    "@shikanime:matrix.taila659a.ts.net": admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -196,6 +207,8 @@ homeserver:
 # Application service host/registration related details.
 # Changing these values requires regeneration of the registration (except when noted otherwise)
 appservice:
+  # The unique ID of this appservice.
+  id: twitter
   # The address that the homeserver can use to connect to this appservice.
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
@@ -209,16 +222,6 @@ appservice:
   # For Docker, you generally have to change the hostname to 0.0.0.0.
   hostname: 0.0.0.0
   port: 29327
-  # The unique ID of this appservice.
-  id: twitter
-  # Appservice bot details.
-  bot:
-    # Username of the appservice bot.
-    username: twitterbot
-    # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
-    # to leave display name/avatar as-is.
-    displayname: Twitter bridge bot
-    avatar: mxc://maunium.net/HVHcnusJkQcpVcsVGZRELLCn
   # Whether to receive ephemeral events via appservice transactions.
   ephemeral_events: true
   # Should incoming events be handled asynchronously?
@@ -232,6 +235,14 @@ appservice:
   # Localpart template of MXIDs for remote users.
   # {{.}} is replaced with the internal ID of the user.
   username_template: twitter_{{.}}
+  # Appservice bot details.
+  bot:
+    # Username of the appservice bot.
+    username: twitterbot
+    # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
+    # to leave display name/avatar as-is.
+    displayname: Twitter bridge bot
+    avatar: mxc://maunium.net/HVHcnusJkQcpVcsVGZRELLCn
 # Config options that affect the Matrix connector of the bridge.
 matrix:
   # Whether the bridge should send the message status as a custom com.beeper.message_send_status event.
@@ -253,10 +264,10 @@ matrix:
   ghost_extra_profile_info: false
 # Segment-compatible analytics endpoint for tracking some events, like provisioning API login and encryption errors.
 analytics:
-  # API key to send with tracking requests. Tracking is disabled if this is null.
-  token: null
   # Address to send tracking requests to.
   url: https://api.segment.io/v1/track
+  # API key to send with tracking requests. Tracking is disabled if this is null.
+  token: null
   # Optional user ID for tracking events. If null, defaults to using Matrix user ID.
   user_id: null
 # Settings for provisioning API
@@ -470,53 +481,62 @@ logging:
       max_backups: 10
       compress: false
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T23:45:57Z"
+  mac: ENC[AES256_GCM,data:P1+n6RD9IKprg4SCw+QEo8/4Htq58RDx26w286DziOidPS/L487W1LOF4dgMyWePwcWRWrJkqK/8q2xHWlatTUkrqlj2KutM/uUGG3xbloXPvFEN/FEHQtGvePKUKEDcqwHSpdN6iHEgDnif3Hlw9Vjsulx/VBr+aep01viiO08=,iv:i/Z/C84RGVSq9yFjWohSGhT+SHruGcsLY+VrlokU7DQ=,tag:hzZHLobQLF68r7lDzsn2EA==,type:str]
+  encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrRWxKWGw0dHlZeWFDdUR5
-        b2Izd3pUZ3k4NlFEbzdBV2loajZZSndNNUgwCkhua1VxY0dRYmErbkg1UmpQRDhY
-        WDk4WXhFTEg2OEhkYWRacHVhRHl5MnMKLS0tIHIyTlFkMXMxMEJUVGZjRENJcWpF
-        Q09jVU16dXdWRTFaR09NOTJ6WnAvYmcKV7/zyBmYjvq8uq8evqavBEYjRZcpxdbb
-        TPQpw1ruozTxISI8u0+7ICbCIQJpccWQ9DpxcFdKvaSAhMgV04CWBQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwRllqa0owNWlTSzBOVlJy
+        KzBUbjZ2Sm4xbTJDQUptTG91N2U2dS9QQ2g0CjN5U1BrSzE3K0owaE5YeEV2R0U1
+        RWVDV1dqbjEyRlp1V0hPRGVTVEdrT0kKLS0tIFQ1Q09xa1BCQVBJbExnTDRUOE5m
+        dXM3Z21SNVFaUGhMelFRc3BDc2tYRXcKypFtlqmIVXrqOmH2p30mvIAEMyLeCdZq
+        fx736j/J2hFnkWsGibuqydagrPXyoK6HJ6uAybOkLBw2TKSTkLDLsQ==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBGSnd4YTJKVGVsS25uM0FI
-        M2JGTEJWUXZyV1FhNWJFOHBYME10ZXVXV1hNCnkwOENaM0U1SHY3MVc1Q3ZFVXpn
-        aHMzM0UvdHQzTTJRVUNLUytlR3ZlZGMKLS0tIDF6NDFjZlJzV3M4V0hBSWVUQk53
-        YmVIRzZyS1JVbE5LdXA2K3Y3aEtCa28KjIX0jByJ8DeHND9lUiAXf8G7Ia/QzfAj
-        P8rC6WvdxSF380oUQJUb+C1Y96xLmOFhehU0qbHoexFJA+z5s6Fxow==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkNXJsc3NlQjdyRytUak9u
+        eDU4Q1c1WmdMNnNVamxPYUVJYmx6OHJzcVJVClBPTjBTRFhBOGRLbGYycktUL2JK
+        SG9ZY05MbngwMC9wSnJLbnN1TWdTYkkKLS0tIFJWd0lVSVlid3pXaHZiVUV0OEtT
+        ckZsTXZPN2E3YUl6MnlWRXQranRWRnMK3l3yaJDPk2WbtdWGQ7FCyWb1MeCd872X
+        tUG6Fs2i4SAbnHKUGYmB/x507bRPMSrTceNUQVhL6KOtUzPteD0c6Q==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4azJZWHE5UXJYdkNVTi9C
-        bUQ0ZE9Fak5FSzZCTW1xRG40WlJuRHZ1clFNCi9ERnhGNTE4U0taUG5XRVJLL1Jn
-        SzRhdjA0Wk1GdExTQXZ2U2EzdVVnZzQKLS0tIDVhVFllVzlWNmt4R1lEWGgvb3Fh
-        UWxRS1RFV1RnZUZTVGZlV0tBOC9ocjQKYrloWAni0oMz3bLLf1RsRSdxAzylOGwx
-        PdgRn9Y9cUMbb/jDC7+lsumWYbQfUsL9IR0QMXWtfykJoIn3Vcs36w==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWL3pDVGxjZ3V1RFdqU3ls
+        YUljcVhlYk9ueDVHbWt0cmZKbUhuL3ZVMFRjCkIyYmM4c213RDM1NUgybTlNQ1NJ
+        MEJQYkw1ck1Wa0doUEptdjhPNGhQRmsKLS0tIEowMGxpNUFMQVJWbmZ4SHE4b0h0
+        OGdlNFZVbUNSOUdleW9vVTB1NElmR3cKV5SR8JAG2Pd4ic5p5NJjBSCX0szRkNJt
+        ybf8Sg+9Y2WN/BJR7ezOiwUk8XciUTF6CC3lA2kZpr7DoKlQoLJ2mw==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17pepaj2fgfsh5a0nzdhjsylv8qdstffmapy5xwvymjh5s9wz8uaqgvzdvr
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArTTNRYTJiNmttRXpGWE5T
-        N0hZVnMwR3V4QmI1WkE2TnNRM3RjOUN2R1Q0Cmx2ajdTMGZWeEJENGJTWDVWWDNZ
-        NSt5alhhZGV6SVpVckxxZi9IVXhPZmcKLS0tIERQNmpmTzV5UkZhNnQ0SlE0RUMw
-        bExsd2p0QzNrQnVPMW9sM2htcVhNWlEK5LmFwtp3a9gJBRcqW1UmrIouzHbqERTO
-        0kVulyFwn5qsRhYvl0YT/6+qo8W+SaGuTWuvnXsIHYT9cn2ZefO6jw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwUHNYVVRaUGpUMW9oazdu
+        RGJPVWZMSEtVbjllY0RYNHpkN3FIOG1zR3lVCnNKU0Rua2ZKS2QvWGhNdlJ0TkdG
+        U201VW9CQzJQdGErZFhGaS9teDA5Y0UKLS0tIFZxNHJ3SDAvaDV0ZDJ1MzBqUFdp
+        R0EwYkJRSytLNkxKZXVoL0VTSlFxMDgK6x21S1Apy8XW4H0/ImLpjLlehTES8L95
+        WploD+0t9HHGarHux0jhGqg2MV5FjjHyh/JDY3Px3tISvnR11uAyAA==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvSlQzZGJ1UEd5UHNWM0sz
-        Z2J1YVFmcDBDTUdEcEorK0dIdGlITVdONW0wCjJCMVRrWkRZZFZYemZ4QVgxazE4
-        TkdVV2lDclZSbU1RdFpPV0lkcHhIL0UKLS0tIHd6bWlxeDdNK0x1OHNWZWkySnlW
-        RkY1T3VUckEwVDlRVjcwOEtGR2N3WVkKdK8rb71zYztEg+tmHJ3P8Ws0HquZqJvG
-        1uqT/5x37Eo7kK+t5DmOYqyQRbgweYX0YmC9IFulGKdg0ZLheJQdHA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVTzhOM2w0TFhXWTZaN2Fi
+        Vm1OQVRsb1dkV01RSE1Bb2tiN3FZeS9xdG5BCmkrYTFYYXZxTy9HekIvamt6aWtu
+        cCsxOTJtUDhxc0wwSGRGVUU0OXNySHcKLS0tIEY3T0ZYZGxDaWtYdVV6ZDVEaVF6
+        TVhGSVc5am1QRzlTSXZsbGgrclhCTU0K+rPf3Pl75mpBERTOmLKWwO9BIU3Wq5bf
+        MCsx2gv0KAJn0DmQjzaOukgAI+z3EXuYmGMGvCRK2iryXZeg7Ecqnw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T23:45:57Z"
-  mac: ENC[AES256_GCM,data:P1+n6RD9IKprg4SCw+QEo8/4Htq58RDx26w286DziOidPS/L487W1LOF4dgMyWePwcWRWrJkqK/8q2xHWlatTUkrqlj2KutM/uUGG3xbloXPvFEN/FEHQtGvePKUKEDcqwHSpdN6iHEgDnif3Hlw9Vjsulx/VBr+aep01viiO08=,iv:i/Z/C84RGVSq9yFjWohSGhT+SHruGcsLY+VrlokU7DQ=,tag:hzZHLobQLF68r7lDzsn2EA==,type:str]
-  encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
-  version: 3.12.2
+    - recipient: age1lcz72z6vkjywvhth955l5q9fl5wu8sdf32jpy2y6tz3rers7v5tq2gz7tx
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSaVhqUVRwUmIxQk5sRlJD
+        NmZnR0dnazUzZ1FDVldRSkszc24rNHRWcVI4ClJLQ2p5WmlXZjU5aURKUnhxQ05u
+        SjIvclpaZ1JuNmgvYXp4U2ZRY0k1QTAKLS0tIHhUUklKUkYzdXBlb2pFWFhSS2Mv
+        SmJkOFY5MU5leHRJS2VJNi9jcnFma0EKeVSnPlOgDzIOWwCwyJZLFtYAKFCltavI
+        QoOKA8elJ5x4xKeHGS8+2oAIHclO1faW73igVI63oJj7mQLG890dyw==
+        -----END AGE ENCRYPTED FILE-----

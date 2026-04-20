@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -7,6 +8,6 @@ spec:
   commonName: cluster.local
   isCA: true
   issuerRef:
-    kind: ClusterIssuer
     name: nishir-selfsigned
+    kind: ClusterIssuer
   secretName: nishir-ca
