@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: automata
   annotations:
-    tailscale.com/proxy-class: automata
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
@@ -14,8 +13,7 @@ kind: Ingress
 metadata:
   name: automata-webhook
   annotations:
-    tailscale.com/funnel: "true"
-    tailscale.com/proxy-class: automata-webhook
+    tailscale.com/funnel: "true"-webhook
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

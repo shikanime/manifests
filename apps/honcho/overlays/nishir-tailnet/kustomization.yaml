@@ -3,5 +3,4 @@ resources:
   - ../nishir
   - ingress.yaml
   - netpol.yaml
-  - proxyclass.yaml
 namespace: shikanime

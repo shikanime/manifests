@@ -5,7 +5,6 @@ resources:
 components:
   - ../../components/cert-manager
   - ../../components/descheduler
-  - ../../components/flux-operator
   - ../../components/grafana
   - ../../components/longhorn
   - ../../components/nfd

@@ -58,7 +58,6 @@ spec:
         enabled: true
         className: tailscale
         annotations:
-          tailscale.com/proxy-class: flux
           tailscale.com/tags: tag:web
         hosts:
           - host: telsha-flux
