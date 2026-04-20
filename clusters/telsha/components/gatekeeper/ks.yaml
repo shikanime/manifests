@@ -28,6 +28,8 @@ metadata:
   name: infrastructure-gatekeeper-config
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-gatekeeper
   interval: 10m
   path: ./configs/gatekeeper/base
   prune: true
