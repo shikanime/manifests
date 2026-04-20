@@ -13,7 +13,7 @@ kind: Ingress
 metadata:
   name: automata-webhook
   annotations:
-    tailscale.com/funnel: "true"-webhook
+    tailscale.com/funnel: "true"
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
