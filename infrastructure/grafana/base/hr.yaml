@@ -51,6 +51,24 @@ spec:
           enabled: true
     clusterMetrics:
       enabled: true
+      cadvisor:
+        metricsTuning:
+          useDefaultAllowList: true
+          excludeMetrics:
+            - container_network_.*
+            - container_fs_.*
+      kube-state-metrics:
+        metricsTuning:
+          useDefaultAllowList: true
+          excludeMetrics:
+            - kube_endpoint.*
+            - kube_configmap.*
+            - kube_secret.*
+            - kube_ingress.*
+      node-exporter:
+        metricsTuning:
+          useDefaultAllowList: true
+          useIntegrationAllowList: false
     clusterEvents:
       enabled: true
     podLogs:
