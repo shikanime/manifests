@@ -6,6 +6,7 @@ components:
   - ../../components/cert-manager
   - ../../components/cluster-api
   - ../../components/flux-operator
+  - ../../components/gatekeeper
   - ../../components/tailscale
   - ../../components/vpa
 secretGenerator:
