@@ -149,6 +149,7 @@
                   pkgs.clusterctl
                   pkgs.docker
                   pkgs.fluxcd-operator
+                  pkgs.gatekeeper
                   pkgs.k0sctl
                   pkgs.kubectl
                   pkgs.kubernetes-helm
