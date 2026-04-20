@@ -69,6 +69,11 @@ spec:
         metricsTuning:
           useDefaultAllowList: true
           useIntegrationAllowList: false
+      kubelet:
+        metricsTuning:
+          useDefaultAllowList: true
+          excludeMetrics:
+            - kubelet_.*_bucket
     clusterEvents:
       enabled: true
     podLogs:
