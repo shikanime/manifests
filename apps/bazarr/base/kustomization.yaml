@@ -1,13 +1,16 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+---
+resources:
+  - ingress.yaml
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "rclone", "tag-regex": "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)$" }, { "name": "bazarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
-configMapGenerator:
-  - files:
-      - rclone/rclone.conf
-    name: bazarr-rclone
-    namespace: shikanime
+    automata.shikanime.studio/images:
+      '[ { "name": "rclone", "tag-regex":
+      "^(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)$" }, { "name":
+      "bazarr", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: bazarr
     newName: lscr.io/linuxserver/bazarr
@@ -15,14 +18,14 @@ images:
   - name: rclone
     newName: rclone/rclone
     newTag: 1.71.2
+configMapGenerator:
+  - name: bazarr-rclone
+    namespace: shikanime
+    files:
+      - rclone/rclone.conf
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/name: bazarr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: v1.5.3
-resources:
-  - ingress.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
+      app.kubernetes.io/version: 1.5.3

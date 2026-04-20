@@ -1,9 +1,11 @@
+---
 apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
   name: fushi
   namespace: longhorn-system
 spec:
+  name: fushi
   allowScheduling: true
   disks:
     fushi:
@@ -14,7 +16,6 @@ spec:
       tags:
         - balanced
         - fast
-  name: fushi
 ---
 apiVersion: longhorn.io/v1beta2
 kind: Node
@@ -22,6 +23,7 @@ metadata:
   name: minish
   namespace: longhorn-system
 spec:
+  name: minish
   allowScheduling: true
   disks:
     minish:
@@ -32,7 +34,6 @@ spec:
       tags:
         - balanced
         - fast
-  name: minish
 ---
 apiVersion: longhorn.io/v1beta2
 kind: Node
@@ -40,7 +41,10 @@ metadata:
   name: nishir
   namespace: longhorn-system
 spec:
+  name: nishir
   allowScheduling: true
+  tags:
+    - storage
   disks:
     flandre:
       allowScheduling: true
@@ -64,6 +68,3 @@ spec:
       storageReserved: 2399829082767
       tags:
         - balanced
-  name: nishir
-  tags:
-    - storage

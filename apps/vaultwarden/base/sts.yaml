@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -15,33 +16,35 @@ spec:
     spec:
       containers:
         - name: vaultwarden
-          envFrom:
-            - secretRef:
-                name: vaultwarden
           image: vaultwarden
           ports:
-            - containerPort: 80
-              name: http
+            - name: http
+              containerPort: 80
           readinessProbe:
             httpGet:
               path: /alive
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /alive
               port: http
             initialDelaySeconds: 60
+            timeoutSeconds: 5
           startupProbe:
             httpGet:
               path: /alive
               port: http
             initialDelaySeconds: 5
-            timeoutSeconds: 2
+            timeoutSeconds: 5
             failureThreshold: 180
           volumeMounts:
             - name: data
               mountPath: /data
+          envFrom:
+            - secretRef:
+                name: vaultwarden
       volumes:
         - name: data
           persistentVolumeClaim:

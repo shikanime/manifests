@@ -68,7 +68,12 @@
         treefmt-nix.flakeModule
       ];
       perSystem =
-        { pkgs, ... }:
+        {
+          lib,
+          pkgs,
+          ...
+        }:
+        with lib;
         {
           devenv = {
             modules = [
@@ -85,6 +90,7 @@
                             "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
                             "age17pepaj2fgfsh5a0nzdhjsylv8qdstffmapy5xwvymjh5s9wz8uaqgvzdvr" # nishir
                             "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
+                            "age1lcz72z6vkjywvhth955l5q9fl5wu8sdf32jpy2y6tz3rers7v5tq2gz7tx" # telsha
                           ];
                         }
                       ];
@@ -149,6 +155,28 @@
                   pkgs.kustomize
                   pkgs.skaffold
                 ];
+
+                tasks = {
+                  "bootstrap:ishtar".exec = ''
+                    ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/ishtar
+
+                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
+                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} -n flux-system \
+                        create secret generic sops-age --from-file=age.agekey=/dev/stdin
+                    fi
+                  '';
+                  "bootstrap:nishir".exec = ''
+                    ${getExe pkgs.k0sctl} apply --config $DEVENV_ROOT/bootstraps/nishir/cluster.yaml
+                  '';
+                  "bootstrap:telsha".exec = ''
+                    ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
+
+                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
+                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} -n flux-system \
+                        create secret generic sops-age --from-file=age.agekey=/dev/stdin
+                    fi
+                  '';
+                };
 
                 treefmt.config.settings.global.excludes = [
                   "*.excalidraw"

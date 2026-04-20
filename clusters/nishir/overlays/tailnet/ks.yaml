@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -6,17 +7,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/bazarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: bazarr
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: bazarr
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -30,17 +32,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/copyparty/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: copyparty
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: copyparty
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -54,17 +57,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/forgejo/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: forgejo
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: forgejo
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -78,17 +82,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/gitea-mirror/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: gitea-mirror
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: gitea-mirror
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -102,17 +107,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: hermes-agent
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: hermes-agent
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -124,17 +130,19 @@ metadata:
   name: apps-chrome
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/chrome/overlays/nishir
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: chrome
+      apiVersion: apps/v1
       kind: Deployment
-      name: chrome
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -142,17 +150,19 @@ metadata:
   name: apps-hermes-agent-postgres
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent-postgres/overlays/nishir
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: hermes-agent-postgres
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: hermes-agent-postgres
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -166,17 +176,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/honcho/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: honcho
+      apiVersion: apps/v1
       kind: Deployment
-      name: honcho
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -190,17 +201,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/jellyfin/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: jellyfin
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: jellyfin
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -214,17 +226,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/lidarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: lidarr
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: lidarr
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -236,17 +249,19 @@ metadata:
   name: apps-mautrix-discord
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-discord
+      apiVersion: v1
       kind: Service
-      name: mautrix-discord
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -258,17 +273,19 @@ metadata:
   name: apps-mautrix-googlechat
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-googlechat
+      apiVersion: v1
       kind: Service
-      name: mautrix-googlechat
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -280,17 +297,19 @@ metadata:
   name: apps-mautrix-linkedin
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-linkedin
+      apiVersion: v1
       kind: Service
-      name: mautrix-linkedin
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -302,17 +321,19 @@ metadata:
   name: apps-mautrix-meta
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-meta
+      apiVersion: v1
       kind: Service
-      name: mautrix-meta
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -324,17 +345,19 @@ metadata:
   name: apps-mautrix-signal
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-signal
+      apiVersion: v1
       kind: Service
-      name: mautrix-signal
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -346,17 +369,19 @@ metadata:
   name: apps-mautrix-slack
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-slack
+      apiVersion: v1
       kind: Service
-      name: mautrix-slack
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -368,17 +393,19 @@ metadata:
   name: apps-mautrix-twitter
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-twitter
+      apiVersion: v1
       kind: Service
-      name: mautrix-twitter
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -390,17 +417,19 @@ metadata:
   name: apps-mautrix-whatsapp
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: v1
+    - name: mautrix-whatsapp
+      apiVersion: v1
       kind: Service
-      name: mautrix-whatsapp
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -412,17 +441,19 @@ metadata:
   name: apps-metatube
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/metatube/overlays/nishir
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: metatube
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: metatube
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -436,17 +467,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/prowlarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: prowlarr
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: prowlarr
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -460,17 +492,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/qbittorrent/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: qbittorrent
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: qbittorrent
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -484,17 +517,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/radarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: radarr
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: radarr
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -508,17 +542,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/seerr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: seerr
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: seerr
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -532,17 +567,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/sonarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: sonarr
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: sonarr
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -556,17 +592,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: synapse
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: synapse
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -580,17 +617,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: synapse-proxy
+      apiVersion: apps/v1
       kind: Deployment
-      name: synapse-proxy
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -600,17 +638,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/syncthing/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: syncthing
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: syncthing
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -624,17 +663,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/vaultwarden/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: vaultwarden
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: vaultwarden
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
@@ -648,17 +688,18 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-tailscale
+    - name: infrastructure-vpa
   interval: 10m
   path: ./apps/whisparr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - apiVersion: apps/v1
+    - name: whisparr
+      apiVersion: apps/v1
       kind: StatefulSet
-      name: whisparr
       namespace: shikanime
   sourceRef:
-    kind: GitRepository
     name: flux-system
+    kind: GitRepository
   decryption:
     provider: sops
     secretRef:

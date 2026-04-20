@@ -1,3 +1,4 @@
+---
 apiVersion: k0sctl.k0sproject.io/v1beta1
 kind: Cluster
 metadata:
@@ -5,34 +6,38 @@ metadata:
 spec:
   hosts:
     - files:
-        - src: files/networkmanager/90-mac-randomization.conf
+        - name: mac-randomization
+          src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
-          name: mac-randomization
-        - src: files/sysctl/10-k8s.conf
+        - name: systctl-k8s
+          src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
-          name: systctl-k8s
-        - src: files/sysctl/20-network.conf
+        - name: systctl-network
+          src: files/sysctl/20-network.conf
           dst: /etc/sysctl.d/20-network.conf
-          name: systctl-network
-        - src: files/sysctl/40-vm-nvme.conf
+        - name: systctl-vm
+          src: files/sysctl/40-vm-nvme.conf
           dst: /etc/sysctl.d/40-vm.conf
-          name: systctl-vm
-        - src: files/tmpfiles/mnt-nishir-k0s.conf
+        - name: tmpfiles
+          src: files/tmpfiles/mnt-nishir-k0s.conf
           dst: /etc/tmpfiles.d/mnt-nishir-k0s.conf
-          name: tmpfiles
-        - src: files/networkd-dispatcher/50-tailscale
+        - name: networkd-dispatcher-tailscale
+          src: files/networkd-dispatcher/50-tailscale
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
-          name: networkd-dispatcher-tailscale
-          perm: '0755'
+          perm: "0755"
       hooks:
         connect:
           after:
             - apt-get update
-            - apt-get install -y age dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
+            - apt-get install -y age dmsetup cryptsetup ethtool open-iscsi
+              nfs-common networkd-dispatcher xfsprogs
             - systemd-tmpfiles --create
             - sysctl --system
             - k0s kubectl wait --for=create namespace/flux-system --timeout=300s
-            - sh -c 'k0s kubectl -n flux-system get secret sops-age >/dev/null 2>&1 || (age-keygen | k0s kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin --dry-run=client -o yaml | k0s kubectl apply -f -)'
+            - sh -c 'k0s kubectl -n flux-system get secret sops-age >/dev/null
+              2>&1 || (age-keygen | k0s kubectl -n flux-system create secret
+              generic sops-age --from-file=age.agekey=/dev/stdin
+              --dry-run=client -o yaml | k0s kubectl apply -f -)'
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
       noTaints: true
@@ -41,30 +46,31 @@ spec:
         address: 100.65.153.31
         user: root
     - files:
-        - src: files/networkmanager/90-mac-randomization.conf
+        - name: mac-randomization
+          src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
-          name: mac-randomization
-        - src: files/sysctl/10-k8s.conf
+        - name: systctl-k8s
+          src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
-          name: systctl-k8s
-        - src: files/sysctl/20-network.conf
+        - name: systctl-network
+          src: files/sysctl/20-network.conf
           dst: /etc/sysctl.d/20-network.conf
-          name: systctl-network
-        - src: files/sysctl/40-vm-sata.conf
+        - name: systctl-vm
+          src: files/sysctl/40-vm-sata.conf
           dst: /etc/sysctl.d/40-vm.conf
-          name: systctl-vm
-        - src: files/tmpfiles/mnt-reimu-k0s.conf
+        - name: tmpfiles
+          src: files/tmpfiles/mnt-reimu-k0s.conf
           dst: /etc/tmpfiles.d/mnt-reimu-k0s.conf
-          name: tmpfiles
-        - src: files/networkd-dispatcher/50-tailscale
+        - name: networkd-dispatcher-tailscale
+          src: files/networkd-dispatcher/50-tailscale
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
-          name: networkd-dispatcher-tailscale
-          perm: '0755'
+          perm: "0755"
       hooks:
         connect:
           after:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
+            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi
+              nfs-common networkd-dispatcher xfsprogs
             - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
@@ -74,30 +80,31 @@ spec:
         address: 100.94.149.17
         user: root
     - files:
-        - src: files/networkmanager/90-mac-randomization.conf
+        - name: mac-randomization
+          src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
-          name: mac-randomization
-        - src: files/sysctl/10-k8s.conf
+        - name: systctl-k8s
+          src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
-          name: systctl-k8s
-        - src: files/sysctl/20-network.conf
+        - name: systctl-network
+          src: files/sysctl/20-network.conf
           dst: /etc/sysctl.d/20-network.conf
-          name: systctl-network
-        - src: files/sysctl/40-vm-sata.conf
+        - name: systctl-vm
+          src: files/sysctl/40-vm-sata.conf
           dst: /etc/sysctl.d/40-vm.conf
-          name: systctl-vm
-        - src: files/tmpfiles/mnt-marisa-k0s.conf
+        - name: tmpfiles
+          src: files/tmpfiles/mnt-marisa-k0s.conf
           dst: /etc/tmpfiles.d/mnt-marisa-k0s.conf
-          name: tmpfiles
-        - src: files/networkd-dispatcher/50-tailscale
+        - name: networkd-dispatcher-tailscale
+          src: files/networkd-dispatcher/50-tailscale
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
-          name: networkd-dispatcher-tailscale
-          perm: '0755'
+          perm: "0755"
       hooks:
         connect:
           after:
             - apt-get update
-            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi nfs-common networkd-dispatcher xfsprogs
+            - apt-get install -y dmsetup cryptsetup ethtool open-iscsi
+              nfs-common networkd-dispatcher xfsprogs
             - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
@@ -107,6 +114,7 @@ spec:
         address: 100.95.57.59
         user: root
   k0s:
+    version: v1.35.2+k0s.0
     config:
       apiVersion: k0s.k0sproject.io/v1beta1
       kind: ClusterConfig
@@ -122,8 +130,8 @@ spec:
                 url: https://flux-iac.github.io/tofu-controller
             charts:
               - name: flux
-                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
                 version: 0.46.0
+                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
                 namespace: flux-system
                 values: |
                   instance:
@@ -147,8 +155,8 @@ spec:
                       ref: refs/heads/main
                       url: https://github.com/shikanime/manifests.git
               - name: flux-operator
-                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
                 version: 0.46.0
+                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
                 namespace: flux-system
                 values: |
                   healthcheck:
@@ -178,8 +186,8 @@ spec:
                     rbac:
                       createRoles: true
               - name: tofu-controller
-                chartname: tofu-controller/tofu-controller
                 version: 0.16.2
+                chartname: tofu-controller/tofu-controller
                 namespace: flux-system
                 values: |
                   awsPackage:
@@ -189,8 +197,8 @@ spec:
                       - flux-system
                       - shikanime
               - name: longhorn
-                chartname: longhorn/longhorn
                 version: 1.11.1
+                chartname: longhorn/longhorn
                 namespace: longhorn-system
                 values: |
                   ingress:
@@ -222,4 +230,3 @@ spec:
                           isGroup: true
         telemetry:
           enabled: false
-    version: v1.35.2+k0s.0

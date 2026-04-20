@@ -1,3 +1,4 @@
+---
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
@@ -5,8 +6,8 @@ metadata:
 spec:
   sources:
     - secret:
-        key: tls.crt
         name: nishir-ca
+        key: tls.crt
     - useDefaultCAs: true
   target:
     configMap:

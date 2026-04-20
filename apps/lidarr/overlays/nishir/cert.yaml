@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -7,8 +8,8 @@ spec:
   dnsNames:
     - lidarr
   issuerRef:
-    kind: ClusterIssuer
     name: nishir
+    kind: ClusterIssuer
   secretName: lidarr-tls
   keystores:
     pkcs12:

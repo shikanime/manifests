@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -24,33 +25,35 @@ spec:
             - name: STHOMEDIR
               value: /config
           ports:
-            - containerPort: 8384
-              name: http
-            - containerPort: 22000
-              name: sync
+            - name: http
+              containerPort: 8384
+            - name: sync
+              containerPort: 22000
               protocol: TCP
-            - containerPort: 22000
-              name: sync-udp
+            - name: sync-udp
+              containerPort: 22000
               protocol: UDP
-            - containerPort: 21027
-              name: discovery
+            - name: discovery
+              containerPort: 21027
               protocol: UDP
           readinessProbe:
             httpGet:
               path: /rest/noauth/health
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /rest/noauth/health
               port: http
             initialDelaySeconds: 60
+            timeoutSeconds: 5
           startupProbe:
             httpGet:
               path: /rest/noauth/health
               port: http
             initialDelaySeconds: 5
-            timeoutSeconds: 2
+            timeoutSeconds: 5
             failureThreshold: 180
           volumeMounts:
             - name: config

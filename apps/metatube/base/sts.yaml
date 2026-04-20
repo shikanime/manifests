@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -19,27 +20,30 @@ spec:
           args:
             - -dsn
             - /data/metatube.db
-          envFrom:
-            - secretRef:
-                name: metatube
           ports:
-            - containerPort: 8080
-              name: http
+            - name: http
+              containerPort: 8080
           readinessProbe:
             tcpSocket:
               port: http
             initialDelaySeconds: 30
+            timeoutSeconds: 5
           livenessProbe:
             tcpSocket:
               port: http
             initialDelaySeconds: 60
+            timeoutSeconds: 5
           startupProbe:
             tcpSocket:
               port: http
+            timeoutSeconds: 5
             failureThreshold: 180
           volumeMounts:
             - name: data
               mountPath: /data
+          envFrom:
+            - secretRef:
+                name: metatube
       volumes:
         - name: data
           persistentVolumeClaim:

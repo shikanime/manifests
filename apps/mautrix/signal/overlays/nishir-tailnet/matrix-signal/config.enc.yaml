@@ -1,3 +1,4 @@
+---
 # Network-specific config options
 network:
   # Displayname template for Signal users.
@@ -29,7 +30,7 @@ network:
 # Config options that affect the central bridge module.
 bridge:
   # The prefix for commands. Only required in non-management rooms.
-  command_prefix: '!signal'
+  command_prefix: "!signal"
   # Should the bridge create a space for each login containing the rooms that account is in?
   personal_filtering_spaces: true
   # Whether the bridge should set names and avatars explicitly for DM portals.
@@ -124,18 +125,28 @@ bridge:
     #   .Caption - The `formatted_body` field of the message, if it's a caption. Otherwise an empty string.
     #   .FileName - The name of the file being sent.
     message_formats:
-      m.text: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.notice: '<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}'
-      m.emote: '* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}'
-      m.file: '<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.image: '<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.audio: '<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.video: '<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}: {{ .Caption }}{{ end }}'
-      m.location: '<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption }}: {{ .Caption }}{{ end }}'
+      m.text: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.notice: "<b>{{ .Sender.DisambiguatedName }}</b>: {{ .Message }}"
+      m.emote: "* <b>{{ .Sender.DisambiguatedName }}</b> {{ .Message }}"
+      m.file:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a file{{ if .Caption }}: {{
+        .Caption }}{{ end }}"
+      m.image:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent an image{{ if .Caption }}:
+        {{ .Caption }}{{ end }}"
+      m.audio:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent an audio file{{ if .Caption
+        }}: {{ .Caption }}{{ end }}"
+      m.video:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a video{{ if .Caption }}:
+        {{ .Caption }}{{ end }}"
+      m.location:
+        "<b>{{ .Sender.DisambiguatedName }}</b> sent a location{{ if .Caption
+        }}: {{ .Caption }}{{ end }}"
     # For networks that support per-message displaynames (i.e. Slack and Discord), the template for those names.
     # This has all the Sender variables available under message_formats (but without the .Sender prefix).
     # Note that you need to manually remove the displayname from message_formats above.
-    displayname_format: '{{ .DisambiguatedName }}'
+    displayname_format: "{{ .DisambiguatedName }}"
   # Permissions for using the bridge.
   # Permitted values:
   #    relay - Talk through the relaybot (if enabled), no access otherwise
@@ -147,9 +158,9 @@ bridge:
   #   domain - All users on that homeserver
   #     mxid - Specific user
   permissions:
-    '*': relay
+    "*": relay
     matrix.taila659a.ts.net: user
-    '@root:matrix.taila659a.ts.net': admin
+    "@root:matrix.taila659a.ts.net": admin
 # Config for the bridge's database.
 database:
   # The database type. "sqlite3-fk-wal" and "postgres" are supported.
@@ -199,6 +210,8 @@ homeserver:
 # Application service host/registration related details.
 # Changing these values requires regeneration of the registration (except when noted otherwise)
 appservice:
+  # The unique ID of this appservice.
+  id: signal
   # The address that the homeserver can use to connect to this appservice.
   # Like the homeserver address, a local non-https address is recommended when the bridge is on the same machine.
   # If the bridge is elsewhere, you must secure the connection yourself (e.g. with https or wireguard)
@@ -212,16 +225,6 @@ appservice:
   # For Docker, you generally have to change the hostname to 0.0.0.0.
   hostname: 0.0.0.0
   port: 29328
-  # The unique ID of this appservice.
-  id: signal
-  # Appservice bot details.
-  bot:
-    # Username of the appservice bot.
-    username: signalbot
-    # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
-    # to leave display name/avatar as-is.
-    displayname: Signal bridge bot
-    avatar: mxc://maunium.net/wPJgTQbZOtpBFmDNkiNEMDUp
   # Whether to receive ephemeral events via appservice transactions.
   ephemeral_events: true
   # Should incoming events be handled asynchronously?
@@ -235,6 +238,14 @@ appservice:
   # Localpart template of MXIDs for remote users.
   # {{.}} is replaced with the internal ID of the user.
   username_template: signal_{{.}}
+  # Appservice bot details.
+  bot:
+    # Username of the appservice bot.
+    username: signalbot
+    # Display name and avatar for bot. Set to "remove" to remove display name/avatar, leave empty
+    # to leave display name/avatar as-is.
+    displayname: Signal bridge bot
+    avatar: mxc://maunium.net/wPJgTQbZOtpBFmDNkiNEMDUp
 # Config options that affect the Matrix connector of the bridge.
 matrix:
   # Whether the bridge should send the message status as a custom com.beeper.message_send_status event.
@@ -253,10 +264,10 @@ matrix:
   upload_file_threshold: 5242880
 # Segment-compatible analytics endpoint for tracking some events, like provisioning API login and encryption errors.
 analytics:
-  # API key to send with tracking requests. Tracking is disabled if this is null.
-  token: null
   # Address to send tracking requests to.
   url: https://api.segment.io/v1/track
+  # API key to send with tracking requests. Tracking is disabled if this is null.
+  token: null
   # Optional user ID for tracking events. If null, defaults to using Matrix user ID.
   user_id: null
 # Settings for provisioning API
@@ -451,53 +462,62 @@ logging:
       max_backups: 10
       compress: false
 sops:
+  version: 3.12.2
+  lastmodified: "2026-04-14T23:45:16Z"
+  mac: ENC[AES256_GCM,data:Y2I7raRBa9Lfc66UzlI66Mnjn87FaJWWLFzApL9ftwdscbgJBOIGfqlTcEGOaXKI3sRlvTg/MQ39NTCOpvTRVudx7Jvh2jUgnHCWouCsG4RvFSUEpPFyS2rCAw1eNMbut79iZfdp7J3mYT0qQ3g6qofYtEcqqj2GIQeLeSepXTc=,iv:7/r86NaK93RcTDuh50YG5j0ub/trYrCVPzc1apWuMZM=,tag:Dg+Tqyyipk4B9VoRbvNvQQ==,type:str]
+  encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4SHdlNXBzczk5ZER2akdk
-        YzNhUitvaEJyM0kxZzJKZ0xoSmZ5c2kvMzJzClJDdnVQZitwY2xjLzQ0elgyWnBE
-        dmg4RnJ2MFYzMGUyMjdXNFJ3UjAwaGsKLS0tIFM0YTNZQVJDZ20xMitDb0lBdW82
-        cTVNSVVRMXVjc0JYc0hiaFowZ0ZEdVkKMLCnv6r/utdtMFzpFSEuVLqmY4sRbvze
-        6R7JZfV/eEHKLo3DBeFHvbX7hgDWR8xOdl5hkSWxzqH+asoEi9apQw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2c1U3K3FTaHRiZWRpZWU1
+        dHpNb2g2aVVXN1FoU2FROGR1dmRvaFZWK2d3CmlSTFFaOFpiTTgwMGhiWEVVQmUw
+        WW85WFlGdkdqRUxCMkVNdXN6d1pnSmcKLS0tIDRiYkJ5c3gvb0k5R2dGbFovdDkx
+        Y1lmRUlWNDdGd0pNdElRVnd1b2J2SW8KogVdnp9DqRVj8cyOO/bkqBWgCTkPXMXE
+        H1/P6mfWQrq/MY0WoK8N9N5Qt+XBZNuKHTvmmeMJUp8IERqgA6PFSA==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVV1Z6cXN3ZlMxZC9CN2Ju
-        aXVBaVV1VHcyenpaaUNGVkVaM0sxR0tqNW5zClJOUmtiWlFFaDhXZFVhOFRQMFc5
-        Rm8yREVRZHBtU2JGbkZPb1FPcDh2NkEKLS0tIEtoa1BaN0lZTTcwRDlDbnFNQlhV
-        Q3RtZXNEaXJPa1FZL1RKRG9ESTBMTUUKaMixLL+KD3tAk01R+Kdtj4UJlNW3q8EN
-        oSD1KeRh7/qlYETj0Ous7MNPQbtut1X7SccLIDZ8YVAJyyVmdYxOcA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyaC9BZ0QwZWFBYTI5WDlG
+        a0xPek9kYXhta1NjTVV0bHVEUmV5aU9QQkRZCk1zeEVKYmdCcktiL2Ywc1QvL29m
+        Y0E5akRsWkNoYTFpUFhaVGdPTTVpdjQKLS0tIGRvQVVaODlXLzNwTTRpQkNNZXVi
+        SDF0WnNqNnF0UjJmOGtYUHJHYWlFSkUKl9ksJyvVyf1C39pcwNlUatHC/6iKwhVi
+        31ur/gr4/Hp4Nftt1nmCFdS3vCWuCSyKTczQD+rAPe7A99GaQSzFqw==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNRllXN0M5cWwyaVJMaEF0
-        ZnZSWFQrUVpkZHdscFFRTm9pak5rVmNKOGtJCmZhbUZqNldWc1V5aitudWdvaU9J
-        KzhNMXBPaTBDT1ZXSVNwc0VNNHNhNFUKLS0tIGppOTA0U0FUWWVHNFZxZE1MdE0v
-        UUJZVnhreVVYWTN2em9xZDB4RFRyOFEK2VjNAHiXaid6ZpHMGlD641ITsxjs3vX6
-        IVlpEzM+TFHsOC6Xy3xv02/QCzqfK4zGheqdIWV5hyswdqrZowrljA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBadDdEYkhnd2phc1RCQmtC
+        M09EUm5YM0R3Q3ZZQTlrMUM4NjNQTm4wSW1NCjUyU3gxY1hId0JXekgvcHM1eDFJ
+        ckdZMTlkbndFY29WMi9SaFRFLzZOdVkKLS0tIHAxTVl5WUlvNGczOHF6MWV0MWJX
+        ajJxNEtQMUdZemVrQ3JSTHZSV1NFbEUK32t1H9z3Im38pPRhaloLysVnpNYHVsFm
+        GJAE8GbaWuzZDjtjgX4I5WRQblic3lQZKaAD5fPR6G8JWeQzPyBgHQ==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age17pepaj2fgfsh5a0nzdhjsylv8qdstffmapy5xwvymjh5s9wz8uaqgvzdvr
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLVUY2TFJrcEE5NUVFRk03
-        bld6OXRSQ2RSeTNOaE5TdkZEdkNPK2t4aGlRCm1sVzg5T0lLQWFWOGxWOGlxamo4
-        RnU1R2NpN0tlT1dvdjV0RFlhV054eU0KLS0tIFZXSjQyRGd4UTBBYUZ2djgyc0xw
-        ekh6VW83eFJIdjRVaFlzZVN2OWx2TGsKHN2pKQGKMbYhURFwWf4powMxcXFFA9xY
-        C+GvLj24HRka59vbzl1/vale31un6p7g2mFKseztyrkFKVmg6Q/8BQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0THozbmw3dFo5UFk0RDlq
+        YUNnc0NpeSsraStMZjdpVVFiTi9XUExXcjNnCi9iNERqMjNlbCtIWCswQ3BkOTNx
+        djBlRndLRXNwdGtIK3FEQWY2WXhtc2sKLS0tIFNiYVMzRyt6NE40NHNpamRwVmRv
+        ck9qbnI3ZUZMZ1pXWnpSNTVNYTFFcXcKHxgw9nrdLwFNgSRVqjEEKYHJDjs/e76A
+        2BhoEyL74bvqtnwB6/Bee7MHQHZKb0sZ/ZJHeFItsw51bMQeHZMe0Q==
         -----END AGE ENCRYPTED FILE-----
     - recipient: age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMUS9nU0tJVFFnOWxOVElj
-        clRLM0ZreGM5bitwc21LREwvanpIUVQ2clVJCmhtaUZONHgwSXBDQjdqbytOalBB
-        aXBaZlJYT09HdTMzRnQxV0dvMW1rNFkKLS0tIHp1M2NYWGwzeDVJSk5vZUVlYUs2
-        b3U5SlR6Q1hGSDdXbmFMRGhRSFQyUncKqOVlgFhpWEG6ZcTdGDVjEJ1QmUYQs8ok
-        brL6+gY92OiAPPBKBzawWzu3064+F3qz6wtAAAT6KiP7BvR/Gmf0Iw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpU0laT3laeXRPYU1YNk1P
+        aElqTHdBVWJ3cW9icjdtZ1A5dFBRaVcwaUJjCmlKY3BpcEtXeno5djFMRHBTUU1X
+        WFFBbWQvN0loWk9TTDdEdkExdmpYTEUKLS0tIE5aamJvVXQrRUVPdEN0NjFyVk42
+        WDNCR21oZGE0bVVoa3YrdHBFMlA5UjgKaSddeLi9CNJAZsqPA+LCJOPml5itla6e
+        HedPF0yXEO9nqRMPQWKj1oWMGJfTlua2PeO/Rz2wKt6Q93XdrgILqw==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-04-14T23:45:16Z"
-  mac: ENC[AES256_GCM,data:Y2I7raRBa9Lfc66UzlI66Mnjn87FaJWWLFzApL9ftwdscbgJBOIGfqlTcEGOaXKI3sRlvTg/MQ39NTCOpvTRVudx7Jvh2jUgnHCWouCsG4RvFSUEpPFyS2rCAw1eNMbut79iZfdp7J3mYT0qQ3g6qofYtEcqqj2GIQeLeSepXTc=,iv:7/r86NaK93RcTDuh50YG5j0ub/trYrCVPzc1apWuMZM=,tag:Dg+Tqyyipk4B9VoRbvNvQQ==,type:str]
-  encrypted_regex: ^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$
-  version: 3.12.2
+    - recipient: age1lcz72z6vkjywvhth955l5q9fl5wu8sdf32jpy2y6tz3rers7v5tq2gz7tx
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0d01HdmJPYWNwQkdZRHVu
+        b2pFMWpVNFlEQWwvZ1BVdHdjaFF6V0JEMG1VCkdZYkVIUWlaSFlXblM1YUk0Zmlo
+        Q1BlNmpwQlpyYnFrejd2bk12Z093WDQKLS0tIEJmRXk3SG0wNUVWZjRPeDZRa1Iz
+        SmRlRU4xd2ZjRTUrQzBSTmg1UEpHSUEKKWlDayLwv1f2VS/7Ke9c2Km5TJkEVcJg
+        kawQKLmM8DodSCmfQUGeZK976yYWmUeGtOWjOthYRqaVsCBbEQMzkg==
+        -----END AGE ENCRYPTED FILE-----

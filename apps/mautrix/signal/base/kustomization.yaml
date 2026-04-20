@@ -1,17 +1,7 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-configMapGenerator:
-  - files:
-      - rclone/rclone.conf
-    name: mautrix-signal-rclone
-    namespace: shikanime
-labels:
-  - pairs:
-      app.kubernetes.io/component: communication
-      app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 1.140.0
+---
 resources:
   - ingress.yaml
+  - pvc.yaml
   - sts.yaml
   - svc.yaml
 images:
@@ -21,3 +11,13 @@ images:
   - name: rclone
     newName: rclone/rclone
     newTag: 1.71.2
+configMapGenerator:
+  - name: mautrix-signal-rclone
+    namespace: shikanime
+    files:
+      - rclone/rclone.conf
+labels:
+  - pairs:
+      app.kubernetes.io/component: communication
+      app.kubernetes.io/part-of: nishir-office
+      app.kubernetes.io/version: 1.140.0

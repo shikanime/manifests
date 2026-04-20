@@ -1,17 +1,16 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: shikanime
-patches:
-  - path: patch-ingress.yaml
+---
 resources:
   - ../nishir
   - netpol.yaml
   - proxyclass.yaml
+namespace: shikanime
+patches:
+  - path: patch-ingress.yaml
 secretGenerator:
-  - files:
+  - name: mautrix-whatsapp
+    files:
       - config.yaml=matrix-whatsapp/config.enc.yaml
       - doublepuppet.yaml=matrix-whatsapp/doublepuppet.enc.yaml
       - registration.yaml=matrix-whatsapp/registration.enc.yaml
-    name: mautrix-whatsapp
     options:
       disableNameSuffixHash: true

@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -12,8 +13,8 @@ spec:
               value: |
                 {certs="/etc/ssl/private/tls.crt",key="/etc/ssl/private/tls.key"}
           ports:
-            - containerPort: 80
-              name: https
+            - name: https
+              containerPort: 80
           readinessProbe:
             httpGet:
               port: https

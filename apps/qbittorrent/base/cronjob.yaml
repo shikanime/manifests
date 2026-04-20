@@ -1,3 +1,4 @@
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -11,18 +12,18 @@ spec:
             app.kubernetes.io/component: qbittorrent-resume
         spec:
           containers:
-            - command:
-                - qbittorrent-resume.sh
+            - name: qbittorrent-resume
               image: alpine
-              envFrom:
-                - secretRef:
-                    name: qbittorrent
-              name: qbittorrent-resume
+              command:
+                - qbittorrent-resume.sh
               volumeMounts:
                 - name: scripts
                   mountPath: /usr/local/bin
                 - name: apk-cache
                   mountPath: /var/cache/apk
+              envFrom:
+                - secretRef:
+                    name: qbittorrent
           restartPolicy: OnFailure
           volumes:
             - name: scripts

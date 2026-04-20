@@ -1,5 +1,7 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
+---
+resources:
+  - ../../base
+  - ks.yaml
 components:
   - ../../components/cert-manager
   - ../../components/descheduler
@@ -9,11 +11,8 @@ components:
   - ../../components/nfd
   - ../../components/tailscale
   - ../../components/vpa
-resources:
-  - ../../base
-  - ks.yaml
 secretGenerator:
-  - envs:
-      - discord-webhook/.enc.env
-    name: discord-webhook
+  - name: discord-webhook
     namespace: flux-system
+    envs:
+      - discord-webhook/.enc.env

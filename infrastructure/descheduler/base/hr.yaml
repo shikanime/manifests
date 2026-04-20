@@ -1,3 +1,4 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -6,13 +7,13 @@ metadata:
 spec:
   chart:
     spec:
+      version: 0.35.1
       chart: descheduler
       interval: 1h
       sourceRef:
-        kind: HelmRepository
         name: kubernetes-sigs-descheduler
+        kind: HelmRepository
         namespace: flux-system
-      version: 0.35.1
   interval: 10m
   releaseName: descheduler
   targetNamespace: kube-system
@@ -22,6 +23,15 @@ spec:
         - source: KubernetesMetrics
       profiles:
         - name: default
+          plugins:
+            deschedule:
+              enabled:
+                - PodLifeTime
+                - RemoveFailedPods
+                - RemovePodsHavingTooManyRestarts
+                - RemovePodsViolatingInterPodAntiAffinity
+                - RemovePodsViolatingNodeAffinity
+                - RemovePodsViolatingNodeTaints
           pluginConfig:
             - name: DefaultEvictor
               args:
@@ -60,16 +70,11 @@ spec:
                 nodeAffinityType:
                   - requiredDuringSchedulingIgnoredDuringExecution
             - name: RemovePodsViolatingNodeTaints
-          plugins:
-            deschedule:
-              enabled:
-                - PodLifeTime
-                - RemoveFailedPods
-                - RemovePodsHavingTooManyRestarts
-                - RemovePodsViolatingInterPodAntiAffinity
-                - RemovePodsViolatingNodeAffinity
-                - RemovePodsViolatingNodeTaints
         - name: utilization
+          plugins:
+            balance:
+              enabled:
+                - LowNodeUtilization
           pluginConfig:
             - name: DefaultEvictor
             - name: LowNodeUtilization
@@ -77,16 +82,10 @@ spec:
                 metricsUtilization:
                   source: KubernetesMetrics
                 thresholds:
-                  cpu: 10
                   memory: 10
                 targetThresholds:
-                  cpu: 20
-                  memory: 20
+                  memory: 10
                 useDeviationThresholds: true
-          plugins:
-            balance:
-              enabled:
-                - LowNodeUtilization
         - name: spread
           pluginConfig:
             - name: DefaultEvictor

@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,8 +20,24 @@ spec:
             - --remote-debugging-address=0.0.0.0
             - --remote-allow-origins=*
           ports:
-            - containerPort: 9222
-              name: cdp
+            - name: cdp
+              containerPort: 9222
+          readinessProbe:
+            tcpSocket:
+              port: cdp
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: cdp
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          startupProbe:
+            tcpSocket:
+              port: cdp
+            initialDelaySeconds: 3
+            timeoutSeconds: 5
+            failureThreshold: 180
           volumeMounts:
             - name: dshm
               mountPath: /dev/shm
