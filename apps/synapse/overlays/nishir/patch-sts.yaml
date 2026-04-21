@@ -33,4 +33,3 @@ spec:
             timeoutSeconds: 15
             periodSeconds: 10
             failureThreshold: 180
-      volumes:
