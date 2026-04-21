@@ -8,4 +8,4 @@ spec:
   url: https://github.com/open-policy-agent/gatekeeper-library
   interval: 1h
   ref:
-    branch: refs/heads/master
+    branch: master
