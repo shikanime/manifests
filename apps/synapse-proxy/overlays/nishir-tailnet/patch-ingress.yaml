@@ -5,7 +5,6 @@ metadata:
   name: matrix
   annotations:
     tailscale.com/funnel: "true"
-    tailscale.com/proxy-class: synapse
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

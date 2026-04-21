@@ -173,7 +173,6 @@ spec:
                       enabled: true
                       className: tailscale
                       annotations:
-                        tailscale.com/proxy-class: flux
                         tailscale.com/tags: tag:web
                       hosts:
                         - host: nishir-flux
@@ -205,7 +204,6 @@ spec:
                     enabled: true
                     ingressClassName: tailscale
                     annotations:
-                      tailscale.com/proxy-class: longhorn
                       tailscale.com/tags: tag:web
                     host: nishir-longhorn
                     tls: true

@@ -87,8 +87,6 @@ controllers installed during bootstrap.
 - Tailnet ingress:
   - Tailscale Operator credentials under
     `clusters/<cluster>/components/tailscale/`
-  - app overlays patch `Ingress` to use `ingressClassName: tailscale` and set
-    `ProxyClass`
 - Storage:
   - Longhorn settings, storage class, and recurring jobs under
     `clusters/<cluster>/components/longhorn/`
@@ -106,8 +104,7 @@ Most apps follow the same pattern:
 
 - Workload: `Deployment` or `StatefulSet` in `apps/<app>/base/`
 - Network: `Service` + `Ingress` in `apps/<app>/base/`, patched per overlay
-  - tailnet overlays typically set `ingressClassName: tailscale` and attach a
-    `ProxyClass` (example:
+  - tailnet overlays typically set `ingressClassName: tailscale` (example:
     [patch-ingress.yaml](apps/jellyfin/overlays/nishir-tailnet/patch-ingress.yaml))
 - Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound
   to a Longhorn `PV`
