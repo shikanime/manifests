@@ -8,12 +8,12 @@ spec:
   serviceName: hermes-agent
   selector:
     matchLabels:
-      app.kubernetes.io/instance: hermes
+      app.kubernetes.io/instance: hermes-agent
       app.kubernetes.io/name: hermes-agent
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: hermes
+        app.kubernetes.io/instance: hermes-agent
         app.kubernetes.io/name: hermes-agent
     spec:
       initContainers:
