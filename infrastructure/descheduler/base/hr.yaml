@@ -70,7 +70,7 @@ spec:
                 nodeAffinityType:
                   - requiredDuringSchedulingIgnoredDuringExecution
             - name: RemovePodsViolatingNodeTaints
-        - name: utilization
+        - name: cpu
           plugins:
             balance:
               enabled:
@@ -81,10 +81,26 @@ spec:
               args:
                 metricsUtilization:
                   source: KubernetesMetrics
-                thresholds:
-                  memory: 10
                 targetThresholds:
-                  memory: 10
+                  cpu: 15
+                thresholds:
+                  cpu: 30
+                useDeviationThresholds: true
+        - name: memory
+          plugins:
+            balance:
+              enabled:
+                - LowNodeUtilization
+          pluginConfig:
+            - name: DefaultEvictor
+            - name: LowNodeUtilization
+              args:
+                metricsUtilization:
+                  source: KubernetesMetrics
+                targetThresholds:
+                  memory: 20
+                thresholds:
+                  memory: 20
                 useDeviationThresholds: true
         - name: spread
           pluginConfig:
