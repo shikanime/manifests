@@ -15,9 +15,11 @@ images:
     newName: syncthing/syncthing
     newTag: 2.0.12
 labels:
-  - pairs:
+  - includeTemplates: true
+    pairs:
       app.kubernetes.io/component: file-synchronizer
       app.kubernetes.io/instance: syncthing
       app.kubernetes.io/name: syncthing
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 2.0.12
+

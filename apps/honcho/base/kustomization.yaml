@@ -13,9 +13,11 @@ images:
     newName: ghcr.io/plastic-labs/honcho
     newTag: v3.0.6
 labels:
-  - pairs:
+  - includeTemplates: true
+    pairs:
       app.kubernetes.io/component: agent
       app.kubernetes.io/instance: honcho
       app.kubernetes.io/name: honcho
       app.kubernetes.io/part-of: nishir-automata
       app.kubernetes.io/version: 3.0.6
+

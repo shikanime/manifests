@@ -20,12 +20,14 @@ configMapGenerator:
     files:
       - rclone/rclone.conf
 labels:
-  - pairs:
+  - includeTemplates: true
+    pairs:
       app.kubernetes.io/component: agent
       app.kubernetes.io/instance: hermes
       app.kubernetes.io/name: hermes-agent
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 2026.4.16
+
 secretGenerator:
   - name: hermes-agent-ssh
     files:
@@ -33,9 +35,11 @@ secretGenerator:
     options:
       disableNameSuffixHash: true
 labels:
-  - pairs:
+  - includeTemplates: true
+    pairs:
       app.kubernetes.io/component: agent
       app.kubernetes.io/instance: hermes-agent
       app.kubernetes.io/name: hermes-agent
       app.kubernetes.io/part-of: nishir-automata
       app.kubernetes.io/version: "2026.4.16"
+

@@ -192,7 +192,6 @@ spec:
       - apiGroups:
           - ""
         kinds:
-          - PersistentVolumeClaim
           - Pod
           - Service
       - apiGroups:

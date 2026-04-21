@@ -15,9 +15,11 @@ images:
     newName: ghcr.io/metatube-community/metatube-server
     newTag: 1.3.2
 labels:
-  - pairs:
+  - includeTemplates: true
+    pairs:
       app.kubernetes.io/component: media-server
       app.kubernetes.io/instance: metatube
       app.kubernetes.io/name: metatube
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 1.3.2
+

@@ -16,9 +16,11 @@ images:
     newName: ghcr.io/seerr-team/seerr
     newTag: v3.1.0
 labels:
-  - pairs:
+  - includeTemplates: true
+    pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/instance: seerr
       app.kubernetes.io/name: seerr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 3.1.0
+

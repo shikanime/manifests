@@ -23,9 +23,11 @@ configMapGenerator:
     files:
       - rclone/rclone.conf
 labels:
-  - pairs:
+  - includeTemplates: true
+    pairs:
       app.kubernetes.io/component: file-server
       app.kubernetes.io/instance: copyparty
       app.kubernetes.io/name: copyparty
       app.kubernetes.io/part-of: nishir-operation
       app.kubernetes.io/version: 1.20.0
+
