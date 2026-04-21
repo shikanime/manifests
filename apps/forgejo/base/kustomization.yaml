@@ -26,7 +26,6 @@ configMapGenerator:
       - rclone/rclone.conf
 labels:
   - includeTemplates: true
-    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/instance: forgejo

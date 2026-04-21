@@ -14,7 +14,6 @@ images:
     newTag: 149.0.7779.3
 labels:
   - includeTemplates: true
-    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: browser
       app.kubernetes.io/instance: chrome

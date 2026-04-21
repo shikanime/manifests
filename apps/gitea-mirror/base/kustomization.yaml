@@ -16,7 +16,6 @@ images:
     newTag: v3.11.0
 labels:
   - includeTemplates: true
-    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/instance: gitea

@@ -14,7 +14,6 @@ images:
     newTag: 2.11.2
 labels:
   - includeTemplates: true
-    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: communication
       app.kubernetes.io/instance: synapse
