@@ -36,5 +36,5 @@ labels:
       app.kubernetes.io/component: agent
       app.kubernetes.io/instance: hermes-agent
       app.kubernetes.io/name: hermes-agent
-      app.kubernetes.io/part-of: nishir-agent
+      app.kubernetes.io/part-of: nishir-automata
       app.kubernetes.io/version: "2026.4.16"
