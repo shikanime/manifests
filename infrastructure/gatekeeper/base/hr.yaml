@@ -26,4 +26,5 @@ spec:
     enableGeneratorResourceExpansion: false
     enableK8sNativeValidation: true
     mutatingWebhookFailurePolicy: Fail
+    replicas: 3
     validatingWebhookFailurePolicy: Fail
