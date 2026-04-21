@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: metatube
       app.kubernetes.io/name: metatube
   policyTypes:
     - Ingress

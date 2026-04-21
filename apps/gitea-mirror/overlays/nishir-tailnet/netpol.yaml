@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: gitea
       app.kubernetes.io/name: gitea-mirror
   policyTypes:
     - Ingress

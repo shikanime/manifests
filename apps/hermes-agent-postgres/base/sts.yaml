@@ -7,11 +7,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
+      app.kubernetes.io/instance: hermes
       app.kubernetes.io/name: hermes-agent-postgres
   serviceName: hermes-agent-postgres
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: hermes
         app.kubernetes.io/name: hermes-agent-postgres
     spec:
       containers:

@@ -8,10 +8,12 @@ spec:
   serviceName: whisparr
   selector:
     matchLabels:
+      app.kubernetes.io/instance: whisparr
       app.kubernetes.io/name: whisparr
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: whisparr
         app.kubernetes.io/name: whisparr
     spec:
       initContainers:

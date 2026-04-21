@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: mautrix
       app.kubernetes.io/name: mautrix-discord
   policyTypes:
     - Ingress

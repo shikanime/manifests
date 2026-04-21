@@ -8,10 +8,12 @@ spec:
   serviceName: lidarr
   selector:
     matchLabels:
+      app.kubernetes.io/instance: lidarr
       app.kubernetes.io/name: lidarr
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: lidarr
         app.kubernetes.io/name: lidarr
     spec:
       initContainers:

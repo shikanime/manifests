@@ -7,11 +7,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
+      app.kubernetes.io/instance: catbox
       app.kubernetes.io/name: catbox
   serviceName: catbox
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: catbox
         app.kubernetes.io/name: catbox
     spec:
       securityContext:

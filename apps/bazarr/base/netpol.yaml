@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: bazarr
       app.kubernetes.io/name: bazarr
   policyTypes:
     - Ingress

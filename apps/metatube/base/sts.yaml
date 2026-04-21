@@ -8,10 +8,12 @@ spec:
   serviceName: metatube
   selector:
     matchLabels:
+      app.kubernetes.io/instance: metatube
       app.kubernetes.io/name: metatube
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: metatube
         app.kubernetes.io/name: metatube
     spec:
       containers:

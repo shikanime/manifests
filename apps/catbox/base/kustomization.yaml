@@ -17,6 +17,7 @@ images:
 labels:
   - pairs:
       app.kubernetes.io/component: backend-service
+      app.kubernetes.io/instance: catbox
       app.kubernetes.io/name: catbox
       app.kubernetes.io/part-of: telsha-workstation
       app.kubernetes.io/version: 0.17.1

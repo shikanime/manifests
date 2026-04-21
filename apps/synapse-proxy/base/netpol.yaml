@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: synapse
       app.kubernetes.io/name: synapse-proxy
   policyTypes:
     - Ingress

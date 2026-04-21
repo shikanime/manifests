@@ -8,10 +8,12 @@ spec:
   serviceName: forgejo
   selector:
     matchLabels:
+      app.kubernetes.io/instance: forgejo
       app.kubernetes.io/name: forgejo
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: forgejo
         app.kubernetes.io/name: forgejo
     spec:
       initContainers:

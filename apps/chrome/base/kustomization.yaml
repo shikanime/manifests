@@ -15,6 +15,7 @@ images:
 labels:
   - pairs:
       app.kubernetes.io/component: browser
+      app.kubernetes.io/instance: chrome
       app.kubernetes.io/name: chrome
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 149.0.7779.3

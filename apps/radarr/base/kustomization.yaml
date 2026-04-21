@@ -28,6 +28,7 @@ configMapGenerator:
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager
+      app.kubernetes.io/instance: radarr
       app.kubernetes.io/name: radarr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 6.0.4
