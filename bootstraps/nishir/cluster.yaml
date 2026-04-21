@@ -200,13 +200,11 @@ spec:
                 chartname: longhorn/longhorn
                 namespace: longhorn-system
                 values: |
-                  ingress:
-                    enabled: true
-                    ingressClassName: tailscale
-                    annotations:
-                      tailscale.com/tags: tag:web
-                    host: nishir-longhorn
-                    tls: true
+                  csi:
+                    attacherReplicaCount: 1
+                    provisionerReplicaCount: 1
+                    resizerReplicaCount: 1
+                    snapshotterReplicaCount: 1
                   defaultSettings:
                     allowCollectingLonghornUsageMetrics: false
                     defaultDataLocality: best-effort
@@ -215,6 +213,15 @@ spec:
                   defaultBackupStore:
                     backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
                     backupTargetCredentialSecret: longhorn-hetzner-backups
+                  ingress:
+                    enabled: true
+                    ingressClassName: tailscale
+                    annotations:
+                      tailscale.com/tags: tag:web
+                    host: nishir-longhorn
+                    tls: true
+                  longhornUI:
+                    replicas: 1
                   persistence:
                     defaultClassReplicaCount: 2
                     defaultDiskSelector:
