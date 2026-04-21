@@ -5,6 +5,7 @@ resources:
 components:
   - ../../components/cert-manager
   - ../../components/descheduler
+  - ../../components/gatekeeper
   - ../../components/grafana
   - ../../components/longhorn
   - ../../components/nfd
