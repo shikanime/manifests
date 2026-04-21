@@ -4,13 +4,6 @@ kind: Config
 metadata:
   name: shikanime
 profiles:
-  - name: ishtar-tailnet
-    activation:
-      - kubeContext: ishtar-k8s-operator.taila659a.ts.net
-    manifests:
-      kustomize:
-        paths:
-          - clusters/ishtar/overlays/tailnet
   - name: nishir-tailnet
     activation:
       - kubeContext: nishir-k8s-operator.taila659a.ts.net

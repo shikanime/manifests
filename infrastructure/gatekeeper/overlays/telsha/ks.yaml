@@ -2,20 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps-catbox
+  name: gatekeeper-config
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-vpa
+    - name: gatekeeper
   interval: 10m
-  path: ./apps/catbox/overlays/telsha
+  path: ./configs/gatekeeper/overlays/telsha
   prune: true
-  healthChecks:
-    - name: catbox
-      apiVersion: apps/v1
-      kind: StatefulSet
-      namespace: shikanime
+  deletionPolicy: Orphan
   sourceRef:
     name: flux-system
     kind: GitRepository

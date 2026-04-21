@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./infrastructure/gatekeeper/base
+  path: ./infrastructure/gatekeeper/overlays/nishir
   prune: true
   deletionPolicy: Orphan
   healthChecks:
@@ -14,47 +14,10 @@ spec:
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       namespace: flux-system
-  sourceRef:
-    name: flux-system
-    kind: GitRepository
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: infrastructure-gatekeeper-config
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-library
-  interval: 10m
-  path: ./configs/gatekeeper/overlays/nishir
-  prune: true
-  deletionPolicy: Orphan
-  sourceRef:
-    name: flux-system
-    kind: GitRepository
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: infrastructure-gatekeeper-library
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: infrastructure-gatekeeper
-  interval: 10m
-  path: ./configs/gatekeeper/overlays/nishir
-  prune: true
-  deletionPolicy: Orphan
+    - name: gatekeeper-config
+      apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      namespace: flux-system
   sourceRef:
     name: flux-system
     kind: GitRepository

@@ -2,12 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-vpa
+  name: cert-manager-config
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cert-manager
   interval: 10m
-  path: ./infrastructure/vpa/base
+  path: ./configs/cert-manager/overlays/nishir
   prune: true
+  deletionPolicy: Orphan
   sourceRef:
     name: flux-system
     kind: GitRepository

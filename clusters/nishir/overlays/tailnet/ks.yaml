@@ -7,7 +7,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -34,7 +33,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -61,7 +59,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -88,7 +85,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -115,7 +111,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -142,7 +137,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/chrome/overlays/nishir
@@ -164,7 +158,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent-postgres/overlays/nishir
@@ -190,7 +183,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -217,7 +209,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -244,7 +235,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -271,7 +261,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
@@ -297,7 +286,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
@@ -323,7 +311,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
@@ -349,7 +336,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
@@ -375,7 +361,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
@@ -401,7 +386,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
@@ -427,7 +411,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
@@ -453,7 +436,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
@@ -479,7 +461,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/metatube/overlays/nishir
@@ -505,7 +486,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -532,7 +512,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -559,7 +538,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -586,7 +564,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -613,7 +590,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -640,7 +616,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -667,7 +642,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -690,7 +664,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -717,7 +690,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
@@ -744,7 +716,6 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
-    - name: infrastructure-gatekeeper-config
     - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
