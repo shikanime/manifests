@@ -6,4 +6,3 @@ components:
   - ../../components/tls
 patches:
   - path: patch-pvc.yaml
-  - path: patch-sts.yaml
