@@ -210,6 +210,7 @@ spec:
   parameters:
     labels:
       - key: app.kubernetes.io/component
+      - key: app.kubernetes.io/instance
       - key: app.kubernetes.io/name
       - key: app.kubernetes.io/part-of
       - key: app.kubernetes.io/version

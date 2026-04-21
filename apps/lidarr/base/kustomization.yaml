@@ -27,6 +27,7 @@ configMapGenerator:
 labels:
   - pairs:
       app.kubernetes.io/component: library-manager
+      app.kubernetes.io/instance: lidarr
       app.kubernetes.io/name: lidarr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 3.1.0

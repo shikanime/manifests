@@ -7,10 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
+      app.kubernetes.io/instance: synapse
       app.kubernetes.io/name: synapse-proxy
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: synapse
         app.kubernetes.io/name: synapse-proxy
     spec:
       enableServiceLinks: true

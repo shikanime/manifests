@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: seerr
       app.kubernetes.io/name: seerr
   policyTypes:
     - Ingress

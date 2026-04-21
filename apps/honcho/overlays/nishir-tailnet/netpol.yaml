@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: honcho
       app.kubernetes.io/name: honcho
   policyTypes:
     - Ingress

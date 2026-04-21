@@ -7,10 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
+      app.kubernetes.io/instance: honcho
       app.kubernetes.io/name: honcho
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: honcho
         app.kubernetes.io/name: honcho
     spec:
       initContainers:

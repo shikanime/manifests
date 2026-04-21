@@ -8,10 +8,12 @@ spec:
   serviceName: mautrix-slack
   selector:
     matchLabels:
+      app.kubernetes.io/instance: mautrix
       app.kubernetes.io/name: mautrix-slack
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: mautrix
         app.kubernetes.io/name: mautrix-slack
     spec:
       initContainers:

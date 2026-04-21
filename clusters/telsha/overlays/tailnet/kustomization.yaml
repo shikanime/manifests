@@ -16,6 +16,7 @@ secretGenerator:
 labels:
   - pairs:
       app.kubernetes.io/component: cluster
+      app.kubernetes.io/instance: telsha
       app.kubernetes.io/name: telsha
       app.kubernetes.io/part-of: telsha-infrastructure
       app.kubernetes.io/version: 0.0.0

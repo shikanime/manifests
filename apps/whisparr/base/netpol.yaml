@@ -6,6 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
+      app.kubernetes.io/instance: whisparr
       app.kubernetes.io/name: whisparr
   policyTypes:
     - Ingress

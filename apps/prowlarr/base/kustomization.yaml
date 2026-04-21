@@ -18,6 +18,7 @@ images:
 labels:
   - pairs:
       app.kubernetes.io/component: torrent-tracker
+      app.kubernetes.io/instance: prowlarr
       app.kubernetes.io/name: prowlarr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 2.3.0

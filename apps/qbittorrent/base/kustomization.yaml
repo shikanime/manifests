@@ -27,6 +27,7 @@ configMapGenerator:
 labels:
   - pairs:
       app.kubernetes.io/component: torrent-downloader
+      app.kubernetes.io/instance: qbittorrent
       app.kubernetes.io/name: qbittorrent
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 5.1.4

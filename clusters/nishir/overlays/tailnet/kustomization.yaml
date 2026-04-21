@@ -19,6 +19,7 @@ secretGenerator:
 labels:
   - pairs:
       app.kubernetes.io/component: cluster
+      app.kubernetes.io/instance: nishir
       app.kubernetes.io/name: nishir
       app.kubernetes.io/part-of: nishir-infrastructure
       app.kubernetes.io/version: 0.0.0

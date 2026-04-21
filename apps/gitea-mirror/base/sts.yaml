@@ -8,10 +8,12 @@ spec:
   serviceName: gitea-mirror
   selector:
     matchLabels:
+      app.kubernetes.io/instance: gitea
       app.kubernetes.io/name: gitea-mirror
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: gitea
         app.kubernetes.io/name: gitea-mirror
     spec:
       containers:

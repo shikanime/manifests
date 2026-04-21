@@ -27,6 +27,7 @@ configMapGenerator:
 labels:
   - pairs:
       app.kubernetes.io/component: version-control-server
+      app.kubernetes.io/instance: forgejo
       app.kubernetes.io/name: forgejo
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 14.0.2

@@ -8,10 +8,12 @@ spec:
   serviceName: radarr
   selector:
     matchLabels:
+      app.kubernetes.io/instance: radarr
       app.kubernetes.io/name: radarr
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: radarr
         app.kubernetes.io/name: radarr
     spec:
       initContainers:

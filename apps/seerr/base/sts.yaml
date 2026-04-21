@@ -8,10 +8,12 @@ spec:
   serviceName: seerr
   selector:
     matchLabels:
+      app.kubernetes.io/instance: seerr
       app.kubernetes.io/name: seerr
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: seerr
         app.kubernetes.io/name: seerr
     spec:
       containers:
