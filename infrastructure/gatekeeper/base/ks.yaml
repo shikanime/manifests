@@ -6,8 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
+  path: ./library
+  prune: true
+  deletionPolicy: Orphan
   sourceRef:
     name: gatekeeper-library
     kind: GitRepository
-  path: ./library
-  prune: true
