@@ -1,6 +1,5 @@
 ---
 resources:
   - ../../base
-  - netpol.yaml
 patches:
   - path: patch-pvc.yaml
