@@ -1,7 +1,3 @@
----
-name: Integration
-permissions:
-  contents: read
 jobs:
   nix:
     if:
@@ -23,6 +19,7 @@ jobs:
     secrets:
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     uses: ./.github/workflows/skaffold.yaml
+name: Integration
 "on":
   pull_request:
     branches:
@@ -39,3 +36,5 @@ jobs:
         required: false
       OPERATOR_PRIVATE_KEY:
         required: true
+permissions:
+  contents: read

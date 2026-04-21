@@ -1,32 +1,13 @@
----
-name: Nix
-permissions:
-  contents: read
-"on":
-  workflow_call:
-    inputs:
-      cachix-name:
-        type: string
-        default: ""
-    secrets:
-      CACHIX_AUTH_TOKEN:
-        required: false
-      OPERATOR_PRIVATE_KEY:
-        required: true
 jobs:
   checks:
-    name: Checks
     if: ${{ needs['setup-checks-jobs'].outputs.continue == 'true' }}
-    runs-on: ${{ matrix.runner }}
+    name: Checks
     needs:
       - setup-checks-jobs
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJSON(needs['setup-checks-jobs'].outputs.matrix) }}
+    runs-on: ${{ matrix.runner }}
     steps:
-      - id: createGithubAppToken
-        continue-on-error: true
+      - continue-on-error: true
+        id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -51,19 +32,19 @@ jobs:
           nix flake check --accept-flake-config --no-pure-eval --system "${{
           matrix.system }}"
         shell: bash
-  packages:
-    name: Packages
-    if: ${{ needs['setup-packages-jobs'].outputs.continue == 'true' }}
-    runs-on: ${{ matrix.runner }}
-    needs:
-      - setup-packages-jobs
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJSON(needs['setup-packages-jobs'].outputs.matrix) }}
+        include: ${{ fromJSON(needs['setup-checks-jobs'].outputs.matrix) }}
+  packages:
+    if: ${{ needs['setup-packages-jobs'].outputs.continue == 'true' }}
+    name: Packages
+    needs:
+      - setup-packages-jobs
+    runs-on: ${{ matrix.runner }}
     steps:
-      - id: createGithubAppToken
-        continue-on-error: true
+      - continue-on-error: true
+        id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -88,15 +69,19 @@ jobs:
           nix build --accept-flake-config --no-pure-eval ".#packages.${{
           matrix.system }}.${{ matrix.name }}"
         shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs['setup-packages-jobs'].outputs.matrix) }}
   setup-checks-jobs:
     name: Setup Checks Jobs
-    runs-on: ubuntu-latest
     outputs:
       continue: ${{ steps.setup-checks-jobs.outputs.continue }}
       matrix: ${{ steps.setup-checks-jobs.outputs.matrix }}
+    runs-on: ubuntu-latest
     steps:
-      - id: createGithubAppToken
-        continue-on-error: true
+      - continue-on-error: true
+        id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -116,13 +101,13 @@ jobs:
         uses: shikanime-studio/actions/nix/setup-checks-jobs@v9
   setup-packages-jobs:
     name: Setup Packages Jobs
-    runs-on: ubuntu-latest
     outputs:
       continue: ${{ steps.setup-packages-jobs.outputs.continue }}
       matrix: ${{ steps.setup-packages-jobs.outputs.matrix }}
+    runs-on: ubuntu-latest
     steps:
-      - id: createGithubAppToken
-        continue-on-error: true
+      - continue-on-error: true
+        id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -140,3 +125,17 @@ jobs:
             }}
       - id: setup-packages-jobs
         uses: shikanime-studio/actions/nix/setup-packages-jobs@v9
+name: Nix
+"on":
+  workflow_call:
+    inputs:
+      cachix-name:
+        default: ""
+        type: string
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        required: false
+      OPERATOR_PRIVATE_KEY:
+        required: true
+permissions:
+  contents: read
