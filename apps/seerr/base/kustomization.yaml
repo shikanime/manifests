@@ -17,7 +17,6 @@ images:
     newTag: v3.1.0
 labels:
   - includeTemplates: true
-    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/instance: seerr

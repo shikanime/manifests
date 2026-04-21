@@ -16,7 +16,6 @@ images:
     newTag: 1.35.4
 labels:
   - includeTemplates: true
-    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: secret-manager
       app.kubernetes.io/instance: vaultwarden

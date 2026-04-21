@@ -17,7 +17,6 @@ images:
     newTag: 2.3.0
 labels:
   - includeTemplates: true
-    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: torrent-tracker
       app.kubernetes.io/instance: prowlarr
