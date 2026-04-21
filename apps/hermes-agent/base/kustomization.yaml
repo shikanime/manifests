@@ -27,7 +27,6 @@ labels:
       app.kubernetes.io/name: hermes-agent
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 2026.4.16
-
 secretGenerator:
   - name: hermes-agent-ssh
     files:
@@ -42,4 +41,3 @@ labels:
       app.kubernetes.io/name: hermes-agent
       app.kubernetes.io/part-of: nishir-automata
       app.kubernetes.io/version: "2026.4.16"
-

@@ -22,4 +22,3 @@ labels:
       app.kubernetes.io/name: gitea-mirror
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 3.11.0
-

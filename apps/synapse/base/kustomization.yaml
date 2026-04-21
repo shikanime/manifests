@@ -30,4 +30,3 @@ labels:
       app.kubernetes.io/name: synapse
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.140.0
-

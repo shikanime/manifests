@@ -20,4 +20,3 @@ labels:
       app.kubernetes.io/name: chrome
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 149.0.7779.3
-

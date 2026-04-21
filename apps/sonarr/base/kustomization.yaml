@@ -33,4 +33,3 @@ labels:
       app.kubernetes.io/name: sonarr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 4.0.16
-

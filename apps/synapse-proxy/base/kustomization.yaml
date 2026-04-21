@@ -20,4 +20,3 @@ labels:
       app.kubernetes.io/name: synapse-proxy
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 2.11.2
-

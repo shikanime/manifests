@@ -25,4 +25,3 @@ labels:
       app.kubernetes.io/name: mautrix-slack
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.140.0
-

@@ -25,4 +25,3 @@ labels:
       app.kubernetes.io/name: postgres
       app.kubernetes.io/part-of: nishir-automata
       app.kubernetes.io/version: "15"
-

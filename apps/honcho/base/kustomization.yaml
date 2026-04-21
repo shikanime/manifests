@@ -20,4 +20,3 @@ labels:
       app.kubernetes.io/name: honcho
       app.kubernetes.io/part-of: nishir-automata
       app.kubernetes.io/version: 3.0.6
-
