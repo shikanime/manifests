@@ -13,7 +13,9 @@ images:
     newName: chromedp/headless-shell
     newTag: 149.0.7779.3
 labels:
-  - pairs:
+  - includeTemplates: true
+    includeVolumeClaimTemplates: true
+    pairs:
       app.kubernetes.io/component: browser
       app.kubernetes.io/instance: chrome
       app.kubernetes.io/name: chrome

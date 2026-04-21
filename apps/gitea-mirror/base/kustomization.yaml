@@ -15,7 +15,9 @@ images:
     newName: ghcr.io/raylabshq/gitea-mirror
     newTag: v3.11.0
 labels:
-  - pairs:
+  - includeTemplates: true
+    includeVolumeClaimTemplates: true
+    pairs:
       app.kubernetes.io/component: version-control-server
       app.kubernetes.io/instance: gitea
       app.kubernetes.io/name: gitea-mirror

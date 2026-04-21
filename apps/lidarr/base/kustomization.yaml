@@ -25,7 +25,9 @@ configMapGenerator:
     files:
       - rclone/rclone.conf
 labels:
-  - pairs:
+  - includeTemplates: true
+    includeVolumeClaimTemplates: true
+    pairs:
       app.kubernetes.io/component: library-manager
       app.kubernetes.io/instance: lidarr
       app.kubernetes.io/name: lidarr

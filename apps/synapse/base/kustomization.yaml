@@ -23,7 +23,9 @@ configMapGenerator:
     files:
       - rclone/rclone.conf
 labels:
-  - pairs:
+  - includeTemplates: true
+    includeVolumeClaimTemplates: true
+    pairs:
       app.kubernetes.io/component: communication
       app.kubernetes.io/instance: synapse
       app.kubernetes.io/name: synapse

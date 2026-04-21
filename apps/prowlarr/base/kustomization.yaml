@@ -16,7 +16,9 @@ images:
     newName: lscr.io/linuxserver/prowlarr
     newTag: 2.3.0
 labels:
-  - pairs:
+  - includeTemplates: true
+    includeVolumeClaimTemplates: true
+    pairs:
       app.kubernetes.io/component: torrent-tracker
       app.kubernetes.io/instance: prowlarr
       app.kubernetes.io/name: prowlarr

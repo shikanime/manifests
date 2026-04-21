@@ -25,7 +25,9 @@ configMapGenerator:
     files:
       - qbittorrent-scripts/qbittorrent-resume.sh
 labels:
-  - pairs:
+  - includeTemplates: true
+    includeVolumeClaimTemplates: true
+    pairs:
       app.kubernetes.io/component: torrent-downloader
       app.kubernetes.io/instance: qbittorrent
       app.kubernetes.io/name: qbittorrent

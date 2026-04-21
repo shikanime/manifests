@@ -15,7 +15,9 @@ images:
     newName: ghcr.io/shikanime/shikanime/catbox
     newTag: v0.17.1-612-g8107bb5
 labels:
-  - pairs:
+  - includeTemplates: true
+    includeVolumeClaimTemplates: true
+    pairs:
       app.kubernetes.io/component: backend-service
       app.kubernetes.io/instance: catbox
       app.kubernetes.io/name: catbox
