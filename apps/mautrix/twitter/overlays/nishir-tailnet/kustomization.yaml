@@ -1,7 +1,6 @@
 ---
 resources:
   - ../nishir
-  - netpol.yaml
 namespace: shikanime
 patches:
   - path: patch-ingress.yaml
