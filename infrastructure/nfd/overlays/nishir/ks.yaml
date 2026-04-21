@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: node-feature-discovery-config
+  name: nfd-config
   namespace: flux-system
 spec:
   dependsOn:
-    - name: node-feature-discovery
+    - name: nfd
   interval: 10m
   path: ./configs/nfd/overlays/nishir
   prune: true

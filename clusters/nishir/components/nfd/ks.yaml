@@ -10,11 +10,11 @@ spec:
   prune: true
   deletionPolicy: Orphan
   healthChecks:
-    - name: node-feature-discovery
+    - name: nfd
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       namespace: flux-system
-    - name: node-feature-discovery-config
+    - name: nfd-config
       apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       namespace: flux-system
