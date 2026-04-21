@@ -15,18 +15,18 @@ spec:
       - shikanime
   parameters:
     repos:
-      - chromedp/*
-      - copyparty/*
-      - dock.mau.dev/mautrix/*
-      - ghcr.io/hotio/*
-      - ghcr.io/plastic-labs/*
-      - ghcr.io/raylabshq/*
-      - ghcr.io/seer-team/*
-      - ghcr.io/shikanime/*
-      - lscr.io/linuxserver/*
-      - matrixdotorg/*
-      - nousresearch/*
-      - pgvector/*
-      - qbittorrentofficial/*
-      - rclone/*
-      - vaultwarden/*
+      - chromedp/
+      - copyparty/
+      - dock.mau.dev/mautrix/
+      - ghcr.io/hotio/
+      - ghcr.io/plastic-labs/
+      - ghcr.io/raylabshq/
+      - ghcr.io/seer-team/
+      - ghcr.io/shikanime/
+      - lscr.io/linuxserver/
+      - matrixdotorg/
+      - nousresearch/
+      - pgvector/
+      - qbittorrentofficial/
+      - rclone/
+      - vaultwarden/
