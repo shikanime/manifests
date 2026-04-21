@@ -5,8 +5,6 @@ metadata:
   name: gatekeeper-library
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: gatekeeper
   interval: 10m
   sourceRef:
     name: gatekeeper-library
