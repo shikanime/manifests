@@ -31,7 +31,7 @@ spec:
   dependsOn:
     - name: infrastructure-gatekeeper
   interval: 10m
-  path: ./configs/gatekeeper/base
+  path: ./configs/gatekeeper/overlays/telsha
   prune: true
   deletionPolicy: Orphan
   sourceRef:
