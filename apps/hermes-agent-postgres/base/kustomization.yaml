@@ -22,5 +22,5 @@ labels:
       app.kubernetes.io/component: database
       app.kubernetes.io/instance: hermes-agent-postgres
       app.kubernetes.io/name: postgres
-      app.kubernetes.io/part-of: nishir-agent
+      app.kubernetes.io/part-of: nishir-automata
       app.kubernetes.io/version: "15"
