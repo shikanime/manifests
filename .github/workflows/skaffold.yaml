@@ -1,13 +1,22 @@
+---
+name: Skaffold
+permissions:
+  contents: read
+"on":
+  workflow_call:
+    secrets:
+      OPERATOR_PRIVATE_KEY:
+        required: true
 jobs:
   build-render:
     name: Build & Render
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-    runs-on: ubuntu-latest
     steps:
-      - continue-on-error: true
-        id: createGithubAppToken
+      - id: createGithubAppToken
+        continue-on-error: true
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -33,17 +42,21 @@ jobs:
       - env: ${{ fromJSON(steps.direnv.outputs.env) }}
         uses: shikanime-studio/actions/skaffold/integration@v9
   build-render-profile:
-    if: ${{ needs['setup-profiles-jobs'].outputs.continue == 'true' }}
     name: Build & Render (Profile)
+    if: ${{ needs['setup-profiles-jobs'].outputs.continue == 'true' }}
+    runs-on: ubuntu-latest
     needs:
       - setup-profiles-jobs
     permissions:
       contents: read
       packages: write
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs['setup-profiles-jobs'].outputs.matrix) }}
     steps:
-      - continue-on-error: true
-        id: createGithubAppToken
+      - id: createGithubAppToken
+        continue-on-error: true
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -70,19 +83,15 @@ jobs:
         uses: shikanime-studio/actions/skaffold/integration@v9
         with:
           profile: ${{ matrix.name }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJSON(needs['setup-profiles-jobs'].outputs.matrix) }}
   setup-profiles-jobs:
     name: Setup Profiles Jobs
+    runs-on: ubuntu-latest
     outputs:
       continue: ${{ steps.setup-profiles-jobs.outputs.continue }}
       matrix: ${{ steps.setup-profiles-jobs.outputs.matrix }}
-    runs-on: ubuntu-latest
     steps:
-      - continue-on-error: true
-        id: createGithubAppToken
+      - id: createGithubAppToken
+        continue-on-error: true
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -100,11 +109,3 @@ jobs:
             }}
       - id: setup-profiles-jobs
         uses: shikanime-studio/actions/skaffold/setup-profiles-jobs@v9
-name: Skaffold
-"on":
-  workflow_call:
-    secrets:
-      OPERATOR_PRIVATE_KEY:
-        required: true
-permissions:
-  contents: read
