@@ -22,11 +22,3 @@ configMapGenerator:
     namespace: shikanime
     files:
       - rclone/rclone.conf
-labels:
-  - includeTemplates: true
-    pairs:
-      app.kubernetes.io/component: communication
-      app.kubernetes.io/instance: synapse
-      app.kubernetes.io/name: synapse
-      app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 1.140.0
