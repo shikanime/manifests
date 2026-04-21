@@ -8,7 +8,6 @@ spec:
     spec:
       containers:
         - name: synapse
-          volumeMounts:
           readinessProbe:
             httpGet:
               port: https
