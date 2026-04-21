@@ -5,8 +5,6 @@ metadata:
   name: gatekeeper-config
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: gatekeeper
   interval: 10m
   path: ./configs/gatekeeper/overlays/telsha
   prune: true

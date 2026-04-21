@@ -5,8 +5,6 @@ metadata:
   name: nfd-config
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: nfd
   interval: 10m
   path: ./configs/nfd/overlays/nishir
   prune: true
