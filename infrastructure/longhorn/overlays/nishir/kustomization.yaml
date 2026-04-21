@@ -1,6 +1,7 @@
 ---
 resources:
   - ../../base
+  - ks.yaml
 secretGenerator:
   - name: longhorn-hetzner-backups
     namespace: longhorn-system

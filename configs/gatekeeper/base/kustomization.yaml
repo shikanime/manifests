@@ -1,5 +1,4 @@
 ---
 resources:
   - constraints.yaml
-  - github.com/open-policy-agent/gatekeeper-library/library
   - mutations.yaml

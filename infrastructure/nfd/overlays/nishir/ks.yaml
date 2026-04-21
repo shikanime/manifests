@@ -2,12 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-cluster-api
+  name: nfd-config
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: nfd
   interval: 10m
-  path: ./infrastructure/cluster-api/base
+  path: ./configs/nfd/overlays/nishir
   prune: true
+  deletionPolicy: Orphan
   sourceRef:
     name: flux-system
     kind: GitRepository

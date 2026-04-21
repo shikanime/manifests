@@ -16,26 +16,10 @@ spec:
       apiVersion: v1
       kind: Secret
       namespace: longhorn-system
-  sourceRef:
-    name: flux-system
-    kind: GitRepository
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: infrastructure-longhorn-config
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: infrastructure-longhorn
-  interval: 10m
-  path: ./configs/longhorn/overlays/nishir
-  prune: true
-  deletionPolicy: Orphan
+    - name: longhorn-config
+      apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      namespace: flux-system
   sourceRef:
     name: flux-system
     kind: GitRepository

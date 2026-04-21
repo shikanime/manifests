@@ -2,12 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-vpa
+  name: gatekeeper-config
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: gatekeeper
   interval: 10m
-  path: ./infrastructure/vpa/base
+  path: ./configs/gatekeeper/overlays/telsha
   prune: true
+  deletionPolicy: Orphan
   sourceRef:
     name: flux-system
     kind: GitRepository

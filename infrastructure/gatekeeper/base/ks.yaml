@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gatekeeper-library
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: gatekeeper
+  interval: 10m
+  sourceRef:
+    name: gatekeeper-library
+    kind: GitRepository
+  path: ./library
+  prune: true
