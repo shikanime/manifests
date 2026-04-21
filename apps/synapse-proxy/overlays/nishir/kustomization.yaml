@@ -6,5 +6,3 @@ resources:
 namespace: shikanime
 components:
   - ../../components/tls
-patches:
-  - path: patch-deploy.yaml

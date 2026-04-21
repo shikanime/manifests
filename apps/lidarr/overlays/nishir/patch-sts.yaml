@@ -9,17 +9,11 @@ spec:
       containers:
         - name: lidarr
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
             - name: music-data
               mountPath: /data/music
             - name: downloads-data
               mountPath: /downloads
       volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
         - name: music-data
           persistentVolumeClaim:
             claimName: music-data

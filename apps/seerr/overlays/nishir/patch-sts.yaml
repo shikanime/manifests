@@ -12,10 +12,4 @@ spec:
             - name: NODE_EXTRA_CA_CERTS
               value: /etc/ssl/certs/ca-certificates.crt
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
       volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
