@@ -30,6 +30,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-gatekeeper
+    - name: infrastructure-gatekeeper-config
   interval: 10m
   path: ./configs/gatekeeper/overlays/telsha
   prune: true

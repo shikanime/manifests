@@ -60,8 +60,6 @@ spec:
         mountPath: /etc/ssl/certs
         readOnly: true
     pathTests:
-      - condition: MustExist
-        subPath: spec.volumes[name:certs]
       - condition: MustNotExist
         subPath: 'spec.containers[name:*].volumeMounts[mountPath:"/etc/ssl/certs"]'
 ---
@@ -96,8 +94,6 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
-      - condition: MustExist
-        subPath: spec.volumes[name:certs]
       - condition: MustNotExist
         subPath: 'spec.initContainers[name:*].volumeMounts[mountPath:"/etc/ssl/certs"]'
 ---
