@@ -1,11 +1,3 @@
----
-name: Commands
-permissions:
-  contents: read
-"on":
-  issue_comment:
-    types:
-      - created
 jobs:
   backport:
     if:
@@ -128,3 +120,10 @@ jobs:
       - uses: shikanime-studio/actions/command/run@v9
         with:
           github-token: ${{ steps.createGithubAppToken.outputs.token }}
+name: Commands
+"on":
+  issue_comment:
+    types:
+      - created
+permissions:
+  contents: read

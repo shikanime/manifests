@@ -139,7 +139,7 @@ spec:
     - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/chrome/overlays/nishir
+  path: ./apps/chrome/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - name: chrome
@@ -160,7 +160,7 @@ spec:
     - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/hermes-agent-postgres/overlays/nishir
+  path: ./apps/hermes-agent-postgres/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - name: hermes-agent-postgres
@@ -463,7 +463,7 @@ spec:
     - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/metatube/overlays/nishir
+  path: ./apps/metatube/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - name: metatube

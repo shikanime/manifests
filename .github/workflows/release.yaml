@@ -1,25 +1,3 @@
----
-name: Release
-permissions:
-  contents: read
-"on":
-  push:
-    branches:
-      - main
-      - release-[0-9]+.[0-9]+
-    tags:
-      - v?[0-9]+.[0-9]+.[0-9]+*
-  workflow_call:
-    secrets:
-      CACHIX_AUTH_TOKEN:
-        required: true
-      OPERATOR_PRIVATE_KEY:
-        required: true
-  workflow_dispatch:
-    inputs:
-      ref_name:
-        description: Tag or branch to release
-        required: true
 jobs:
   nix:
     secrets:
@@ -41,8 +19,8 @@ jobs:
       contents: write
     runs-on: ubuntu-slim
     steps:
-      - id: createGithubAppToken
-        continue-on-error: true
+      - continue-on-error: true
+        id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -75,8 +53,8 @@ jobs:
       contents: write
     runs-on: ubuntu-slim
     steps:
-      - id: createGithubAppToken
-        continue-on-error: true
+      - continue-on-error: true
+        id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -108,3 +86,24 @@ jobs:
     secrets:
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
     uses: ./.github/workflows/skaffold.yaml
+name: Release
+"on":
+  push:
+    branches:
+      - main
+      - release-[0-9]+.[0-9]+
+    tags:
+      - v?[0-9]+.[0-9]+.[0-9]+*
+  workflow_call:
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        required: true
+      OPERATOR_PRIVATE_KEY:
+        required: true
+  workflow_dispatch:
+    inputs:
+      ref_name:
+        description: Tag or branch to release
+        required: true
+permissions:
+  contents: read

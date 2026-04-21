@@ -1,18 +1,9 @@
----
-name: Triage
-permissions:
-  pull-requests: write
-"on":
-  pull_request:
-    types:
-      - opened
-      - synchronize
 jobs:
   triage:
     runs-on: ubuntu-slim
     steps:
-      - id: createGithubAppToken
-        continue-on-error: true
+      - continue-on-error: true
+        id: createGithubAppToken
         uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
@@ -49,3 +40,11 @@ jobs:
         run:
           gh pr edit "${{ github.event.pull_request.number }}" --add-label
           ghstack
+name: Triage
+"on":
+  pull_request:
+    types:
+      - opened
+      - synchronize
+permissions:
+  pull-requests: write
