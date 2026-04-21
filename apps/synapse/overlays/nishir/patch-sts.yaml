@@ -9,9 +9,6 @@ spec:
       containers:
         - name: synapse
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
           readinessProbe:
             httpGet:
               port: https
@@ -37,6 +34,3 @@ spec:
             periodSeconds: 10
             failureThreshold: 180
       volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt

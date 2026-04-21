@@ -9,17 +9,11 @@ spec:
       containers:
         - name: sonarr
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
             - name: shows-data
               mountPath: /data/shows
             - name: downloads-data
               mountPath: /downloads
       volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
         - name: shows-data
           persistentVolumeClaim:
             claimName: shows-data

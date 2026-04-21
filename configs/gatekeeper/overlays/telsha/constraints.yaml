@@ -1,0 +1,18 @@
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: allowed-repos
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+  parameters:
+    repos:
+      - ghcr.io/shikanime/*

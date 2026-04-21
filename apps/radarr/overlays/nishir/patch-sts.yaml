@@ -9,17 +9,11 @@ spec:
       containers:
         - name: radarr
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
             - name: movies-data
               mountPath: /data/movies
             - name: downloads-data
               mountPath: /downloads
       volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data

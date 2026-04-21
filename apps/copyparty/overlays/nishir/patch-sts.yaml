@@ -9,9 +9,6 @@ spec:
       containers:
         - name: copyparty
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
             - name: archives-data
               mountPath: /data/archives
             - name: downloads-data
@@ -34,9 +31,6 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: copyparty-config
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
         - name: archives-data
           persistentVolumeClaim:
             claimName: archives-data

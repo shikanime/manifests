@@ -9,9 +9,6 @@ spec:
       containers:
         - name: jellyfin
           volumeMounts:
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
             - name: movies-data
               mountPath: /data/movies
             - name: music-data
@@ -23,9 +20,6 @@ spec:
             - name: timeline-data
               mountPath: /data/timeline
       volumes:
-        - name: certs
-          configMap:
-            name: nishir-ca-certificates.crt
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
