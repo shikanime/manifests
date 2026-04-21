@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-tailscale
+    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/catbox/base
