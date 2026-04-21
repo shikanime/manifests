@@ -19,6 +19,7 @@ configMapGenerator:
       - hermes-agent-postgres/init.sql
 labels:
   - includeTemplates: true
+    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: database
       app.kubernetes.io/instance: hermes-agent-postgres

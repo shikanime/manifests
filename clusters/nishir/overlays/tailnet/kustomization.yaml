@@ -18,6 +18,7 @@ secretGenerator:
       - discord-webhook/.enc.env
 labels:
   - includeTemplates: true
+    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: cluster
       app.kubernetes.io/instance: nishir

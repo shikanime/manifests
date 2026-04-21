@@ -24,6 +24,7 @@ configMapGenerator:
       - rclone/rclone.conf
 labels:
   - includeTemplates: true
+    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: file-server
       app.kubernetes.io/instance: copyparty

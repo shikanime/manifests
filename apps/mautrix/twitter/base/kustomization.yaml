@@ -19,6 +19,7 @@ configMapGenerator:
       - rclone/rclone.conf
 labels:
   - includeTemplates: true
+    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: communication
       app.kubernetes.io/instance: mautrix

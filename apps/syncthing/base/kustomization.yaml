@@ -16,6 +16,7 @@ images:
     newTag: 2.0.12
 labels:
   - includeTemplates: true
+    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: file-synchronizer
       app.kubernetes.io/instance: syncthing

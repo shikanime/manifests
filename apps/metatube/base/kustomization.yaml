@@ -16,6 +16,7 @@ images:
     newTag: 1.3.2
 labels:
   - includeTemplates: true
+    includeVolumeClaimTemplates: true
     pairs:
       app.kubernetes.io/component: media-server
       app.kubernetes.io/instance: metatube
