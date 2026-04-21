@@ -5,7 +5,6 @@ metadata:
   name: git
   annotations:
     tailscale.com/hostname: git
-    tailscale.com/proxy-class: forgejo
     tailscale.com/tags: tag:git
 spec:
   loadBalancerClass: tailscale

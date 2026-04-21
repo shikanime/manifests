@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: matrix-whatsapp
   annotations:
-    tailscale.com/proxy-class: mautrix-whatsapp
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

@@ -5,7 +5,6 @@ metadata:
   name: copyparty
   annotations:
     tailscale.com/funnel: "true"
-    tailscale.com/proxy-class: copyparty
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

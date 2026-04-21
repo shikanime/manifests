@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: gitea-mirror
   annotations:
-    tailscale.com/proxy-class: gitea-mirror
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale

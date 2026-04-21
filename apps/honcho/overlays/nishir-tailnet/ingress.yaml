@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: honcho
   annotations:
-    tailscale.com/proxy-class: honcho
     tailscale.com/tags: tag:web
 spec:
   defaultBackend:

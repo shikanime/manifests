@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: matrix-slack
   annotations:
-    tailscale.com/proxy-class: mautrix-slack
     tailscale.com/tags: tag:web
 spec:
   ingressClassName: tailscale
