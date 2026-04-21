@@ -17,3 +17,10 @@ configMapGenerator:
   - name: hermes-agent-postgres
     files:
       - hermes-agent-postgres/init.sql
+labels:
+  - pairs:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: hermes-agent-postgres
+      app.kubernetes.io/name: postgres
+      app.kubernetes.io/part-of: nishir-agent
+      app.kubernetes.io/version: "15"

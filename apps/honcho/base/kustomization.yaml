@@ -16,5 +16,5 @@ labels:
   - pairs:
       app.kubernetes.io/component: agent
       app.kubernetes.io/name: honcho
-      app.kubernetes.io/part-of: nishir-platform
+      app.kubernetes.io/part-of: nishir-agent
       app.kubernetes.io/version: 3.0.6
