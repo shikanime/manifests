@@ -2,6 +2,8 @@
 resources:
   - ../../base
   - ks.yaml
+patches:
+  - path: patch-hr.yaml
 secretGenerator:
   - name: longhorn-hetzner-backups
     namespace: longhorn-system
