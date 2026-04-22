@@ -6,7 +6,6 @@ metadata:
 spec:
   template:
     spec:
-      enableServiceLinks: true
       containers:
         - name: hermes-agent
           env:
