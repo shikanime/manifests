@@ -13,6 +13,20 @@ spec:
             - jellyfin
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPAllowedUsers
+metadata:
+  name: psp-allowed-users
+spec:
+  match:
+    labelSelector:
+      matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: NotIn
+          values:
+            - jellyfin
+---
+
+apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPHostFilesystem
 metadata:
   name: psp-host-filesystem
