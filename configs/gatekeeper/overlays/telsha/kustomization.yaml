@@ -1,3 +1,6 @@
 ---
 resources:
   - ../../base
+  - constraints.yaml
+patches:
+  - path: patch-constraints.yaml

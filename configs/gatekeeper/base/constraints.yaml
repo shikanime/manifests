@@ -1,0 +1,323 @@
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sBlockNodePort
+metadata:
+  name: block-nodeport
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Service
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sBlockWildcardIngress
+metadata:
+  name: block-wildcard-ingress
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - networking.k8s.io
+        kinds:
+          - Ingress
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sDisallowAnonymous
+metadata:
+  name: disallow-anonymous
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+      - cert-manager
+      - flux-system
+      - gatekeeper-system
+      - kube-node-lease
+      - kube-public
+      - kube-system
+      - tailscale-system
+    kinds:
+      - apiGroups:
+          - rbac.authorization.k8s.io
+        kinds:
+          - ClusterRoleBinding
+          - RoleBinding
+  parameters:
+    allowedRoles: []
+    disallowAuthenticated: false
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sDisallowedTags
+metadata:
+  name: disallowed-tags
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+  parameters:
+    tags:
+      - latest
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sExternalIPs
+metadata:
+  name: external-ips
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Service
+    namespaces:
+      - shikanime
+  parameters:
+    allowedIPs: []
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sHttpsOnly
+metadata:
+  name: https-only
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - networking.k8s.io
+        kinds:
+          - Ingress
+    namespaces:
+      - shikanime
+  parameters:
+    tlsOptional: true
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPAllowPrivilegeEscalationContainer
+metadata:
+  name: psp-allow-privilege-escalation
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPAutomountServiceAccountTokenPod
+metadata:
+  name: psp-automount-serviceaccount-token
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPHostProcess
+metadata:
+  name: psp-host-process
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPPrivilegedContainer
+metadata:
+  name: psp-privileged-container
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPReadOnlyRootFilesystem
+metadata:
+  name: psp-read-only-root-filesystem
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: required-labels
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+          - Service
+      - apiGroups:
+          - apps
+        kinds:
+          - DaemonSet
+          - Deployment
+          - StatefulSet
+      - apiGroups:
+          - networking.k8s.io
+        kinds:
+          - Ingress
+    namespaces:
+      - shikanime
+  parameters:
+    labels:
+      - key: app.kubernetes.io/component
+      - key: app.kubernetes.io/instance
+      - key: app.kubernetes.io/name
+      - key: app.kubernetes.io/part-of
+      - key: app.kubernetes.io/version
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredProbes
+metadata:
+  name: required-probes
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+  parameters:
+    probeTypes:
+      - exec
+      - grpc
+      - httpGet
+      - tcpSocket
+    probes:
+      - livenessProbe
+      - readinessProbe
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sUniqueIngressHost
+metadata:
+  name: unique-ingress-host
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+      - cert-manager
+      - flux-system
+      - gatekeeper-system
+      - kube-node-lease
+      - kube-public
+      - kube-system
+      - tailscale-system
+    kinds:
+      - apiGroups:
+          - networking.k8s.io
+          - extensions
+        kinds:
+          - Ingress
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sUniqueServiceSelector
+metadata:
+  name: unique-service-selector
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+      - cert-manager
+      - flux-system
+      - gatekeeper-system
+      - kube-node-lease
+      - kube-public
+      - kube-system
+      - tailscale-system
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Service
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: VerifyDeprecatedAPI
+metadata:
+  name: verify-deprecated-api
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups:
+          - "*"
+        kinds:
+          - "*"
+  parameters:
+    k8sVersion: 1.35
+    kvs:
+      - deprecatedAPI: apps/v1beta1
+        kinds:
+          - Deployment
+        targetAPI: apps/v1
+      - deprecatedAPI: apps/v1beta2
+        kinds:
+          - Deployment
+        targetAPI: apps/v1
+      - deprecatedAPI: batch/v1beta1
+        kinds:
+          - CronJob
+        targetAPI: batch/v1
+      - deprecatedAPI: extensions/v1beta1
+        kinds:
+          - Deployment
+          - Ingress
+        targetAPI: None
+      - deprecatedAPI: networking.k8s.io/v1beta1
+        kinds:
+          - Ingress
+        targetAPI: networking.k8s.io/v1
+      - deprecatedAPI: policy/v1beta1
+        kinds:
+          - PodDisruptionBudget
+        targetAPI: policy/v1
