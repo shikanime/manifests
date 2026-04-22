@@ -24,6 +24,7 @@ spec:
   targetNamespace: gatekeeper-system
   values:
     replicas: 1
+    enableK8sNativeValidation: false
     controllerManager:
       exemptNamespaces:
         - cert-manager
