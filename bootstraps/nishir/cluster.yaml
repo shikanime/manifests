@@ -33,11 +33,6 @@ spec:
               nfs-common networkd-dispatcher xfsprogs
             - systemd-tmpfiles --create
             - sysctl --system
-            - k0s kubectl wait --for=create namespace/flux-system --timeout=300s
-            - sh -c 'k0s kubectl -n flux-system get secret sops-age >/dev/null
-              2>&1 || (age-keygen | k0s kubectl -n flux-system create secret
-              generic sops-age --from-file=age.agekey=/dev/stdin
-              --dry-run=client -o yaml | k0s kubectl apply -f -)'
       installFlags:
         - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
       noTaints: true
