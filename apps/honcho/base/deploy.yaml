@@ -15,6 +15,7 @@ spec:
         app.kubernetes.io/instance: honcho
         app.kubernetes.io/name: honcho
     spec:
+      enableServiceLinks: true
       initContainers:
         - name: alembic-upgrade
           image: honcho
