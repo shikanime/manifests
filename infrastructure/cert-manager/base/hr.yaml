@@ -16,6 +16,9 @@ spec:
         namespace: flux-system
   install:
     createNamespace: true
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   interval: 10m
   releaseName: cert-manager
   targetNamespace: cert-manager-system
@@ -41,6 +44,9 @@ spec:
         namespace: flux-system
   install:
     createNamespace: true
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   interval: 10m
   releaseName: trust-manager
   targetNamespace: cert-manager-system

@@ -15,6 +15,9 @@ spec:
         namespace: flux-system
   install:
     createNamespace: true
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   interval: 10m
   releaseName: cluster-api-operator
   targetNamespace: capi-operator-system
