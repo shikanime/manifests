@@ -88,7 +88,7 @@
                             "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
                             "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c" # telsha
                             "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
-                            "age1a9vtmpe385n3f9nd6dxxjgcvhccc0apu22jsvwwd2d7ej82nq3tq8hwggy" # nishir
+                            "age1zwgwk8e86wz6x8vd82zwc49qtd8drpc0m6sfd46uxtvxr45ll3ws6pm6ek" # nishir
                             "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
                             "age1lcz72z6vkjywvhth955l5q9fl5wu8sdf32jpy2y6tz3rers7v5tq2gz7tx" # telsha
                           ];
@@ -159,7 +159,7 @@
                 ];
 
                 tasks = {
-                  "bootstrap:nishir".exec = ''
+                  "manifests:bootstrap:nishir".exec = ''
                     ${getExe pkgs.k0sctl} apply \
                       --config $DEVENV_ROOT/bootstraps/nishir/cluster.yaml
 
@@ -179,7 +179,7 @@
                         --from-file=age.agekey=/dev/stdin
                     fi
                   '';
-                  "bootstrap:telsha".exec = ''
+                  "manifests:bootstrap:telsha".exec = ''
                     ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
 
                     if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
