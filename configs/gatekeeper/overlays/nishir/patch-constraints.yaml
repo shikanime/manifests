@@ -25,7 +25,6 @@ spec:
           values:
             - jellyfin
 ---
-
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPHostFilesystem
 metadata:
