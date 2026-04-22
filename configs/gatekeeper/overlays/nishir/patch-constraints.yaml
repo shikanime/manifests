@@ -13,9 +13,9 @@ spec:
             - jellyfin
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sPSPAutomountServiceAccountTokenPod
+kind: K8sPSPAllowedUsers
 metadata:
-  name: psp-automount-serviceaccount-token
+  name: psp-allowed-users
 spec:
   match:
     labelSelector:
@@ -26,9 +26,9 @@ spec:
             - jellyfin
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sPSPHostProcess
+kind: K8sPSPHostFilesystem
 metadata:
-  name: psp-host-process
+  name: psp-host-filesystem
 spec:
   match:
     labelSelector:
