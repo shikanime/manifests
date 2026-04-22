@@ -20,11 +20,4 @@ spec:
   releaseName: gatekeeper
   targetNamespace: gatekeeper-system
   values:
-    disableMutation: false
-    disableValidatingWebhook: false
-    enableExternalData: false
-    enableGeneratorResourceExpansion: false
-    enableK8sNativeValidation: true
-    mutatingWebhookFailurePolicy: Fail
-    replicas: 3
-    validatingWebhookFailurePolicy: Fail
+    replicas: 1
