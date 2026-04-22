@@ -36,20 +36,14 @@ metadata:
 spec:
   enforcementAction: deny
   match:
-    excludedNamespaces:
-      - cert-manager
-      - flux-system
-      - gatekeeper-system
-      - kube-node-lease
-      - kube-public
-      - kube-system
-      - tailscale-system
     kinds:
       - apiGroups:
           - rbac.authorization.k8s.io
         kinds:
           - ClusterRoleBinding
           - RoleBinding
+    namespaces:
+      - shikanime
   parameters:
     allowedRoles: []
     disallowAuthenticated: false
@@ -111,7 +105,7 @@ kind: K8sPSPAllowPrivilegeEscalationContainer
 metadata:
   name: psp-allow-privilege-escalation
 spec:
-  enforcementAction: warn
+  enforcementAction: deny
   match:
     kinds:
       - apiGroups:
@@ -126,7 +120,7 @@ kind: K8sPSPAutomountServiceAccountTokenPod
 metadata:
   name: psp-automount-serviceaccount-token
 spec:
-  enforcementAction: warn
+  enforcementAction: deny
   match:
     kinds:
       - apiGroups:
@@ -141,7 +135,7 @@ kind: K8sPSPHostProcess
 metadata:
   name: psp-host-process
 spec:
-  enforcementAction: warn
+  enforcementAction: deny
   match:
     kinds:
       - apiGroups:
@@ -156,7 +150,7 @@ kind: K8sPSPPrivilegedContainer
 metadata:
   name: psp-privileged-container
 spec:
-  enforcementAction: warn
+  enforcementAction: deny
   match:
     kinds:
       - apiGroups:
@@ -171,7 +165,7 @@ kind: K8sPSPReadOnlyRootFilesystem
 metadata:
   name: psp-read-only-root-filesystem
 spec:
-  enforcementAction: warn
+  enforcementAction: deny
   match:
     kinds:
       - apiGroups:
@@ -245,20 +239,14 @@ metadata:
 spec:
   enforcementAction: deny
   match:
-    excludedNamespaces:
-      - cert-manager
-      - flux-system
-      - gatekeeper-system
-      - kube-node-lease
-      - kube-public
-      - kube-system
-      - tailscale-system
     kinds:
       - apiGroups:
           - networking.k8s.io
           - extensions
         kinds:
           - Ingress
+    namespaces:
+      - shikanime
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sUniqueServiceSelector
@@ -267,19 +255,13 @@ metadata:
 spec:
   enforcementAction: deny
   match:
-    excludedNamespaces:
-      - cert-manager
-      - flux-system
-      - gatekeeper-system
-      - kube-node-lease
-      - kube-public
-      - kube-system
-      - tailscale-system
     kinds:
       - apiGroups:
           - ""
         kinds:
           - Service
+    namespaces:
+      - shikanime
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: VerifyDeprecatedAPI
