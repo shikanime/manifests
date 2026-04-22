@@ -706,39 +706,6 @@ spec:
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
 metadata:
-  name: set-pod-init-run-emptydir-volume-mount
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: 'spec.initContainers[name:*].volumeMounts[mountPath:"/run"]'
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value:
-        name: run
-        mountPath: /run
-    pathTests:
-      - condition: MustExist
-        subPath: spec.initContainers
-      - condition: MustNotExist
-        subPath: 'spec.initContainers[name:*].volumeMounts[mountPath:"/run"]'
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
   name: set-pod-init-tmp-emptydir-volume-mount
 spec:
   applyTo:
@@ -831,37 +798,6 @@ spec:
     pathTests:
       - condition: MustNotExist
         subPath: spec.volumes[name:run]
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
-  name: set-pod-run-emptydir-volume-mount
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: 'spec.containers[name:*].volumeMounts[mountPath:"/run"]'
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value:
-        name: run
-        mountPath: /run
-    pathTests:
-      - condition: MustNotExist
-        subPath: 'spec.containers[name:*].volumeMounts[mountPath:"/run"]'
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
