@@ -24,3 +24,12 @@ spec:
   targetNamespace: gatekeeper-system
   values:
     replicas: 1
+    controllerManager:
+      exemptNamespaces:
+        - cert-manager
+        - flux-system
+        - gatekeeper-system
+        - kube-node-lease
+        - kube-public
+        - kube-system
+        - tailscale-system

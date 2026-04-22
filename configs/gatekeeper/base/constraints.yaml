@@ -36,20 +36,14 @@ metadata:
 spec:
   enforcementAction: deny
   match:
-    excludedNamespaces:
-      - cert-manager
-      - flux-system
-      - gatekeeper-system
-      - kube-node-lease
-      - kube-public
-      - kube-system
-      - tailscale-system
     kinds:
       - apiGroups:
           - rbac.authorization.k8s.io
         kinds:
           - ClusterRoleBinding
           - RoleBinding
+    namespaces:
+      - shikanime
   parameters:
     allowedRoles: []
     disallowAuthenticated: false
@@ -245,20 +239,14 @@ metadata:
 spec:
   enforcementAction: deny
   match:
-    excludedNamespaces:
-      - cert-manager
-      - flux-system
-      - gatekeeper-system
-      - kube-node-lease
-      - kube-public
-      - kube-system
-      - tailscale-system
     kinds:
       - apiGroups:
           - networking.k8s.io
           - extensions
         kinds:
           - Ingress
+    namespaces:
+      - shikanime
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sUniqueServiceSelector
@@ -267,19 +255,13 @@ metadata:
 spec:
   enforcementAction: deny
   match:
-    excludedNamespaces:
-      - cert-manager
-      - flux-system
-      - gatekeeper-system
-      - kube-node-lease
-      - kube-public
-      - kube-system
-      - tailscale-system
     kinds:
       - apiGroups:
           - ""
         kinds:
           - Service
+    namespaces:
+      - shikanime
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: VerifyDeprecatedAPI
