@@ -107,21 +107,6 @@ spec:
     tlsOptional: true
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
-kind: K8sPSPAllowPrivilegeEscalationContainer
-metadata:
-  name: psp-allow-privilege-escalation
-spec:
-  enforcementAction: deny
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
----
-apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sPSPAutomountServiceAccountTokenPod
 metadata:
   name: psp-automount-serviceaccount-token
