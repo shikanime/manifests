@@ -256,6 +256,268 @@ spec:
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
 metadata:
+  name: set-pod-run-as-group-1000
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.securityContext.runAsGroup
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: 1000
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.securityContext.runAsGroup
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-run-as-user-1000
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.securityContext.runAsUser
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: 1000
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.securityContext.runAsUser
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-apparmor-profile-runtime-default
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.securityContext.appArmorProfile.type
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: RuntimeDefault
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.securityContext.appArmorProfile.type
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-apparmor-profile-runtime-default-container
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.containers[name:*].securityContext.appArmorProfile.type"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: RuntimeDefault
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-init-apparmor-profile-runtime-default
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.initContainers[name:*].securityContext.appArmorProfile.type"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: RuntimeDefault
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-apparmor-profile-runtime-default
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.appArmorProfile.type"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: RuntimeDefault
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-proc-mount-default-container
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.containers[name:*].securityContext.procMount"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: Default
+    pathTests:
+      - condition: MustNotExist
+        subPath: "spec.containers[name:*].securityContext.procMount"
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-init-proc-mount-default
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.initContainers[name:*].securityContext.procMount"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: Default
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: "spec.initContainers[name:*].securityContext.procMount"
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-proc-mount-default
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.procMount"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: Default
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
+      - condition: MustNotExist
+        subPath: "spec.ephemeralContainers[name:*].securityContext.procMount"
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
   name: set-pod-seccomp-profile-runtime-default-container
 spec:
   applyTo:
