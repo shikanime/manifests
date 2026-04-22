@@ -119,8 +119,6 @@ spec:
         extensions:
           helm:
             repositories:
-              - name: longhorn
-                url: https://charts.longhorn.io
               - name: tofu-controller
                 url: https://flux-iac.github.io/tofu-controller
             charts:
@@ -190,43 +188,5 @@ spec:
                     allowedNamespaces:
                       - flux-system
                       - shikanime
-              - name: longhorn
-                version: 1.11.1
-                chartname: longhorn/longhorn
-                namespace: longhorn-system
-                values: |
-                  csi:
-                    attacherReplicaCount: 1
-                    provisionerReplicaCount: 1
-                    resizerReplicaCount: 1
-                    snapshotterReplicaCount: 1
-                  defaultSettings:
-                    allowCollectingLonghornUsageMetrics: false
-                    defaultDataLocality: best-effort
-                    defaultReplicaCount: 2
-                    replicaAutoBalance: best-effort
-                  defaultBackupStore:
-                    backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
-                    backupTargetCredentialSecret: longhorn-hetzner-backups
-                  ingress:
-                    enabled: true
-                    ingressClassName: tailscale
-                    annotations:
-                      tailscale.com/tags: tag:web
-                    host: nishir-longhorn
-                    tls: true
-                  longhornUI:
-                    replicas: 1
-                  persistence:
-                    defaultClassReplicaCount: 2
-                    defaultDiskSelector:
-                      enable: true
-                      selector: fast
-                    defaultFsType: xfs
-                    recurringJobSelector:
-                      enable: true
-                      jobList:
-                        - name: standard
-                          isGroup: true
         telemetry:
           enabled: false

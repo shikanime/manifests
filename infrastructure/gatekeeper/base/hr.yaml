@@ -16,6 +16,9 @@ spec:
         namespace: flux-system
   install:
     createNamespace: true
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   interval: 10m
   releaseName: gatekeeper
   targetNamespace: gatekeeper-system
