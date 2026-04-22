@@ -11,12 +11,11 @@ spec:
           volumeMounts:
             - name: music-data
               mountPath: /data/music
-            - name: downloads-data
+              subPath: Music
+            - name: music-data
               mountPath: /downloads
+              subPath: Staging
       volumes:
         - name: music-data
           persistentVolumeClaim:
             claimName: music-data
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
