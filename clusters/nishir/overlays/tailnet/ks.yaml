@@ -6,8 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/bazarr/overlays/nishir-tailnet
@@ -32,8 +30,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/copyparty/overlays/nishir-tailnet
@@ -58,8 +54,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/forgejo/overlays/nishir-tailnet
@@ -84,8 +78,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/gitea-mirror/overlays/nishir-tailnet
@@ -110,8 +102,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent/overlays/nishir-tailnet
@@ -136,7 +126,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/chrome/overlays/nishir-tailnet
@@ -157,7 +146,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent-postgres/overlays/nishir-tailnet
@@ -182,8 +170,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/honcho/overlays/nishir-tailnet
@@ -208,8 +194,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/jellyfin/overlays/nishir-tailnet
@@ -234,8 +218,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/lidarr/overlays/nishir-tailnet
@@ -260,7 +242,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
@@ -285,7 +266,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
@@ -310,7 +290,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
@@ -335,7 +314,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
@@ -360,7 +338,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
@@ -385,7 +362,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
@@ -410,7 +386,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
@@ -435,7 +410,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
@@ -460,7 +434,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/metatube/overlays/nishir-tailnet
@@ -485,8 +458,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/prowlarr/overlays/nishir-tailnet
@@ -511,8 +482,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/qbittorrent/overlays/nishir-tailnet
@@ -537,8 +506,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/radarr/overlays/nishir-tailnet
@@ -563,8 +530,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/seerr/overlays/nishir-tailnet
@@ -589,8 +554,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/sonarr/overlays/nishir-tailnet
@@ -615,8 +578,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse/overlays/nishir-tailnet
@@ -641,8 +602,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
@@ -663,8 +622,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/syncthing/overlays/nishir-tailnet
@@ -689,8 +646,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/vaultwarden/overlays/nishir-tailnet
@@ -715,8 +670,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-gatekeeper
-    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/whisparr/overlays/nishir-tailnet
