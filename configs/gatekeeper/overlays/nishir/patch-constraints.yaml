@@ -63,3 +63,4 @@ spec:
           operator: NotIn
           values:
             - jellyfin
+            - whisparr

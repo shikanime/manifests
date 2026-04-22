@@ -118,6 +118,12 @@ spec:
           - ""
         kinds:
           - Pod
+    labelSelector:
+      matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: NotIn
+          values:
+            - whisparr
     namespaces:
       - shikanime
     scope: Namespaced
@@ -147,6 +153,12 @@ spec:
           - ""
         kinds:
           - Pod
+    labelSelector:
+      matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: NotIn
+          values:
+            - whisparr
     namespaces:
       - shikanime
     scope: Namespaced
