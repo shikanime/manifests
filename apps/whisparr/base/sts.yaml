@@ -40,6 +40,8 @@ spec:
       containers:
         - name: whisparr
           image: whisparr
+          securityContext:
+            readOnlyRootFilesystem: false
           env:
             - name: PUID
               value: "1000"
