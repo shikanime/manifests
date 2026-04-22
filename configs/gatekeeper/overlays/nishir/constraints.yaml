@@ -16,6 +16,7 @@ spec:
   parameters:
     repos:
       - chromedp/
+      - codeberg.org/forgejo/
       - copyparty/
       - dock.mau.dev/mautrix/
       - ghcr.io/hotio/
