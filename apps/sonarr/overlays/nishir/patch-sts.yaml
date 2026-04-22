@@ -11,12 +11,11 @@ spec:
           volumeMounts:
             - name: shows-data
               mountPath: /data/shows
-            - name: downloads-data
+              subPath: Shows
+            - name: shows-data
               mountPath: /downloads
+              subPath: Staging
       volumes:
         - name: shows-data
           persistentVolumeClaim:
             claimName: shows-data
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
