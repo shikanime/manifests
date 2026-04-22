@@ -22,11 +22,11 @@ spec:
           command:
             - rclone
           args:
-            - copy
+            - copyto
             - --copy-links
             - --update
-            - /mnt/startup-config
-            - /mnt/config
+            - /mnt/startup-config/config.xml
+            - /mnt/config/config.xml
           volumeMounts:
             - name: config
               mountPath: /mnt/config
