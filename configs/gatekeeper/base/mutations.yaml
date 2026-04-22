@@ -256,64 +256,6 @@ spec:
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
 metadata:
-  name: set-pod-run-as-group-1000
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: spec.securityContext.runAsGroup
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value: 1000
-    pathTests:
-      - condition: MustNotExist
-        subPath: spec.securityContext.runAsGroup
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
-  name: set-pod-run-as-user-1000
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: spec.securityContext.runAsUser
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value: 1000
-    pathTests:
-      - condition: MustNotExist
-        subPath: spec.securityContext.runAsUser
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
   name: set-pod-apparmor-profile-runtime-default
 spec:
   applyTo:
