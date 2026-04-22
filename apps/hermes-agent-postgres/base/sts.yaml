@@ -22,12 +22,6 @@ spec:
           ports:
             - name: postgres
               containerPort: 5432
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/postgresql/data
-            - name: initdb
-              mountPath: /docker-entrypoint-initdb.d
-              readOnly: true
           startupProbe:
             exec:
               command:
@@ -71,6 +65,14 @@ spec:
                 secretKeyRef:
                   name: hermes-agent-postgres
                   key: password
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+            - name: run-postgresql
+              mountPath: /run/postgresql
       volumes:
         - name: initdb
           configMap:
@@ -81,3 +83,5 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: hermes-agent-postgres-data
+        - name: run-postgresql
+          emptyDir: {}
