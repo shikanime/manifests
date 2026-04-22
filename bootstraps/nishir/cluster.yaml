@@ -34,7 +34,7 @@ spec:
             - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large,node.longhorn.io/create-default-disk=false"
+        - --labels="beta.kubernetes.io/instance-type=rpi5-large,node.kubernetes.io/instance-type=rpi5-large"
       noTaints: true
       role: controller+worker
       ssh:
@@ -69,7 +69,7 @@ spec:
             - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large,node.longhorn.io/create-default-disk=false"
+        - --labels="beta.kubernetes.io/instance-type=rpi4-large,node.kubernetes.io/instance-type=rpi4-large"
       role: worker
       ssh:
         address: 100.94.149.17
@@ -103,7 +103,7 @@ spec:
             - systemd-tmpfiles --create
             - sysctl --system
       installFlags:
-        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium,node.longhorn.io/create-default-disk=false"
+        - --labels="beta.kubernetes.io/instance-type=rpi4-medium,node.kubernetes.io/instance-type=rpi4-medium"
       role: worker
       ssh:
         address: 100.95.57.59
