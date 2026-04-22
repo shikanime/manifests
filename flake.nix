@@ -148,6 +148,7 @@
                   pkgs.caddy
                   pkgs.clusterctl
                   pkgs.docker
+                  pkgs.fluxcd
                   pkgs.fluxcd-operator
                   pkgs.gatekeeper
                   pkgs.k0sctl
