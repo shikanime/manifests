@@ -17,21 +17,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: downloads-data
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 1Ti
-  storageClassName: nishir-standard
-  volumeMode: Filesystem
-  volumeName: downloads-data
-  accessModes:
-    - ReadWriteMany
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: movies-data
   namespace: shikanime
 spec:

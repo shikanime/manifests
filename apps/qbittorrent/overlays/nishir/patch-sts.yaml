@@ -9,9 +9,49 @@ spec:
       containers:
         - name: qbittorrent
           volumeMounts:
-            - name: downloads-data
-              mountPath: /downloads
+            - name: staging-data
+              mountPath: /downloads/incomplete/prowlarr
+              subPath: Downloads
+            - name: staging-data
+              mountPath: /downloads/prowlarr
+              subPath: Staging/Nishir/Downloads
+            - name: movies-data
+              mountPath: /downloads/incomplete/radarr
+              subPath: Downloads
+            - name: movies-data
+              mountPath: /downloads/radarr
+              subPath: Staging
+            - name: music-data
+              mountPath: /downloads/incomplete/lidarr
+              subPath: Downloads
+            - name: music-data
+              mountPath: /downloads/lidarr
+              subPath: Staging
+            - name: shows-data
+              mountPath: /downloads/incomplete/sonarr
+              subPath: Downloads
+            - name: shows-data
+              mountPath: /downloads/sonarr
+              subPath: Staging
+            - name: sukebe-data
+              mountPath: /downloads/incomplete/whisparr
+              subPath: Downloads
+            - name: sukebe-data
+              mountPath: /downloads/whisparr
+              subPath: Staging
       volumes:
-        - name: downloads-data
+        - name: movies-data
           persistentVolumeClaim:
-            claimName: downloads-data
+            claimName: movies-data
+        - name: music-data
+          persistentVolumeClaim:
+            claimName: music-data
+        - name: shows-data
+          persistentVolumeClaim:
+            claimName: shows-data
+        - name: staging-data
+          persistentVolumeClaim:
+            claimName: staging-data
+        - name: sukebe-data
+          persistentVolumeClaim:
+            claimName: sukebe-data

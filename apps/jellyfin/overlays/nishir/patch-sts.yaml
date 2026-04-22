@@ -11,12 +11,16 @@ spec:
           volumeMounts:
             - name: movies-data
               mountPath: /data/movies
+              subPath: Movies
             - name: music-data
               mountPath: /data/music
+              subPath: Music
             - name: shows-data
               mountPath: /data/shows
+              subPath: Shows
             - name: sukebe-data
               mountPath: /data/sukebe
+              subPath: Sukebe
             - name: timeline-data
               mountPath: /data/timeline
       volumes:
