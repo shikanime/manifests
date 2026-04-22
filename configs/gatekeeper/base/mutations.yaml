@@ -73,6 +73,215 @@ spec:
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
 metadata:
+  name: set-pod-capabilities-drop-all
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.containers[name:*].securityContext.capabilities.drop"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value:
+        - ALL
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-enable-service-links-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.enableServiceLinks
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-host-ipc-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.hostIPC
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-host-network-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.hostNetwork
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-host-pid-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.hostPID
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-privileged-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.containers[name:*].securityContext.privileged"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-run-as-non-root-true
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: spec.securityContext.runAsNonRoot
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: true
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-seccomp-profile-runtime-default-container
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.containers[name:*].securityContext.seccompProfile.type"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: RuntimeDefault
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
   name: set-pod-init-allow-privilege-escalation-false
 spec:
   applyTo:
@@ -98,6 +307,269 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-init-privileged-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.initContainers[name:*].securityContext.privileged"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-init-capabilities-drop-all
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.initContainers[name:*].securityContext.capabilities.drop"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value:
+        - ALL
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-init-seccomp-profile-runtime-default
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.initContainers[name:*].securityContext.seccompProfile.type"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: RuntimeDefault
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-allow-privilege-escalation-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-capabilities-drop-all
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.capabilities.drop"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value:
+        - ALL
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-privileged-false
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.privileged"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: false
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-read-only-root-filesystem-true
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: true
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-run-as-non-root-true
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.runAsNonRoot"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: true
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-ephemeral-seccomp-profile-runtime-default
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: "spec.ephemeralContainers[name:*].securityContext.seccompProfile.type"
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value: RuntimeDefault
+    pathTests:
+      - condition: MustExist
+        subPath: spec.ephemeralContainers
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -133,6 +605,72 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-init-run-emptydir-volume-mount
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: 'spec.initContainers[name:*].volumeMounts[mountPath:"/run"]'
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value:
+        name: run
+        mountPath: /run
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: 'spec.initContainers[name:*].volumeMounts[mountPath:"/run"]'
+---
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: set-pod-init-tmp-emptydir-volume-mount
+spec:
+  applyTo:
+    - groups:
+        - ""
+      kinds:
+        - Pod
+      versions:
+        - v1
+  location: 'spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]'
+  match:
+    kinds:
+      - apiGroups:
+          - ""
+        kinds:
+          - Pod
+    namespaces:
+      - shikanime
+    scope: Namespaced
+  parameters:
+    assign:
+      value:
+        name: tmp
+        mountPath: /tmp
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: 'spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]'
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -231,7 +769,7 @@ spec:
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
 metadata:
-  name: set-pod-init-run-emptydir-volume-mount
+  name: set-pod-seccomp-profile-runtime-default
 spec:
   applyTo:
     - groups:
@@ -240,7 +778,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: 'spec.initContainers[name:*].volumeMounts[mountPath:"/run"]'
+  location: spec.securityContext.seccompProfile.type
   match:
     kinds:
       - apiGroups:
@@ -252,14 +790,7 @@ spec:
     scope: Namespaced
   parameters:
     assign:
-      value:
-        name: run
-        mountPath: /run
-    pathTests:
-      - condition: MustExist
-        subPath: spec.initContainers
-      - condition: MustNotExist
-        subPath: 'spec.initContainers[name:*].volumeMounts[mountPath:"/run"]'
+      value: RuntimeDefault
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -322,36 +853,3 @@ spec:
     pathTests:
       - condition: MustNotExist
         subPath: 'spec.containers[name:*].volumeMounts[mountPath:"/tmp"]'
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
-  name: set-pod-init-tmp-emptydir-volume-mount
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: 'spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]'
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value:
-        name: tmp
-        mountPath: /tmp
-    pathTests:
-      - condition: MustExist
-        subPath: spec.initContainers
-      - condition: MustNotExist
-        subPath: 'spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]'
