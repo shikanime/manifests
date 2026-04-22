@@ -4,3 +4,5 @@ nameReference:
     fieldSpecs:
       - kind: Provider
         path: spec/secretRef/name
+      - kind: Receiver
+        path: spec/secretRef/name
