@@ -24,3 +24,5 @@ spec:
   targetNamespace: gatekeeper-system
   values:
     replicas: 1
+    upgradeCRDs:
+      enabled: false
