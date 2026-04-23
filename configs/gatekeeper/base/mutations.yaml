@@ -4,13 +4,6 @@ kind: AssignMetadata
 metadata:
   name: set-ingress-allow-http-false
 spec:
-  applyTo:
-    - groups:
-        - networking.k8s.io
-      kinds:
-        - Ingress
-      versions:
-        - v1
   location: 'metadata.annotations."kubernetes.io/ingress.allow-http"'
   match:
     kinds:
