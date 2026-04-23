@@ -51,13 +51,13 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: run
-              mountPath: /run
+            - name: run-s6
+              mountPath: /run/s6
       securityContext:
         fsGroup: 1000
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: prowlarr-config
-        - name: run
+        - name: run-s6
           emptyDir: {}

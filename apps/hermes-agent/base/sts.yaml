@@ -45,6 +45,9 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
         - name: hermes-setup
           image: hermes-agent
           args:
@@ -63,6 +66,9 @@ spec:
           envFrom:
             - secretRef:
                 name: hermes-agent
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
       containers:
         - name: hermes-agent
           image: hermes-agent
@@ -85,6 +91,8 @@ spec:
           envFrom:
             - secretRef:
                 name: hermes-agent
+      securityContext:
+        fsGroup: 10000
       volumes:
         - name: data
           persistentVolumeClaim:

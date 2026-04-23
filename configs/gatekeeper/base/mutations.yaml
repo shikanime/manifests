@@ -17,6 +17,9 @@ spec:
   parameters:
     assign:
       value: "false"
+    pathTests:
+      - condition: MustNotExist
+        subPath: 'metadata.annotations."kubernetes.io/ingress.allow-http"'
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -43,6 +46,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+      - condition: MustNotExist
+        subPath: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -69,6 +75,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.automountServiceAccountToken
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -96,6 +105,9 @@ spec:
     assign:
       value:
         - ALL
+    pathTests:
+      - condition: MustNotExist
+        subPath: "spec.containers[name:*].securityContext.capabilities.drop"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -122,6 +134,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.hostIPC
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -148,6 +163,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.hostNetwork
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -174,6 +192,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.hostPID
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -200,6 +221,9 @@ spec:
   parameters:
     assign:
       value: false
+    pathTests:
+      - condition: MustNotExist
+        subPath: "spec.containers[name:*].securityContext.privileged"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -317,6 +341,9 @@ spec:
   parameters:
     assign:
       value: RuntimeDefault
+    pathTests:
+      - condition: MustNotExist
+        subPath: "spec.containers[name:*].securityContext.seccompProfile.type"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -346,6 +373,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: "spec.initContainers[name:*].securityContext.allowPrivilegeEscalation"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -375,6 +404,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: "spec.initContainers[name:*].securityContext.privileged"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -405,6 +436,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: "spec.initContainers[name:*].securityContext.capabilities.drop"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -434,6 +467,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: "spec.initContainers[name:*].securityContext.seccompProfile.type"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -463,6 +498,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.ephemeralContainers
+      - condition: MustNotExist
+        subPath: "spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -493,6 +530,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.ephemeralContainers
+      - condition: MustNotExist
+        subPath: "spec.ephemeralContainers[name:*].securityContext.capabilities.drop"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -522,6 +561,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.ephemeralContainers
+      - condition: MustNotExist
+        subPath: "spec.ephemeralContainers[name:*].securityContext.privileged"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -551,6 +592,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.ephemeralContainers
+      - condition: MustNotExist
+        subPath: "spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -580,6 +623,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.ephemeralContainers
+      - condition: MustNotExist
+        subPath: "spec.ephemeralContainers[name:*].securityContext.runAsNonRoot"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -609,6 +654,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.ephemeralContainers
+      - condition: MustNotExist
+        subPath: "spec.ephemeralContainers[name:*].securityContext.seccompProfile.type"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -644,6 +691,8 @@ spec:
     pathTests:
       - condition: MustExist
         subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: "spec.initContainers[name:*].securityContext.readOnlyRootFilesystem"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -709,37 +758,9 @@ spec:
   parameters:
     assign:
       value: true
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
-  name: set-pod-run-emptydir-volume
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: spec.volumes[name:run]
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value:
-        name: run
-        emptyDir: {}
     pathTests:
       - condition: MustNotExist
-        subPath: spec.volumes[name:run]
+        subPath: "spec.containers[name:*].securityContext.readOnlyRootFilesystem"
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -766,6 +787,9 @@ spec:
   parameters:
     assign:
       value: RuntimeDefault
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.securityContext.seccompProfile.type
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign

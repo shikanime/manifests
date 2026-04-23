@@ -27,6 +27,9 @@ spec:
             - --update
             - /mnt/startup-config/config.xml
             - /mnt/config/config.xml
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           volumeMounts:
             - name: config
               mountPath: /mnt/config
@@ -72,6 +75,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: run-s6
+              mountPath: /run/s6
       securityContext:
         fsGroup: 1000
       volumes:
@@ -84,3 +89,5 @@ spec:
         - name: startup-config
           secret:
             secretName: radarr
+        - name: run-s6
+          emptyDir: {}

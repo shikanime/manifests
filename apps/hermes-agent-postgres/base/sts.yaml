@@ -72,7 +72,9 @@ spec:
               mountPath: /docker-entrypoint-initdb.d
               readOnly: true
             - name: run-postgresql
-              mountPath: /run/postgresql
+              mountPath: /var/run/postgresql
+      securityContext:
+        fsGroup: 999
       volumes:
         - name: initdb
           configMap:
