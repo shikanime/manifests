@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/instance: hermes-agent
+      app.kubernetes.io/instance: hermes-agent-dashboard
       app.kubernetes.io/name: hermes-agent
   policyTypes:
     - Ingress
@@ -17,4 +17,3 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
-        - port: webhook

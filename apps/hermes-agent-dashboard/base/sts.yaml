@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hermes-agent
+spec:
+  replicas: 1
+  serviceName: hermes-agent-dashboard
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: hermes-agent-dashboard
+      app.kubernetes.io/name: hermes-agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: hermes-agent-dashboard
+        app.kubernetes.io/name: hermes-agent
+    spec:
+      containers:
+        - name: hermes-agent
+          image: hermes-agent
+          args:
+            - dashboard
+          env:
+            - name: GATEWAY_HEALTH_URL
+              value: http://$(HERMES_AGENT_SERVICE_HOST):$(HERMES_AGENT_SERVICE_PORT)
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hermes-agent-dashboard-data

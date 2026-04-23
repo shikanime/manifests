@@ -4,7 +4,10 @@ kind: Service
 metadata:
   name: hermes-agent
 spec:
+  selector:
+    app.kubernetes.io/name: hermes-agent
+pec:
   ports:
     - name: http
-      port: 8642
+      port: 9119
       targetPort: http
