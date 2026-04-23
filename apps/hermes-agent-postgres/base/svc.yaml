@@ -9,4 +9,5 @@ spec:
       port: 5432
       targetPort: postgres
   selector:
+    app.kubernetes.io/instance: hermes-agent-postgres
     app.kubernetes.io/name: hermes-agent-postgres

@@ -9,4 +9,5 @@ spec:
       port: 3923
       targetPort: http
   selector:
+    app.kubernetes.io/instance: copyparty
     app.kubernetes.io/name: copyparty

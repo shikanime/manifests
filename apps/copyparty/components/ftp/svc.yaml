@@ -6,6 +6,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
+    app.kubernetes.io/instance: copyparty
     app.kubernetes.io/name: copyparty
   ports:
     - name: ftp-control

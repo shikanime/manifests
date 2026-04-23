@@ -5,6 +5,7 @@ metadata:
   name: hermes-agent
 spec:
   selector:
+    app.kubernetes.io/instance: hermes-agent
     app.kubernetes.io/name: hermes-agent
 pec:
   ports:

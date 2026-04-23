@@ -10,4 +10,5 @@ spec:
       port: 29318
       targetPort: http
   selector:
+    app.kubernetes.io/instance: mautrix-whatsapp
     app.kubernetes.io/name: mautrix-whatsapp
