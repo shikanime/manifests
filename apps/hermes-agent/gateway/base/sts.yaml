@@ -5,7 +5,7 @@ metadata:
   name: hermes-agent-gateway
 spec:
   replicas: 1
-  servicename: hermes-agent-gateway
+  serviceName: hermes-agent-gateway
   selector:
     matchLabels:
       app.kubernetes.io/instance: hermes-agent-gateway
@@ -64,7 +64,7 @@ spec:
             - secretRef:
                 name: hermes-agent-gateway
       containers:
-        - name: hermes-agent
+        - name: hermes-agent-gateway
           image: hermes-agent
           args:
             - gateway
