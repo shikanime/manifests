@@ -132,6 +132,9 @@ spec:
       fromList:
         - name: NODE_EXTRA_CA_CERTS
           value: /etc/ssl/certs/ca-certificates.crt
+    pathTests:
+      - condition: MustNotExist
+        subPath: spec.containers[name:*].env[name:NODE_EXTRA_CA_CERTS]
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: ModifySet
@@ -168,3 +171,8 @@ spec:
       fromList:
         - name: NODE_EXTRA_CA_CERTS
           value: /etc/ssl/certs/ca-certificates.crt
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
+      - condition: MustNotExist
+        subPath: spec.initContainers[name:*].env[name:NODE_EXTRA_CA_CERTS]
