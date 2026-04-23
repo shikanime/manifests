@@ -99,5 +99,5 @@ spec:
             name: hermes-agent-gateway-startup-config
         - name: ssh-key
           secret:
-            secretName hermes-agent-gateway-ssh
+            secretName: hermes-agent-gateway-ssh
             defaultMode: 0400
