@@ -9,4 +9,4 @@ spec:
       storage: 512Mi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOncePod
+    - ReadWriteMany
