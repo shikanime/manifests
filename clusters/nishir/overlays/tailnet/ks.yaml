@@ -30,6 +30,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/copyparty/overlays/nishir-tailnet
@@ -54,6 +55,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/forgejo/overlays/nishir-tailnet
@@ -78,6 +80,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/gitea-mirror/overlays/nishir-tailnet
@@ -126,6 +129,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: ifrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/chrome/overlays/nishir-tailnet
@@ -194,6 +198,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/jellyfin/overlays/nishir-tailnet
@@ -218,6 +223,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/lidarr/overlays/nishir-tailnet
@@ -458,6 +464,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/prowlarr/overlays/nishir-tailnet
@@ -482,6 +489,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/qbittorrent/overlays/nishir-tailnet
@@ -506,6 +514,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/radarr/overlays/nishir-tailnet
@@ -554,6 +563,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/sonarr/overlays/nishir-tailnet
@@ -578,6 +588,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse/overlays/nishir-tailnet
@@ -602,6 +613,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
@@ -622,6 +634,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/syncthing/overlays/nishir-tailnet
@@ -646,6 +659,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/vaultwarden/overlays/nishir-tailnet
@@ -670,6 +684,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/whisparr/overlays/nishir-tailnet
