@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: hermes-agent
+  name: hermes-agent-gateway
 spec:
   replicas: 1
-  serviceName: hermes-agent
+  servicename: hermes-agent-gateway
   selector:
     matchLabels:
-      app.kubernetes.io/instance: hermes-agent
+      app.kubernetes.io/instance: hermes-agent-gateway
       app.kubernetes.io/name: hermes-agent
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: hermes-agent
+        app.kubernetes.io/instance: hermes-agent-gateway
         app.kubernetes.io/name: hermes-agent
     spec:
       initContainers:
@@ -62,9 +62,9 @@ spec:
               readOnly: true
           envFrom:
             - secretRef:
-                name: hermes-agent
+                name: hermes-agent-gateway
       containers:
-        - name: hermes-agent
+        - name: hermes-agent-gateway
           image: hermes-agent
           args:
             - gateway
@@ -84,7 +84,7 @@ spec:
               readOnly: true
           envFrom:
             - secretRef:
-                name: hermes-agent
+                name: hermes-agent-gateway
       securityContext:
         fsGroup: 10000
       volumes:
@@ -93,11 +93,11 @@ spec:
             claimName: hermes-agent-data
         - name: rclone-config
           configMap:
-            name: hermes-agent-rclone
+            name: hermes-agent-gateway-rclone
         - name: startup-config
           configMap:
-            name: hermes-agent-startup-config
+            name: hermes-agent-gateway-startup-config
         - name: ssh-key
           secret:
-            secretName: hermes-agent-ssh
+            secretname: hermes-agent-gateway-ssh
             defaultMode: 0400

@@ -2,11 +2,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: hermes-agent-tailscale
+  name: hermes-agent-gateway-tailscale
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/instance: hermes-agent
+      app.kubernetes.io/instance: hermes-agent-gateway
       app.kubernetes.io/name: hermes-agent
   policyTypes:
     - Ingress

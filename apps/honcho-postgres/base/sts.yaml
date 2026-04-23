@@ -8,13 +8,13 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/instance: honcho-postgres
-      app.kubernetes.io/name: honcho-postgres
+      app.kubernetes.io/name: postgres
   serviceName: honcho-postgres
   template:
     metadata:
       labels:
         app.kubernetes.io/instance: honcho-postgres
-        app.kubernetes.io/name: honcho-postgres
+        app.kubernetes.io/name: postgres
     spec:
       containers:
         - name: postgres
