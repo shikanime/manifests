@@ -7,7 +7,6 @@ spec:
   selector:
     app.kubernetes.io/instance: hermes-agent-dashboard
     app.kubernetes.io/name: hermes-agent
-pec:
   ports:
     - name: http
       port: 9119
