@@ -24,6 +24,9 @@ spec:
           env:
             - name: GATEWAY_HEALTH_URL
               value: http://$(HERMES_AGENT_GATEWAY_SERVICE_HOST):$(HERMES_AGENT_GATEWAY_SERVICE_PORT)
+          ports:
+            - containerPort: 9119
+              name: http
           volumeMounts:
             - name: data
               mountPath: /opt/data
