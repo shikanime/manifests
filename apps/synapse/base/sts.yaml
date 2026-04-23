@@ -26,8 +26,8 @@ spec:
               # Copy synapse config
               rclone copy \
                 --copy-links \
-                --filter "+ *.log.config" \
-                --filter "+ *.signing.key" \
+                --filter "+ /*.log.config" \
+                --filter "+ /*.signing.key" \
                 --filter "+ /homeserver.yaml" \
                 --filter "- *" \
                 --update \
