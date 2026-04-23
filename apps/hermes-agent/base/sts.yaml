@@ -26,11 +26,11 @@ spec:
             - --copy-links
             - --update
             - --filter
-            - "+ config.yaml"
+            - "+ /config.yaml"
             - --filter
-            - "+ honcho.json"
+            - "+ /honcho.json"
             - --filter
-            - "+ SOUL.md"
+            - "+ /SOUL.md"
             - --filter
             - "- *"
             - /mnt/startup-config

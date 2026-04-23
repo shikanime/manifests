@@ -26,11 +26,11 @@ spec:
             - --copy-links
             - --update
             - --filter
-            - "+ config.yaml"
+            - "+ /config.yaml"
             - --filter
-            - "+ doublepuppet.yaml"
+            - "+ /doublepuppet.yaml"
             - --filter
-            - "+ registration.yaml"
+            - "+ /registration.yaml"
             - --filter
             - "- *"
             - /mnt/config

@@ -28,7 +28,7 @@ spec:
                 --copy-links \
                 --filter "+ *.log.config" \
                 --filter "+ *.signing.key" \
-                --filter "+ homeserver.yaml" \
+                --filter "+ /homeserver.yaml" \
                 --filter "- *" \
                 --update \
                 /mnt/config \
