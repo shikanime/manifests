@@ -72,8 +72,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: run-s6
-              mountPath: /run/s6
+            - name: run
+              mountPath: /run
       securityContext:
         fsGroup: 1000
       volumes:
@@ -86,5 +86,5 @@ spec:
         - name: startup-config
           secret:
             secretName: sonarr
-        - name: run-s6
+        - name: run
           emptyDir: {}
