@@ -79,36 +79,6 @@ spec:
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
 metadata:
-  name: set-pod-capabilities-drop-all
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: "spec.containers[name:*].securityContext.capabilities.drop"
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value:
-        - ALL
-    pathTests:
-      - condition: MustNotExist
-        subPath: "spec.containers[name:*].securityContext.capabilities.drop"
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
   name: set-pod-host-ipc-false
 spec:
   applyTo:
@@ -758,35 +728,6 @@ spec:
     pathTests:
       - condition: MustNotExist
         subPath: "spec.containers[name:*].securityContext.readOnlyRootFilesystem"
----
-apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
-metadata:
-  name: set-pod-seccomp-profile-runtime-default
-spec:
-  applyTo:
-    - groups:
-        - ""
-      kinds:
-        - Pod
-      versions:
-        - v1
-  location: spec.securityContext.seccompProfile.type
-  match:
-    kinds:
-      - apiGroups:
-          - ""
-        kinds:
-          - Pod
-    namespaces:
-      - shikanime
-    scope: Namespaced
-  parameters:
-    assign:
-      value: RuntimeDefault
-    pathTests:
-      - condition: MustNotExist
-        subPath: spec.securityContext.seccompProfile.type
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
