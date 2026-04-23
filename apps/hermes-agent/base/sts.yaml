@@ -35,6 +35,9 @@ spec:
             - "- *"
             - /mnt/startup-config
             - /opt/data
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
           volumeMounts:
             - name: data
               mountPath: /opt/data
@@ -45,14 +48,14 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
-          securityContext:
-            runAsUser: 10000
-            runAsGroup: 10000
         - name: hermes-setup
           image: hermes-agent
           args:
             - setup
             - --non-interactive
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
           volumeMounts:
             - name: data
               mountPath: /opt/data
@@ -66,9 +69,6 @@ spec:
           envFrom:
             - secretRef:
                 name: hermes-agent
-          securityContext:
-            runAsUser: 10000
-            runAsGroup: 10000
       containers:
         - name: hermes-agent
           image: hermes-agent
