@@ -6,7 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/bazarr/overlays/nishir-tailnet
@@ -106,7 +105,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent/overlays/nishir-tailnet
@@ -131,7 +129,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-cert-manager
+    - name: ifrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/chrome/overlays/nishir-tailnet
@@ -152,7 +150,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/hermes-agent-postgres/overlays/nishir-tailnet
@@ -177,7 +174,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/honcho/overlays/nishir-tailnet
@@ -543,7 +539,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/seerr/overlays/nishir-tailnet
