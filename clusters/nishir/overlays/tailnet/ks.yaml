@@ -177,7 +177,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: ifrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/chrome/overlays/nishir-tailnet
