@@ -5,4 +5,4 @@ metadata:
   name: hermes-agent-data
 spec:
   storageClassName: nishir-fast
-  volumeName: hermes-agent-data
+  volumename: hermes-agent-data
