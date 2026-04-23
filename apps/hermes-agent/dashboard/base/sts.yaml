@@ -23,7 +23,7 @@ spec:
             - dashboard
           env:
             - name: GATEWAY_HEALTH_URL
-              value: http://$(HERMES_AGENT_SERVICE_HOST):$(HERMES_AGENT_SERVICE_PORT)
+              value: http://$(HERMES_AGENT_GATEWAY_SERVICE_HOST):$(HERMES_AGENT_GATEWAY_SERVICE_PORT)
           volumeMounts:
             - name: data
               mountPath: /opt/data
