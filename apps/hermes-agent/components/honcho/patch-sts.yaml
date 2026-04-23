@@ -6,7 +6,6 @@ metadata:
 spec:
   template:
     spec:
-      : true
       containers:
         - name: hermes-agent
           env:
