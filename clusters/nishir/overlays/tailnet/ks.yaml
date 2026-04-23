@@ -248,6 +248,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
@@ -272,6 +273,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
@@ -296,6 +298,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
@@ -320,6 +323,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
@@ -344,6 +348,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
@@ -368,6 +373,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
@@ -392,6 +398,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
@@ -416,6 +423,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
