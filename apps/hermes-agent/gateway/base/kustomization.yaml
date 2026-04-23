@@ -16,12 +16,12 @@ images:
     newName: nousresearch/hermes-agent
     newTag: v2026.4.16
 configMapGenerator:
-  - name: hermes-agent-rclone
+  - name: hermes-agent-gateway-rclone
     files:
       - rclone/rclone.conf
 secretGenerator:
-  - name: hermes-agent-ssh
+  - name: hermes-agent-gateway-ssh
     files:
-      - id_ed25519=hermes-agent/id_ed25519.enc
+      - id_ed25519=hermes-agent-gateway/id_ed25519.enc
     options:
       disableNameSuffixHash: true

@@ -10,12 +10,12 @@ components:
 patches:
   - path: patch-pvc.yaml
 configMapGenerator:
-  - name: hermes-agent-startup-config
+  - name: hermes-agent-gateway-startup-config
     files:
-      - hermes-agent/config.yaml
-      - hermes-agent/honcho.json
-      - hermes-agent/SOUL.md
+      - hermes-agent-gateway/config.yaml
+      - hermes-agent-gateway/honcho.json
+      - hermes-agent-gateway/SOUL.md
 secretGenerator:
-  - name: hermes-agent
+  - name: hermes-agent-gateway
     envs:
-      - hermes-agent/.enc.env
+      - hermes-agent-gateway/.enc.env
