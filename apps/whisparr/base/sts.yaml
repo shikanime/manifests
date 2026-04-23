@@ -44,8 +44,6 @@ spec:
       containers:
         - name: whisparr
           image: whisparr
-          securityContext:
-            readOnlyRootFilesystem: false
           env:
             - name: PUID
               value: "1000"
@@ -79,6 +77,11 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+          securityContext:
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - FOWNER
       securityContext:
         fsGroup: 1000
       volumes:
