@@ -27,9 +27,6 @@ spec:
             - --update
             - /mnt/startup-config/config.yaml
             - /mnt/config/config.yaml
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
           volumeMounts:
             - name: config
               mountPath: /mnt/config

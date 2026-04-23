@@ -35,9 +35,6 @@ spec:
             - "- *"
             - /mnt/startup-config
             - /opt/data
-          securityContext:
-            runAsUser: 10000
-            runAsGroup: 10000
           volumeMounts:
             - name: data
               mountPath: /opt/data
@@ -53,9 +50,6 @@ spec:
           args:
             - setup
             - --non-interactive
-          securityContext:
-            runAsUser: 10000
-            runAsGroup: 10000
           volumeMounts:
             - name: data
               mountPath: /opt/data
