@@ -5,6 +5,9 @@ metadata:
   name: qbittorrent-resume
 spec:
   jobTemplate:
+    successfulJobsHistoryLimit: 1
+    failedJobsHistoryLimit: 1
+    concurrencyPolicy: Forbid
     spec:
       backoffLimit: 3
       template:
