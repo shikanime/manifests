@@ -7,3 +7,4 @@ spec:
   selector:
     app.kubernetes.io/instance: hermes-agent-gateway
     app.kubernetes.io/name: hermes-agent
+  ports: []
