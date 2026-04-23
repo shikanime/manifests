@@ -37,6 +37,10 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FORWARD
       containers:
         - name: radarr
           image: radarr
