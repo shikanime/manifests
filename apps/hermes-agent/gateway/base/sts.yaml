@@ -48,7 +48,7 @@ spec:
           securityContext:
             capabilities:
               add:
-                - FORWARD
+                - FOWNER
         - name: setup
           image: hermes-agent
           args:

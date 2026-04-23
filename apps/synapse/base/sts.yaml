@@ -154,7 +154,7 @@ spec:
           securityContext:
             capabilities:
               add:
-                - FORWARD
+                - FOWNER
       containers:
         - name: synapse
           image: synapse
