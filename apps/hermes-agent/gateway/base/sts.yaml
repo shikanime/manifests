@@ -45,7 +45,7 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
-        - name: hermes-setup
+        - name: setup
           image: hermes-agent
           args:
             - setup
@@ -64,7 +64,7 @@ spec:
             - secretRef:
                 name: hermes-agent-gateway
       containers:
-        - name: hermes-agent-gateway
+        - name: hermes-agent
           image: hermes-agent
           args:
             - gateway
