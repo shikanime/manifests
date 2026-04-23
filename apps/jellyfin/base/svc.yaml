@@ -9,4 +9,5 @@ spec:
       port: 8096
       targetPort: http
   selector:
+    app.kubernetes.io/instance: jellyfin
     app.kubernetes.io/name: jellyfin

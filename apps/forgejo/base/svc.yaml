@@ -9,6 +9,7 @@ spec:
       port: 80
       targetPort: http
   selector:
+    app.kubernetes.io/instance: forgejo
     app.kubernetes.io/name: forgejo
 ---
 apiVersion: v1
@@ -18,6 +19,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
+    app.kubernetes.io/instance: forgejo
     app.kubernetes.io/name: forgejo
   ports:
     - name: ssh

@@ -9,4 +9,5 @@ spec:
       port: 6969
       targetPort: http
   selector:
+    app.kubernetes.io/instance: whisparr
     app.kubernetes.io/name: whisparr

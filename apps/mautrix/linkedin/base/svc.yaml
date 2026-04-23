@@ -10,4 +10,5 @@ spec:
       port: 29341
       targetPort: http
   selector:
+    app.kubernetes.io/instance: mautrix-linkedin
     app.kubernetes.io/name: mautrix-linkedin

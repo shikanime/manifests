@@ -13,4 +13,5 @@ spec:
       port: 5353
       targetPort: mdns
   selector:
+    app.kubernetes.io/instance: catbox
     app.kubernetes.io/name: catbox
