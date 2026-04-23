@@ -26,6 +26,7 @@ spec:
               # Copy synapse config
               rclone copy \
                 --copy-links \
+                --no-modtime \
                 --filter "+ /*.log.config" \
                 --filter "+ /*.signing.key" \
                 --filter "+ /homeserver.yaml" \
@@ -37,41 +38,49 @@ spec:
               # Copy doublepuppet to synapse appservices
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-discord-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-discord-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-googlechat-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-googlechat-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-linkedin-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-linkedin-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-meta-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-meta-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-signal-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-signal-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-slack-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-slack-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-twitter-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-twitter-doublepuppet.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-whatsapp-config/doublepuppet.yaml \
                 /mnt/data/appservices/matrix-whatsapp-doublepuppet.yaml
@@ -79,41 +88,49 @@ spec:
               # Copy registration to synapse appservices
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-discord-config/registration.yaml \
                 /mnt/data/appservices/matrix-discord.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-googlechat-config/registration.yaml \
                 /mnt/data/appservices/matrix-googlechat.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-linkedin-config/registration.yaml \
                 /mnt/data/appservices/matrix-linkedin.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-meta-config/registration.yaml \
                 /mnt/data/appservices/matrix-meta.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-signal-config/registration.yaml \
                 /mnt/data/appservices/matrix-signal.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-slack-config/registration.yaml \
                 /mnt/data/appservices/matrix-slack.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-twitter-config/registration.yaml \
                 /mnt/data/appservices/matrix-twitter.yaml
               rclone copyto \
                 --copy-links \
+                --no-modtime \
                 --update \
                 /mnt/matrix-whatsapp-config/registration.yaml \
                 /mnt/data/appservices/matrix-whatsapp.yaml
