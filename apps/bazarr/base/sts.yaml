@@ -24,6 +24,7 @@ spec:
           args:
             - copyto
             - --copy-links
+            - --no-modtime
             - --update
             - /mnt/startup-config/config.yaml
             - /mnt/config/config.yaml

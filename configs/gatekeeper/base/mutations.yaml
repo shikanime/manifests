@@ -1,6 +1,6 @@
 ---
 apiVersion: mutations.gatekeeper.sh/v1
-kind: Assign
+kind: AssignMetadata
 metadata:
   name: set-ingress-allow-http-false
 spec:
@@ -24,9 +24,6 @@ spec:
   parameters:
     assign:
       value: "false"
-    pathTests:
-      - condition: MustNotExist
-        subPath: 'metadata.annotations."kubernetes.io/ingress.allow-http"'
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign

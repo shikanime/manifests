@@ -8,6 +8,8 @@ spec:
     spec:
       containers:
         - name: syncthing
+          securityContext:
+            runAsUser: 0
           volumeMounts:
             - name: archives-data
               mountPath: /var/syncthing/Archives
