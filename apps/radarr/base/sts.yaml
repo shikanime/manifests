@@ -78,6 +78,10 @@ spec:
               mountPath: /config
             - name: run
               mountPath: /run
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       securityContext:
         fsGroup: 1000
       volumes:
