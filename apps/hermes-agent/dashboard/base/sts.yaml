@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: hermes-agent
+  name: hermes-agent-dashboard
 spec:
   replicas: 1
   serviceName: hermes-agent-dashboard
