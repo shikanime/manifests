@@ -33,4 +33,4 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: hermes-agent-dashboard-data
+            claimName: hermes-agent-data
