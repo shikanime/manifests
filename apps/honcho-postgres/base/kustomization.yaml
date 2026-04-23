@@ -8,12 +8,12 @@ resources:
 metadata:
   annotations:
     automata.shikanime.studio/images:
-      '[ { "name": "hermes-agent-postgres", "tag-regex": "^(?P<version>.+)$" } ]'
+      '[ { "name": "honcho-postgres", "tag-regex": "^(?P<version>.+)$" } ]'
 images:
-  - name: hermes-agent-postgres
+  - name: honcho-postgres
     newName: pgvector/pgvector
     newTag: pg15
 configMapGenerator:
-  - name: hermes-agent-postgres
+  - name: honcho-postgres
     files:
-      - hermes-agent-postgres/init.sql
+      - honcho-postgres/init.sql

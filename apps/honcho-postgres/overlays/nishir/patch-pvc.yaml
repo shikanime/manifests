@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: hermes-agent-postgres-data
+  name: honcho-postgres-data
 spec:
   storageClassName: nishir-fast
-  volumeName: hermes-agent-postgres-data
+  volumeName: honcho-postgres-data
