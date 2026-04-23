@@ -40,7 +40,7 @@ spec:
           securityContext:
             capabilities:
               add:
-                - FORWARD
+                - FOWNER
       containers:
         - name: sonarr
           image: sonarr

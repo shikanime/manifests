@@ -39,7 +39,7 @@ spec:
           securityContext:
             capabilities:
               add:
-                - FORWARD
+                - FOWNER
       containers:
         - name: forgejo
           image: forgejo
