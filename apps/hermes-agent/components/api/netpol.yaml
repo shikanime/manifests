@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: hermes-agent-tailscale
+  name: hermes-agent
 spec:
   podSelector:
     matchLabels:
@@ -14,7 +14,6 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: tailscale-system
+              kubernetes.io/metadata.name: hermes-agent-dashboard
       ports:
         - port: http
-        - port: webhook
