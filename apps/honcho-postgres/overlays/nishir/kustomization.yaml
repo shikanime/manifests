@@ -5,9 +5,9 @@ namespace: shikanime
 patches:
   - path: patch-pvc.yaml
 secretGenerator:
-  - name: hermes-agent-postgres
+  - name: honcho-postgres
     type: basic-auth
     envs:
-      - hermes-agent-postgres/.enc.env
+      - honcho-postgres/.enc.env
     options:
       disableNameSuffixHash: true
