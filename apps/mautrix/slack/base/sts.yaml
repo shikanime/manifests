@@ -86,6 +86,8 @@ spec:
             capabilities:
               add:
                 - CHOWN
+                - SETUID
+                - SETGID
       securityContext:
         fsGroup: 1337
       volumes:
