@@ -53,10 +53,6 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 5
             failureThreshold: 180
-          securityContext:
-            capabilities:
-              add:
-                - FOWNER
           volumeMounts:
             - name: config
               mountPath: /config
