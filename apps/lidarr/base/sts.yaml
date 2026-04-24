@@ -71,7 +71,7 @@ spec:
               path: /ping
               port: http
             timeoutSeconds: 5
-            failureThreshold: 180
+            failureThreshold: 360
           volumeMounts:
             - name: config
               mountPath: /config
