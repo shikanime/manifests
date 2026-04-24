@@ -72,6 +72,11 @@ spec:
               port: http
             timeoutSeconds: 5
             failureThreshold: 180
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: run
+              mountPath: /run
           securityContext:
             capabilities:
               add:
@@ -79,11 +84,6 @@ spec:
                 - FOWNER
                 - SETGID
                 - SETUID
-          volumeMounts:
-            - name: config
-              mountPath: /config
-            - name: run
-              mountPath: /run
       securityContext:
         fsGroup: 1000
       volumes:
