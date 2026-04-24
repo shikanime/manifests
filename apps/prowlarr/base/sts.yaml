@@ -58,6 +58,11 @@ spec:
               mountPath: /config
             - name: run
               mountPath: /run
+          securityContext:
+            capabilities:
+              add:
+                - SETGID
+                - SETUID
       securityContext:
         fsGroup: 1000
       volumes:
