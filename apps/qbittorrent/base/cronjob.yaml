@@ -4,10 +4,10 @@ kind: CronJob
 metadata:
   name: qbittorrent-resume
 spec:
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
   jobTemplate:
-    successfulJobsHistoryLimit: 3
-    failedJobsHistoryLimit: 1
-    concurrencyPolicy: Forbid
     spec:
       template:
         metadata:
