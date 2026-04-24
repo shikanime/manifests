@@ -186,7 +186,7 @@ spec:
             initialDelaySeconds: 20
             timeoutSeconds: 15
             periodSeconds: 10
-            failureThreshold: 360
+            failureThreshold: 480
           volumeMounts:
             - name: data
               mountPath: /data
