@@ -51,7 +51,7 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 10
             timeoutSeconds: 10
-            failureThreshold: 180
+            failureThreshold: 480
           securityContext:
             readOnlyRootFilesystem: false
             capabilities:
