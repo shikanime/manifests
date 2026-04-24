@@ -110,7 +110,7 @@ spec:
   path: ./apps/hermes-agent/gateway/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: hermes-agent
+    - name: hermes-agent-gateway
       apiVersion: apps/v1
       kind: StatefulSet
       namespace: shikanime
@@ -134,7 +134,7 @@ spec:
   path: ./apps/hermes-agent/dashboard/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: hermes-agent
+    - name: hermes-agent-dashboard
       apiVersion: apps/v1
       kind: StatefulSet
       namespace: shikanime
