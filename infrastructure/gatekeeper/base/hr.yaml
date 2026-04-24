@@ -23,6 +23,9 @@ spec:
   releaseName: gatekeeper
   targetNamespace: gatekeeper-system
   values:
+    defaultCreateVAPBindingForConstraints: false
+    defaultCreateVAPForTemplates: false
+    enableK8sNativeValidation: false
     replicas: 1
     upgradeCRDs:
       enabled: false
