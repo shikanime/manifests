@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: mautrix
+        app.kubernetes.io/instance: mautrix-googlechat
         app.kubernetes.io/name: mautrix-googlechat
     spec:
       initContainers:
