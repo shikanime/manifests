@@ -30,6 +30,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data
+            - name: cli-web-dist
+              mountPath: /opt/hermes/hermes_cli/web-dist
           livenessProbe:
             httpGet:
               path: /
@@ -60,3 +62,5 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: hermes-agent-data
+        - name: cli-web-dist
+          emptyDir: {}
