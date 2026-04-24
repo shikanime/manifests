@@ -91,6 +91,11 @@ spec:
             - name: ssh-key
               mountPath: /root/.ssh
               readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - SETGID
+                - SETUID
           envFrom:
             - secretRef:
                 name: hermes-agent-gateway

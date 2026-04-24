@@ -81,6 +81,7 @@ spec:
             readOnlyRootFilesystem: false
             capabilities:
               add:
+                - CHOWN
                 - FOWNER
                 - SETGID
                 - SETUID
