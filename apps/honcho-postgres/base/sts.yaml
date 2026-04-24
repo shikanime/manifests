@@ -30,6 +30,10 @@ spec:
               readOnly: true
             - name: run-postgresql
               mountPath: /var/run/postgresql
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
           startupProbe:
             exec:
               command:

@@ -57,6 +57,11 @@ spec:
             initialDelaySeconds: 5
             timeoutSeconds: 5
             failureThreshold: 180
+          securityContext:
+            capabilities:
+              add:
+                - SETGID
+                - SETUID
           volumeMounts:
             - name: config
               mountPath: /config

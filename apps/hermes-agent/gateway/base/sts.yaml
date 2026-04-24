@@ -76,6 +76,11 @@ spec:
           env:
             - name: DISCORD_ALLOW_BOTS
               value: "mentions"
+          securityContext:
+            capabilities:
+              add:
+                - SETGID
+                - SETUID
           volumeMounts:
             - name: data
               mountPath: /opt/data
