@@ -85,9 +85,12 @@ spec:
           securityContext:
             capabilities:
               add:
+                - FOWNER
                 - CHOWN
                 - SETUID
                 - SETGID
+      securityContext:
+        fsGroup: 1337
       volumes:
         - name: config
           secret:
