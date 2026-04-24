@@ -8,7 +8,7 @@ spec:
   serviceName: mautrix-discord
   selector:
     matchLabels:
-      app.kubernetes.io/instance: mautrix
+      app.kubernetes.io/instance: mautrix-discord
       app.kubernetes.io/name: mautrix-discord
   template:
     metadata:

@@ -21,7 +21,7 @@ labels:
   - includeTemplates: true
     pairs:
       app.kubernetes.io/component: communication
-      app.kubernetes.io/instance: mautrix
+      app.kubernetes.io/instance: mautrix-meta
       app.kubernetes.io/name: mautrix-meta
       app.kubernetes.io/part-of: nishir-office
       app.kubernetes.io/version: 1.140.0

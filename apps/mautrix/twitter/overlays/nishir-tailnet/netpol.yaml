@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/instance: mautrix
+      app.kubernetes.io/instance: mautrix-twitter
       app.kubernetes.io/name: mautrix-twitter
   policyTypes:
     - Ingress

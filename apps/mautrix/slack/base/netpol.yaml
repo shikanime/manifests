@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/instance: mautrix
+      app.kubernetes.io/instance: mautrix-slack
       app.kubernetes.io/name: mautrix-slack
   policyTypes:
     - Ingress

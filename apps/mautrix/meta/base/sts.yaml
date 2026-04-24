@@ -8,7 +8,7 @@ spec:
   serviceName: mautrix-meta
   selector:
     matchLabels:
-      app.kubernetes.io/instance: mautrix
+      app.kubernetes.io/instance: mautrix-meta
       app.kubernetes.io/name: mautrix-meta
   template:
     metadata:
