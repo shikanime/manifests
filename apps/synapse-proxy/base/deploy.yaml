@@ -31,8 +31,6 @@ spec:
       containers:
         - name: caddy
           image: caddy
-          securityContext:
-            allowPrivilegeEscalation: true
           ports:
             - name: http
               containerPort: 8008
