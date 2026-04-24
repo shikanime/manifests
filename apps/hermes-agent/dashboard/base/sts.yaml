@@ -30,6 +30,18 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
           securityContext:
             capabilities:
               add:
