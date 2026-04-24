@@ -5,11 +5,10 @@ metadata:
   name: qbittorrent-resume
 spec:
   jobTemplate:
-    successfulJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 3
     failedJobsHistoryLimit: 1
     concurrencyPolicy: Forbid
     spec:
-      backoffLimit: 3
       template:
         metadata:
           labels:
@@ -32,7 +31,7 @@ spec:
               envFrom:
                 - secretRef:
                     name: qbittorrent
-          restartPolicy: OnFailure
+          restartPolicy: Never
           volumes:
             - name: scripts
               configMap:
