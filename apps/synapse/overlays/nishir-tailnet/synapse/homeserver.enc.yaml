@@ -69,10 +69,11 @@ auto_accept_invites:
   only_from_local_users: true
 serve_server_wellknown: true
 encryption_enabled_by_default_for_room_type: all
+suppress_key_server_warning: true
 sops:
   version: 3.12.2
-  lastmodified: "2026-04-14T16:49:08Z"
-  mac: ENC[AES256_GCM,data:XqVsjgT7WqrNw2ZBaF+n2jTnTtf89qTTwwYccNKrWwJ6Oho1Ki6pMC0pca6h/BH5JL18F6GfomdBZchUFNy4G5ZGopMkZ2JdpWjL6ZlXDFzbVM6ofSTDo7l5E/CkLBN9w7F6aOav6UCezuTRGM46VoQ2QvwZLdGYtrhGR7+9HmE=,iv:AE4XJCCH52hmZP+ENIlZ0ujF9gdwHSiiNyI1Dq6EMig=,tag:YFgy8i3LtXfZMGLIAKIUbQ==,type:str]
+  lastmodified: "2026-04-24T00:43:22Z"
+  mac: ENC[AES256_GCM,data:PvlnSKl2CTvTZYXlT4BGmaIcYYwjGCIT2UzYLRd6h1oEye4/G8aew5gozbvxTw98GZbjclQY/TMq14WHsOv9GjD9Xo2N2G09eyEa0PZf2t0YF9hjPAKUcG0lrDMwehI2/dteelac+cDq8ZdzfF0gmYoMcD24dt/gtm9lYa0By88=,iv:D6ZXryj+DseK3H3IjrkrW4a5FnXBZPScV/zfHoy2kjQ=,tag:dPs/5Zmt0Z8MqilwYUJKrg==,type:str]
   encrypted_regex: ^(registration_shared_secret|form_secret|macaroon_secret_key)$
   age:
     - recipient: age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl
