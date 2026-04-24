@@ -13,7 +13,8 @@ spec:
       template:
         metadata:
           labels:
-            app.kubernetes.io/component: qbittorrent-resume
+            app.kubernetes.io/instance: qbittorrent-resume
+            app.kubernetes.io/name: qbittorrent-resume
         spec:
           containers:
             - name: qbittorrent-resume
