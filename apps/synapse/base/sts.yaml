@@ -190,6 +190,11 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+          securityContext:
+            capabilities:
+              add:
+                - SETUID
+                - SETGID
       securityContext:
         fsGroup: 991
       volumes:
