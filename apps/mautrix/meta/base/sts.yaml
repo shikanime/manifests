@@ -82,6 +82,10 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
       securityContext:
         fsGroup: 1337
       volumes:
