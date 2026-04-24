@@ -72,6 +72,13 @@ spec:
               port: http
             timeoutSeconds: 5
             failureThreshold: 180
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - SETGID
+                - SETUID
           volumeMounts:
             - name: config
               mountPath: /config
