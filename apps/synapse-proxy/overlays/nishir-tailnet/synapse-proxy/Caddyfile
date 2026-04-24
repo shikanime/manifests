@@ -54,3 +54,7 @@
 		import matrix
 	}
 }
+
+{
+	auto_https disable_redirects
+}
