@@ -33,7 +33,10 @@ spec:
           securityContext:
             capabilities:
               add:
-                - FOWNER
+                - CHOWN
+                - SETUID
+                - SETGID
+                - DAC_OVERRIDE
           startupProbe:
             exec:
               command:
