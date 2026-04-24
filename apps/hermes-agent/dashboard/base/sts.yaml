@@ -33,20 +33,17 @@ spec:
             - name: cli-web-dist
               mountPath: /opt/hermes/hermes_cli/web-dist
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
             initialDelaySeconds: 15
             periodSeconds: 20
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10
           startupProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
             initialDelaySeconds: 15
             periodSeconds: 10
