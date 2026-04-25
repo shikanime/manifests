@@ -32,6 +32,8 @@ spec:
                 - secretRef:
                     name: qbittorrent
           restartPolicy: Never
+          securityContext:
+            readOnlyRootFilesystem: false
           volumes:
             - name: scripts
               configMap:
