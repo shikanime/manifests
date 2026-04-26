@@ -59,8 +59,7 @@ spec:
       path: /var/lib/longhorn/
       storageReserved: 76772540416
       tags:
-        - balanced
-        - fast
+        - critical
     remilia:
       allowScheduling: true
       diskType: filesystem
