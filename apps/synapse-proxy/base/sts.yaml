@@ -56,9 +56,9 @@ spec:
               mountPath: /etc/caddy
               readOnly: true
             - name: synapse-proxy-config
-              mountPath: /etc/synapse-proxy
+              mountPath: /etc/caddy
             - name: synapse-proxy-data
-              mountPath: /var/synapse-proxy
+              mountPath: /var/caddy
           securityContext:
             allowPrivilegeEscalation: true
             capabilities:
