@@ -7,6 +7,8 @@ metadata:
 spec:
   name: fushi
   allowScheduling: true
+  tags:
+    - storage
   disks:
     fushi:
       allowScheduling: true
@@ -25,6 +27,8 @@ metadata:
 spec:
   name: minish
   allowScheduling: true
+  tags:
+    - storage
   disks:
     minish:
       allowScheduling: true
@@ -44,7 +48,7 @@ spec:
   name: nishir
   allowScheduling: true
   tags:
-    - storage
+    - control-plane
   disks:
     flandre:
       allowScheduling: true
