@@ -1,3 +1,7 @@
+{
+	auto_https off
+}
+
 (mautrix) {
 	@isMautrixWellKnown path /.well-known/matrix/mautrix
 	handle @isMautrixWellKnown {
@@ -53,8 +57,4 @@
 	handle {
 		import matrix
 	}
-}
-
-{
-	auto_https off
 }
