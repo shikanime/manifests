@@ -20,6 +20,8 @@ spec:
               image: alpine
               command:
                 - qbittorrent-resume.sh
+              securityContext:
+                readOnlyRootFilesystem: false
               volumeMounts:
                 - name: scripts
                   mountPath: /usr/local/bin
@@ -32,8 +34,6 @@ spec:
                 - secretRef:
                     name: qbittorrent
           restartPolicy: Never
-          securityContext:
-            readOnlyRootFilesystem: false
           volumes:
             - name: scripts
               configMap:
