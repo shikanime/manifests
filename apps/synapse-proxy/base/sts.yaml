@@ -55,22 +55,17 @@ spec:
             - name: synapse-proxy
               mountPath: /etc/caddy
               readOnly: true
-            - name: synapse-proxy-config
-              mountPath: /etc/caddy
             - name: synapse-proxy-data
               mountPath: /var/caddy
           securityContext:
             allowPrivilegeEscalation: true
             capabilities:
               add:
-                - NET_ADMIN
+                - NET_RAW
       volumes:
         - name: synapse-proxy
           configMap:
             name: synapse-proxy
-        - name: synapse-proxy-config
-          persistentVolumeClaim:
-            claimName: synapse-proxy-config
         - name: synapse-proxy-data
           persistentVolumeClaim:
             claimName: synapse-proxy-data
