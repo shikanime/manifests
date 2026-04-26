@@ -59,6 +59,11 @@ spec:
               mountPath: /etc/synapse-proxy
             - name: synapse-proxy-data
               mountPath: /var/synapse-proxy
+          securityContext:
+            allowPrivilegeEscalation: true
+            capabilities:
+              add:
+                - NET_ADMIN
       volumes:
         - name: synapse-proxy
           configMap:
