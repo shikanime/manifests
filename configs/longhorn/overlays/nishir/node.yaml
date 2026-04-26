@@ -8,7 +8,7 @@ spec:
   name: fushi
   allowScheduling: true
   tags:
-    - storage
+    - worker
   disks:
     fushi:
       allowScheduling: true
@@ -28,7 +28,7 @@ spec:
   name: minish
   allowScheduling: true
   tags:
-    - storage
+    - worker
   disks:
     minish:
       allowScheduling: true
