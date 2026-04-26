@@ -49,6 +49,7 @@ spec:
   allowScheduling: true
   tags:
     - control-plane
+    - storage
   disks:
     flandre:
       allowScheduling: true
