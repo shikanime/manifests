@@ -3,6 +3,16 @@ apiVersion: skaffold/v4beta9
 kind: Config
 metadata:
   name: shikanime
+build:
+  artifacts:
+    - image: ghcr.io/shikanime/manifests/qbittorrent-resume
+      context: cmd/qbittorrent-resume
+      ko: {}
+      platforms:
+        - linux/amd64
+        - linux/arm64
+  tagPolicy:
+    sha256: {}
 profiles:
   - name: nishir-tailnet
     activation:

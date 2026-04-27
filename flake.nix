@@ -134,6 +134,7 @@
             shells = {
               default = {
                 imports = [
+                  devlib.devenvModules.go
                   devlib.devenvModules.git
                   devlib.devenvModules.nix
                   devlib.devenvModules.opentofu
