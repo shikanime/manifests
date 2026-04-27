@@ -1,5 +1,6 @@
 ---
 resources:
+  - cluster.yaml
   - hcloud-machine-template.yaml
   - hetzner-cluster.yaml
   - k0s-control-plane.yaml
