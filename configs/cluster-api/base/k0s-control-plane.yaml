@@ -16,15 +16,79 @@ spec:
       apiVersion: k0s.k0sproject.io/v1beta1
       kind: ClusterConfig
       metadata:
-        name: k0s
+        name: shana
       spec:
-        api:
-          port: 6443
-          extraArgs:
-            anonymous-auth: "true"
-        network:
-          kuberouter:
-            extraArgs:
-              advertise-cluster-ip: "true"
-              advertise-external-ip: "true"
-              advertise-loadbalancer-ip: "true"
+        extensions:
+          helm:
+            repositories:
+              - name: tofu-controller
+                url: https://flux-iac.github.io/tofu-controller
+            charts:
+              - name: flux
+                version: 0.46.0
+                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-instance
+                namespace: flux-system
+                values: |
+                  instance:
+                    distribution:
+                      registry: ghcr.io/fluxcd
+                      version: 2.x
+                    kustomize:
+                      patches:
+                        - patch: |
+                            - op: add
+                              path: /spec/decryption
+                              value:
+                                provider: sops
+                                secretRef:
+                                  name: sops-age
+                          target:
+                            kind: Kustomization
+                    sync:
+                      kind: GitRepository
+                      path: clusters/shana/overlays/tailnet
+                      ref: refs/heads/main
+                      url: https://github.com/shikanime/manifests.git
+              - name: flux-operator
+                version: 0.46.0
+                chartname: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
+                namespace: flux-system
+                values: |
+                  healthcheck:
+                    enabled: true
+                  web:
+                    config:
+                      authentication:
+                        type: Anonymous
+                        anonymous:
+                          username: admin
+                          groups:
+                            - system:masters
+                    ingress:
+                      enabled: true
+                      className: tailscale
+                      annotations:
+                        tailscale.com/tags: tag:web
+                      hosts:
+                        - host: nishir-flux
+                          paths:
+                            - path: /
+                              pathType: ImplementationSpecific
+                      tls:
+                        - hosts:
+                            - nishir-flux
+                    rbac:
+                      createRoles: true
+              - name: tofu-controller
+                version: 0.16.2
+                chartname: tofu-controller/tofu-controller
+                namespace: flux-system
+                values: |
+                  awsPackage:
+                    install: false
+                  runner:
+                    allowedNamespaces:
+                      - flux-system
+                      - shikanime
+        telemetry:
+          enabled: false
