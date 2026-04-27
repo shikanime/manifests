@@ -5,3 +5,4 @@ resources:
   - k0s-control-plane.yaml
   - k0s-worker-config-template.yaml
   - machine-deployment.yaml
+  - ns.yaml
