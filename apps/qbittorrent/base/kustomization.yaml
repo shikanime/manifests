@@ -20,6 +20,9 @@ images:
   - name: qbittorrent
     newName: qbittorrentofficial/qbittorrent-nox
     newTag: 5.1.4-2
+  - name: qbittorrent-resume
+    newName: ghcr.io/shikanime/manifests/qbittorrent-resume
+    newTag: latest
 configMapGenerator:
   - name: qbittorrent-scripts
     files:
