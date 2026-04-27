@@ -24,7 +24,6 @@ spec:
           args:
             - copyto
             - --copy-links
-            - --update
             - /mnt/startup-config/app.ini
             - /var/lib/gitea/custom/conf/app.ini
           volumeMounts:
