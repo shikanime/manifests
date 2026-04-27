@@ -11,6 +11,8 @@ spec:
     region: fsn1
   controlPlaneRegions:
     - fsn1
+    - nbg1
+    - hel1
   hcloudNetwork:
     enabled: true
   hcloudPlacementGroups:
