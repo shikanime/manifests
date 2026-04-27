@@ -3,7 +3,6 @@ apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: K0sControlPlane
 metadata:
   name: shana
-  namespace: nishir
 spec:
   version: v1.33.3+k0s.0
   replicas: 1
