@@ -36,20 +36,18 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	// 1. Define CLI Flags
 	f := rootCmd.Flags()
 	f.String("url", "", "qBittorrent WebUI URL (e.g. http://localhost:8080)")
 	f.String("user", "", "qBittorrent username")
 	f.String("password", "", "qBittorrent password")
 	f.Duration("timeout", 30*time.Second, "API request timeout")
 
-	// 2. Initialize Viper Configuration
 	cobra.OnInitialize(func() {
 		viper.SetEnvPrefix("QBT")
 		viper.AutomaticEnv()
 
 		// Bind all flags to Viper keys
-		if err := viper.BindPFlags(rootCmd.Flags()); err != nil {
+		if err := viper.BindPFlags(f); err != nil {
 			log.Fatalf("Error binding flags: %v", err)
 		}
 	})

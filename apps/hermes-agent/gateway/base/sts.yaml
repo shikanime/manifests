@@ -24,7 +24,6 @@ spec:
           args:
             - copy
             - --copy-links
-            - --update
             - --filter
             - "+ /config.yaml"
             - --filter

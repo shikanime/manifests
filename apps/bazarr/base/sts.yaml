@@ -24,7 +24,6 @@ spec:
           args:
             - copyto
             - --copy-links
-            - --update
             - /mnt/startup-config/config.yaml
             - /mnt/config/config.yaml
           volumeMounts:
