@@ -18,15 +18,6 @@ spec:
           containers:
             - name: qbittorrent-resume
               image: qbittorrent-resume
-              command:
-                - qbittorrent-resume.sh
-              securityContext:
-                readOnlyRootFilesystem: false
-              volumeMounts:
-                - name: scripts
-                  mountPath: /usr/local/bin
-                - name: apk-cache
-                  mountPath: /var/cache/apk
               env:
                 - name: QBT_URL
                   value: https://$(QBITTORRENT_SERVICE_HOST):$(QBITTORRENT_SERVICE_PORT)
@@ -34,11 +25,4 @@ spec:
                 - secretRef:
                     name: qbittorrent
           restartPolicy: Never
-          volumes:
-            - name: scripts
-              configMap:
-                name: qbittorrent-scripts
-                defaultMode: 0755
-            - name: apk-cache
-              emptyDir: {}
   schedule: "*/2 * * * *"
