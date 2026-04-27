@@ -645,7 +645,7 @@ spec:
   healthChecks:
     - name: synapse-proxy
       apiVersion: apps/v1
-      kind: Deployment
+      kind: StatefulSet
       namespace: shikanime
   sourceRef:
     name: flux-system
