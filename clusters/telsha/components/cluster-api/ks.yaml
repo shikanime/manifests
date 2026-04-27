@@ -24,7 +24,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./configs/cluster-api/base
+  path: ./configs/cluster-api/overlays/telsha
   prune: true
   sourceRef:
     name: flux-system
