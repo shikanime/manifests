@@ -7,6 +7,8 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 metadata:
   annotations:
     automata.shikanime.studio/images:
@@ -17,16 +19,16 @@ images:
   - name: alpine
     newName: alpine
     newTag: 3.21.2
+  - name: ghcr.io/shikanime/manifests/qbittorrent-resume
+    digest: sha256:91450334c9b119d94bd98c3d70f5025e271f1d356c4388446f9556121588c918
+    newName: ghcr.io/shikanime/manifests/qbittorrent-resume
+    newTag: c4f877de1
   - name: qbittorrent
     newName: qbittorrentofficial/qbittorrent-nox
     newTag: 5.1.4-2
   - name: qbittorrent-resume
     newName: ghcr.io/shikanime/manifests/qbittorrent-resume
     newTag: latest
-configMapGenerator:
-  - name: qbittorrent-scripts
-    files:
-      - qbittorrent-scripts/qbittorrent-resume.sh
 secretGenerator:
   - name: qbittorrent
     envs:

@@ -11,8 +11,6 @@ build:
       platforms:
         - linux/amd64
         - linux/arm64
-  tagPolicy:
-    sha256: {}
 profiles:
   - name: nishir-tailnet
     activation:
