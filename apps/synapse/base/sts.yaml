@@ -60,7 +60,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /mnt/data
-            - name: startup-config
+            - name: appservices-startup-config
               mountPath: /mnt/startup-config
               readOnly: true
             - name: rclone-config
@@ -92,17 +92,8 @@ spec:
           configMap:
             name: synapse-rclone
         - name: startup-config
-          projected:
-            sources:
-              - secret:
-                  name: synapse
-                  items:
-                    - key: homeserver.yaml
-                      path: homeserver.yaml
-                    - key: log.config
-                      path: synapse.log.config
-                    - key: signing.key
-                      path: synapse.signing.key
+          secret:
+            secretName: synapse
         - name: appservices-startup-config
           projected:
             sources:
