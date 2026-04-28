@@ -32,6 +32,6 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              app.kubernetes.io/component: qbittorrent-resume
+              app.kubernetes.io/component: qbittorrent-cleanup
       ports:
         - port: https

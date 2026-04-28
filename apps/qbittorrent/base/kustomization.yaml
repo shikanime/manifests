@@ -21,6 +21,6 @@ images:
   - name: qbittorrent
     newName: qbittorrentofficial/qbittorrent-nox
     newTag: 5.1.4-2
-  - name: qbittorrent-resume
-    newName: ghcr.io/shikanime/manifests/qbittorrent-resume
+  - name: qbittorrent-cleanup
+    newName: ghcr.io/shikanime/manifests/qbittorrent-cleanup
     newTag: latest

@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: qbittorrent-resume
+  name: qbittorrent-cleanup
 spec:
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
@@ -12,17 +12,17 @@ spec:
       template:
         metadata:
           labels:
-            app.kubernetes.io/instance: qbittorrent-resume
-            app.kubernetes.io/name: qbittorrent-resume
+            app.kubernetes.io/instance: qbittorrent-cleanup
+            app.kubernetes.io/name: qbittorrent-cleanup
         spec:
           containers:
-            - name: qbittorrent-resume
-              image: qbittorrent-resume
+            - name: qbittorrent-cleanup
+              image: qbittorrent-cleanup
               env:
                 - name: QBT_URL
                   value: https://$(QBITTORRENT_SERVICE_HOST):$(QBITTORRENT_SERVICE_PORT)
               envFrom:
                 - secretRef:
-                    name: qbittorrent-resume
+                    name: qbittorrent-cleanup
           restartPolicy: Never
   schedule: "*/2 * * * *"

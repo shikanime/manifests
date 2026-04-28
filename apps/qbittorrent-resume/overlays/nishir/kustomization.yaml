@@ -1,7 +1,0 @@
----
-resources:
-  - ../../base
-secretGenerator:
-  - name: qbittorrent-resume
-    envs:
-      - qbittorrent-resume/.enc.env

@@ -194,9 +194,9 @@
                   "manifests:build".exec = ''
                     IMAGES=$(${getExe pkgs.skaffold} build \
                       --quiet \
-                      --build-image ghcr.io/shikanime/manifests/qbittorrent-resume | \
+                      --build-image ghcr.io/shikanime/manifests/qbittorrent-cleanup | \
                       ${getExe pkgs.jq} -r '.builds[] | "\(.imageName)=\(.tag)"')
-                    cd apps/qbittorrent-resume/base && ${getExe pkgs.kustomize} edit set image $IMAGES
+                    cd apps/qbittorrent-cleanup/base && ${getExe pkgs.kustomize} edit set image $IMAGES
                   '';
                 };
 

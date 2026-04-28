@@ -5,7 +5,7 @@ labels:
   - includeTemplates: true
     pairs:
       app.kubernetes.io/component: torrent-downloader
-      app.kubernetes.io/instance: qbittorrent-resume
-      app.kubernetes.io/name: qbittorrent-resume
+      app.kubernetes.io/instance: qbittorrent-cleanup
+      app.kubernetes.io/name: qbittorrent-cleanup
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 0.0.0

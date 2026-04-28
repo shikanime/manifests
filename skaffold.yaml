@@ -5,8 +5,8 @@ metadata:
   name: shikanime
 build:
   artifacts:
-    - image: ghcr.io/shikanime/manifests/qbittorrent-resume
-      context: cmd/qbittorrent-resume
+    - image: ghcr.io/shikanime/manifests/qbittorrent-cleanup
+      context: cmd/qbittorrent-cleanup
       ko: {}
       platforms:
         - linux/amd64
