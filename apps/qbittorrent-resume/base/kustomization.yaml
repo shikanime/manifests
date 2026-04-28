@@ -1,0 +1,8 @@
+---
+resources:
+  - cronjob.yaml
+images:
+  - name: ghcr.io/shikanime/manifests/qbittorrent-resume
+    digest: sha256:91450334c9b119d94bd98c3d70f5025e271f1d356c4388446f9556121588c918
+    newName: ghcr.io/shikanime/manifests/qbittorrent-resume
+    newTag: c4f877de1

@@ -196,7 +196,7 @@
                       --quiet \
                       --build-image ghcr.io/shikanime/manifests/qbittorrent-resume | \
                       ${getExe pkgs.jq} -r '.builds[] | "\(.imageName)=\(.tag)"')
-                    cd apps/qbittorrent/base && ${getExe pkgs.kustomize} edit set image $IMAGES
+                    cd apps/qbittorrent-resume/base && ${getExe pkgs.kustomize} edit set image $IMAGES
                   '';
                 };
 

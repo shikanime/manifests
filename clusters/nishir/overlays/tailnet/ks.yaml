@@ -534,6 +534,31 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: apps-qbittorrent-resume
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-cert-manager
+    - name: infrastructure-vpa
+  interval: 10m
+  path: ./apps/qbittorrent-resume/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
+    - name: qbittorrent-resume
+      apiVersion: batch/v1
+      kind: CronJob
+      namespace: shikanime
+  sourceRef:
+    name: flux-system
+    kind: GitRepository
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: apps-radarr
   namespace: flux-system
 spec:

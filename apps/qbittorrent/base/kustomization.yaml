@@ -1,6 +1,5 @@
 ---
 resources:
-  - cronjob.yaml
   - ingress.yaml
   - netpol.yaml
   - pvc.yaml
@@ -19,10 +18,6 @@ images:
   - name: alpine
     newName: alpine
     newTag: 3.21.2
-  - name: ghcr.io/shikanime/manifests/qbittorrent-resume
-    digest: sha256:91450334c9b119d94bd98c3d70f5025e271f1d356c4388446f9556121588c918
-    newName: ghcr.io/shikanime/manifests/qbittorrent-resume
-    newTag: c4f877de1
   - name: qbittorrent
     newName: qbittorrentofficial/qbittorrent-nox
     newTag: 5.1.4-2
