@@ -1,6 +1,7 @@
 ---
 resources:
   - ../nishir
+namespace: shikanime
 labels:
   - includeTemplates: true
     pairs:
