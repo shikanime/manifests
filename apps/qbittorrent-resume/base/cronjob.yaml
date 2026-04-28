@@ -23,6 +23,6 @@ spec:
                   value: https://$(QBITTORRENT_SERVICE_HOST):$(QBITTORRENT_SERVICE_PORT)
               envFrom:
                 - secretRef:
-                    name: qbittorrent
+                    name: qbittorrent-resume
           restartPolicy: Never
   schedule: "*/2 * * * *"

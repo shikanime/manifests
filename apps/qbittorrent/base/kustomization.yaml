@@ -24,7 +24,3 @@ images:
   - name: qbittorrent-resume
     newName: ghcr.io/shikanime/manifests/qbittorrent-resume
     newTag: latest
-secretGenerator:
-  - name: qbittorrent
-    envs:
-      - qbittorrent/.enc.env
