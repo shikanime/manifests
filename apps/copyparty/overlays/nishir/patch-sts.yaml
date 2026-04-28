@@ -14,9 +14,9 @@ spec:
             - name: downloads-data
               mountPath: /data/downloads
             - name: movies-data
-              mountPath: /data/movie
+              mountPath: /data/movies
             - name: music-data
-              mountPath: /var/syncthing/Musics
+              mountPath: /data/music
             - name: shows-data
               mountPath: /data/shows
             - name: staging-data
