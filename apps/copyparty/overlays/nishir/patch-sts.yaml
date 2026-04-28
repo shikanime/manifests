@@ -11,18 +11,21 @@ spec:
           volumeMounts:
             - name: archives-data
               mountPath: /data/archives
-            - name: downloads-data
-              mountPath: /data/downloads
             - name: movies-data
               mountPath: /data/movies
+              subPath: Movies
             - name: music-data
               mountPath: /data/music
+              subPath: Music
             - name: shows-data
               mountPath: /data/shows
+              subPath: Shows
             - name: staging-data
               mountPath: /data/staging
+              subPath: Staging
             - name: sukebe-data
               mountPath: /data/sukebe
+              subPath: Sukebe
             - name: sync-data
               mountPath: /data/sync
             - name: timeline-data
@@ -34,9 +37,6 @@ spec:
         - name: archives-data
           persistentVolumeClaim:
             claimName: archives-data
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data

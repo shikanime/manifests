@@ -11,12 +11,11 @@ spec:
           volumeMounts:
             - name: sukebe-data
               mountPath: /data/sukebe
-            - name: downloads-data
+              subPath: Sukebe
+            - name: sukebe-data
               mountPath: /downloads
+              subPath: Staging
       volumes:
         - name: sukebe-data
           persistentVolumeClaim:
             claimName: sukebe-data
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data

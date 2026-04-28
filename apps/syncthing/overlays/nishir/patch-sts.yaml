@@ -11,18 +11,21 @@ spec:
           volumeMounts:
             - name: archives-data
               mountPath: /var/syncthing/Archives
-            - name: downloads-data
-              mountPath: /var/syncthing/Downloads
             - name: movies-data
               mountPath: /var/syncthing/Movies
+              subPath: Movies
             - name: music-data
               mountPath: /var/syncthing/Music
+              subPath: Music
             - name: shows-data
               mountPath: /var/syncthing/Shows
+              subPath: Shows
             - name: staging-data
               mountPath: /var/syncthing/Staging
+              subPath: Staging
             - name: sukebe-data
               mountPath: /var/syncthing/Sukebe
+              subPath: Sukebe
             - name: sync-data
               mountPath: /var/syncthing/Sync
             - name: timeline-data
@@ -31,9 +34,6 @@ spec:
         - name: archives-data
           persistentVolumeClaim:
             claimName: archives-data
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
