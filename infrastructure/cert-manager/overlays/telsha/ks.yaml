@@ -5,8 +5,6 @@ metadata:
   name: cert-manager-config
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: infrastructure-cert-manager
   interval: 10m
   path: ./configs/cert-manager/overlays/telsha
   prune: true
