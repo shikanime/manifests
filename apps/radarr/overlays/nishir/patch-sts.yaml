@@ -11,12 +11,11 @@ spec:
           volumeMounts:
             - name: movies-data
               mountPath: /data/movies
-            - name: downloads-data
+              subPath: Movies
+            - name: movies-data
               mountPath: /downloads
+              subPath: Staging
       volumes:
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
-        - name: downloads-data
-          persistentVolumeClaim:
-            claimName: downloads-data
