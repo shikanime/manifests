@@ -107,51 +107,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sukebe-doujins-data
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 1Ti
-  storageClassName: nishir-standard
-  volumeMode: Filesystem
-  volumeName: sukebe-doujins-data
-  accessModes:
-    - ReadWriteMany
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sukebe-scenes-data
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 1Ti
-  storageClassName: nishir-standard
-  volumeMode: Filesystem
-  volumeName: sukebe-scenes-data
-  accessModes:
-    - ReadWriteMany
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sukebe-shows-data
-  namespace: shikanime
-spec:
-  resources:
-    requests:
-      storage: 256Gi
-  storageClassName: nishir-standard
-  volumeMode: Filesystem
-  volumeName: sukebe-shows-data
-  accessModes:
-    - ReadWriteMany
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: sync-data
   namespace: shikanime
 spec:
