@@ -63,7 +63,12 @@ func NewClient(baseURL string) (*QBitClient, error) {
 
 func (c *QBitClient) Login(ctx context.Context, user, pass string) error {
 	data := url.Values{"username": {user}, "password": {pass}}
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.BaseURL+"/api/v2/auth/login", strings.NewReader(data.Encode()))
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodPost,
+		c.BaseURL+"/api/v2/auth/login",
+		strings.NewReader(data.Encode()),
+	)
 	if err != nil {
 		return err
 	}
@@ -73,7 +78,7 @@ func (c *QBitClient) Login(ctx context.Context, user, pass string) error {
 	if err != nil {
 		return err
 	}
-	defer func() { _ = resp.Body.Close() }() // Fix: ignored error explicitly
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("login failed: %d", resp.StatusCode)
@@ -82,7 +87,12 @@ func (c *QBitClient) Login(ctx context.Context, user, pass string) error {
 }
 
 func (c *QBitClient) GetErroredTorrents(ctx context.Context) ([]Torrent, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.BaseURL+"/api/v2/torrents/info?filter=error", http.NoBody)
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodGet,
+		c.BaseURL+"/api/v2/torrents/info?filter=error",
+		http.NoBody,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +112,12 @@ func (c *QBitClient) GetErroredTorrents(ctx context.Context) ([]Torrent, error) 
 
 func (c *QBitClient) DeleteTorrents(ctx context.Context, hashes []string) error {
 	data := url.Values{"hashes": {strings.Join(hashes, "|")}, "deleteFiles": {"true"}}
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.BaseURL+"/api/v2/torrents/delete", strings.NewReader(data.Encode()))
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodPost,
+		c.BaseURL+"/api/v2/torrents/delete",
+		strings.NewReader(data.Encode()),
+	)
 	if err != nil {
 		return err
 	}
@@ -112,13 +127,18 @@ func (c *QBitClient) DeleteTorrents(ctx context.Context, hashes []string) error 
 	if err != nil {
 		return err
 	}
-	defer func() { _ = resp.Body.Close() }() // Fix: ignored error explicitly
+	defer func() { _ = resp.Body.Close() }()
 	return nil
 }
 
 func (c *QBitClient) Resume(ctx context.Context, hashes []string) error {
 	data := url.Values{"hashes": {strings.Join(hashes, "|")}}
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.BaseURL+"/api/v2/torrents/start", strings.NewReader(data.Encode()))
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodPost,
+		c.BaseURL+"/api/v2/torrents/start",
+		strings.NewReader(data.Encode()),
+	)
 	if err != nil {
 		return err
 	}
@@ -155,10 +175,6 @@ func runCleanup(_ *cobra.Command, _ []string) { // Fix: Rename 'cmd' to '_'
 
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
-
-	// Logic fix: Don't use log.Fatalf inside runCleanup if you want defers to run.
-	// Or accept that the process dies immediately. Since this is a CLI tool,
-	// Fatalf is okay, but we should handle the 'Auth error' properly.
 
 	if err := client.Login(ctx, user, pass); err != nil {
 		fmt.Printf("Auth error: %v\n", err)
