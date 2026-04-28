@@ -142,6 +142,27 @@
                   devlib.devenvModules.shikanime
                 ];
 
+                git-hooks.hooks.kubeconform = {
+                  enable = true;
+                  name = "kubeconform";
+                  files = "(base|overlays)/.*/kustomization\\.ya?ml$";
+                  entry =
+                    let
+                      script = pkgs.writeShellScriptBin "kubeconform" ''
+                        set -euo pipefail
+                        for file in "$@"; do
+                          ${pkgs.kustomize}/bin/kustomize build "$(dirname "$file")" | \
+                            ${pkgs.kubeconform}/bin/kubeconform \
+                              -exit-on-error \
+                              -strict \
+                              -schema-location default \
+                              -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
+                        done
+                      '';
+                    in
+                    "${script}/bin/kubeconform";
+                };
+
                 github.workflows.skaffold.enable = true;
 
                 packages = [
