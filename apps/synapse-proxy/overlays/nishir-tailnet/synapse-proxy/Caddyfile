@@ -37,7 +37,6 @@
 }
 
 :8008 {
-	log
 	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
 	handle @isDiscordDirectMedia {
 		import matrix-discord-media
@@ -49,7 +48,6 @@
 
 :8448 {
 	tls /etc/ssl/private/tls.crt /etc/ssl/private/tls.key
-	log
 	@isDiscordDirectMedia host matrix-discord-media.taila659a.ts.net
 	handle @isDiscordDirectMedia {
 		import matrix-discord-media
