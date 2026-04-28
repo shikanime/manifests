@@ -1,6 +1,6 @@
 ---
 resources:
-  - ../../base
+  - ../nishir
 labels:
   - includeTemplates: true
     pairs:
