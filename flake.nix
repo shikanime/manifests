@@ -192,11 +192,12 @@
                   '';
 
                   "manifests:build".exec = ''
-                    IMAGES=$(${getExe pkgs.skaffold} build \
+                    IMAGE_FULL=$(${getExe pkgs.skaffold} build \
                       --quiet \
-                      --build-image ghcr.io/shikanime/manifests/qbittorrent-cleanup | \
-                      ${getExe pkgs.jq} -r '.builds[] | "\(.imageName)=\(.tag)"')
-                    cd apps/qbittorrent-cleanup/base && ${getExe pkgs.kustomize} edit set image $IMAGES
+                      --output='{{(index .Builds 0).Tag}}' \
+                      --build-image ghcr.io/shikanime/manifests/qbittorrent-cleanup)
+                    cd apps/qbittorrent-cleanup/base && \
+                      ${getExe pkgs.kustomize} edit set image qbittorrent-cleanup=$IMAGE_FULL
                   '';
                 };
 
