@@ -1,0 +1,7 @@
+---
+resources:
+  - ../../base
+secretGenerator:
+  - name: qbittorrent-cleanup
+    envs:
+      - qbittorrent-cleanup/.enc.env
