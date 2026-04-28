@@ -1,0 +1,21 @@
+---
+resources:
+  - ../../base
+namespace: shikanime
+components:
+  - ../../components/api
+  - ../../components/browser
+  - ../../components/honcho
+  - ../../components/webhook
+patches:
+  - path: patch-pvc.yaml
+configMapGenerator:
+  - name: hermes-agent-gateway-startup-config
+    files:
+      - hermes-agent-gateway/config.yaml
+      - hermes-agent-gateway/honcho.json
+      - hermes-agent-gateway/SOUL.md
+secretGenerator:
+  - name: hermes-agent-gateway
+    envs:
+      - hermes-agent-gateway/.enc.env

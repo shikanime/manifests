@@ -22,11 +22,10 @@ spec:
           command:
             - rclone
           args:
-            - copy
+            - copyto
             - --copy-links
-            - --update
-            - /mnt/startup-config
-            - /mnt/cfg
+            - /mnt/startup-config/config.conf
+            - /mnt/cfg/config.conf
           volumeMounts:
             - name: config
               mountPath: /mnt/cfg
@@ -37,6 +36,10 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       containers:
         - name: copyparty
           image: copyparty

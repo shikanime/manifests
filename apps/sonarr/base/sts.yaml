@@ -22,11 +22,10 @@ spec:
           command:
             - rclone
           args:
-            - copy
+            - copyto
             - --copy-links
-            - --update
-            - /mnt/startup-config
-            - /mnt/config
+            - /mnt/startup-config/config.xml
+            - /mnt/config/config.xml
           volumeMounts:
             - name: config
               mountPath: /mnt/config
@@ -37,6 +36,10 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       containers:
         - name: sonarr
           image: sonarr
@@ -72,6 +75,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: run
+              mountPath: /run
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - SETGID
+                - SETUID
       securityContext:
         fsGroup: 1000
       volumes:
@@ -84,3 +96,5 @@ spec:
         - name: startup-config
           secret:
             secretName: sonarr
+        - name: run
+          emptyDir: {}

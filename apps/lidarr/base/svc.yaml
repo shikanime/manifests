@@ -9,4 +9,5 @@ spec:
       port: 8686
       targetPort: http
   selector:
+    app.kubernetes.io/instance: lidarr
     app.kubernetes.io/name: lidarr

@@ -1,0 +1,19 @@
+---
+resources:
+  - netpol.yaml
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
+metadata:
+  annotations:
+    automata.shikanime.studio/images:
+      '[ { "name": "honcho-postgres", "tag-regex": "^(?P<version>.+)$" } ]'
+images:
+  - name: postgres
+    newName: pgvector/pgvector
+    newTag: pg15
+configMapGenerator:
+  - name: honcho-postgres
+    files:
+      - honcho-postgres/init.sql

@@ -56,6 +56,13 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - SETUID
+                - SETGID
       securityContext:
         fsGroup: 1000
       volumes:

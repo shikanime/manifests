@@ -90,7 +90,7 @@
                             "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
                             "age1zwgwk8e86wz6x8vd82zwc49qtd8drpc0m6sfd46uxtvxr45ll3ws6pm6ek" # nishir
                             "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
-                            "age1lcz72z6vkjywvhth955l5q9fl5wu8sdf32jpy2y6tz3rers7v5tq2gz7tx" # telsha
+                            "age1srrmxajm2daxk8c3lxh4dfy2s98u8ktv38h47wn6v0saxl7y735q7smppe" # telsha
                           ];
                         }
                       ];
@@ -134,12 +134,34 @@
             shells = {
               default = {
                 imports = [
+                  devlib.devenvModules.go
                   devlib.devenvModules.git
                   devlib.devenvModules.nix
                   devlib.devenvModules.opentofu
                   devlib.devenvModules.shell
                   devlib.devenvModules.shikanime
                 ];
+
+                git-hooks.hooks.kubeconform = {
+                  enable = true;
+                  name = "kubeconform";
+                  files = "(base|overlays)/.*/kustomization\\.ya?ml$";
+                  entry =
+                    let
+                      script = pkgs.writeShellScriptBin "kubeconform" ''
+                        set -euo pipefail
+                        for file in "$@"; do
+                          ${pkgs.kustomize}/bin/kustomize build "$(dirname "$file")" | \
+                            ${pkgs.kubeconform}/bin/kubeconform \
+                              -exit-on-error \
+                              -strict \
+                              -schema-location default \
+                              -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
+                        done
+                      '';
+                    in
+                    "${script}/bin/kubeconform";
+                };
 
                 github.workflows.skaffold.enable = true;
 
@@ -188,6 +210,15 @@
                         create secret generic sops-age \
                         --from-file=age.agekey=/dev/stdin
                     fi
+                  '';
+
+                  "manifests:build".exec = ''
+                    IMAGE_FULL=$(${getExe pkgs.skaffold} build \
+                      --quiet \
+                      --output='{{(index .Builds 0).Tag}}' \
+                      --build-image ghcr.io/shikanime/manifests/qbittorrent-cleanup)
+                    cd apps/qbittorrent-cleanup/base && \
+                      ${getExe pkgs.kustomize} edit set image qbittorrent-cleanup=$IMAGE_FULL
                   '';
                 };
 

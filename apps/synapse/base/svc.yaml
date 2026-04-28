@@ -12,4 +12,5 @@ spec:
       port: 9090
       targetPort: metrics
   selector:
+    app.kubernetes.io/instance: synapse
     app.kubernetes.io/name: synapse

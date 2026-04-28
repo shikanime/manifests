@@ -7,6 +7,8 @@ metadata:
 spec:
   name: fushi
   allowScheduling: true
+  tags:
+    - worker
   disks:
     fushi:
       allowScheduling: true
@@ -25,6 +27,8 @@ metadata:
 spec:
   name: minish
   allowScheduling: true
+  tags:
+    - worker
   disks:
     minish:
       allowScheduling: true
@@ -44,6 +48,7 @@ spec:
   name: nishir
   allowScheduling: true
   tags:
+    - control-plane
     - storage
   disks:
     flandre:
@@ -59,8 +64,7 @@ spec:
       path: /var/lib/longhorn/
       storageReserved: 76772540416
       tags:
-        - balanced
-        - fast
+        - critical
     remilia:
       allowScheduling: true
       diskType: filesystem

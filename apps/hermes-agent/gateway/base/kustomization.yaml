@@ -1,0 +1,27 @@
+---
+resources:
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
+metadata:
+  annotations:
+    automata.shikanime.studio/images:
+      '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
+images:
+  - name: rclone
+    newName: rclone/rclone
+    newTag: 1.71.2
+  - name: hermes-agent
+    newName: nousresearch/hermes-agent
+    newTag: v2026.4.16
+configMapGenerator:
+  - name: hermes-agent-gateway-rclone
+    files:
+      - rclone/rclone.conf
+secretGenerator:
+  - name: hermes-agent-gateway-ssh
+    files:
+      - id_ed25519=hermes-agent-gateway-ssh/id_ed25519.enc
+    options:
+      disableNameSuffixHash: true

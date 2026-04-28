@@ -14,6 +14,10 @@ spec:
         name: fairwinds-stable
         kind: HelmRepository
         namespace: flux-system
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   interval: 10m
   releaseName: vpa
   targetNamespace: kube-system

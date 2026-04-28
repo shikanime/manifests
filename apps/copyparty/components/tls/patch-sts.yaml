@@ -14,7 +14,12 @@ spec:
           args:
             - copy
             - --copy-links
-            - --update
+            - --filter
+            - "+ /cert.pem"
+            - --filter
+            - "+ /key.pem"
+            - --filter
+            - "- *"
             - /mnt/tls
             - /mnt/cfg/copyparty
           volumeMounts:

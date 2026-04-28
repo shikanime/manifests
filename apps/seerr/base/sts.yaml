@@ -42,7 +42,7 @@ spec:
               port: http
             initialDelaySeconds: 20
             timeoutSeconds: 5
-            failureThreshold: 180
+            failureThreshold: 360
           volumeMounts:
             - name: config
               mountPath: /app/config

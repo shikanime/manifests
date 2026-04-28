@@ -6,16 +6,21 @@ components:
   - ../../components/cert-manager
   - ../../components/descheduler
   - ../../components/gatekeeper
-  - ../../components/grafana
   - ../../components/longhorn
   - ../../components/nfd
   - ../../components/tailscale
   - ../../components/vpa
+patches:
+  - path: patch-ingress.yaml
 secretGenerator:
   - name: discord-webhook
     namespace: flux-system
     envs:
       - discord-webhook/.enc.env
+  - name: receiver-token
+    namespace: flux-system
+    envs:
+      - receiver-token/.enc.env
 labels:
   - includeTemplates: true
     pairs:

@@ -1,0 +1,9 @@
+---
+resources:
+  - ../../base
+namespace: shana
+secretGenerator:
+  - name: hetzner
+    type: Opaque
+    envs:
+      - hetzner/.enc.env

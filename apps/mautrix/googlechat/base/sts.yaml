@@ -8,12 +8,12 @@ spec:
   serviceName: mautrix-googlechat
   selector:
     matchLabels:
-      app.kubernetes.io/instance: mautrix
+      app.kubernetes.io/instance: mautrix-googlechat
       app.kubernetes.io/name: mautrix-googlechat
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: mautrix
+        app.kubernetes.io/instance: mautrix-googlechat
         app.kubernetes.io/name: mautrix-googlechat
     spec:
       initContainers:
@@ -24,13 +24,12 @@ spec:
           args:
             - copy
             - --copy-links
-            - --update
             - --filter
-            - "+ config.yaml"
+            - "+ /config.yaml"
             - --filter
-            - "+ doublepuppet.yaml"
+            - "+ /doublepuppet.yaml"
             - --filter
-            - "+ registration.yaml"
+            - "+ /registration.yaml"
             - --filter
             - "- *"
             - /mnt/config
@@ -45,6 +44,10 @@ spec:
               mountPath: /config/rclone/rclone.conf
               subPath: rclone.conf
               readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       containers:
         - name: mautrix
           image: mautrix
@@ -78,6 +81,13 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+          securityContext:
+            allowPrivilegeEscalation: true
+            capabilities:
+              add:
+                - CHOWN
+                - SETUID
+                - SETGID
       securityContext:
         fsGroup: 1337
       volumes:

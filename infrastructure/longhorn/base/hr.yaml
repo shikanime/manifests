@@ -1,0 +1,50 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      version: 1.11.1
+      chart: longhorn
+      interval: 1h
+      sourceRef:
+        name: longhorn
+        kind: HelmRepository
+        namespace: flux-system
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  interval: 10m
+  releaseName: longhorn
+  targetNamespace: longhorn-system
+  values:
+    csi:
+      attacherReplicaCount: 1
+      provisionerReplicaCount: 1
+      resizerReplicaCount: 1
+      snapshotterReplicaCount: 1
+    defaultSettings:
+      allowCollectingLonghornUsageMetrics: false
+      defaultDataLocality: best-effort
+      defaultReplicaCount: 2
+      replicaAutoBalance: best-effort
+    ingress:
+      enabled: true
+      ingressClassName: tailscale
+      annotations:
+        tailscale.com/tags: tag:web
+      tls: true
+    longhornUI:
+      replicas: 1
+    persistence:
+      defaultClassReplicaCount: 2
+      defaultFsType: xfs
+      recurringJobSelector:
+        enable: true
+        jobList:
+          - name: standard
+            isGroup: true

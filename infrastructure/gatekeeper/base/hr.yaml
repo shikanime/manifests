@@ -16,8 +16,16 @@ spec:
         namespace: flux-system
   install:
     createNamespace: true
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   interval: 10m
   releaseName: gatekeeper
   targetNamespace: gatekeeper-system
   values:
+    defaultCreateVAPBindingForConstraints: false
+    defaultCreateVAPForTemplates: false
+    enableK8sNativeValidation: false
     replicas: 1
+    upgradeCRDs:
+      enabled: false

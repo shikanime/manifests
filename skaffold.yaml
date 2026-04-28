@@ -3,6 +3,14 @@ apiVersion: skaffold/v4beta9
 kind: Config
 metadata:
   name: shikanime
+build:
+  artifacts:
+    - image: ghcr.io/shikanime/manifests/qbittorrent-cleanup
+      context: cmd/qbittorrent-cleanup
+      ko: {}
+      platforms:
+        - linux/amd64
+        - linux/arm64
 profiles:
   - name: nishir-tailnet
     activation:

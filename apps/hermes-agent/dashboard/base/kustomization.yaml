@@ -1,0 +1,14 @@
+---
+resources:
+  - ingress.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
+metadata:
+  annotations:
+    automata.shikanime.studio/images:
+      '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
+images:
+  - name: hermes-agent
+    newName: nousresearch/hermes-agent
+    newTag: v2026.4.16
