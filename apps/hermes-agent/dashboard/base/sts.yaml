@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hermes-agent-dashboard
+spec:
+  replicas: 1
+  serviceName: hermes-agent-dashboard
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: hermes-agent-dashboard
+      app.kubernetes.io/name: hermes-agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: hermes-agent-dashboard
+        app.kubernetes.io/name: hermes-agent
+    spec:
+      containers:
+        - name: hermes-agent
+          image: hermes-agent
+          args:
+            - dashboard
+            - --host
+            - 0.0.0.0
+            - --insecure
+          env:
+            - name: GATEWAY_HEALTH_URL
+              value: http://$(HERMES_AGENT_GATEWAY_SERVICE_HOST):$(HERMES_AGENT_GATEWAY_SERVICE_PORT)
+          ports:
+            - name: http
+              containerPort: 9119
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+            - name: cli-web-dist
+              mountPath: /opt/hermes/hermes_cli/web-dist
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 480
+          securityContext:
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - SETUID
+                - SETGID
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hermes-agent-data
+        - name: cli-web-dist
+          emptyDir: {}

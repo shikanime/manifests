@@ -1,8 +1,9 @@
 ---
 resources:
-  - deploy.yaml
   - ingress.yaml
   - netpol.yaml
+  - pvc.yaml
+  - sts.yaml
   - svc.yaml
   - vpa.yaml
 metadata:

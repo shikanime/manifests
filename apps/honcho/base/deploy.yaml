@@ -29,20 +29,20 @@ spec:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
+                  name: honcho-postgres
                   key: username
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
+                  name: honcho-postgres
                   key: password
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
+                  name: honcho-postgres
                   key: database
             - name: DB_CONNECTION_URI
-              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HONCHO_POSTGRES_SERVICE_HOST):$(HONCHO_POSTGRES_SERVICE_PORT)/$(DB_NAME)
       containers:
         - name: honcho
           image: honcho
@@ -139,19 +139,17 @@ spec:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
+                  name: honcho-postgres
                   key: username
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
+                  name: honcho-postgres
                   key: password
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  name: hermes-agent-postgres
+                  name: honcho-postgres
                   key: database
             - name: DB_CONNECTION_URI
-              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HERMES_AGENT_POSTGRES_SERVICE_HOST):$(HERMES_AGENT_POSTGRES_SERVICE_PORT)/$(DB_NAME)
-            - name: AUTH_USE_AUTH
-              value: "false"
+              value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HONCHO_POSTGRES_SERVICE_HOST):$(HONCHO_POSTGRES_SERVICE_PORT)/$(DB_NAME)

@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hermes-agent-gateway
+spec:
+  template:
+    spec:
+      containers:
+        - name: hermes-agent-gateway
+          env:
+            - name: API_SERVER_ENABLED
+              value: "true"
+            - name: API_SERVER_HOST
+              value: "0.0.0.0"
+          ports:
+            - name: http
+              containerPort: 8642
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 180
+            periodSeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 5

@@ -5,8 +5,6 @@ metadata:
   name: infrastructure-longhorn
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: infrastructure-tailscale
   interval: 10m
   path: ./infrastructure/longhorn/overlays/nishir
   prune: true

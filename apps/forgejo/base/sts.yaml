@@ -24,7 +24,6 @@ spec:
           args:
             - copyto
             - --copy-links
-            - --update
             - /mnt/startup-config/app.ini
             - /var/lib/gitea/custom/conf/app.ini
           volumeMounts:
@@ -36,6 +35,10 @@ spec:
               readOnly: true
             - name: config
               mountPath: /mnt/startup-config
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       containers:
         - name: forgejo
           image: forgejo

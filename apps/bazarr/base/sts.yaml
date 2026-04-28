@@ -22,11 +22,10 @@ spec:
           command:
             - rclone
           args:
-            - copy
+            - copyto
             - --copy-links
-            - --update
-            - /mnt/startup-config
-            - /mnt/config
+            - /mnt/startup-config/config.yaml
+            - /mnt/config/config.yaml
           volumeMounts:
             - name: config
               mountPath: /mnt/config
@@ -37,6 +36,10 @@ spec:
             - name: startup-config
               mountPath: /mnt/startup-config
               readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       containers:
         - name: bazarr
           image: bazarr
@@ -69,6 +72,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: run
+              mountPath: /run
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - FOWNER
+                - SETGID
+                - SETUID
       securityContext:
         fsGroup: 1000
       volumes:
@@ -78,6 +90,8 @@ spec:
         - name: rclone-config
           configMap:
             name: bazarr-rclone
+        - name: run
+          emptyDir: {}
         - name: startup-config
           secret:
             secretName: bazarr

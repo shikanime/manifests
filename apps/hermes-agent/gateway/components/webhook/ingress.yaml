@@ -1,0 +1,14 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: automata-webhook
+spec:
+  defaultBackend:
+    service:
+      name: hermes-agent-gateway
+      port:
+        name: webhook
+  tls:
+    - hosts:
+        - automata-webhook

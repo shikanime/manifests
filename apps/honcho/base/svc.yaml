@@ -9,4 +9,5 @@ spec:
       port: 8000
       targetPort: http
   selector:
+    app.kubernetes.io/instance: honcho
     app.kubernetes.io/name: honcho

@@ -51,9 +51,19 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: run
+              mountPath: /run
+          securityContext:
+            capabilities:
+              add:
+                - CHOWN
+                - SETGID
+                - SETUID
       securityContext:
         fsGroup: 1000
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: prowlarr-config
+        - name: run
+          emptyDir: {}

@@ -1,0 +1,116 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hermes-agent-gateway
+spec:
+  replicas: 1
+  serviceName: hermes-agent-gateway
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: hermes-agent-gateway
+      app.kubernetes.io/name: hermes-agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: hermes-agent-gateway
+        app.kubernetes.io/name: hermes-agent
+    spec:
+      initContainers:
+        - name: config-sync
+          image: rclone
+          command:
+            - rclone
+          args:
+            - copy
+            - --copy-links
+            - --filter
+            - "+ /config.yaml"
+            - --filter
+            - "+ /honcho.json"
+            - --filter
+            - "+ /SOUL.md"
+            - --filter
+            - "- *"
+            - /mnt/startup-config
+            - /opt/data
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
+        - name: setup
+          image: hermes-agent
+          args:
+            - setup
+            - --non-interactive
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: ssh-key
+              mountPath: /root/.ssh
+              readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - SETGID
+                - SETUID
+          envFrom:
+            - secretRef:
+                name: hermes-agent-gateway
+      containers:
+        - name: hermes-agent-gateway
+          image: hermes-agent
+          args:
+            - gateway
+            - run
+          env:
+            - name: DISCORD_ALLOW_BOTS
+              value: "mentions"
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              subPath: rclone.conf
+              readOnly: true
+            - name: ssh-key
+              mountPath: /root/.ssh
+              readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - SETGID
+                - SETUID
+          envFrom:
+            - secretRef:
+                name: hermes-agent-gateway
+      securityContext:
+        fsGroup: 10000
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hermes-agent-data
+        - name: rclone-config
+          configMap:
+            name: hermes-agent-gateway-rclone
+        - name: startup-config
+          configMap:
+            name: hermes-agent-gateway-startup-config
+        - name: ssh-key
+          secret:
+            secretName: hermes-agent-gateway-ssh
+            defaultMode: 0400

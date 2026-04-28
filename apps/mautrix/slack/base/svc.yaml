@@ -10,4 +10,5 @@ spec:
       port: 29335
       targetPort: http
   selector:
+    app.kubernetes.io/instance: mautrix-slack
     app.kubernetes.io/name: mautrix-slack

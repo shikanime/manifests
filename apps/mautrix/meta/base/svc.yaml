@@ -10,4 +10,5 @@ spec:
       port: 29319
       targetPort: http
   selector:
+    app.kubernetes.io/instance: mautrix-meta
     app.kubernetes.io/name: mautrix-meta

@@ -10,4 +10,5 @@ spec:
       port: 29334
       targetPort: http
   selector:
+    app.kubernetes.io/instance: mautrix-discord
     app.kubernetes.io/name: mautrix-discord
