@@ -2,7 +2,7 @@
 resources:
   - cronjob.yaml
 images:
-  - name: ghcr.io/shikanime/manifests/qbittorrent-cleanup
-    digest: sha256:91450334c9b119d94bd98c3d70f5025e271f1d356c4388446f9556121588c918
+  - name: qbittorrent-cleanup
+    digest: sha256:85091f0d6f175ca64f670d61c77925aee6c05c9c53da93270944b7538b6cba1e
     newName: ghcr.io/shikanime/manifests/qbittorrent-cleanup
-    newTag: c4f877de1
+    newTag: fc533d07d
