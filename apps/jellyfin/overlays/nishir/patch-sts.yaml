@@ -38,6 +38,9 @@ spec:
         - name: sukebe-data
           persistentVolumeClaim:
             claimName: sukebe-data
+        - name: sukebe-shows-data
+          persistentVolumeClaim:
+            claimName: sukebe-shows-data
         - name: timeline-data
           persistentVolumeClaim:
             claimName: timeline-data

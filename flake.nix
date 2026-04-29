@@ -145,7 +145,7 @@
                 git-hooks.hooks.kubeconform = {
                   enable = true;
                   name = "kubeconform";
-                  files = "(base|overlays)/.*/kustomization\\.ya?ml$";
+                  files = "(base|overlays)/.*/.*\\.ya?ml$";
                   entry =
                     let
                       script = pkgs.writeShellScriptBin "kubeconform" ''
