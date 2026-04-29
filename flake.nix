@@ -142,26 +142,6 @@
                   devlib.devenvModules.shikanime
                 ];
 
-                git-hooks.hooks.kubeconform = {
-                  enable = true;
-                  name = "kubeconform";
-                  files = "(base|overlays)/.*/.*\\.ya?ml$";
-                  entry =
-                    let
-                      script = pkgs.writeShellScriptBin "kubeconform" ''
-                        set -euo pipefail
-                        for file in "$@"; do
-                          ${pkgs.kustomize}/bin/kustomize build "$(dirname "$file")" | \
-                            ${pkgs.kubeconform}/bin/kubeconform \
-                              -exit-on-error \
-                              -strict \
-                              -ignore-missing-schemas
-                        done
-                      '';
-                    in
-                    "${script}/bin/kubeconform";
-                };
-
                 github.workflows.skaffold.enable = true;
 
                 packages = [
@@ -180,6 +160,18 @@
                 ];
 
                 tasks = {
+                  "manifests:kubeconform" = {
+                    before = [ "devenv:enterTest" ];
+                    exec = ''
+                      for file in "$@"; do
+                        ${pkgs.kustomize}/bin/kustomize build "$(dirname "$file")" | \
+                          ${pkgs.kubeconform}/bin/kubeconform \
+                            -exit-on-error \
+                            -strict
+                      done
+                    '';
+                  };
+
                   "manifests:bootstrap:nishir".exec = ''
                     ${getExe pkgs.k0sctl} apply \
                       --config $DEVENV_ROOT/bootstraps/nishir/cluster.yaml
@@ -200,6 +192,7 @@
                         --from-file=age.agekey=/dev/stdin
                     fi
                   '';
+
                   "manifests:bootstrap:telsha".exec = ''
                     ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
 
