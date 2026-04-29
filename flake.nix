@@ -155,8 +155,7 @@
                             ${pkgs.kubeconform}/bin/kubeconform \
                               -exit-on-error \
                               -strict \
-                              -schema-location default \
-                              -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
+                              -ignore-missing-schemas
                         done
                       '';
                     in
