@@ -16,7 +16,13 @@ spec:
             - name: shows-data
               mountPath: /data/shows
             - name: sukebe-data
-              mountPath: /data/sukebe
+              mountPath: /data/sukebe/Videos/Doujins
+              subPath: Videos/Doujins
+            - name: sukebe-data
+              mountPath: /data/sukebe/Videos/Scenes
+              subPath: Videos/Scenes
+            - name: sukebe-shows-data
+              mountPath: /data/sukebe/Videos/Shows
             - name: timeline-data
               mountPath: /data/timeline
       volumes:
