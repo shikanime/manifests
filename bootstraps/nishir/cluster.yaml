@@ -9,6 +9,9 @@ spec:
         - name: mac-randomization
           src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
+        - name: rpi-swap
+          src: files/rpi/zram.conf
+          dst: /etc/rpi/swap.conf.d/zram.conf
         - name: systctl-k8s
           src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
@@ -44,6 +47,9 @@ spec:
         - name: mac-randomization
           src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
+        - name: rpi-swap
+          src: files/rpi/zram.conf
+          dst: /etc/rpi/swap.conf.d/zram.conf
         - name: systctl-k8s
           src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
@@ -78,6 +84,9 @@ spec:
         - name: mac-randomization
           src: files/networkmanager/90-mac-randomization.conf
           dst: /etc/NetworkManager/conf.d/90-mac-randomization.conf
+        - name: rpi-swap
+          src: files/rpi/zram.conf
+          dst: /etc/rpi/swap.conf.d/zram.conf
         - name: systctl-k8s
           src: files/sysctl/10-k8s.conf
           dst: /etc/sysctl.d/10-k8s.conf
