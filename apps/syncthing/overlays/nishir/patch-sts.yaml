@@ -21,8 +21,12 @@ spec:
               mountPath: /var/syncthing/Shows
             - name: staging-data
               mountPath: /var/syncthing/Staging
-            - name: sukebe-data
-              mountPath: /var/syncthing/Sukebe
+            - name: sukebe-doujins-data
+              mountPath: /var/syncthing/Sukebe/Doujins
+            - name: sukebe-scenes-data
+              mountPath: /var/syncthing/Sukebe/Scenes
+            - name: sukebe-shows-data
+              mountPath: /var/syncthing/Sukebe/Shows
             - name: sync-data
               mountPath: /var/syncthing/Sync
             - name: timeline-data
@@ -46,9 +50,15 @@ spec:
         - name: staging-data
           persistentVolumeClaim:
             claimName: staging-data
-        - name: sukebe-data
+        - name: sukebe-doujins-data
           persistentVolumeClaim:
-            claimName: sukebe-data
+            claimName: sukebe-doujins-data
+        - name: sukebe-scenes-data
+          persistentVolumeClaim:
+            claimName: sukebe-scenes-data
+        - name: sukebe-shows-data
+          persistentVolumeClaim:
+            claimName: sukebe-shows-data
         - name: sync-data
           persistentVolumeClaim:
             claimName: sync-data

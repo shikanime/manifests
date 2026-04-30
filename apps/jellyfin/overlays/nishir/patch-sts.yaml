@@ -15,14 +15,12 @@ spec:
               mountPath: /data/music
             - name: shows-data
               mountPath: /data/shows
-            - name: sukebe-data
-              mountPath: /data/sukebe/Videos/Doujins
-              subPath: Videos/Doujins
-            - name: sukebe-data
-              mountPath: /data/sukebe/Videos/Scenes
-              subPath: Videos/Scenes
+            - name: sukebe-doujins-data
+              mountPath: /data/sukebe/Doujins
+            - name: sukebe-scenes-data
+              mountPath: /data/sukebe/Scenes
             - name: sukebe-shows-data
-              mountPath: /data/sukebe/Videos/Shows
+              mountPath: /data/sukebe/Shows
             - name: timeline-data
               mountPath: /data/timeline
       volumes:
@@ -35,9 +33,12 @@ spec:
         - name: shows-data
           persistentVolumeClaim:
             claimName: shows-data
-        - name: sukebe-data
+        - name: sukebe-doujins-data
           persistentVolumeClaim:
-            claimName: sukebe-data
+            claimName: sukebe-doujins-data
+        - name: sukebe-scenes-data
+          persistentVolumeClaim:
+            claimName: sukebe-scenes-data
         - name: sukebe-shows-data
           persistentVolumeClaim:
             claimName: sukebe-shows-data
