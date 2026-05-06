@@ -17,6 +17,7 @@ spec:
               mountPath: /data/shows
             - name: sukebe-doujins-data
               mountPath: /data/sukebe/Doujins
+              subPath: Videos
             - name: sukebe-scenes-data
               mountPath: /data/sukebe/Scenes
             - name: sukebe-shows-data
