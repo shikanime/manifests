@@ -29,9 +29,11 @@ spec:
       snapshotterReplicaCount: 1
     defaultSettings:
       allowCollectingLonghornUsageMetrics: false
+      backupExecutionTimeout: 60
       defaultDataLocality: best-effort
       defaultReplicaCount: 2
       replicaAutoBalance: best-effort
+      restoreVolumeRecurringJob: true
     ingress:
       enabled: true
       ingressClassName: tailscale
