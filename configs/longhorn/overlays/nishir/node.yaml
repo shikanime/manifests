@@ -67,6 +67,7 @@ spec:
       storageReserved: 76772540416
       tags:
         - critical
+        - fast
     remilia:
       allowScheduling: true
       diskType: filesystem
