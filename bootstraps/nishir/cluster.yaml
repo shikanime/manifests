@@ -29,7 +29,7 @@ spec:
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           perm: "0755"
       hooks:
-        connect:
+        apply:
           after:
             - apt-get update
             - apt-get install -y age dmsetup cryptsetup ethtool open-iscsi
@@ -67,7 +67,7 @@ spec:
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           perm: "0755"
       hooks:
-        connect:
+        apply:
           after:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup ethtool open-iscsi
@@ -104,7 +104,7 @@ spec:
           dst: /etc/networkd-dispatcher/routable.d/50-tailscale
           perm: "0755"
       hooks:
-        connect:
+        apply:
           after:
             - apt-get update
             - apt-get install -y dmsetup cryptsetup ethtool open-iscsi
