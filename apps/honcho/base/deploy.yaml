@@ -74,68 +74,44 @@ spec:
             - secretRef:
                 name: honcho
           env:
-            - name: DERIVER_PROVIDER
-              value: google
-            - name: DERIVER_MODEL
-              value: gemini-3.1-flash-lite-preview
-            - name: DERIVER_THINKING_BUDGET_TOKENS
-              value: "1024"
-            - name: SUMMARY_PROVIDER
-              value: google
-            - name: SUMMARY_MODEL
-              value: gemini-3-flash-preview
-            - name: SUMMARY_THINKING_BUDGET_TOKENS
-              value: "512"
-            - name: DREAM_PROVIDER
-              value: google
+            - name: DERIVER_ENABLED
+              value: "true"
+            - name: DERIVER_MODEL_CONFIG__TRANSPORT
+              value: openai
+            - name: DERIVER_MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: SUMMARY_MODEL_CONFIG__TRANSPORT
+              value: openai
+            - name: SUMMARY_MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: DREAM_ENABLED
+              value: "true"
             - name: DREAM_MODEL
-              value: gemini-3.1-pro-preview
-            - name: DREAM_THINKING_BUDGET_TOKENS
-              value: "8192"
-            - name: DREAM_DEDUCTION_MODEL
-              value: gemini-3-flash-preview
-            - name: DREAM_INDUCTION_MODEL
-              value: gemini-3-flash-preview
-            - name: DIALECTIC_LEVELS__minimal__PROVIDER
-              value: google
-            - name: DIALECTIC_LEVELS__minimal__MODEL
-              value: gemini-3.1-flash-lite-preview
-            - name: DIALECTIC_LEVELS__minimal__THINKING_BUDGET_TOKENS
-              value: "0"
-            - name: DIALECTIC_LEVELS__minimal__MAX_TOOL_ITERATIONS
-              value: "10"
-            - name: DIALECTIC_LEVELS__low__PROVIDER
-              value: google
-            - name: DIALECTIC_LEVELS__low__MODEL
-              value: gemini-3.1-flash-lite-preview
-            - name: DIALECTIC_LEVELS__low__THINKING_BUDGET_TOKENS
-              value: "0"
-            - name: DIALECTIC_LEVELS__low__MAX_TOOL_ITERATIONS
-              value: "12"
-            - name: DIALECTIC_LEVELS__medium__PROVIDER
-              value: google
-            - name: DIALECTIC_LEVELS__medium__MODEL
-              value: gemini-3-flash-preview
-            - name: DIALECTIC_LEVELS__medium__THINKING_BUDGET_TOKENS
-              value: "1024"
-            - name: DIALECTIC_LEVELS__medium__MAX_TOOL_ITERATIONS
-              value: "15"
-            - name: DIALECTIC_LEVELS__high__PROVIDER
-              value: google
-            - name: DIALECTIC_LEVELS__high__MODEL
-              value: gemini-3.1-pro-preview
-            - name: DIALECTIC_LEVELS__high__THINKING_BUDGET_TOKENS
-              value: "1024"
-            - name: DIALECTIC_LEVELS__high__MAX_TOOL_ITERATIONS
-              value: "20"
-            - name: DIALECTIC_LEVELS__max__PROVIDER
-              value: google
-            - name: DIALECTIC_LEVELS__max__MODEL
-              value: gemini-3.1-pro-preview
-            - name: DIALECTIC_LEVELS__max__THINKING_BUDGET_TOKENS
-              value: "2048"
-            - name: DIALECTIC_LEVELS__max__MAX_TOOL_ITERATIONS
-              value: "30"
+              value: nousresearch/hermes-3-llama-3.1-405b
+            - name: DREAM_DEDUCTION_MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: DREAM_INDUCTION_MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: DIALECTIC_LEVELS__minimal__MODEL_CONFIG__TRANSPORT
+              value: openai
+            - name: DIALECTIC_LEVELS__minimal__MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: DIALECTIC_LEVELS__low__MODEL_CONFIG__TRANSPORT
+              value: openai
+            - name: DIALECTIC_LEVELS__low__MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: DIALECTIC_LEVELS__medium__MODEL_CONFIG__TRANSPORT
+              value: openai
+            - name: DIALECTIC_LEVELS__medium__MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: DIALECTIC_LEVELS__high__MODEL_CONFIG__TRANSPORT
+              value: openai
+            - name: DIALECTIC_LEVELS__high__MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
+            - name: DIALECTIC_LEVELS__max__MODEL_CONFIG__TRANSPORT
+              value: openai
+            - name: DIALECTIC_LEVELS__max__MODEL_CONFIG__OVERRIDES__BASE_URL
+              value: https://inference-api.nousresearch.com/v1
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
