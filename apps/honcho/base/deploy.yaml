@@ -78,38 +78,54 @@ spec:
               value: "true"
             - name: DERIVER_MODEL_CONFIG__TRANSPORT
               value: openai
+            - name: DERIVER_MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DERIVER_MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: SUMMARY_MODEL_CONFIG__TRANSPORT
               value: openai
+            - name: SUMMARY_MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: SUMMARY_MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: DREAM_ENABLED
               value: "true"
-            - name: DREAM_MODEL
-              value: nousresearch/hermes-3-llama-3.1-405b
+            - name: DREAM_DEDUCTION_MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DREAM_DEDUCTION_MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
+            - name: DREAM_INDUCTION_MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DREAM_INDUCTION_MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: DIALECTIC_LEVELS__minimal__MODEL_CONFIG__TRANSPORT
               value: openai
+            - name: DIALECTIC_LEVELS__minimal__MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DIALECTIC_LEVELS__minimal__MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: DIALECTIC_LEVELS__low__MODEL_CONFIG__TRANSPORT
               value: openai
+            - name: DIALECTIC_LEVELS__low__MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DIALECTIC_LEVELS__low__MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: DIALECTIC_LEVELS__medium__MODEL_CONFIG__TRANSPORT
               value: openai
+            - name: DIALECTIC_LEVELS__medium__MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DIALECTIC_LEVELS__medium__MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: DIALECTIC_LEVELS__high__MODEL_CONFIG__TRANSPORT
               value: openai
+            - name: DIALECTIC_LEVELS__high__MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DIALECTIC_LEVELS__high__MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: DIALECTIC_LEVELS__max__MODEL_CONFIG__TRANSPORT
               value: openai
+            - name: DIALECTIC_LEVELS__max__MODEL_CONFIG__MODEL
+              value: openai/gpt-5.4-mini
             - name: DIALECTIC_LEVELS__max__MODEL_CONFIG__OVERRIDES__BASE_URL
               value: https://inference-api.nousresearch.com/v1
             - name: DB_USER
