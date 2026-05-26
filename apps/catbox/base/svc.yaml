@@ -4,6 +4,10 @@ kind: Service
 metadata:
   name: catbox
 spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/instance: catbox
+    app.kubernetes.io/name: catbox
   ports:
     - name: ssh
       port: 22
@@ -12,6 +16,3 @@ spec:
       protocol: UDP
       port: 5353
       targetPort: mdns
-  selector:
-    app.kubernetes.io/instance: catbox
-    app.kubernetes.io/name: catbox
