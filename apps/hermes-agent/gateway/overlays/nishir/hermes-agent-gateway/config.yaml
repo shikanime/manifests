@@ -1,8 +1,8 @@
 ---
 model:
-  default: gemini-3-flash-preview
-  provider: gemini
-  base_url: https://generativelanguage.googleapis.com/v1beta/openai
+  default: deepseek/deepseek-v4-flash:free
+  provider: nous
+  base_url: https://inference-api.nousresearch.com/v1
 providers: {}
 fallback_providers: []
 credential_pool_strategies: {}
@@ -108,7 +108,6 @@ compression:
   threshold: 0.5
   target_ratio: 0.2
   protect_last_n: 20
-  summary_model: gemini-3.1-flash-lite-preview
 smart_model_routing:
   enabled: false
   max_simple_chars: 160
