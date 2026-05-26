@@ -98,7 +98,7 @@ spec:
                 metricsUtilization:
                   source: KubernetesMetrics
                 targetThresholds:
-                  memory: 5
+                  memory: 10
                 thresholds:
                   memory: 10
                 useDeviationThresholds: true
