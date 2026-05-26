@@ -1,0 +1,5 @@
+---
+resources:
+  - ../telsha
+patches:
+  - path: patch-svc.yaml
