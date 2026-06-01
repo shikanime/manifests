@@ -4,6 +4,8 @@ kind: StorageClass
 metadata:
   name: nishir-ephemeral
 allowVolumeExpansion: true
+provisioner: driver.longhorn.io
+volumeBindingMode: WaitForFirstConsumer
 parameters:
   diskSelector: fast
   fsType: xfs
@@ -12,14 +14,15 @@ parameters:
     [
       {"name": "default", "isGroup": true}
     ]
-provisioner: driver.longhorn.io
-volumeBindingMode: WaitForFirstConsumer
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nishir-fast
 allowVolumeExpansion: true
+provisioner: driver.longhorn.io
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
 parameters:
   dataLocality: best-effort
   diskSelector: fast
@@ -30,15 +33,15 @@ parameters:
       {"name": "default", "isGroup": true},
       {"name": "standard", "isGroup": true}
     ]
-provisioner: driver.longhorn.io
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nishir-standard
 allowVolumeExpansion: true
+provisioner: driver.longhorn.io
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
 parameters:
   diskSelector: balanced
   fsType: xfs
@@ -48,6 +51,3 @@ parameters:
       {"name": "default", "isGroup": true},
       {"name": "standard", "isGroup": true}
     ]
-provisioner: driver.longhorn.io
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
