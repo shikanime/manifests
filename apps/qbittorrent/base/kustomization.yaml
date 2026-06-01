@@ -1,11 +1,3 @@
----
-resources:
-  - ingress.yaml
-  - netpol.yaml
-  - pvc.yaml
-  - sts.yaml
-  - svc.yaml
-  - vpa.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
@@ -14,6 +6,13 @@ metadata:
       '[ { "name": "alpine", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" },
       { "name": "qbittorrent", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$",
       "exclude-tags": ["20.04.1", "14.3.9"] } ]'
+resources:
+  - ingress.yaml
+  - netpol.yaml
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
 images:
   - name: alpine
     newName: alpine
