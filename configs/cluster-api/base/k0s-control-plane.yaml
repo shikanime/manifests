@@ -1,4 +1,3 @@
----
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: K0sControlPlane
 metadata:
@@ -8,9 +7,9 @@ spec:
   replicas: 1
   machineTemplate:
     infrastructureRef:
-      name: shana-control-plane
       apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
       kind: HCloudMachineTemplate
+      name: shana-control-plane
   k0sConfigSpec:
     k0s:
       apiVersion: k0s.k0sproject.io/v1beta1

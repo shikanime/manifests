@@ -11,9 +11,9 @@ spec:
   path: ./apps/bazarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: bazarr
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: bazarr
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -36,9 +36,9 @@ spec:
   path: ./apps/copyparty/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: copyparty
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: copyparty
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -61,9 +61,9 @@ spec:
   path: ./apps/forgejo/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: forgejo
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: forgejo
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -86,9 +86,9 @@ spec:
   path: ./apps/gitea-mirror/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: gitea-mirror
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: gitea-mirror
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -110,9 +110,9 @@ spec:
   path: ./apps/hermes-agent/gateway/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: hermes-agent-gateway
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: hermes-agent-gateway
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -134,9 +134,9 @@ spec:
   path: ./apps/hermes-agent/dashboard/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: hermes-agent-dashboard
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: hermes-agent-dashboard
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -158,9 +158,9 @@ spec:
   path: ./apps/honcho-postgres/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: honcho-postgres
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: honcho-postgres
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -182,9 +182,9 @@ spec:
   path: ./apps/chrome/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: chrome
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: Deployment
+      name: chrome
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -203,9 +203,9 @@ spec:
   path: ./apps/honcho/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: honcho
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: Deployment
+      name: honcho
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -228,9 +228,9 @@ spec:
   path: ./apps/jellyfin/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: jellyfin
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: jellyfin
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -253,9 +253,9 @@ spec:
   path: ./apps/lidarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: lidarr
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: lidarr
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -277,9 +277,9 @@ spec:
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-discord
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-discord
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -301,9 +301,9 @@ spec:
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-googlechat
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-googlechat
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -325,9 +325,9 @@ spec:
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-linkedin
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-linkedin
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -349,9 +349,9 @@ spec:
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-meta
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-meta
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -373,9 +373,9 @@ spec:
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-signal
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-signal
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -397,9 +397,9 @@ spec:
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-slack
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-slack
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -421,9 +421,9 @@ spec:
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-twitter
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-twitter
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -445,9 +445,9 @@ spec:
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: mautrix-whatsapp
-      apiVersion: v1
+    - apiVersion: v1
       kind: Service
+      name: mautrix-whatsapp
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -469,9 +469,9 @@ spec:
   path: ./apps/metatube/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: metatube
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: metatube
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -494,9 +494,9 @@ spec:
   path: ./apps/prowlarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: prowlarr
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: prowlarr
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -519,9 +519,9 @@ spec:
   path: ./apps/qbittorrent/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: qbittorrent
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: qbittorrent
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -541,9 +541,9 @@ spec:
   path: ./apps/qbittorrent-cleanup/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: qbittorrent-cleanup
-      apiVersion: batch/v1
+    - apiVersion: batch/v1
       kind: CronJob
+      name: qbittorrent-cleanup
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -566,9 +566,9 @@ spec:
   path: ./apps/radarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: radarr
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: radarr
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -590,9 +590,9 @@ spec:
   path: ./apps/seerr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: seerr
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: seerr
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -615,9 +615,9 @@ spec:
   path: ./apps/sonarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: sonarr
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: sonarr
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -640,9 +640,9 @@ spec:
   path: ./apps/synapse/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: synapse
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: synapse
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -665,9 +665,9 @@ spec:
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: synapse-proxy
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: synapse-proxy
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -686,9 +686,9 @@ spec:
   path: ./apps/syncthing/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: syncthing
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: syncthing
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -711,9 +711,9 @@ spec:
   path: ./apps/vaultwarden/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: vaultwarden
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: vaultwarden
       namespace: shikanime
   sourceRef:
     name: flux-system
@@ -736,9 +736,9 @@ spec:
   path: ./apps/whisparr/overlays/nishir-tailnet
   prune: true
   healthChecks:
-    - name: whisparr
-      apiVersion: apps/v1
+    - apiVersion: apps/v1
       kind: StatefulSet
+      name: whisparr
       namespace: shikanime
   sourceRef:
     name: flux-system

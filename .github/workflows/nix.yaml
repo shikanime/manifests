@@ -1,4 +1,3 @@
----
 name: Nix
 permissions:
   contents: read
@@ -13,6 +12,12 @@ permissions:
         required: false
       OPERATOR_PRIVATE_KEY:
         required: true
+  workflow_dispatch:
+    inputs:
+      cachix-name:
+        type: string
+        default: ""
+        description: Cachix cache name
 jobs:
   checks:
     name: Checks
@@ -57,6 +62,9 @@ jobs:
     runs-on: ${{ matrix.runner }}
     needs:
       - setup-packages-jobs
+    permissions:
+      contents: read
+      packages: write
     strategy:
       fail-fast: false
       matrix:
@@ -84,10 +92,10 @@ jobs:
       - id: direnv
         uses: shikanime-studio/actions/direnv@v9
       - env: ${{ fromJSON(steps.direnv.outputs.env) }}
-        run:
-          nix build --accept-flake-config --no-pure-eval ".#packages.${{
-          matrix.system }}.${{ matrix.name }}"
-        shell: bash
+        uses: shikanime-studio/actions/nix/integration@v9
+        with:
+          name: ${{ matrix.name }}
+          system: ${{ matrix.system }}
   setup-checks-jobs:
     name: Setup Checks Jobs
     runs-on: ubuntu-latest
@@ -117,6 +125,8 @@ jobs:
   setup-packages-jobs:
     name: Setup Packages Jobs
     runs-on: ubuntu-latest
+    needs:
+      - checks
     outputs:
       continue: ${{ steps.setup-packages-jobs.outputs.continue }}
       matrix: ${{ steps.setup-packages-jobs.outputs.matrix }}
