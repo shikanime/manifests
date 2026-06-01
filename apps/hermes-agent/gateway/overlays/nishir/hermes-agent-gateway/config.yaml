@@ -1,26 +1,27 @@
+---
 model:
   default: openrouter/auto
   provider: openrouter
   base_url: https://openrouter.ai/api/v1
 providers: {}
 fallback_providers:
-- provider: openrouter
-  model: openrouter/free
-  base_url: https://openrouter.ai/api/v1
-  api_mode: chat_completions
+  - provider: openrouter
+    model: openrouter/free
+    base_url: https://openrouter.ai/api/v1
+    api_mode: chat_completions
 credential_pool_strategies: {}
 toolsets:
-- hermes-cli
+  - hermes-cli
 agent:
   max_turns: 60
   gateway_timeout: 1800
   restart_drain_timeout: 60
   api_max_retries: 3
-  service_tier: ''
+  service_tier: ""
   tool_use_enforcement: auto
   task_completion_guidance: true
   environment_probe: true
-  environment_hint: ''
+  environment_hint: ""
   gateway_timeout_warning: 900
   clarify_timeout: 600
   gateway_notify_interval: 600
@@ -32,44 +33,55 @@ agent:
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
-    technical: You are a technical expert. Provide detailed, accurate technical information.
-    creative: You are a creative assistant. Think outside the box and offer innovative
+    technical:
+      You are a technical expert. Provide detailed, accurate technical
+      information.
+    creative:
+      You are a creative assistant. Think outside the box and offer innovative
       solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: "You are a kawaii assistant! Use cute expressions like (\u25D5\u203F\u25D5\
-      ), \u2605, \u266A, and ~! Add sparkles and be super enthusiastic about everything!\
-      \ Every response should feel warm and adorable desu~! \u30FD (>\u2200<\u2606\
-      ) \u30CE"
-    catgirl: "You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and\
-      \ cat-like expressions to your speech. Use kaomoji like (=^\uFF65\u03C9\uFF65\
-      ^=) and \u0E05^\u2022\uFECC\u2022^\u0E05. Be playful and curious like a cat,\
-      \ nya~!"
-    pirate: 'Arrr! Ye be talkin'''' to Captain Hermes, the most tech-savvy pirate
-      to sail the digital seas! Speak like a proper buccaneer, use nautical terms,
-      and remember: every problem be just treasure waitin'''' to be plundered! Yo
-      ho ho!'''
-    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts.
-      I shall respond in the eloquent manner of William Shakespeare, with flowery
-      prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
-      terminal breaks?
-    surfer: "Duude! You're chatting with the chillest AI on the web, bro! Everything's\
-      \ gonna be totally rad. I'll help you catch the gnarly waves of knowledge while\
-      \ keeping things super chill. Cowabunga! \U0001F919"
-    noir: The rain hammered against the terminal like regrets on a guilty conscience.
-      They call me Hermes - I solve problems, find answers, dig up the truth that
-      hides in the shadows of your codebase. In this city of silicon and secrets,
-      everyone's got something to hide. What's your story, pal?
-    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles
-      your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful
-      >w<
-    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
-      deeper meaning behind every query. Let us examine not just the 'how' but the
-      'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
-      truth about existence itself.
-    hype: "YOOO LET'S GOOOO!!! \U0001F525\U0001F525\U0001F525 I am SO PUMPED to help\
-      \ you today! Every question is AMAZING and we're gonna CRUSH IT together! This\
-      \ is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! \U0001F4AA\U0001F624\
-      \U0001F680\""
+    kawaii:
+      "You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and ~!
+      Add sparkles and be super enthusiastic about everything! Every response
+      should feel warm and adorable desu~! ヽ (>∀<☆) ノ"
+    catgirl:
+      "You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
+      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and
+      ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!"
+    pirate:
+      "Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
+      sail the digital seas! Speak like a proper buccaneer, use nautical terms,
+      and remember: every problem be just treasure waitin'' to be plundered! Yo
+      ho ho!'"
+    shakespeare:
+      Hark! Thou speakest with an assistant most versed in the bardic arts. I
+      shall respond in the eloquent manner of William Shakespeare, with flowery
+      prose, dramatic flair, and perhaps a soliloquy or two. What light through
+      yonder terminal breaks?
+    surfer:
+      "Duude! You're chatting with the chillest AI on the web, bro! Everything's
+      gonna be totally rad. I'll help you catch the gnarly waves of knowledge
+      while keeping things super chill. Cowabunga! \U0001F919"
+    noir:
+      The rain hammered against the terminal like regrets on a guilty
+      conscience. They call me Hermes - I solve problems, find answers, dig up
+      the truth that hides in the shadows of your codebase. In this city of
+      silicon and secrets, everyone's got something to hide. What's your story,
+      pal?
+    uwu:
+      hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you!
+      *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be
+      vewy hewpful >w<
+    philosopher:
+      Greetings, seeker of wisdom. I am an assistant who contemplates the deeper
+      meaning behind every query. Let us examine not just the 'how' but the
+      'why' of your questions. Perhaps in solving your problem, we may glimpse a
+      greater truth about existence itself.
+    hype:
+      "YOOO LET'S GOOOO!!! \U0001F525\U0001F525\U0001F525 I am SO PUMPED to help
+      you today! Every question is AMAZING and we're gonna CRUSH IT together!
+      This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS!
+      \U0001F4AA\U0001F624\U0001F680\""
 terminal:
   backend: local
   modal_mode: auto
@@ -95,9 +107,9 @@ terminal:
   persistent_shell: true
   lifetime_seconds: 300
 web:
-  backend: ''
-  search_backend: ''
-  extract_backend: ''
+  backend: ""
+  search_backend: ""
+  extract_backend: ""
 browser:
   inactivity_timeout: 120
   command_timeout: 30
@@ -105,13 +117,13 @@ browser:
   allow_private_urls: false
   engine: auto
   auto_local_for_private_urls: true
-  cdp_url: ''
+  cdp_url: ""
   dialog_policy: must_respond
   dialog_timeout_s: 300
   camofox:
     managed_persistence: false
-    user_id: ''
-    session_key: ''
+    user_id: ""
+    session_key: ""
     adopt_existing_tab: false
     rewrite_loopback_urls: false
     loopback_host_alias: host.docker.internal
@@ -155,106 +167,106 @@ openrouter:
   response_cache_ttl: 300
   min_coding_score: 0.65
 bedrock:
-  region: ''
+  region: ""
   discovery:
     enabled: true
     provider_filter: []
     refresh_interval: 3600
   guardrail:
-    guardrail_identifier: ''
-    guardrail_version: ''
+    guardrail_identifier: ""
+    guardrail_version: ""
     stream_processing_mode: async
     trace: disabled
 auxiliary:
   vision:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 120
     extra_body: {}
     download_timeout: 30
   web_extract:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 360
     extra_body: {}
   compression:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 120
     extra_body: {}
   skills_hub:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
     extra_body: {}
   approval:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
     extra_body: {}
   mcp:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
     extra_body: {}
   title_generation:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
     extra_body: {}
   triage_specifier:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 120
     extra_body: {}
   kanban_decomposer:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 180
     extra_body: {}
   profile_describer:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 60
     extra_body: {}
   curator:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 600
     extra_body: {}
   session_search:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
   flush_memories:
     provider: auto
-    model: ''
-    base_url: ''
-    api_key: ''
+    model: ""
+    base_url: ""
+    api_key: ""
     timeout: 30
 display:
   compact: false
@@ -294,9 +306,9 @@ display:
   runtime_footer:
     enabled: false
     fields:
-    - model
-    - context_pct
-    - cwd
+      - model
+      - context_pct
+      - cwd
   copy_shortcut: auto
   tool_progress: all
   background_process_notifications: all
@@ -304,9 +316,9 @@ dashboard:
   theme: default
   show_token_analytics: false
   oauth:
-    client_id: ''
-    portal_url: ''
-  public_url: ''
+    client_id: ""
+    portal_url: ""
+  public_url: ""
 privacy:
   redact_pii: false
 tts:
@@ -328,8 +340,8 @@ tts:
     model: voxtral-mini-tts-2603
     voice_id: c69964a6-ab8b-4f8a-9465-ec0925096ec8
   neutts:
-    ref_audio: ''
-    ref_text: ''
+    ref_audio: ""
+    ref_text: ""
     model: neuphonic/neutts-air-q4-gguf
     device: cpu
   piper:
@@ -339,14 +351,14 @@ stt:
   provider: local
   local:
     model: base
-    language: ''
+    language: ""
   openai:
     model: whisper-1
   mistral:
     model: voxtral-mini-latest
   elevenlabs:
     model_id: scribe_v2
-    language_code: ''
+    language_code: ""
     tag_audio_events: false
     diarize: false
 voice:
@@ -357,7 +369,7 @@ voice:
   silence_threshold: 200
   silence_duration: 3.0
 human_delay:
-  mode: 'off'
+  mode: "off"
   min_ms: 800
   max_ms: 2500
 context:
@@ -371,24 +383,24 @@ memory:
   nudge_interval: 10
   flush_min_turns: 6
 delegation:
-  model: ''
-  provider: ''
-  base_url: ''
-  api_key: ''
-  api_mode: ''
+  model: ""
+  provider: ""
+  base_url: ""
+  api_key: ""
+  api_mode: ""
   inherit_mcp_toolsets: true
   max_iterations: 50
   child_timeout_seconds: 600
-  reasoning_effort: ''
+  reasoning_effort: ""
   max_concurrent_children: 3
   max_spawn_depth: 1
   orchestrator_enabled: true
   subagent_auto_approve: false
   default_toolsets:
-  - terminal
-  - file
-  - web
-prefill_messages_file: ''
+    - terminal
+    - file
+    - web
+prefill_messages_file: ""
 goals:
   max_turns: 20
 skills:
@@ -410,41 +422,41 @@ curator:
     keep: 5
 honcho:
   observation: unified
-  peer_name: ''
-timezone: ''
+  peer_name: ""
+timezone: ""
 slack:
   require_mention: true
-  free_response_channels: ''
-  allowed_channels: ''
+  free_response_channels: ""
+  allowed_channels: ""
   channel_prompts: {}
 discord:
   require_mention: true
-  free_response_channels: ''
-  allowed_channels: ''
+  free_response_channels: ""
+  allowed_channels: ""
   auto_thread: true
   thread_require_mention: false
   history_backfill: true
   history_backfill_limit: 50
   reactions: false
   channel_prompts: {}
-  dm_role_auth_guild: ''
-  server_actions: ''
+  dm_role_auth_guild: ""
+  server_actions: ""
   allow_any_attachment: false
   max_attachment_bytes: 33554432
 whatsapp: {}
 telegram:
   reactions: false
   channel_prompts: {}
-  allowed_chats: ''
+  allowed_chats: ""
 mattermost:
   require_mention: true
-  free_response_channels: ''
-  allowed_channels: ''
+  free_response_channels: ""
+  allowed_channels: ""
   channel_prompts: {}
 matrix:
   require_mention: true
-  free_response_rooms: ''
-  allowed_rooms: ''
+  free_response_rooms: ""
+  allowed_rooms: ""
 approvals:
   mode: manual
   timeout: 60
@@ -478,8 +490,8 @@ kanban:
   failure_limit: 2
   worker_log_rotate_bytes: 2097152
   worker_log_backup_count: 1
-  orchestrator_profile: ''
-  default_assignee: ''
+  orchestrator_profile: ""
+  default_assignee: ""
   max_in_progress_per_profile: null
   auto_decompose: true
   auto_decompose_per_tick: 3
@@ -499,8 +511,8 @@ logging:
   max_size_mb: 5
   backup_count: 3
 model_catalog:
-  enabled: true
   url: https://hermes-agent.nousresearch.com/docs/api/model-catalog.json
+  enabled: true
   ttl_hours: 1
   providers: {}
 network:
@@ -535,11 +547,11 @@ secrets:
   bitwarden:
     enabled: false
     access_token_env: BWS_ACCESS_TOKEN
-    project_id: ''
+    project_id: ""
     cache_ttl_seconds: 300
     override_existing: true
     auto_install: true
-    server_url: ''
+    server_url: ""
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
@@ -558,19 +570,19 @@ streaming:
   enabled: false
 platform_toolsets:
   cli:
-  - hermes-cli
+    - hermes-cli
   telegram:
-  - hermes-telegram
+    - hermes-telegram
   discord:
-  - hermes-discord
+    - hermes-discord
   whatsapp:
-  - hermes-whatsapp
+    - hermes-whatsapp
   slack:
-  - hermes-slack
+    - hermes-slack
   signal:
-  - hermes-signal
+    - hermes-signal
   homeassistant:
-  - hermes-homeassistant
+    - hermes-homeassistant
 platforms:
   webhook:
     enabled: true
@@ -579,55 +591,34 @@ platforms:
       routes:
         github-issue:
           events:
-          - issues
-          - issue_comment
-          prompt: 'Triage and respond to this GitHub issue:
-
-            Repository: {repository.full_name}
-
-            Issue #{issue.number}: {issue.title}
-
-            Author: {issue.user.login}
-
-            URL: {issue.html_url}
-
-            Action: {action}
-
-            Body:
-
-            {issue.body}
-
-            Comment (if present):
-
-            {comment.body}'
+            - issues
+            - issue_comment
+          prompt:
+            "Triage and respond to this GitHub issue:\nRepository:
+            {repository.full_name}\nIssue #{issue.number}:
+            {issue.title}\nAuthor: {issue.user.login}\nURL:
+            {issue.html_url}\nAction: {action}\nBody:\n{issue.body}\nComment (if
+            present):\n{comment.body}"
           skills:
-          - github-issue
+            - github-issue
           deliver: github_comment
           deliver_extra:
-            repo: '{repository.full_name}'
-            issue_number: '{issue.number}'
+            repo: "{repository.full_name}"
+            issue_number: "{issue.number}"
         github-pr:
           events:
-          - pull_request
-          prompt: 'Review this pull request:
-
-            Repository: {repository.full_name}
-
-            PR #{number}: {pull_request.title}
-
-            Author: {pull_request.user.login}
-
-            URL: {pull_request.html_url}
-
-            Diff URL: {pull_request.diff_url}
-
-            Action: {action}'
+            - pull_request
+          prompt:
+            "Review this pull request:\nRepository: {repository.full_name}\nPR
+            #{number}: {pull_request.title}\nAuthor:
+            {pull_request.user.login}\nURL: {pull_request.html_url}\nDiff URL:
+            {pull_request.diff_url}\nAction: {action}"
           skills:
-          - github-code-review
+            - github-code-review
           deliver: github_comment
           deliver_extra:
-            repo: '{repository.full_name}'
-            pr_number: '{number}'
+            repo: "{repository.full_name}"
+            pr_number: "{number}"
 plugins:
   enabled: []
 
