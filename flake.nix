@@ -134,7 +134,6 @@
             shells = {
               default = {
                 imports = [
-                  devlib.devenvModules.go
                   devlib.devenvModules.git
                   devlib.devenvModules.nix
                   devlib.devenvModules.opentofu
@@ -202,15 +201,6 @@
                         create secret generic sops-age \
                         --from-file=age.agekey=/dev/stdin
                     fi
-                  '';
-
-                  "manifests:build".exec = ''
-                    IMAGE_FULL=$(${getExe pkgs.skaffold} build \
-                      --quiet \
-                      --output='{{(index .Builds 0).Tag}}' \
-                      --build-image ghcr.io/shikanime/manifests/qbittorrent-cleanup)
-                    cd apps/qbittorrent-cleanup/base && \
-                      ${getExe pkgs.kustomize} edit set image qbittorrent-cleanup=$IMAGE_FULL
                   '';
                 };
 
