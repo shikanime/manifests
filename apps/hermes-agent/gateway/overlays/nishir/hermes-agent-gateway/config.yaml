@@ -1,10 +1,14 @@
 ---
 model:
-  default: deepseek/deepseek-v4-flash:free
-  provider: nous
-  base_url: https://inference-api.nousresearch.com/v1
+  default: openrouter/auto
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
 providers: {}
-fallback_providers: []
+fallback_providers:
+- provider: openrouter
+  model: openrouter/free
+  base_url: https://openrouter.ai/api/v1
+  api_mode: chat_completions
 credential_pool_strategies: {}
 toolsets:
   - hermes-cli
