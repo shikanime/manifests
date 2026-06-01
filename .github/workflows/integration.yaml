@@ -1,12 +1,14 @@
----
 name: Integration
 permissions:
   contents: read
 jobs:
   nix:
     if:
-      ${{ github.event_name == 'workflow_call' ||
-      github.event.pull_request.draft == false }}
+      ${{ github.event_name == 'workflow_call' || github.event_name ==
+      'workflow_dispatch' || github.event.pull_request.draft == false }}
+    permissions:
+      contents: read
+      packages: write
     secrets:
       CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
       OPERATOR_PRIVATE_KEY: ${{ secrets.OPERATOR_PRIVATE_KEY }}
@@ -15,8 +17,8 @@ jobs:
       cachix-name: shikanime
   skaffold:
     if:
-      ${{ github.event_name == 'workflow_call' ||
-      github.event.pull_request.draft == false }}
+      ${{ github.event_name == 'workflow_call' || github.event_name ==
+      'workflow_dispatch' || github.event.pull_request.draft == false }}
     permissions:
       contents: read
       packages: write
@@ -39,3 +41,4 @@ jobs:
         required: false
       OPERATOR_PRIVATE_KEY:
         required: true
+  workflow_dispatch: {}
