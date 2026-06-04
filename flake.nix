@@ -91,7 +91,9 @@
                             "age1zwgwk8e86wz6x8vd82zwc49qtd8drpc0m6sfd46uxtvxr45ll3ws6pm6ek" # nishir
                             "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
                             "age1srrmxajm2daxk8c3lxh4dfy2s98u8ktv38h47wn6v0saxl7y735q7smppe" # telsha
+                            "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64" # manash
                           ];
+
                         }
                       ];
                     in
