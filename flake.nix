@@ -82,52 +82,72 @@
                   enable = true;
                   settings =
                     let
-                      keyGroups = [
-                        {
-                          age = [
-                            "age1045knj0kzudt68plt0snrhp7u0gffp2uh8ul4g6qy93nel5rw4wq3ag2kl" # kaltashar
-                            "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c" # telsha
-                            "age1dnxv9pweev9aqm5d6a8ylnw2z3tjds2hed5j73awtqmyr0cy354q068md4" # github
-                            "age1zwgwk8e86wz6x8vd82zwc49qtd8drpc0m6sfd46uxtvxr45ll3ws6pm6ek" # nishir
-                            "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay" # nixtar
-                            "age1srrmxajm2daxk8c3lxh4dfy2s98u8ktv38h47wn6v0saxl7y735q7smppe" # telsha
-                            "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64" # manash
-                          ];
+                      # Workstations (Included in all environments)
+                      telsha = "age17q5ljstyzkvqtejwfnyf5jvqduars2yauw7vtgu5fcf54tm2jf0sspvt3c";
+                      nixtar = "age1x9v4ps90txy9mk4392uya93tyzx40te4dvns4chg5s6q8mfy03ns74jpay";
+                      workstations = [
+                        telsha
+                        nixtar
+                      ];
 
+                      # Overlays mapping definition
+                      overlays = [
+                        {
+                          name = "telsha";
+                          keys = [
+                            "age1srrmxajm2daxk8c3lxh4dfy2s98u8ktv38h47wn6v0saxl7y735q7smppe"
+                          ];
+                        }
+                        {
+                          name = "nishir";
+                          keys = [
+                            "age1zwgwk8e86wz6x8vd82zwc49qtd8drpc0m6sfd46uxtvxr45ll3ws6pm6ek"
+                          ];
+                        }
+                        {
+                          name = "manash";
+                          keys = [
+                            "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64"
+                          ];
                         }
                       ];
+
+                      # Helper function to generate rules for a specific overlay environment
+                      makeRulesForOverlay =
+                        env:
+                        let
+                          keyGroup = [ { age = workstations ++ env.keys; } ];
+                        in
+                        [
+                          {
+                            path_regex = "apps/bazarr/overlays/${env.name}(.*)?/bazarr/config\\..*";
+                            encrypted_regex = "^(apikey|api_key|password|token|cookies|passkey|flask_secret_key|encryption_key|hashed_password|anti_captcha_key|gemini_key)$";
+                            key_groups = keyGroup;
+                          }
+                          {
+                            path_regex = "apps/forgejo/overlays/${env.name}(.*)?/forgejo/app\\..*";
+                            encrypted_regex = "^(PASSWD|SECRET_KEY|INTERNAL_TOKEN|LFS_JWT_SECRET|JWT_SECRET|PASSWORD)$";
+                            key_groups = keyGroup;
+                          }
+                          {
+                            path_regex = "apps/synapse/overlays/${env.name}(.*)?/synapse/homeserver\\..*";
+                            encrypted_regex = "^(registration_shared_secret|form_secret|macaroon_secret_key)$";
+                            key_groups = keyGroup;
+                          }
+                          {
+                            path_regex = "apps/mautrix/.*/overlays/${env.name}(.*)?/matrix-.*/config\\..*";
+                            encrypted_regex = "^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$";
+                            key_groups = keyGroup;
+                          }
+                          {
+                            path_regex = "apps/mautrix/.*/overlays/${env.name}(.*)?/matrix-.*/(registration|doublepuppet)\\..*";
+                            encrypted_regex = "^(as_token|hs_token)$";
+                            key_groups = keyGroup;
+                          }
+                        ];
                     in
                     {
-                      creation_rules = [
-                        {
-                          path_regex = "apps/bazarr/overlays/.*/bazarr/config\\..*";
-                          encrypted_regex = "^(apikey|api_key|password|token|cookies|passkey|flask_secret_key|encryption_key|hashed_password|anti_captcha_key|gemini_key)$";
-                          key_groups = keyGroups;
-                        }
-                        {
-                          path_regex = "apps/forgejo/overlays/.*/forgejo/app\\..*";
-                          encrypted_regex = "^(PASSWD|SECRET_KEY|INTERNAL_TOKEN|LFS_JWT_SECRET|JWT_SECRET|PASSWORD)$";
-                          key_groups = keyGroups;
-                        }
-                        {
-                          path_regex = "apps/synapse/overlays/.*/synapse/homeserver\\..*";
-                          encrypted_regex = "^(registration_shared_secret|form_secret|macaroon_secret_key)$";
-                          key_groups = keyGroups;
-                        }
-                        {
-                          path_regex = "apps/mautrix/.*/overlays/.*/matrix-.*/config\\..*";
-                          encrypted_regex = "^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$";
-                          key_groups = keyGroups;
-                        }
-                        {
-                          path_regex = "apps/mautrix/.*/overlays/.*/matrix-.*/(registration|doublepuppet)\\..*";
-                          encrypted_regex = "^(as_token|hs_token)$";
-                          key_groups = keyGroups;
-                        }
-                        {
-                          key_groups = keyGroups;
-                        }
-                      ];
+                      creation_rules = concatMap makeRulesForOverlay overlays;
                     };
                 };
               }
