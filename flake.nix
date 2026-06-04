@@ -106,7 +106,7 @@
                         }
                         {
                           path_regex = "apps/forgejo/overlays/.*/forgejo/app\\..*";
-                          encrypted_regex = "^(PASSWD|SECRET_KEY|INTERNAL_TOKEN|LFS_JWT_SECRET|JWT_SECRET|PASSWORD|PROVIDER_CONFIG)$";
+                          encrypted_regex = "^(PASSWD|SECRET_KEY|INTERNAL_TOKEN|LFS_JWT_SECRET|JWT_SECRET|PASSWORD)$";
                           key_groups = keyGroups;
                         }
                         {
