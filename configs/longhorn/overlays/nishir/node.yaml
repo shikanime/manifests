@@ -2,75 +2,20 @@
 apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
-  name: fushi
+  name: manash
   namespace: longhorn-system
 spec:
-  name: fushi
+  name: manash
   allowScheduling: true
   tags:
     - storage
     - worker
   disks:
-    fushi:
+    default-disk-1030200000000:
       allowScheduling: true
       diskType: filesystem
       path: /var/lib/longhorn/
-      storageReserved: 287919575138
+      storageReserved: 299592448819
       tags:
         - balanced
         - fast
----
-apiVersion: longhorn.io/v1beta2
-kind: Node
-metadata:
-  name: minish
-  namespace: longhorn-system
-spec:
-  name: minish
-  allowScheduling: true
-  tags:
-    - storage
-    - worker
-  disks:
-    minish:
-      allowScheduling: true
-      diskType: filesystem
-      path: /var/lib/longhorn/
-      storageReserved: 287919575138
-      tags:
-        - balanced
-        - fast
----
-apiVersion: longhorn.io/v1beta2
-kind: Node
-metadata:
-  name: nishir
-  namespace: longhorn-system
-spec:
-  name: nishir
-  allowScheduling: true
-  tags:
-    - control-plane
-    - storage
-  disks:
-    flandre:
-      allowScheduling: true
-      diskType: filesystem
-      path: /mnt/flandre/longhorn/
-      storageReserved: 2399829082767
-      tags:
-        - balanced
-    nishir:
-      allowScheduling: true
-      diskType: filesystem
-      path: /var/lib/longhorn/
-      storageReserved: 76772540416
-      tags:
-        - fast
-    remilia:
-      allowScheduling: true
-      diskType: filesystem
-      path: /mnt/remilia/longhorn/
-      storageReserved: 2399829082767
-      tags:
-        - balanced
