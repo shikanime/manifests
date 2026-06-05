@@ -18,3 +18,8 @@ secretGenerator:
   - name: hermes-agent-gateway
     envs:
       - hermes-agent-gateway/.enc.env
+  - name: hermes-agent-gateway-ssh
+    files:
+      - id_ed25519=hermes-agent-gateway-ssh/id_ed25519.enc
+    options:
+      disableNameSuffixHash: true
