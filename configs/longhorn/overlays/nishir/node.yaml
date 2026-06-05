@@ -11,11 +11,17 @@ spec:
     - storage
     - worker
   disks:
-    default-disk-1030200000000:
+    flandre:
       allowScheduling: true
       diskType: filesystem
-      path: /var/lib/longhorn/
-      storageReserved: 299592448819
+      path: /mnt/flandre/longhorn/
+      storageReserved: 2399829082767
       tags:
         - balanced
-        - fast
+    remilia:
+      allowScheduling: true
+      diskType: filesystem
+      path: /mnt/remilia/longhorn/
+      storageReserved: 2399829082767
+      tags:
+        - balanced
