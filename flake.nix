@@ -144,6 +144,10 @@
                             encrypted_regex = "^(as_token|hs_token)$";
                             key_groups = keyGroup;
                           }
+                          {
+                            path_regex = "apps/hermes-agent/gateway/overlays/${env.name}(.*)?/hermes-agent-gateway-ssh/id_ed25519.enc";
+                            key_groups = keyGroup;
+                          }
                         ];
                     in
                     {
