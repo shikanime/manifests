@@ -38,7 +38,7 @@ spec:
   resources:
     requests:
       storage: 64Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-ephemeral
   volumeMode: Filesystem
   volumeName: movies-data
   accessModes:
@@ -53,7 +53,7 @@ spec:
   resources:
     requests:
       storage: 64Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-ephemeral
   volumeMode: Filesystem
   volumeName: music-data
   accessModes:
@@ -68,7 +68,7 @@ spec:
   resources:
     requests:
       storage: 512Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-ephemeral
   volumeMode: Filesystem
   volumeName: shows-data
   accessModes:
