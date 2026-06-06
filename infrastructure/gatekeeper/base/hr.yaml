@@ -25,6 +25,5 @@ spec:
     defaultCreateVAPBindingForConstraints: false
     defaultCreateVAPForTemplates: false
     enableK8sNativeValidation: false
-    replicas: 1
     upgradeCRDs:
       enabled: false

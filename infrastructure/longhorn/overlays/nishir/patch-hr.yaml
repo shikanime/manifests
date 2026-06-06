@@ -14,6 +14,5 @@ spec:
       defaultDiskSelector:
         enable: true
         selector: fast
-    # TODO: enable after hardware migration
-    # defaultSettings:
-    #   storageNetwork: longhorn-system/longhorn-storage
+    defaultSettings:
+      storageNetwork: longhorn-system/longhorn-storage
