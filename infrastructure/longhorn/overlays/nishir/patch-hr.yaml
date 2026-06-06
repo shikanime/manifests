@@ -10,8 +10,6 @@ spec:
       backupTargetCredentialSecret: longhorn-hetzner-backups
     defaultSettings:
       storageNetwork: longhorn-system/longhorn-storage
-    ingress:
-      host: nishir-longhorn
     persistence:
       defaultDiskSelector:
         enable: true

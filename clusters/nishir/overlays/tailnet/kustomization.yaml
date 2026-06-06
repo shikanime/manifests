@@ -6,8 +6,8 @@ components:
   - ../../components/descheduler
   - ../../components/gatekeeper
   - ../../components/longhorn
-  - ../../components/nfd
   - ../../components/tailscale
+  - ../../components/victoriametrics
   - ../../components/vpa
 patches:
   - path: patch-ingress.yaml
