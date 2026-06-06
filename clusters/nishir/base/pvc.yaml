@@ -8,7 +8,7 @@ spec:
   resources:
     requests:
       storage: 64Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: archives-data
   accessModes:
@@ -23,7 +23,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: downloads-data
   accessModes:
@@ -38,7 +38,7 @@ spec:
   resources:
     requests:
       storage: 64Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: movies-data
   accessModes:
@@ -53,7 +53,7 @@ spec:
   resources:
     requests:
       storage: 64Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: music-data
   accessModes:
@@ -68,7 +68,7 @@ spec:
   resources:
     requests:
       storage: 512Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: shows-data
   accessModes:
@@ -83,7 +83,7 @@ spec:
   resources:
     requests:
       storage: 64Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: staging-data
   accessModes:
@@ -98,7 +98,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: sukebe-doujins-data
   accessModes:
@@ -113,7 +113,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: sukebe-scenes-data
   accessModes:
@@ -128,7 +128,7 @@ spec:
   resources:
     requests:
       storage: 512Gi
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: sukebe-shows-data
   accessModes:
@@ -143,7 +143,7 @@ spec:
   resources:
     requests:
       storage: 2Ti
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: sync-data
   accessModes:
@@ -158,7 +158,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: nishir-standard
+  storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: timeline-data
   accessModes:

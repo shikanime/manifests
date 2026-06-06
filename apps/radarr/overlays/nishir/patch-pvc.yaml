@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: radarr-config
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: radarr-config

@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: hermes-agent-data
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: hermes-agent-data

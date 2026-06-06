@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: mautrix-slack-data
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: mautrix-slack-data

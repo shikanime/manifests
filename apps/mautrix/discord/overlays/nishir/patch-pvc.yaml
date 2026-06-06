@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: mautrix-discord-data
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: mautrix-discord-data

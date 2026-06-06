@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: vaultwarden-data
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: vaultwarden-data

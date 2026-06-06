@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: qbittorrent-config
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: qbittorrent-config
