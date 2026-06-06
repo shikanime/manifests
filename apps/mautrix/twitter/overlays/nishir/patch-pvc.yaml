@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: mautrix-twitter-data
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: mautrix-twitter-data

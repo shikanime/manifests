@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: sonarr-config
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: sonarr-config

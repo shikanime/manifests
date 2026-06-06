@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: mautrix-googlechat-data
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: mautrix-googlechat-data

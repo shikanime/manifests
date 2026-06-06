@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: forgejo-data
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: forgejo-data

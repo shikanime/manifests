@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: whisparr-config
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: whisparr-config

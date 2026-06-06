@@ -3,5 +3,5 @@ kind: PersistentVolumeClaim
 metadata:
   name: copyparty-config
 spec:
-  storageClassName: nishir-fast
+  storageClassName: nishir-standard
   volumeName: copyparty-config
