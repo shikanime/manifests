@@ -111,11 +111,6 @@ Most apps follow the same pattern:
 - Secrets/config: stored as `*.enc.*` and fed into `secretGenerator` (see
   [Secrets](#secrets))
 
-Hardware-dependent apps can also add scheduling constraints via components
-(example: [patch-sts.yaml](apps/jellyfin/components/v4l2/patch-sts.yaml)), which
-rely on NFD labels from
-[nodefeature.yaml](configs/nfd/overlays/nishir/nodefeature.yaml).
-
 ### Secrets
 
 Sensitive values are stored encrypted in-repo and materialized at render/apply
