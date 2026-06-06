@@ -250,7 +250,7 @@ spec:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/lidarr/overlays/nishir-tailnet
+  path: ./apps/servarr/lidarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -563,7 +563,7 @@ spec:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/radarr/overlays/nishir-tailnet
+  path: ./apps/servarr/radarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -612,7 +612,7 @@ spec:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/sonarr/overlays/nishir-tailnet
+  path: ./apps/servarr/sonarr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
@@ -733,7 +733,7 @@ spec:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
   interval: 10m
-  path: ./apps/whisparr/overlays/nishir-tailnet
+  path: ./apps/servarr/whisparr/overlays/nishir-tailnet
   prune: true
   healthChecks:
     - apiVersion: apps/v1
