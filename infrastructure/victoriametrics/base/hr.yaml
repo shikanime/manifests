@@ -6,32 +6,32 @@ metadata:
 spec:
   chart:
     spec:
-      version: 0.80.0
       chart: victoria-metrics-k8s-stack
       interval: 1h
       sourceRef:
-        name: vm
         kind: HelmRepository
+        name: vm
         namespace: flux-system
+      version: 0.80.0
   interval: 10m
-  releaseName: vmks
-  targetNamespace: monitoring-system
   install:
     createNamespace: true
+  releaseName: vmks
+  targetNamespace: monitoring-system
   values:
+    defaultDashboards:
+      enabled: true
     grafana:
       enabled: true
       persistence:
-        type: pvc
         enabled: true
         size: 2Gi
-    defaultDashboards:
-      enabled: true
+        type: pvc
     vmsingle:
+      enabled: true
       spec:
         retentionPeriod: 30d
         storage:
           resources:
             requests:
               storage: 8Gi
-      enabled: true
