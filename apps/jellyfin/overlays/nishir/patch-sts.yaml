@@ -8,6 +8,8 @@ spec:
       containers:
         - name: jellyfin
           volumeMounts:
+            - name: dev-dri
+              mountPath: /dev/dri
             - name: movies-data
               mountPath: /data/movies
             - name: music-data
@@ -22,7 +24,16 @@ spec:
               mountPath: /data/sukebe/Shows
             - name: timeline-data
               mountPath: /data/timeline
+      securityContext:
+        fsGroup: 1000
+        supplementalGroups:
+          - 26 # video: host access to /dev/dri device nodes
+          - 303 # render: host access to /dev/dri/renderD128
       volumes:
+        - name: dev-dri
+          hostPath:
+            path: /dev/dri
+            type: Directory
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
