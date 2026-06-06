@@ -8,12 +8,11 @@ spec:
     defaultBackupStore:
       backupTarget: s3://shikanime-studio-nishir-longhorn-backups-e9750005@fsn1/
       backupTargetCredentialSecret: longhorn-hetzner-backups
+    defaultSettings:
+      storageNetwork: longhorn-system/longhorn-storage
     ingress:
       host: nishir-longhorn
     persistence:
       defaultDiskSelector:
         enable: true
         selector: fast
-    # TODO: enable after hardware migration
-    # defaultSettings:
-    #   storageNetwork: longhorn-system/longhorn-storage

@@ -21,14 +21,8 @@ spec:
   releaseName: longhorn
   targetNamespace: longhorn-system
   values:
-    csi:
-      attacherReplicaCount: 1
-      provisionerReplicaCount: 1
-      resizerReplicaCount: 1
-      snapshotterReplicaCount: 1
     defaultSettings:
       allowCollectingLonghornUsageMetrics: false
-      backupExecutionTimeout: 60
       defaultDataLocality: best-effort
       defaultReplicaCount: 2
       replicaAutoBalance: best-effort
@@ -39,8 +33,6 @@ spec:
       annotations:
         tailscale.com/tags: tag:web
       tls: true
-    longhornUI:
-      replicas: 1
     persistence:
       defaultClassReplicaCount: 2
       defaultFsType: xfs
