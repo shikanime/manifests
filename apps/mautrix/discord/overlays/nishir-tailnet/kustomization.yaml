@@ -1,9 +1,8 @@
 resources:
   - ../nishir
   - netpol.yaml
+  - ingress.yaml
 namespace: shikanime
-patches:
-  - path: patch-ingress.yaml
 secretGenerator:
   - name: mautrix-discord
     files:

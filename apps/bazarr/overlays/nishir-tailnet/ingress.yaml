@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bazarr
+  annotations:
+    tailscale.com/tags: tag:web
+spec:
+  defaultBackend:
+    service:
+      name: bazarr
+      port:
+        name: http
+  tls:
+    - hosts:
+        - bazarr
+  ingressClassName: tailscale

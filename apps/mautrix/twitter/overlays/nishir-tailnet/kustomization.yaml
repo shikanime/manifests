@@ -1,8 +1,7 @@
 resources:
   - ../nishir
+  - ingress.yaml
 namespace: shikanime
-patches:
-  - path: patch-ingress.yaml
 secretGenerator:
   - name: mautrix-twitter
     files:
