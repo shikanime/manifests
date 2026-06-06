@@ -71,8 +71,8 @@ exist. Those are installed out-of-band using the manifests in `bootstraps/`.
 
 This repo currently defines two cluster trees:
 
-- `clusters/nishir/` (overlay: `tailnet`, components: grafana, longhorn,
-  node-feature, tailscale, tls)
+- `clusters/nishir/` (overlay: `tailnet`, components: longhorn, tailscale, tls,
+  victoriametrics)
 - `clusters/telsha/` (overlay: `tailnet`, component: tailscale)
 
 ### Cluster Services (Add-ons)
@@ -91,10 +91,9 @@ controllers installed during bootstrap.
   - Longhorn settings, storage class, and recurring jobs under
     `clusters/<cluster>/components/longhorn/`
 - Observability:
-  - Grafana k8s monitoring / Alloy remote config secrets under
-    `clusters/<cluster>/components/grafana/`
-- Scheduling / hardware discovery:
-  - Node Feature Discovery rules under `clusters/<cluster>/components/nfd/`
+  - VictoriaMetrics stack under `clusters/<cluster>/components/victoriametrics/`
+  - Grafana is part of the VictoriaMetrics stack and is exposed over Tailscale
+    ingress in the `nishir` overlay
 - Vertical Pod Autoscaler:
   - many apps include `vpa.yaml` and expect a VPA controller to be present
 
@@ -103,9 +102,13 @@ controllers installed during bootstrap.
 Most apps follow the same pattern:
 
 - Workload: `Deployment` or `StatefulSet` in `apps/<app>/base/`
-- Network: `Service` + `Ingress` in `apps/<app>/base/`, patched per overlay
-  - tailnet overlays typically set `ingressClassName: tailscale` (example:
-    [patch-ingress.yaml](apps/jellyfin/overlays/nishir-tailnet/patch-ingress.yaml))
+- Network: `Service` + `Ingress` in `apps/<app>/base/`
+  - generic ingress shape lives in base
+  - tailnet overlays own the rendered `ingress.yaml` and set
+    `ingressClassName: tailscale` plus Tailscale annotations (example:
+    [ingress.yaml](apps/jellyfin/overlays/nishir-tailnet/ingress.yaml))
+  - cluster-local internal hosts are prefixed where needed, such as
+    `nishir-grafana`
 - Storage: a `PVC` in `apps/<app>/overlays/<cluster>/` (or `*-tailnet/`) bound
   to a Longhorn `PV`
 - Secrets/config: stored as `*.enc.*` and fed into `secretGenerator` (see
