@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./configs/nfd/overlays/nishir
+  path: ./configs/nfd/base
   prune: true
   deletionPolicy: Orphan
   sourceRef:
