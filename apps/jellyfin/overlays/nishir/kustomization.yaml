@@ -4,7 +4,6 @@ resources:
 namespace: shikanime
 components:
   - ../../components/tls
-  - ../../components/v4l2
 configurations:
   - namereference.yaml
 patches:
