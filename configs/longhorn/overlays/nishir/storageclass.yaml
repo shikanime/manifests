@@ -7,7 +7,7 @@ allowVolumeExpansion: true
 provisioner: driver.longhorn.io
 volumeBindingMode: WaitForFirstConsumer
 parameters:
-  diskSelector: fast
+  diskSelector: ssd
   fsType: xfs
   numberOfReplicas: "2"
   recurringJobSelector: |
@@ -25,7 +25,7 @@ reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   dataLocality: best-effort
-  diskSelector: fast
+  diskSelector: ssd
   fsType: xfs
   numberOfReplicas: "2"
   recurringJobSelector: |
@@ -43,7 +43,7 @@ provisioner: driver.longhorn.io
 reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
 parameters:
-  diskSelector: balanced
+  diskSelector: hdd
   fsType: xfs
   numberOfReplicas: "2"
   recurringJobSelector: |
