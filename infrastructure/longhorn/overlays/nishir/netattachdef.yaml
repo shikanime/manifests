@@ -10,7 +10,6 @@ spec:
       "name": "longhorn-storage",
       "type": "macvlan",
       "master": "enp1s0",
-      "mode": "l2",
       "ipam": {
         "type": "dhcp"
       }
