@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: flux-system
+spec:
+  values:
+    ingress:
+      enabled: true
+      ingressClassName: tailscale
+      annotations:
+        tailscale.com/tags: tag:web
+      host: nishir-longhorn
+      tls: true

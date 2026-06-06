@@ -27,12 +27,6 @@ spec:
       defaultReplicaCount: 2
       replicaAutoBalance: best-effort
       restoreVolumeRecurringJob: true
-    ingress:
-      enabled: true
-      ingressClassName: tailscale
-      annotations:
-        tailscale.com/tags: tag:web
-      tls: true
     persistence:
       defaultClassReplicaCount: 2
       defaultFsType: xfs

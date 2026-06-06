@@ -7,6 +7,5 @@ components:
   - ../../components/tls
   - ../../components/zeroconf
 patches:
-  - path: patch-ingress.yaml
   - path: patch-pvc.yaml
   - path: patch-sts.yaml

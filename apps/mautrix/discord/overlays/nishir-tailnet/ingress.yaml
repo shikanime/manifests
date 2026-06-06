@@ -1,0 +1,35 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-discord
+  annotations:
+    tailscale.com/tags: tag:web
+spec:
+  defaultBackend:
+    service:
+      name: mautrix-discord
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-discord
+  ingressClassName: tailscale
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-discord-media
+  annotations:
+    tailscale.com/funnel: "true"
+    tailscale.com/tags: tag:web
+spec:
+  defaultBackend:
+    service:
+      name: synapse-proxy
+      port:
+        name: http
+  tls:
+    - hosts:
+        - matrix-discord-media
+  ingressClassName: tailscale

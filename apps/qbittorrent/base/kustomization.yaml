@@ -7,7 +7,6 @@ metadata:
       { "name": "qbittorrent", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$",
       "exclude-tags": ["20.04.1", "14.3.9"] } ]'
 resources:
-  - ingress.yaml
   - netpol.yaml
   - pvc.yaml
   - sts.yaml
