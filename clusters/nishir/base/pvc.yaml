@@ -157,7 +157,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 1Ti
+      storage: 2Ti
   storageClassName: nishir-capacity
   volumeMode: Filesystem
   volumeName: timeline-data
