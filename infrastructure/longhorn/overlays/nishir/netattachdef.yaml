@@ -8,7 +8,7 @@ spec:
     {
       "cniVersion": "0.4.0",
       "name": "longhorn-storage",
-      "type": "ipvlan",
+      "type": "macvlan",
       "master": "enp1s0",
       "mode": "l2",
       "ipam": {
