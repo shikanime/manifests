@@ -59,19 +59,9 @@ spec:
               mountPath: /cache
             - name: config
               mountPath: /config
-            - name: dev-dri
-              mountPath: /dev/dri
-      securityContext:
-        fsGroup: 1000
-        supplementalGroups:
-          - 44
       volumes:
         - name: cache
           emptyDir: {}
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
-        - name: dev-dri
-          hostPath:
-            type: Directory
-            path: /dev/dri
