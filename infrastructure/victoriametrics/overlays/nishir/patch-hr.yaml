@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoriametrics
+  namespace: flux-system
+spec:
+  values:
+    grafana:
+      persistence:
+        storageClassName: nishir-standard
+    vmsingle:
+      spec:
+        storage:
+          storageClassName: nishir-standard
