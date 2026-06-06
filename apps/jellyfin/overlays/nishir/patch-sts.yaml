@@ -32,8 +32,8 @@ spec:
       volumes:
         - name: dev-dri
           hostPath:
-            path: /dev/dri
             type: Directory
+            path: /dev/dri
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
