@@ -13,7 +13,7 @@ spec:
       "ipam": {
         "request": [
           { "skipDefault": true },
-          {"option": "subnet-mask" }
+          { "option": "subnet-mask" }
         ],
         "type": "dhcp"
       }
