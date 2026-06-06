@@ -1,9 +1,9 @@
 resources:
   - ../nishir
   - netpol.yaml
+  - ingress.yaml
 namespace: shikanime
 patches:
-  - path: patch-ingress.yaml
   - path: patch-svc.yaml
 configMapGenerator:
   - name: copyparty

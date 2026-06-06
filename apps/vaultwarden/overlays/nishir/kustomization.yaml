@@ -5,7 +5,6 @@ namespace: shikanime
 components:
   - ../../components/tls
 patches:
-  - path: patch-ingress.yaml
   - path: patch-pvc.yaml
 secretGenerator:
   - name: vaultwarden
