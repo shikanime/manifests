@@ -11,6 +11,10 @@ spec:
       "type": "macvlan",
       "master": "enp1s0",
       "ipam": {
-        "type": "dhcp"
+        "type": "dhcp",
+        "request": [
+          { "skipDefault": true },
+          { "option": "subnet-mask" }
+        ]
       }
     }
