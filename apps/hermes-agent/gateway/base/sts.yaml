@@ -47,31 +47,6 @@ spec:
             capabilities:
               add:
                 - FOWNER
-        - name: setup
-          image: hermes-agent
-          args:
-            - setup
-            - --non-interactive
-          volumeMounts:
-            - name: data
-              mountPath: /opt/data
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
-            - name: run
-              mountPath: /run
-            - name: ssh-key
-              mountPath: /root/.ssh
-              readOnly: true
-          securityContext:
-            capabilities:
-              add:
-                - SETGID
-                - SETUID
-          envFrom:
-            - secretRef:
-                name: hermes-agent-gateway
       containers:
         - name: hermes-agent-gateway
           image: hermes-agent
