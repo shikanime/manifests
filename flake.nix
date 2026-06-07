@@ -110,41 +110,40 @@
                       makeRulesForOverlay =
                         env:
                         let
-                          overlayName = "${env.name}(-tailnet)?";
                           keyGroup = [ { age = workstations ++ env.keys; } ];
                         in
                         [
                           {
-                            path_regex = "apps/bazarr/overlays/${overlayName}/bazarr/config\\.enc\\.yaml";
+                            path_regex = "apps/bazarr/overlays/${env.name}(.*)?/bazarr/config\\.enc\\.yaml";
                             encrypted_regex = "^(apikey|api_key|password|token|cookies|passkey|flask_secret_key|encryption_key|hashed_password|anti_captcha_key|gemini_key)$";
                             key_groups = keyGroup;
                           }
                           {
-                            path_regex = "apps/forgejo/overlays/${overlayName}/forgejo/app\\.enc\\.ini";
+                            path_regex = "apps/forgejo/overlays/${env.name}(.*)?/forgejo/app\\.enc\\.ini";
                             encrypted_regex = "^(PASSWD|SECRET_KEY|INTERNAL_TOKEN|LFS_JWT_SECRET|JWT_SECRET|PASSWORD)$";
                             key_groups = keyGroup;
                           }
                           {
-                            path_regex = "apps/hermes-agent/gateway/overlays/${overlayName}/hermes-agent-gateway-ssh/id_ed25519\\.enc\\.yaml";
+                            path_regex = "apps/hermes-agent/gateway/overlays/${env.name}(.*)?/hermes-agent-gateway-ssh/id_ed25519\\.enc\\.yaml";
                             key_groups = keyGroup;
                           }
                           {
-                            path_regex = "apps/synapse/overlays/${overlayName}/synapse/homeserver\\.enc\\.yaml";
+                            path_regex = "apps/synapse/overlays/${env.name}(.*)?/synapse/homeserver\\.enc\\.yaml";
                             encrypted_regex = "^(registration_shared_secret|form_secret|macaroon_secret_key)$";
                             key_groups = keyGroup;
                           }
                           {
-                            path_regex = "apps/mautrix/.+/overlays/${overlayName}/matrix-.+/config\\.enc\\.yaml";
+                            path_regex = "apps/mautrix/.+/overlays/${env.name}(.*)?/matrix-.+/config\\.enc\\.yaml";
                             encrypted_regex = "^(avatar_proxy_key|as_token|hs_token|pickle_key|server_key|shared_secret|signing_key|login_shared_secret_map|secrets)$";
                             key_groups = keyGroup;
                           }
                           {
-                            path_regex = "apps/mautrix/.+/overlays/${overlayName}/matrix-.+/(registration|doublepuppet)\\.enc\\.yaml";
+                            path_regex = "apps/mautrix/.+/overlays/${env.name}(.*)?/matrix-.+/(registration|doublepuppet)\\.enc\\.yaml";
                             encrypted_regex = "^(as_token|hs_token)$";
                             key_groups = keyGroup;
                           }
                           {
-                            path_regex = "(apps|configs|infrastructure)/.+/overlays/${overlayName}/.*\\.enc(\\..*)?";
+                            path_regex = "(apps|configs|infrastructure)/.+/overlays/${env.name}(.*)?/.*\\.enc(\\..*)?";
                             key_groups = keyGroup;
                           }
                           {
