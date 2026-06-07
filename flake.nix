@@ -110,7 +110,7 @@
                       makeRulesForOverlay =
                         env:
                         let
-                          overlayName = "${env.name}(-tailnet)?";
+                          overlayName = "${env.name}(.*)?";
                           keyGroup = [ { age = workstations ++ env.keys; } ];
                         in
                         [
