@@ -101,12 +101,6 @@
                         {
                           name = "nishir";
                           keys = [
-                            "age1zwgwk8e86wz6x8vd82zwc49qtd8drpc0m6sfd46uxtvxr45ll3ws6pm6ek"
-                          ];
-                        }
-                        {
-                          name = "manash";
-                          keys = [
                             "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64"
                           ];
                         }
@@ -150,7 +144,11 @@
                             key_groups = keyGroup;
                           }
                           {
-                            path_regex = "apps/.*/overlays/${overlayName}/.*\\.enc(\\..*)?";
+                            path_regex = "(apps|configs|infrastructure)/.+/overlays/${overlayName}/.*\\.enc(\\..*)?";
+                            key_groups = keyGroup;
+                          }
+                          {
+                            path_regex = "clusters/${env.name}/overlays/.+/.*\\.enc(\\..*)?";
                             key_groups = keyGroup;
                           }
                         ];
