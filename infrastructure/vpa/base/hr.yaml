@@ -19,4 +19,4 @@ spec:
     crds: CreateReplace
   interval: 10m
   releaseName: vpa
-  targetNamespace: kube-system
+  targetNamespace: autoscaler-system
