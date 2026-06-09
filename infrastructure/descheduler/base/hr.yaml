@@ -14,8 +14,10 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   interval: 10m
+  install:
+    createNamespace: true
   releaseName: descheduler
-  targetNamespace: kube-system
+  targetNamespace: decheduler-system
   values:
     deschedulerPolicy:
       metricsProviders:
