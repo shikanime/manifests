@@ -10,6 +10,9 @@ spec:
       backupTargetCredentialSecret: longhorn-hetzner-backups
     defaultSettings:
       storageNetwork: longhorn-system/longhorn-storage
+    networkPolicies:
+      type: "rke2"
+      enabled: true
     persistence:
       defaultDiskSelector:
         enable: true
