@@ -7,7 +7,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
   interval: 10m
-  path: ./infrastructure/vpa/base
+  path: ./infrastructure/vpa/overlays/telsha
   prune: true
   sourceRef:
     name: flux-system
