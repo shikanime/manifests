@@ -20,3 +20,13 @@ spec:
   interval: 10m
   releaseName: vpa
   targetNamespace: autoscaler-system
+  values:
+    admissionController:
+      generateCertificate: false
+      tlsSecretKeys:
+        - key: ca.crt
+          path: caCert.pem
+        - key: tls.crt
+          path: serverCert.pem
+        - key: tls.key
+          path: serverKey.pem
