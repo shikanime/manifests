@@ -74,63 +74,63 @@ spec:
                 name: honcho
           env:
             - name: DERIVER_PROVIDER
-              value: google
+              value: openrouter
             - name: DERIVER_MODEL
-              value: gemini-3.1-flash-lite-preview
+              value: openrouter/auto
             - name: DERIVER_THINKING_BUDGET_TOKENS
               value: "1024"
             - name: SUMMARY_PROVIDER
-              value: google
+              value: openrouter
             - name: SUMMARY_MODEL
-              value: gemini-3-flash-preview
+              value: openrouter/auto
             - name: SUMMARY_THINKING_BUDGET_TOKENS
               value: "512"
             - name: DREAM_PROVIDER
-              value: google
+              value: openrouter
             - name: DREAM_MODEL
-              value: gemini-3.1-pro-preview
+              value: openrouter/auto
             - name: DREAM_THINKING_BUDGET_TOKENS
               value: "8192"
             - name: DREAM_DEDUCTION_MODEL
-              value: gemini-3-flash-preview
+              value: openrouter/auto
             - name: DREAM_INDUCTION_MODEL
-              value: gemini-3-flash-preview
+              value: openrouter/auto
             - name: DIALECTIC_LEVELS__minimal__PROVIDER
-              value: google
+              value: openrouter
             - name: DIALECTIC_LEVELS__minimal__MODEL
-              value: gemini-3.1-flash-lite-preview
+              value: openrouter/auto
             - name: DIALECTIC_LEVELS__minimal__THINKING_BUDGET_TOKENS
               value: "0"
             - name: DIALECTIC_LEVELS__minimal__MAX_TOOL_ITERATIONS
               value: "10"
             - name: DIALECTIC_LEVELS__low__PROVIDER
-              value: google
+              value: openrouter
             - name: DIALECTIC_LEVELS__low__MODEL
-              value: gemini-3.1-flash-lite-preview
+              value: openrouter/auto
             - name: DIALECTIC_LEVELS__low__THINKING_BUDGET_TOKENS
               value: "0"
             - name: DIALECTIC_LEVELS__low__MAX_TOOL_ITERATIONS
               value: "12"
             - name: DIALECTIC_LEVELS__medium__PROVIDER
-              value: google
+              value: openrouter
             - name: DIALECTIC_LEVELS__medium__MODEL
-              value: gemini-3-flash-preview
+              value: openrouter/auto
             - name: DIALECTIC_LEVELS__medium__THINKING_BUDGET_TOKENS
               value: "1024"
             - name: DIALECTIC_LEVELS__medium__MAX_TOOL_ITERATIONS
               value: "15"
             - name: DIALECTIC_LEVELS__high__PROVIDER
-              value: google
+              value: openrouter
             - name: DIALECTIC_LEVELS__high__MODEL
-              value: gemini-3.1-pro-preview
+              value: openrouter/auto
             - name: DIALECTIC_LEVELS__high__THINKING_BUDGET_TOKENS
               value: "1024"
             - name: DIALECTIC_LEVELS__high__MAX_TOOL_ITERATIONS
               value: "20"
             - name: DIALECTIC_LEVELS__max__PROVIDER
-              value: google
+              value: openrouter
             - name: DIALECTIC_LEVELS__max__MODEL
-              value: gemini-3.1-pro-preview
+              value: openrouter/auto
             - name: DIALECTIC_LEVELS__max__THINKING_BUDGET_TOKENS
               value: "2048"
             - name: DIALECTIC_LEVELS__max__MAX_TOOL_ITERATIONS
@@ -152,3 +152,5 @@ spec:
                   key: database
             - name: DB_CONNECTION_URI
               value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HONCHO_POSTGRES_SERVICE_HOST):$(HONCHO_POSTGRES_SERVICE_PORT)/$(DB_NAME)
+            - name: HONCHO_BASE_URL
+              value: https://openrouter.ai/api/v1
