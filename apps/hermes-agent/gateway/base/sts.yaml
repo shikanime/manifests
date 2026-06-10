@@ -56,6 +56,8 @@ spec:
           env:
             - name: DISCORD_ALLOW_BOTS
               value: "mentions"
+            - name: S6_READ_ONLY_ROOT
+              value: "1"
           volumeMounts:
             - name: data
               mountPath: /opt/data

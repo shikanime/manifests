@@ -47,6 +47,8 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: S6_READ_ONLY_ROOT
+              value: "1"
             - name: TZ
               value: Europe/Paris
           ports:
