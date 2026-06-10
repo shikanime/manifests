@@ -1,7 +1,7 @@
 model:
-  default: openrouter/auto
-  provider: openrouter
-  base_url: https://openrouter.ai/api/v1
+  default: openrouter/owl-alpha
+  provider: nous
+  base_url: https://inference-api.nousresearch.com/v1
 providers: {}
 fallback_providers:
   - provider: openrouter
