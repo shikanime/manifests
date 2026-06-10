@@ -89,6 +89,7 @@ spec:
                   - hermes
                   - gateway
                   - stop
+                  - --all
       securityContext:
         fsGroup: 10000
       volumes:
