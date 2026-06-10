@@ -65,4 +65,5 @@ spec:
           persistentVolumeClaim:
             claimName: prowlarr-config
         - name: run
-          emptyDir: {}
+          emptyDir:
+            medium: Memory

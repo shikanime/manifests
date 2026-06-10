@@ -96,4 +96,5 @@ spec:
           secret:
             secretName: sonarr
         - name: run
-          emptyDir: {}
+          emptyDir:
+            medium: Memory
