@@ -71,6 +71,8 @@ spec:
           securityContext:
             capabilities:
               add:
+                - CHOWN
+                - FOWNER
                 - SETGID
                 - SETUID
           envFrom:
