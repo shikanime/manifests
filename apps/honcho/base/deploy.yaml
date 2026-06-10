@@ -74,19 +74,19 @@ spec:
                 name: honcho
           env:
             - name: DERIVER_PROVIDER
-              value: openrouter
+              value: openai
             - name: DERIVER_MODEL
               value: openrouter/owl-alpha
             - name: DERIVER_THINKING_BUDGET_TOKENS
               value: "1024"
             - name: SUMMARY_PROVIDER
-              value: openrouter
+              value: openai
             - name: SUMMARY_MODEL
               value: openrouter/owl-alpha
             - name: SUMMARY_THINKING_BUDGET_TOKENS
               value: "512"
             - name: DREAM_PROVIDER
-              value: openrouter
+              value: openai
             - name: DREAM_MODEL
               value: openrouter/owl-alpha
             - name: DREAM_THINKING_BUDGET_TOKENS
