@@ -11,4 +11,3 @@ spec:
       annotations:
         tailscale.com/tags: tag:web
       host: nishir-longhorn
-      tls: true
