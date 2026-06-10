@@ -15,4 +15,6 @@ spec:
         ingressClassName: tailscale
         path: /
         pathType: Prefix
-        tls: []
+        tls:
+          - hosts:
+              - nishir-grafana
