@@ -21,6 +21,7 @@ spec:
             patch: |
               - op: add
                 path: /spec/tls
+                pathType: Prefix
                 value:
                   - hosts:
                       - nishir-longhorn
