@@ -7,6 +7,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/bazarr/overlays/nishir-tailnet
   prune: true
@@ -32,6 +34,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/copyparty/overlays/nishir-tailnet
   prune: true
@@ -57,6 +60,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/forgejo/overlays/nishir-tailnet
   prune: true
@@ -82,6 +86,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/gitea-mirror/overlays/nishir-tailnet
   prune: true
@@ -106,6 +111,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/hermes-agent/gateway/overlays/nishir-tailnet
   prune: true
@@ -130,6 +137,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/hermes-agent/dashboard/overlays/nishir-tailnet
   prune: true
@@ -154,6 +163,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
   interval: 10m
   path: ./apps/honcho-postgres/overlays/nishir-tailnet
   prune: true
@@ -178,6 +188,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
   interval: 10m
   path: ./apps/chrome/overlays/nishir-tailnet
   prune: true
@@ -198,7 +209,9 @@ metadata:
 spec:
   dependsOn:
     - name: apps-honcho-postgres
+    - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/honcho/overlays/nishir-tailnet
   prune: true
@@ -224,6 +237,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/jellyfin/overlays/nishir-tailnet
   prune: true
@@ -249,6 +263,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/lidarr/overlays/nishir-tailnet
   prune: true
@@ -273,6 +288,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/discord/overlays/nishir-tailnet
   prune: true
@@ -297,6 +314,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/googlechat/overlays/nishir-tailnet
   prune: true
@@ -321,6 +340,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/linkedin/overlays/nishir-tailnet
   prune: true
@@ -345,6 +366,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/meta/overlays/nishir-tailnet
   prune: true
@@ -369,6 +392,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/signal/overlays/nishir-tailnet
   prune: true
@@ -393,6 +418,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/slack/overlays/nishir-tailnet
   prune: true
@@ -417,6 +444,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/twitter/overlays/nishir-tailnet
   prune: true
@@ -441,6 +470,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/mautrix/whatsapp/overlays/nishir-tailnet
   prune: true
@@ -465,6 +496,7 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
   interval: 10m
   path: ./apps/metatube/overlays/nishir-tailnet
   prune: true
@@ -490,6 +522,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/prowlarr/overlays/nishir-tailnet
   prune: true
@@ -515,6 +548,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/qbittorrent/overlays/nishir-tailnet
   prune: true
@@ -562,6 +596,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/radarr/overlays/nishir-tailnet
   prune: true
@@ -586,6 +621,8 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-vpa
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/seerr/overlays/nishir-tailnet
   prune: true
@@ -611,6 +648,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/sonarr/overlays/nishir-tailnet
   prune: true
@@ -636,6 +674,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/synapse/overlays/nishir-tailnet
   prune: true
@@ -661,6 +700,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
   prune: true
@@ -682,6 +722,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/syncthing/overlays/nishir-tailnet
   prune: true
@@ -707,6 +748,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/vaultwarden/overlays/nishir-tailnet
   prune: true
@@ -732,6 +774,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
     - name: infrastructure-vpa
+    - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/whisparr/overlays/nishir-tailnet
   prune: true

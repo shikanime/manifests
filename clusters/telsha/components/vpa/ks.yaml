@@ -4,6 +4,8 @@ metadata:
   name: infrastructure-vpa
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infrastructure-cert-manager
   interval: 10m
   path: ./infrastructure/vpa/base
   prune: true
