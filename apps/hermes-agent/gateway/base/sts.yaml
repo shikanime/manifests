@@ -53,6 +53,7 @@ spec:
           args:
             - gateway
             - run
+            - --replace
           env:
             - name: DISCORD_ALLOW_BOTS
               value: "mentions"
