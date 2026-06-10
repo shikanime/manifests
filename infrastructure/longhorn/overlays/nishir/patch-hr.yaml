@@ -11,8 +11,8 @@ spec:
     defaultSettings:
       storageNetwork: longhorn-system/longhorn-storage
     networkPolicies:
-      enabled: true
       type: "rke2"
+      enabled: true
     persistence:
       defaultDiskSelector:
         enable: true
