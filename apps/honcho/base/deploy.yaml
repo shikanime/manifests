@@ -69,72 +69,14 @@ spec:
               port: http
             periodSeconds: 10
             timeoutSeconds: 5
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.toml
+              subPath: config.toml
           envFrom:
             - secretRef:
                 name: honcho
           env:
-            - name: DERIVER_PROVIDER
-              value: openai
-            - name: DERIVER_MODEL
-              value: openrouter/owl-alpha
-            - name: DERIVER_THINKING_BUDGET_TOKENS
-              value: "1024"
-            - name: SUMMARY_PROVIDER
-              value: openai
-            - name: SUMMARY_MODEL
-              value: openrouter/owl-alpha
-            - name: SUMMARY_THINKING_BUDGET_TOKENS
-              value: "512"
-            - name: DREAM_PROVIDER
-              value: openai
-            - name: DREAM_MODEL
-              value: openrouter/owl-alpha
-            - name: DREAM_THINKING_BUDGET_TOKENS
-              value: "8192"
-            - name: DREAM_DEDUCTION_MODEL
-              value: openrouter/owl-alpha
-            - name: DREAM_INDUCTION_MODEL
-              value: openrouter/owl-alpha
-            - name: DIALECTIC_LEVELS__minimal__PROVIDER
-              value: openai
-            - name: DIALECTIC_LEVELS__minimal__MODEL
-              value: openrouter/owl-alpha
-            - name: DIALECTIC_LEVELS__minimal__THINKING_BUDGET_TOKENS
-              value: "0"
-            - name: DIALECTIC_LEVELS__minimal__MAX_TOOL_ITERATIONS
-              value: "10"
-            - name: DIALECTIC_LEVELS__low__PROVIDER
-              value: openai
-            - name: DIALECTIC_LEVELS__low__MODEL
-              value: openrouter/owl-alpha
-            - name: DIALECTIC_LEVELS__low__THINKING_BUDGET_TOKENS
-              value: "0"
-            - name: DIALECTIC_LEVELS__low__MAX_TOOL_ITERATIONS
-              value: "12"
-            - name: DIALECTIC_LEVELS__medium__PROVIDER
-              value: openai
-            - name: DIALECTIC_LEVELS__medium__MODEL
-              value: openrouter/owl-alpha
-            - name: DIALECTIC_LEVELS__medium__THINKING_BUDGET_TOKENS
-              value: "1024"
-            - name: DIALECTIC_LEVELS__medium__MAX_TOOL_ITERATIONS
-              value: "15"
-            - name: DIALECTIC_LEVELS__high__PROVIDER
-              value: openai
-            - name: DIALECTIC_LEVELS__high__MODEL
-              value: openrouter/owl-alpha
-            - name: DIALECTIC_LEVELS__high__THINKING_BUDGET_TOKENS
-              value: "1024"
-            - name: DIALECTIC_LEVELS__high__MAX_TOOL_ITERATIONS
-              value: "20"
-            - name: DIALECTIC_LEVELS__max__PROVIDER
-              value: openai
-            - name: DIALECTIC_LEVELS__max__MODEL
-              value: openrouter/owl-alpha
-            - name: DIALECTIC_LEVELS__max__THINKING_BUDGET_TOKENS
-              value: "2048"
-            - name: DIALECTIC_LEVELS__max__MAX_TOOL_ITERATIONS
-              value: "30"
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
@@ -152,5 +94,7 @@ spec:
                   key: database
             - name: DB_CONNECTION_URI
               value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HONCHO_POSTGRES_SERVICE_HOST):$(HONCHO_POSTGRES_SERVICE_PORT)/$(DB_NAME)
-            - name: LLM__OPENAI_BASE_URL
-              value: https://inference-api.nousresearch.com/v1
+      volumes:
+        - name: config
+          configMap:
+            name: honcho
