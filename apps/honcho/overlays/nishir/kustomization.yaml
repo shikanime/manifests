@@ -1,6 +1,10 @@
 resources:
   - ../../base
 namespace: shikanime
+configMapGenerator:
+  - name: honcho
+    files:
+      - honcho/config.toml
 secretGenerator:
   - name: honcho
     envs:
