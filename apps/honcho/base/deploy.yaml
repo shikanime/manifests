@@ -96,7 +96,7 @@ spec:
             - name: DREAM_INDUCTION_MODEL
               value: openrouter/owl-alpha
             - name: DIALECTIC_LEVELS__minimal__PROVIDER
-              value: openrouter
+              value: openai
             - name: DIALECTIC_LEVELS__minimal__MODEL
               value: openrouter/owl-alpha
             - name: DIALECTIC_LEVELS__minimal__THINKING_BUDGET_TOKENS
@@ -104,7 +104,7 @@ spec:
             - name: DIALECTIC_LEVELS__minimal__MAX_TOOL_ITERATIONS
               value: "10"
             - name: DIALECTIC_LEVELS__low__PROVIDER
-              value: openrouter
+              value: openai
             - name: DIALECTIC_LEVELS__low__MODEL
               value: openrouter/owl-alpha
             - name: DIALECTIC_LEVELS__low__THINKING_BUDGET_TOKENS
@@ -112,7 +112,7 @@ spec:
             - name: DIALECTIC_LEVELS__low__MAX_TOOL_ITERATIONS
               value: "12"
             - name: DIALECTIC_LEVELS__medium__PROVIDER
-              value: openrouter
+              value: openai
             - name: DIALECTIC_LEVELS__medium__MODEL
               value: openrouter/owl-alpha
             - name: DIALECTIC_LEVELS__medium__THINKING_BUDGET_TOKENS
@@ -120,7 +120,7 @@ spec:
             - name: DIALECTIC_LEVELS__medium__MAX_TOOL_ITERATIONS
               value: "15"
             - name: DIALECTIC_LEVELS__high__PROVIDER
-              value: openrouter
+              value: openai
             - name: DIALECTIC_LEVELS__high__MODEL
               value: openrouter/owl-alpha
             - name: DIALECTIC_LEVELS__high__THINKING_BUDGET_TOKENS
@@ -128,7 +128,7 @@ spec:
             - name: DIALECTIC_LEVELS__high__MAX_TOOL_ITERATIONS
               value: "20"
             - name: DIALECTIC_LEVELS__max__PROVIDER
-              value: openrouter
+              value: openai
             - name: DIALECTIC_LEVELS__max__MODEL
               value: openrouter/owl-alpha
             - name: DIALECTIC_LEVELS__max__THINKING_BUDGET_TOKENS
