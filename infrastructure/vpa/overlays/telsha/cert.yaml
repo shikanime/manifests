@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: vpa-admission-tls
+  name: vpa-tls-secret
   namespace: autoscaler-system
 spec:
   commonName: vpa-admission-controller
@@ -11,7 +11,7 @@ spec:
     - vpa-admission-controller.autoscaler-system.svc
   duration: 8760h
   issuerRef:
-    name: nishir
+    name: telsha
     kind: ClusterIssuer
   renewBefore: 720h
   secretName: vpa-tls-secret
