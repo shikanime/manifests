@@ -92,7 +92,8 @@ spec:
           configMap:
             name: lidarr-rclone
         - name: run
-          emptyDir: {}
+          emptyDir:
+            medium: Memory
         - name: startup-config
           secret:
             secretName: lidarr
