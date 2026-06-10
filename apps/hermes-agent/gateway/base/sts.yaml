@@ -85,7 +85,10 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["hermes", "gateway", "stop"]
+                command:
+                  - hermes
+                  - gateway
+                  - stop
       securityContext:
         fsGroup: 10000
       volumes:
