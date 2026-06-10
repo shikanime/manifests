@@ -11,4 +11,16 @@ spec:
       annotations:
         tailscale.com/tags: tag:web
       host: nishir-longhorn
-      tls: true
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              name: longhorn-ingress
+              version: v1
+              kind: Ingress
+            patch: |
+              - op: add
+                path: /spec/tls
+                value:
+                  - hosts:
+                      - nishir-longhorn
