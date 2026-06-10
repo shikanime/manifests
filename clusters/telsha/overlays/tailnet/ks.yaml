@@ -5,6 +5,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
     - name: infrastructure-vpa
   interval: 10m
   path: ./apps/catbox/overlays/telsha-tailnet
