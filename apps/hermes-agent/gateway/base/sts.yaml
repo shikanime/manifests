@@ -82,6 +82,10 @@ spec:
           envFrom:
             - secretRef:
                 name: hermes-agent-gateway
+          lifecycle:
+            preStop:
+              exec:
+                command: ["hermes", "gateway", "stop"]
       securityContext:
         fsGroup: 10000
       volumes:
