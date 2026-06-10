@@ -78,8 +78,8 @@ agent:
       This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS!
       \U0001F4AA\U0001F624\U0001F680\""
 terminal:
-  backend: local
-  modal_mode: auto
+  backend: modal
+  modal_mode: managed
   cwd: .
   timeout: 180
   env_passthrough: []
