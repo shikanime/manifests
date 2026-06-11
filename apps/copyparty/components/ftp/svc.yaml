@@ -9,7 +9,7 @@ spec:
     app.kubernetes.io/name: copyparty
   ports:
     - name: ftp-control
-      port: 3921
+      port: 21
       targetPort: ftp-control
     - name: ftp-data-12000
       port: 12000
@@ -312,5 +312,5 @@ spec:
       port: 12099
       targetPort: ftp-data-12099
     - name: ftps
-      port: 3990
+      port: 22
       targetPort: ftps
