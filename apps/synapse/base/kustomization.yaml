@@ -12,10 +12,10 @@ metadata:
 images:
   - name: rclone
     newName: rclone/rclone
-    newTag: 1.73.3
+    newTag: 1.74.3
   - name: synapse
     newName: matrixdotorg/synapse
-    newTag: v1.150.0
+    newTag: v1.154.0
 configMapGenerator:
   - name: synapse-rclone
     namespace: shikanime
