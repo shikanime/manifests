@@ -25,3 +25,14 @@ spec:
                 value:
                   - hosts:
                       - nishir-longhorn
+          - target:
+              name: longhorn-ui-frontend
+              version: v1
+              kind: NetworkPolicy
+            patch: |
+              - op: add
+                path: /spec/ingress/0/from/-
+                value:
+                  namespaceSelector:
+                    matchLabels:
+                      kubernetes.io/metadata.name: tailscale-system
