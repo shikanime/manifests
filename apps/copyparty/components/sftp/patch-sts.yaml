@@ -9,4 +9,4 @@ spec:
         - name: copyparty
           ports:
             - name: sftp
-              containerPort: 3990
+              containerPort: 3922
