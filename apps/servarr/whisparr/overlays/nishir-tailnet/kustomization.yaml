@@ -10,4 +10,4 @@ labels:
       app.kubernetes.io/instance: whisparr
       app.kubernetes.io/name: whisparr
       app.kubernetes.io/part-of: nishir-media
-      app.kubernetes.io/version: 3.0.2
+      app.kubernetes.io/version: 3-3.1.0.2040

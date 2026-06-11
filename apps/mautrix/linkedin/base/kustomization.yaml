@@ -28,4 +28,4 @@ labels:
       app.kubernetes.io/instance: mautrix-linkedin
       app.kubernetes.io/name: mautrix-linkedin
       app.kubernetes.io/part-of: nishir-office
-      app.kubernetes.io/version: 1.140.0
+      app.kubernetes.io/version: 0.2604.0
