@@ -11,4 +11,4 @@ metadata:
 images:
   - name: gitea-mirror
     newName: ghcr.io/raylabshq/gitea-mirror
-    newTag: v3.11.0
+    newTag: v3.17.1

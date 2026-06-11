@@ -14,10 +14,10 @@ metadata:
 images:
   - name: rclone
     newName: rclone/rclone
-    newTag: 1.72.0
+    newTag: 1.74.3
   - name: whisparr
     newName: ghcr.io/hotio/whisparr
-    newTag: v3-3.0.2.1472
+    newTag: v3-3.1.0.2040
 configMapGenerator:
   - name: whisparr-rclone
     namespace: shikanime

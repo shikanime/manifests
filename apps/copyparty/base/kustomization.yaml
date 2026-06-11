@@ -11,10 +11,10 @@ metadata:
 images:
   - name: copyparty
     newName: copyparty/dj
-    newTag: 1.20.0
+    newTag: 1.20.16
   - name: rclone
     newName: rclone/rclone
-    newTag: 1.72.0
+    newTag: 1.74.3
 configMapGenerator:
   - name: copyparty-rclone
     namespace: shikanime

@@ -13,10 +13,10 @@ metadata:
 images:
   - name: bazarr
     newName: lscr.io/linuxserver/bazarr
-    newTag: 1.5.3
+    newTag: 1.5.6
   - name: rclone
     newName: rclone/rclone
-    newTag: 1.71.2
+    newTag: 1.74.3
 configMapGenerator:
   - name: bazarr-rclone
     namespace: shikanime

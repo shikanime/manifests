@@ -14,7 +14,7 @@ metadata:
 images:
   - name: radarr
     newName: lscr.io/linuxserver/radarr
-    newTag: 6.0.4
+    newTag: 6.2.1
   - name: rclone
     newName: rclone/rclone
     newTag: 1.71.2
