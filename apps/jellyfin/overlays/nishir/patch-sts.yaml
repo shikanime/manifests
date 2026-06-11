@@ -7,6 +7,8 @@ spec:
     spec:
       containers:
         - name: jellyfin
+          securityContext:
+            privileged: true
           volumeMounts:
             - name: dev-dri
               mountPath: /dev/dri
