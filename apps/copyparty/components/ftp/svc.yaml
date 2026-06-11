@@ -311,6 +311,3 @@ spec:
     - name: ftp-data-12099
       port: 12099
       targetPort: ftp-data-12099
-    - name: sftp
-      port: 22
-      targetPort: sftp

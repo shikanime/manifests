@@ -4,6 +4,8 @@ resources:
 namespace: shikanime
 components:
   - ../../components/ftp
+  - ../../components/ftps
+  - ../../components/sftp
   - ../../components/tls
   - ../../components/zeroconf
 patches:
