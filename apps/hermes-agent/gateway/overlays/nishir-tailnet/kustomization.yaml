@@ -10,4 +10,4 @@ labels:
       app.kubernetes.io/instance: hermes-agent-gateway
       app.kubernetes.io/name: hermes-agent
       app.kubernetes.io/part-of: nishir-automata
-      app.kubernetes.io/version: 2026.5.28
+      app.kubernetes.io/version: 2026.6.5
