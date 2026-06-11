@@ -8,6 +8,7 @@ spec:
       containers:
         - name: jellyfin
           securityContext:
+            allowPrivilegeEscalation: true
             privileged: true
           volumeMounts:
             - name: dev-dri
