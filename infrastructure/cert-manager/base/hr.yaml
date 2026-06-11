@@ -7,7 +7,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: v1.20.1
+      version: v1.20.2
       chart: cert-manager
       interval: 1h
       sourceRef:
@@ -35,7 +35,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: v0.22.0
+      version: v0.22.1
       chart: trust-manager
       interval: 1h
       sourceRef:

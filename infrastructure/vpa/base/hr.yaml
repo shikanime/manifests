@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: 4.10.2
+      version: 4.11.0
       chart: vpa
       interval: 1h
       sourceRef:

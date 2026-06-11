@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: 1.94.2
+      version: 1.98.4
       chart: tailscale-operator
       interval: 1h
       sourceRef:
