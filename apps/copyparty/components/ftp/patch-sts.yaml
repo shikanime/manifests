@@ -210,5 +210,3 @@ spec:
               containerPort: 12098
             - name: ftp-data-12099
               containerPort: 12099
-            - name: sftp
-              containerPort: 3990
