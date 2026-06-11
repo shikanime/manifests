@@ -9,4 +9,4 @@ spec:
         - name: copyparty
           ports:
             - name: ftps
-              containerPort: 3922
+              containerPort: 3990
