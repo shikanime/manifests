@@ -7,6 +7,8 @@ spec:
     spec:
       containers:
         - name: jellyfin
+          securityContext:
+            privileged: true
           volumeMounts:
             - name: dev-dri
               mountPath: /dev/dri
@@ -26,7 +28,6 @@ spec:
               mountPath: /data/timeline
       securityContext:
         fsGroup: 1000
-        privileged: true
         supplementalGroups:
           - 26 # video: host access to /dev/dri device nodes
           - 303 # render: host access to /dev/dri/renderD128
