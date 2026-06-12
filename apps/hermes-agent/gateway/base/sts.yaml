@@ -24,6 +24,8 @@ spec:
             - copy
             - --copy-links
             - --filter
+            - "+ /.env"
+            - --filter
             - "+ /config.yaml"
             - --filter
             - "+ /honcho.json"
@@ -79,9 +81,6 @@ spec:
                 - FOWNER
                 - SETGID
                 - SETUID
-          envFrom:
-            - secretRef:
-                name: hermes-agent-gateway
           lifecycle:
             preStop:
               exec:
@@ -102,8 +101,8 @@ spec:
           emptyDir:
             medium: Memory
         - name: startup-config
-          configMap:
-            name: hermes-agent-gateway-startup-config
+          secret:
+            secretName: hermes-agent-gateway-startup-config
         - name: ssh-key
           secret:
             secretName: hermes-agent-gateway-ssh
