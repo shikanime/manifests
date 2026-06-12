@@ -10,7 +10,7 @@ patches:
   - path: patch-pvc.yaml
 secretGenerator:
   - name: hermes-agent-gateway-startup-config
-    envs:
+    files:
       - hermes-agent-gateway/.enc.env
       - hermes-agent-gateway/config.yaml
       - hermes-agent-gateway/honcho.json
