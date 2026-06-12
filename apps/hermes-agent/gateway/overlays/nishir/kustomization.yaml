@@ -8,16 +8,13 @@ components:
   - ../../components/webhook
 patches:
   - path: patch-pvc.yaml
-configMapGenerator:
+secretGenerator:
   - name: hermes-agent-gateway-startup-config
-    files:
+    envs:
+      - hermes-agent-gateway/.enc.env
       - hermes-agent-gateway/config.yaml
       - hermes-agent-gateway/honcho.json
       - hermes-agent-gateway/SOUL.md
-secretGenerator:
-  - name: hermes-agent-gateway
-    envs:
-      - hermes-agent-gateway/.enc.env
   - name: hermes-agent-gateway-ssh
     files:
       - id_ed25519=hermes-agent-gateway-ssh/id_ed25519.enc
