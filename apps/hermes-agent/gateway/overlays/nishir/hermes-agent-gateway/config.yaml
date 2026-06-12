@@ -82,7 +82,8 @@ terminal:
   modal_mode: managed
   cwd: .
   timeout: 180
-  env_passthrough: []
+  env_passthrough:
+    - GITHUB_TOKEN
   shell_init_files: []
   auto_source_bashrc: true
   docker_image: nikolaik/python-nodejs:python3.11-nodejs20
