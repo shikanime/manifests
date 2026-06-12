@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: vaultwarden
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: vaultwarden
+      app.kubernetes.io/name: vaultwarden
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - port: http
