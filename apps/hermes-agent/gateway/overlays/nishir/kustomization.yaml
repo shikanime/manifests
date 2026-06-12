@@ -11,7 +11,7 @@ patches:
 secretGenerator:
   - name: hermes-agent-gateway-startup-config
     files:
-      - hermes-agent-gateway/.enc.env
+      - .env=hermes-agent-gateway/.enc.env
       - hermes-agent-gateway/config.yaml
       - hermes-agent-gateway/honcho.json
       - hermes-agent-gateway/SOUL.md
