@@ -156,6 +156,7 @@ compression:
   hygiene_hard_message_limit: 400
   protect_first_n: 3
   abort_on_summary_failure: false
+  codex_gpt55_autoraise: true
 prompt_caching:
   cache_ttl: 5m
 openrouter:
@@ -274,6 +275,7 @@ display:
   resume_max_assistant_lines: 3
   resume_skip_tool_only: true
   busy_input_mode: interrupt
+  interface: cli
   tui_auto_resume_recent: false
   tui_agents_nudge: true
   bell_on_complete: false
@@ -298,7 +300,11 @@ display:
   tool_progress_overrides: {}
   tool_preview_length: 0
   ephemeral_system_ttl: 0
-  platforms: {}
+  platforms:
+    telegram:
+      streaming: true
+    discord:
+      streaming: false
   runtime_footer:
     enabled: false
     fields:
@@ -314,6 +320,12 @@ dashboard:
   oauth:
     client_id: ""
     portal_url: ""
+  basic_auth:
+    username: ""
+    password_hash: ""
+    password: ""
+    secret: ""
+    session_ttl_seconds: 0
   public_url: ""
 privacy:
   redact_pii: false
@@ -439,6 +451,20 @@ discord:
   server_actions: ""
   allow_any_attachment: false
   max_attachment_bytes: 33554432
+  voice_fx:
+    enabled: false
+    ambient_enabled: true
+    ambient_path: ""
+    ambient_gain: 0.18
+    duck_gain: 0.06
+    speech_gain: 1.0
+    ack_enabled: true
+    ack_phrases:
+      - Let me look into that.
+      - One moment.
+      - Checking on that now.
+      - Give me a sec.
+      - On it.
 whatsapp: {}
 telegram:
   reactions: false
@@ -518,6 +544,13 @@ gateway:
   media_delivery_allow_dirs: []
   trust_recent_files: true
   trust_recent_files_seconds: 600
+streaming:
+  enabled: false
+  transport: auto
+  edit_interval: 0.8
+  buffer_threshold: 24
+  cursor: " ▉"
+  fresh_final_after_seconds: 60.0
 sessions:
   auto_prune: false
   retention_days: 90
@@ -529,6 +562,7 @@ onboarding:
 updates:
   pre_update_backup: false
   backup_keep: 5
+  non_interactive_local_changes: stash
 lsp:
   enabled: true
   wait_mode: document
@@ -551,7 +585,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 25
+_config_version: 28
 smart_model_routing:
   enabled: false
   max_simple_chars: 160
@@ -562,8 +596,6 @@ session_reset:
   idle_minutes: 1440
   at_hour: 4
 group_sessions_per_user: true
-streaming:
-  enabled: false
 platform_toolsets:
   cli:
     - hermes-cli
@@ -589,12 +621,25 @@ platforms:
           events:
             - issues
             - issue_comment
-          prompt:
-            "Triage and respond to this GitHub issue:\nRepository:
-            {repository.full_name}\nIssue #{issue.number}:
-            {issue.title}\nAuthor: {issue.user.login}\nURL:
-            {issue.html_url}\nAction: {action}\nBody:\n{issue.body}\nComment (if
-            present):\n{comment.body}"
+          prompt: "Triage and respond to this GitHub issue:
+
+            Repository: {repository.full_name}
+
+            Issue #{issue.number}: {issue.title}
+
+            Author: {issue.user.login}
+
+            URL: {issue.html_url}
+
+            Action: {action}
+
+            Body:
+
+            {issue.body}
+
+            Comment (if present):
+
+            {comment.body}"
           skills:
             - github-issue
           deliver: github_comment
@@ -604,11 +649,19 @@ platforms:
         github-pr:
           events:
             - pull_request
-          prompt:
-            "Review this pull request:\nRepository: {repository.full_name}\nPR
-            #{number}: {pull_request.title}\nAuthor:
-            {pull_request.user.login}\nURL: {pull_request.html_url}\nDiff URL:
-            {pull_request.diff_url}\nAction: {action}"
+          prompt: "Review this pull request:
+
+            Repository: {repository.full_name}
+
+            PR #{number}: {pull_request.title}
+
+            Author: {pull_request.user.login}
+
+            URL: {pull_request.html_url}
+
+            Diff URL: {pull_request.diff_url}
+
+            Action: {action}"
           skills:
             - github-code-review
           deliver: github_comment
@@ -617,3 +670,25 @@ platforms:
             pr_number: "{number}"
 plugins:
   enabled: []
+
+# ── Fallback Model ────────────────────────────────────────────────────
+# Automatic provider failover when primary is unavailable.
+# Uncomment and configure to enable. Triggers on rate limits (429),
+# overload (529), service errors (503), or connection failures.
+#
+# Supported providers:
+#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
+#   openai-codex (OAuth — hermes auth) — OpenAI Codex
+#   nous         (OAuth — hermes auth) — Nous Portal
+#   zai          (ZAI_API_KEY)         — Z.AI / GLM
+#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
+#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
+#   minimax      (MINIMAX_API_KEY)     — MiniMax
+#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
+#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
+#
+# For custom OpenAI-compatible endpoints, add base_url and key_env.
+#
+# fallback_model:
+#   provider: openrouter
+#   model: anthropic/claude-sonnet-4
