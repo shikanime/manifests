@@ -621,25 +621,12 @@ platforms:
           events:
             - issues
             - issue_comment
-          prompt: "Triage and respond to this GitHub issue:
-
-            Repository: {repository.full_name}
-
-            Issue #{issue.number}: {issue.title}
-
-            Author: {issue.user.login}
-
-            URL: {issue.html_url}
-
-            Action: {action}
-
-            Body:
-
-            {issue.body}
-
-            Comment (if present):
-
-            {comment.body}"
+          prompt:
+            "Triage and respond to this GitHub issue:\nRepository:
+            {repository.full_name}\nIssue #{issue.number}:
+            {issue.title}\nAuthor: {issue.user.login}\nURL:
+            {issue.html_url}\nAction: {action}\nBody:\n{issue.body}\nComment (if
+            present):\n{comment.body}"
           skills:
             - github-issue
           deliver: github_comment
@@ -649,19 +636,11 @@ platforms:
         github-pr:
           events:
             - pull_request
-          prompt: "Review this pull request:
-
-            Repository: {repository.full_name}
-
-            PR #{number}: {pull_request.title}
-
-            Author: {pull_request.user.login}
-
-            URL: {pull_request.html_url}
-
-            Diff URL: {pull_request.diff_url}
-
-            Action: {action}"
+          prompt:
+            "Review this pull request:\nRepository: {repository.full_name}\nPR
+            #{number}: {pull_request.title}\nAuthor:
+            {pull_request.user.login}\nURL: {pull_request.html_url}\nDiff URL:
+            {pull_request.diff_url}\nAction: {action}"
           skills:
             - github-code-review
           deliver: github_comment
