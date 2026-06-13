@@ -58,6 +58,15 @@ the flake evaluates.
   (example: `.enc.env` → `.env`).
 - Never commit decrypted outputs. Change the encrypted source instead.
 
+## Branch Naming
+
+- **Trunk**: `main`
+- **Release branches**: `release-<name>` (e.g. `release-1.0`, `release-unstable`)
+- **Feature/fix branches**: use ghstack workflow only — branches named `gh/<user>/<N>/{base,head,orig}`
+- **Bot branches**: `renovate/*`, `dependabot/*`, `actions/*`, `pre-commit-ci/*` are allowed
+
+Do not create bare feature/fix branches (e.g. `fix/something`, `feature/xyz`). Use `jj commit` + `ghstack` instead.
+
 ## Conventions
 
 - Always add probes for workloads: `readinessProbe`, `livenessProbe`, and
