@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: forgejo
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: oidc-config-merge
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              # Append OIDC config to app.ini after the main config-sync init-container
+              if [ -f /mnt/oidc-config/oidc.ini ]; then
+                echo "" >> /var/lib/gitea/custom/conf/app.ini
+                echo "# Dex OIDC configuration" >> /var/lib/gitea/custom/conf/app.ini
+                cat /mnt/oidc-config/oidc.ini >> /var/lib/gitea/custom/conf/app.ini
+              fi
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/gitea
+            - name: oidc-config
+              mountPath: /mnt/oidc-config
+      volumes:
+        - name: oidc-config
+          secret:
+            secretName: forgejo-oidc
