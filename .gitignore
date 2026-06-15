@@ -313,3 +313,6 @@ $RECYCLE.BIN/
 ###-------------------###
 
 .pre-commit-config.yaml
+
+# Hermes Agent
+.hermes/
