@@ -24,7 +24,7 @@ labels:
   - includeTemplates: true
     pairs:
       app.kubernetes.io/component: cluster
-      app.kubernetes.io/instance: nishir
-      app.kubernetes.io/name: nishir
-      app.kubernetes.io/part-of: nishir-infrastructure
+      app.kubernetes.io/instance: talashi
+      app.kubernetes.io/name: talashi
+      app.kubernetes.io/part-of: talashi-infrastructure
       app.kubernetes.io/version: 0.0.0
