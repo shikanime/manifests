@@ -1,0 +1,5 @@
+resources:
+  - ../../base
+  - ../talashi
+patches:
+  - path: patch-hr.yaml
