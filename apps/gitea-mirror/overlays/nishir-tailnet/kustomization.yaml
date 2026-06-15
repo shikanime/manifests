@@ -5,10 +5,14 @@ resources:
 namespace: shikanime
 patches:
   - path: patch-sts.yaml
+  - path: patch-sts-oidc.yaml
 secretGenerator:
   - name: gitea-mirror
     envs:
       - gitea-mirror/.enc.env
+  - name: gitea-mirror-oidc
+    envs:
+      - gitea-mirror/oidc.enc.env
 labels:
   - includeTemplates: true
     pairs:

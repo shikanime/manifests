@@ -1,0 +1,22 @@
+# Base structure
+dn: ou=people,dc=shikanime,dc=studio
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,dc=shikanime,dc=studio
+objectClass: organizationalUnit
+ou: groups
+
+# Admin group
+dn: cn=admins,ou=groups,dc=shikanime,dc=studio
+objectClass: groupOfNames
+cn: admins
+member: cn=admin,ou=people,dc=shikanime,dc=studio
+
+# Admin user
+dn: cn=admin,ou=people,dc=shikanime,dc=studio
+objectClass: inetOrgPerson
+cn: admin
+sn: Admin
+mail: admin@shikanime.studio
+userPassword: $2b$12$8CU0K17kv0FCnDowsj7jOe/5KMhd9Y74Azc6nP00bhJl7.vYm3RTa

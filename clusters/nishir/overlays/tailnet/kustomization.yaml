@@ -6,6 +6,7 @@ components:
   - ../../components/descheduler
   - ../../components/gatekeeper
   - ../../components/longhorn
+  - ../../components/sso
   - ../../components/tailscale
   - ../../components/victoriametrics
   - ../../components/vpa

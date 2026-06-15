@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: openldap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: openldap
+      app.kubernetes.io/name: openldap
+  serviceName: openldap
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: openldap
+        app.kubernetes.io/name: openldap
+    spec:
+      securityContext:
+        fsGroup: 1001
+      initContainers:
+        - name: tls-cert
+          image: alpine:3.20
+          command:
+            - sh
+            - -c
+            - |
+              cp /tls/tls.crt /certs/tls.crt
+              cp /tls/tls.key /certs/tls.key
+              chmod 600 /certs/tls.key
+          volumeMounts:
+            - name: tls-secret
+              mountPath: /tls
+            - name: certs
+              mountPath: /certs
+      containers:
+        - name: openldap
+          image: osixia/openldap:1.5.0
+          ports:
+            - name: ldap
+              containerPort: 389
+            - name: ldaps
+              containerPort: 636
+          envFrom:
+            - secretRef:
+                name: openldap
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/ldap
+            - name: data
+              mountPath: /etc/ldap/slapd.d
+              subPath: config
+            - name: certs
+              mountPath: /container/service/slapd/assets/certs
+          livenessProbe:
+            tcpSocket:
+              port: ldaps
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: ldaps
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: openldap
+        - name: certs
+          emptyDir: {}
+        - name: tls-secret
+          secret:
+            secretName: openldap-tls

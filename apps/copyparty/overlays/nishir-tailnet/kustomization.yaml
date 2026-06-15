@@ -5,10 +5,15 @@ resources:
 namespace: shikanime
 patches:
   - path: patch-svc.yaml
+  - path: patch-sts-oidc.yaml
 configMapGenerator:
   - name: copyparty
     files:
       - ./copyparty/config.conf
+secretGenerator:
+  - name: copyparty-oidc
+    files:
+      - oidc.conf=copyparty/oidc.enc.conf
 labels:
   - includeTemplates: true
     pairs:
