@@ -6,9 +6,9 @@ components:
   - ../../components/descheduler
   - ../../components/gatekeeper
   - ../../components/longhorn
+  - ../../components/autoscaler
   - ../../components/monitoring
   - ../../components/tailscale
-  - ../../components/autoscale
 patches:
   - path: patch-ingress.yaml
 secretGenerator:

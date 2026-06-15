@@ -6,7 +6,6 @@ components:
   - ../../components/cluster-api
   - ../../components/gatekeeper
   - ../../components/tailscale
-  - ../../components/autoscale
 patches:
   - path: patch-ingress.yaml
 secretGenerator:

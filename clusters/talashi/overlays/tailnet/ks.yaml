@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m

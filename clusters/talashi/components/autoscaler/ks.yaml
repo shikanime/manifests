@@ -7,7 +7,7 @@ spec:
   dependsOn:
     - name: infrastructure-cert-manager
   interval: 10m
-  path: ./infrastructure/autoscaler/overlays/nishir
+  path: ./infrastructure/autoscaler/overlays/talashi
   prune: true
   deletionPolicy: Orphan
   healthChecks:
