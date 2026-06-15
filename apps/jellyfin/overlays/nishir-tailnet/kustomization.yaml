@@ -5,6 +5,11 @@ resources:
 namespace: shikanime
 patches:
   - path: patch-sts.yaml
+  - path: patch-sts-ldap.yaml
+secretGenerator:
+  - name: jellyfin-ldap
+    envs:
+      - jellyfin/ldap.enc.env
 labels:
   - includeTemplates: true
     pairs:
