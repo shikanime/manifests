@@ -815,3 +815,29 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-dex
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: apps-openldap
+    - name: infrastructure-cert-manager
+    - name: infrastructure-tailscale
+  interval: 10m
+  path: ./apps/dex/overlays/nishir-tailnet
+  prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: dex
+      namespace: shikanime
+  sourceRef:
+    name: flux-system
+    kind: GitRepository
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
