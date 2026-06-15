@@ -8,7 +8,7 @@ components:
   - ../../components/longhorn
   - ../../components/monitoring
   - ../../components/tailscale
-  - ../../components/autoscale
+  - ../../components/autoscaler
 patches:
   - path: patch-ingress.yaml
 secretGenerator:

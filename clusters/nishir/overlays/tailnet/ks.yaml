@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -32,8 +32,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/copyparty/overlays/nishir-tailnet
@@ -58,8 +58,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/forgejo/overlays/nishir-tailnet
@@ -84,8 +84,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/gitea-mirror/overlays/nishir-tailnet
@@ -110,7 +110,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -136,7 +136,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -162,7 +162,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
   interval: 10m
   path: ./apps/honcho-postgres/overlays/nishir-tailnet
@@ -187,7 +187,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
   interval: 10m
   path: ./apps/chrome/overlays/nishir-tailnet
@@ -209,8 +209,8 @@ metadata:
 spec:
   dependsOn:
     - name: apps-honcho-postgres
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/honcho/overlays/nishir-tailnet
@@ -235,8 +235,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/jellyfin/overlays/nishir-tailnet
@@ -261,8 +261,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/lidarr/overlays/nishir-tailnet
@@ -287,7 +287,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -313,7 +313,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -339,7 +339,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -365,7 +365,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -391,7 +391,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -417,7 +417,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -443,7 +443,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -469,7 +469,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -495,7 +495,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
   interval: 10m
   path: ./apps/metatube/overlays/nishir-tailnet
@@ -520,8 +520,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/prowlarr/overlays/nishir-tailnet
@@ -546,8 +546,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/qbittorrent/overlays/nishir-tailnet
@@ -594,8 +594,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/radarr/overlays/nishir-tailnet
@@ -620,7 +620,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: infrastructure-vpa
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
   interval: 10m
@@ -646,8 +646,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/sonarr/overlays/nishir-tailnet
@@ -672,8 +672,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/synapse/overlays/nishir-tailnet
@@ -698,8 +698,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/synapse-proxy/overlays/nishir-tailnet
@@ -720,8 +720,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/syncthing/overlays/nishir-tailnet
@@ -746,8 +746,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/vaultwarden/overlays/nishir-tailnet
@@ -772,8 +772,8 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-vpa
     - name: infrastructure-tailscale
   interval: 10m
   path: ./apps/servarr/whisparr/overlays/nishir-tailnet

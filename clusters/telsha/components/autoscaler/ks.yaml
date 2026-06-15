@@ -1,13 +1,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-vpa
+  name: infrastructure-autoscaler
   namespace: flux-system
 spec:
   dependsOn:
     - name: infrastructure-cert-manager
   interval: 10m
-  path: ./infrastructure/vpa/overlays/telsha
+  path: ./infrastructure/autoscaler/overlays/telsha
   prune: true
   sourceRef:
     name: flux-system
