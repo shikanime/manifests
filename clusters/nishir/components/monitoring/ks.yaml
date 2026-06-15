@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-victoriametrics
+  name: infrastructure-monitoring
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./infrastructure/victoriametrics/overlays/nishir-tailnet
+  path: ./infrastructure/monitoring/overlays/nishir-tailnet
   prune: true
   deletionPolicy: Orphan
   healthChecks:
