@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: openldap
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: openldap
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: shikanime
+      ports:
+        - port: ldap
+        - port: ldaps
