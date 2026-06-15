@@ -1,0 +1,7 @@
+resources:
+  - ../../base
+namespace: shikanime
+secretGenerator:
+  - name: dex
+    files:
+      - config.yaml=dex/config.enc.yaml
