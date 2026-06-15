@@ -205,27 +205,6 @@
                     '';
                   };
 
-                  "manifests:bootstrap:nishir".exec = ''
-                    ${getExe pkgs.k0sctl} apply \
-                      --config $DEVENV_ROOT/bootstraps/nishir/cluster.yaml
-
-                    KUBECONFIG=$(mktemp)
-                    ${getExe pkgs.k0sctl} kubeconfig \
-                      --config $DEVENV_ROOT/bootstraps/nishir/cluster.yaml > "$KUBECONFIG"
-
-                    ${getExe pkgs.kubectl} \
-                      --kubeconfig "$KUBECONFIG" wait \
-                      --for=create namespace/flux-system
-
-                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
-                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} \
-                        --kubeconfig "$KUBECONFIG" \
-                        --namespace flux-system \
-                        create secret generic sops-age \
-                        --from-file=age.agekey=/dev/stdin
-                    fi
-                  '';
-
                   "manifests:bootstrap:telsha".exec = ''
                     ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
 
