@@ -18,6 +18,6 @@ spec:
               - key: tls.crt
                 path: tls.crt
               - key: tls.key
-                mode: "0640"
+                mode: 416
                 path: tls.key
             secretName: forgejo-tls
