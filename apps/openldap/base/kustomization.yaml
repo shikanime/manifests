@@ -1,0 +1,6 @@
+resources:
+  - sts.yaml
+  - svc.yaml
+  - pvc.yaml
+  - cert.yaml
+  - netpol.yaml

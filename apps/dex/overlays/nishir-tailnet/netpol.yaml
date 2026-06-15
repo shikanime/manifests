@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: dex
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: dex
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: shikanime
+      ports:
+        - port: http
+    - from: []
+      ports:
+        - port: http
