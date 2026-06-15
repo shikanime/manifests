@@ -30,6 +30,6 @@ spec:
               - key: tls.crt
                 path: tls.crt
               - key: tls.key
-                mode: 640
+                mode: "0640"
                 path: tls.key
             secretName: qbittorrent-tls
