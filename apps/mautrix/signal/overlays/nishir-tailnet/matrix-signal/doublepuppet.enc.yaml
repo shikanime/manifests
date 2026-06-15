@@ -1,13 +1,13 @@
 url: ""
-id: signal-doublepuppet
 as_token: ENC[AES256_GCM,data:eZDnuOSe2yfyN5PGXWdiA6TcAFQZll2wumLnREnUFPFhVQ4A76Ucw3KQt02THTuYvT489p3b5NgeW369kGOSMw==,iv:82r9tJdt6sPcs3X5GVCoNMk7sNLjFBsMQrNB4BPMfJc=,tag:wvGIYbam6hWippDVGS7fMQ==,type:str]
 hs_token: ENC[AES256_GCM,data:jU1LiFqbOuIFWWvlT8TaZ1wmPDdJkJDgQzfRvlaz3+rOqEtCnisoZr2VHsbjO5FF9VO1nWVIYs6qwUBrALEC6A==,iv:Je1RuxhCI/VnsLyQo24DztfZbsPatVjnnZHwv0TxKGQ=,tag:pRyEgPLBPjvYouf6lc+Qfw==,type:str]
-sender_localpart: 8fgq3tbKxGBCfuc221yf2mOLs6i2cQvi
+id: signal-doublepuppet
 rate_limited: false
+sender_localpart: 8fgq3tbKxGBCfuc221yf2mOLs6i2cQvi
 namespaces:
   users:
-    - regex: ^@.*:matrix\.taila659a\.ts\.net$
-      exclusive: false
+    - exclusive: false
+      regex: ^@.*:matrix\.taila659a\.ts\.net$
 sops:
   version: 3.12.1
   encrypted_regex: ^(as_token|hs_token)$

@@ -3,13 +3,28 @@ kind: NetworkPolicy
 metadata:
   name: synapse-proxy-tailscale
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: synapse-proxy
-      app.kubernetes.io/name: synapse-proxy
-  policyTypes:
-    - Ingress
-    - Egress
+  egress:
+    - ports:
+        - port: https
+      to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: synapse
+    - ports:
+        - port: http
+      to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: mautrix-discord
+    - ports:
+        - port: 53
+          protocol: TCP
+        - port: 53
+          protocol: UDP
+      to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
   ingress:
     - from:
         - namespaceSelector:
@@ -17,25 +32,10 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: https
-  egress:
-    - to:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: synapse
-      ports:
-        - port: https
-    - to:
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: mautrix-discord
-      ports:
-        - port: http
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - port: 53
-          protocol: TCP
-        - port: 53
-          protocol: UDP
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: synapse-proxy
+      app.kubernetes.io/name: synapse-proxy
+  policyTypes:
+    - Ingress
+    - Egress

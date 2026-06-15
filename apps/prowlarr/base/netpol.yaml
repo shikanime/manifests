@@ -4,12 +4,6 @@ metadata:
   name: prowlarr-allow-apps
   namespace: shikanime
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: prowlarr
-      app.kubernetes.io/name: prowlarr
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -26,3 +20,9 @@ spec:
               app.kubernetes.io/name: whisparr
       ports:
         - port: https
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: prowlarr
+      app.kubernetes.io/name: prowlarr
+  policyTypes:
+    - Ingress

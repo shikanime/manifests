@@ -3,12 +3,6 @@ resources:
   - pvc.yaml
   - sts.yaml
   - svc.yaml
-metadata:
-  annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "mautrix", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
-      }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }
-      ]'
 images:
   - name: mautrix
     newName: dock.mau.dev/mautrix/linkedin
@@ -16,6 +10,12 @@ images:
   - name: rclone
     newName: rclone/rclone
     newTag: 1.74.3
+metadata:
+  annotations:
+    automata.shikanime.studio/images:
+      '[ { "name": "mautrix", "tag-regex": "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
+      }, { "name": "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" }
+      ]'
 configMapGenerator:
   - name: mautrix-linkedin-rclone
     namespace: shikanime

@@ -11,6 +11,14 @@ components:
   - ../../components/tailscale
 patches:
   - path: patch-ingress.yaml
+labels:
+  - includeTemplates: true
+    pairs:
+      app.kubernetes.io/component: cluster
+      app.kubernetes.io/instance: nishir
+      app.kubernetes.io/name: nishir
+      app.kubernetes.io/part-of: nishir-infrastructure
+      app.kubernetes.io/version: 0.0.0
 secretGenerator:
   - name: discord-webhook
     namespace: flux-system
@@ -20,11 +28,3 @@ secretGenerator:
     namespace: flux-system
     envs:
       - receiver-token/.enc.env
-labels:
-  - includeTemplates: true
-    pairs:
-      app.kubernetes.io/component: cluster
-      app.kubernetes.io/instance: nishir
-      app.kubernetes.io/name: nishir
-      app.kubernetes.io/part-of: nishir-infrastructure
-      app.kubernetes.io/version: 0.0.0

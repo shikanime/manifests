@@ -1,17 +1,17 @@
 url: http://mautrix-whatsapp:29318
-id: whatsapp
 as_token: ENC[AES256_GCM,data:wxGtjocU6I/BjGzAIkAFR7Yj/K3BpDxflsKKJNRn04iQd+SGfmmLuiPSmEJvc3JGj9DM3KyuUy+RU1sbsxXT2g==,iv:PAWtAAsjhVw5qKmM5z480f4+CokPe+WvdIn/e/QmP20=,tag:BeeBf3xP4wnPOp+a2SpMaw==,type:str]
-hs_token: ENC[AES256_GCM,data:LzchqFMGFzOCURIcUwsEP9ACKnO+1zrvd1WQWEoOavKVNSx//gPuCbTZVfA7vzwf74p25A0gfDERYKisnF8BMQ==,iv:jGORtUAjgnYzUDaBYJNi92kvcIz1Rwqpj889HRhMkVk=,tag:Qy7TMSmQuMhRCDAv++RqXA==,type:str]
-sender_localpart: t8iaBytUUysNeiWALGzdXlDUxIpAn2Vg
-rate_limited: false
 de.sorunome.msc2409.push_ephemeral: true
+hs_token: ENC[AES256_GCM,data:LzchqFMGFzOCURIcUwsEP9ACKnO+1zrvd1WQWEoOavKVNSx//gPuCbTZVfA7vzwf74p25A0gfDERYKisnF8BMQ==,iv:jGORtUAjgnYzUDaBYJNi92kvcIz1Rwqpj889HRhMkVk=,tag:Qy7TMSmQuMhRCDAv++RqXA==,type:str]
+id: whatsapp
+rate_limited: false
 receive_ephemeral: true
+sender_localpart: t8iaBytUUysNeiWALGzdXlDUxIpAn2Vg
 namespaces:
   users:
-    - regex: ^@whatsappbot:matrix\.taila659a\.ts\.net$
-      exclusive: true
-    - regex: ^@whatsapp_.*:matrix\.taila659a\.ts\.net$
-      exclusive: true
+    - exclusive: true
+      regex: ^@whatsappbot:matrix\.taila659a\.ts\.net$
+    - exclusive: true
+      regex: ^@whatsapp_.*:matrix\.taila659a\.ts\.net$
 sops:
   version: 3.12.2
   encrypted_regex: ^(as_token|hs_token)$

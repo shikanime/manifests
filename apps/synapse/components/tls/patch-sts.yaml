@@ -7,14 +7,14 @@ spec:
     spec:
       containers:
         - name: synapse
+          livenessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
           ports:
             - name: https
               containerPort: 8448
           readinessProbe:
-            httpGet:
-              port: https
-              scheme: HTTPS
-          livenessProbe:
             httpGet:
               port: https
               scheme: HTTPS
@@ -29,10 +29,10 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: synapse-tls
             items:
               - key: tls.crt
                 path: tls.crt
               - key: tls.key
+                mode: 640
                 path: tls.key
-                mode: 0640
+            secretName: synapse-tls

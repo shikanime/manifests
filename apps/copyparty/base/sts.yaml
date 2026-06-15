@@ -4,44 +4,26 @@ metadata:
   name: copyparty
 spec:
   replicas: 1
-  serviceName: copyparty
   selector:
     matchLabels:
       app.kubernetes.io/instance: copyparty
       app.kubernetes.io/name: copyparty
+  serviceName: copyparty
   template:
     metadata:
       labels:
         app.kubernetes.io/instance: copyparty
         app.kubernetes.io/name: copyparty
     spec:
-      initContainers:
-        - name: config-sync
-          image: rclone
-          command:
-            - rclone
-          args:
-            - copyto
-            - --copy-links
-            - /mnt/startup-config/config.conf
-            - /mnt/cfg/config.conf
-          volumeMounts:
-            - name: config
-              mountPath: /mnt/cfg
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
-            - name: startup-config
-              mountPath: /mnt/startup-config
-              readOnly: true
-          securityContext:
-            capabilities:
-              add:
-                - FOWNER
       containers:
         - name: copyparty
           image: copyparty
+          livenessProbe:
+            httpGet:
+              path: /?reset=/._
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
           ports:
             - name: http
               containerPort: 3923
@@ -51,22 +33,40 @@ spec:
               port: http
             initialDelaySeconds: 30
             timeoutSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /?reset=/._
-              port: http
-            initialDelaySeconds: 60
-            timeoutSeconds: 5
           startupProbe:
+            failureThreshold: 180
             httpGet:
               path: /?reset=/._
               port: http
-            timeoutSeconds: 5
             periodSeconds: 10
-            failureThreshold: 180
+            timeoutSeconds: 5
           volumeMounts:
             - name: config
               mountPath: /cfg
+      initContainers:
+        - name: config-sync
+          image: rclone
+          args:
+            - copyto
+            - --copy-links
+            - /mnt/startup-config/config.conf
+            - /mnt/cfg/config.conf
+          command:
+            - rclone
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/cfg
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              readOnly: true
+              subPath: rclone.conf
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       volumes:
         - name: config
           persistentVolumeClaim:

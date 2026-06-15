@@ -10,7 +10,7 @@ spec:
       name: mautrix-meta
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - matrix-meta
-  ingressClassName: tailscale

@@ -3,11 +3,6 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-metadata:
-  annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "copyparty", "tag-regex": "^(?P<version>.+)$" }, { "name":
-      "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 images:
   - name: copyparty
     newName: copyparty/dj
@@ -15,6 +10,11 @@ images:
   - name: rclone
     newName: rclone/rclone
     newTag: 1.74.3
+metadata:
+  annotations:
+    automata.shikanime.studio/images:
+      '[ { "name": "copyparty", "tag-regex": "^(?P<version>.+)$" }, { "name":
+      "rclone", "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+)$" } ]'
 configMapGenerator:
   - name: copyparty-rclone
     namespace: shikanime

@@ -197,6 +197,9 @@ sonarr:
   sync_only_monitored_episodes: false
   sync_only_monitored_series: false
   use_ffprobe_cache: true
+turkcealtyaziorg:
+  cookies: ""
+  user_agent: ""
 subdl:
   api_key: ""
 subf2m:
@@ -231,9 +234,6 @@ translator:
   lingarr_url: http://lingarr:9876
   translator_info: true
   translator_type: google_translate
-turkcealtyaziorg:
-  cookies: ""
-  user_agent: ""
 proxy:
   url: ""
   password: ""

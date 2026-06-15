@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: mautrix-slack
 spec:
-  publishNotReadyAddresses: true
   ports:
     - name: http
       port: 29335
       targetPort: http
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: mautrix-slack
     app.kubernetes.io/name: mautrix-slack

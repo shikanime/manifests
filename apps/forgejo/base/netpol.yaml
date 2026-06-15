@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: forgejo
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: forgejo
-      app.kubernetes.io/name: forgejo
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -17,3 +11,9 @@ spec:
       ports:
         - port: http
         - port: ssh
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: forgejo
+      app.kubernetes.io/name: forgejo
+  policyTypes:
+    - Ingress

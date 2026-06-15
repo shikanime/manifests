@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: copyparty-tailscale
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: copyparty
-      app.kubernetes.io/name: copyparty
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -119,3 +113,9 @@ spec:
         - port: ftp-data-12099
         - port: ftps
         - port: sftp
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: copyparty
+      app.kubernetes.io/name: copyparty
+  policyTypes:
+    - Ingress

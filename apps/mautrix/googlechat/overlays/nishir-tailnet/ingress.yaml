@@ -10,7 +10,7 @@ spec:
       name: mautrix-googlechat
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - matrix-googlechat
-  ingressClassName: tailscale

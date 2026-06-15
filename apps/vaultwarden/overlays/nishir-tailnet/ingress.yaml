@@ -10,7 +10,7 @@ spec:
       name: vaultwarden
       port:
         name: https
+  ingressClassName: tailscale
   tls:
     - hosts:
         - vaultwarden
-  ingressClassName: tailscale

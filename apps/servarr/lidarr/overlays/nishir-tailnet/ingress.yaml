@@ -10,7 +10,7 @@ spec:
       name: lidarr
       port:
         name: https
+  ingressClassName: tailscale
   tls:
     - hosts:
         - lidarr
-  ingressClassName: tailscale

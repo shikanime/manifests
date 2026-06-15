@@ -10,7 +10,7 @@ spec:
       name: seerr
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - seerr
-  ingressClassName: tailscale

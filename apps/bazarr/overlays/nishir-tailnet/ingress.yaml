@@ -10,7 +10,7 @@ spec:
       name: bazarr
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - bazarr
-  ingressClassName: tailscale

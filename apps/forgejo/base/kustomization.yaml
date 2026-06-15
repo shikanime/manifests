@@ -4,12 +4,6 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-metadata:
-  annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "forgejo", "tag-regex":
-      "^(?P<version>\\d+\\.\\d+\\.\\d+-rootless)$" }, { "name": "rclone",
-      "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+.*)$" } ]'
 images:
   - name: rclone
     newName: rclone/rclone
@@ -17,6 +11,12 @@ images:
   - name: forgejo
     newName: codeberg.org/forgejo/forgejo
     newTag: 15.0.3-rootless
+metadata:
+  annotations:
+    automata.shikanime.studio/images:
+      '[ { "name": "forgejo", "tag-regex":
+      "^(?P<version>\\d+\\.\\d+\\.\\d+-rootless)$" }, { "name": "rclone",
+      "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+.*)$" } ]'
 configMapGenerator:
   - name: forgejo-rclone
     namespace: shikanime

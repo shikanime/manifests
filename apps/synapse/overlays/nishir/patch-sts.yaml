@@ -7,27 +7,27 @@ spec:
     spec:
       containers:
         - name: synapse
-          readinessProbe:
-            httpGet:
-              port: https
-              scheme: HTTPS
-            initialDelaySeconds: 80
-            timeoutSeconds: 20
-            periodSeconds: 20
-            failureThreshold: 15
           livenessProbe:
+            failureThreshold: 15
             httpGet:
               port: https
               scheme: HTTPS
             initialDelaySeconds: 150
-            timeoutSeconds: 30
             periodSeconds: 30
+            timeoutSeconds: 30
+          readinessProbe:
             failureThreshold: 15
+            httpGet:
+              port: https
+              scheme: HTTPS
+            initialDelaySeconds: 80
+            periodSeconds: 20
+            timeoutSeconds: 20
           startupProbe:
+            failureThreshold: 180
             httpGet:
               port: https
               scheme: HTTPS
             initialDelaySeconds: 20
-            timeoutSeconds: 15
             periodSeconds: 10
-            failureThreshold: 180
+            timeoutSeconds: 15

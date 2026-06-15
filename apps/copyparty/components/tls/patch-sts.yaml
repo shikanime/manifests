@@ -8,33 +8,33 @@ spec:
       initContainers:
         - name: tls-sync
           image: rclone
-          command:
-            - rclone
           args:
             - copy
             - --copy-links
             - --filter
-            - "+ /cert.pem"
+            - + /cert.pem
             - --filter
-            - "+ /key.pem"
+            - + /key.pem
             - --filter
             - "- *"
             - /mnt/tls
             - /mnt/cfg/copyparty
+          command:
+            - rclone
           volumeMounts:
             - name: config
               mountPath: /mnt/cfg
             - name: rclone-config
               mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
               readOnly: true
+              subPath: rclone.conf
             - name: tls
               mountPath: /mnt/tls
               readOnly: true
       volumes:
         - name: tls
           secret:
-            secretName: copyparty-tls
             items:
               - key: tls-combined.pem
                 path: cert.pem
+            secretName: copyparty-tls

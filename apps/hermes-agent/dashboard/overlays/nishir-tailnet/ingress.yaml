@@ -10,7 +10,7 @@ spec:
       name: hermes-agent-dashboard
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - automata-dashboard
-  ingressClassName: tailscale

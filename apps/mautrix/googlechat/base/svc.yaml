@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: mautrix-googlechat
 spec:
-  publishNotReadyAddresses: true
   ports:
     - name: http
       port: 29320
       targetPort: http
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: mautrix-googlechat
     app.kubernetes.io/name: mautrix-googlechat

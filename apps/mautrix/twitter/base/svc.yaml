@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: mautrix-twitter
 spec:
-  publishNotReadyAddresses: true
   ports:
     - name: http
       port: 29327
       targetPort: http
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: mautrix-twitter
     app.kubernetes.io/name: mautrix-twitter

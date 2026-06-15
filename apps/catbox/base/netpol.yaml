@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: catbox
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: catbox
-      app.kubernetes.io/name: catbox
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -17,3 +11,9 @@ spec:
       ports:
         - port: ssh
         - port: mdns
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: catbox
+      app.kubernetes.io/name: catbox
+  policyTypes:
+    - Ingress

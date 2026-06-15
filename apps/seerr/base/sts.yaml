@@ -4,11 +4,11 @@ metadata:
   name: seerr
 spec:
   replicas: 1
-  serviceName: seerr
   selector:
     matchLabels:
       app.kubernetes.io/instance: seerr
       app.kubernetes.io/name: seerr
+  serviceName: seerr
   template:
     metadata:
       labels:
@@ -18,30 +18,30 @@ spec:
       containers:
         - name: seerr
           image: seerr
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1/status
+              port: http
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
           ports:
             - name: http
               containerPort: 5055
           readinessProbe:
+            failureThreshold: 3
             httpGet:
               path: /api/v1/status
               port: http
             initialDelaySeconds: 20
             timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            httpGet:
-              path: /api/v1/status
-              port: http
-            initialDelaySeconds: 20
-            timeoutSeconds: 5
-            failureThreshold: 3
           startupProbe:
+            failureThreshold: 360
             httpGet:
               path: /api/v1/status
               port: http
             initialDelaySeconds: 20
             timeoutSeconds: 5
-            failureThreshold: 360
           volumeMounts:
             - name: config
               mountPath: /app/config

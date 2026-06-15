@@ -7,13 +7,13 @@ spec:
     spec:
       containers:
         - name: qbittorrent
+          livenessProbe:
+            tcpSocket:
+              port: https
           ports:
             - name: https
               containerPort: 8080
           readinessProbe:
-            tcpSocket:
-              port: https
-          livenessProbe:
             tcpSocket:
               port: https
           startupProbe:
@@ -26,10 +26,10 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: qbittorrent-tls
             items:
               - key: tls.crt
                 path: tls.crt
               - key: tls.key
+                mode: 640
                 path: tls.key
-                mode: 0640
+            secretName: qbittorrent-tls

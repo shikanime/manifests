@@ -29,6 +29,24 @@ spec:
               readOnly: true
             - name: run-postgresql
               mountPath: /var/run/postgresql
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 5
           securityContext:
             capabilities:
               add:
@@ -45,24 +63,6 @@ spec:
                 - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
             failureThreshold: 180
             periodSeconds: 5
-            timeoutSeconds: 5
-          readinessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
-            failureThreshold: 3
-            periodSeconds: 10
-            timeoutSeconds: 5
-          livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
-            failureThreshold: 3
-            periodSeconds: 30
             timeoutSeconds: 5
           env:
             - name: POSTGRES_DB

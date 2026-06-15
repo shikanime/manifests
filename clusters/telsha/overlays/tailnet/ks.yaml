@@ -4,22 +4,22 @@ metadata:
   name: apps-catbox
   namespace: flux-system
 spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
-  interval: 10m
-  path: ./apps/catbox/overlays/telsha-tailnet
-  prune: true
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: catbox
       namespace: shikanime
+  interval: 10m
+  path: ./apps/catbox/overlays/telsha-tailnet
+  prune: true
   sourceRef:
     name: flux-system
     kind: GitRepository
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age

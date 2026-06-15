@@ -23,10 +23,10 @@ spec:
     app.kubernetes.io/name: syncthing
   ports:
     - name: sync
-      protocol: TCP
       port: 22000
+      protocol: TCP
       targetPort: sync
     - name: sync-udp
-      protocol: UDP
       port: 22000
+      protocol: UDP
       targetPort: sync-udp

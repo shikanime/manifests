@@ -3,9 +3,8 @@ kind: CronJob
 metadata:
   name: qbittorrent-cleanup
 spec:
-  successfulJobsHistoryLimit: 3
-  failedJobsHistoryLimit: 1
   concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
@@ -25,3 +24,4 @@ spec:
                     name: qbittorrent-cleanup
           restartPolicy: Never
   schedule: "*/2 * * * *"
+  successfulJobsHistoryLimit: 3

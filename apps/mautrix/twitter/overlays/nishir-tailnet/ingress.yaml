@@ -10,7 +10,7 @@ spec:
       name: mautrix-twitter
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - matrix-twitter
-  ingressClassName: tailscale

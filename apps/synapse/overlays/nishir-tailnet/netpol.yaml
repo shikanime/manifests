@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: synapse-tailscale
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: synapse
-      app.kubernetes.io/name: synapse
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -16,3 +10,9 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: https
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: synapse
+      app.kubernetes.io/name: synapse
+  policyTypes:
+    - Ingress

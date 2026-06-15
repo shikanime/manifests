@@ -4,9 +4,10 @@ metadata:
   name: infrastructure-longhorn
   namespace: flux-system
 spec:
-  interval: 10m
-  path: ./infrastructure/longhorn/overlays/talashi-tailnet
-  prune: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   deletionPolicy: Orphan
   healthChecks:
     - apiVersion: v1
@@ -17,10 +18,9 @@ spec:
       kind: Kustomization
       name: longhorn-config
       namespace: flux-system
+  interval: 10m
+  path: ./infrastructure/longhorn/overlays/talashi-tailnet
+  prune: true
   sourceRef:
     name: flux-system
     kind: GitRepository
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age

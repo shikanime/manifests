@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: hermes-agent-gateway
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: hermes-agent-gateway
-      app.kubernetes.io/name: hermes-agent
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -17,3 +11,9 @@ spec:
               app.kubernetes.io/name: hermes-agent
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: hermes-agent-gateway
+      app.kubernetes.io/name: hermes-agent
+  policyTypes:
+    - Ingress

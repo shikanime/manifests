@@ -10,7 +10,7 @@ spec:
       name: syncthing
       port:
         name: https
+  ingressClassName: tailscale
   tls:
     - hosts:
         - syncthing
-  ingressClassName: tailscale

@@ -4,11 +4,11 @@ metadata:
   name: metatube
 spec:
   replicas: 1
-  serviceName: metatube
   selector:
     matchLabels:
       app.kubernetes.io/instance: metatube
       app.kubernetes.io/name: metatube
+  serviceName: metatube
   template:
     metadata:
       labels:
@@ -21,29 +21,29 @@ spec:
           args:
             - -dsn
             - /data/metatube.db
-          ports:
-            - name: http
-              containerPort: 8080
           env:
             - name: HTTP_PROXY
               value: https://secure.mse.waseda.ac.jp
             - name: HTTPS_PROXY
               value: https://secure.mse.waseda.ac.jp
-          readinessProbe:
-            tcpSocket:
-              port: http
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
           livenessProbe:
+            initialDelaySeconds: 60
             tcpSocket:
               port: http
-            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 30
+            tcpSocket:
+              port: http
             timeoutSeconds: 5
           startupProbe:
+            failureThreshold: 180
             tcpSocket:
               port: http
             timeoutSeconds: 5
-            failureThreshold: 180
           volumeMounts:
             - name: data
               mountPath: /data

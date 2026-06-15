@@ -4,7 +4,7 @@ kind: AssignMetadata
 metadata:
   name: set-ingress-allow-http-false
 spec:
-  location: 'metadata.annotations."kubernetes.io/ingress.allow-http"'
+  location: metadata.annotations."kubernetes.io/ingress.allow-http"
   match:
     kinds:
       - apiGroups:
@@ -30,7 +30,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
+  location: spec.containers[name:*].securityContext.allowPrivilegeEscalation
   match:
     kinds:
       - apiGroups:
@@ -45,7 +45,7 @@ spec:
       value: false
     pathTests:
       - condition: MustNotExist
-        subPath: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
+        subPath: spec.containers[name:*].securityContext.allowPrivilegeEscalation
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -88,7 +88,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.containers[name:*].securityContext.capabilities.drop"
+  location: spec.containers[name:*].securityContext.capabilities.drop
   match:
     kinds:
       - apiGroups:
@@ -104,7 +104,7 @@ spec:
         - ALL
     pathTests:
       - condition: MustNotExist
-        subPath: "spec.containers[name:*].securityContext.capabilities.drop"
+        subPath: spec.containers[name:*].securityContext.capabilities.drop
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -205,7 +205,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.containers[name:*].securityContext.privileged"
+  location: spec.containers[name:*].securityContext.privileged
   match:
     kinds:
       - apiGroups:
@@ -220,7 +220,7 @@ spec:
       value: false
     pathTests:
       - condition: MustNotExist
-        subPath: "spec.containers[name:*].securityContext.privileged"
+        subPath: spec.containers[name:*].securityContext.privileged
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -234,7 +234,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.containers[name:*].securityContext.procMount"
+  location: spec.containers[name:*].securityContext.procMount
   match:
     kinds:
       - apiGroups:
@@ -249,7 +249,7 @@ spec:
       value: Default
     pathTests:
       - condition: MustNotExist
-        subPath: "spec.containers[name:*].securityContext.procMount"
+        subPath: spec.containers[name:*].securityContext.procMount
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -263,7 +263,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.initContainers[name:*].securityContext.procMount"
+  location: spec.initContainers[name:*].securityContext.procMount
   match:
     kinds:
       - apiGroups:
@@ -280,7 +280,7 @@ spec:
       - condition: MustExist
         subPath: spec.initContainers
       - condition: MustNotExist
-        subPath: "spec.initContainers[name:*].securityContext.procMount"
+        subPath: spec.initContainers[name:*].securityContext.procMount
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -294,7 +294,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.ephemeralContainers[name:*].securityContext.procMount"
+  location: spec.ephemeralContainers[name:*].securityContext.procMount
   match:
     kinds:
       - apiGroups:
@@ -311,7 +311,7 @@ spec:
       - condition: MustExist
         subPath: spec.ephemeralContainers
       - condition: MustNotExist
-        subPath: "spec.ephemeralContainers[name:*].securityContext.procMount"
+        subPath: spec.ephemeralContainers[name:*].securityContext.procMount
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -325,7 +325,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.containers[name:*].securityContext.seccompProfile.type"
+  location: spec.containers[name:*].securityContext.seccompProfile.type
   match:
     kinds:
       - apiGroups:
@@ -340,7 +340,7 @@ spec:
       value: RuntimeDefault
     pathTests:
       - condition: MustNotExist
-        subPath: "spec.containers[name:*].securityContext.seccompProfile.type"
+        subPath: spec.containers[name:*].securityContext.seccompProfile.type
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -354,7 +354,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.initContainers[name:*].securityContext.allowPrivilegeEscalation"
+  location: spec.initContainers[name:*].securityContext.allowPrivilegeEscalation
   match:
     kinds:
       - apiGroups:
@@ -371,7 +371,7 @@ spec:
       - condition: MustExist
         subPath: spec.initContainers
       - condition: MustNotExist
-        subPath: "spec.initContainers[name:*].securityContext.allowPrivilegeEscalation"
+        subPath: spec.initContainers[name:*].securityContext.allowPrivilegeEscalation
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -385,7 +385,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.initContainers[name:*].securityContext.privileged"
+  location: spec.initContainers[name:*].securityContext.privileged
   match:
     kinds:
       - apiGroups:
@@ -402,7 +402,7 @@ spec:
       - condition: MustExist
         subPath: spec.initContainers
       - condition: MustNotExist
-        subPath: "spec.initContainers[name:*].securityContext.privileged"
+        subPath: spec.initContainers[name:*].securityContext.privileged
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -416,7 +416,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.initContainers[name:*].securityContext.capabilities.drop"
+  location: spec.initContainers[name:*].securityContext.capabilities.drop
   match:
     kinds:
       - apiGroups:
@@ -434,7 +434,7 @@ spec:
       - condition: MustExist
         subPath: spec.initContainers
       - condition: MustNotExist
-        subPath: "spec.initContainers[name:*].securityContext.capabilities.drop"
+        subPath: spec.initContainers[name:*].securityContext.capabilities.drop
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -448,7 +448,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.initContainers[name:*].securityContext.seccompProfile.type"
+  location: spec.initContainers[name:*].securityContext.seccompProfile.type
   match:
     kinds:
       - apiGroups:
@@ -465,7 +465,7 @@ spec:
       - condition: MustExist
         subPath: spec.initContainers
       - condition: MustNotExist
-        subPath: "spec.initContainers[name:*].securityContext.seccompProfile.type"
+        subPath: spec.initContainers[name:*].securityContext.seccompProfile.type
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -479,7 +479,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation"
+  location: spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation
   match:
     kinds:
       - apiGroups:
@@ -496,7 +496,7 @@ spec:
       - condition: MustExist
         subPath: spec.ephemeralContainers
       - condition: MustNotExist
-        subPath: "spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation"
+        subPath: spec.ephemeralContainers[name:*].securityContext.allowPrivilegeEscalation
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -510,7 +510,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.ephemeralContainers[name:*].securityContext.capabilities.drop"
+  location: spec.ephemeralContainers[name:*].securityContext.capabilities.drop
   match:
     kinds:
       - apiGroups:
@@ -528,7 +528,7 @@ spec:
       - condition: MustExist
         subPath: spec.ephemeralContainers
       - condition: MustNotExist
-        subPath: "spec.ephemeralContainers[name:*].securityContext.capabilities.drop"
+        subPath: spec.ephemeralContainers[name:*].securityContext.capabilities.drop
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -542,7 +542,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.ephemeralContainers[name:*].securityContext.privileged"
+  location: spec.ephemeralContainers[name:*].securityContext.privileged
   match:
     kinds:
       - apiGroups:
@@ -559,7 +559,7 @@ spec:
       - condition: MustExist
         subPath: spec.ephemeralContainers
       - condition: MustNotExist
-        subPath: "spec.ephemeralContainers[name:*].securityContext.privileged"
+        subPath: spec.ephemeralContainers[name:*].securityContext.privileged
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -573,7 +573,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem"
+  location: spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem
   match:
     kinds:
       - apiGroups:
@@ -590,7 +590,7 @@ spec:
       - condition: MustExist
         subPath: spec.ephemeralContainers
       - condition: MustNotExist
-        subPath: "spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem"
+        subPath: spec.ephemeralContainers[name:*].securityContext.readOnlyRootFilesystem
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -604,7 +604,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.ephemeralContainers[name:*].securityContext.seccompProfile.type"
+  location: spec.ephemeralContainers[name:*].securityContext.seccompProfile.type
   match:
     kinds:
       - apiGroups:
@@ -621,7 +621,7 @@ spec:
       - condition: MustExist
         subPath: spec.ephemeralContainers
       - condition: MustNotExist
-        subPath: "spec.ephemeralContainers[name:*].securityContext.seccompProfile.type"
+        subPath: spec.ephemeralContainers[name:*].securityContext.seccompProfile.type
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -635,7 +635,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.initContainers[name:*].securityContext.readOnlyRootFilesystem"
+  location: spec.initContainers[name:*].securityContext.readOnlyRootFilesystem
   match:
     kinds:
       - apiGroups:
@@ -658,7 +658,7 @@ spec:
       - condition: MustExist
         subPath: spec.initContainers
       - condition: MustNotExist
-        subPath: "spec.initContainers[name:*].securityContext.readOnlyRootFilesystem"
+        subPath: spec.initContainers[name:*].securityContext.readOnlyRootFilesystem
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -672,7 +672,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: 'spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]'
+  location: spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]
   match:
     kinds:
       - apiGroups:
@@ -691,7 +691,7 @@ spec:
       - condition: MustExist
         subPath: spec.initContainers
       - condition: MustNotExist
-        subPath: 'spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]'
+        subPath: spec.initContainers[name:*].volumeMounts[mountPath:"/tmp"]
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -705,7 +705,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.containers[name:*].securityContext.readOnlyRootFilesystem"
+  location: spec.containers[name:*].securityContext.readOnlyRootFilesystem
   match:
     kinds:
       - apiGroups:
@@ -726,7 +726,7 @@ spec:
       value: true
     pathTests:
       - condition: MustNotExist
-        subPath: "spec.containers[name:*].securityContext.readOnlyRootFilesystem"
+        subPath: spec.containers[name:*].securityContext.readOnlyRootFilesystem
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
@@ -800,7 +800,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: 'spec.containers[name:*].volumeMounts[mountPath:"/tmp"]'
+  location: spec.containers[name:*].volumeMounts[mountPath:"/tmp"]
   match:
     kinds:
       - apiGroups:
@@ -817,4 +817,4 @@ spec:
         mountPath: /tmp
     pathTests:
       - condition: MustNotExist
-        subPath: 'spec.containers[name:*].volumeMounts[mountPath:"/tmp"]'
+        subPath: spec.containers[name:*].volumeMounts[mountPath:"/tmp"]

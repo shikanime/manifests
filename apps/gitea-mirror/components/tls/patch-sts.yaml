@@ -14,10 +14,10 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: forgejo-tls
             items:
               - key: tls.crt
                 path: tls.crt
               - key: tls.key
+                mode: 640
                 path: tls.key
-                mode: 0640
+            secretName: forgejo-tls

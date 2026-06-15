@@ -1,17 +1,17 @@
 url: http://mautrix-twitter:29327
-id: twitter
 as_token: ENC[AES256_GCM,data:/fqoPJsBcubohxlHmHOTyllptSC6pmnN2f2O0ngrw1+tPtxP3zeFW8ZAYNsT7djWCx3v3JqDaMByYFDFto1N7w==,iv:8gtQR3czrlcEetiZ6k8RPZ8Rj2U3XFAJQ5lcnWQ9nac=,tag:vUH8MpegsOE8mJE52jZbxA==,type:str]
-hs_token: ENC[AES256_GCM,data:bANbTKCchHJk6JZS8z11BxVk8ucHDJpbHlvg2U0vw1TM1lhrCa5CzFF6zJOpWe9qdSY0Rnk3Z97QDbRQehCMFA==,iv:bsbYg/k1gABya02WUk4keS/tVoHs6syvSt7sl5SHkqI=,tag:6Fu6JN17rZfx8gHuFzouCg==,type:str]
-sender_localpart: D2x81bUOmzcd7JdHVEesHVgAuLJM32dc
-rate_limited: false
 de.sorunome.msc2409.push_ephemeral: true
+hs_token: ENC[AES256_GCM,data:bANbTKCchHJk6JZS8z11BxVk8ucHDJpbHlvg2U0vw1TM1lhrCa5CzFF6zJOpWe9qdSY0Rnk3Z97QDbRQehCMFA==,iv:bsbYg/k1gABya02WUk4keS/tVoHs6syvSt7sl5SHkqI=,tag:6Fu6JN17rZfx8gHuFzouCg==,type:str]
+id: twitter
+rate_limited: false
 receive_ephemeral: true
+sender_localpart: D2x81bUOmzcd7JdHVEesHVgAuLJM32dc
 namespaces:
   users:
-    - regex: ^@twitterbot:matrix\.taila659a\.ts\.net$
-      exclusive: true
-    - regex: ^@twitter_.*:matrix\.taila659a\.ts\.net$
-      exclusive: true
+    - exclusive: true
+      regex: ^@twitterbot:matrix\.taila659a\.ts\.net$
+    - exclusive: true
+      regex: ^@twitter_.*:matrix\.taila659a\.ts\.net$
 sops:
   version: 3.12.2
   encrypted_regex: ^(as_token|hs_token)$

@@ -4,21 +4,21 @@ metadata:
   name: infrastructure-autoscaler
   namespace: flux-system
 spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  deletionPolicy: Orphan
   dependsOn:
     - name: infrastructure-cert-manager
-  interval: 10m
-  path: ./infrastructure/autoscaler/overlays/talashi
-  prune: true
-  deletionPolicy: Orphan
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: vpa
       namespace: flux-system
+  interval: 10m
+  path: ./infrastructure/autoscaler/overlays/talashi
+  prune: true
   sourceRef:
     name: flux-system
     kind: GitRepository
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age

@@ -10,7 +10,7 @@ spec:
       name: mautrix-slack
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - matrix-slack
-  ingressClassName: tailscale

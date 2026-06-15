@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: mautrix-discord
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: mautrix-discord
-      app.kubernetes.io/name: mautrix-discord
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -19,3 +13,9 @@ spec:
               app.kubernetes.io/name: synapse-proxy
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: mautrix-discord
+      app.kubernetes.io/name: mautrix-discord
+  policyTypes:
+    - Ingress

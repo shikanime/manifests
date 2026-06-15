@@ -4,40 +4,17 @@ metadata:
   name: forgejo
 spec:
   replicas: 1
-  serviceName: forgejo
   selector:
     matchLabels:
       app.kubernetes.io/instance: forgejo
       app.kubernetes.io/name: forgejo
+  serviceName: forgejo
   template:
     metadata:
       labels:
         app.kubernetes.io/instance: forgejo
         app.kubernetes.io/name: forgejo
     spec:
-      initContainers:
-        - name: config-sync
-          image: rclone
-          command:
-            - rclone
-          args:
-            - copyto
-            - --copy-links
-            - /mnt/startup-config/app.ini
-            - /var/lib/gitea/custom/conf/app.ini
-          volumeMounts:
-            - name: data
-              mountPath: /var/lib/gitea
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
-            - name: config
-              mountPath: /mnt/startup-config
-          securityContext:
-            capabilities:
-              add:
-                - FOWNER
       containers:
         - name: forgejo
           image: forgejo
@@ -48,6 +25,12 @@ spec:
               value: "1000"
             - name: TZ
               value: Europe/Paris
+          livenessProbe:
+            httpGet:
+              path: /api/healthz
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
           ports:
             - name: http
               containerPort: 3000
@@ -59,21 +42,38 @@ spec:
               port: http
             initialDelaySeconds: 30
             timeoutSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /api/healthz
-              port: http
-            initialDelaySeconds: 60
-            timeoutSeconds: 5
           startupProbe:
+            failureThreshold: 180
             httpGet:
               path: /api/healthz
               port: http
             timeoutSeconds: 5
-            failureThreshold: 180
           volumeMounts:
             - name: data
               mountPath: /var/lib/gitea
+      initContainers:
+        - name: config-sync
+          image: rclone
+          args:
+            - copyto
+            - --copy-links
+            - /mnt/startup-config/app.ini
+            - /var/lib/gitea/custom/conf/app.ini
+          command:
+            - rclone
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/gitea
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              readOnly: true
+              subPath: rclone.conf
+            - name: config
+              mountPath: /mnt/startup-config
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       securityContext:
         fsGroup: 1000
       volumes:
