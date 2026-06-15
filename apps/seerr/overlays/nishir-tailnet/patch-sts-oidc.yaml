@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: seerr
+spec:
+  template:
+    spec:
+      containers:
+        - name: seerr
+          envFrom:
+            - secretRef:
+                name: seerr-oidc
