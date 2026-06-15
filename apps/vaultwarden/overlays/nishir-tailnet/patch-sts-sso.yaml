@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vaultwarden
+spec:
+  template:
+    spec:
+      containers:
+        - name: vaultwarden
+          envFrom:
+            - secretRef:
+                name: vaultwarden-sso
+      volumes:
+        - name: sso-config
+          secret:
+            secretName: vaultwarden-sso
