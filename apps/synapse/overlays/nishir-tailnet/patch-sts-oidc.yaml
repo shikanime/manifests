@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: synapse
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: oidc-config-merge
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              # Merge OIDC provider config into homeserver.yaml
+              if [ -f /mnt/oidc-config/oidc.yaml ]; then
+                # Append oidc_providers block to homeserver.yaml
+                cat /mnt/oidc-config/oidc.yaml >> /data/homeserver.yaml
+              fi
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: oidc-config
+              mountPath: /mnt/oidc-config
+      volumes:
+        - name: oidc-config
+          secret:
+            secretName: synapse-oidc
