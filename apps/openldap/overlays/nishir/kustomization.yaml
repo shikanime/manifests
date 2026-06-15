@@ -1,6 +1,11 @@
 resources:
   - ../../base
+  - seed-job.yaml
 namespace: shikanime
+configMapGenerator:
+  - name: openldap-seed
+    files:
+      - seed.ldif
 secretGenerator:
   - name: openldap
     envs:
