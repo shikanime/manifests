@@ -2,13 +2,13 @@ resources:
   - ../../base
   - ks.yaml
 components:
+  - ../../components/autoscaler
   - ../../components/cert-manager
   - ../../components/descheduler
   - ../../components/gatekeeper
   - ../../components/longhorn
   - ../../components/monitoring
   - ../../components/tailscale
-  - ../../components/autoscaler
 patches:
   - path: patch-ingress.yaml
 secretGenerator:
