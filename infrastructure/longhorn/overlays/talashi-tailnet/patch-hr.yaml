@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: flux-system
+spec:
+  values:
+    ingress:
+      enabled: true
+      ingressClassName: tailscale
+      annotations:
+        tailscale.com/tags: tag:web
+      host: talashi-longhorn
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              name: longhorn-ingress
+              version: v1
+              kind: Ingress
+            patch: |
+              - op: add
+                path: /spec/tls
+                pathType: Prefix
+                value:
+                  - hosts:
+                      - talashi-longhorn
+          - target:
+              name: longhorn-ui-frontend
+              version: v1
+              kind: NetworkPolicy
+            patch: |
+              - op: add
+                path: /spec/ingress/0/from/-
+                value:
+                  namespaceSelector:
+                    matchLabels:
+                      kubernetes.io/metadata.name: tailscale-system

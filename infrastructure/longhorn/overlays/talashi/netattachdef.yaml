@@ -1,0 +1,20 @@
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: longhorn-storage
+  namespace: longhorn-system
+spec:
+  config: |-
+    {
+      "cniVersion": "0.4.0",
+      "name": "longhorn-storage",
+      "type": "macvlan",
+      "master": "end0",
+      "ipam": {
+        "request": [
+          { "skipDefault": true },
+          { "option": "subnet-mask" }
+        ],
+        "type": "dhcp"
+      }
+    }
