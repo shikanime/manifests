@@ -1,0 +1,30 @@
+resources:
+  - ../../base
+  - ks.yaml
+components:
+  - ../../components/cert-manager
+  - ../../components/descheduler
+  - ../../components/gatekeeper
+  - ../../components/longhorn
+  - ../../components/tailscale
+  - ../../components/autoscaling
+  - ../../components/vpa
+patches:
+  - path: patch-ingress.yaml
+secretGenerator:
+  - name: discord-webhook
+    namespace: flux-system
+    envs:
+      - discord-webhook/.enc.env
+  - name: receiver-token
+    namespace: flux-system
+    envs:
+      - receiver-token/.enc.env
+labels:
+  - includeTemplates: true
+    pairs:
+      app.kubernetes.io/component: cluster
+      app.kubernetes.io/instance: talashi
+      app.kubernetes.io/name: talashi
+      app.kubernetes.io/part-of: talashi-infrastructure
+      app.kubernetes.io/version: 0.0.0

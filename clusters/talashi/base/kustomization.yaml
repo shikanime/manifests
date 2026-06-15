@@ -1,0 +1,10 @@
+resources:
+  - alert.yaml
+  - ingress.yaml
+  - netpol.yaml
+  - ns.yaml
+  - provider.yaml
+  - pvc.yaml
+  - receiver.yaml
+configurations:
+  - config.yaml
