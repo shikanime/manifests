@@ -31,6 +31,6 @@ spec:
           secret:
             items:
               - key: keystore.p12
-                mode: 640
+                mode: "0640"
                 path: keystore.p12
             secretName: lidarr-tls
