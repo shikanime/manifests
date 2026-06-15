@@ -7,7 +7,7 @@ components:
   - ../../components/gatekeeper
   - ../../components/longhorn
   - ../../components/tailscale
-  - ../../components/victoriametrics
+  - ../../components/autoscaling
   - ../../components/vpa
 patches:
   - path: patch-ingress.yaml
