@@ -3,6 +3,12 @@ resources:
   - netpol.yaml
   - ingress.yaml
 namespace: shikanime
+patches:
+  - path: patch-sts-sso.yaml
+secretGenerator:
+  - name: vaultwarden-sso
+    envs:
+      - vaultwarden/sso.enc.env
 labels:
   - includeTemplates: true
     pairs:
