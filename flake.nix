@@ -104,6 +104,12 @@
                             "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64"
                           ];
                         }
+                        {
+                          name = "talashi";
+                          keys = [
+                            "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64"
+                          ];
+                        }
                       ];
 
                       # Helper function to generate rules for a specific overlay environment
@@ -222,6 +228,17 @@
 
                   "manifests:bootstrap:telsha".exec = ''
                     ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
+
+                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
+                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} \
+                        -n flux-system \
+                        create secret generic sops-age \
+                        --from-file=age.agekey=/dev/stdin
+                    fi
+                  '';
+
+                  "manifests:bootstrap:talashi".exec = ''
+                    ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/talashi
 
                     if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
                       ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} \
