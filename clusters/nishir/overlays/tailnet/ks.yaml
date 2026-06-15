@@ -841,3 +841,23 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infrastructure-tofu-controller
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infrastructure-cert-manager
+  interval: 10m
+  path: ./infrastructure/tofu-controller/overlays/nishir
+  prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: tofu-controller
+      namespace: flux-system
+  sourceRef:
+    name: flux-system
+    kind: GitRepository
