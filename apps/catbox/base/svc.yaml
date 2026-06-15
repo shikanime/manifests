@@ -12,6 +12,6 @@ spec:
       port: 22
       targetPort: ssh
     - name: mdns
-      protocol: UDP
       port: 5353
+      protocol: UDP
       targetPort: mdns

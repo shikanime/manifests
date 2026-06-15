@@ -19,9 +19,6 @@ spec:
       spec:
         extensions:
           helm:
-            repositories:
-              - name: tofu-controller
-                url: https://flux-iac.github.io/tofu-controller
             charts:
               - name: flux
                 version: 0.46.0
@@ -89,5 +86,8 @@ spec:
                     allowedNamespaces:
                       - flux-system
                       - shikanime
+            repositories:
+              - name: tofu-controller
+                url: https://flux-iac.github.io/tofu-controller
         telemetry:
           enabled: false

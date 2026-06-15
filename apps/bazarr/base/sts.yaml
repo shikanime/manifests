@@ -4,41 +4,17 @@ metadata:
   name: bazarr
 spec:
   replicas: 1
-  serviceName: bazarr
   selector:
     matchLabels:
       app.kubernetes.io/instance: bazarr
       app.kubernetes.io/name: bazarr
+  serviceName: bazarr
   template:
     metadata:
       labels:
         app.kubernetes.io/instance: bazarr
         app.kubernetes.io/name: bazarr
     spec:
-      initContainers:
-        - name: config-sync
-          image: rclone
-          command:
-            - rclone
-          args:
-            - copyto
-            - --copy-links
-            - /mnt/startup-config/config.yaml
-            - /mnt/config/config.yaml
-          volumeMounts:
-            - name: config
-              mountPath: /mnt/config
-            - name: rclone-config
-              mountPath: /config/rclone/rclone.conf
-              subPath: rclone.conf
-              readOnly: true
-            - name: startup-config
-              mountPath: /mnt/startup-config
-              readOnly: true
-          securityContext:
-            capabilities:
-              add:
-                - FOWNER
       containers:
         - name: bazarr
           image: bazarr
@@ -49,24 +25,24 @@ spec:
               value: "1000"
             - name: TZ
               value: Europe/Paris
+          livenessProbe:
+            initialDelaySeconds: 60
+            tcpSocket:
+              port: http
+            timeoutSeconds: 5
           ports:
             - name: http
               containerPort: 6767
           readinessProbe:
-            tcpSocket:
-              port: http
             initialDelaySeconds: 30
-            timeoutSeconds: 5
-          livenessProbe:
             tcpSocket:
               port: http
-            initialDelaySeconds: 60
             timeoutSeconds: 5
           startupProbe:
-            tcpSocket:
-              port: http
             failureThreshold: 180
             periodSeconds: 10
+            tcpSocket:
+              port: http
             timeoutSeconds: 5
           volumeMounts:
             - name: config
@@ -80,6 +56,30 @@ spec:
                 - FOWNER
                 - SETGID
                 - SETUID
+      initContainers:
+        - name: config-sync
+          image: rclone
+          args:
+            - copyto
+            - --copy-links
+            - /mnt/startup-config/config.yaml
+            - /mnt/config/config.yaml
+          command:
+            - rclone
+          volumeMounts:
+            - name: config
+              mountPath: /mnt/config
+            - name: rclone-config
+              mountPath: /config/rclone/rclone.conf
+              readOnly: true
+              subPath: rclone.conf
+            - name: startup-config
+              mountPath: /mnt/startup-config
+              readOnly: true
+          securityContext:
+            capabilities:
+              add:
+                - FOWNER
       securityContext:
         fsGroup: 1000
       volumes:

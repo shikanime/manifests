@@ -14,13 +14,37 @@ spec:
         app.kubernetes.io/instance: honcho
         app.kubernetes.io/name: honcho
     spec:
-      initContainers:
-        - name: alembic-upgrade
+      containers:
+        - name: honcho
           image: honcho
-          command:
-            - alembic
-            - upgrade
-            - head
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+          ports:
+            - name: http
+              containerPort: 8000
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+          startupProbe:
+            failureThreshold: 180
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.toml
+              subPath: config.toml
           envFrom:
             - secretRef:
                 name: honcho
@@ -42,37 +66,13 @@ spec:
                   key: database
             - name: DB_CONNECTION_URI
               value: postgresql+psycopg://$(DB_USER):$(DB_PASSWORD)@$(HONCHO_POSTGRES_SERVICE_HOST):$(HONCHO_POSTGRES_SERVICE_PORT)/$(DB_NAME)
-      containers:
-        - name: honcho
+      initContainers:
+        - name: alembic-upgrade
           image: honcho
-          ports:
-            - name: http
-              containerPort: 8000
-          startupProbe:
-            failureThreshold: 180
-            httpGet:
-              path: /health
-              port: http
-            periodSeconds: 5
-            timeoutSeconds: 5
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /health
-              port: http
-            periodSeconds: 30
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /health
-              port: http
-            periodSeconds: 10
-            timeoutSeconds: 5
-          volumeMounts:
-            - name: config
-              mountPath: /app/config.toml
-              subPath: config.toml
+          command:
+            - alembic
+            - upgrade
+            - head
           envFrom:
             - secretRef:
                 name: honcho

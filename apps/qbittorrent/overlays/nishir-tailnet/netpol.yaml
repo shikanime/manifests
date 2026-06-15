@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: qbittorrent-tailscale
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: qbittorrent
-      app.kubernetes.io/name: qbittorrent
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -19,3 +13,9 @@ spec:
         - port: bittorrent
         - port: bittorrent-udp
           protocol: UDP
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: qbittorrent
+      app.kubernetes.io/name: qbittorrent
+  policyTypes:
+    - Ingress

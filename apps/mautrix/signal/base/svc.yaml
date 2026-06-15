@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: mautrix-signal
 spec:
-  publishNotReadyAddresses: true
   ports:
     - name: http
       port: 29328
       targetPort: http
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: mautrix-signal
     app.kubernetes.io/name: mautrix-signal

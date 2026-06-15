@@ -1,10 +1,10 @@
 resources:
   - cronjob.yaml
-metadata:
-  annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "qbittorrent-cleanup", "tag-regex": "^(?P<version>.+)$" } ]'
 images:
   - name: qbittorrent-cleanup
     newName: ghcr.io/shikanime/xqbit/qbittorrent-cleanup
     newTag: 4e7e1b0
+metadata:
+  annotations:
+    automata.shikanime.studio/images:
+      '[ { "name": "qbittorrent-cleanup", "tag-regex": "^(?P<version>.+)$" } ]'

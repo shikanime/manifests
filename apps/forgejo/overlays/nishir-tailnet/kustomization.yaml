@@ -5,10 +5,6 @@ resources:
 namespace: shikanime
 patches:
   - path: patch-svc.yaml
-secretGenerator:
-  - name: forgejo-config
-    files:
-      - app.ini=forgejo/app.enc.ini
 labels:
   - includeTemplates: true
     pairs:
@@ -17,3 +13,7 @@ labels:
       app.kubernetes.io/name: forgejo
       app.kubernetes.io/part-of: nishir-platform
       app.kubernetes.io/version: 15.0.3-rootless
+secretGenerator:
+  - name: forgejo-config
+    files:
+      - app.ini=forgejo/app.enc.ini

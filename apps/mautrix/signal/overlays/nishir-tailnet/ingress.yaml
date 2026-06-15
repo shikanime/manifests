@@ -10,7 +10,7 @@ spec:
       name: mautrix-signal
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - matrix-signal
-  ingressClassName: tailscale

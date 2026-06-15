@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: metatube
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: metatube
-      app.kubernetes.io/name: metatube
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -16,3 +10,9 @@ spec:
               app.kubernetes.io/name: jellyfin
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: metatube
+      app.kubernetes.io/name: metatube
+  policyTypes:
+    - Ingress

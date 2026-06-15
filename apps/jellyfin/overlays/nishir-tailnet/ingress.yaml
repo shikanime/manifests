@@ -10,7 +10,7 @@ spec:
       name: jellyfin
       port:
         name: https
+  ingressClassName: tailscale
   tls:
     - hosts:
         - jellyfin
-  ingressClassName: tailscale

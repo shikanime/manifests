@@ -11,14 +11,14 @@ spec:
             - name: ROCKET_TLS
               value: |
                 {certs="/etc/ssl/private/tls.crt",key="/etc/ssl/private/tls.key"}
+          livenessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
           ports:
             - name: https
               containerPort: 80
           readinessProbe:
-            httpGet:
-              port: https
-              scheme: HTTPS
-          livenessProbe:
             httpGet:
               port: https
               scheme: HTTPS
@@ -33,10 +33,10 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: vaultwarden-tls
             items:
               - key: tls.crt
                 path: tls.crt
               - key: tls.key
+                mode: 640
                 path: tls.key
-                mode: 0640
+            secretName: vaultwarden-tls

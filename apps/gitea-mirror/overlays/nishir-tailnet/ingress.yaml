@@ -10,7 +10,7 @@ spec:
       name: gitea-mirror
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - gitea-mirror
-  ingressClassName: tailscale

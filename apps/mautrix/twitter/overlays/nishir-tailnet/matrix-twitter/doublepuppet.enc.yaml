@@ -1,13 +1,13 @@
 url: ""
-id: twitter-doublepuppet
 as_token: ENC[AES256_GCM,data:grjJqT84AuBYZ16s6vOYZP3jVJ4VOQRmFilMpJszY1Nk8aXaJVyLLt4F0kafdSjSRwZ3h9WoJ5+sBeVxSiVdEw==,iv:4C/1nisXvInPgaH8D2juCV58gi+o5Y6bxxL4hNmgFj4=,tag:uraOPAUjp7CDgCvE6ys4XA==,type:str]
 hs_token: ENC[AES256_GCM,data:8Pb4hH9u46Wtk7uI9Cf3/HzZS2KQj8FlrsPxaJiAdXIRU2f2qo4bnB5/0fyC/q3Ksw5kcso1lJSYExZ681QXVg==,iv:JglhRmpl6zTG/QsG+u9aTIetm45ARNQ8bRu2sGcHAj8=,tag:1E+Ugaq2ErPyVmGxe7Mbqw==,type:str]
-sender_localpart: T0sb3TEdrtA3ErIeYI1KVn9leHOkd9bu
+id: twitter-doublepuppet
 rate_limited: false
+sender_localpart: T0sb3TEdrtA3ErIeYI1KVn9leHOkd9bu
 namespaces:
   users:
-    - regex: ^@.*:matrix\.taila659a\.ts\.net$
-      exclusive: false
+    - exclusive: false
+      regex: ^@.*:matrix\.taila659a\.ts\.net$
 sops:
   version: 3.12.1
   encrypted_regex: ^(as_token|hs_token)$

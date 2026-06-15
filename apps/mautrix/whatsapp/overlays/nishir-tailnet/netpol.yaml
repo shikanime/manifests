@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: mautrix-whatsapp-tailscale
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: mautrix-whatsapp
-      app.kubernetes.io/name: mautrix-whatsapp
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - namespaceSelector:
@@ -16,3 +10,9 @@ spec:
               kubernetes.io/metadata.name: tailscale-system
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: mautrix-whatsapp
+      app.kubernetes.io/name: mautrix-whatsapp
+  policyTypes:
+    - Ingress

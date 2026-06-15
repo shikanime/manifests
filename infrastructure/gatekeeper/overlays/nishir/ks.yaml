@@ -4,14 +4,14 @@ metadata:
   name: gatekeeper-config
   namespace: flux-system
 spec:
-  interval: 10m
-  path: ./configs/gatekeeper/overlays/nishir
-  prune: true
-  deletionPolicy: Orphan
-  sourceRef:
-    name: flux-system
-    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
       name: sops-age
+  deletionPolicy: Orphan
+  interval: 10m
+  path: ./configs/gatekeeper/overlays/nishir
+  prune: true
+  sourceRef:
+    name: flux-system
+    kind: GitRepository

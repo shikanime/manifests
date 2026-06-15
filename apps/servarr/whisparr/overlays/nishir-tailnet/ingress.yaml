@@ -10,7 +10,7 @@ spec:
       name: whisparr
       port:
         name: https
+  ingressClassName: tailscale
   tls:
     - hosts:
         - whisparr
-  ingressClassName: tailscale

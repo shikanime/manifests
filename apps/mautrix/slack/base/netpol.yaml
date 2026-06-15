@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: mautrix-slack
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: mautrix-slack
-      app.kubernetes.io/name: mautrix-slack
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -16,3 +10,9 @@ spec:
               app.kubernetes.io/name: synapse
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: mautrix-slack
+      app.kubernetes.io/name: mautrix-slack
+  policyTypes:
+    - Ingress

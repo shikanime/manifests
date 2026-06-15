@@ -4,35 +4,35 @@ metadata:
   name: longhorn
   namespace: flux-system
 spec:
-  values:
-    ingress:
-      enabled: true
-      ingressClassName: tailscale
-      annotations:
-        tailscale.com/tags: tag:web
-      host: nishir-longhorn
   postRenderers:
     - kustomize:
         patches:
-          - target:
-              name: longhorn-ingress
-              version: v1
-              kind: Ingress
-            patch: |
+          - patch: |
               - op: add
                 path: /spec/tls
                 pathType: Prefix
                 value:
                   - hosts:
                       - nishir-longhorn
-          - target:
-              name: longhorn-ui-frontend
+            target:
+              name: longhorn-ingress
               version: v1
-              kind: NetworkPolicy
-            patch: |
+              kind: Ingress
+          - patch: |
               - op: add
                 path: /spec/ingress/0/from/-
                 value:
                   namespaceSelector:
                     matchLabels:
                       kubernetes.io/metadata.name: tailscale-system
+            target:
+              name: longhorn-ui-frontend
+              version: v1
+              kind: NetworkPolicy
+  values:
+    ingress:
+      annotations:
+        tailscale.com/tags: tag:web
+      enabled: true
+      host: nishir-longhorn
+      ingressClassName: tailscale

@@ -1,13 +1,13 @@
 url: ""
-id: whatsapp-doublepuppet
 as_token: ENC[AES256_GCM,data:q0xZg+p83kqi7o37wVq10CiO7hRdfzONpp9B7PMUjkFwgNkkBPpV4FJrkb7zTDFxy8yQm9P6nJo2DLcFuuZGew==,iv:hWcMan6rpgc6BB/nYBccFOaj9qbpuHShJ1PyBZmIlbY=,tag:JAruwbxZGlQsB5kyo+ikeg==,type:str]
 hs_token: ENC[AES256_GCM,data:O+Gz8Q9bxgpRZqYbgzGLNCjX6YuubY7yJSGmJsGGJH3KrARzeqS+enVrultEKBgUZCfX51+Z+yQDA+aBZNiEnw==,iv:AI9/Ythtjp2SFHsk7W/350vlE2IsjRgBOeczOHiFahQ=,tag:/5PIZtNq1IuKYdhyiUZ8lg==,type:str]
-sender_localpart: VujRiQe96MZwjXVH3MvzdUl2BHod8GeJ
+id: whatsapp-doublepuppet
 rate_limited: false
+sender_localpart: VujRiQe96MZwjXVH3MvzdUl2BHod8GeJ
 namespaces:
   users:
-    - regex: ^@.*:matrix\.taila659a\.ts\.net$
-      exclusive: false
+    - exclusive: false
+      regex: ^@.*:matrix\.taila659a\.ts\.net$
 sops:
   version: 3.12.1
   encrypted_regex: ^(as_token|hs_token)$

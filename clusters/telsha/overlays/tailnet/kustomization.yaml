@@ -8,6 +8,14 @@ components:
   - ../../components/tailscale
 patches:
   - path: patch-ingress.yaml
+labels:
+  - includeTemplates: true
+    pairs:
+      app.kubernetes.io/component: cluster
+      app.kubernetes.io/instance: telsha
+      app.kubernetes.io/name: telsha
+      app.kubernetes.io/part-of: telsha-infrastructure
+      app.kubernetes.io/version: 0.0.0
 secretGenerator:
   - name: discord-webhook
     namespace: flux-system
@@ -17,11 +25,3 @@ secretGenerator:
     namespace: flux-system
     envs:
       - receiver-token/.enc.env
-labels:
-  - includeTemplates: true
-    pairs:
-      app.kubernetes.io/component: cluster
-      app.kubernetes.io/instance: telsha
-      app.kubernetes.io/name: telsha
-      app.kubernetes.io/part-of: telsha-infrastructure
-      app.kubernetes.io/version: 0.0.0

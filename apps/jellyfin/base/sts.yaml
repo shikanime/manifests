@@ -4,11 +4,11 @@ metadata:
   name: jellyfin
 spec:
   replicas: 1
-  serviceName: jellyfin
   selector:
     matchLabels:
       app.kubernetes.io/instance: jellyfin
       app.kubernetes.io/name: jellyfin
+  serviceName: jellyfin
   template:
     metadata:
       labels:
@@ -25,6 +25,14 @@ spec:
               value: "1000"
             - name: TZ
               value: Europe/Paris
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 600
+            periodSeconds: 120
+            timeoutSeconds: 30
           ports:
             - name: http
               containerPort: 8096
@@ -32,26 +40,18 @@ spec:
               containerPort: 7359
               protocol: UDP
           readinessProbe:
+            failureThreshold: 5
             httpGet:
               path: /health
               port: http
             initialDelaySeconds: 60
             periodSeconds: 30
             timeoutSeconds: 10
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: 600
-            periodSeconds: 120
-            timeoutSeconds: 30
-            failureThreshold: 10
           startupProbe:
+            failureThreshold: 480
             httpGet:
               path: /health
               port: http
-            failureThreshold: 480
             periodSeconds: 15
             timeoutSeconds: 10
           volumeMounts:

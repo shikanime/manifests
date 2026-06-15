@@ -40,7 +40,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: 'spec.containers[name:*].volumeMounts[mountPath:"/etc/ssl/certs"]'
+  location: spec.containers[name:*].volumeMounts[mountPath:"/etc/ssl/certs"]
   match:
     kinds:
       - apiGroups:
@@ -69,7 +69,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: 'spec.initContainers[name:*].volumeMounts[mountPath:"/etc/ssl/certs"]'
+  location: spec.initContainers[name:*].volumeMounts[mountPath:"/etc/ssl/certs"]
   match:
     kinds:
       - apiGroups:
@@ -101,7 +101,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.containers[name:*].env"
+  location: spec.containers[name:*].env
   match:
     kinds:
       - apiGroups:
@@ -137,7 +137,7 @@ spec:
         - Pod
       versions:
         - v1
-  location: "spec.initContainers[name:*].env"
+  location: spec.initContainers[name:*].env
   match:
     kinds:
       - apiGroups:
@@ -156,10 +156,10 @@ spec:
     scope: Namespaced
   parameters:
     operation: merge
+    pathTests:
+      - condition: MustExist
+        subPath: spec.initContainers
     values:
       fromList:
         - name: NODE_EXTRA_CA_CERTS
           value: /etc/ssl/certs/ca-certificates.crt
-    pathTests:
-      - condition: MustExist
-        subPath: spec.initContainers

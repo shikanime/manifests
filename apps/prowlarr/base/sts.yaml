@@ -4,11 +4,11 @@ metadata:
   name: prowlarr
 spec:
   replicas: 1
-  serviceName: prowlarr
   selector:
     matchLabels:
       app.kubernetes.io/instance: prowlarr
       app.kubernetes.io/name: prowlarr
+  serviceName: prowlarr
   template:
     metadata:
       labels:
@@ -27,6 +27,12 @@ spec:
               value: "1"
             - name: TZ
               value: Europe/Paris
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
           ports:
             - name: http
               containerPort: 9696
@@ -36,19 +42,13 @@ spec:
               port: http
             initialDelaySeconds: 30
             timeoutSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /ping
-              port: http
-            initialDelaySeconds: 60
-            timeoutSeconds: 5
           startupProbe:
+            failureThreshold: 180
             httpGet:
               path: /ping
               port: http
             initialDelaySeconds: 5
             timeoutSeconds: 5
-            failureThreshold: 180
           volumeMounts:
             - name: config
               mountPath: /config

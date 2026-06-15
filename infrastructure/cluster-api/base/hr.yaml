@@ -14,20 +14,20 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   install:
-    createNamespace: true
     crds: Create
-  upgrade:
-    crds: CreateReplace
+    createNamespace: true
   interval: 10m
   releaseName: cluster-api-operator
   targetNamespace: capi-operator-system
+  upgrade:
+    crds: CreateReplace
   values:
-    cert-manager:
-      enabled: true
     bootstrap:
       k0sproject-k0smotron: {}
+    cert-manager:
+      enabled: true
     controlPlane:
       k0sproject-k0smotron: {}
     infrastructure:
-      k0sproject-k0smotron: {}
       hetzner: {}
+      k0sproject-k0smotron: {}

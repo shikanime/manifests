@@ -26,6 +26,6 @@ spec:
       port: 6881
       targetPort: bittorrent
     - name: bittorrent-udp
-      protocol: UDP
       port: 6881
+      protocol: UDP
       targetPort: bittorrent-udp

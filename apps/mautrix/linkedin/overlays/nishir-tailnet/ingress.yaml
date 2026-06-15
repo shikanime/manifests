@@ -10,7 +10,7 @@ spec:
       name: mautrix-linkedin
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - matrix-linkedin
-  ingressClassName: tailscale

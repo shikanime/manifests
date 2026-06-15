@@ -20,25 +20,25 @@ spec:
           args:
             - --remote-debugging-address=0.0.0.0
             - --remote-allow-origins=*
+          livenessProbe:
+            initialDelaySeconds: 30
+            tcpSocket:
+              port: cdp
+            timeoutSeconds: 5
           ports:
             - name: cdp
               containerPort: 9222
           readinessProbe:
-            tcpSocket:
-              port: cdp
             initialDelaySeconds: 10
-            timeoutSeconds: 5
-          livenessProbe:
             tcpSocket:
               port: cdp
-            initialDelaySeconds: 30
             timeoutSeconds: 5
           startupProbe:
+            failureThreshold: 180
+            initialDelaySeconds: 3
             tcpSocket:
               port: cdp
-            initialDelaySeconds: 3
             timeoutSeconds: 5
-            failureThreshold: 180
           volumeMounts:
             - name: dshm
               mountPath: /dev/shm

@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: jellyfin
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: jellyfin
-      app.kubernetes.io/name: jellyfin
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -28,3 +22,9 @@ spec:
               app.kubernetes.io/name: whisparr
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: jellyfin
+      app.kubernetes.io/name: jellyfin
+  policyTypes:
+    - Ingress

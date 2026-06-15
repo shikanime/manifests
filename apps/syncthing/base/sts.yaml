@@ -4,11 +4,11 @@ metadata:
   name: syncthing
 spec:
   replicas: 1
-  serviceName: syncthing
   selector:
     matchLabels:
       app.kubernetes.io/instance: syncthing
       app.kubernetes.io/name: syncthing
+  serviceName: syncthing
   template:
     metadata:
       labels:
@@ -25,6 +25,12 @@ spec:
               value: "1000"
             - name: STHOMEDIR
               value: /config
+          livenessProbe:
+            httpGet:
+              path: /rest/noauth/health
+              port: http
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
           ports:
             - name: http
               containerPort: 8384
@@ -43,19 +49,13 @@ spec:
               port: http
             initialDelaySeconds: 30
             timeoutSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /rest/noauth/health
-              port: http
-            initialDelaySeconds: 60
-            timeoutSeconds: 5
           startupProbe:
+            failureThreshold: 180
             httpGet:
               path: /rest/noauth/health
               port: http
             initialDelaySeconds: 5
             timeoutSeconds: 5
-            failureThreshold: 180
           volumeMounts:
             - name: config
               mountPath: /config

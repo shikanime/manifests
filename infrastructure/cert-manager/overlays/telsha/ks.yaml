@@ -4,14 +4,14 @@ metadata:
   name: cert-manager-config
   namespace: flux-system
 spec:
-  interval: 10m
-  path: ./configs/cert-manager/overlays/telsha
-  prune: true
-  deletionPolicy: Orphan
-  sourceRef:
-    name: flux-system
-    kind: GitRepository
   decryption:
     provider: sops
     secretRef:
       name: sops-age
+  deletionPolicy: Orphan
+  interval: 10m
+  path: ./configs/cert-manager/overlays/telsha
+  prune: true
+  sourceRef:
+    name: flux-system
+    kind: GitRepository

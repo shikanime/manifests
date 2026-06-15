@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: mautrix-discord
 spec:
-  publishNotReadyAddresses: true
   ports:
     - name: http
       port: 29334
       targetPort: http
+  publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: mautrix-discord
     app.kubernetes.io/name: mautrix-discord

@@ -7,7 +7,7 @@ metadata:
 spec:
   task: snapshot
   concurrency: 2
-  cron: "0 * * * *"
+  cron: 0 * * * *
   retain: 24
   groups:
     - default
@@ -20,7 +20,7 @@ metadata:
 spec:
   task: backup
   concurrency: 1
-  cron: "0 2 * * *"
+  cron: 0 2 * * *
   retain: 7
   groups:
     - large
@@ -34,7 +34,7 @@ metadata:
 spec:
   task: backup
   concurrency: 1
-  cron: "0 3 * * 0"
+  cron: 0 3 * * 0
   retain: 4
   groups:
     - large
@@ -48,7 +48,7 @@ metadata:
 spec:
   task: snapshot-cleanup
   concurrency: 2
-  cron: "0 5 * * 0"
+  cron: 0 5 * * 0
   retain: 0
   groups:
     - default
@@ -61,7 +61,7 @@ metadata:
 spec:
   task: filesystem-trim
   concurrency: 1
-  cron: "0 6 * * 0"
+  cron: 0 6 * * 0
   retain: 0
   groups:
     - default

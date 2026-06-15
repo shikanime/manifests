@@ -15,13 +15,13 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   install:
-    createNamespace: true
     crds: Create
-  upgrade:
-    crds: CreateReplace
+    createNamespace: true
   interval: 10m
   releaseName: cert-manager
   targetNamespace: cert-manager-system
+  upgrade:
+    crds: CreateReplace
   values:
     clusterResourceNamespace: cert-manager-trust
     crds:
@@ -43,13 +43,13 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   install:
-    createNamespace: true
     crds: Create
-  upgrade:
-    crds: CreateReplace
+    createNamespace: true
   interval: 10m
   releaseName: trust-manager
   targetNamespace: cert-manager-system
+  upgrade:
+    crds: CreateReplace
   values:
     app:
       trust:

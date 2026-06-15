@@ -7,14 +7,14 @@ spec:
     spec:
       containers:
         - name: sonarr
+          livenessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
           ports:
             - name: https
               containerPort: 9898
           readinessProbe:
-            httpGet:
-              port: https
-              scheme: HTTPS
-          livenessProbe:
             httpGet:
               port: https
               scheme: HTTPS
@@ -29,8 +29,8 @@ spec:
       volumes:
         - name: tls
           secret:
-            secretName: sonarr-tls
             items:
               - key: keystore.p12
+                mode: 640
                 path: keystore.p12
-                mode: 0640
+            secretName: sonarr-tls

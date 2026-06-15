@@ -10,7 +10,7 @@ spec:
       name: qbittorrent
       port:
         name: https
+  ingressClassName: tailscale
   tls:
     - hosts:
         - qbittorrent
-  ingressClassName: tailscale

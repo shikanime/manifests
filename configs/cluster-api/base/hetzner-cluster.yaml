@@ -4,7 +4,7 @@ metadata:
   name: shana
 spec:
   controlPlaneEndpoint:
-    host: "0.0.0.0"
+    host: 0.0.0.0
     port: 443
   controlPlaneLoadBalancer:
     enabled: false

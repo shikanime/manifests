@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: radarr
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: radarr
-      app.kubernetes.io/name: radarr
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -25,3 +19,9 @@ spec:
               app.kubernetes.io/name: prowlarr
       ports:
         - port: https
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: radarr
+      app.kubernetes.io/name: radarr
+  policyTypes:
+    - Ingress

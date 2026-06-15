@@ -9,7 +9,6 @@ spec:
   issuerRef:
     name: nishir
     kind: ClusterIssuer
-  secretName: lidarr-tls
   keystores:
     pkcs12:
       create: true
@@ -17,6 +16,7 @@ spec:
         name: lidarr-pkcs12-password
         key: password
       profile: Modern2023
+  secretName: lidarr-tls
   usages:
     - digital signature
     - key encipherment

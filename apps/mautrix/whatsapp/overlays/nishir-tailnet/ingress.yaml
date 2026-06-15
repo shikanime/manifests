@@ -10,7 +10,7 @@ spec:
       name: mautrix-whatsapp
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - matrix-whatsapp
-  ingressClassName: tailscale

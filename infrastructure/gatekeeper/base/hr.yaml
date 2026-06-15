@@ -14,13 +14,13 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   install:
-    createNamespace: true
     crds: Create
-  upgrade:
-    crds: CreateReplace
+    createNamespace: true
   interval: 10m
   releaseName: gatekeeper
   targetNamespace: gatekeeper-system
+  upgrade:
+    crds: CreateReplace
   values:
     defaultCreateVAPBindingForConstraints: false
     defaultCreateVAPForTemplates: false

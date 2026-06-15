@@ -9,7 +9,6 @@ spec:
   issuerRef:
     name: nishir
     kind: ClusterIssuer
-  secretName: whisparr-tls
   keystores:
     pkcs12:
       create: true
@@ -17,6 +16,7 @@ spec:
         name: whisparr-pkcs12-password
         key: password
       profile: Modern2023
+  secretName: whisparr-tls
   usages:
     - digital signature
     - key encipherment

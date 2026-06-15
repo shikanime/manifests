@@ -3,12 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: honcho
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: honcho
-      app.kubernetes.io/name: honcho
-  policyTypes:
-    - Ingress
   ingress:
     - from:
         - podSelector:
@@ -16,3 +10,9 @@ spec:
               app.kubernetes.io/name: hermes-agent
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: honcho
+      app.kubernetes.io/name: honcho
+  policyTypes:
+    - Ingress

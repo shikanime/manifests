@@ -1,17 +1,17 @@
 url: http://mautrix-meta:29319
-id: meta
 as_token: ENC[AES256_GCM,data:v91KVhPWbqiFw5DQkMotP2y+29qRgoXa/lJ8adfa1SJPycTbfjTbHxghT0vt8fqXHreIAnoCgjSaB52z2vAQFA==,iv:Ov3kXJbSEO9Fluzz8fLiNmCQ09JOji7Pub3+8qw8AdE=,tag:9WfwEXA6g/QdKFZv5VwARg==,type:str]
-hs_token: ENC[AES256_GCM,data:w9F6WbA+665rGbQTEhNOqn1uQlv5BJ3aDzROYwYY3xo5vHUpTXkvbkJ/okREMzboYOLp33d1pwRjjgev74utLA==,iv:dUdBl+ZYCiNw2HzLjpGlKIiqt4+xACeEDwpNCmnSED4=,tag:3xa1r1d9QTtnq+BBkoSrbg==,type:str]
-sender_localpart: VwV7pnSh9eP4flEBzESHiks634IdmzeH
-rate_limited: false
 de.sorunome.msc2409.push_ephemeral: true
+hs_token: ENC[AES256_GCM,data:w9F6WbA+665rGbQTEhNOqn1uQlv5BJ3aDzROYwYY3xo5vHUpTXkvbkJ/okREMzboYOLp33d1pwRjjgev74utLA==,iv:dUdBl+ZYCiNw2HzLjpGlKIiqt4+xACeEDwpNCmnSED4=,tag:3xa1r1d9QTtnq+BBkoSrbg==,type:str]
+id: meta
+rate_limited: false
 receive_ephemeral: true
+sender_localpart: VwV7pnSh9eP4flEBzESHiks634IdmzeH
 namespaces:
   users:
-    - regex: ^@metabot:matrix\.taila659a\.ts\.net$
-      exclusive: true
-    - regex: ^@meta_.*:matrix\.taila659a\.ts\.net$
-      exclusive: true
+    - exclusive: true
+      regex: ^@metabot:matrix\.taila659a\.ts\.net$
+    - exclusive: true
+      regex: ^@meta_.*:matrix\.taila659a\.ts\.net$
 sops:
   version: 3.12.2
   encrypted_regex: ^(as_token|hs_token)$

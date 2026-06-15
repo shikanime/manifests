@@ -30,8 +30,8 @@ spec:
       securityContext:
         fsGroup: 1000
         supplementalGroups:
-          - 26 # video: host access to /dev/dri device nodes
-          - 303 # render: host access to /dev/dri/renderD128
+          - 26
+          - 303
       volumes:
         - name: dev-dri
           hostPath:
