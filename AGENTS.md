@@ -32,4 +32,4 @@ Kubernetes manifests and GitOps configurations for shikanime infrastructure.
 - Require signed commits
 - Squash+rebase merge only
 
-*Managed via FluxCD. Ensure all manifests are linted before committing*
+Managed via FluxCD. Ensure all manifests are linted before committing
