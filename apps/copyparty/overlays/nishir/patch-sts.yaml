@@ -57,6 +57,9 @@ spec:
         - name: sukebe-doujins-data
           persistentVolumeClaim:
             claimName: sukebe-doujins-data
+        - name: sukebe-games-data
+          persistentVolumeClaim:
+            claimName: sukebe-games-data
         - name: sukebe-scenes-data
           persistentVolumeClaim:
             claimName: sukebe-scenes-data
