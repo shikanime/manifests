@@ -1,0 +1,79 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: github-repo-shikanime
+  namespace: flux-system
+spec:
+  interval: 10m
+  approvePlan: auto
+  path: ./modules/github-repository
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  runnerPodTemplate:
+    spec:
+      env:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: github-token
+              key: token
+  vars:
+    - name: name
+      value: shikanime
+    - name: description
+      value: "Shikanime Studio — infrastructure and tooling"
+    - name: visibility
+      value: public
+    - name: has_issues
+      value: "true"
+    - name: has_projects
+      value: "true"
+    - name: allow_squash_merge
+      value: "true"
+    - name: delete_branch_on_merge
+      value: "true"
+    - name: web_commit_signoff_required
+      value: "true"
+    - name: vulnerability_alerts
+      value: "true"
+    - name: enable_advanced_security
+      value: "true"
+    - name: enable_secret_scanning_push_protection
+      value: "true"
+    - name: protect_default_branch
+      value: "true"
+    - name: required_approving_review_count
+      value: "1"
+    - name: dismiss_stale_reviews
+      value: "true"
+    - name: require_last_push_approval
+      value: "true"
+    - name: enforce_admins
+      value: "true"
+    - name: require_signed_commits
+      value: "true"
+    - name: require_linear_history
+      value: "true"
+    - name: require_conversation_resolution
+      value: "true"
+    - name: allows_force_pushes
+      value: "false"
+    - name: allows_deletions
+      value: "false"
+    - name: archive_on_destroy
+      value: "true"
+    - name: prevent_destroy
+      value: "true"
+    - name: enable_enhanced_rulesets
+      value: "true"
+  writeOutputsToSecret:
+    name: github-repo-shikanime-outputs
+    outputs:
+      - repository_id
+      - repository_node_id
+      - repository_full_name
+      - repository_html_url
+      - repository_ssh_clone_url
+      - repository_default_branch
