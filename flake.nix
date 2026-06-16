@@ -231,6 +231,7 @@
                 treefmt.config.settings.global.excludes = [
                   "*.excalidraw"
                   "*.enc.xml"
+                  ".hermes/"
                 ];
               };
             };
