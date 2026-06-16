@@ -22,6 +22,8 @@ spec:
               mountPath: /var/syncthing/Staging
             - name: sukebe-doujins-data
               mountPath: /var/syncthing/Sukebe/Doujins
+            - name: sukebe-games
+              mountPath: /var/syncthing/Sukebe/Games
             - name: sukebe-scenes-data
               mountPath: /var/syncthing/Sukebe/Scenes
             - name: sukebe-shows-data
@@ -52,6 +54,9 @@ spec:
         - name: sukebe-doujins-data
           persistentVolumeClaim:
             claimName: sukebe-doujins-data
+        - name: sukebe-games
+          persistentVolumeClaim:
+            claimName: sukebe-games
         - name: sukebe-scenes-data
           persistentVolumeClaim:
             claimName: sukebe-scenes-data

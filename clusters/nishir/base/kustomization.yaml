@@ -5,6 +5,7 @@ resources:
   - ns.yaml
   - provider.yaml
   - pvc.yaml
+  - sukebe-games-copy-job.yaml
   - receiver.yaml
 configurations:
   - config.yaml
