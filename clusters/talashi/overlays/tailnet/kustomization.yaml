@@ -2,13 +2,14 @@ resources:
   - ../../base
   - ks.yaml
 components:
+  - ../../components/autoscaler
   - ../../components/cert-manager
   - ../../components/descheduler
   - ../../components/gatekeeper
   - ../../components/longhorn
-  - ../../components/autoscaler
   - ../../components/monitoring
   - ../../components/tailscale
+  - ../../components/tofu-controller
 patches:
   - path: patch-ingress.yaml
 labels:
