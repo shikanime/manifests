@@ -3,6 +3,12 @@ resources:
   - netpol.yaml
   - ingress.yaml
 namespace: shikanime
+patches:
+  - path: patch-sts-oidc.yaml
+secretGenerator:
+  - name: seerr-oidc
+    envs:
+      - oidc.enc.env
 labels:
   - includeTemplates: true
     pairs:

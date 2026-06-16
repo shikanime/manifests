@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jellyfin
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: install-ldap-plugin
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              PLUGIN_DIR=/config/plugins
+              PLUGIN_FILE="${PLUGIN_DIR}/LdapAuthentication"
+              if [ ! -d "${PLUGIN_FILE}" ]; then
+                mkdir -p "${PLUGIN_DIR}"
+                PLUGIN_VERSION=18
+                curl -fsSL \
+                  "https://repo.jellyfin.org/releases/plugin/ldap-auth/LdapAuthentication_${PLUGIN_VERSION}.zip" \
+                  -o /tmp/ldap-plugin.zip
+                unzip -o /tmp/ldap-plugin.zip -d "${PLUGIN_DIR}/"
+                rm -f /tmp/ldap-plugin.zip
+              fi
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      containers:
+        - name: jellyfin
+          envFrom:
+            - configMapRef:
+                name: sso-config
+            - secretRef:
+                name: jellyfin-ldap
+          volumeMounts:
+            - name: ldap-ca
+              mountPath: /etc/jellyfin/ldap-ca
+              readOnly: true
+      volumes:
+        - name: ldap-ca
+          secret:
+            secretName: openldap-tls
+            items:
+              - key: tls.crt
+                path: ca.crt
