@@ -2,7 +2,7 @@ resources:
   - cronjob.yaml
 images:
   - name: qbittorrent-cleanup
-    newName: ghcr.io/shikanime/xqbit/qbittorrent-cleanup
+    newName: ghcr.io/x-shikanime/xqbit/qbittorrent-cleanup
     newTag: 4e7e1b0
 metadata:
   annotations:
