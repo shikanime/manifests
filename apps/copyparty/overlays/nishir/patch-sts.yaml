@@ -22,6 +22,8 @@ spec:
               mountPath: /data/staging
             - name: sukebe-doujins-data
               mountPath: /data/sukebe/Doujins
+            - name: sukebe-games-data
+              mountPath: /data/sukebe/Games
             - name: sukebe-scenes-data
               mountPath: /data/sukebe/Scenes
             - name: sukebe-shows-data
