@@ -107,7 +107,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sukebe-games
+  name: sukebe-games-data
   namespace: shikanime
 spec:
   resources:
@@ -115,7 +115,7 @@ spec:
       storage: 128Gi
   storageClassName: nishir-capacity
   volumeMode: Filesystem
-  volumeName: sukebe-games
+  volumeName: sukebe-games-data
   accessModes:
     - ReadWriteMany
 ---
