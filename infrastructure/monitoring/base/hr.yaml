@@ -25,6 +25,8 @@ spec:
         type: pvc
         enabled: true
         size: 2Gi
+    kubeProxy:
+      enabled: true
     vmsingle:
       spec:
         retentionPeriod: 30d
@@ -32,6 +34,4 @@ spec:
           resources:
             requests:
               storage: 8Gi
-      enabled: true
-    kubeProxy:
       enabled: true
