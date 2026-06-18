@@ -2,3 +2,9 @@ resources:
   - helmrepo.yaml
   - hr.yaml
   - ns.yaml
+  - vmscrape-cert-manager.yaml
+  - vmscrape-gatekeeper.yaml
+  - vmscrape-longhorn.yaml
+  - vmscrape-cluster-api.yaml
+  - vmscrape-descheduler.yaml
+  - vmscrape-synapse.yaml
