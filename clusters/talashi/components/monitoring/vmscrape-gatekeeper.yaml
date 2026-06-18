@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: gatekeeper
+  namespace: gatekeeper-system
+  labels:
+    app.kubernetes.io/name: gatekeeper
+    app.kubernetes.io/part-of: gatekeeper
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gatekeeper
+      app.kubernetes.io/component: controller
+  namespaceSelector:
+    matchNames:
+      - gatekeeper-system
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 60s
+      scrapeTimeout: 30s
