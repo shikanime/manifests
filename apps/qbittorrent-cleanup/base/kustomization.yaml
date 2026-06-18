@@ -3,7 +3,7 @@ resources:
 images:
   - name: qbittorrent-cleanup
     newName: ghcr.io/x-shikanime/xqbit/qbittorrent-cleanup
-    newTag: 4e7e1b0
+    newTag: eb547ca
 metadata:
   annotations:
     automata.shikanime.studio/images:
