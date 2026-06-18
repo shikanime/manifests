@@ -33,3 +33,5 @@ spec:
             requests:
               storage: 8Gi
       enabled: true
+    kubeProxy:
+      enabled: true
