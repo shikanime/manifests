@@ -74,5 +74,5 @@ managed via FluxCD and structured around Kustomize.
 - Require signed commits
 - Squash+rebase merge only
 
-*Managed via FluxCD. Lint all manifests with `kustomize build` before committing.
-Always use worktrees when making changes.*
+_Managed via FluxCD. Lint all manifests with `kustomize build` before
+committing. Always use worktrees when making changes._

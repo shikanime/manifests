@@ -1,3 +1,5 @@
 resources:
   - ../../base
   - ks.yaml
+components:
+  - ../../components/monitoring
