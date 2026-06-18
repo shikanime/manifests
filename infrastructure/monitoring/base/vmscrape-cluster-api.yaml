@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: cluster-api-operator
+  namespace: capi-operator-system
+  labels:
+    app.kubernetes.io/name: cluster-api-operator
+    app.kubernetes.io/part-of: cluster-api
+spec:
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  namespaceSelector:
+    matchNames:
+      - capi-operator-system
+  endpoints:
+    - port: https
+      path: /metrics
+      interval: 60s
+      scrapeTimeout: 30s
+      scheme: https
