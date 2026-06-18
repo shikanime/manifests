@@ -1,7 +1,4 @@
 resources:
-  - ../../base
   - ../talashi
-components:
-  - ../../components/monitoring
 patches:
   - path: patch-hr.yaml
