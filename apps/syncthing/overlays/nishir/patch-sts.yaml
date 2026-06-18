@@ -12,6 +12,8 @@ spec:
               mountPath: /var/syncthing/Archives
             - name: downloads-data
               mountPath: /var/syncthing/Downloads
+            - name: games-data
+              mountPath: /var/syncthing/Games
             - name: movies-data
               mountPath: /var/syncthing/Movies
             - name: music-data
@@ -39,6 +41,9 @@ spec:
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
+        - name: games-data
+          persistentVolumeClaim:
+            claimName: games-data
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
