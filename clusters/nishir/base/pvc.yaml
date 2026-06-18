@@ -32,6 +32,21 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: games-data
+  namespace: shikanime
+spec:
+  resources:
+    requests:
+      storage: 32Gi
+  storageClassName: nishir-capacity
+  volumeMode: Filesystem
+  volumeName: games-data
+  accessModes:
+    - ReadWriteMany
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: movies-data
   namespace: shikanime
 spec:

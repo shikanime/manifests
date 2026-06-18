@@ -12,6 +12,8 @@ spec:
               mountPath: /data/archives
             - name: downloads-data
               mountPath: /data/downloads
+            - name: games-data
+              mountPath: /data/games
             - name: movies-data
               mountPath: /data/movies
             - name: music-data
@@ -42,6 +44,9 @@ spec:
         - name: downloads-data
           persistentVolumeClaim:
             claimName: downloads-data
+        - name: games-data
+          persistentVolumeClaim:
+            claimName: games-data
         - name: movies-data
           persistentVolumeClaim:
             claimName: movies-data
