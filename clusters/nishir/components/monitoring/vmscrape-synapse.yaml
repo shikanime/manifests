@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: synapse
+  namespace: shikanime
+  labels:
+    app.kubernetes.io/name: synapse
+    app.kubernetes.io/part-of: synapse
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: synapse
+      app.kubernetes.io/name: synapse
+  namespaceSelector:
+    matchNames:
+      - shikanime
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 60s
+      scrapeTimeout: 30s
