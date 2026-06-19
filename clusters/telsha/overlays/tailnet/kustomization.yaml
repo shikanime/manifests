@@ -5,6 +5,7 @@ components:
   - ../../components/cert-manager
   - ../../components/cluster-api
   - ../../components/gatekeeper
+  - ../../components/monitoring
   - ../../components/tailscale
 patches:
   - path: patch-ingress.yaml
