@@ -95,7 +95,7 @@
                         {
                           name = "telsha";
                           keys = [
-                            "age1srrmxajm2daxk8c3lxh4dfy2s98u8ktv38h47wn6v0saxl7y735q7smppe"
+                            "age1eak84xcr44yfqsg843rfu2xajxsyvjwh67a630htpnd0scy7yu5szjfh8d"
                           ];
                         }
                         {
@@ -164,35 +164,48 @@
                 };
               }
             ];
+            shells.default = {
+              imports = [
+                devlib.devenvModules.git
+                devlib.devenvModules.nix
+                devlib.devenvModules.opentofu
+                devlib.devenvModules.shell
+                devlib.devenvModules.shikanime
+              ];
 
-            shells = {
-              default = {
-                imports = [
-                  devlib.devenvModules.git
-                  devlib.devenvModules.nix
-                  devlib.devenvModules.opentofu
-                  devlib.devenvModules.shell
-                  devlib.devenvModules.shikanime
-                ];
+              github.workflows.skaffold.enable = true;
 
-                github.workflows.skaffold.enable = true;
+              packages = [
+                pkgs.age
+                pkgs.caddy
+                pkgs.clusterctl
+                pkgs.docker
+                pkgs.fluxcd
+                pkgs.fluxcd-operator
+                pkgs.gatekeeper
+                pkgs.k0sctl
+                pkgs.kubectl
+                pkgs.kubernetes-helm
+                pkgs.kustomize
+                pkgs.ssh-to-age
+                pkgs.skaffold
+              ];
 
-                packages = [
-                  pkgs.age
-                  pkgs.caddy
-                  pkgs.clusterctl
-                  pkgs.docker
-                  pkgs.fluxcd
-                  pkgs.fluxcd-operator
-                  pkgs.gatekeeper
-                  pkgs.k0sctl
-                  pkgs.kubectl
-                  pkgs.kubernetes-helm
-                  pkgs.kustomize
-                  pkgs.skaffold
-                ];
+              tasks =
+                let
+                  manifestsBootstrapSopsAge = ''
+                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
+                      ssh_key_file="/etc/ssh/ssh_host_ed25519_key"
 
-                tasks = {
+                      sudo ${getExe pkgs.ssh-to-age} -private-key -i "$ssh_key_file" | \
+                        ${getExe pkgs.kubectl} \
+                          -n flux-system \
+                          create secret generic sops-age \
+                          --from-file=age.agekey=/dev/stdin
+                    fi
+                  '';
+                in
+                {
                   "manifests:kubeconform" = {
                     before = [ "devenv:enterTest" ];
                     exec = ''
@@ -208,31 +221,20 @@
                   "manifests:bootstrap:telsha".exec = ''
                     ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
 
-                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
-                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} \
-                        -n flux-system \
-                        create secret generic sops-age \
-                        --from-file=age.agekey=/dev/stdin
-                    fi
+                    ${manifestsBootstrapSopsAge}
                   '';
 
                   "manifests:bootstrap:talashi".exec = ''
                     ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/talashi
 
-                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
-                      ${getExe' pkgs.age "age-keygen"} | ${getExe pkgs.kubectl} \
-                        -n flux-system \
-                        create secret generic sops-age \
-                        --from-file=age.agekey=/dev/stdin
-                    fi
+                    ${manifestsBootstrapSopsAge}
                   '';
                 };
 
-                treefmt.config.settings.global.excludes = [
-                  "*.excalidraw"
-                  "*.enc.xml"
-                ];
-              };
+              treefmt.config.settings.global.excludes = [
+                "*.excalidraw"
+                "*.enc.xml"
+              ];
             };
           };
         };
