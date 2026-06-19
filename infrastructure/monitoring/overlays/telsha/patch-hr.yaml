@@ -10,4 +10,8 @@ spec:
         enabled: false
     vmsingle:
       spec:
-        storageClassName: ""
+        storage:
+          resources:
+            requests:
+              storage: 4Gi
+        storageClassName: local-path

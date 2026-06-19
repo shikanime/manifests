@@ -2,6 +2,7 @@ resources:
   - ../../base
   - ks.yaml
 components:
+  - ../../components/autoscaler
   - ../../components/cert-manager
   - ../../components/cluster-api
   - ../../components/gatekeeper
