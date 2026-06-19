@@ -1,21 +1,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure-descheduler
+  name: infrastructure-cluster-api
   namespace: flux-system
 spec:
   decryption:
     provider: sops
     secretRef:
       name: sops-age
-  deletionPolicy: Orphan
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: descheduler
-      namespace: flux-system
   interval: 10m
-  path: ./infrastructure/descheduler/overlays/nishir
+  path: ./infrastructure/cluster-api/overlays/telsha
   prune: true
   sourceRef:
     name: flux-system
