@@ -4,7 +4,6 @@ metadata:
   name: gatekeeper-library
   namespace: flux-system
 spec:
-  deletionPolicy: Orphan
   interval: 10m
   path: ./library
   prune: true
