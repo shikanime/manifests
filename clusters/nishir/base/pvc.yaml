@@ -8,7 +8,7 @@ spec:
   resources:
     requests:
       storage: 64Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: archives-data
   accessModes:
@@ -38,7 +38,7 @@ spec:
   resources:
     requests:
       storage: 32Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: games-data
   accessModes:
@@ -98,7 +98,7 @@ spec:
   resources:
     requests:
       storage: 128Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: staging-data
   accessModes:
@@ -113,7 +113,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: sukebe-doujins-data
   accessModes:
@@ -128,7 +128,7 @@ spec:
   resources:
     requests:
       storage: 128Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: sukebe-games-data
   accessModes:
@@ -143,7 +143,7 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: sukebe-scenes-data
   accessModes:
@@ -158,7 +158,7 @@ spec:
   resources:
     requests:
       storage: 512Gi
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: sukebe-shows-data
   accessModes:
@@ -173,7 +173,7 @@ spec:
   resources:
     requests:
       storage: 2Ti
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: sync-data
   accessModes:
@@ -188,7 +188,7 @@ spec:
   resources:
     requests:
       storage: 2Ti
-  storageClassName: nishir-capacity
+  storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: timeline-data
   accessModes:
