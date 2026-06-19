@@ -1,5 +1,4 @@
 resources:
   - helmrepo.yaml
   - hr.yaml
-components:
-  - ../components/monitoring
+  - ns.yaml
