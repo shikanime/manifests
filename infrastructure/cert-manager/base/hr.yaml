@@ -16,7 +16,6 @@ spec:
         namespace: flux-system
   install:
     crds: Create
-    createNamespace: true
   interval: 10m
   releaseName: cert-manager
   targetNamespace: cert-manager-system
