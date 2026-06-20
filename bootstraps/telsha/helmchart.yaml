@@ -32,6 +32,8 @@ spec:
         pullSecret: ""
         ref: refs/heads/main
         url: https://github.com/shikanime/manifests.git
+      cluster:
+        networkPolicy: true
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -47,6 +49,8 @@ spec:
     healthcheck:
       enabled: true
     web:
+      networkPolicy:
+        create: true
       config:
         authentication:
           type: Anonymous

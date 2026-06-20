@@ -191,45 +191,33 @@
                 pkgs.skaffold
               ];
 
-              tasks =
-                let
-                  manifestsBootstrapSopsAge = ''
-                    if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
-                      ssh_key_file="/etc/ssh/ssh_host_ed25519_key"
-
-                      sudo ${getExe pkgs.ssh-to-age} -private-key -i "$ssh_key_file" | \
-                        ${getExe pkgs.kubectl} \
-                          -n flux-system \
-                          create secret generic sops-age \
-                          --from-file=age.agekey=/dev/stdin
-                    fi
-                  '';
-                in
-                {
-                  "manifests:kubeconform" = {
-                    before = [ "devenv:enterTest" ];
-                    exec = ''
-                      for file in "$@"; do
-                        ${pkgs.kustomize}/bin/kustomize build "$(dirname "$file")" | \
-                          ${pkgs.kubeconform}/bin/kubeconform \
-                            -exit-on-error \
-                            -strict
-                      done
-                    '';
-                  };
-
-                  "manifests:bootstrap:telsha".exec = ''
-                    ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
-
-                    ${manifestsBootstrapSopsAge}
-                  '';
-
-                  "manifests:bootstrap:talashi".exec = ''
-                    ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/talashi
-
-                    ${manifestsBootstrapSopsAge}
+              tasks = {
+                "manifests:kubeconform" = {
+                  before = [ "devenv:enterTest" ];
+                  exec = ''
+                    for file in "$@"; do
+                      ${pkgs.kustomize}/bin/kustomize build "$(dirname "$file")" | \
+                        ${pkgs.kubeconform}/bin/kubeconform \
+                          -exit-on-error \
+                          -strict
+                    done
                   '';
                 };
+
+                "manifests:bootstrap:telsha".exec = ''
+                  ${getExe pkgs.kubectl} apply -k $DEVENV_ROOT/bootstraps/telsha
+
+                  if ! ${getExe pkgs.kubectl} -n flux-system get secret sops-age >/dev/null 2>&1; then
+                    ssh_key_file="/etc/ssh/ssh_host_ed25519_key"
+
+                    sudo ${getExe pkgs.ssh-to-age} -private-key -i "$ssh_key_file" | \
+                      ${getExe pkgs.kubectl} \
+                        -n flux-system \
+                        create secret generic sops-age \
+                        --from-file=age.agekey=/dev/stdin
+                  fi
+                '';
+              };
 
               treefmt.config.settings.global.excludes = [
                 "*.excalidraw"
