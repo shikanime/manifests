@@ -9,6 +9,8 @@ spec:
     secretRef:
       name: sops-age
   deletionPolicy: Orphan
+  dependsOn:
+    - name: infrastructure-longhorn
   interval: 10m
   path: ./configs/longhorn/overlays/nishir
   prune: true
