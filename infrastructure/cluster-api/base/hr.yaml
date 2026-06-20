@@ -12,7 +12,6 @@ spec:
       sourceRef:
         name: cluster-api-operator
         kind: HelmRepository
-        namespace: flux-system
   install:
     crds: Create
   interval: 10m
@@ -27,6 +26,7 @@ spec:
       enabled: true
     controlPlane:
       k0sproject-k0smotron: {}
+    enableHelmHook: false
     infrastructure:
       hetzner: {}
       k0sproject-k0smotron: {}
