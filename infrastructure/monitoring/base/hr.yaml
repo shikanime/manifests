@@ -27,8 +27,13 @@ spec:
         size: 2Gi
     kubeProxy:
       enabled: true
+    vmalert:
+      extraArgs:
+        enableTCP6: "true"
     vmsingle:
       spec:
+        extraArgs:
+          enableTCP6: "true"
         retentionPeriod: 30d
         storage:
           resources:
