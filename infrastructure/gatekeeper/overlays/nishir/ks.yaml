@@ -9,6 +9,8 @@ spec:
     secretRef:
       name: sops-age
   deletionPolicy: Orphan
+  dependsOn:
+    - name: infrastructure-gatekeeper
   interval: 10m
   path: ./configs/gatekeeper/overlays/nishir
   prune: true

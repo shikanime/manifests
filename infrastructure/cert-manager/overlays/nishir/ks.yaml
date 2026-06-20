@@ -9,6 +9,8 @@ spec:
     secretRef:
       name: sops-age
   deletionPolicy: Orphan
+  dependsOn:
+    - name: infrastructure-cert-manager
   interval: 10m
   path: ./configs/cert-manager/overlays/nishir
   prune: true
