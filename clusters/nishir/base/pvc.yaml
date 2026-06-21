@@ -142,7 +142,7 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 1Ti
+      storage: 2Ti
   storageClassName: nishir-nearline
   volumeMode: Filesystem
   volumeName: sukebe-scenes-data
