@@ -1,4 +1,4 @@
-<!-- markdownlint-disable first-line-heading MD041 -->
+bootstraps/talashi/helmchart.yaml<!-- markdownlint-disable first-line-heading MD041 -->
 
 ![header.png](https://raw.githubusercontent.com/shikanime/shikanime/main/assets/github-header.png)
 
@@ -62,8 +62,6 @@ This repository is intentionally split into two concerns:
 The Kustomize overlays assume the underlying controllers/operators already
 exist. Those are installed out-of-band using the manifests in `bootstraps/`.
 
-- `bootstraps/talashi/` contains `HelmChart` resources
-  ([helmchart.yaml](bootstraps/talashi/helmchart.yaml))
 - `bootstraps/telsha/` contains `HelmChart` resources
   ([helmchart.yaml](bootstraps/telsha/helmchart.yaml))
 
