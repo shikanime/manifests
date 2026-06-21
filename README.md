@@ -1,4 +1,4 @@
-bootstraps/talashi/helmchart.yaml<!-- markdownlint-disable first-line-heading MD041 -->
+<!-- markdownlint-disable first-line-heading MD041 -->
 
 ![header.png](https://raw.githubusercontent.com/shikanime/shikanime/main/assets/github-header.png)
 
