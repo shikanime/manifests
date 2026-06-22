@@ -20,6 +20,7 @@ spec:
       namespace: flux-system
   interval: 10m
   path: ./infrastructure/longhorn/overlays/talashi-tailnet
+  timeout: 20m
   prune: true
   sourceRef:
     name: flux-system
