@@ -14,10 +14,6 @@ spec:
       kind: HelmRelease
       name: cert-manager
       namespace: flux-system
-    - apiVersion: kustomize.toolkit.fluxcd.io/v1
-      kind: Kustomization
-      name: cert-manager-config
-      namespace: flux-system
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: trust-manager
