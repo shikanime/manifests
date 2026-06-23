@@ -16,7 +16,11 @@ spec:
       port: 443
       protocol: HTTPS
       tls:
-        mode: Passthrough
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            group: ""
+            name: nishir-tls
       allowedRoutes:
         namespaces:
           from: Same
