@@ -28,10 +28,4 @@ spec:
       replicaAutoBalance: best-effort
       restoreVolumeRecurringJob: true
     persistence:
-      defaultClassReplicaCount: 2
-      defaultFsType: xfs
-      recurringJobSelector:
-        enable: true
-        jobList:
-          - name: standard
-            isGroup: true
+      createStorageClass: false
