@@ -1,5 +1,6 @@
 resources:
   - alert.yaml
+  - gateway.yaml
   - ingress.yaml
   - netpol.yaml
   - ns.yaml
