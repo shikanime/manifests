@@ -4,6 +4,7 @@ resources:
   - sts.yaml
   - svc.yaml
   - tcproute.yaml
+  - udproute.yaml
   - vpa.yaml
 images:
   - name: syncthing
