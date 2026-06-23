@@ -14,7 +14,7 @@ spec:
           from: Same
     - name: websecure
       port: 443
-      protocol: HTTPS
+      protocol: TLS
       tls:
         mode: Passthrough
       allowedRoutes:
