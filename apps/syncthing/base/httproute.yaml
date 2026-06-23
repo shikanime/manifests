@@ -6,7 +6,7 @@ spec:
   hostnames:
     - syncthing.taila659a.ts.net
   parentRefs:
-    - name: traefik-gateway
+    - name: nishir
       namespace: kube-system
   rules:
     - backendRefs:
