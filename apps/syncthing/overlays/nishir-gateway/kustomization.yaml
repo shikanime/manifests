@@ -1,7 +1,5 @@
 resources:
   - ../nishir
-  - httproute-ui.yaml
-  - tcproute-replication.yaml
 namespace: shikanime
 labels:
   - includeTemplates: true
