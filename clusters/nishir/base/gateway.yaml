@@ -11,6 +11,14 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
+    - name: websecure
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Same
     - name: tcp
       port: 22000
       protocol: TCP
