@@ -12,14 +12,6 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - name: websecure
-      port: 443
-      protocol: HTTPS
-      tls:
-        mode: Terminate
-      allowedRoutes:
-        namespaces:
-          from: All
     - name: tcp
       port: 22000
       protocol: TCP
