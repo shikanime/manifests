@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: syncthing
+spec:
+  template:
+    spec:
+      containers:
+        - name: syncthing
+          livenessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+          ports:
+            - name: https
+              containerPort: 8384
+          readinessProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+          startupProbe:
+            httpGet:
+              port: https
+              scheme: HTTPS
+          volumeMounts:
+            - name: tls
+              mountPath: /config/https-cert.pem
+              subPath: tls.crt
+              readOnly: true
+            - name: tls
+              mountPath: /config/https-key.pem
+              subPath: tls.key
+              readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                mode: 416
+                path: tls.key
+            secretName: syncthing-tls
