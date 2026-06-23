@@ -25,12 +25,12 @@ spec:
           volumeMounts:
             - name: tls
               mountPath: /config/https-cert.pem
-              subPath: tls.crt
               readOnly: true
+              subPath: tls.crt
             - name: tls
               mountPath: /config/https-key.pem
-              subPath: tls.key
               readOnly: true
+              subPath: tls.key
       volumes:
         - name: tls
           secret:
