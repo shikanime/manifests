@@ -1,7 +1,3 @@
 resources:
   - ../nishir
 namespace: shikanime
-labels:
-  - includeTemplates: true
-    pairs:
-      app.kubernetes.io/canary: syncthing-gateway-api
