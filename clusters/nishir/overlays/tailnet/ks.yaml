@@ -726,14 +726,13 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
-    - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: syncthing
       namespace: shikanime
   interval: 10m
-  path: ./apps/syncthing/overlays/nishir-tailnet
+  path: ./apps/syncthing/overlays/nishir-gateway
   prune: true
   sourceRef:
     name: flux-system
