@@ -3,7 +3,9 @@ resources:
   - pvc.yaml
   - sts.yaml
   - svc.yaml
+  - svc-sync.yaml
   - tcproute.yaml
+  - udproute.yaml
   - vpa.yaml
 images:
   - name: syncthing
