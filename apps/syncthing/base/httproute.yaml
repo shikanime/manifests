@@ -11,4 +11,4 @@ spec:
   rules:
     - backendRefs:
         - name: syncthing
-          port: 8384
+          port: 80
