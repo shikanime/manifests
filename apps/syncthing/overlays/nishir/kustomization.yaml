@@ -1,7 +1,7 @@
 resources:
   - ../../base
+  - backendtlspolicy.yaml
   - cert.yaml
-  - serverstransport.yaml
 namespace: shikanime
 components:
   - ../../components/tls

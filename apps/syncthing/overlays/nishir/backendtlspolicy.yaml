@@ -9,7 +9,7 @@ spec:
       kind: Service
   validation:
     caCertificateRefs:
-      - name: syncthing-tls
-        group: ""
-        kind: Secret
+      - group: ""
+        kind: ConfigMap
+        name: nishir-ca-certificates.crt
     hostname: syncthing.taila659a.ts.net

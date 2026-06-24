@@ -27,6 +27,9 @@ spec:
         name: certs
         configMap:
           name: nishir-ca-certificates.crt
+          items:
+            - key: ca.crt
+              path: ca-certificates.crt
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: Assign
