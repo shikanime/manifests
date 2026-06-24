@@ -3,6 +3,4 @@ kind: ServersTransport
 metadata:
   name: syncthing
 spec:
-  rootCAs:
-    - secret: syncthing-tls
-  serverName: syncthing
+  insecureSkipVerify: true
