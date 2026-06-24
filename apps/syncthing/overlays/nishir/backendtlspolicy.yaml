@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: BackendTLSPolicy
+metadata:
+  name: syncthing
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: syncthing
+  validation:
+    caCertificateRefs:
+      - group: ""
+        kind: Secret
+        name: nishir-ca
+        namespace: cert-manager-trust
+    hostname: syncthing.taila659a.ts.net
