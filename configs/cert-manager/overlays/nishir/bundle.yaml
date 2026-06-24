@@ -6,8 +6,8 @@ spec:
   sources:
     - secret:
         name: nishir-ca
-        key: tls.crt
+        key: ca.crt
     - useDefaultCAs: true
   target:
     configMap:
-      key: ca-certificates.crt
+      key: ca.crt
