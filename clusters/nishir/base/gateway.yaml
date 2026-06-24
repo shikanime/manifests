@@ -8,22 +8,28 @@ spec:
   listeners:
     - name: web
       port: 80
-      protocol: HTTP
+      protocol: HTTPS
       allowedRoutes:
         namespaces:
           from: Same
+      tls:
+        certificateRefs:
+          - name: nishir-tls
+            group: ""
+            kind: Secret
+        mode: Terminate
     - name: websecure
       port: 443
       protocol: HTTPS
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - kind: Secret
-            group: ""
-            name: nishir-tls
       allowedRoutes:
         namespaces:
           from: Same
+      tls:
+        certificateRefs:
+          - name: nishir-tls
+            group: ""
+            kind: Secret
+        mode: Terminate
     - name: tcp
       port: 22000
       protocol: TCP
