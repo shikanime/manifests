@@ -123,7 +123,7 @@ spec:
     values:
       fromList:
         - name: NODE_EXTRA_CA_CERTS
-          value: /etc/ssl/certs/ca-certificates.crt
+          value: /etc/ssl/certs/ca.crt
 ---
 apiVersion: mutations.gatekeeper.sh/v1
 kind: ModifySet
@@ -162,4 +162,4 @@ spec:
     values:
       fromList:
         - name: NODE_EXTRA_CA_CERTS
-          value: /etc/ssl/certs/ca-certificates.crt
+          value: /etc/ssl/certs/ca.crt
