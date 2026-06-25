@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: openldap-seed
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+        - name: ldapadd
+          image: osixia/openldap:1.5.0
+          command:
+            - ldapadd
+            - -x
+            - -H
+            - ldaps://openldap:636
+            - -D
+            - cn=admin,dc=shikanime,dc=studio
+            - -w
+            - $(LDAP_ADMIN_PASSWORD)
+            - -f
+            - /seed/seed.ldif
+            - -Z
+          volumeMounts:
+            - name: seed
+              mountPath: /seed
+          envFrom:
+            - secretRef:
+                name: openldap
+      restartPolicy: OnFailure
+      volumes:
+        - name: seed
+          configMap:
+            name: openldap-seed
