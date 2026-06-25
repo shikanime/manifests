@@ -10,5 +10,22 @@ spec:
         storageClassName: local-path
     vmsingle:
       spec:
+        extraArgs:
+          enableTCP6: "true"
         storage:
+          resources:
+            requests:
+              storage: 8Gi
           storageClassName: local-path
+      ingress:
+        annotations:
+          tailscale.com/funnel: "true"
+          tailscale.com/tags: tag:web
+        enabled: true
+        hosts:
+          - telsha-telemetry
+        ingressClassName: tailscale
+        tls:
+          - hosts:
+              - telsha-telemetry
+            secretName: vmsingle-ingress-tls
