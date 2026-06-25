@@ -33,7 +33,6 @@ spec:
       ingress:
         enabled: true
         annotations:
-          tailscale.com/funnel: "true"
           tailscale.com/tags: tag:web
         ingressClassName: tailscale
         hosts:
