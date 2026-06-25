@@ -4,11 +4,37 @@ metadata:
   name: victoriametrics
   namespace: flux-system
 spec:
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |
+              - op: add
+                path: /spec/tls
+                value:
+                  - hosts:
+                      - telsha-telemetry
+            target:
+              name: telsha-telemetry
+              version: v1
+              kind: Ingress
   values:
     grafana:
       persistence:
         storageClassName: local-path
     vmsingle:
       spec:
+        extraArgs:
+          enableTCP6: "true"
         storage:
           storageClassName: local-path
+          resources:
+            requests:
+              storage: 8Gi
+      ingress:
+        enabled: true
+        annotations:
+          tailscale.com/funnel: "true"
+          tailscale.com/tags: tag:web
+        ingressClassName: tailscale
+        hosts:
+          - telsha-telemetry

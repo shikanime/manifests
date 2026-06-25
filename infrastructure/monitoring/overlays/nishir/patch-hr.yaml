@@ -4,11 +4,57 @@ metadata:
   name: victoriametrics
   namespace: flux-system
 spec:
+  postRenderers:
+    - kustomize:
+        patches:
+          - patch: |
+              - op: add
+                path: /spec/tls
+                value:
+                  - hosts:
+                      - nishir-telemetry
+            target:
+              name: nishir-telemetry
+              version: v1
+              kind: Ingress
   values:
     grafana:
       persistence:
         storageClassName: nishir-standard
     vmsingle:
+      enabled: false
+    vmcluster:
+      enabled: true
       spec:
-        storage:
-          storageClassName: nishir-standard
+        vmstorage:
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: nishir-standard
+                resources:
+                  requests:
+                    storage: 8Gi
+          extraArgs:
+            enableTCP6: "true"
+        vmselect:
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: nishir-standard
+                resources:
+                  requests:
+                    storage: 2Gi
+          extraArgs:
+            enableTCP6: "true"
+        vminsert:
+          extraArgs:
+            enableTCP6: "true"
+      ingress:
+        insert:
+          enabled: true
+          annotations:
+            tailscale.com/funnel: "true"
+            tailscale.com/tags: tag:web
+          ingressClassName: tailscale
+          hosts:
+            - nishir-telemetry
