@@ -3,6 +3,7 @@ resources:
   - backendtlspolicy.yaml
   - cert.yaml
   - httproute.yaml
+  - netpol.yaml
   - tcproute.yaml
   - udproute.yaml
 namespace: shikanime
