@@ -21,6 +21,23 @@ spec:
     grafana:
       persistence:
         storageClassName: local-path
+    vmauth:
+      spec:
+        port: "8427"
+        secretName: vmauth
+      enabled: true
+      ingress:
+        annotations:
+          tailscale.com/tags: tag:web
+        enabled: true
+        hosts:
+          - telsha-vmauth
+        ingressClassName: tailscale
+        path: /
+        pathType: Prefix
+        tls:
+          - hosts:
+              - telsha-vmauth
     vmsingle:
       spec:
         extraArgs:
