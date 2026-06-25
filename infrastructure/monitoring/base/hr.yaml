@@ -30,6 +30,11 @@ spec:
     vmalert:
       extraArgs:
         enableTCP6: "true"
+    vmauth:
+      spec:
+        port: "8427"
+        secretName: vmauth
+      enabled: true
     vmsingle:
       spec:
         extraArgs:

@@ -21,6 +21,19 @@ spec:
     grafana:
       persistence:
         storageClassName: nishir-standard
+    vmauth:
+      ingress:
+        annotations:
+          tailscale.com/tags: tag:web
+        enabled: true
+        hosts:
+          - nishir-vmauth
+        ingressClassName: tailscale
+        path: /
+        pathType: Prefix
+        tls:
+          - hosts:
+              - nishir-vmauth
     vmcluster:
       spec:
         vminsert:
