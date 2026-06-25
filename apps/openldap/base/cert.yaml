@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: openldap
+spec:
+  dnsNames:
+    - openldap
+    - openldap.shikanime.svc.cluster.local
+  duration: 2160h
+  isCA: false
+  issuerRef:
+    name: nishir
+    kind: ClusterIssuer
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  renewBefore: 720h
+  secretName: openldap-tls
+  usages:
+    - server auth

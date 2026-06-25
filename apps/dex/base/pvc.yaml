@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dex
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
