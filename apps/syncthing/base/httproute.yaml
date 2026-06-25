@@ -10,5 +10,5 @@ spec:
       sectionName: https
   rules:
     - backendRefs:
-        - name: http
+        - name: syncthing
           port: 8384
