@@ -14,9 +14,6 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: kube-system
-          podSelector:
-            matchLabels:
-              app.kubernetes.io/name: rke2-traefik
       ports:
         - port: http
           protocol: TCP
