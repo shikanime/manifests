@@ -1,0 +1,5 @@
+resources:
+  - ../nishir
+  - ingress.yaml
+  - netpol.yaml
+namespace: shikanime
