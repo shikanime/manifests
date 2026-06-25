@@ -2,6 +2,9 @@ resources:
   - ../../base
   - backendtlspolicy.yaml
   - cert.yaml
+  - httproute.yaml
+  - tcproute.yaml
+  - udproute.yaml
 namespace: shikanime
 components:
   - ../../components/tls
