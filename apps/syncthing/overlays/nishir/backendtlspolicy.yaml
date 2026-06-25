@@ -12,4 +12,4 @@ spec:
       - name: nishir-ca-certificates.crt
         group: ""
         kind: ConfigMap
-    hostname: syncthing
+    hostname: syncthing.taila659a.ts.net
