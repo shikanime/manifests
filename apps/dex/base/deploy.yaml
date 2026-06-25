@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: dex
+      app.kubernetes.io/name: dex
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: dex
+        app.kubernetes.io/name: dex
+    spec:
+      containers:
+        - name: dex
+          image: ghcr.io/dexidp/dex:v2.41.1
+          args:
+            - serve
+            - /etc/dex/config.yaml
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          ports:
+            - name: http
+              containerPort: 5556
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          volumeMounts:
+            - name: config
+              mountPath: /etc/dex
+            - name: data
+              mountPath: /var/dex
+            - name: openldap-ca
+              mountPath: /etc/dex/openldap-ca
+              readOnly: true
+      volumes:
+        - name: config
+          secret:
+            secretName: dex
+        - name: data
+          persistentVolumeClaim:
+            claimName: dex
+        - name: openldap-ca
+          secret:
+            items:
+              - key: tls.crt
+                path: ca.crt
+            secretName: openldap-tls
