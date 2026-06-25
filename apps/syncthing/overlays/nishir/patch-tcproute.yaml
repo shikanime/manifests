@@ -6,7 +6,3 @@ spec:
   parentRefs:
     - name: nishir
       sectionName: syncthing
-  rules:
-    - backendRefs:
-        - name: syncthing
-          port: 22000
