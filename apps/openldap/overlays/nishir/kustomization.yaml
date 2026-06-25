@@ -1,0 +1,19 @@
+resources:
+  - ../../base
+  - seed-job.yaml
+namespace: shikanime
+configMapGenerator:
+  - name: openldap-seed
+    files:
+      - seed.ldif
+  - name: sso-config
+    literals:
+      - LDAP_SERVER=openldap.shikanime.svc.cluster.local
+      - LDAP_BASE_DN=dc=shikanime,dc=studio
+      - LDAP_TLS=true
+      - OIDC_ISSUER=https://dex.shikanime.ts.net
+      - OIDC_SCOPES=openid email profile groups
+secretGenerator:
+  - name: openldap
+    envs:
+      - .enc.env
