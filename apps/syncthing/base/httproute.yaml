@@ -4,9 +4,12 @@ metadata:
   name: syncthing
 spec:
   parentRefs:
+  parentRefs:
     - name: nishir
-      sectionName: websecure
+      sectionName: http
+    - name: nishir
+      sectionName: https
   rules:
     - backendRefs:
-        - name: syncthing
+        - name: http
           port: 8384
