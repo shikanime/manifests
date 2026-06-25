@@ -6,7 +6,7 @@ metadata:
 spec:
   gatewayClassName: traefik
   listeners:
-    - name: web
+    - name: http
       port: 80
       protocol: HTTPS
       allowedRoutes:
@@ -18,7 +18,7 @@ spec:
             group: ""
             kind: Secret
         mode: Terminate
-    - name: websecure
+    - name: https
       port: 443
       protocol: HTTPS
       allowedRoutes:
