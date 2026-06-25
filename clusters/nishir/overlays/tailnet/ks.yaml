@@ -292,6 +292,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -318,6 +319,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -344,6 +346,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -370,6 +373,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -396,6 +400,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -422,6 +427,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -448,6 +454,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -474,6 +481,7 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
@@ -576,6 +584,8 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+  dependsOn:
+    - name: apps-qbittorrent
   healthChecks:
     - apiVersion: batch/v1
       kind: CronJob
@@ -699,6 +709,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
+    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
