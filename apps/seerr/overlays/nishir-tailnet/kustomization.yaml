@@ -3,6 +3,8 @@ resources:
   - netpol.yaml
   - ingress.yaml
 namespace: shikanime
+patches:
+  - path: patch-sts-oidc.yaml
 labels:
   - includeTemplates: true
     pairs:
@@ -11,3 +13,7 @@ labels:
       app.kubernetes.io/name: seerr
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 3.3.0
+secretGenerator:
+  - name: seerr-oidc
+    envs:
+      - oidc.enc.env
