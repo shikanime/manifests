@@ -1,0 +1,20 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: vmauth
+  namespace: monitoring-system
+spec:
+  approvePlan: auto
+  interval: 1h
+  path: ./modules/vmauth
+  sourceRef:
+    name: flux-system
+    kind: GitRepository
+    namespace: flux-system
+  vars:
+    - name: vmselect_url
+      value: http://vmks-vmselect.monitoring-system.svc:8481
+    - name: vminsert_url
+      value: http://vmks-vminsert.monitoring-system.svc:8480
+  writeOutputsToSecret:
+    name: vmauth-outputs
