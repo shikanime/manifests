@@ -2,6 +2,8 @@ resources:
   - ../nishir
   - netpol.yaml
 namespace: shikanime
+patches:
+  - path: patch-sts-oidc.yaml
 labels:
   - includeTemplates: true
     pairs:
@@ -18,5 +20,3 @@ secretGenerator:
   - name: synapse-oidc
     files:
       - oidc.yaml=synapse/oidc.enc.yaml
-patches:
-  - path: patch-sts-oidc.yaml

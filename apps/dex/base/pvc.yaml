@@ -3,9 +3,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: dex
 spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
   resources:
     requests:
       storage: 2Gi
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce

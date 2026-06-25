@@ -3,18 +3,18 @@ kind: Certificate
 metadata:
   name: openldap
 spec:
-  secretName: openldap-tls
-  duration: 2160h
-  renewBefore: 720h
-  isCA: false
-  privateKey:
-    algorithm: ECDSA
-    size: 256
-  usages:
-    - server auth
   dnsNames:
     - openldap
     - openldap.shikanime.svc.cluster.local
+  duration: 2160h
+  isCA: false
   issuerRef:
     name: nishir
     kind: ClusterIssuer
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  renewBefore: 720h
+  secretName: openldap-tls
+  usages:
+    - server auth

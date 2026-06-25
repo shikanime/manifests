@@ -20,9 +20,21 @@ spec:
           args:
             - serve
             - /etc/dex/config.yaml
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
           ports:
             - name: http
               containerPort: 5556
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
           volumeMounts:
             - name: config
               mountPath: /etc/dex
@@ -31,18 +43,6 @@ spec:
             - name: openldap-ca
               mountPath: /etc/dex/openldap-ca
               readOnly: true
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 10
-            periodSeconds: 5
       volumes:
         - name: config
           secret:
@@ -52,7 +52,7 @@ spec:
             claimName: dex
         - name: openldap-ca
           secret:
-            secretName: openldap-tls
             items:
               - key: tls.crt
                 path: ca.crt
+            secretName: openldap-tls

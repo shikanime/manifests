@@ -3,9 +3,6 @@ kind: NetworkPolicy
 metadata:
   name: dex
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/instance: dex
   ingress:
     - from:
         - namespaceSelector:
@@ -16,3 +13,6 @@ spec:
     - from: []
       ports:
         - port: http
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: dex

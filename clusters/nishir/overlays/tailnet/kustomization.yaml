@@ -8,7 +8,6 @@ components:
   - ../../components/gatekeeper
   - ../../components/longhorn
   - ../../components/monitoring
-  - ../../components/sso
   - ../../components/tailscale
 patches:
   - path: patch-ingress.yaml

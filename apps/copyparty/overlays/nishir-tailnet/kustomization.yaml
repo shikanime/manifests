@@ -10,10 +10,6 @@ configMapGenerator:
   - name: copyparty
     files:
       - ./copyparty/config.conf
-secretGenerator:
-  - name: copyparty-oidc
-    files:
-      - oidc.conf=copyparty/oidc.enc.conf
 labels:
   - includeTemplates: true
     pairs:
@@ -22,3 +18,7 @@ labels:
       app.kubernetes.io/name: copyparty
       app.kubernetes.io/part-of: nishir-operation
       app.kubernetes.io/version: 1.20.16
+secretGenerator:
+  - name: copyparty-oidc
+    files:
+      - oidc.conf=copyparty/oidc.enc.conf

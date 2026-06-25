@@ -6,7 +6,6 @@ spec:
   backoffLimit: 3
   template:
     spec:
-      restartPolicy: OnFailure
       containers:
         - name: ldapadd
           image: osixia/openldap:1.5.0
@@ -22,12 +21,13 @@ spec:
             - -f
             - /seed/seed.ldif
             - -Z
-          envFrom:
-            - secretRef:
-                name: openldap
           volumeMounts:
             - name: seed
               mountPath: /seed
+          envFrom:
+            - secretRef:
+                name: openldap
+      restartPolicy: OnFailure
       volumes:
         - name: seed
           configMap:

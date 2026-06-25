@@ -10,7 +10,7 @@ spec:
       name: dex
       port:
         name: http
+  ingressClassName: tailscale
   tls:
     - hosts:
         - dex
-  ingressClassName: tailscale
