@@ -5,3 +5,7 @@ metadata:
 spec:
   hostnames:
     - syncthing.taila659a.ts.net
+  rules:
+    - backendRefs:
+        - name: https
+          port: 8384
