@@ -14,7 +14,7 @@ spec:
                   - hosts:
                       - telsha-telemetry
             target:
-              name: telsha-telemetry
+              name: vminsert-vmks-victoria-metrics-k8s-stack
               version: v1
               kind: Ingress
   values:
@@ -26,14 +26,14 @@ spec:
         extraArgs:
           enableTCP6: "true"
         storage:
-          storageClassName: local-path
           resources:
             requests:
               storage: 8Gi
+          storageClassName: local-path
       ingress:
-        enabled: true
         annotations:
           tailscale.com/tags: tag:web
-        ingressClassName: tailscale
+        enabled: true
         hosts:
           - telsha-telemetry
+        ingressClassName: tailscale

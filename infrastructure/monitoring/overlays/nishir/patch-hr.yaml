@@ -14,46 +14,46 @@ spec:
                   - hosts:
                       - nishir-telemetry
             target:
-              name: nishir-telemetry
+              name: vminsert-vmks-victoria-metrics-k8s-stack
               version: v1
               kind: Ingress
   values:
     grafana:
       persistence:
         storageClassName: nishir-standard
-    vmsingle:
-      enabled: false
     vmcluster:
-      enabled: true
       spec:
-        vmstorage:
-          storage:
-            volumeClaimTemplate:
-              spec:
-                storageClassName: nishir-standard
-                resources:
-                  requests:
-                    storage: 8Gi
-          extraArgs:
-            enableTCP6: "true"
-        vmselect:
-          storage:
-            volumeClaimTemplate:
-              spec:
-                storageClassName: nishir-standard
-                resources:
-                  requests:
-                    storage: 2Gi
-          extraArgs:
-            enableTCP6: "true"
         vminsert:
           extraArgs:
             enableTCP6: "true"
+        vmselect:
+          extraArgs:
+            enableTCP6: "true"
+          storage:
+            volumeClaimTemplate:
+              spec:
+                resources:
+                  requests:
+                    storage: 2Gi
+                storageClassName: nishir-standard
+        vmstorage:
+          extraArgs:
+            enableTCP6: "true"
+          storage:
+            volumeClaimTemplate:
+              spec:
+                resources:
+                  requests:
+                    storage: 8Gi
+                storageClassName: nishir-standard
+      enabled: true
       ingress:
         insert:
-          enabled: true
           annotations:
             tailscale.com/tags: tag:web
-          ingressClassName: tailscale
+          enabled: true
           hosts:
             - nishir-telemetry
+          ingressClassName: tailscale
+    vmsingle:
+      enabled: false
