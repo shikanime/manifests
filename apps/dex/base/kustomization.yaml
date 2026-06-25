@@ -1,0 +1,5 @@
+resources:
+  - deploy.yaml
+  - svc.yaml
+  - pvc.yaml
+  - netpol.yaml

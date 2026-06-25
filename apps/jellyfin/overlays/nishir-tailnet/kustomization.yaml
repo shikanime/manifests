@@ -5,6 +5,15 @@ resources:
 namespace: shikanime
 patches:
   - path: patch-sts.yaml
+  - path: patch-sts-ldap.yaml
+configMapGenerator:
+  - name: sso-config
+    literals:
+      - LDAP_SERVER=openldap.shikanime.svc.cluster.local
+      - LDAP_BASE_DN=dc=shikanime,dc=studio
+      - LDAP_TLS=true
+      - OIDC_ISSUER=https://dex.shikanime.ts.net
+      - OIDC_SCOPES=openid email profile groups
 labels:
   - includeTemplates: true
     pairs:
@@ -13,3 +22,7 @@ labels:
       app.kubernetes.io/name: jellyfin
       app.kubernetes.io/part-of: nishir-media
       app.kubernetes.io/version: 10.11.11
+secretGenerator:
+  - name: jellyfin-ldap
+    envs:
+      - jellyfin/ldap.enc.env

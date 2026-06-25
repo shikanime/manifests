@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: copyparty
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: oidc-config-merge
+          image: busybox:1.37
+          command:
+            - sh
+            - -c
+            - |
+              # Append OIDC config to copyparty config.conf
+              if [ -f /mnt/oidc-config/oidc.conf ]; then
+                echo "" >> /config/config.conf
+                echo "# Dex OIDC configuration" >> /config/config.conf
+                cat /mnt/oidc-config/oidc.conf >> /config/config.conf
+              fi
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: oidc-config
+              mountPath: /mnt/oidc-config
+      volumes:
+        - name: oidc-config
+          secret:
+            secretName: copyparty-oidc
