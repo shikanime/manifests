@@ -5,6 +5,7 @@ resources:
 namespace: shikanime
 patches:
   - path: patch-svc.yaml
+  - path: patch-sts-oidc.yaml
 labels:
   - includeTemplates: true
     pairs:
@@ -17,3 +18,6 @@ secretGenerator:
   - name: forgejo-config
     files:
       - app.ini=forgejo/app.enc.ini
+  - name: forgejo-oidc
+    files:
+      - oidc.ini=forgejo/oidc.enc.ini

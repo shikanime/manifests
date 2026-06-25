@@ -10,7 +10,3 @@ spec:
       sectionName: http
     - name: nishir
       sectionName: https
-  rules:
-    - backendRefs:
-        - name: syncthing
-          port: 8384

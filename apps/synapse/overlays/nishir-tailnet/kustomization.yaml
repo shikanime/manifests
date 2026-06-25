@@ -15,3 +15,8 @@ secretGenerator:
     files:
       - homeserver.yaml=synapse/homeserver.enc.yaml
       - synapse/matrix.taila659a.ts.net.log.config
+  - name: synapse-oidc
+    files:
+      - oidc.yaml=synapse/oidc.enc.yaml
+patches:
+  - path: patch-sts-oidc.yaml
