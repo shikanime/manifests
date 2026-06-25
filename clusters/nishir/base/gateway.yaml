@@ -30,7 +30,7 @@ spec:
             group: ""
             kind: Secret
         mode: Terminate
-    - name: tcp
+    - name: syncthing
       port: 22000
       protocol: TCP
       allowedRoutes:

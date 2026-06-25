@@ -5,6 +5,7 @@ metadata:
 spec:
   parentRefs:
     - name: nishir
+      sectionName: syncthing-udp
   rules:
     - backendRefs:
         - name: syncthing
