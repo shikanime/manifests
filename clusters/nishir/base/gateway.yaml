@@ -20,16 +20,12 @@ spec:
         mode: Terminate
     - name: https
       port: 443
-      protocol: HTTPS
+      protocol: TLS
       allowedRoutes:
         namespaces:
           from: Same
       tls:
-        certificateRefs:
-          - name: nishir-tls
-            group: ""
-            kind: Secret
-        mode: Terminate
+        mode: Passthrough
     - name: syncthing
       port: 22000
       protocol: TCP
