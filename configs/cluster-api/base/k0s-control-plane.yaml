@@ -44,7 +44,7 @@ spec:
                       kind: GitRepository
                       path: clusters/shana/overlays/tailnet
                       ref: refs/heads/main
-                      url: https://github.com/x-shikanime/manifests.git
+                      url: https://github.com/shikanime-labs/manifests.git
                     cluster:
                       networkPolicy: true
               - name: flux-operator
