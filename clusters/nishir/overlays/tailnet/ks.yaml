@@ -247,6 +247,7 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: apps/v1
