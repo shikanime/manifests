@@ -2,8 +2,6 @@ resources:
   - ../nishir
   - netpol.yaml
 namespace: shikanime
-components:
-  - ../../components/monitoring
 labels:
   - includeTemplates: true
     pairs:
