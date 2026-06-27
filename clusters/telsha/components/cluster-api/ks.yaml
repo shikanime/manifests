@@ -8,6 +8,8 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+  dependsOn:
+    - name: infrastructure-monitoring
   interval: 10m
   path: ./infrastructure/cluster-api/overlays/telsha
   prune: true
