@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: whisparr
+  namespace: shikanime
+  labels:
+    app.kubernetes.io/name: whisparr
+    app.kubernetes.io/part-of: whisparr
+spec:
+  endpoints:
+    - interval: 60s
+      path: /metrics
+      port: http
+      scrapeTimeout: 30s
+  namespaceSelector:
+    matchNames:
+      - shikanime
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: whisparr
+      app.kubernetes.io/name: whisparr
