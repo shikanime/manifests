@@ -2,6 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: honcho
+  labels:
+    app.kubernetes.io/instance: honcho
+    app.kubernetes.io/name: honcho
 spec:
   ports:
     - name: http

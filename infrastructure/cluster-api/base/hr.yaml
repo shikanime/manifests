@@ -30,3 +30,6 @@ spec:
     infrastructure:
       hetzner: {}
       k0sproject-k0smotron: {}
+    leaderElection:
+      enabled: true
+    replicaCount: 2
