@@ -27,6 +27,8 @@ spec:
         size: 2Gi
     kubeProxy:
       enabled: true
+    serviceMonitor:
+      enabled: true
     vmalert:
       extraArgs:
         enableTCP6: "true"
