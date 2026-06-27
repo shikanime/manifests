@@ -1,7 +1,5 @@
 resources:
   - ../nishir
-components:
-  - ../../components/monitoring
 labels:
   - includeTemplates: true
     pairs:
