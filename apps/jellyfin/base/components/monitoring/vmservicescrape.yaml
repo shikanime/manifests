@@ -1,20 +1,21 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMServiceScrape
 metadata:
-  name: descheduler
-  namespace: kube-system
+  name: jellyfin
+  namespace: shikanime
   labels:
-    app.kubernetes.io/name: descheduler
-    app.kubernetes.io/part-of: descheduler
+    app.kubernetes.io/name: jellyfin
+    app.kubernetes.io/part-of: jellyfin
 spec:
   endpoints:
     - interval: 60s
       path: /metrics
-      port: http-metrics
+      port: http
       scrapeTimeout: 30s
   namespaceSelector:
     matchNames:
-      - kube-system
+      - shikanime
   selector:
     matchLabels:
-      app.kubernetes.io/name: descheduler
+      app.kubernetes.io/instance: jellyfin
+      app.kubernetes.io/name: jellyfin

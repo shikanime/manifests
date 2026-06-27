@@ -191,7 +191,7 @@ MAX_WORKSPACE_LIMIT = 10
 
 # Prometheus metrics settings (pull-based metrics)
 [metrics]
-ENABLED = false
+ENABLED = true
 
 # CloudEvents telemetry settings (analytics events)
 [telemetry]
