@@ -23,6 +23,10 @@ spec:
   values:
     admissionController:
       generateCertificate: false
+      podDisruptionBudget:
+        enabled: true
+        maxUnavailable: 1
+      replicaCount: 2
       tlsSecretKeys:
         - key: ca.crt
           path: caCert.pem
@@ -30,3 +34,13 @@ spec:
           path: serverCert.pem
         - key: tls.key
           path: serverKey.pem
+    recommender:
+      podDisruptionBudget:
+        enabled: true
+        maxUnavailable: 1
+      replicaCount: 2
+    updater:
+      podDisruptionBudget:
+        enabled: true
+        maxUnavailable: 1
+      replicaCount: 2

@@ -9,7 +9,7 @@ spec:
             matchLabels:
               app.kubernetes.io/name: prowlarr
       ports:
-        - port: https
+        - port: http
   podSelector:
     matchLabels:
       app.kubernetes.io/instance: lidarr

@@ -1,5 +1,7 @@
 resources:
   - ../../base
 namespace: shikanime
+components:
+  - ../../components/monitoring
 patches:
   - path: patch-pvc.yaml

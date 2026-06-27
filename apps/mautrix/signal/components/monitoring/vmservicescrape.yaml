@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: signal
+  namespace: shikanime
+  labels:
+    app.kubernetes.io/name: signal
+    app.kubernetes.io/part-of: signal
+spec:
+  endpoints:
+    - interval: 60s
+      path: /metrics
+      port: metrics
+      scrapeTimeout: 30s
+  namespaceSelector:
+    matchNames:
+      - shikanime
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: signal
+      app.kubernetes.io/name: signal

@@ -1,8 +1,11 @@
 resources:
+  - netpol.yaml
   - pvc.yaml
   - sts.yaml
   - svc.yaml
   - vpa.yaml
+components:
+  - components/monitoring
 images:
   - name: rclone
     newName: rclone/rclone

@@ -3,6 +3,8 @@ resources:
   - netpol.yaml
   - ingress.yaml
 namespace: shikanime
+components:
+  - ../../components/monitoring
 configMapGenerator:
   - name: synapse-proxy
     files:

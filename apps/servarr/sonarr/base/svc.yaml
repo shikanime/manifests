@@ -7,6 +7,9 @@ spec:
     - name: http
       port: 8989
       targetPort: http
+    - name: metrics
+      port: 8989
+      targetPort: http
   selector:
     app.kubernetes.io/instance: sonarr
     app.kubernetes.io/name: sonarr

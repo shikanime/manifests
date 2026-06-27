@@ -3,7 +3,13 @@ kind: Service
 metadata:
   name: hermes-agent-gateway
 spec:
-  ports: []
+  ports:
+    - name: http
+      port: 8000
+      targetPort: http
+    - name: metrics
+      port: 8000
+      targetPort: http
   selector:
     app.kubernetes.io/instance: hermes-agent-gateway
     app.kubernetes.io/name: hermes-agent

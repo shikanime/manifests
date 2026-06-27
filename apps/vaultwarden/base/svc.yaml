@@ -7,6 +7,9 @@ spec:
     - name: http
       port: 80
       targetPort: http
+    - name: metrics
+      port: 80
+      targetPort: http
   selector:
     app.kubernetes.io/instance: vaultwarden
     app.kubernetes.io/name: vaultwarden

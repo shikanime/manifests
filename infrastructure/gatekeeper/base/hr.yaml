@@ -21,8 +21,19 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
+    controllerManager:
+      networkPolicy:
+        enabled: true
+        ingress:
+          - from:
+              - ipBlock:
+                  cidr: 0.0.0.0/0
     defaultCreateVAPBindingForConstraints: false
     defaultCreateVAPForTemplates: false
     enableK8sNativeValidation: false
+    pdb:
+      controllerManager:
+        minAvailable: 1
+    replicas: 2
     upgradeCRDs:
       enabled: false

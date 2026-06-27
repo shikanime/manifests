@@ -7,6 +7,9 @@ spec:
     - name: http
       port: 7878
       targetPort: http
+    - name: metrics
+      port: 7878
+      targetPort: http
   selector:
     app.kubernetes.io/instance: radarr
     app.kubernetes.io/name: radarr

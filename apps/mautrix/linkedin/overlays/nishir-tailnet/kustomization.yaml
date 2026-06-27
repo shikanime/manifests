@@ -3,6 +3,8 @@ resources:
   - netpol.yaml
   - ingress.yaml
 namespace: shikanime
+components:
+  - ../../components/monitoring
 secretGenerator:
   - name: mautrix-linkedin
     files:

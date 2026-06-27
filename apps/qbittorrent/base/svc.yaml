@@ -8,6 +8,9 @@ spec:
     - name: http
       port: 8080
       targetPort: http
+    - name: metrics
+      port: 8080
+      targetPort: http
   selector:
     app.kubernetes.io/instance: qbittorrent
     app.kubernetes.io/name: qbittorrent

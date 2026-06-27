@@ -7,6 +7,9 @@ spec:
     - name: http
       port: 29318
       targetPort: http
+    - name: metrics
+      port: 29318
+      targetPort: http
   publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: mautrix-whatsapp

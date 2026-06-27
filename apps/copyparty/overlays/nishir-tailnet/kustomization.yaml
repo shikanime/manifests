@@ -3,6 +3,8 @@ resources:
   - netpol.yaml
   - ingress.yaml
 namespace: shikanime
+components:
+  - ../../components/monitoring
 patches:
   - path: patch-svc.yaml
 configMapGenerator:

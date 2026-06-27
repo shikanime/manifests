@@ -2,8 +2,6 @@ resources:
   - ../../base
   - ks.yaml
   - netattachdef.yaml
-components:
-  - ../../components/monitoring
 patches:
   - path: patch-hr.yaml
 secretGenerator:

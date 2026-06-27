@@ -7,6 +7,9 @@ spec:
     - name: http
       port: 5055
       targetPort: http
+    - name: metrics
+      port: 5055
+      targetPort: http
   selector:
     app.kubernetes.io/instance: seerr
     app.kubernetes.io/name: seerr

@@ -1,0 +1,21 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: slack
+  namespace: shikanime
+  labels:
+    app.kubernetes.io/name: slack
+    app.kubernetes.io/part-of: slack
+spec:
+  endpoints:
+    - interval: 60s
+      path: /metrics
+      port: metrics
+      scrapeTimeout: 30s
+  namespaceSelector:
+    matchNames:
+      - shikanime
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: slack
+      app.kubernetes.io/name: slack

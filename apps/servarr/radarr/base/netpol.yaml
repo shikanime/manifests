@@ -7,18 +7,12 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: bazarr
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: jellyfin
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: seerr
+              app.kubernetes.io/name: sonarr
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: prowlarr
       ports:
-        - port: https
+        - port: http
   podSelector:
     matchLabels:
       app.kubernetes.io/instance: radarr

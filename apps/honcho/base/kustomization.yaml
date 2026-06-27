@@ -1,8 +1,11 @@
 resources:
   - deploy.yaml
+  - hpa.yaml
   - netpol.yaml
   - svc.yaml
   - vpa.yaml
+components:
+  - components/monitoring
 images:
   - name: honcho
     newName: ghcr.io/plastic-labs/honcho

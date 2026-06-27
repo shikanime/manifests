@@ -2,6 +2,8 @@ resources:
   - ../nishir
   - ingress.yaml
 namespace: shikanime
+components:
+  - ../../components/monitoring
 secretGenerator:
   - name: mautrix-twitter
     files:

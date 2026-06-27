@@ -7,6 +7,9 @@ spec:
     - name: http
       port: 8008
       targetPort: http
+    - name: metrics
+      port: 8008
+      targetPort: http
   selector:
     app.kubernetes.io/instance: synapse-proxy
     app.kubernetes.io/name: synapse-proxy

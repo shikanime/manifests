@@ -7,6 +7,9 @@ spec:
     - name: http
       port: 6767
       targetPort: http
+    - name: metrics
+      port: 6767
+      targetPort: http
   selector:
     app.kubernetes.io/instance: bazarr
     app.kubernetes.io/name: bazarr
