@@ -24,7 +24,6 @@ spec:
     admissionController:
       generateCertificate: false
       podDisruptionBudget:
-        enabled: true
         maxUnavailable: 1
       replicaCount: 2
       tlsSecretKeys:
@@ -36,11 +35,9 @@ spec:
           path: serverKey.pem
     recommender:
       podDisruptionBudget:
-        enabled: true
         maxUnavailable: 1
       replicaCount: 2
     updater:
       podDisruptionBudget:
-        enabled: true
         maxUnavailable: 1
       replicaCount: 2
