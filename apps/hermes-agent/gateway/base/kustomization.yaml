@@ -3,8 +3,6 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-components:
-  - components/monitoring
 images:
   - name: rclone
     newName: rclone/rclone

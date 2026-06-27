@@ -2,8 +2,6 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-components:
-  - components/monitoring
 images:
   - name: hermes-agent
     newName: nousresearch/hermes-agent

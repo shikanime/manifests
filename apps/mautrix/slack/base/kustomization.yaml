@@ -3,8 +3,6 @@ resources:
   - pvc.yaml
   - sts.yaml
   - svc.yaml
-components:
-  - components/monitoring
 images:
   - name: mautrix
     newName: dock.mau.dev/mautrix/slack
