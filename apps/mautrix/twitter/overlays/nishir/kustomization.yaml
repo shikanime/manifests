@@ -2,3 +2,5 @@ resources:
   - ../../base
 patches:
   - path: patch-pvc.yaml
+components:
+  - ../../components/monitoring

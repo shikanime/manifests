@@ -4,8 +4,6 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-components:
-  - components/monitoring
 images:
   - name: rclone
     newName: rclone/rclone
@@ -15,8 +13,7 @@ images:
     newTag: 15.0.3-rootless
 metadata:
   annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "forgejo", "tag-regex":
+    automata.shikanime.studio/images: '[ { "name": "forgejo", "tag-regex":
       "^(?P<version>\\d+\\.\\d+\\.\\d+-rootless)$" }, { "name": "rclone",
       "tag-regex": "^(?P<version>\\d+\\.\\d+\\.\\d+.*)$" } ]'
 configMapGenerator:

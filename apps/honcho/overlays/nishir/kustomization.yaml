@@ -1,6 +1,8 @@
 resources:
   - ../../base
 namespace: shikanime
+components:
+  - ../../components/monitoring
 configMapGenerator:
   - name: honcho
     files:

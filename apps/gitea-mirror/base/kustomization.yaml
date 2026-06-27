@@ -3,14 +3,11 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-components:
-  - components/monitoring
 images:
   - name: gitea-mirror
     newName: ghcr.io/raylabshq/gitea-mirror
     newTag: v3.17.1
 metadata:
   annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "gitea-mirror", "tag-regex":
+    automata.shikanime.studio/images: '[ { "name": "gitea-mirror", "tag-regex":
       "^(?P<version>v\\d+\\.\\d+\\.\\d+)$" } ]'

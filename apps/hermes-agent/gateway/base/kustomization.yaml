@@ -3,8 +3,6 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-components:
-  - components/monitoring
 images:
   - name: rclone
     newName: rclone/rclone
@@ -14,8 +12,7 @@ images:
     newTag: v2026.6.5
 metadata:
   annotations:
-    automata.shikanime.studio/images:
-      '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
+    automata.shikanime.studio/images: '[ { "name": "hermes-agent", "tag-regex": "^(?P<version>.+)$" } ]'
 configMapGenerator:
   - name: hermes-agent-gateway-rclone
     files:
