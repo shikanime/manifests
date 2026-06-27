@@ -13,8 +13,6 @@ spec:
         name: kubernetes-sigs-descheduler
         kind: HelmRepository
         namespace: flux-system
-  install:
-    createNamespace: true
   interval: 10m
   releaseName: descheduler
   targetNamespace: decheduler-system
