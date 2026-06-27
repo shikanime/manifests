@@ -9,5 +9,6 @@ images:
     newTag: v3.17.1
 metadata:
   annotations:
-    automata.shikanime.studio/images: '[ { "name": "gitea-mirror", "tag-regex":
+    automata.shikanime.studio/images:
+      '[ { "name": "gitea-mirror", "tag-regex":
       "^(?P<version>v\\d+\\.\\d+\\.\\d+)$" } ]'
