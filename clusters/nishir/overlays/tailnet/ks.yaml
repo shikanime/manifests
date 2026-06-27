@@ -64,6 +64,7 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: apps/v1
@@ -90,6 +91,7 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: apps/v1
@@ -116,6 +118,7 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: apps/v1
@@ -142,6 +145,7 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: apps/v1
@@ -294,6 +298,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -321,6 +326,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -348,6 +354,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -375,6 +382,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -402,6 +410,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -429,6 +438,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -456,6 +466,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -483,6 +494,7 @@ spec:
     - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: v1
@@ -509,6 +521,7 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
@@ -688,6 +701,7 @@ spec:
   dependsOn:
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
+    - name: infrastructure-monitoring
     - name: infrastructure-tailscale
   healthChecks:
     - apiVersion: apps/v1
