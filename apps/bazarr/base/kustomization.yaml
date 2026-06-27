@@ -4,8 +4,6 @@ resources:
   - sts.yaml
   - svc.yaml
   - vpa.yaml
-components:
-  - components/monitoring
 images:
   - name: bazarr
     newName: lscr.io/linuxserver/bazarr
