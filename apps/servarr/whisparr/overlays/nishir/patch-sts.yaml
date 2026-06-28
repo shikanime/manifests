@@ -9,7 +9,7 @@ spec:
         - name: whisparr
           volumeMounts:
             - name: sukebe-scenes-data
-              mountPath: /data/scenes
+              mountPath: /data/videos
             - name: downloads-data
               mountPath: /downloads
       volumes:

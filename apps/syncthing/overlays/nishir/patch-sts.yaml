@@ -27,7 +27,7 @@ spec:
             - name: sukebe-games-data
               mountPath: /var/syncthing/Sukebe/Games
             - name: sukebe-scenes-data
-              mountPath: /var/syncthing/Sukebe/Scenes
+              mountPath: /var/syncthing/Sukebe/Videos
             - name: sukebe-shows-data
               mountPath: /var/syncthing/Sukebe/Shows
             - name: sync-data

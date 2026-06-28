@@ -27,7 +27,7 @@ spec:
             - name: sukebe-games-data
               mountPath: /data/sukebe/Games
             - name: sukebe-scenes-data
-              mountPath: /data/sukebe/Scenes
+              mountPath: /data/sukebe/Videos
             - name: sukebe-shows-data
               mountPath: /data/sukebe/Shows
             - name: sync-data
