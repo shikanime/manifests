@@ -104,12 +104,6 @@
                             "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64"
                           ];
                         }
-                        {
-                          name = "talashi";
-                          keys = [
-                            "age1f4yuh4j3gqafjduusfpxz3na9xtwth9s6gznq043mfex0zglp5jqkkdm64"
-                          ];
-                        }
                       ];
 
                       # Helper function to generate rules for a specific overlay environment

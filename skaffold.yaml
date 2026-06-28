@@ -17,10 +17,3 @@ profiles:
       kustomize:
         paths:
           - clusters/telsha/overlays/tailnet
-  - name: talashi-tailnet
-    activation:
-      - kubeContext: talashi-k8s-operator.taila659a.ts.net
-    manifests:
-      kustomize:
-        paths:
-          - clusters/talashi/overlays/tailnet

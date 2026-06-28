@@ -21,7 +21,7 @@ managed via FluxCD and structured around Kustomize.
   - `clusters/<cluster>/overlays/<overlay>/` — Build entrypoints composing
     base + components + app overlays
 - `bootstraps/` — Controller/operator installation (HelmChart resources)
-  - `bootstraps/talashi/`, `bootstraps/telsha/`
+  - `bootstraps/telsha/`
 - `skaffold.yaml` — Renderable profiles pointing at cluster overlay entrypoints
 
 ## Clusters
