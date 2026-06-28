@@ -22,7 +22,7 @@ spec:
             - name: sukebe-doujins-data
               mountPath: /data/sukebe/Doujins
             - name: sukebe-scenes-data
-              mountPath: /data/sukebe/Scenes
+              mountPath: /data/sukebe/Videos
             - name: sukebe-shows-data
               mountPath: /data/sukebe/Shows
             - name: timeline-data
