@@ -1,6 +1,5 @@
 resources:
   - ../../base
-  - ks.yaml
   - netattachdef.yaml
 components:
   - ../../components/monitoring

@@ -19,10 +19,30 @@ spec:
       namespace: flux-system
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
-      name: gatekeeper-config
+      name: config-gatekeeper
       namespace: flux-system
   interval: 10m
   path: ./infrastructure/gatekeeper/overlays/telsha
+  prune: true
+  sourceRef:
+    name: flux-system
+    kind: GitRepository
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: config-gatekeeper
+  namespace: flux-system
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  deletionPolicy: Orphan
+  dependsOn:
+    - name: infrastructure-gatekeeper
+  interval: 10m
+  path: ./configs/gatekeeper/overlays/telsha
   prune: true
   sourceRef:
     name: flux-system
