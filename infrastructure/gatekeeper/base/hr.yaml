@@ -34,6 +34,5 @@ spec:
     pdb:
       controllerManager:
         minAvailable: 1
-    replicas: 2
     upgradeCRDs:
       enabled: false
