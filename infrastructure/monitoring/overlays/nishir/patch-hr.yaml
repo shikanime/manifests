@@ -55,5 +55,3 @@ spec:
           hosts:
             - nishir-telemetry
           ingressClassName: tailscale
-    vmsingle:
-      enabled: false
