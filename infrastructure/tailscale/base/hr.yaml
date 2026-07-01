@@ -22,6 +22,7 @@ spec:
     crds: CreateReplace
   values:
     apiServerProxyConfig:
+      allowImpersonation: "true"
       mode: "true"
     proxyConfig:
       defaultTags: tag:web
