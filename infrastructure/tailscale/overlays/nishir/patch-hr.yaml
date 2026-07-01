@@ -7,3 +7,5 @@ spec:
   values:
     operatorConfig:
       hostname: nishir-k8s-operator
+    proxyConfig:
+      defaultProxyClass: nishir
