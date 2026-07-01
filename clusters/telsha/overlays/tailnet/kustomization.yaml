@@ -8,6 +8,7 @@ components:
   - ../../components/gatekeeper
   - ../../components/monitoring
   - ../../components/tailscale
+  - ../../components/trust-manager
 patches:
   - path: patch-ingress.yaml
 labels:
