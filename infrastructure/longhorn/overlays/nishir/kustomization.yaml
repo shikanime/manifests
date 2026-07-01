@@ -1,6 +1,5 @@
 resources:
   - ../../base
-  - netattachdef.yaml
 components:
   - ../../components/monitoring
 patches:
