@@ -8,11 +8,12 @@ spec:
     {
       "cniVersion": "0.4.0",
       "name": "longhorn-storage",
-      "type": "bridge",
-      "bridge": "br0",
+      "type": "macvlan",
       "ipam": {
-        "type": "whereabouts",
-        "range": "192.168.2.0/24",
-        "range_end": "192.168.2.250"
+        "request": [
+          { "skipDefault": true },
+          { "option": "subnet-mask" }
+        ],
+        "type": "dhcp"
       }
     }
