@@ -1,0 +1,11 @@
+resources:
+  - ../../base
+namespace: shikanime
+configMapGenerator:
+  - name: agentgateway
+    files:
+      - agentgateway/config.yaml
+secretGenerator:
+  - name: agentgateway
+    envs:
+      - agentgateway/.enc.env

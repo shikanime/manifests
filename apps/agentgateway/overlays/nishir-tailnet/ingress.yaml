@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: agentgateway
+  annotations:
+    tailscale.com/tags: tag:web
+spec:
+  defaultBackend:
+    service:
+      name: agentgateway
+      port:
+        name: http
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - agentgateway

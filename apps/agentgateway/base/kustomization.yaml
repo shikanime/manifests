@@ -1,0 +1,13 @@
+resources:
+  - pvc.yaml
+  - sts.yaml
+  - svc.yaml
+  - vpa.yaml
+images:
+  - name: agentgateway
+    newName: ghcr.io/shikanime-labs/agentgateway
+    newTag: latest
+metadata:
+  annotations:
+    automata.shikanime.studio/images: |
+      [ { "name": "agentgateway", "tag-regex": "^(?P<version>.+)$" } ]
