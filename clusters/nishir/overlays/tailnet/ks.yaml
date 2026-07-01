@@ -298,7 +298,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -326,7 +325,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -354,7 +352,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -382,7 +379,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -410,7 +406,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -438,7 +433,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -466,7 +460,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -494,7 +487,6 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-monitoring
@@ -725,7 +717,6 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: apps-synapse
     - name: infrastructure-autoscaler
     - name: infrastructure-cert-manager
     - name: infrastructure-tailscale
